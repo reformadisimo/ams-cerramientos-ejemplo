@@ -34,14 +34,14 @@ a{color:var(--navy)}a:hover{color:#B8430A}
 .mobile a{display:flex;align-items:center;min-height:50px;border-bottom:1px solid var(--line);color:#fff;text-decoration:none;font-size:17px;font-weight:600}
 .mobile a.on{color:var(--peach)}
 .mobile a.cta{justify-content:center;margin-top:16px;border:0;border-radius:6px;background:var(--accent)}
-@media (max-width:1080px){.btn-quote{display:none}}
-@media (max-width:960px){
+@media (max-width:1399px){.btn-quote{display:none}}
+@media (max-width:1180px){
  .nav{display:none}.burger{display:inline-flex}
  .bar{justify-content:space-between;gap:8px}.actions{margin-left:0}
  .btn-call span{display:none}.btn-call::after{content:"Llamar"}.btn-call{padding:0 14px}
  .logo img{height:42px}
 }
-@media (min-width:961px){.mobile{display:none !important}}
+@media (min-width:1181px){.mobile{display:none !important}}
 .wa{position:fixed;right:18px;bottom:18px;z-index:60;width:60px;height:60px;border-radius:50%;background:#1F8F4E;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.25)}
 .wa:hover{background:#17733E}
 .site-footer{background:var(--navy2);color:#B9C4CE}
