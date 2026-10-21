@@ -1,1 +1,1 @@
-{"cleanUrls": true, "headers": [{"source": "/(.*)", "headers": [{"key": "X-Robots-Tag", "value": "noindex, nofollow"}]}]}
+{"cleanUrls": true, "trailingSlash": false, "headers": [{"source": "/(.*)", "headers": [{"key": "X-Robots-Tag", "value": "noindex, nofollow"}]}], "redirects": [{"source": "/Terrazas", "destination": "/cerramientos-terrazas"}, {"source": "/landing/index", "destination": "/landing"}]}
