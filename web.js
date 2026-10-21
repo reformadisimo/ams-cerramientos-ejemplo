@@ -11,8 +11,14 @@ var nombre=v('nombre'),tel=v('telefono'),loc=v('localidad'),serv=v('servicio'),m
 if(!nombre||!tel){alert('Escribe tu nombre y tu teléfono para que podamos llamarte.');return;}
 var txt='Hola, AMS Cerramientos. Os escribo desde vuestra web para pedir presupuesto.\n'+
 'Nombre: '+nombre+'\nTeléfono: '+tel+(loc?'\nLocalidad: '+loc:'')+(serv?'\nNecesito: '+serv:'')+(msg?'\nDetalles: '+msg:'');
-window.open('https://wa.me/34639788220?text='+encodeURIComponent(txt),'_blank');
+var waUrl='https://wa.me/34639788220?text='+encodeURIComponent(txt);
+var mailUrl='mailto:info@amscerramientos.es?subject='+encodeURIComponent('Presupuesto desde la web: '+nombre)+'&body='+encodeURIComponent(txt);
+var movil=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)||(navigator.maxTouchPoints>1&&/Macintosh/.test(navigator.userAgent));
+var n=nombre.replace(/</g,'');
 var ok=document.createElement('div');ok.className='form-ok';ok.setAttribute('role','status');
-ok.innerHTML='<strong>Gracias, '+nombre.replace(/</g,'')+'. Se abre WhatsApp con tu petición: solo tienes que pulsar enviar.</strong><br>Si no se ha abierto, llámanos al <a href="tel:+34639788220">639 78 82 20</a>.';
+if(movil){window.open(waUrl,'_blank');
+ok.innerHTML='<strong>Gracias, '+n+'. Se abre WhatsApp con tu petición: solo tienes que pulsar enviar.</strong><br>Si no se ha abierto, <a href="'+waUrl+'" target="_blank" rel="noopener">pulsa aquí</a> o llámanos al <a href="tel:+34639788220">639 78 82 20</a>.';}
+else{window.location.href=mailUrl;
+ok.innerHTML='<strong>Gracias, '+n+'. Se abre tu programa de correo con la petición preparada: solo tienes que pulsar enviar.</strong><br>Si no se ha abierto, puedes <a href="'+mailUrl+'">escribirnos a info@amscerramientos.es</a>, <a href="'+waUrl+'" target="_blank" rel="noopener">enviarla por WhatsApp</a> o llamarnos al <a href="tel:+34639788220">639 78 82 20</a>.';}
 f.replaceWith(ok);});});
 })();
