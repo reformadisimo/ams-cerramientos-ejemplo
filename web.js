@@ -13,7 +13,7 @@ var fb=document.querySelectorAll('.gal-filters button');fb.forEach(function(b){b
 document.querySelectorAll('form').forEach(function(f){f.addEventListener('submit',function(e){e.preventDefault();
 var v=function(n){var el=f.querySelector('[name='+n+']');return el?el.value.trim():'';};
 var nombre=v('nombre'),tel=v('telefono'),loc=v('localidad'),serv=v('servicio'),msg=v('mensaje');
-if(!nombre||!tel){alert('Escribe tu nombre y tu teléfono para que podamos llamarte.');return;}
+var err=function(m){var e=f.querySelector('.form-err');if(!e){e=document.createElement('p');e.className='form-err';e.setAttribute('role','alert');e.style.cssText='grid-column:1/-1;margin:0;color:#B91C1C;font-weight:700;font-size:15px';var bt=f.querySelector('button[type=submit],button:not([type])');if(bt)bt.parentNode.insertBefore(e,bt);else f.appendChild(e);}e.textContent=m;};if(!nombre||!tel){err('Escribe tu nombre y tu teléfono para que podamos llamarte.');return;}var pc=f.querySelector('[name=privacidad]');if(pc&&!pc.checked){err('Marca la casilla de la política de privacidad para poder enviarlo.');return;}
 var txt='Hola, AMS Cerramientos. Os escribo desde vuestra web para pedir presupuesto.\n'+
 'Nombre: '+nombre+'\nTeléfono: '+tel+(loc?'\nLocalidad: '+loc:'')+(serv?'\nNecesito: '+serv:'')+(msg?'\nDetalles: '+msg:'');
 var waUrl='https://wa.me/34639788220?text='+encodeURIComponent(txt);
