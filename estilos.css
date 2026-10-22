@@ -14,6 +14,7 @@ a{color:var(--navy)}a:hover{color:#B8430A}
 .logo-foot img{height:56px;margin-bottom:6px}
 .nav{display:flex;align-items:center;gap:4px;margin-left:8px;flex:1}
 .nav>a,.drop>button{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 12px;border:0;background:none;border-radius:6px;color:#E6ECF1;font:600 15px Inter,sans-serif;text-decoration:none;cursor:pointer}
+.nav>a{white-space:nowrap}.nav>a.nav-cfg{color:#F5B27F}@media(max-width:1400px){.nav>a,.drop>button{padding:0 8px;font-size:14px}.nav{gap:0;margin-left:0}}
 .nav>a:hover,.drop>button:hover,.nav>a.on,.drop.on>button{color:#fff;background:#1C2F3F}
 .nav>a.on,.drop.on>button{color:var(--peach)}
 .drop{position:relative}
