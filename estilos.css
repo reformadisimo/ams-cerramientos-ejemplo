@@ -83,3 +83,5 @@ a{color:var(--navy)}a:hover{color:#B8430A}
  .logo img{height:36px}
  .mobile a{min-height:46px;font-size:16px}
 }
+@media (prefers-reduced-motion: reduce){.vbg{display:none}}
+.vbg{pointer-events:none}
