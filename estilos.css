@@ -85,3 +85,4 @@ a{color:var(--navy)}a:hover{color:#B8430A}
 }
 @media (prefers-reduced-motion: reduce){.vbg{display:none}}
 .vbg{pointer-events:none}
+@media (max-width: 760px){.vov{background:linear-gradient(180deg,rgba(18,32,43,0.8) 0%,rgba(18,32,43,0.6) 60%,rgba(18,32,43,0.35) 100%)!important}}
