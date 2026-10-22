@@ -188,3 +188,11 @@
 .cf-amb figcaption{padding:8px 12px;font-size:13px;font-weight:700;color:var(--soft)}
 .cf-amb.noamb{display:none}
 @media (max-width:760px){.cf-amb{display:none}}
+.cf-o .oimg{display:block;width:100%;min-width:120px;aspect-ratio:4/3;object-fit:cover;border-radius:6px;margin-bottom:6px;background:#fff}
+.cf-cards .cf-o .oimg{aspect-ratio:16/10}
+.cf-view{display:flex;border:2px solid var(--line);border-radius:10px;overflow:hidden}
+.cf-view[hidden]{display:none}
+.cf-view button{flex:1;min-height:38px;border:0;background:#fff;font:700 13px Inter,sans-serif;color:var(--ink);cursor:pointer}
+.cf-view button.on{background:var(--ink);color:#fff}
+@media (max-width:760px){.cf-view{position:absolute;opacity:0;pointer-events:none}}
+.cf-opts .cf-o:has(.oimg){width:158px}

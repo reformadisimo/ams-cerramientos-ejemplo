@@ -183,10 +183,27 @@ function openEditor(tipo,idx){
 }
 function closeEditor(){S.cur=null;S.curIdx=-1;$('cfEditor').hidden=true;renderTypes();schedule();}
 
-function opt(k,v,label,sub,on,extra){
- return '<button type="button" class="cf-o'+(on?' on':'')+'" data-k="'+k+'" data-v="'+esc(v)+'"'+(extra||'')+'>'+label+(sub?'<small>'+sub+'</small>':'')+'<span class="d" data-dk="'+k+'" data-dv="'+esc(v)+'"></span></button>';
+/* Foto de cada opcion: /img/cfg/<nombre>.webp. Si no existe, la opcion se ve sin foto. */
+function optImg(k,v){
+ var it=S.cur||{},t=it.tipo,n=null;
+ if(k==='mat')n='perfil-'+v+'-confort';
+ else if(k==='gama')n='perfil-'+it.mat+'-'+v;
+ else if(k==='vid')n='vidrio-'+v;
+ else if(k==='pers'&&v!=='no')n='persiana-'+v;
+ else if(k==='mosq'&&t!=='techo'&&v!=='no')n='mosquitera-'+v;
+ else if(t==='techo'&&k==='aper')n='techo-'+v;
+ else if(t==='techo'&&k==='estor')n='techo-estor';
+ else if(t==='techo'&&k==='persext')n='techo-persiana-exterior';
+ else if(t==='techo'&&k==='mosq')n='techo-mosquitera';
+ else if(t==='claraboya'&&k==='acc')n='claraboya-'+v;
+ else if(k==='umbral')n='balconera-umbral';
+ else if(k==='elev')n='corredera-elevadora';
+ return n?'<img class="oimg" src="/img/cfg/'+n+'.webp" alt="" loading="lazy" onerror="this.remove()">':'';
 }
-function tog(k,label,sub,on){return '<button type="button" class="cf-o'+(on?' on':'')+'" data-k="'+k+'" data-v="'+(on?'0':'1')+'">'+label+(sub?'<small>'+sub+'</small>':'')+'<span class="d" data-dk="'+k+'" data-dv="1"></span></button>';}
+function opt(k,v,label,sub,on,extra){
+ return '<button type="button" class="cf-o'+(on?' on':'')+'" data-k="'+k+'" data-v="'+esc(v)+'"'+(extra||'')+'>'+optImg(k,v)+label+(sub?'<small>'+sub+'</small>':'')+'<span class="d" data-dk="'+k+'" data-dv="'+esc(v)+'"></span></button>';
+}
+function tog(k,label,sub,on){return '<button type="button" class="cf-o'+(on?' on':'')+'" data-k="'+k+'" data-v="'+(on?'0':'1')+'">'+optImg(k,'1')+label+(sub?'<small>'+sub+'</small>':'')+'<span class="d" data-dk="'+k+'" data-dv="1"></span></button>';}
 function sec(t,help,body){return '<div class="cf-sec"><h3>'+t+'</h3>'+(help?'<p class="h">'+help+'</p>':'')+body+'</div>';}
 
 function renderOpts(){
@@ -261,9 +278,26 @@ function dimHint(){
  if(it.tipo==='corredera'&&hw>150)m.push('Hojas correderas de más de 150 cm pesan mucho: mejor 3 o 4 hojas.');
  el.textContent=m.join(' ');el.className='cf-hint'+(m.length?' bad':'');
 }
+/* Fondo de la vista previa: la habitacion elegida (o la fachada si se mira desde fuera). */
+var ROOMBG={'Salón':'salon','Cocina':'cocina','Dormitorio':'dormitorio','Baño':'bano','Pasillo':'pasillo','Terraza':'terraza','Buhardilla':'salon','Otra':'salon'};
+var BGOK={};S.view='in';
+function bgName(it){
+ if(it.tipo==='techo'||it.tipo==='claraboya')return null;
+ if(S.view==='out')return 'fachada';
+ return ROOMBG[it.hab]||({ventana:'dormitorio',balconera:'salon',corredera:'salon',fijo:'pasillo'}[it.tipo]);
+}
+function bgUrl(n){
+ if(!n)return null;var u='/img/cfg/fondo-'+n+'.webp';
+ if(BGOK[n]===true)return u;
+ if(BGOK[n]===undefined){BGOK[n]='cargando';var im=new Image();im.onload=function(){BGOK[n]=true;refreshCur();};im.onerror=function(){BGOK[n]=false;};im.src=u;}
+ return null;
+}
 function refreshCur(){
  if(!S.cur)return;
- $('cfDraw').innerHTML=REAL(S.cur,{scene:true});renderBars(S.cur);
+ var win=S.cur.tipo!=='techo'&&S.cur.tipo!=='claraboya';
+ $('cfView').hidden=!win;
+ document.querySelectorAll('#cfView button').forEach(function(b){b.classList.toggle('on',b.dataset.view===S.view);});
+ $('cfDraw').innerHTML=REAL(S.cur,{scene:true,bg:bgUrl(bgName(S.cur)),ext:win&&S.view==='out'});renderBars(S.cur);
 }
 
 /* ---------- Precio (servidor) ---------- */
@@ -361,6 +395,7 @@ $('cfAdd').addEventListener('click',function(){
  var y=($(window.innerWidth<=980?'cfSide':'cfPick')).getBoundingClientRect().top+window.scrollY-80;window.scrollTo({top:y,behavior:'smooth'});
 });
 $('cfCancel').addEventListener('click',closeEditor);
+$('cfView').addEventListener('click',function(e){var b=e.target.closest('[data-view]');if(!b)return;S.view=b.dataset.view;refreshCur();});
 $('cfItems').addEventListener('click',function(e){
  var b=e.target.closest('button');if(!b)return;
  if(b.dataset.edit!=null){openEditor(null,+b.dataset.edit);return;}
