@@ -161,7 +161,7 @@ var AMB={ventana:['/img/ventana-cortina.jpg','Ventana oscilobatiente de dos hoja
 window.cfFb=function(el){var fb=el.getAttribute('data-fb');if(fb&&el.getAttribute('src')!==fb){el.setAttribute('src',fb);}else{var p=el.parentNode;if(p)p.classList.add('noamb');el.remove();}};
 function media(t,it){
  var fb=AMB[t]?AMB[t][0]:'';
- return '<div class="cf-tm"><img class="amb" src="/img/cfg/'+t+'-ambiente.webp" data-fb="'+fb+'" alt="" loading="lazy" onerror="cfFb(this)"><span class="ins"><img class="prod" src="/img/cfg/'+t+'-producto.webp" alt="" loading="lazy" onerror="this.remove()">'+REAL(it)+'</span></div>';
+ return '<div class="cf-tm"><img class="amb" src="/img/cfg/'+t+'-ambiente.webp" data-fb="'+fb+'" alt="" loading="lazy" onerror="cfFb(this)"><span class="ins">'+REAL(it)+'</span><img class="prod" src="/img/cfg/'+t+'-producto.webp" alt="" loading="lazy" onerror="this.remove()"></div>';
 }
 function renderTypes(){
  var h='';

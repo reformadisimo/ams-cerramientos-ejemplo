@@ -196,3 +196,4 @@
 .cf-view button.on{background:var(--ink);color:#fff}
 @media (max-width:760px){.cf-view{position:absolute;opacity:0;pointer-events:none}}
 .cf-opts .cf-o:has(.oimg){width:158px}
+.cf-tm>.prod{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff;padding:6px;z-index:2}
