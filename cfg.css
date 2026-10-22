@@ -214,3 +214,26 @@
 @media (max-width:760px){.cf-dims{font-size:10px;padding:2px 6px;left:4px;top:4px}}
 .cf-cards .cf-o .oimg{max-height:150px;object-fit:contain}
 @media (max-width:640px){.cf-cards .cf-o .oimg{max-height:110px}}
+
+/* Presupuesto impreso / PDF */
+@media print{
+ @page{margin:14mm}
+ html,body,main,.cf{background:#fff!important}
+ .cf-print{-webkit-print-color-adjust:exact;print-color-adjust:exact;width:100%;box-sizing:border-box}
+ .cf-print .pr-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:12px;border-bottom:3px solid #C2410C}
+ .cf-print .pr-logo{height:54px;width:auto}
+ .cf-print .pr-title{text-align:right;font-size:12px;color:#4A5A68}
+ .cf-print .pr-title h1{font-size:24px;color:#12202B;margin:0 0 2px}
+ .cf-print .pr-for{margin-top:14px;padding:10px 12px;background:#F3F5F7;border-radius:6px;font-size:13px}
+ .cf-print .pr-for span{display:inline-block;margin-right:8px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#4A5A68}
+ .cf-print thead th{background:#12202B;color:#fff;border-bottom:0;font-size:12px}
+ .cf-print tbody tr:nth-child(even) td{background:#FAFBFC}
+ .cf-print tr{break-inside:avoid}
+ .cf-print tfoot .tot td{border-top:0;padding:5px 6px}
+ .cf-print tfoot .gt td{background:#FDF1EA;color:#9A3412;font-size:17px;border-top:2px solid #C2410C;padding:9px 6px}
+ .cf-print .pr-inc{margin-top:16px;padding:12px 14px;border:1px solid #DCE2E7;border-left:4px solid #2F7D52;border-radius:6px;break-inside:avoid}
+ .cf-print .pr-inc ul{display:grid;grid-template-columns:1fr 1fr;gap:3px 18px;margin:6px 0 8px;padding:0;list-style:none}
+ .cf-print .pr-inc li::before{content:"\2713\00a0";color:#2F7D52;font-weight:800}
+ .cf-print .pr-inc p{margin:0}
+ .cf-print .pr-foot{margin-top:18px;padding-top:10px;border-top:1px solid #DCE2E7;font-size:10.5px;color:#4A5A68;line-height:1.5}
+}
