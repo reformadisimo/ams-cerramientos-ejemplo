@@ -157,10 +157,16 @@ function detalle(it){
 }
 
 /* ---------- Selector de tipo ---------- */
+var AMB={ventana:['/img/ventana-cortina.jpg','Ventana oscilobatiente de dos hojas'],balconera:['/img/obra-balcon.jpg','Balconera recién instalada'],corredera:['/img/terraza-cristal.jpg','Corredera de suelo a techo'],fijo:['/img/salon-ventanal.jpg','Ventanal fijo en un salón']};
+window.cfFb=function(el){var fb=el.getAttribute('data-fb');if(fb&&el.getAttribute('src')!==fb){el.setAttribute('src',fb);}else{var p=el.parentNode;if(p)p.classList.add('noamb');el.remove();}};
+function media(t,it){
+ var fb=AMB[t]?AMB[t][0]:'';
+ return '<div class="cf-tm"><img class="amb" src="/img/cfg/'+t+'-ambiente.webp" data-fb="'+fb+'" alt="" loading="lazy" onerror="cfFb(this)"><span class="ins"><img class="prod" src="/img/cfg/'+t+'-producto.webp" alt="" loading="lazy" onerror="this.remove()">'+REAL(it)+'</span></div>';
+}
 function renderTypes(){
  var h='';
  TYPES.forEach(function(t){var it=defItem(t.id);if(t.id==='corredera'){it.w=200;it.h=215;}
-  h+='<button type="button" class="cf-type'+(S.cur&&S.curIdx<0&&S.cur.tipo===t.id?' on':'')+'" data-type="'+t.id+'">'+REAL(it)+'<b>'+t.n+'</b><span>'+t.d+'</span><em id="cfFrom_'+t.id+'"></em></button>';});
+  h+='<button type="button" class="cf-type'+(S.cur&&S.curIdx<0&&S.cur.tipo===t.id?' on':'')+'" data-type="'+t.id+'">'+media(t.id,it)+'<b>'+t.n+'</b><span>'+t.d+'</span><em id="cfFrom_'+t.id+'"></em></button>';});
  $('cfTypes').innerHTML=h;
 }
 
@@ -168,6 +174,7 @@ function renderTypes(){
 function openEditor(tipo,idx){
  if(idx>=0){S.cur=clone(S.items[idx]);S.curIdx=idx;}else{S.cur=defItem(tipo);S.curIdx=-1;}
  $('cfEditor').hidden=false;
+ var tp=S.cur.tipo,fb=AMB[tp]?AMB[tp][0]:'';$('cfAmb').innerHTML='<img src="/img/cfg/'+tp+'-ambiente.webp" data-fb="'+fb+'" alt="" onerror="cfFb(this)"><figcaption>Así queda en una casa'+(AMB[tp]?' · '+AMB[tp][1]:'')+'</figcaption>';$('cfAmb').classList.remove('noamb');
  $('cfEdTitle').textContent=(idx>=0?'Cambia tu ':'Configura tu ')+TT[S.cur.tipo].n.toLowerCase();
  $('cfEdSub').textContent=S.mode==='rapido'?'Modo rápido: lo justo para darte un precio fiable. Si sabes las medidas, cambia a cálculo exacto arriba.':'Modo exacto: con tus medidas y todas las opciones. Cada opción te dice lo que suma o resta.';
  $('cfAdd').textContent=idx>=0?'Guardar cambios':'Añadir al presupuesto';

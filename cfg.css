@@ -175,3 +175,16 @@
 .cf-sizes .cf-o{padding:0 0 10px;overflow:hidden}
 .cf-sizes svg{width:100%;height:auto;display:block;background:linear-gradient(180deg,#F7F9FA,#EEF2F5);margin-bottom:4px}
 .cf-draw{padding:0;overflow:hidden;background:#ECE8E1}
+.cf-tm{position:relative;width:100%;aspect-ratio:4/3;background:linear-gradient(180deg,#F7F9FA,#EEF2F5);overflow:hidden;margin-bottom:6px}
+.cf-tm .amb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.cf-tm .ins{position:absolute;right:8px;bottom:8px;width:44%;aspect-ratio:1/1;border-radius:50%;background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.25);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.cf-tm .ins svg{width:118%;height:auto;margin:0;background:none}
+.cf-tm .ins .prod{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff;z-index:1}
+.cf-tm.noamb .ins{inset:0;width:100%;height:100%;border-radius:0;box-shadow:none;right:0;bottom:0}
+.cf-tm.noamb .ins svg{width:100%}
+.cf-type>svg{display:none}
+.cf-amb{margin:0;border-radius:12px;overflow:hidden;background:var(--bg)}
+.cf-amb img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover}
+.cf-amb figcaption{padding:8px 12px;font-size:13px;font-weight:700;color:var(--soft)}
+.cf-amb.noamb{display:none}
+@media (max-width:760px){.cf-amb{display:none}}
