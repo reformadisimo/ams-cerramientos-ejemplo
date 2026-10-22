@@ -94,6 +94,19 @@ figcaption{font-size:14.1px;color:var(--mut);margin-top:6.3px}
 @media(max-width:600px){.g{font-size:16px}.g .grid,.g .grid4,.g .flow,.g .two,.g .logos{grid-template-columns:1fr}.g .diag .ar{display:none}.g .cover{padding:36px 22px}.g .up{display:none}}
 @media print{.acts,#estado{display:none}}
 a{color:#B8430A}
+.sb{position:relative;margin:14px 0 16px;border-radius:12px;overflow:hidden;aspect-ratio:16/6;background:#12202B}
+.g .sb img{width:100%;height:100%;object-fit:cover;display:block}
+.sb p{position:absolute;left:0;right:0;bottom:0;margin:0;padding:34px 20px 16px;color:#fff;font-weight:800;font-size:clamp(18px,3.2vw,26px);line-height:1.25;background:linear-gradient(transparent,rgba(18,32,43,.9))}
+@media(max-width:600px){.sb{aspect-ratio:16/9}}
+.dt>summary{cursor:pointer;display:inline-block;background:#FFF1E8;color:#B8430A;font-weight:700;padding:10px 18px;border-radius:999px;margin:4px 0 16px;list-style:none;border:1px solid #F2C9AE}
+.dt>summary::-webkit-details-marker{display:none}
+.dt>summary::before{content:"Ver el detalle de esta sección"}
+.dt[open]>summary::before{content:"Ocultar el detalle"}
+.pos-g{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;counter-reset:p}
+.pos-g div{background:linear-gradient(160deg,#FFF1E8,#FFFFFF);border:1px solid #F2C9AE;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:6px;position:relative}
+.pos-g div::before{counter-increment:p;content:counter(p);position:absolute;top:-10px;left:12px;background:#C2410C;color:#fff;font-weight:800;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:14px}
+.pos-g b{color:#B8430A;margin-top:6px}.pos-g span{font-size:15px;line-height:1.4}
+@media(max-width:700px){.pos-g{grid-template-columns:1fr 1fr}}
 .g a:focus-visible,.g button:focus-visible{outline:3px solid #C2410C;outline-offset:2px}
 </style></head><body><div class="g"><div class="cover">
 <img src="/img/guia/logo-blanco.png" alt="AMS Cerramientos">
@@ -110,7 +123,7 @@ a{color:#B8430A}
 <p>Un abrazo, Ignacio.</p>
 <div class="how"><b>Cómo leerlo:</b> todo lo que está en <span style="color:#C2410C;text-decoration:underline">naranja y subrayado</span> se puede pulsar: el índice, los enlaces a la web nueva y a las páginas de los competidores. En cada apartado hay un "↑ índice" para volver. Las respuestas al final se guardan solas en este móvil o en este ordenador. <a href="/AMS-guia-completa-para-Javi.pdf"><b>Descargar esta guía en PDF</b></a>.</div>
 
-<div class="how" style="border-left:4px solid #C2410C"><b>Esta guía está viva.</b> Al estar en internet, la vamos actualizando según vamos mejorando la web: cada herramienta o idea nueva aparece aquí, con su explicación. Mira abajo las <a href="#novedades"><b>últimas novedades</b></a>.</div><h2 id="novedades" style="margin-top:28px">Últimas novedades</h2><ul><li><b>22 de octubre de 2026.</b> Menú <b>Herramientas</b>: Revisa tu presupuesto, Diagnóstico de tus ventanas, Simulador de ahorro y ruido, Comprobador de ayudas, Permisos para cerrar tu terraza, Cómo medir tus ventanas y Glosario (113 términos). El visualizador con foto está en construcción.</li><li><b>22 de octubre de 2026.</b> Explicada la ventana de salida (la última oportunidad cuando un visitante se va).</li><li><b>22 de octubre de 2026.</b> Explicado cómo hemos aprovechado el contenido de la web anterior y qué falta (acceso a Analytics) para afinarlo.</li><li><b>22 de octubre de 2026.</b> Página de Garantía y postventa y franja de confianza en la portada (20 años, taller propio, Kömmerling, garantías). Pendiente de que confirmes los datos.</li><li><b>22 de octubre de 2026.</b> Mapa de obras de ejemplo (1.600 obras ficticias en más de 40 localidades) en la portada y en Trabajos, y una tabla que explica qué es imprescindible y qué opcional para lanzar la web por fases.</li><li><b>22 de octubre de 2026.</b> "Revisa tu presupuesto" tiene ya un botón de ejemplo para probarlo con un presupuesto inventado.</li><li><b>22 de octubre de 2026.</b> Interlinkado interno: las guías, los productos y las herramientas se enlazan entre sí y con el glosario.</li><li><b>21 de octubre de 2026.</b> Blog con 13 guías, calendario de 36 artículos, ventana emergente de salida y sección de trabajos ampliada.</li></ul><h2 id="indice">Índice</h2>
+<div class="how" style="border-left:4px solid #C2410C"><b>Esta guía está viva.</b> Al estar en internet, la vamos actualizando según vamos mejorando la web: cada herramienta o idea nueva aparece aquí, con su explicación. Mira abajo las <a href="#novedades"><b>últimas novedades</b></a>.</div><h2 id="novedades" style="margin-top:28px">Últimas novedades</h2><ul><li><b>22 de octubre de 2026.</b> Menú <b>Herramientas</b>: Revisa tu presupuesto, Diagnóstico de tus ventanas, Simulador de ahorro y ruido, Comprobador de ayudas, Permisos para cerrar tu terraza, Cómo medir tus ventanas y Glosario (113 términos). El visualizador con foto está en construcción.</li><li><b>22 de octubre de 2026.</b> Explicada la ventana de salida (la última oportunidad cuando un visitante se va).</li><li><b>22 de octubre de 2026.</b> Explicado cómo hemos aprovechado el contenido de la web anterior y qué falta (acceso a Analytics) para afinarlo.</li><li><b>22 de octubre de 2026.</b> Página de Garantía y postventa y franja de confianza en la portada (20 años, taller propio, Kömmerling, garantías). Pendiente de que confirmes los datos.</li><li><b>22 de octubre de 2026.</b> Mapa de obras de ejemplo (1.600 obras ficticias en más de 40 localidades) en la portada y en Trabajos, y una tabla que explica qué es imprescindible y qué opcional para lanzar la web por fases.</li><li><b>22 de octubre de 2026.</b> "Revisa tu presupuesto" tiene ya un botón de ejemplo para probarlo con un presupuesto inventado.</li><li><b>22 de octubre de 2026.</b> Interlinkado interno: las guías, los productos y las herramientas se enlazan entre sí y con el glosario.</li><li><b>21 de octubre de 2026.</b> Blog con 13 guías, calendario de 36 artículos, ventana emergente de salida y sección de trabajos ampliada.</li></ul><div class="pos"><h2 id="posibilidades" style="margin-top:28px">De dónde partimos y hasta dónde se puede llegar</h2><p style="font-size:18px;margin:0 0 12px">Hoy casi no entran contactos por la web. Eso significa que hay mucho margen: todo lo que se construya suma. Son posibilidades, no promesas: las marcan las ganas y el ritmo.</p><div class="pos-g"><div><b>Hoy</b><span>Web nueva, ficha de Google cuidada y contestar el mismo día.</span></div><div><b>Primeros meses</b><span>Google empieza a conoceros y pueden llegar las primeras peticiones.</span></div><div><b>El primer año</b><span>Reseñas nuevas, obras publicadas y el blog funcionando.</span></div><div><b>Dentro de unos años</b><span>Un mapa lleno de obras propias, como el de ejemplo.</span></div></div></div><h2 id="indice">Índice</h2>
 <div class="toc">
 <div><b>1.</b> <a href="#s1">Lo esencial en un minuto</a></div>
 <div><b>2.</b> <a href="#s2">Palabras que vamos a usar</a></div>
@@ -187,7 +200,7 @@ a{color:#B8430A}
 <tr><td><b>Redirecciones</b></td><td>Carteles de "hemos cambiado de local, ahora estamos aquí". Hacen que las visitas a las direcciones antiguas lleguen a las nuevas sin perder lo que Google ya sabe de ti.</td></tr>
 </table></div>
 
-<h2 class="pb" id="s3">3. Cómo te encuentra un cliente hoy<a class="up" href="#indice">↑ índice</a></h2>
+<h2 class="pb" id="s3">3. Cómo te encuentra un cliente hoy<a class="up" href="#indice">↑ índice</a></h2><div class="sb"><img loading="lazy" alt="" src="/img/mujer-movil.jpg"><p>Todo cliente empieza con una búsqueda. Vamos a hacer que os encuentre.</p></div>
 <figure style="margin:4mm 0;break-inside:avoid"><img src="/img/guia/guia-recorrido.jpg" alt="Recorrido del cliente en cinco escenas" style="width:100%;height:auto;border-radius:6px;display:block"><figcaption style="font-size:12px;color:#4a5a68;margin-top:1.5mm">El camino de un cliente, de la búsqueda en el móvil a la familia con ventanas nuevas. Cada paso es un sitio donde hoy podéis ganar o perder la obra.</figcaption></figure>
 
 <p>Imagina a una vecina de Alcalá que quiere cerrar su terraza. Esto es lo que suele hacer, y en qué puntos os pierde.</p>
@@ -200,7 +213,7 @@ a{color:#B8430A}
 <p>Los dos pasos marcados en naranja son donde AMS pierde hoy: en el 2, porque la ficha, la web y los portales no destacan; y en el 3, porque hay presupuestos que no se han contestado a tiempo (lo dicen reseñas de clientes). <b>El cliente rara vez vuelve a insistir:</b> pide a varios y se queda con el primero que le atiende bien.</p>
 <div class="box dummy"><h3>La idea clave</h3><p style="margin:0">Hacer buen trabajo ya lo hacéis. El problema es anterior y posterior a la obra: que te vean, que te contesten rápido y que el cliente vea pruebas de que eres de fiar. Ahí está todo el trabajo.</p></div>
 
-<h2 id="s4">4. Lo que ya tienes (y vale mucho)<a class="up" href="#indice">↑ índice</a></h2>
+<h2 id="s4">4. Lo que ya tienes (y vale mucho)<a class="up" href="#indice">↑ índice</a></h2><div class="sb"><img loading="lazy" alt="" src="/img/taller-hombre.jpg"><p>Veinte años de trabajo bien hecho: esa base no se compra.</p></div>
 <div class="grid grid4">
 <div class="k"><b>4,5</b><span>nota media en Google</span></div>
 <div class="k"><b>44</b><span>reseñas, 38 de 5 estrellas</span></div>
@@ -212,7 +225,7 @@ a{color:#B8430A}
 <p><b>Y lo que más preocupa:</b> la ficha está parada. La reseña más reciente es de hace unos 5 meses y la mayoría tiene más de tres años. Para Google, y para quien busca, una ficha sin actividad sugiere que quizá la empresa ya no trabaja.</p>
 <div class="box hard"><h3>La lectura dura</h3><p style="margin:0">Quien pide presupuesto a varias empresas y a una no le contesta, no vuelve a insistir. Cada presupuesto sin contestar es un trabajo perdido y a veces una reseña negativa que se queda años a la vista. Esto es lo que más dinero se está llevando.</p></div>
 
-<h2 class="pb" id="s5">5. Por qué la web actual no funciona<a class="up" href="#indice">↑ índice</a></h2>
+<h2 class="pb" id="s5">5. Por qué la web actual no funciona<a class="up" href="#indice">↑ índice</a></h2><div class="sb"><img loading="lazy" alt="" src="/img/ventana-cortina.jpg"><p>Lo que no funciona tiene arreglo, y es más sencillo de lo que parece.</p></div><details class="dt"><summary></summary>
 <p>No es una sola cosa: son varias pequeñas que se suman. Esto es lo que he visto abriéndola yo mismo el 22 de octubre de 2026, y lo que significa para ti.</p>
 <figure><img src="/img/guia/old-home1.jpg"><figcaption>La web actual, portada en ordenador: el teléfono está bien visible arriba (fijo 91 883 35 12 y móvil 639 78 82 20) y hay un botón de WhatsApp. Pero el diseño es de 2015: logo con efecto 3D brillante, fondo texturado y un menú repetido dos veces.</figcaption></figure>
 <div class="tw"><table>
@@ -233,7 +246,7 @@ a{color:#B8430A}
 <div class="box hope"><h3>Matiz importante: no sois invisibles</h3><p style="margin:0">Al buscar "instalador de ventanas PVC en Alcalá de Henares" sí salen páginas de amscerramientos.es entre los resultados. Google os conoce. La base existe; lo que hay que hacer es mejorarla y que, al llegar, el cliente encuentre algo que le convenza.</p></div>
 <p class="small">No he podido comprobar cómo se ve en un móvil. Mírala tú desde el tuyo como si fueras un cliente y cuéntame qué te parece.</p>
 
-<h2 class="pb" id="s6">6. Tus competidores en Alcalá de Henares y Guadalajara<a class="up" href="#indice">↑ índice</a></h2>
+</details><h2 class="pb" id="s6">6. Tus competidores en Alcalá de Henares y Guadalajara<a class="up" href="#indice">↑ índice</a></h2><div class="sb"><img loading="lazy" alt="" src="/img/lapiz-medicion.jpg"><p>Mirar a los demás sirve para saber dónde brillar.</p></div><details class="dt"><summary></summary>
 <p>Quién compite contigo cuando alguien busca lo mismo que tú haces. Esto es lo que he podido ver en sus páginas y en los portales el 22 de octubre de 2026. No es un estudio completo: no puedo saber cuántas visitas ni cuántos clientes tiene cada uno.</p>
 
 <h3>Alcalá de Henares: no estáis solos</h3>
@@ -272,7 +285,7 @@ a{color:#B8430A}
 </ul>
 <div class="box"><h3>Una cosa honesta sobre la competencia</h3><p style="margin:0">Algunas de estas empresas, además de estar en internet, hacen buzoneo, tienen exposición, comerciales o publicidad de pago. No puedo verlo todo: lo que se ve en internet es solo una parte de cómo captan clientes. Pero lo que sí se ve es que están donde buscan los clientes, con pruebas a la vista, y que contestan rápido.</p></div>
 
-<h2 class="pb" id="s7">7. Los portales: Habitissimo, Cronoshare, Trustlocal<a class="up" href="#indice">↑ índice</a></h2>
+</details><h2 class="pb" id="s7">7. Los portales: Habitissimo, Cronoshare, Trustlocal<a class="up" href="#indice">↑ índice</a></h2><div class="sb"><img loading="lazy" alt="" src="/img/llamada-sonrisa.jpg"><p>Los portales, bien usados, también suman.</p></div><details class="dt"><summary></summary>
 <div class="box dummy"><h3>Cómo funcionan, en dos frases</h3><p style="margin:0">Un cliente describe lo que quiere (por ejemplo "cerrar terraza en Alcalá") y el portal manda su petición a varias empresas. Gana la que contesta primero y mejor. Es como un concurso de presupuestos en el que el cliente ya llega con ganas de comprar.</p></div>
 <p>Por qué importan: cuando alguien busca "ventanas de aluminio en Alcalá" o "cerramientos en Alcalá", <b>en los primeros resultados de Google salen sobre todo estos portales</b>, no las empresas. Son un intermediario inevitable: muchos clientes entran por ahí.</p>
 <h3>Dónde está AMS hoy</h3>
@@ -285,7 +298,7 @@ a{color:#B8430A}
 <h3>¿Compensa pagar en los portales?</h3>
 <p>Depende. En la mayoría se paga por contacto o por suscripción, y solo sale a cuenta si respondes en minutos, porque el cliente ha pedido a varios a la vez. Mi consejo: primero completar los perfiles gratuitos y conseguir opiniones, y probar el pago en pequeño después, cuando haya alguien que conteste al instante. No te digo que sea mala idea; te digo que sin rapidez es tirar el dinero.</p>
 
-<h2 id="s8">8. Redes sociales<a class="up" href="#indice">↑ índice</a></h2>
+</details><h2 id="s8">8. Redes sociales<a class="up" href="#indice">↑ índice</a></h2><div class="sb"><img loading="lazy" alt="" src="/img/sonrisa-luces.jpg"><p>Una foto de una obra vale más que mil anuncios.</p></div>
 <div class="tw"><table>
 <tr><th style="width:20%">Red</th><th>Qué he visto</th><th style="width:26%">Veredicto</th></tr>
 <tr><td>X (Twitter)</td><td>63 publicaciones, 8 seguidores, la última de octubre de 2018. Casi todo son publicaciones automáticas de Facebook con enlaces a la web antigua.</td><td>Abandonada. La hemos quitado de la web nueva.</td></tr>
@@ -295,7 +308,7 @@ a{color:#B8430A}
 <h3>Instagram, sin complicaciones</h3>
 <p>Una empresa de obra se vende con imágenes: una cancela terminada, un antes y después de una terraza, una ventana instalada. Instagram es gratis y se hace con el móvil. Bastan tres publicaciones por semana, con fotos y vídeos cortos de obras reales, y enlace a WhatsApp. Lo que publiques sirve también para la ficha de Google y para la web. Es opcional: si no te apetece, hay otros caminos.</p>
 
-<h2 class="pb" id="s9">9. Por qué se pierden los clientes<a class="up" href="#indice">↑ índice</a></h2>
+<h2 class="pb" id="s9">9. Por qué se pierden los clientes<a class="up" href="#indice">↑ índice</a></h2><div class="sb"><img loading="lazy" alt="" src="/img/llamada-risa.jpg"><p>Cada cliente que se pierde es uno que se puede recuperar.</p></div><details class="dt"><summary></summary>
 <div class="flow">
 <div class="bad"><b>1. No os encuentran</b>Portales y otras empresas salen antes. La ficha de Google está parada.</div>
 <div class="bad"><b>2. No les convence</b>Web con aspecto de 2015, formulario en inglés, redes abandonadas o con contenido ajeno.</div>
@@ -310,7 +323,7 @@ a{color:#B8430A}
 <div class="ok"><b>4. Ven pruebas</b>Fotos, vídeos cortos, reseñas nuevas cada mes.</div>
 </div>
 
-<h2 class="pb" id="s10">10. La web nueva, con imágenes<a class="up" href="#indice">↑ índice</a></h2>
+</details><h2 class="pb" id="s10">10. La web nueva, con imágenes<a class="up" href="#indice">↑ índice</a></h2><div class="sb"><img loading="lazy" alt="" src="/img/reforma-ventanal.jpg"><p>Así puede verse vuestra casa en internet.</p></div><div class="vid"><video controls playsinline preload="none" poster="/img/reforma-ventanal.jpg"><source src="/img/reforma-ventanal.mp4" type="video/mp4"><source src="/img/reforma-ventanal.webm" type="video/webm"></video></div>
 <p>Está publicada como borrador en <a href="https://ams-cerramientos-ejemplo.vercel.app"><b>ams-cerramientos-ejemplo.vercel.app</b></a>. Está oculta a Google a propósito hasta que decidas. Las capturas son de esa web; arriba aparece una franja de "ejemplo de diseño" que desaparecería al publicarla.</p>
 
 <h3>La portada</h3>
@@ -413,7 +426,7 @@ a{color:#B8430A}
 <li><b>Textos legales:</b> el aviso legal, la política de privacidad y la de cookies ya están redactados como borrador y enlazados en el pie de la web y junto a la casilla de consentimiento del configurador y la calculadora (<a href="https://ams-cerramientos-ejemplo.vercel.app/privacidad">verlos</a>). He puesto el CIF y los datos del Registro Mercantil que aparecen en un directorio público de empresas: Javi tiene que confirmarlos con su escritura. Falta también que un gestor o abogado los revise antes de publicar.</li>
 </ul>
 
-<h2 class="pb" id="s11">11. El logo<a class="up" href="#indice">↑ índice</a></h2>
+<h2 class="pb" id="s11">11. El logo<a class="up" href="#indice">↑ índice</a></h2><div class="sb"><img loading="lazy" alt="" src="/img/villa-cristal.jpg"><p>Vuestro nombre, bien puesto.</p></div>
 <p>Vuestro logo está bien pensado, pero el archivo que se usa es pequeño y borroso al ampliarlo. Lo he redibujado en vectorial, que se ve nítido en cualquier tamaño, y he preparado dos versiones: de color, para fondos claros, y blanca, para fondos oscuros. Es una limpieza del que ya tenéis, <b>no un cambio de marca</b>: las formas, los colores y las letras son los mismos.</p>
 <figure><img src="/img/guia/logo-revision.png"><figcaption>Arriba: versión blanca sobre fondo oscuro. Abajo a la izquierda: versión de color, vectorial y nítida. Abajo a la derecha: el logo actual, pequeño y con fondo blanco.</figcaption></figure>
 <div class="logos">
@@ -422,11 +435,11 @@ a{color:#B8430A}
 </div>
 <p>Es solo una propuesta. Si te gusta, lo uso en la web, en la ficha de Google, en WhatsApp Business y, si quieres, en rotulación o furgoneta. Si prefieres otra cosa o dejarlo como está, también está bien.</p>
 
-<h2 class="pb" id="s12">12. Todas las direcciones de la web nueva<a class="up" href="#indice">↑ índice</a></h2>
+<h2 class="pb" id="s12">12. Todas las direcciones de la web nueva<a class="up" href="#indice">↑ índice</a></h2><div class="sb"><img loading="lazy" alt="" src="/img/vista-exterior.jpg"><p>Cada dirección, una puerta de entrada.</p></div><details class="dt"><summary></summary>
 <p class="small">Pulsa en cualquiera para verla. Todo está en una dirección provisional de prueba hasta que publiquemos con el dominio real.</p>
 <div class="tw"><table><tr><th style="width:17%">Bloque</th><th>Direcciones</th><th style="width:33%">Qué hemos hecho</th></tr><tr><td><b>Portada y landing</b></td><td><a href="https://ams-cerramientos-ejemplo.vercel.app/">Portada</a>, <a href="https://ams-cerramientos-ejemplo.vercel.app/landing">Landing de terrazas</a></td><td>Cabecera con vídeo, formulario visible, reseñas reales, preguntas desplegables y llamada a pedir presupuesto.</td></tr><tr><td><b>Herramientas</b></td><td><a href="https://ams-cerramientos-ejemplo.vercel.app/configurador">Configurador de ventanas</a>, <a href="https://ams-cerramientos-ejemplo.vercel.app/calculadora">Calculadora de precio</a></td><td>Precio en vivo con medición, instalación y remates incluidos; el cliente se lleva el presupuesto en PDF o por WhatsApp. Precios provisionales.</td></tr><tr><td><b>Productos</b></td><td><a href="https://ams-cerramientos-ejemplo.vercel.app/ventanas-aluminio">Ventanas de aluminio</a>, <a href="https://ams-cerramientos-ejemplo.vercel.app/ventanas-pvc">Ventanas PVC Kömmerling</a>, <a href="https://ams-cerramientos-ejemplo.vercel.app/cerramientos-terrazas">Cerramientos de terraza</a>, <a href="https://ams-cerramientos-ejemplo.vercel.app/techos">Techos de aluminio</a>, <a href="https://ams-cerramientos-ejemplo.vercel.app/cancelas-puertas">Cancelas y puertas</a>, <a href="https://ams-cerramientos-ejemplo.vercel.app/pergolas">Pérgolas</a>, <a href="https://ams-cerramientos-ejemplo.vercel.app/toldos">Toldos y tejidos</a>, <a href="https://ams-cerramientos-ejemplo.vercel.app/persianas-cristales">Persianas y cristales</a>, <a href="https://ams-cerramientos-ejemplo.vercel.app/acabados">Acabados y calidades</a></td><td>Mismos productos de la web antigua con textos reescritos, series y modelos, tablas claras y presupuesto en cada página. Quitada la tienda de mamparas.</td></tr><tr><td><b>Servicios</b></td><td><a href="https://ams-cerramientos-ejemplo.vercel.app/automatismos">Automatismos</a>, <a href="https://ams-cerramientos-ejemplo.vercel.app/rejas">Rejas y enrejados</a>, <a href="https://ams-cerramientos-ejemplo.vercel.app/comunidades">Mantenimiento para comunidades</a>, <a href="https://ams-cerramientos-ejemplo.vercel.app/reparaciones">Reparaciones</a>, <a href="https://ams-cerramientos-ejemplo.vercel.app/financiacion">Financiación y ayudas</a></td><td>Cuatro páginas nuevas (automatismos, rejas, techos y reparaciones) con el contenido de la web antigua ordenado y ampliado.</td></tr><tr><td><b>Empresa</b></td><td><a href="https://ams-cerramientos-ejemplo.vercel.app/empresa">Quiénes somos</a>, <a href="https://ams-cerramientos-ejemplo.vercel.app/trabajos">Trabajos realizados</a>, <a href="https://ams-cerramientos-ejemplo.vercel.app/contacto">Contacto</a></td><td>Más de 20 años, taller propio, garantía de 2 años; galería y contacto con WhatsApp.</td></tr><tr><td><b>Zonas</b></td><td><a href="https://ams-cerramientos-ejemplo.vercel.app/alcala-de-henares">Alcalá de Henares</a>, <a href="https://ams-cerramientos-ejemplo.vercel.app/torrejon-de-ardoz">Torrejón de Ardoz</a>, <a href="https://ams-cerramientos-ejemplo.vercel.app/villalbilla">Villalbilla</a>, <a href="https://ams-cerramientos-ejemplo.vercel.app/coslada">Coslada</a>, <a href="https://ams-cerramientos-ejemplo.vercel.app/meco">Meco</a>, <a href="https://ams-cerramientos-ejemplo.vercel.app/azuqueca-de-henares">Azuqueca de Henares</a>, <a href="https://ams-cerramientos-ejemplo.vercel.app/guadalajara">Guadalajara</a>, <a href="https://ams-cerramientos-ejemplo.vercel.app/madrid">Madrid capital</a></td><td>Una página por zona, con texto propio según el tipo de vivienda, preguntas frecuentes y enlace a los servicios. Para aparecer cuando buscan en su localidad.</td></tr><tr><td><b>Blog</b></td><td><a href="https://ams-cerramientos-ejemplo.vercel.app/blog">Índice</a>, <a href="https://ams-cerramientos-ejemplo.vercel.app/blog/cancelas-aluminio-soldado">Cancelas de aluminio soldado</a>, <a href="https://ams-cerramientos-ejemplo.vercel.app/blog/ventanas-oscilobatientes">Ventanas oscilobatientes</a>, <a href="https://ams-cerramientos-ejemplo.vercel.app/blog/instalacion-ventanas-pvc">Instalación de ventanas de PVC</a>, <a href="https://ams-cerramientos-ejemplo.vercel.app/blog/cajones-persiana-aislados">Cajones de persiana aislados</a>, <a href="https://ams-cerramientos-ejemplo.vercel.app/blog/rotura-puente-termico">Rotura de puente térmico</a>, <a href="https://ams-cerramientos-ejemplo.vercel.app/blog/pvc-o-aluminio">PVC o aluminio</a>, <a href="https://ams-cerramientos-ejemplo.vercel.app/blog/precio-cerrar-terraza">Precio de cerrar una terraza</a>, <a href="https://ams-cerramientos-ejemplo.vercel.app/blog/ayudas-cambiar-ventanas-madrid">Ayudas para cambiar ventanas</a>, <a href="https://ams-cerramientos-ejemplo.vercel.app/blog/cerrar-terraza-antes-de-navidad">Cerrar la terraza antes de Navidad</a></td><td>Cinco guías nuevas sobre lo que la gente busca, más las que ya valían. Cada una tiene preguntas frecuentes y enlaces a los productos.</td></tr></table></div>
 
-<h2 class="pb" id="s13">13. Cómo se haría el cambio de la web<a class="up" href="#indice">↑ índice</a></h2>
+</details><h2 class="pb" id="s13">13. Cómo se haría el cambio de la web<a class="up" href="#indice">↑ índice</a></h2><div class="sb"><img loading="lazy" alt="" src="/img/obra-balcon.jpg"><p>Un cambio hecho con calma y sin riesgo.</p></div><details class="dt"><summary></summary>
 <div class="box dummy"><h3>La comparación más sencilla</h3><p style="margin:0">Tu dominio, <b>amscerramientos.es</b>, es como la dirección de tu taller. La web es lo que hay dentro. Cambiar de web es poner un escaparate nuevo en el mismo local: la dirección no cambia, el correo no se toca y los clientes llegan al mismo sitio.</p></div>
 <p>La web nueva ya funciona en una dirección de prueba. Para ponerla en <b>amscerramientos.es</b> hay dos caminos:</p>
 <div class="tw"><table>
@@ -452,7 +465,7 @@ a{color:#B8430A}
 </ul>
 <p><b>Un detalle para decidir bien:</b> si algún día queremos cambiar de alojamiento, la web es un conjunto de archivos que se puede llevar a cualquier sitio. No quedas atado a nada.</p>
 
-<h2 id="s14">14. Caminos y costes<a class="up" href="#indice">↑ índice</a></h2>
+</details><h2 id="s14">14. Caminos y costes<a class="up" href="#indice">↑ índice</a></h2><div class="sb"><img loading="lazy" alt="" src="/img/salon-ventanal.jpg"><p>Tú eliges el camino y el ritmo.</p></div><details class="dt"><summary></summary>
 <div class="tw"><table>
 <tr><th style="width:21%">Camino</th><th>Qué incluye</th><th style="width:18%">Coste</th><th style="width:20%">Cuándo se nota</th></tr>
 <tr><td><b>A. Orgánico perfecto</b></td><td>Web nueva publicada, ficha de Google al día con fotos y publicaciones semanales, responder todas las reseñas, pedir reseñas nuevas, WhatsApp Business, perfiles de portales completos, Instagram con obras.</td><td>0 euros. Es tiempo de vuestro equipo.</td><td>Ficha y portales, en semanas. La web en Google, de 3 a 6 meses.</td></tr>
@@ -461,7 +474,7 @@ a{color:#B8430A}
 </table></div>
 <p><b>Mi recomendación:</b> empezar ya con el camino A, que no cuesta dinero, y añadir el B cuando la web esté publicada y haya alguien que conteste a todos el mismo día. Publicidad con la respuesta lenta es tirar el dinero. No puedo prometer cuántos contactos dará una campaña antes de probarla.</p>
 
-<h2 class="pb" id="s15">15. WhatsApp Business: gratis y automático<a class="up" href="#indice">↑ índice</a></h2>
+</details><h2 class="pb" id="s15">15. WhatsApp Business: gratis y automático<a class="up" href="#indice">↑ índice</a></h2><div class="sb"><img loading="lazy" alt="" src="/img/mujer-libro.jpg"><p>Contestar rápido, sin esfuerzo.</p></div><details class="dt"><summary></summary>
 <div class="box dummy"><h3>Qué es, en una frase</h3><p style="margin:0">Es el mismo WhatsApp de siempre, pero pensado para empresas: gratis, con un perfil de empresa y con mensajes que se envían solos. Es como tener una recepcionista que saluda a cada cliente aunque estés subido a un andamio.</p></div>
 <p>La web nueva ya funciona con WhatsApp: cada botón abre una conversación con vuestro número y un mensaje ya escrito según lo que mire el cliente ("Hola, AMS Cerramientos. He visto vuestra web y quiero presupuesto para ventanas de PVC…"). Lo que falta es que, del otro lado, el número esté preparado para atender bien. Eso se hace con <b>WhatsApp Business</b>.</p>
 <h3>Qué te da, sin pagar nada</h3>
@@ -491,7 +504,7 @@ a{color:#B8430A}
 <li><b>La regla de oro sigue siendo contestar el mismo día.</b> La automatización ayuda, pero no sustituye a una persona.</li>
 </ul>
 
-<h2 id="s16">16. Calculadora, configurador y asistente con IA<a class="up" href="#indice">↑ índice</a></h2>
+</details><h2 id="s16">16. Calculadora, configurador y asistente con IA<a class="up" href="#indice">↑ índice</a></h2><div class="sb"><img loading="lazy" alt="" src="/img/arquitecto-mesa.jpg"><p>Herramientas que trabajan aunque no estéis delante.</p></div><details class="dt"><summary></summary>
 <p>Aquí van las herramientas que pueden captar clientes de una forma que casi ninguna empresa del sector tiene. Dos ya están hechas como prueba y se pueden usar ahora mismo: el <b>configurador de ventanas</b> y una <b>calculadora sencilla</b>. Otras dos son lo siguiente: el <b>asistente con inteligencia artificial</b> y el <b>correo automático</b> (con Resend). Siempre se pueden hacer más cosas; lo importante es ir paso a paso.</p>
 <h3>A. El configurador de ventanas (ya hecho, pruébalo)</h3>
 <p>Es una página donde el cliente configura sus ventanas habitación por habitación (ventanas, balconeras, correderas, fijos, ventanas de tejado y claraboyas), elige medidas, material y color, y <b>ve el precio al momento</b>. Está en <a href="https://ams-cerramientos-ejemplo.vercel.app/configurador">ams-cerramientos-ejemplo.vercel.app/configurador</a>, enlazado desde el menú ("Calcula tu precio") y desde la portada. No toca nada más de la web.</p>
@@ -565,7 +578,7 @@ a{color:#B8430A}
 <div class="box hope"><h3>Cómo lo ordenaría yo</h3><p style="margin:0">Primero lo básico y gratuito (contestar rápido, WhatsApp Business, ficha de Google, la web nueva). Cuando eso esté en marcha y quieras dar un paso más, empezamos por poner tus precios en el configurador y por el correo automático; después, el asistente. Lo decides tú, y no hay prisa.</p></div>
 
 
-<h2 class="pb" id="s17">17. Qué haría yo contigo, paso a paso<a class="up" href="#indice">↑ índice</a></h2>
+</details><h2 class="pb" id="s17">17. Qué haría yo contigo, paso a paso<a class="up" href="#indice">↑ índice</a></h2><div class="sb"><img loading="lazy" alt="" src="/img/hombre-sonriendo.jpg"><p>Paso a paso, de uno en uno.</p></div><details class="dt"><summary></summary>
 <p>La web nueva está pensada para <b>posicionarse</b>: que Google, y cada vez más las inteligencias artificiales, os encuentren y os recomienden cuando alguien busca "cerrar terraza en Alcalá" o "ventanas de PVC en Guadalajara". Pero una web sola no basta, y por eso te cuento aquí en qué trabajaría yo, con quién y con qué ritmo. <b>Importante: yo te guiaría y te diría exactamente qué hacer; lo haces tú o quien tú elijas, y lo decides tú en cada paso.</b></p>
 <div class="tw"><table>
 <tr><th style="width:22%">Qué</th><th>Qué haría yo</th><th style="width:28%">Qué haría falta de ti</th></tr>
@@ -576,7 +589,7 @@ a{color:#B8430A}
 <tr><td><b>La web</b></td><td>Publicarla con vuestro dominio, con las redirecciones de las páginas viejas, y mantenerla: artículos nuevos, fotos reales, ajustes con lo que vaya mostrando Analytics y Search Console.</td><td>Las fotos y los datos pendientes del cuestionario.</td></tr>
 </table></div>
 
-<h2 id="s18">18. Calendario editorial: 3 meses, 36 artículos<a class="up" href="#indice">↑ índice</a></h2>
+</details><h2 id="s18">18. Calendario editorial: 3 meses, 36 artículos<a class="up" href="#indice">↑ índice</a></h2><div class="sb"><img loading="lazy" alt="" src="/img/mujer-luz.jpg"><p>Un artículo cada semana, y la web se va llenando de vida.</p></div><details class="dt"><summary></summary>
 <div class="box hope"><h3>Esto ya lo hemos hecho: el blog está optimizado y ampliado</h3><p style="margin:0">Hemos recogido del blog de la web antigua (unas 38 entradas, desde 2019) todo lo que sigue sirviendo, lo hemos reescrito, ordenado y actualizado, y hemos dejado fuera lo que no aporta (una nota sobre un medidor láser de otra marca, un truco viral de TikTok, resúmenes de premios de otros fabricantes). Hoy el blog tiene <b>13 guías completas</b>, entre ellas las cuatro últimas que hemos añadido: <i>condensación y moho en ventanas</i>, <i>Kömmerling 76 AD y 76 MD</i>, <i>mantenimiento y limpieza de ventanas</i> y <i>la mejor época para cambiar las ventanas</i>. Cada una lleva respuesta rápida, tablas, preguntas frecuentes, enlaces a las páginas de producto y botón de presupuesto.</p></div>
 <h3>Cómo vais a aparecer en Google y en las respuestas de las IA</h3>
 <p>Cuando alguien pregunta a Google o a un asistente de IA (ChatGPT, Gemini, Perplexity, el buscador con IA de Google) "¿qué ventanas me conviene para el ruido en Alcalá?" o "¿quién instala ventanas Kömmerling cerca de mí?", el sistema hace dos cosas: <b>entiende qué es cada empresa</b> y <b>elige a quién citar</b>. La web nueva está construida para que os entiendan a la primera, sin ambigüedades. Es lo que se llama SEO "on-page": todo lo que se puede hacer dentro de la propia web. Y en esto la web nueva está al máximo nivel que se puede pedir; lo cuento por capas.</p>
@@ -720,7 +733,7 @@ a{color:#B8430A}
 
 <p>Quien pide un presupuesto de ventanas piensa en algo más que el precio: "¿y si luego falla algo?, ¿me dejarán tirado?". Por eso la web enseña, en la portada y en una página propia (<a href="https://ams-cerramientos-ejemplo.vercel.app/garantia-y-postventa">Garantía y postventa</a>), lo que ya tenéis: más de veinte años, taller propio, instaladores oficiales de Kömmerling y garantías de 2 años mínimo en todos los trabajos, 10 en los perfiles Kömmerling y 5 en las cancelas soldadas. Todo explicado con tres momentos: antes (visita y presupuesto cerrado), durante (obra limpia) y después (servicio técnico).</p>
 <div class="box"><h3>Lo que necesito que confirmes</h3><p style="margin:0">Todo lo que ponemos tiene que ser verdad el día que salga la web. Dime si son ciertos: los <b>20 años</b>, las <b>garantías de 2, 5 y 10 años</b>, que medís <b>con láser</b> y que el proceso de "si algo falla, nos avisa y lo vemos" es como lo hacéis. Si quieres, podemos añadir compromisos que os den aún más fuerza (por ejemplo, contestar siempre el mismo día o una revisión gratuita al año), pero <b>solo los que estés seguro de cumplir</b>. Una promesa que no se cumple hace más daño que no hacerla.</p></div>
-<h2 id="s19">19. Del primer clic a la obra: el seguimiento del cliente<a class="up" href="#indice">↑ índice</a></h2>
+</details><h2 id="s19">19. Del primer clic a la obra: el seguimiento del cliente<a class="up" href="#indice">↑ índice</a></h2><div class="sb"><img loading="lazy" alt="" src="/img/cliente-obrero.jpg"><p>Del primer clic a la obra, sin perder a nadie.</p></div><details class="dt"><summary></summary>
 <p>Muchos presupuestos no se pierden porque el cliente diga que no, sino porque nadie le vuelve a escribir. La idea es sencilla: <b>acompañar al cliente desde que deja sus datos hasta que decide</b>, con información útil, sin agobiar.</p>
 <div class="diag"><div class="n"><b>1. Entra</b>Calculadora, configurador o WhatsApp</div><div class="ar">&rarr;</div><div class="n"><b>2. Deja sus datos</b>Con su permiso</div><div class="ar">&rarr;</div><div class="n"><b>3. Recibe</b>Su presupuesto y un correo de bienvenida</div><div class="ar">&rarr;</div><div class="n"><b>4. Se le acompaña</b>Precios, blog, reseñas, ayudas</div><div class="ar">&rarr;</div><div class="n g"><b>5. Visita y obra</b>Y después, una reseña</div></div>
 <ul>
@@ -732,7 +745,7 @@ a{color:#B8430A}
 <div class="box"><h3>Por qué la calculadora y el configurador son el corazón de esto</h3><p style="margin:0">Los he diseñado después de ver cómo lo hacen las webs del sector, quedándome con lo que funciona (precio al momento, sin pedir los datos antes, pasos muy cortos, resultado por WhatsApp o PDF) y quitando lo que estorba. Por mi experiencia, una herramienta así es de lo que mejor capta contactos, porque responde a la pregunta que todo cliente tiene: "¿cuánto me va a costar?". Pero no puedo prometerte cuántos contactos traerá hasta probarla con tus precios reales y con la web publicada.</p></div>
 <div class="box hope"><h3>Un menú, no una obligación</h3><p style="margin:0">Todo lo de arriba son posibilidades. Puedes quedarte con la web y nada más, añadir solo la ficha de Google, o ir a por todo poco a poco. Cualquiera de esos caminos es bueno. Mi trabajo es que lo entiendas y que elijas con tranquilidad.</p></div>
 
-<h2 id="s20">20. Plan de 30 días<a class="up" href="#indice">↑ índice</a></h2>
+</details><h2 id="s20">20. Plan de 30 días<a class="up" href="#indice">↑ índice</a></h2><div class="sb"><img loading="lazy" alt="" src="/img/terraza-cristal.jpg"><p>Treinta días para arrancar con buen pie.</p></div><details class="dt"><summary></summary>
 <div class="tw"><table>
 <tr><th style="width:15%">Semana</th><th>Acciones</th><th style="width:20%">Quién</th></tr>
 <tr><td><b>1</b></td><td>Probar el formulario actual. Responder las 5 reseñas negativas con educación y ofreciendo solución. Contestar los presupuestos pendientes. Actualizar la ficha de Google: horario, fotos, servicios y zonas. Instalar WhatsApp Business con respuesta automática.</td><td>Javi y su equipo; yo os guío</td></tr>
@@ -741,7 +754,7 @@ a{color:#B8430A}
 <tr><td><b>4</b></td><td>Decidir sobre una pequeña campaña de Google Ads con datos de lo que ya haya entrado. Revisar resultados.</td><td>Decisión de Javi</td></tr>
 </table></div>
 
-<h2 class="pb" id="s21">21. Cuánto tarda en notarse (esto no es magia)<a class="up" href="#indice">↑ índice</a></h2>
+</details><h2 class="pb" id="s21">21. Cuánto tarda en notarse (esto no es magia)<a class="up" href="#indice">↑ índice</a></h2><div class="sb"><img loading="lazy" alt="" src="/img/techo-buhardilla.jpg"><p>Las cosas buenas llevan su tiempo, y merecen la pena.</p></div><details class="dt"><summary></summary>
 <div class="box hard"><p style="margin:0">Lo digo sin adornos: hoy, con lo que hay, es muy difícil que tengas más clientes que los que ya te recomiendan. No tiene que ser siempre así, pero el camino es largo. Y conviene saber que el mercado puede estar más flojo en los próximos meses, algo que no depende de ti.</p></div>
 <div class="tw"><table>
 <tr><th style="width:30%">Acción</th><th>Cuándo se nota</th></tr>
@@ -756,7 +769,7 @@ a{color:#B8430A}
 <div class="box hope"><h3>Y ahora, la parte buena</h3>
 <p style="margin:0">Tenéis lo que no se improvisa: veinte años, taller propio, red oficial Kömmerling, clientes que os recomiendan con entusiasmo y un trabajo que se nota. Y un hueco real: en Guadalajara hay poca competencia visible, y en Alcalá los líderes se apoyan en tener muchas opiniones, algo que se puede construir con constancia. Con una respuesta rápida, una ficha viva y una web que enseñe vuestro trabajo, se puede recuperar el flujo de contactos aunque el mercado esté más flojo. No es una promesa de resultados, pero es el camino con más probabilidades de funcionar.</p></div>
 
-<h2 id="s22">22. Cómo lo planteo yo<a class="up" href="#indice">↑ índice</a></h2>
+</details><h2 id="s22">22. Cómo lo planteo yo<a class="up" href="#indice">↑ índice</a></h2><div class="sb"><img loading="lazy" alt="" src="/img/villa-cristal.jpg"><p>Con cariño y sin prisas.</p></div><details class="dt"><summary></summary>
 <p>Me pediste ayuda y me dijiste que estabas pasando un momento flojo de trabajo. Por eso me puse con ello. Lo único que quiero es que lo tengas claro:</p>
 <ul>
 <li><b>Todo lo que ves aquí lo he hecho por amistad, con mucho gusto.</b> No hay nada que pagar, ahora ni después, y no estás en deuda conmigo.</li>
@@ -764,7 +777,7 @@ a{color:#B8430A}
 <li>Los únicos costes posibles son de terceros y los decides tú: publicidad, si algún día quieres, y la cuenta de Vercel, si eliges la opción B. Tu dominio ya lo pagas.</li>
 </ul>
 
-<h2 class="pb" id="s23">23. Los accesos que necesito (y cómo darlos)<a class="up" href="#indice">↑ índice</a></h2>
+</details><h2 class="pb" id="s23">23. Los accesos que necesito (y cómo darlos)<a class="up" href="#indice">↑ índice</a></h2><div class="sb"><img loading="lazy" alt="" src="/img/vista-exterior.jpg"><p>Pocos accesos, muchas posibilidades.</p></div>
 <p>Para poder revisar y actualizar lo que haga falta, necesito permiso en estas herramientas, siempre con el correo <b>delarubiaignacio@gmail.com</b> y con el nivel que se indica. Tú puedes quitarlo cuando quieras. Los menús de Google cambian de nombre de vez en cuando; si te pierdes, mándame una captura.</p>
 <div class="tw"><table>
 <tr><th style="width:20%">Herramienta</th><th>Para qué sirve</th><th style="width:38%">Cómo dar acceso</th></tr>
@@ -777,7 +790,7 @@ a{color:#B8430A}
 <tr><td><b>Dominio</b></td><td>Apuntarlo a la web nueva.</td><td>Solo necesito saber dónde está contratado y que tú (o quien lo lleve) cambie los apuntes cuando te lo diga.</td></tr>
 </table></div>
 
-<h2 class="pb" id="s24">24. Preguntas para ti<a class="up" href="#indice">↑ índice</a></h2>
+<h2 class="pb" id="s24">24. Preguntas para ti<a class="up" href="#indice">↑ índice</a></h2><div class="sb"><img loading="lazy" alt="" src="/img/llamada-sonrisa.jpg"><p>Tus respuestas lo cambian todo.</p></div>
 <div class="box"><h3>Contesta aquí mismo</h3><p style="margin:0">Son 28 preguntas cortas. Pulsa las opciones o escribe. Contesta todas; si no sabes algo, escribe "No sé". Tus respuestas se guardan solas en este dispositivo mientras las escribes y, cuando termines, las mandas a Ignacio por WhatsApp o por correo con los botones de abajo. También puedes ir a <a href="/cuestionario">esta misma página solo con las preguntas</a>.</p></div>
 <style>
 .qb{background:#fff;border:1px solid #DCE2E7;border-radius:10px;padding:18px;margin-top:12px}
@@ -821,7 +834,7 @@ document.getElementById('b-copy').addEventListener('click',function(){if(!valida
 var s=document.getElementById('b-share');if(navigator.share){s.addEventListener('click',function(){if(!validar())return;navigator.share({title:'Respuestas de Javi - AMS',text:leer()}).catch(function(){});});}else{s.style.display='none';}
 })();
 </script>
-<h2 class="pb" id="s25">25. Anexo: las fotos de la web antigua, para decidir<a class="up" href="#indice">↑ índice</a></h2>
+<h2 class="pb" id="s25">25. Anexo: las fotos de la web antigua, para decidir<a class="up" href="#indice">↑ índice</a></h2><div class="sb"><img loading="lazy" alt="" src="/img/ventana-cortina.jpg"><p>Las fotos que ya tenéis valen oro.</p></div><details class="dt"><summary></summary>
 <p>La web actual tiene 33 imágenes que podrían servir. Las he reunido en una página donde cada una se marca como <b>Usar</b>, <b>Quizá</b> o <b>No</b>: <a href="https://ams-cerramientos-ejemplo.vercel.app/fotos-web-antigua">ams-cerramientos-ejemplo.vercel.app/fotos-web-antigua</a>. Las capturas de aquí son esa misma página.</p>
 <ul>
 <li><b>Las más valiosas son las de obras reales</b> (números 1 a 14 y 22 a 24): cancelas, rejas, cerramientos de terraza, acristalamientos y persianas. Son las que no se pueden comprar en un banco de imágenes.</li>
@@ -836,7 +849,7 @@ var s=document.getElementById('b-share');if(navigator.share){s.addEventListener(
 <figure><img src="/img/guia/g5.jpg"></figure>
 <figure><img src="/img/guia/g6.jpg"></figure>
 
-<h2 id="s26">26. Fuentes<a class="up" href="#indice">↑ índice</a></h2>
+</details><h2 id="s26">26. Fuentes<a class="up" href="#indice">↑ índice</a></h2>
 <p class="small">Consultadas el 22 de octubre de 2026. Son páginas públicas de terceros; pueden cambiar y no son un estudio completo.</p>
 <ul class="small">
 <li><a href="https://www.kommerling.es/red-oficial/madrid">Red oficial de Kömmerling en Madrid</a> (AMS aparece en Villalbilla; 7 empresas en Alcalá)</li>
@@ -853,4 +866,7 @@ var s=document.getElementById('b-share');if(navigator.share){s.addEventListener(
 <p><b>Un abrazo muy fuerte,</b></p>
 <p style="font-size:15pt;margin:1mm 0"><b>Ignacio</b></p>
 <p><a href="mailto:delarubiaignacio@gmail.com">delarubiaignacio@gmail.com</a></p></div>
-</div></body></html>
+<script>(function(){function ab(el){while(el&&(el=el.parentElement)){if(el.tagName==='DETAILS')el.open=true}}
+function go(){var h=location.hash.slice(1);if(!h)return;var t=document.getElementById(h);if(t){ab(t);setTimeout(function(){t.scrollIntoView()},30)}}
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;var t=document.getElementById(a.getAttribute('href').slice(1));if(t)ab(t)});
+window.addEventListener('hashchange',go);go();})();</script></div></body></html>
