@@ -72,7 +72,8 @@
 <label for="pe" style="font-weight:700">Persianas</label><select id="pe"><option value="no">Sin persianas</option><option value="manual">Con persiana manual</option><option value="motor">Con persiana motorizada</option></select>
 </div>
 <fieldset class="card"><legend style="font-size:22px;font-weight:800;margin-bottom:6px">2. ¿Qué aparece escrito en el presupuesto?</legend><p style="margin:0 0 6px;color:#4A5A68">Marca solo lo que viene claramente. Lo que dejes sin marcar te lo señalamos como cosa que preguntar.</p><label class="op"><input type="checkbox" name="c" value="med"><span>Medición previa de los huecos</span></label><label class="op"><input type="checkbox" name="c" value="ret"><span>Desmontaje y retirada de las ventanas viejas y de los escombros</span></label><label class="op"><input type="checkbox" name="c" value="marca"><span>Marca y serie del perfil (por ejemplo, Kömmerling 76 AD)</span></label><label class="op"><input type="checkbox" name="c" value="vid"><span>Composición exacta del vidrio (por ejemplo, 4/16/4 bajo emisivo)</span></label><label class="op"><input type="checkbox" name="c" value="caja"><span>Cajón de persiana: qué se hace con él (aislar, cambiar o dejar)</span></label><label class="op"><input type="checkbox" name="c" value="rem"><span>Remates: sellado, tapajuntas y vierteaguas</span></label><label class="op"><input type="checkbox" name="c" value="iva"><span>Precio con el IVA indicado claramente</span></label><label class="op"><input type="checkbox" name="c" value="gar"><span>Garantía por escrito, con los años del perfil, del vidrio y de la instalación</span></label><label class="op"><input type="checkbox" name="c" value="plazo"><span>Plazo de entrega e instalación</span></label><label class="op"><input type="checkbox" name="c" value="pago"><span>Forma de pago y cuánto se adelanta</span></label></fieldset>
-<div><button type="submit" class="b1">Revisar mi presupuesto</button></div>
+<div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center"><button type="submit" class="b1">Revisar mi presupuesto</button><button type="button" id="pr-ej" style="min-height:54px;padding:0 22px;border-radius:6px;border:1px solid #12202B;background:transparent;color:#12202B;font:600 16px Inter,sans-serif;cursor:pointer">Probar con un ejemplo</button></div>
+<p style="margin:0;font-size:14px;color:#4A5A68">El ejemplo es un presupuesto inventado de 4 ventanas (6 m², 3.000 € con IVA) para que veas cómo responde. Cuando activemos la lectura con IA, subirás la foto o el PDF y los datos se rellenarán solos.</p>
 <p id="pr-err" style="margin:0;color:#B42318;font-weight:600" role="alert"></p>
 </form>
 <div id="pr-out" style="display:none;flex-direction:column;gap:18px" aria-live="polite"></div>
@@ -135,6 +136,9 @@ out.innerHTML=h;out.scrollIntoView({behavior:'smooth',block:'start'});
 }
 ref(it,n).then(pinta).catch(function(){pinta(null);});
 });
+g('pr-ej').addEventListener('click',function(){g('pp').value=3000;g('pi').value='con';g('pn').value=4;g('pm').value=6;g('pa').value='pvc';g('pv').value='doble';g('pe').value='no';
+[].slice.call(f.querySelectorAll('input[name=c]')).forEach(function(e){e.checked=(e.value==='med'||e.value==='iva'||e.value==='plazo');});
+f.requestSubmit?f.requestSubmit():f.dispatchEvent(new Event('submit',{cancelable:true}));});
 })();
 </script>
 </main>
