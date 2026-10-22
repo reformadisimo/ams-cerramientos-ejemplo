@@ -57,6 +57,10 @@ a{color:var(--navy)}a:hover{color:#B8430A}
 @media (max-width:900px){.gal{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:600px){.gal{grid-template-columns:1fr}}
 .gal-link{display:block;border-radius:10px}.gal-link:hover img{opacity:.92}
+.ph{position:relative;aspect-ratio:4/3;border-radius:10px;overflow:hidden;background:linear-gradient(135deg,#12202B 0%,#24465d 100%);display:flex;align-items:center;justify-content:center}
+.ph:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,rgba(255,255,255,.035) 0 2px,transparent 2px 22px)}
+.ph svg{position:relative;width:34%;height:auto;stroke:#F5B27F;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.ph b{position:absolute;left:12px;top:12px;font:700 11px Inter,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#12202B;background:#F5B27F;padding:5px 10px;border-radius:99px}
 .gal-filters{display:flex;flex-wrap:wrap;gap:8px}
 .gal-filters button{min-height:40px;padding:0 16px;border:1px solid #DCE2E7;border-radius:999px;background:#fff;color:var(--navy);font:600 14px Inter,sans-serif;cursor:pointer}
 .gal-filters button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
