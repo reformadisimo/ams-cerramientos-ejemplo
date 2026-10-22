@@ -57,6 +57,7 @@ function fixAper(it){
 }
 
 /* ---------- Dibujos ---------- */
+function REAL(it,o){return window.AMSRender?window.AMSRender.real(it,o):draw(it,{person:!(o&&o.scene)?false:true});}
 function frameCol(it){return COLHEX[it.col]||'#FFFFFF';}
 function drawWin(it,opt){
  opt=opt||{};var person=opt.person!==false;
@@ -159,7 +160,7 @@ function detalle(it){
 function renderTypes(){
  var h='';
  TYPES.forEach(function(t){var it=defItem(t.id);if(t.id==='corredera'){it.w=200;it.h=215;}
-  h+='<button type="button" class="cf-type'+(S.cur&&S.curIdx<0&&S.cur.tipo===t.id?' on':'')+'" data-type="'+t.id+'">'+draw(it,{person:false})+'<b>'+t.n+'</b><span>'+t.d+'</span><em id="cfFrom_'+t.id+'"></em></button>';});
+  h+='<button type="button" class="cf-type'+(S.cur&&S.curIdx<0&&S.cur.tipo===t.id?' on':'')+'" data-type="'+t.id+'">'+REAL(it)+'<b>'+t.n+'</b><span>'+t.d+'</span><em id="cfFrom_'+t.id+'"></em></button>';});
  $('cfTypes').innerHTML=h;
 }
 
@@ -204,7 +205,7 @@ function renderOpts(){
  } else {
   var t=TT[it.tipo];
   var sizes='<div class="cf-sizes">'+t.pre.map(function(p,i){var on=Math.round(it.w)===p.w&&Math.round(it.h)===p.h&&it.hojas===p.hojas;var tmp=clone(it);tmp.w=p.w;tmp.h=p.h;tmp.hojas=p.hojas;fixAper(tmp);
-   return '<button type="button" class="cf-o'+(on?' on':'')+'" data-pre="'+i+'">'+draw(tmp,{person:false})+'<b>'+p.n+'</b><small>'+p.d+' · '+p.w+' × '+p.h+' cm</small></button>';}).join('')+'</div>';
+   return '<button type="button" class="cf-o'+(on?' on':'')+'" data-pre="'+i+'">'+REAL(tmp)+'<b>'+p.n+'</b><small>'+p.d+' · '+p.w+' × '+p.h+' cm</small></button>';}).join('')+'</div>';
   if(R) h+=sec('Tamaño','Elige la que más se parezca. Las medidas exactas las tomamos nosotros gratis.',sizes);
   else {
    var hojasOpts=it.tipo==='fijo'?'':'<label class="f" style="flex:0 1 auto">Hojas<span class="cf-opts">'+[1,2,3,4].filter(function(n){return it.tipo==='corredera'?n>=2:n<=3;}).map(function(n){return '<button type="button" class="cf-o'+(it.hojas===n?' on':'')+'" data-k="hojas" data-v="'+n+'">'+n+'</button>';}).join('')+'</span></label>';
@@ -255,7 +256,7 @@ function dimHint(){
 }
 function refreshCur(){
  if(!S.cur)return;
- $('cfDraw').innerHTML=draw(S.cur);renderBars(S.cur);
+ $('cfDraw').innerHTML=REAL(S.cur,{scene:true});renderBars(S.cur);
 }
 
 /* ---------- Precio (servidor) ---------- */

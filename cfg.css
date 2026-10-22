@@ -170,3 +170,8 @@
 .cf-dlg label.f{flex:none}
 .cf-dlg h2{padding-right:84px}
 .cf-mbar.empty{display:none!important}
+.cf-type{padding:0 0 14px;overflow:hidden}
+.cf-type svg{width:100%;height:auto;display:block;background:linear-gradient(180deg,#F7F9FA,#EEF2F5);margin-bottom:4px}
+.cf-sizes .cf-o{padding:0 0 10px;overflow:hidden}
+.cf-sizes svg{width:100%;height:auto;display:block;background:linear-gradient(180deg,#F7F9FA,#EEF2F5);margin-bottom:4px}
+.cf-draw{padding:0;overflow:hidden;background:#ECE8E1}
