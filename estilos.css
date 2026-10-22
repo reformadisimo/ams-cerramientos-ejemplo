@@ -85,4 +85,5 @@ a{color:var(--navy)}a:hover{color:#B8430A}
 }
 @media (prefers-reduced-motion: reduce){.vbg{display:none}}
 .vbg{pointer-events:none}
+.vtxt{text-shadow:0 2px 14px rgba(0,0,0,.5)}.vtxt #presupuesto,.vtxt .btn-hero{text-shadow:none}
 @media (max-width: 760px){.vov{background:linear-gradient(180deg,rgba(18,32,43,0.8) 0%,rgba(18,32,43,0.6) 60%,rgba(18,32,43,0.35) 100%)!important}}
