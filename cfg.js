@@ -57,6 +57,30 @@ function fixAper(it){
 }
 
 /* ---------- Dibujos ---------- */
+/* ---------- Fotos reales ----------
+ Cada configuracion busca su foto en este orden: modelo+color, modelo, foto del tipo.
+ Modelos: ventana-1h, ventana-2h, ventana-3h, balconera-1h, balconera-2h,
+ corredera-ventana, corredera-balconera, corredera-4h, fijo, techo, claraboya.
+ Colores: -gris, -madera, -negro (blanco es la foto base). */
+var BASEFOTO={'ventana-2h':'ventana-producto','balconera-2h':'balconera-producto','corredera-ventana':'corredera-producto','fijo':'fijo-producto','techo':'techo-producto','claraboya':'claraboya-producto'};
+function modelo(it){
+ var t=it.tipo;
+ if(t==='ventana')return 'ventana-'+Math.min(3,it.hojas)+'h';
+ if(t==='balconera')return 'balconera-'+Math.min(2,it.hojas)+'h';
+ if(t==='corredera')return it.hojas>=4?'corredera-4h':(it.h>=180?'corredera-balconera':'corredera-ventana');
+ return t;
+}
+function colorSuf(it){var c=it.col;if(c==='bicolor')c=S.view==='out'?'color':'blanco';return {color:'-gris',madera:'-madera',negro:'-negro'}[c]||'';}
+function fotoList(it){
+ var m=modelo(it),c=colorSuf(it),L=[];
+ if(c)L.push('/img/cfg/p/'+m+c+'.webp');
+ L.push('/img/cfg/p/'+m+'.webp');
+ if(BASEFOTO[m])L.push('/img/cfg/'+BASEFOTO[m]+'.webp');
+ L.push('/img/cfg/'+it.tipo+'-producto.webp');
+ return L.filter(function(u,i){return L.indexOf(u)===i;});
+}
+window.cfNext=function(el){var l=(el.getAttribute('data-l')||'').split('|').filter(Boolean);if(!l.length){el.removeAttribute('onerror');return;}el.setAttribute('data-l',l.slice(1).join('|'));el.src=l[0];};
+function foto(it,cls){var l=fotoList(it);return '<img class="'+(cls||'ph')+'" src="'+l[0]+'" data-l="'+l.slice(1).join('|')+'" alt="" loading="lazy" onerror="cfNext(this)">';}
 function REAL(it,o){return window.AMSRender?window.AMSRender.real(it,o):draw(it,{person:!(o&&o.scene)?false:true});}
 function frameCol(it){return COLHEX[it.col]||'#FFFFFF';}
 function drawWin(it,opt){
@@ -229,7 +253,7 @@ function renderOpts(){
  } else {
   var t=TT[it.tipo];
   var sizes='<div class="cf-sizes">'+t.pre.map(function(p,i){var on=Math.round(it.w)===p.w&&Math.round(it.h)===p.h&&it.hojas===p.hojas;var tmp=clone(it);tmp.w=p.w;tmp.h=p.h;tmp.hojas=p.hojas;fixAper(tmp);
-   return '<button type="button" class="cf-o'+(on?' on':'')+'" data-pre="'+i+'">'+REAL(tmp)+'<b>'+p.n+'</b><small>'+p.d+' · '+p.w+' × '+p.h+' cm</small></button>';}).join('')+'</div>';
+   return '<button type="button" class="cf-o'+(on?' on':'')+'" data-pre="'+i+'"><span class="cf-pf">'+foto(tmp)+'</span><b>'+p.n+'</b><small>'+p.d+' · '+p.w+' × '+p.h+' cm</small></button>';}).join('')+'</div>';
   if(R) h+=sec('Tamaño','Elige la que más se parezca. Las medidas exactas las tomamos nosotros gratis.',sizes);
   else {
    var hojasOpts=it.tipo==='fijo'?'':'<label class="f" style="flex:0 1 auto">Hojas<span class="cf-opts">'+[1,2,3,4].filter(function(n){return it.tipo==='corredera'?n>=2:n<=3;}).map(function(n){return '<button type="button" class="cf-o'+(it.hojas===n?' on':'')+'" data-k="hojas" data-v="'+n+'">'+n+'</button>';}).join('')+'</span></label>';
@@ -297,7 +321,13 @@ function refreshCur(){
  var win=S.cur.tipo!=='techo'&&S.cur.tipo!=='claraboya';
  $('cfView').hidden=!win;
  document.querySelectorAll('#cfView button').forEach(function(b){b.classList.toggle('on',b.dataset.view===S.view);});
- $('cfDraw').innerHTML=REAL(S.cur,{scene:true,bg:bgUrl(bgName(S.cur)),ext:win&&S.view==='out'});renderBars(S.cur);
+ var it=S.cur,bg=win?bgUrl(bgName(it)):null;
+ if(!win){$('cfDraw').innerHTML='<div class="cf-stage solo">'+foto(it)+'</div>';renderBars(it);return;}
+ var floor=it.tipo==='balconera'||(it.tipo==='corredera'&&it.h>=180);
+ var k=Math.min(78/it.w,(floor?82:62)/it.h,0.62),w=it.w*k,h=it.h*k;
+ var top=floor?(90-h):(46-h/2);
+ $('cfDraw').innerHTML='<div class="cf-stage'+(bg?'':' nobg')+'"'+(bg?' style="background-image:url('+bg+')"':'')+'><div class="cf-win" style="left:'+(50-w/2)+'%;top:'+top+'%;width:'+w+'%;height:'+h+'%">'+foto(it)+'</div><span class="cf-dims">'+Math.round(it.w)+' × '+Math.round(it.h)+' cm</span></div>';
+ renderBars(it);
 }
 
 /* ---------- Precio (servidor) ---------- */
@@ -338,7 +368,7 @@ function renderSummary(){
  if(S.cur&&S.curIdx<0)list.push({it:S.cur,i:S.items.length,editing:true,nuevo:true});
  if(!list.length)$('cfItems').innerHTML='<li class="cf-empty">Elige qué quieres poner y aquí irá apareciendo, con su precio.</li>';
  else $('cfItems').innerHTML=list.map(function(x){var it=x.it,p=ok&&r.lineas[x.i]?eur(r.lineas[x.i].total):'…';
-  return '<li class="'+(x.editing?'editing':'')+'"><div class="cf-it">'+draw(it,{person:false})+'<div><b>'+(it.n>1?it.n+' × ':'')+esc((it.hab?it.hab+' · ':'')+nombre(it))+'</b><small>'+esc(detalle(it))+'</small></div><span class="p">'+p+'</span>'+
+  return '<li class="'+(x.editing?'editing':'')+'"><div class="cf-it"><span class="cf-pf sm">'+foto(it)+'</span><div><b>'+(it.n>1?it.n+' × ':'')+esc((it.hab?it.hab+' · ':'')+nombre(it))+'</b><small>'+esc(detalle(it))+'</small></div><span class="p">'+p+'</span>'+
   (x.nuevo?'<div class="cf-it-acts"><small style="color:#9A3412;font-weight:700">Configurando. Pulsa "Añadir al presupuesto".</small></div>':x.editing?'<div class="cf-it-acts"><small style="color:#9A3412;font-weight:700">Editando</small></div>':'<div class="cf-it-acts"><button type="button" data-edit="'+x.i+'">Cambiar</button><button type="button" data-dup="'+x.i+'">Duplicar</button><button type="button" data-del="'+x.i+'">Quitar</button></div>')+'</div></li>';}).join('');
  var n=list.reduce(function(s,x){return s+x.it.n;},0);
  $('cfCount').textContent=n?n+(n==1?' elemento':' elementos'):'Vacío';
@@ -441,7 +471,7 @@ $('cfWa').addEventListener('click',function(){
 $('cfPdf').addEventListener('click',function(){
  if(!valid())return;var r=S.res;if(!r){return;}
  var hoy=new Date(),ref='AMS-'+hoy.getFullYear().toString().slice(2)+String(hoy.getMonth()+1).padStart(2,'0')+String(hoy.getDate()).padStart(2,'0')+'-'+String(Math.floor(Math.random()*900+100));
- var rows=S.items.map(function(it,i){return '<tr><td style="width:70px">'+draw(it,{person:false}).replace('<svg ','<svg width="60" height="60" ')+'</td><td><b>'+esc((it.hab?it.hab+' · ':'')+nombre(it))+'</b><br>'+esc(detalle(it))+'</td><td class="r">'+it.n+'</td><td class="r">'+eur(r.lineas[i].unidad)+'</td><td class="r">'+eur(r.lineas[i].total)+'</td></tr>';}).join('');
+ var rows=S.items.map(function(it,i){return '<tr><td style="width:70px">'+foto(it,'pdfimg')+'</td><td><b>'+esc((it.hab?it.hab+' · ':'')+nombre(it))+'</b><br>'+esc(detalle(it))+'</td><td class="r">'+it.n+'</td><td class="r">'+eur(r.lineas[i].unidad)+'</td><td class="r">'+eur(r.lineas[i].total)+'</td></tr>';}).join('');
  $('cfPrint').innerHTML='<img src="/img/logo-ams-color.svg" alt="AMS Cerramientos" style="height:46px"><h1>Presupuesto orientativo</h1><div>Referencia '+ref+' · '+hoy.toLocaleDateString('es-ES')+' · válido 30 días</div><div style="margin-top:8px">Para: <b>'+esc(C.nombre)+'</b> · '+esc(C.tel)+' · '+esc(C.email)+' · Obra en '+esc(C.loc)+'</div>'+
   '<table><thead><tr><th></th><th>Concepto</th><th class="r">Uds.</th><th class="r">Precio</th><th class="r">Importe</th></tr></thead><tbody>'+rows+'</tbody><tfoot><tr class="tot"><td></td><td>Base imponible</td><td></td><td></td><td class="r">'+eur2(r.base)+'</td></tr><tr class="tot"><td></td><td>IVA ('+r.iva_pct+' %)</td><td></td><td></td><td class="r">'+eur2(r.iva)+'</td></tr><tr class="tot"><td></td><td style="font-size:16px">Total</td><td></td><td></td><td class="r" style="font-size:16px">'+eur2(r.total)+'</td></tr></tfoot></table>'+
   '<p><b>Incluye:</b> medición láser, fabricación a medida en nuestro taller, instalación con nuestro equipo, retirada de lo viejo y escombros, remates y sellado, y 2 años de garantía de instalación. Financiación en 3, 6 o 12 meses sin intereses ('+eur(r.total/12)+' al mes a 12 meses).</p>'+
