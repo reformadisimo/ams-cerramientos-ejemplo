@@ -1049,7 +1049,11 @@ var s=document.getElementById('b-share');if(navigator.share){s.addEventListener(
 <p><b>Un abrazo muy fuerte,</b></p>
 <p style="font-size:15pt;margin:1mm 0"><b>Ignacio</b></p>
 <p><a href="mailto:delarubiaignacio@gmail.com">delarubiaignacio@gmail.com</a></p></div>
-<a class="fl" href="#empieza">Inicio de la guía</a><script>(function(){function ab(el){while(el&&(el=el.parentElement)){if(el.tagName==='DETAILS')el.open=true}}
+<a class="fl" href="#empieza">Inicio de la guía</a><p style="margin:30px 0 10px;font-size:13px;color:#6B7A86;text-align:center">Esta guía avisa a Ignacio de que se ha abierto, para saber cuándo llamarte. No guarda nada más.</p><script>(function(){try{var q=location.search;if(/[?&]yo=1/.test(q)){localStorage.setItem('ams-yo','1');return}
+if(/[?&]yo=0/.test(q)){localStorage.removeItem('ams-yo')}
+if(localStorage.getItem('ams-yo'))return;var u=+localStorage.getItem('ams-v')||0;if(Date.now()-u<4*3600000)return;localStorage.setItem('ams-v',String(Date.now()));
+var d=/Mobi|Android|iPhone/i.test(navigator.userAgent)?'móvil':'ordenador';
+fetch('/api/respuestas',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({texto:'VISITA: se ha abierto la guía ('+d+'), '+new Date().toLocaleString('es-ES',{timeZone:'Europe/Madrid'})+'.'}),keepalive:true}).catch(function(){})}catch(e){}})();</script><script>(function(){function ab(el){while(el&&(el=el.parentElement)){if(el.tagName==='DETAILS')el.open=true}}
 function go(){var h=location.hash.slice(1);if(!h)return;var t=document.getElementById(h);if(t){ab(t);setTimeout(function(){t.scrollIntoView()},30)}}
 document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;var t=document.getElementById(a.getAttribute('href').slice(1));if(t)ab(t)});
 window.addEventListener('hashchange',go);go();})();</script><script>(function(){var K='ams-rx';var S={};try{S=JSON.parse(localStorage.getItem(K)||'{}')}catch(e){}
