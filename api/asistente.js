@@ -29,6 +29,21 @@ async function correo(asunto, texto, responder) {
     return r.ok;
   } catch (e) { return false; }
 }
+// Guarda la conversación (solo escritura, tabla aislada en Supabase). Sin IP. Si falla, no afecta al chat.
+async function guarda(cid, rol, contenido, pagina) {
+  // Clave publicable (solo puede ESCRIBIR en la tabla ams_chat; no lee nada). Se puede sustituir con variables de entorno.
+  const url = process.env.AMS_SUPABASE_URL || 'https://thzntlymcsazcjrddqjm.supabase.co';
+  const key = process.env.AMS_SUPABASE_KEY || 'sb_publishable_rkrwbrgbW_ebOtWTSoY_mA_LZu8SsT5';
+  if (!url || !key || typeof cid !== 'string' || cid.length < 8 || !contenido) return;
+  try {
+    await fetch(url.replace(/\/$/, '') + '/rest/v1/ams_chat', {
+      method: 'POST',
+      headers: { apikey: key, Authorization: 'Bearer ' + key, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+      body: JSON.stringify({ conversacion: cid.slice(0, 64), rol, contenido: String(contenido).slice(0, 8000), pagina: pagina ? String(pagina).slice(0, 200) : null })
+    });
+  } catch (e) { console.error('No se pudo guardar la conversación:', e && e.message); }
+}
+
 function transcribe(m) {
   return (m || []).slice(-12).map(x => (x.role === 'user' ? 'Cliente: ' : 'Asistente: ') + limpia(x.content, 700)).join('\n');
 }
@@ -47,10 +62,12 @@ module.exports = async (req, res) => {
     if (b.consentimiento !== true) return res.status(400).json({ ok: false, motivo: 'consentimiento' });
     const texto = ['Alguien ha pedido que le llamen desde el asistente de la web.', '', 'Nombre: ' + (nombre || '(sin nombre)'), 'Teléfono: ' + tel, '', 'Conversación:', transcribe(b.mensajes)].join('\n');
     const ok = await correo('Te piden una llamada (asistente web AMS)', texto);
+    await guarda(b.cid, 'contacto', 'Nombre: ' + (nombre || '(sin nombre)') + ' · Teléfono: ' + tel, b.pagina);
     return res.status(ok ? 200 : 502).json({ ok });
   }
   if (b.accion === 'duda') {
     if (!limite(ip, avisos, 8, 3600000)) return res.json({ ok: true });
+    await guarda(b.cid, 'duda', limpia(b.pregunta, 400), b.pagina);
     const ok = await correo('Pregunta sin respuesta del asistente (AMS)', 'El asistente no ha sabido contestar esto:\n\n' + limpia(b.pregunta, 400) + '\n\nAñádelo a las notas de Javi para que la próxima vez lo sepa.');
     return res.json({ ok });
   }
@@ -67,7 +84,8 @@ module.exports = async (req, res) => {
   const hora = new Intl.DateTimeFormat('es-ES', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Madrid' }).format(new Date());
   res.setHeader('Content-Type', 'text/plain; charset=utf-8');
   res.setHeader('X-Accel-Buffering', 'no');
-  let enviado = false;
+  let enviado = false, respuesta = '';
+  await guarda(b.cid, 'user', m[m.length - 1].content, b.pagina);
   for (let i = 0; i < MODELOS.length; i++) {
     try {
       const r = await fetch('https://api.anthropic.com/v1/messages', {
@@ -90,11 +108,13 @@ module.exports = async (req, res) => {
           if (!l.startsWith('data:')) continue;
           try {
             const e = JSON.parse(l.slice(5));
-            if (e.type === 'content_block_delta' && e.delta && e.delta.type === 'text_delta') { enviado = true; res.write(e.delta.text); }
+            if (e.type === 'content_block_delta' && e.delta && e.delta.type === 'text_delta') { enviado = true; respuesta += e.delta.text; res.write(e.delta.text); }
           } catch (x) { /* línea incompleta */ }
         }
       }
-      return res.end();
+      res.end();
+      await guarda(b.cid, 'assistant', respuesta.replace(/\[\[DUDA:[\s\S]*?\]\]/g, '').trim(), b.pagina);
+      return;
     } catch (e) {
       console.error('Modelo ' + MODELOS[i] + ' falló:', e && e.message);
       if (enviado || i === MODELOS.length - 1) break;

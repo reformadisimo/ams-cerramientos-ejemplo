@@ -3,7 +3,9 @@ var RUTAS=["/", "/acabados", "/alcala-de-henares", "/automatismos", "/azuqueca-d
 var SUG=['Quiero cambiar las ventanas de mi casa','Quiero cerrar la terraza de mi chalet','Necesito una cancela o una puerta de garaje','¿Cómo puedo pedir presupuesto?'];
 var BIEN='Hola. Soy el asistente de AMS, una inteligencia artificial. Te oriento sobre ventanas, cerramientos de terraza, cancelas y puertas, y te digo qué conviene preguntar para pedir un buen presupuesto. Estoy aquí a cualquier hora.';
 var AV="/img/logo-cuadrado.png",EQ="/img/equipo-ams.webp";
-var msgs=[],ocupado=false,abierto=false;
+var msgs=[],ocupado=false,abierto=false,cid='';
+try{cid=sessionStorage.getItem('ams_cid')||'';if(!cid){cid=(window.crypto&&crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random().toString(16).slice(2));sessionStorage.setItem('ams_cid',cid)}}catch(e){cid=String(Date.now())+Math.random().toString(16).slice(2)}
+var PAG=location.pathname;
 try{var g=sessionStorage.getItem('ams_chat');if(g)msgs=JSON.parse(g)||[]}catch(e){}
 function guarda(){try{sessionStorage.setItem('ams_chat',JSON.stringify(msgs.slice(-20)))}catch(e){}}
 function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
@@ -29,7 +31,7 @@ function crea(){
    +'<div id="asm" aria-live="polite"></div>'
    +'<div id="asl"><b>Deja tu teléfono y el equipo te llama.</b><label for="asnm">Nombre</label><input type="text" id="asnm" autocomplete="name"><label for="astl">Teléfono</label><input type="tel" id="astl" autocomplete="tel"><label class="k"><input type="checkbox" id="asok"><span>Acepto que AMS me llame al teléfono que he indicado. <a href="/privacidad">Privacidad</a></span></label><button type="button" class="bt" id="asen">Enviar</button> <span id="asmo"></span></div>'
    +'<form id="asf"><textarea id="ast" rows="1" placeholder="Escribe tu pregunta" aria-label="Tu mensaje" maxlength="1500"></textarea><button type="submit" id="asse">Enviar</button></form>'
-   +'<div id="asn"><span>No escribas datos personales sensibles. El equipo confirma siempre precios y plazos.</span><button type="button" id="asll">Que me llamen</button></div>';
+   +'<div id="asn"><span>Guardamos la conversación para mejorar el servicio (<a href="/privacidad">privacidad</a>). No escribas datos sensibles. El equipo confirma precios y plazos.</span><button type="button" id="asll">Que me llamen</button></div>';
   document.body.appendChild(b);document.body.appendChild(p);
   b.addEventListener('click',abre);$('asx').addEventListener('click',cierra);
   $('asf').addEventListener('submit',function(e){e.preventDefault();envia($('ast').value)});
@@ -57,7 +59,7 @@ async function envia(txt){
   var m=$('asm'),t=document.createElement('div');t.className='t';t.textContent='Escribiendo…';m.appendChild(t);m.scrollTop=m.scrollHeight;
   var burbuja=null,acum='';
   try{
-    var r=await fetch('/api/asistente',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mensajes:msgs.slice(-20)})});
+    var r=await fetch('/api/asistente',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({cid:cid,pagina:PAG,mensajes:msgs.slice(-20)})});
     if(!r.ok){var j={};try{j=await r.json()}catch(e){}throw new Error(j.error||'No he podido responder ahora. Llámanos al 639 78 82 20.')}
     var lec=r.body.getReader(),dec=new TextDecoder();
     for(;;){var x=await lec.read();if(x.done)break;acum+=dec.decode(x.value,{stream:true});
@@ -68,7 +70,7 @@ async function envia(txt){
     if(!burbuja){burbuja=document.createElement('div');burbuja.className='m a';m.appendChild(burbuja)}burbuja.innerHTML=fmt(acum);
   }
   var d=acum.match(DUDA);
-  if(d){try{fetch('/api/asistente',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({accion:'duda',pregunta:d[1].trim()})})}catch(e){}}
+  if(d){try{fetch('/api/asistente',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({accion:'duda',cid:cid,pagina:PAG,pregunta:d[1].trim()})})}catch(e){}}
   var limpio=acum.replace(DUDA,'').trim();
   if(limpio){msgs.push({role:'assistant',content:limpio});guarda()}
   ocupado=false;$('asse').disabled=false;$('ast').focus();
@@ -79,7 +81,7 @@ async function contacto(){
   if(!$('asok').checked){mo.textContent='Marca la casilla para que podamos llamarte.';return}
   mo.textContent='Enviando…';
   try{
-    var r=await fetch('/api/asistente',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({accion:'contacto',nombre:nm,telefono:tl,consentimiento:true,mensajes:msgs.slice(-12)})});
+    var r=await fetch('/api/asistente',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({accion:'contacto',cid:cid,pagina:PAG,nombre:nm,telefono:tl,consentimiento:true,mensajes:msgs.slice(-12)})});
     var j=await r.json();
     if(j.ok){$('asl').classList.remove('on');msgs.push({role:'assistant',content:'Gracias'+(nm?', '+nm:'')+'. He pasado tu teléfono al equipo de AMS y te llamarán. Si es urgente, puedes llamar ya al 639 78 82 20.'});guarda();pinta()}
     else mo.textContent='No se ha podido enviar. Llama al 639 78 82 20.';
