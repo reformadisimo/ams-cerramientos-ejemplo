@@ -2,7 +2,7 @@
 var RUTAS=["/", "/acabados", "/alcala-de-henares", "/automatismos", "/azuqueca-de-henares", "/blog", "/blog/ayudas-cambiar-ventanas-madrid", "/blog/cajones-persiana-aislados", "/blog/cancelas-aluminio-soldado", "/blog/cerrar-terraza-antes-de-navidad", "/blog/condensacion-ventanas", "/blog/cuanto-cuesta-cambiar-ventanas", "/blog/instalacion-ventanas-pvc", "/blog/kommerling-76-ad-md-xtrem", "/blog/licencia-obras-cambiar-ventanas", "/blog/mantenimiento-limpieza-ventanas", "/blog/mas-que-una-ventana", "/blog/mejor-epoca-cambiar-ventanas", "/blog/no-hacemos-ventanas-hacemos-hogares", "/blog/precio-cerrar-terraza", "/blog/pvc-o-aluminio", "/blog/rotura-puente-termico", "/blog/una-ventana-no-es-solo-una-ventana", "/blog/ventanas-ahorro-energia-calor-frio", "/blog/ventanas-oscilobatientes", "/calculadora", "/cancelas-puertas", "/cerramientos-terrazas", "/como-medir-ventanas", "/comprobador-ayudas", "/comunidades", "/configurador", "/contacto", "/coslada", "/diagnostico", "/empresa", "/financiacion", "/garantia-y-postventa", "/glosario", "/guadalajara", "/landing", "/madrid", "/mapa-de-obras", "/meco", "/pergolas", "/permisos-cerrar-terraza", "/persianas-cristales", "/rejas", "/reparaciones", "/revisa-tu-presupuesto", "/simulador", "/techos", "/toldos", "/torrejon-de-ardoz", "/trabajos", "/ventanas-aluminio", "/ventanas-pvc", "/villalbilla", "/visualizador"];
 var SUG=['Quiero cambiar las ventanas de mi casa','Quiero cerrar la terraza de mi chalet','Necesito una cancela o una puerta de garaje','¿Cómo puedo pedir presupuesto?'];
 var BIEN='Hola. Soy el asistente de AMS, una inteligencia artificial. Te oriento sobre ventanas, cerramientos de terraza, cancelas y puertas, y te digo qué conviene preguntar para pedir un buen presupuesto. Estoy aquí a cualquier hora.';
-var AV="/img/javi-avatar.webp",EQ="/img/equipo-ams.webp";
+var AV="/img/logo-cuadrado.png",EQ="/img/equipo-ams.webp";
 var msgs=[],ocupado=false,abierto=false;
 try{var g=sessionStorage.getItem('ams_chat');if(g)msgs=JSON.parse(g)||[]}catch(e){}
 function guarda(){try{sessionStorage.setItem('ams_chat',JSON.stringify(msgs.slice(-20)))}catch(e){}}
@@ -42,7 +42,7 @@ function crea(){
 }
 function pinta(){
   var m=$('asm');m.innerHTML='';
-  if(EQ){var f=document.createElement('figure');f.className='eq';f.innerHTML='<img src="'+EQ+'" alt="Equipo de AMS Cerramientos" width="640" height="360"><figcaption><strong>El equipo de AMS</strong><span>Villalbilla (Madrid). Si tu caso lo necesita, te atiende una persona del equipo.</span></figcaption>';m.appendChild(f)}
+  if(EQ){var f=document.createElement('figure');f.className='eq';f.innerHTML='<img src="'+EQ+'" alt="Cerramiento de terraza instalado por AMS" width="640" height="360"><figcaption><strong>AMS Cerramientos y Servicios</strong><span>Fabricamos e instalamos ventanas, cerramientos y cancelas desde Villalbilla (Madrid). Si tu caso lo necesita, te atiende una persona del equipo.</span></figcaption>';m.appendChild(f)}
   var a=document.createElement('div');a.className='m a';a.innerHTML='<p>'+esc(BIEN)+'</p>';m.appendChild(a);
   if(!msgs.length){var c=document.createElement('div');c.className='ch';SUG.forEach(function(s){var x=document.createElement('button');x.type='button';x.textContent=s;x.addEventListener('click',function(){envia(s)});c.appendChild(x)});m.appendChild(c)}
   msgs.forEach(function(x){var d=document.createElement('div');d.className='m '+(x.role==='user'?'u':'a');d.innerHTML=x.role==='user'?'<p>'+esc(x.content)+'</p>':fmt(x.content);m.appendChild(d)});
