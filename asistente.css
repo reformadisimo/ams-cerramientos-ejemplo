@@ -29,3 +29,5 @@
 @media(max-width:560px){#asb{padding:8px 16px 8px 8px}#asp{right:0;left:0;bottom:0;top:0;width:auto;max-width:none;height:auto;border-radius:0}}
 @media print{#asb,#asp{display:none!important}}
 #asn a{color:#9A3412}
+
+@media (max-width:480px){#asb{padding:6px 16px 6px 6px;bottom:84px}#asb .ast2 small{display:none}#asb{font-size:15px}.asf img{width:38px;height:38px}}
