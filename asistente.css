@@ -1,0 +1,30 @@
+#asb{position:fixed;right:16px;bottom:88px;z-index:9000;display:flex;align-items:center;gap:10px;background:#C2410C;color:#fff;border:0;border-radius:999px;padding:14px 20px;font:700 16px/1 Inter,system-ui,sans-serif;cursor:pointer;box-shadow:0 8px 24px rgba(18,32,43,.35)}
+#asb:hover{background:#9A3412}#asb:focus-visible,#asp button:focus-visible,#asp textarea:focus-visible,#asp input:focus-visible{outline:3px solid #F5C9A8;outline-offset:2px}
+#asb{padding:8px 18px 8px 8px}#asb .ast2{display:flex;flex-direction:column;gap:3px;text-align:left}#asb .ast2 small{font-weight:500;font-size:12.5px;opacity:.9}
+.asf{position:relative;flex:none;display:block}.asf img{width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.85);background:#fff;display:block}.asf .asd{position:absolute;right:0;bottom:1px;width:11px;height:11px;border-radius:50%;background:#22C55E;border:2px solid #fff}
+#asm .eq{flex:none;margin:0 0 4px;border-radius:14px;overflow:hidden;background:#fff;border:1px solid #D7DEE4}#asm .eq img{display:block;width:100%;height:120px;object-fit:cover;object-position:center 30%}#asm .eq figcaption{display:grid;gap:2px;padding:9px 12px 11px;font-size:14px;line-height:1.35}#asm .eq span{color:#5B6B78}
+#asp{position:fixed;right:16px;bottom:16px;z-index:9001;width:390px;max-width:calc(100vw - 24px);height:min(640px,calc(100vh - 32px));display:none;flex-direction:column;background:#fff;color:#12202B;border-radius:16px;box-shadow:0 16px 48px rgba(18,32,43,.4);overflow:hidden;font:16px/1.5 Inter,system-ui,sans-serif}
+#asp.on{display:flex}
+#asp .ah{background:#12202B;color:#fff;padding:14px 16px;display:flex;align-items:center;gap:12px}
+#asp .ah b{font-size:17px;display:block}#asp .ah small{color:#C9D3DB;font-size:13px}
+#asp .ah button{margin-left:auto;background:none;border:1px solid #5B6B78;color:#fff;border-radius:8px;padding:7px 12px;font-size:15px;cursor:pointer}
+#asm{flex:1;overflow:auto;padding:14px;background:#F3F5F7;display:flex;flex-direction:column;gap:10px}
+#asm .m{max-width:88%;padding:10px 13px;border-radius:14px;font-size:16px;line-height:1.5;overflow-wrap:anywhere}
+#asm .m p{margin:0 0 8px}#asm .m p:last-child{margin:0}#asm .m ul,#asm .m ol{margin:4px 0 8px 18px;padding:0}
+#asm .u{align-self:flex-end;background:#12202B;color:#fff;border-bottom-right-radius:4px}
+#asm .a{align-self:flex-start;background:#fff;border:1px solid #D7DEE4;border-bottom-left-radius:4px}
+#asm .a a{color:#9A3412;font-weight:600}
+#asm .ch{display:flex;flex-wrap:wrap;gap:8px}#asm .ch button{background:#fff;border:1px solid #C2410C;color:#9A3412;border-radius:999px;padding:9px 13px;font-size:15px;font-weight:600;cursor:pointer;text-align:left}
+#asm .t{align-self:flex-start;color:#5B6B78;font-size:14px;padding:2px 6px}
+#asl{display:none;padding:12px 14px;background:#FFF4EC;border-top:1px solid #F5C9A8;font-size:15px}
+#asl.on{display:block}#asl input[type=text],#asl input[type=tel]{width:100%;box-sizing:border-box;padding:10px;border:1px solid #9AA8B3;border-radius:8px;font-size:16px;margin:4px 0 8px}
+#asl label.k{display:flex;gap:8px;align-items:flex-start;font-size:14px;margin-bottom:8px}#asl label.k input{margin-top:3px}
+#asl .bt{background:#C2410C;color:#fff;border:0;border-radius:8px;padding:11px 16px;font:700 16px Inter,system-ui,sans-serif;cursor:pointer}
+#asf{display:flex;gap:8px;padding:10px 12px;border-top:1px solid #D7DEE4;background:#fff;align-items:flex-end}
+#asf textarea{flex:1;resize:none;border:1px solid #9AA8B3;border-radius:10px;padding:10px;font:16px/1.4 Inter,system-ui,sans-serif;max-height:110px}
+#asf button{background:#C2410C;color:#fff;border:0;border-radius:10px;padding:11px 16px;font:700 16px Inter,system-ui,sans-serif;cursor:pointer}
+#asf button:disabled{opacity:.5;cursor:default}
+#asn{padding:6px 14px 10px;background:#fff;font-size:12.5px;color:#5B6B78;display:flex;gap:10px;justify-content:space-between;align-items:center}
+#asn button{background:none;border:0;color:#9A3412;font:700 14px Inter,system-ui,sans-serif;text-decoration:underline;cursor:pointer;padding:4px}
+@media(max-width:560px){#asb{padding:8px 16px 8px 8px}#asp{right:0;left:0;bottom:0;top:0;width:auto;max-width:none;height:auto;border-radius:0}}
+@media print{#asb,#asp{display:none!important}}
