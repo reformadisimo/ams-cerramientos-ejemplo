@@ -19,20 +19,33 @@
   function cerrar() { var e = document.getElementById('sx'); if (e) e.remove(); document.removeEventListener('keydown', esc); }
   function esc(e) { if (e.key === 'Escape') cerrar(); }
   function mostrar() {
-    if (hecho || document.getElementById('ck') || Date.now() - t0 < 8000) return;
+    if (hecho || document.getElementById('ck') || document.querySelector('#asp.open,#asp[data-open],#asp.on') || Date.now() - t0 < 8000) return;
     hecho = true; try { sessionStorage.setItem(K, '1'); } catch (e) {}
     var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
     var d = document.createElement('div'); d.id = 'sx'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-modal', 'true'); d.setAttribute('aria-labelledby', 'sx-t');
-    var tit, txt, b1;
+    var tit, txt, b1, tag = 'Presupuesto gratis y sin compromiso';
+    var wa = 'https://wa.me/34639788220?text=' + encodeURIComponent('Hola, AMS Cerramientos. Estaba mirando vuestra web (' + (p || '/') + ') y me gustaría pedir presupuesto.');
     if (enCalc) {
-      tit = '¿Quieres que te lo afinemos?'; txt = 'Este precio es orientativo. Nos acercamos a tu casa a tomar medidas y te hacemos el presupuesto cerrado, <b>sin coste y sin compromiso</b>.';
-      b1 = '<a class="p" href="/contacto">Pedir visita y medición gratis</a>';
+      tit = '¿Quieres que te lo afinemos?'; txt = 'Este precio es orientativo. El equipo de AMS te prepara el presupuesto cerrado, <b>gratis y sin compromiso</b>.';
+      b1 = '<a class="p" href="/contacto">Pedir presupuesto gratis</a>';
+    } else if (/^\/(cerramientos-terrazas|techos|pergolas|toldos|persianas-cristales)/.test(p) || /precio-cerrar-terraza|cerrar-terraza/.test(p)) {
+      tit = '¿Cuánto costaría cerrar tu terraza?'; txt = 'Calcula un precio orientativo en un minuto, sin dejar tus datos. Si te encaja, <b>pides un presupuesto gratis y sin compromiso</b>.';
+      b1 = '<a class="p" href="/calculadora">Calcular el precio de mi terraza</a>';
+    } else if (/^\/(cancelas-puertas|rejas|automatismos|reparaciones|comunidades)/.test(p)) {
+      tit = '¿Qué precio orientativo tendría?'; txt = 'Calcúlalo en un minuto, sin dejar tus datos, y luego <b>pide un presupuesto gratis y sin compromiso</b>.';
+      b1 = '<a class="p" href="/calculadora">Calcular mi presupuesto</a>';
+    } else if (/^\/blog/.test(p) || /^\/(garantia|financiacion|glosario|como-medir|permisos)/.test(p)) {
+      tit = '¿Ya tienes un presupuesto de otra empresa?'; txt = 'Revísalo gratis: te decimos qué incluye, qué le falta y si el precio es razonable. <b>Sin compromiso.</b>';
+      b1 = '<a class="p" href="/revisa-tu-presupuesto">Revisar mi presupuesto</a>'; tag = 'Revisión sin compromiso';
+    } else if (/^\/(ventanas|acabados)/.test(p) || /^\/(alcala|torrejon|villalbilla|coslada|meco|azuqueca|guadalajara|madrid)/.test(p)) {
+      tit = 'Configura tus ventanas y mira el precio'; txt = 'Elige medidas, material y color y ve un precio orientativo al momento, sin dejar tus datos. <b>El presupuesto cerrado es gratis y sin compromiso.</b>';
+      b1 = '<a class="p" href="/configurador">Configurar mis ventanas</a>';
     } else {
-      tit = '¿Cuánto te costaría? Míralo en un minuto'; txt = 'Calcula el precio orientativo de tus ventanas, puertas o cerramiento con nuestra herramienta, sin dejar tus datos. Y si te encaja, <b>la visita y la medición son gratuitas</b>.';
+      tit = '¿Cuánto te costaría? Míralo en un minuto'; txt = 'Calcula el precio orientativo de tus ventanas, puertas o cerramiento, sin dejar tus datos. Y si te encaja, <b>el presupuesto es gratis y sin compromiso</b>.';
       b1 = '<a class="p" href="/calculadora">Calcular mi presupuesto</a>';
     }
-    d.innerHTML = '<div class="c"><button class="x" type="button" aria-label="Cerrar">&times;</button><span class="k">Visita y medición gratis</span><h2 id="sx-t">' + tit + '</h2><p>' + txt + '</p>' +
-      '<div class="a">' + b1 + '<a class="s" href="https://wa.me/34639788220">Preguntar por WhatsApp</a></div><button class="n" type="button">No, gracias</button></div>';
+    d.innerHTML = '<div class="c"><button class="x" type="button" aria-label="Cerrar">&times;</button><span class="k">' + tag + '</span><h2 id="sx-t">' + tit + '</h2><p>' + txt + '</p>' +
+      '<div class="a">' + b1 + '<a class="s" href="' + wa + '">Preguntar por WhatsApp</a></div><button class="n" type="button">No, gracias</button></div>';
     document.body.appendChild(d);
     d.querySelector('.x').onclick = cerrar; d.querySelector('.n').onclick = cerrar;
     d.onclick = function (e) { if (e.target === d) cerrar(); };
