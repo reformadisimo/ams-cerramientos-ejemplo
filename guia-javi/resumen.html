@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Resumen de la guía | AMS Cerramientos</title>
+<meta name="description" content="Los puntos de dolor de AMS Cerramientos y sus soluciones, en una sola página.">
+<style>
+@font-face{font-family:Inter;font-weight:400;font-display:swap;src:url(/fonts/inter-400.woff2) format("woff2")}
+@font-face{font-family:Inter;font-weight:600;font-display:swap;src:url(/fonts/inter-600.woff2) format("woff2")}
+@font-face{font-family:Inter;font-weight:700;font-display:swap;src:url(/fonts/inter-700.woff2) format("woff2")}
+*{box-sizing:border-box}
+body{margin:0;background:#F3F6F9;font-family:Inter,system-ui,sans-serif;color:#1F2A36;line-height:1.5;padding-bottom:76px}
+.rs-barra{position:sticky;top:0;z-index:20;background:#12202B;color:#fff;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.rs-barra a{color:#fff;font-weight:700;text-decoration:none;font-size:15px;padding:8px 12px;border-radius:8px}
+.rs-barra a.pri{background:#C2410C}
+.rs-barra a.sec{border:1px solid #5B6B78}
+.rs-barra span{color:#CFE0F2;font-size:14px}
+main{max-width:1100px;margin:0 auto;padding:28px 16px 40px}
+h1{margin:0 0 8px;font-size:clamp(28px,5.5vw,42px);line-height:1.1;font-weight:700}
+.rs-lead{font-size:18px;color:#3C4C5A;max-width:760px;margin:0 0 22px}
+h2{font-size:clamp(21px,3.4vw,27px);margin:34px 0 6px}
+.rs-sub{margin:0 0 14px;color:#4B5B66;font-size:16px}
+.rs-camino{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.rs-paso{background:#fff;border:1px solid #D8E0E6;border-top:6px solid var(--k);border-radius:16px;padding:16px 14px 14px;position:relative;display:flex;flex-direction:column}
+.rs-n{position:absolute;top:-16px;left:12px;width:30px;height:30px;border-radius:50%;background:var(--k);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center}
+.rs-paso h3{margin:6px 0 10px;font-size:20px;color:var(--k)}
+.rs-hoy,.rs-sol{border-radius:12px;padding:10px 12px;font-size:15px}
+.rs-hoy{background:#FDECEA}.rs-hoy b{color:#B3261E}
+.rs-sol{background:#E6F4EC;flex:1}.rs-sol b{color:#1F7A4D}
+.rs-hoy p,.rs-sol p{margin:4px 0 0}
+.rs-flecha{text-align:center;font-size:22px;color:var(--k);line-height:1.2;margin:2px 0}
+.rs-tabla{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border:1px solid #D8E0E6;border-radius:16px;overflow:hidden;font-size:15px}
+.rs-tabla th{background:#12202B;color:#fff;text-align:left;padding:10px 12px;font-size:14px}
+.rs-tabla td{padding:11px 12px;border-top:1px solid #EDF1F4;vertical-align:top}
+.rs-num{font-weight:700;color:#C2410C;width:44px}
+.rs-h{color:#5A6A76}
+.rs-b{display:inline-block;font-size:13px;font-weight:700;border-radius:999px;padding:3px 10px;white-space:nowrap}
+.rs-tabla a,.rs-card a{color:#B8430A;font-weight:700}
+.rs-cards{display:none}
+.rs-card{background:#fff;border:1px solid #D8E0E6;border-radius:14px;padding:14px;margin:0 0 10px;position:relative}
+.rs-cn{position:absolute;top:12px;right:14px;font-weight:700;color:#C2410C}
+.rs-card b{display:block;padding-right:34px;font-size:16px}
+.rs-card p{margin:6px 0 0;font-size:15px}.rs-card .rs-ch{color:#5A6A76}.rs-card i{font-style:normal;font-weight:700}
+.rs-pie{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+.rs-dos{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.rs-caja{background:#fff;border:1px solid #D8E0E6;border-radius:16px;padding:16px 18px}
+.rs-caja h3{margin:0 0 8px;font-size:18px}
+.rs-caja ul{margin:0;padding-left:20px}.rs-caja li{margin:6px 0}
+.rs-pasos{list-style:none;margin:0;padding:0;counter-reset:q}
+.rs-pasos li{counter-increment:q;position:relative;padding-left:34px;margin:10px 0}
+.rs-pasos li:before{content:counter(q);position:absolute;left:0;top:0;width:24px;height:24px;border-radius:50%;background:#C2410C;color:#fff;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center}
+.rs-verde{background:#E6F4EC;border:2px solid #8CC9A5;border-radius:16px;padding:16px 18px;margin-top:14px}
+.rs-verde h3{margin:0 0 6px;font-size:19px;color:#1F5E3C}.rs-verde p{margin:0}
+.rs-acc{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.rs-acc a{display:inline-block;text-decoration:none;font-weight:700;padding:12px 18px;border-radius:10px;font-size:16px;border:2px solid #12202B;color:#12202B;background:#fff}
+.rs-acc a.p{background:#C2410C;border-color:#C2410C;color:#fff}
+.rs-pie-fijo{position:fixed;left:0;right:0;bottom:0;z-index:30;background:#12202B;padding:10px 12px;display:flex;gap:10px;justify-content:center}
+.rs-pie-fijo a{flex:1;max-width:260px;text-align:center;text-decoration:none;font-weight:700;font-size:15px;color:#fff;padding:12px 10px;border-radius:10px;border:1px solid #5B6B78}
+.rs-pie-fijo a.p{background:#C2410C;border-color:#C2410C}
+a:focus-visible{outline:3px solid #C2410C;outline-offset:2px}
+@media(max-width:900px){.rs-camino{grid-template-columns:1fr 1fr;gap:22px 12px}}
+@media(max-width:700px){.rs-tabla{display:none}.rs-cards{display:block}.rs-dos{grid-template-columns:1fr}.rs-camino{grid-template-columns:1fr}.rs-barra span{display:none}}
+@media print{.rs-barra,.rs-pie-fijo{display:none}}
+</style>
+</head>
+<body>
+<div class="rs-barra"><a class="pri" href="/guia-javi">&larr; Volver a la guía</a><span>AMS Cerramientos &middot; Resumen</span><a class="sec" href="/guia-javi#indice">Menú de la guía</a></div>
+<main>
+<h1>Tu guía en una sola página</h1>
+<p class="rs-lead">Lo que hoy te está costando clientes, y lo que hacemos para arreglarlo. Todo tiene arreglo, y lo más difícil ya lo tienes: más de 20 años, taller propio, instalador oficial de Kömmerling y 44 reseñas con 4,5 de nota.</p>
+
+<h2>El camino de un cliente, y dónde se pierde hoy</h2>
+<p class="rs-sub">De izquierda a derecha: así llega un cliente a pedirte presupuesto. En rojo, lo que pasa hoy; en verde, lo que cambia.</p>
+<div class="rs-camino"><div class="rs-paso" style="--k:#1D6FB8"><div class="rs-n">1</div><h3>Te buscan</h3><div class="rs-hoy"><b>Hoy</b><p>Hoy te encuentran unas 230 personas al mes en Google. Otras empresas de la zona reciben 3 o 4 veces más.</p></div><div class="rs-flecha" aria-hidden="true">&darr;</div><div class="rs-sol"><b>Con nosotros</b><p>8 páginas por zona (Alcalá, Torrejón, Villalbilla, Coslada...), guías por producto y las direcciones actuales protegidas.</p></div></div><div class="rs-paso" style="--k:#C2410C"><div class="rs-n">2</div><h3>Te contactan</h3><div class="rs-hoy"><b>Hoy</b><p>Hay presupuestos que no se contestan (3 de tus 5 reseñas de una estrella van por eso). La web va lenta (56) y el formulario está en inglés.</p></div><div class="rs-flecha" aria-hidden="true">&darr;</div><div class="rs-sol"><b>Con nosotros</b><p>Web nueva (94 de velocidad), botón de presupuesto siempre a la vista, WhatsApp con el mensaje escrito, aviso en cuanto entra uno y asistente 24 horas.</p></div></div><div class="rs-paso" style="--k:#2E8B57"><div class="rs-n">3</div><h3>Se fían de ti</h3><div class="rs-hoy"><b>Hoy</b><p>La ficha de Google lleva 5 meses sin una reseña nueva, las reseñas no se ven en la web y las redes están abandonadas o con contenido ajeno.</p></div><div class="rs-flecha" aria-hidden="true">&darr;</div><div class="rs-sol"><b>Con nosotros</b><p>Ficha viva con fotos y publicaciones, todas las reseñas contestadas, tus 44 reseñas a la vista y redes con tus obras reales.</p></div></div><div class="rs-paso" style="--k:#7A4BB8"><div class="rs-n">4</div><h3>Sabes qué funciona</h3><div class="rs-hoy"><b>Hoy</b><p>Sin claves ni informes de tu web y tus campañas. No sabes de dónde viene cada cliente ni qué se gasta.</p></div><div class="rs-flecha" aria-hidden="true">&darr;</div><div class="rs-sol"><b>Con nosotros</b><p>Todo a tu nombre. Un minuto al día, un resumen a la semana y un balance al mes, más un panel con todo junto.</p></div></div></div>
+
+<h2>Los nueve puntos, uno por uno</h2>
+<p class="rs-sub">Pulsa en «Ver» para ir al detalle en la guía. Verde: ya está hecho. Azul: preparado. Naranja: ahí necesitamos algo de ti.</p>
+<table class="rs-tabla"><thead><tr><th></th><th>Punto de dolor</th><th>Hoy</th><th>Qué hacemos</th><th>Estado</th><th></th></tr></thead><tbody><tr><td class="rs-num">01</td><td><b>Quien busca no llega hasta vosotros</b></td><td class="rs-h">230 visitas al mes desde Google</td><td>Páginas por zona y por producto, ya hechas en la web nueva</td><td><span class="rs-b" style="color:#1F7A4D;background:#E6F4EC">Ya hecho</span></td><td><a href="/guia-javi#s44">Ver</a></td></tr><tr><td class="rs-num">02</td><td><b>Presupuestos que se quedan sin contestar</b></td><td class="rs-h">3 de 5 reseñas de una estrella son por no recibir respuesta</td><td>Mensaje de WhatsApp listo, aviso al entrar y asistente 24 horas</td><td><span class="rs-b" style="color:#1D6FB8;background:#EAF2FB">Preparado</span></td><td><a href="/guia-javi#s44">Ver</a></td></tr><tr><td class="rs-num">03</td><td><b>La ficha de Google parada</b></td><td class="rs-h">5 meses sin una reseña nueva</td><td>Fotos, publicaciones semanales y reseñas contestadas</td><td><span class="rs-b" style="color:#B8430A;background:#FFF1E8">Te necesitamos</span></td><td><a href="/guia-javi#s44">Ver</a></td></tr><tr><td class="rs-num">04</td><td><b>Una web que no ayuda a pedir presupuesto</b></td><td class="rs-h">Velocidad en móvil 56; formulario en inglés</td><td>Web nueva con velocidad 94 y formulario de 4 datos</td><td><span class="rs-b" style="color:#1F7A4D;background:#E6F4EC">Ya hecho</span></td><td><a href="/guia-javi#s44">Ver</a></td></tr><tr><td class="rs-num">05</td><td><b>Redes abandonadas o con contenido ajeno</b></td><td class="rs-h">Facebook con publicaciones ajenas; X e Instagram paradas</td><td>Limpiar Facebook y retomar Instagram con tus obras</td><td><span class="rs-b" style="color:#B8430A;background:#FFF1E8">Te necesitamos</span></td><td><a href="/guia-javi#s40">Ver</a></td></tr><tr><td class="rs-num">06</td><td><b>Trabajas sin las claves ni saber lo que pasa</b></td><td class="rs-h">Sin accesos ni informes de tu web y tus campañas</td><td>El lunes pides los accesos; nosotros te enviamos informes claros</td><td><span class="rs-b" style="color:#B8430A;background:#FFF1E8">Te necesitamos</span></td><td><a href="/guia-javi#s41">Ver</a></td></tr><tr><td class="rs-num">07</td><td><b>No sabes de dónde viene cada cliente</b></td><td class="rs-h">Llamadas, WhatsApp y formularios sin medir</td><td>Cada contacto con su origen y las conversaciones del chat guardadas</td><td><span class="rs-b" style="color:#1D6FB8;background:#EAF2FB">Preparado</span></td><td><a href="/guia-javi#s43">Ver</a></td></tr><tr><td class="rs-num">08</td><td><b>Las pruebas están escondidas</b></td><td class="rs-h">Tus 44 reseñas no salen en ninguna página</td><td>Reseñas, antes y después y vídeos cortos a la vista</td><td><span class="rs-b" style="color:#B8430A;background:#FFF1E8">Te necesitamos</span></td><td><a href="/guia-javi#s44">Ver</a></td></tr><tr><td class="rs-num">09</td><td><b>¿Tienes tú las llaves de todo?</b></td><td class="rs-h">No está claro quién tiene web, Analytics, Ads y redes</td><td>Todo a tu nombre desde el primer día</td><td><span class="rs-b" style="color:#8A5A00;background:#FFF4D6">En marcha</span></td><td><a href="/guia-javi#s41">Ver</a></td></tr></tbody></table>
+<div class="rs-cards"><div class="rs-card"><div class="rs-cn">01</div><b>Quien busca no llega hasta vosotros</b><p class="rs-ch"><i>Hoy:</i> 230 visitas al mes desde Google</p><p><i>Con nosotros:</i> Páginas por zona y por producto, ya hechas en la web nueva</p><div class="rs-pie"><span class="rs-b" style="color:#1F7A4D;background:#E6F4EC">Ya hecho</span><a href="/guia-javi#s44">Ver el detalle</a></div></div><div class="rs-card"><div class="rs-cn">02</div><b>Presupuestos que se quedan sin contestar</b><p class="rs-ch"><i>Hoy:</i> 3 de 5 reseñas de una estrella son por no recibir respuesta</p><p><i>Con nosotros:</i> Mensaje de WhatsApp listo, aviso al entrar y asistente 24 horas</p><div class="rs-pie"><span class="rs-b" style="color:#1D6FB8;background:#EAF2FB">Preparado</span><a href="/guia-javi#s44">Ver el detalle</a></div></div><div class="rs-card"><div class="rs-cn">03</div><b>La ficha de Google parada</b><p class="rs-ch"><i>Hoy:</i> 5 meses sin una reseña nueva</p><p><i>Con nosotros:</i> Fotos, publicaciones semanales y reseñas contestadas</p><div class="rs-pie"><span class="rs-b" style="color:#B8430A;background:#FFF1E8">Te necesitamos</span><a href="/guia-javi#s44">Ver el detalle</a></div></div><div class="rs-card"><div class="rs-cn">04</div><b>Una web que no ayuda a pedir presupuesto</b><p class="rs-ch"><i>Hoy:</i> Velocidad en móvil 56; formulario en inglés</p><p><i>Con nosotros:</i> Web nueva con velocidad 94 y formulario de 4 datos</p><div class="rs-pie"><span class="rs-b" style="color:#1F7A4D;background:#E6F4EC">Ya hecho</span><a href="/guia-javi#s44">Ver el detalle</a></div></div><div class="rs-card"><div class="rs-cn">05</div><b>Redes abandonadas o con contenido ajeno</b><p class="rs-ch"><i>Hoy:</i> Facebook con publicaciones ajenas; X e Instagram paradas</p><p><i>Con nosotros:</i> Limpiar Facebook y retomar Instagram con tus obras</p><div class="rs-pie"><span class="rs-b" style="color:#B8430A;background:#FFF1E8">Te necesitamos</span><a href="/guia-javi#s40">Ver el detalle</a></div></div><div class="rs-card"><div class="rs-cn">06</div><b>Trabajas sin las claves ni saber lo que pasa</b><p class="rs-ch"><i>Hoy:</i> Sin accesos ni informes de tu web y tus campañas</p><p><i>Con nosotros:</i> El lunes pides los accesos; nosotros te enviamos informes claros</p><div class="rs-pie"><span class="rs-b" style="color:#B8430A;background:#FFF1E8">Te necesitamos</span><a href="/guia-javi#s41">Ver el detalle</a></div></div><div class="rs-card"><div class="rs-cn">07</div><b>No sabes de dónde viene cada cliente</b><p class="rs-ch"><i>Hoy:</i> Llamadas, WhatsApp y formularios sin medir</p><p><i>Con nosotros:</i> Cada contacto con su origen y las conversaciones del chat guardadas</p><div class="rs-pie"><span class="rs-b" style="color:#1D6FB8;background:#EAF2FB">Preparado</span><a href="/guia-javi#s43">Ver el detalle</a></div></div><div class="rs-card"><div class="rs-cn">08</div><b>Las pruebas están escondidas</b><p class="rs-ch"><i>Hoy:</i> Tus 44 reseñas no salen en ninguna página</p><p><i>Con nosotros:</i> Reseñas, antes y después y vídeos cortos a la vista</p><div class="rs-pie"><span class="rs-b" style="color:#B8430A;background:#FFF1E8">Te necesitamos</span><a href="/guia-javi#s44">Ver el detalle</a></div></div><div class="rs-card"><div class="rs-cn">09</div><b>¿Tienes tú las llaves de todo?</b><p class="rs-ch"><i>Hoy:</i> No está claro quién tiene web, Analytics, Ads y redes</p><p><i>Con nosotros:</i> Todo a tu nombre desde el primer día</p><div class="rs-pie"><span class="rs-b" style="color:#8A5A00;background:#FFF4D6">En marcha</span><a href="/guia-javi#s41">Ver el detalle</a></div></div></div>
+
+<h2>Lo que necesitamos de ti, y por dónde empezar</h2>
+<div class="rs-dos">
+<div class="rs-caja"><h3>Lo que necesitamos de ti</h3><ul>
+<li>Los accesos que te dé quien lleva hoy tu web y tus campañas.</li>
+<li>Hacernos administradores de la ficha de Google.</li>
+<li>Acceso a Facebook e Instagram, que ya son tuyos.</li>
+<li>Fotos y vídeos cortos de tus obras (sin dar la cara).</li>
+<li>Una conversación sobre tu tarifa, a tu manera: solo tú la conoces.</li>
+</ul></div>
+<div class="rs-caja"><h3>Los primeros pasos</h3><ol class="rs-pasos">
+<li><b>El lunes:</b> pides los accesos a quien lleva tu web, sin firmar ni aceptar nada.</li>
+<li><b>Esta semana:</b> la ficha de Google y las redes, con nosotros guiándote.</li>
+<li><b>Después:</b> revisamos la web nueva contigo, página por página.</li>
+<li><b>Al final:</b> se publica en tu dominio. Los anuncios, solo si tú dices que sí.</li>
+</ol></div>
+</div>
+<div class="rs-verde"><h3>Todo lo nuestro es gratis y todo lo tuyo sigue siendo tuyo</h3>
+<p>No te cobramos ninguna cuota, comisión ni honorarios, ni ahora ni después. La web, el dominio, las cuentas y los informes van a tu nombre desde el primer día. Sin tu sí, no se activa ni se gasta nada.</p></div>
+
+<div class="rs-acc"><a class="p" href="/guia-javi">&larr; Volver a la guía</a><a href="/guia-javi#indice">Menú de la guía</a><a href="/">Ver la web nueva</a><a href="/guia-javi/panel">Tu panel de control</a></div>
+</main>
+<div class="rs-pie-fijo"><a class="p" href="/guia-javi">&larr; Volver a la guía</a><a href="/guia-javi#indice">Menú</a></div>
+</body>
+</html>
