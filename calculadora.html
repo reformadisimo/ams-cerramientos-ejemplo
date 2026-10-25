@@ -466,7 +466,7 @@ R.sistema=function(){
  var t=S.ter;
  var o=[['pvc','PVC','Aísla muy bien del frío y del ruido. El más económico.','<img src="/img/ventana-pvc.webp" alt="" loading="lazy">'],
   ['aluminio','Aluminio con rotura de puente térmico','Perfiles finos, mucha luz y muy resistente.','<img src="/img/terraza.webp" alt="" loading="lazy">'],
-  ['cortina','Cortina de cristal','Todo cristal, sin perfiles a la vista. Se recoge entera.','<video autoplay muted loop playsinline preload="metadata" poster="/img/terraza-cristal.jpg"><source src="/img/terraza-cristal.webm" type="video/webm"><source src="/img/terraza-cristal.mp4" type="video/mp4"></video>']];
+  ['cortina','Cortina de cristal','Todo cristal, sin perfiles a la vista. Se recoge entera.','<video autoplay muted loop playsinline preload="metadata" poster="/img/obra-balcon.jpg"><source src="/img/obra-balcon.webm" type="video/webm"><source src="/img/obra-balcon.mp4" type="video/mp4"></video>']];
  var h='<h2>¿Cómo la quieres cerrar?</h2><p class="cx-lead">Las tres opciones las fabricamos e instalamos nosotros.</p><div class="cx-grid3">';
  o.forEach(function(x){h+='<button type="button" class="cx-big'+(t.sis==x[0]?' on':'')+'" data-sis="'+x[0]+'"><div class="cx-media">'+x[3]+'</div>'+(x[0]=='aluminio'?'<span class="cx-tag">La más elegida</span>':'')+'<span class="cx-check">'+IC.check+'</span><div class="cx-txt"><strong>'+x[1]+'</strong><span>'+x[2]+'</span></div></button>';});
  h+='</div>';
@@ -504,8 +504,8 @@ R.resultado=function(){
  if(!S.res)return '<h2>Calculando tu precio...</h2><p class="cx-lead">Un segundo.</p>';
  if(S.res.error)return '<h2>No hemos podido calcularlo ahora</h2><p class="cx-lead">Pásanos lo que has elegido por WhatsApp y te damos el precio hoy mismo.</p><div class="cx-acts"><a class="cx-btn cx-wa" target="_blank" rel="noopener" href="'+waLink()+'">Enviar por WhatsApp</a><a class="cx-btn sec" href="tel:'+TEL+'">Llamar al 639 78 82 20</a></div>';
  var r=S.res,mid=(r.low+r.high)/2,f=fechas();
- var media=S.svc==='terraza'?'<video autoplay muted loop playsinline preload="metadata" poster="/img/villa-cristal.jpg"><source src="/img/villa-cristal.webm" type="video/webm"><source src="/img/villa-cristal.mp4" type="video/mp4"></video>':
-  S.svc==='ventanas'?'<video autoplay muted loop playsinline preload="metadata" poster="/img/ventana-cortina.jpg"><source src="/img/ventana-cortina.webm" type="video/webm"><source src="/img/ventana-cortina.mp4" type="video/mp4"></video>':'<img src="/img/cancela.webp" alt="">';
+ var media=S.svc==='terraza'?'<video autoplay muted loop playsinline preload="metadata" poster="/img/salon-ventanal.jpg"><source src="/img/salon-ventanal.webm" type="video/webm"><source src="/img/salon-ventanal.mp4" type="video/mp4"></video>':
+  S.svc==='ventanas'?'<video autoplay muted loop playsinline preload="metadata" poster="/img/sonrisa-luces.jpg"><source src="/img/sonrisa-luces.webm" type="video/webm"><source src="/img/sonrisa-luces.mp4" type="video/mp4"></video>':'<img src="/img/cancela.webp" alt="">';
  var h='<div class="cx-res-top"><div><div style="font-size:15px;font-weight:700;color:#4A5A68">'+esc(S.c.nombre?S.c.nombre.split(' ')[0]+', tu precio orientativo':'Tu precio orientativo')+'</div>'+
  '<div class="cx-price">'+eur(r.low)+' <small>a</small> '+eur(r.high)+'</div><div style="font-size:14px;color:#4A5A68">'+(r.iva_incluido?'IVA incluido':'IVA no incluido')+'. Instalado y con la retirada de lo viejo.</div></div>'+
  '<div class="cx-res-media">'+media+'</div></div>';
