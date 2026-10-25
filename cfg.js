@@ -17,9 +17,7 @@ var TYPES=[
  {id:'corredera',n:'Corredera',d:'Ventana o ventanal',def:{w:200,h:215,hojas:2,mat:'alu'},pre:[
   {n:'Ventana corredera',d:'Cocina o dormitorio',w:150,h:120,hojas:2},{n:'Balconera corredera',d:'Salida a terraza',w:200,h:215,hojas:2},{n:'Ventanal',d:'Salón',w:300,h:220,hojas:2},{n:'Gran ventanal',d:'Cuatro hojas',w:400,h:230,hojas:4}]},
  {id:'fijo',n:'Fijo',d:'Cristal que no se abre',def:{w:100,h:100,hojas:1},pre:[
-  {n:'Pequeño',d:'Montante o hueco',w:60,h:60,hojas:1},{n:'Mediano',d:'Escalera o pasillo',w:100,h:100,hojas:1},{n:'Grande',d:'Paño de luz',w:150,h:200,hojas:1}]},
- {id:'techo',n:'Ventana de tejado',d:'Para buhardillas',def:{talla:'78x118'}},
- {id:'claraboya',n:'Claraboya',d:'Para cubierta plana',def:{talla:'80'}}];
+  {n:'Pequeño',d:'Montante o hueco',w:60,h:60,hojas:1},{n:'Mediano',d:'Escalera o pasillo',w:100,h:100,hojas:1},{n:'Grande',d:'Paño de luz',w:150,h:200,hojas:1}]}];
 var TT={};TYPES.forEach(function(t){TT[t.id]=t;});
 var TECHO=[['55x78','55 × 78 cm'],['55x98','55 × 98 cm'],['66x118','66 × 118 cm'],['78x98','78 × 98 cm'],['78x118','78 × 118 cm'],['78x140','78 × 140 cm'],['114x118','114 × 118 cm'],['114x140','114 × 140 cm']];
 var CLARA=[['60','60 × 60 cm'],['80','80 × 80 cm'],['90','90 × 90 cm'],['100','100 × 100 cm']];
