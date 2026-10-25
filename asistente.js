@@ -23,17 +23,45 @@ function fmt(t){
 }
 var DUDA=/\[\[DUDA:([\s\S]*?)\]\]/;
 var $=function(i){return document.getElementById(i)};
+var TTS=('speechSynthesis' in window)&&('SpeechSynthesisUtterance' in window);
+var vozOn=true;try{vozOn=localStorage.getItem('ams_voz')!=='0'}catch(e){}
+function callar(){try{if(TTS)window.speechSynthesis.cancel()}catch(e){}}
+function habla(txt){
+  if(!TTS||!vozOn)return;
+  try{
+    var t=String(txt||'').replace(/\*\*|__|`/g,'').replace(/\[([^\]]+)\]\([^)]*\)/g,'$1').replace(/https?:\/\/\S+/g,'').replace(/^[\s>*\-•]+/gm,'').replace(/\s+/g,' ').trim();
+    if(!t)return;
+    var sy=window.speechSynthesis;sy.cancel();
+    var voz=(sy.getVoices()||[]).filter(function(v){return /^es/i.test(v.lang)});
+    var v=voz.filter(function(x){return /es[-_]ES/i.test(x.lang)})[0]||voz[0];
+    (t.match(/[^.!?:]+[.!?:]+|\S[^.!?:]*$/g)||[t]).forEach(function(x){
+      var u=new SpeechSynthesisUtterance(x.trim());u.lang='es-ES';if(v)u.voice=v;u.rate=1;sy.speak(u)});
+    var b=$('asvoz');if(b)b.classList.add('habla');
+    var fin=function(){var b2=$('asvoz');if(b2&&!sy.speaking)b2.classList.remove('habla')};
+    var iv=setInterval(function(){if(!sy.speaking){clearInterval(iv);fin()}},500);
+  }catch(e){}
+}
+function pintaVoz(){
+  var b=$('asvoz');if(!b)return;
+  b.setAttribute('aria-pressed',vozOn?'true':'false');
+  b.setAttribute('aria-label',vozOn?'Silenciar la voz del asistente':'Activar la voz del asistente');
+  b.title=vozOn?'Silenciar la voz':'Activar la voz';
+  b.classList.toggle('off',!vozOn);
+  b.querySelector('span').textContent=vozOn?'Voz':'Sin voz';
+}
 function crea(){
   var b=document.createElement('button');b.id='asb';b.type='button';b.setAttribute('aria-label','Abrir el asistente de AMS');
   b.innerHTML='<span class="asf"><img src="'+AV+'" alt="" width="44" height="44"><i class="asd"></i></span><span class="ast2"><strong>Pregunta a AMS</strong><small>Chat 24 h · respuesta al momento</small></span>';
   var p=document.createElement('div');p.id='asp';p.setAttribute('role','dialog');p.setAttribute('aria-label','Asistente de AMS');
-  p.innerHTML='<div class="ah"><span class="asf"><img src="'+AV+'" alt="" width="44" height="44"><i class="asd"></i></span><div><b>Asistente de AMS</b><small>Inteligencia artificial · disponible las 24 horas</small></div><button type="button" id="asx">Cerrar</button></div>'
+  p.innerHTML='<div class="ah"><span class="asf"><img src="'+AV+'" alt="" width="44" height="44"><i class="asd"></i></span><div><b>Asistente de AMS</b><small>Inteligencia artificial · disponible las 24 horas</small></div><button type="button" id="asvoz" aria-pressed="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path class="on" d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/><path class="of" d="M16 9l6 6M22 9l-6 6"/></svg><span>Voz</span></button><button type="button" id="asx">Cerrar</button></div>'
    +'<div id="asm" aria-live="polite"></div>'
    +'<div id="asl"><b>Deja tu teléfono y el equipo te llama.</b><label for="asnm">Nombre</label><input type="text" id="asnm" autocomplete="name"><label for="astl">Teléfono</label><input type="tel" id="astl" autocomplete="tel"><label class="k"><input type="checkbox" id="asok"><span>Acepto que AMS me llame al teléfono que he indicado. <a href="/privacidad">Privacidad</a></span></label><button type="button" class="bt" id="asen">Enviar</button> <span id="asmo"></span></div>'
    +'<form id="asf"><textarea id="ast" rows="1" placeholder="Escribe tu pregunta" aria-label="Tu mensaje" maxlength="1500"></textarea><button type="button" id="asmic" aria-label="Hablar en vez de escribir" aria-pressed="false" title="Hablar en vez de escribir"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button><button type="submit" id="asse">Enviar</button></form><div id="asvz" role="status" aria-live="polite"></div>'
    +'<div id="asn"><span>Guardamos la conversación para mejorar el servicio (<a href="/privacidad">privacidad</a>). No escribas datos sensibles. El equipo confirma precios y plazos.</span><button type="button" id="asll">Que me llamen</button></div>';
   document.body.appendChild(b);document.body.appendChild(p);
   b.addEventListener('click',abre);$('asx').addEventListener('click',cierra);
+  if(!TTS){$('asvoz').style.display='none'}else{pintaVoz();$('asvoz').addEventListener('click',function(){vozOn=!vozOn;try{localStorage.setItem('ams_voz',vozOn?'1':'0')}catch(e){}if(!vozOn)callar();pintaVoz()});if(window.speechSynthesis.onvoiceschanged===null)window.speechSynthesis.onvoiceschanged=function(){}}
+  addEventListener('pagehide',callar);
   $('asf').addEventListener('submit',function(e){e.preventDefault();envia($('ast').value)});
   $('ast').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();envia($('ast').value)}});
   $('ast').addEventListener('input',function(){this.style.height='auto';this.style.height=Math.min(this.scrollHeight,110)+'px'});
@@ -50,7 +78,7 @@ function crea(){
       rec.onend=function(){if(on){para();msg('Revisa el texto y pulsa Enviar.')}};
       try{rec.start();on=true;mic.classList.add('on');mic.setAttribute('aria-pressed','true');msg('Te escuchamos... habla con normalidad.')}catch(err){para();msg('No se ha podido usar el micrófono. Puedes escribir tu pregunta.')}
     }
-    mic.addEventListener('click',function(){if(on){try{rec.stop()}catch(e){}para();msg('');return}ini()});
+    mic.addEventListener('click',function(){callar();if(on){try{rec.stop()}catch(e){}para();msg('');return}ini()});
     $('asf').addEventListener('submit',function(){if(on){try{rec.stop()}catch(e){}para()}msg('')});
   })();
   $('asll').addEventListener('click',function(){$('asl').classList.toggle('on')});
@@ -67,10 +95,10 @@ function pinta(){
   m.scrollTop=m.scrollHeight;
 }
 function abre(){abierto=true;$('asp').classList.add('on');$('asb').style.display='none';pinta();setTimeout(function(){$('ast').focus()},50)}
-function cierra(){abierto=false;$('asp').classList.remove('on');$('asb').style.display='flex';$('asb').focus()}
+function cierra(){callar();abierto=false;$('asp').classList.remove('on');$('asb').style.display='flex';$('asb').focus()}
 async function envia(txt){
   txt=(txt||'').trim();if(!txt||ocupado)return;
-  ocupado=true;$('asse').disabled=true;$('ast').value='';$('ast').style.height='auto';
+  callar();ocupado=true;$('asse').disabled=true;$('ast').value='';$('ast').style.height='auto';
   msgs.push({role:'user',content:txt});guarda();pinta();
   var m=$('asm'),t=document.createElement('div');t.className='t';t.textContent='Escribiendo…';m.appendChild(t);m.scrollTop=m.scrollHeight;
   var burbuja=null,acum='';
@@ -89,6 +117,7 @@ async function envia(txt){
   if(d){try{fetch('/api/asistente',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({accion:'duda',cid:cid,pagina:PAG,pregunta:d[1].trim()})})}catch(e){}}
   var limpio=acum.replace(DUDA,'').trim();
   if(limpio){msgs.push({role:'assistant',content:limpio});guarda()}
+  if(limpio&&!/^No he podido|Llámanos al 639/.test(limpio))habla(limpio);
   ocupado=false;$('asse').disabled=false;$('ast').focus();
 }
 async function contacto(){
