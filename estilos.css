@@ -30,6 +30,9 @@ a{color:var(--navy)}a:hover{color:#B8430A}
 .mi.c3{background:linear-gradient(135deg,#EC4E88,#BB2A62)}.mi.c4{background:linear-gradient(135deg,#F5922B,#C2410C)}.mi.c5{background:linear-gradient(135deg,#19A9BF,#0D7F92)}
 .drop-menu a:hover .mi,.drop-menu a.on .mi,.mobile a:hover .mi{transform:scale(1.07)}
 .drop-menu.two{min-width:690px}
+.drop-menu a.ver-todo{grid-column:1/-1;background:linear-gradient(90deg,#12202B,#1F3A52);color:#fff;margin-bottom:6px}.drop-menu a.ver-todo small{color:#C8D4DE}.drop-menu a.ver-todo:hover{background:linear-gradient(90deg,#1F3A52,#2A4D6B);color:#fff}
+.mobile a.ver-todo{background:#1C2F3F;border-radius:10px;padding:6px 10px;margin:6px 0;border-bottom:0}.mobile a.ver-todo .mt small{display:block;color:#9FB0BE;font-weight:400;font-size:13px}
+#hprog{position:absolute;left:0;right:0;bottom:0;height:3px;background:transparent;pointer-events:none}#hprog i{display:block;height:100%;width:0;background:linear-gradient(90deg,#FFC53D,#FF9F1C);border-radius:0 3px 3px 0}
 .drop:hover .drop-menu.two,.drop:focus-within .drop-menu.two,.drop.open .drop-menu.two{display:grid;grid-template-columns:1fr 1fr;gap:2px 8px}
 .mobile a{gap:12px}.mobile a .mi{width:32px;height:32px}.mobile a .mt small{display:none}.mobile a .mi svg{width:18px;height:18px}
 .drop-menu a:hover,.drop-menu a.on{background:var(--bg);color:#B8430A}
