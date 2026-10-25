@@ -30,13 +30,29 @@ function crea(){
   p.innerHTML='<div class="ah"><span class="asf"><img src="'+AV+'" alt="" width="44" height="44"><i class="asd"></i></span><div><b>Asistente de AMS</b><small>Inteligencia artificial · disponible las 24 horas</small></div><button type="button" id="asx">Cerrar</button></div>'
    +'<div id="asm" aria-live="polite"></div>'
    +'<div id="asl"><b>Deja tu teléfono y el equipo te llama.</b><label for="asnm">Nombre</label><input type="text" id="asnm" autocomplete="name"><label for="astl">Teléfono</label><input type="tel" id="astl" autocomplete="tel"><label class="k"><input type="checkbox" id="asok"><span>Acepto que AMS me llame al teléfono que he indicado. <a href="/privacidad">Privacidad</a></span></label><button type="button" class="bt" id="asen">Enviar</button> <span id="asmo"></span></div>'
-   +'<form id="asf"><textarea id="ast" rows="1" placeholder="Escribe tu pregunta" aria-label="Tu mensaje" maxlength="1500"></textarea><button type="submit" id="asse">Enviar</button></form>'
+   +'<form id="asf"><textarea id="ast" rows="1" placeholder="Escribe tu pregunta" aria-label="Tu mensaje" maxlength="1500"></textarea><button type="button" id="asmic" aria-label="Hablar en vez de escribir" aria-pressed="false" title="Hablar en vez de escribir"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button><button type="submit" id="asse">Enviar</button></form><div id="asvz" role="status" aria-live="polite"></div>'
    +'<div id="asn"><span>Guardamos la conversación para mejorar el servicio (<a href="/privacidad">privacidad</a>). No escribas datos sensibles. El equipo confirma precios y plazos.</span><button type="button" id="asll">Que me llamen</button></div>';
   document.body.appendChild(b);document.body.appendChild(p);
   b.addEventListener('click',abre);$('asx').addEventListener('click',cierra);
   $('asf').addEventListener('submit',function(e){e.preventDefault();envia($('ast').value)});
   $('ast').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();envia($('ast').value)}});
   $('ast').addEventListener('input',function(){this.style.height='auto';this.style.height=Math.min(this.scrollHeight,110)+'px'});
+  (function(){
+    var SR=window.SpeechRecognition||window.webkitSpeechRecognition,mic=$('asmic'),t=$('ast'),zz=$('asvz'),rec=null,on=false,base='';
+    if(!SR){mic.style.display='none';return}
+    function msg(x){zz.textContent=x||'';zz.style.display=x?'block':'none'}
+    function para(){on=false;mic.classList.remove('on');mic.setAttribute('aria-pressed','false')}
+    function ini(){
+      rec=new SR();rec.lang='es-ES';rec.interimResults=true;rec.continuous=false;rec.maxAlternatives=1;
+      base=t.value?t.value.replace(/\s+$/,'')+' ':'';
+      rec.onresult=function(e){var x='';for(var i=0;i<e.results.length;i++)x+=e.results[i][0].transcript;t.value=(base+x).slice(0,1500);t.dispatchEvent(new Event('input'))};
+      rec.onerror=function(e){para();msg(e.error==='not-allowed'||e.error==='service-not-allowed'?'No tenemos permiso para usar el micrófono. Puedes permitirlo en el navegador o escribir tu pregunta.':e.error==='no-speech'?'No te hemos oído. Pulsa el micrófono e inténtalo de nuevo.':'No se ha podido usar el micrófono. Puedes escribir tu pregunta.')};
+      rec.onend=function(){if(on){para();msg('Revisa el texto y pulsa Enviar.')}};
+      try{rec.start();on=true;mic.classList.add('on');mic.setAttribute('aria-pressed','true');msg('Te escuchamos... habla con normalidad.')}catch(err){para();msg('No se ha podido usar el micrófono. Puedes escribir tu pregunta.')}
+    }
+    mic.addEventListener('click',function(){if(on){try{rec.stop()}catch(e){}para();msg('');return}ini()});
+    $('asf').addEventListener('submit',function(){if(on){try{rec.stop()}catch(e){}para()}msg('')});
+  })();
   $('asll').addEventListener('click',function(){$('asl').classList.toggle('on')});
   $('asen').addEventListener('click',contacto);
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&abierto)cierra()});
