@@ -23,7 +23,7 @@ var TECHO=[['55x78','55 × 78 cm'],['55x98','55 × 98 cm'],['66x118','66 × 118 
 var CLARA=[['60','60 × 60 cm'],['80','80 × 80 cm'],['90','90 × 90 cm'],['100','100 × 100 cm']];
 var MAT={pvc:['PVC','Aísla mejor del frío y del ruido. Casi sin mantenimiento.'],alu:['Aluminio','Perfiles más finos y más luz. Muy resistente y duradero.']};
 var GAMA={pvc:{eco:['Económica',['Perfil de 70 mm','5 cámaras']],confort:['Confort',['Kömmerling 76 mm','La más vendida']],premium:['Premium',['Perfil de 82 mm','La que más aísla']]},
- alu:{eco:['Sin rotura de puente térmico',['Para trasteros, garajes o cerramientos sin calefacción']],confort:['Con rotura de puente térmico',['Cortizo o Technal','La más vendida']],premium:['Rotura de alta gama',['Hoja oculta y perfil más fino','Máximo aislamiento en aluminio']]}};
+ alu:{eco:['Sin rotura de puente térmico',['Para trasteros, garajes o cerramientos sin calefacción']],confort:['Con rotura de puente térmico',['Alugom','La más vendida']],premium:['Rotura de alta gama',['Hoja oculta y perfil más fino','Máximo aislamiento en aluminio']]}};
 var COL=[['blanco','Blanco','#FFFFFF'],['color','Gris antracita u otro color liso','#3F454B'],['bicolor','Blanco dentro, color fuera','linear-gradient(90deg,#fff 50%,#3F454B 50%)'],['madera','Imitación madera','#8A5A35'],['negro','Negro mate','#1B1C1E']];
 var COLHEX={blanco:'#FFFFFF',color:'#3F454B',bicolor:'#3F454B',madera:'#8A5A35',negro:'#1B1C1E'};
 var VID=[['doble','Doble vidrio','Básico'],['bajoe','Térmico bajo emisivo','Recomendado'],['solar','Control solar','Fachadas con mucho sol'],['mate','Translúcido','Para baños'],['acustico','Acústico','Calles con ruido'],['seguridad','Seguridad laminado','Bajos y casas con niños'],['triple','Triple vidrio','Máximo aislamiento']];

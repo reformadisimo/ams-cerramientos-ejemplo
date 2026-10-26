@@ -60,7 +60,33 @@ function limpia(it, C) {
   return o;
 }
 
+// Tarifa real de AMS (ventanas de PVC, 2 hojas, oscilobatiente). Solo existe si la variable
+// PRECIARIO de Vercel la trae; si no, se usa la formula provisional de _preciario.js.
+// Regla del cajon (Javi, 25 oct): el precio incluye el cajon, pero la altura de la tabla es la de la
+// ventana sin el; con persiana, altura de tabla = altura total - 16,5 cm. Siempre la casilla superior.
+function tarifaVentana(o, C) {
+  const T = C.tarifa;
+  if (!T || o.tipo !== 'ventana' || o.mat !== 'pvc' || o.hojas !== 2 || o.fijo !== 'no') return null;
+  if (o.aper.indexOf('fija') >= 0) return null;
+  const tabla = o.col === 'blanco' ? T.blanco : o.col === 'color' ? T.gris7016 : null;
+  if (!tabla || !tabla.con) return null;
+  const t = tabla.con, hv = o.pers !== 'no' ? o.h - (T.cajon_cm || 16.5) : o.h;
+  const sube = (cm) => Math.ceil(cm / 10 - 1e-9) / 10;
+  const w = Math.max(t.anchos[0], sube(o.w)), alto = Math.max(0.8, sube(hv));
+  const col = t.anchos.findIndex((a) => Math.abs(a - w) < 1e-6);
+  const fila = t.filas[alto.toFixed(2)];
+  if (col < 0 || !fila) return null;
+  let p = fila[col];
+  const m2 = o.w * o.h / 10000;
+  p += Math.max(0, C.vidrio_m2[o.vid] - C.vidrio_m2.solar) * m2;
+  if (o.pers === 'motor' || o.pers === 'radio' || o.pers === 'solar') p += Math.max(0, C.persiana.fijo[o.pers] - C.persiana.fijo.manual);
+  if (o.mosq !== 'no') p += C.mosquitera[o.mosq][0] + C.mosquitera[o.mosq][1] * m2;
+  return p;
+}
+
 function precioUnidad(o, C) {
+  const pt = tarifaVentana(o, C);
+  if (pt !== null) return pt;
   if (o.tipo === 'techo') {
     const T = C.techo;
     let p = T.talla[o.talla];
