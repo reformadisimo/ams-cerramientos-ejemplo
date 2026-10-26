@@ -1,12 +1,24 @@
 {
-  "version": "2026-10-26T16:10",
+  "version": "2026-10-26T19:50",
   "fecha": "26 de octubre de 2026",
   "aviso": "",
   "ultimo": [
-    {"f": "26 oct", "t": "Has pedido por correo a tu agencia actual el acceso de Administrador a Google Ads y a Analytics. Esperamos su respuesta."},
-    {"f": "26 oct", "t": "Nuevo compromiso por escrito, más arriba: «Tuyo es el control. Siempre.»"}
+    {
+      "f": "26 oct",
+      "t": "Raúl te ha contestado que te llamará mañana para hablar de los accesos. Cuando habléis, pídele que lo que acordéis te lo confirme por escrito."
+    },
+    {
+      "f": "26 oct",
+      "t": "Has pedido por correo a tu agencia actual el acceso de Administrador a Google Ads y a Analytics. Esperamos su respuesta."
+    },
+    {
+      "f": "26 oct",
+      "t": "Nuevo compromiso por escrito, más arriba: «Tuyo es el control. Siempre.»"
+    }
   ],
-  "cuentas": {},
+  "cuentas": {
+    "ads": "La gestiona tu agencia actual. Ya se lo has pedido (26 de octubre) y te ha contestado que te llamará el 27 para hablarlo. Si la cuenta es de la agencia y no se puede traspasar, la solución es abrir una cuenta nueva a tu nombre, con tu tarjeta."
+  },
   "resueltas": [],
   "nuevas": []
 }
