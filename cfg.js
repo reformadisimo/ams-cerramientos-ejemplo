@@ -355,7 +355,7 @@ function updateDeltas(){
   el.textContent=txt;el.className=cls;
  });
  var now=$('cfNow');
- if(S.res&&S.res._probe!=null&&S.res.lineas[S.res._probe]){var l=S.res.lineas[S.res._probe];now.textContent=eur(l.total);$('cfNowSub').textContent=(S.cur.n>1?S.cur.n+' × '+eur(l.unidad)+' · ':'')+'instalada, sin IVA';}
+ if(S.res&&S.res._probe!=null&&S.res.lineas[S.res._probe]){var l=S.res.lineas[S.res._probe];now.textContent=l.presupuestar?'A presupuestar':eur(l.total);$('cfNowSub').textContent=l.presupuestar?'El aluminio se calcula a medida: te lo preparamos tras medir':(S.cur.n>1?S.cur.n+' × '+eur(l.unidad)+' · ':'')+'instalada, sin IVA';}
  else if(S.err){now.textContent='—';$('cfNowSub').textContent='No hemos podido calcularlo ahora.';}
 }
 
@@ -365,7 +365,7 @@ function renderSummary(){
  var list=S.items.map(function(it,i){return {it:S.curIdx===i&&S.cur?S.cur:it,i:i,editing:S.curIdx===i};});
  if(S.cur&&S.curIdx<0)list.push({it:S.cur,i:S.items.length,editing:true,nuevo:true});
  if(!list.length)$('cfItems').innerHTML='<li class="cf-empty">Elige qué quieres poner y aquí irá apareciendo, con su precio.</li>';
- else $('cfItems').innerHTML=list.map(function(x){var it=x.it,p=ok&&r.lineas[x.i]?eur(r.lineas[x.i].total):'…';
+ else $('cfItems').innerHTML=list.map(function(x){var it=x.it,p=ok&&r.lineas[x.i]?(r.lineas[x.i].presupuestar?'A presupuestar':eur(r.lineas[x.i].total)):'…';
   return '<li class="'+(x.editing?'editing':'')+'"><div class="cf-it"><span class="cf-pf sm">'+foto(it)+'</span><div><b>'+(it.n>1?it.n+' × ':'')+esc((it.hab?it.hab+' · ':'')+nombre(it))+'</b><small>'+esc(detalle(it))+'</small></div><span class="p">'+p+'</span>'+
   (x.nuevo?'<div class="cf-it-acts"><small style="color:#9A3412;font-weight:700">Configurando. Pulsa "Añadir al presupuesto".</small></div>':x.editing?'<div class="cf-it-acts"><small style="color:#9A3412;font-weight:700">Editando</small></div>':'<div class="cf-it-acts"><button type="button" data-edit="'+x.i+'">Cambiar</button><button type="button" data-dup="'+x.i+'">Duplicar</button><button type="button" data-del="'+x.i+'">Quitar</button></div>')+'</div></li>';}).join('');
  var n=list.reduce(function(s,x){return s+x.it.n;},0);
@@ -458,8 +458,8 @@ function valid(){
  var b=$('cfErr');if(e.length){b.textContent='Nos falta: '+e.join(', ')+'.';b.classList.add('show');return false;}b.classList.remove('show');return true;
 }
 function resumen(){
- var r=S.res,L=S.items.map(function(it,i){return '- '+(it.n>1?it.n+' × ':'')+(it.hab?it.hab+': ':'')+nombre(it)+', '+detalle(it)+(r&&r.lineas[i]?' ('+eur(r.lineas[i].total)+' + IVA)':'');});
- if(r)L.push('','Total: '+eur(r.total)+' con IVA');return L.join('\n');
+ var r=S.res,L=S.items.map(function(it,i){return '- '+(it.n>1?it.n+' × ':'')+(it.hab?it.hab+': ':'')+nombre(it)+', '+detalle(it)+(r&&r.lineas[i]?(r.lineas[i].presupuestar?' (a presupuestar)':' ('+eur(r.lineas[i].total)+' + IVA)'):'');});
+ if(r)L.push('','Total: '+eur(r.total)+' con IVA'+(r.hay_presupuestar?' (sin contar lo que va a presupuestar)':''));return L.join('\n');
 }
 $('cfWa').addEventListener('click',function(){
  if(!valid())return;
@@ -469,7 +469,7 @@ $('cfWa').addEventListener('click',function(){
 $('cfPdf').addEventListener('click',function(){
  if(!valid())return;var r=S.res;if(!r){return;}
  var hoy=new Date(),ref='AMS-'+hoy.getFullYear().toString().slice(2)+String(hoy.getMonth()+1).padStart(2,'0')+String(hoy.getDate()).padStart(2,'0')+'-'+String(Math.floor(Math.random()*900+100));
- var rows=S.items.map(function(it,i){return '<tr><td style="width:70px">'+foto(it,'pdfimg')+'</td><td><b>'+esc((it.hab?it.hab+' · ':'')+nombre(it))+'</b><br>'+esc(detalle(it))+'</td><td class="r">'+it.n+'</td><td class="r">'+eur(r.lineas[i].unidad)+'</td><td class="r">'+eur(r.lineas[i].total)+'</td></tr>';}).join('');
+ var rows=S.items.map(function(it,i){return '<tr><td style="width:70px">'+foto(it,'pdfimg')+'</td><td><b>'+esc((it.hab?it.hab+' · ':'')+nombre(it))+'</b><br>'+esc(detalle(it))+'</td><td class="r">'+it.n+'</td><td class="r">'+(r.lineas[i].presupuestar?'A presupuestar':eur(r.lineas[i].unidad))+'</td><td class="r">'+(r.lineas[i].presupuestar?'—':eur(r.lineas[i].total))+'</td></tr>';}).join('');
  var base=location.origin;
  $('cfPrint').innerHTML='<div class="pr-head"><img src="/img/logo-ams-color.svg" alt="AMS Cerramientos" class="pr-logo"><div class="pr-title"><h1>Presupuesto orientativo</h1><div>Referencia '+ref+' · '+hoy.toLocaleDateString('es-ES')+' · válido 30 días</div></div></div>'+
   '<div class="pr-for"><span>Para</span><b>'+esc(C.nombre)+'</b> · '+esc(C.tel)+' · '+esc(C.email)+' · Obra en '+esc(C.loc)+'</div>'+

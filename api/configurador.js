@@ -60,32 +60,58 @@ function limpia(it, C) {
   return o;
 }
 
-// Tarifa real de AMS (ventanas de PVC, 2 hojas, oscilobatiente). Solo existe si la variable
+// Tarifa real de AMS (PVC Kommerling blanco/gris, 2 hojas, oscilobatiente). Solo existe si la variable
 // PRECIARIO de Vercel la trae; si no, se usa la formula provisional de _preciario.js.
-// Regla del cajon (Javi, 25 oct): el precio incluye el cajon, pero la altura de la tabla es la de la
-// ventana sin el; con persiana, altura de tabla = altura total - 16,5 cm. Siempre la casilla superior.
+// Reglas de Javi: el precio de la tabla con persiana incluye el cajon, pero la altura de la tabla es la
+// de la ventana sin el (altura total - 16,5 cm). Siempre se sube a la casilla superior. Sin persiana se usa
+// la tabla "sin cajon". Las tablas "sin montaje" suman montaje (250 EUR) porque el configurador da precio instalado.
+const sube = (cm) => Math.ceil(cm / 10 - 1e-9) / 10;
+function extras(o, C, T, m2) {
+  let p = Math.max(0, C.vidrio_m2[o.vid] - C.vidrio_m2.solar) * m2;
+  if (o.pers === 'motor') p += T.motor_eur !== undefined ? T.motor_eur : Math.max(0, C.persiana.fijo.motor - C.persiana.fijo.manual);
+  else if (o.pers === 'radio' || o.pers === 'solar') p += Math.max(0, C.persiana.fijo[o.pers] - C.persiana.fijo.manual);
+  if (o.mosq !== 'no') p += C.mosquitera[o.mosq][0] + C.mosquitera[o.mosq][1] * m2;
+  return p;
+}
 function tarifaVentana(o, C) {
   const T = C.tarifa;
   if (!T || o.tipo !== 'ventana' || o.mat !== 'pvc' || o.hojas !== 2 || o.fijo !== 'no') return null;
   if (o.aper.indexOf('fija') >= 0) return null;
   const tabla = o.col === 'blanco' ? T.blanco : o.col === 'color' ? T.gris7016 : null;
-  if (!tabla || !tabla.con) return null;
+  if (!tabla) return null;
+  const m2 = o.w * o.h / 10000;
+  if (o.pers === 'no' && o.col === 'blanco' && T.ventana_sincajon) {
+    const t = T.ventana_sincajon, w = Math.max(t.anchos[0], sube(o.w)), alto = Math.max(1, sube(o.h));
+    const col = t.anchos.findIndex((a) => Math.abs(a - w) < 1e-6), fila = t.filas[alto.toFixed(2)];
+    if (col >= 0 && fila) return fila[col] + (T.montaje || 250) + extras(o, C, T, m2);
+  }
+  if (!tabla.con) return null;
   const t = tabla.con, hv = o.pers !== 'no' ? o.h - (T.cajon_cm || 16.5) : o.h;
-  const sube = (cm) => Math.ceil(cm / 10 - 1e-9) / 10;
   const w = Math.max(t.anchos[0], sube(o.w)), alto = Math.max(0.8, sube(hv));
   const col = t.anchos.findIndex((a) => Math.abs(a - w) < 1e-6);
   const fila = t.filas[alto.toFixed(2)];
   if (col < 0 || !fila) return null;
-  let p = fila[col];
-  const m2 = o.w * o.h / 10000;
-  p += Math.max(0, C.vidrio_m2[o.vid] - C.vidrio_m2.solar) * m2;
-  if (o.pers === 'motor' || o.pers === 'radio' || o.pers === 'solar') p += Math.max(0, C.persiana.fijo[o.pers] - C.persiana.fijo.manual);
-  if (o.mosq !== 'no') p += C.mosquitera[o.mosq][0] + C.mosquitera[o.mosq][1] * m2;
-  return p;
+  return fila[col] + extras(o, C, T, m2);
+}
+// Puertas balconeras PVC blanco de 2 hojas, 1100-1900 de ancho, 2100 de paso (mas cajon si lleva persiana).
+function tarifaPuerta(o, C) {
+  const T = C.tarifa, P = T && T.puerta;
+  if (!P || o.tipo !== 'balconera' || o.mat !== 'pvc' || o.hojas !== 2 || o.col !== 'blanco' || o.fijo !== 'no') return null;
+  if (o.aper.indexOf('fija') >= 0) return null;
+  const con = o.pers !== 'no';
+  if (o.h > 210 + (con ? (T.cajon_cm || 16.5) : 0)) return null;
+  const w = Math.max(P.anchos[0], sube(o.w)), col = P.anchos.findIndex((a) => Math.abs(a - w) < 1e-6);
+  if (col < 0) return null;
+  let p = (con ? P.con_cajon : P.sin_cajon)[col] + (T.montaje || 250);
+  if (o.umbral) p += C.umbral_rebajado;
+  return p + extras(o, C, T, o.w * o.h / 10000);
 }
 
+// El aluminio no tiene tarifa: se presupuesta a medida (Javi, 26 oct).
+const aPresupuestar = (o) => (o.tipo === 'ventana' || o.tipo === 'balconera' || o.tipo === 'corredera' || o.tipo === 'fijo') && o.mat === 'alu';
 function precioUnidad(o, C) {
-  const pt = tarifaVentana(o, C);
+  let pt = tarifaVentana(o, C);
+  if (pt === null) pt = tarifaPuerta(o, C);
   if (pt !== null) return pt;
   if (o.tipo === 'techo') {
     const T = C.techo;
@@ -121,7 +147,7 @@ function precioUnidad(o, C) {
   if (o.mosq !== 'no') p += C.mosquitera[o.mosq][0] + C.mosquitera[o.mosq][1] * m2;
   return p;
 }
-const total = (o, C) => r5(precioUnidad(o, C)) * o.n;
+const total = (o, C) => (aPresupuestar(o) ? 0 : r5(precioUnidad(o, C)) * o.n);
 
 // Cuanto sumaria o restaria cada opcion al item que se esta configurando.
 function variantes(o, C) {
@@ -175,7 +201,163 @@ module.exports = (req, res) => {
   d = d || {};
   const C = tabla();
   const items = (Array.isArray(d.items) ? d.items.slice(0, 60) : []).map((it) => limpia(it || {}, C));
-  const lineas = items.map((o) => ({ unidad: r5(precioUnidad(o, C)), total: total(o, C) }));
+  const lineas = items.map((o) => (aPresupuestar(o) ? { unidad: 0, total: 0, presupuestar: true } : { unidad: r5(precioUnidad(o, C)), total: total(o, C) }));
+  const base_ = lineas.reduce((s, l) => s + l.total, 0);
+  const out = {}, actual = total(o, C);
+  const prueba = (k, vals, set) => {
+    out[k] = {};
+    for (const v of vals) { const c = JSON.parse(JSON.stringify(o)); set(c, v); out[k][v] = total(limpia(c, C), C) - actual; }
+  };
+  if (o.tipo === 'techo') {
+    prueba('talla', Object.keys(C.techo.talla), (c, v) => { c.talla = v; });
+    prueba('aper', ['giratoria', 'proyectante'], (c, v) => { c.aper = v; });
+    prueba('acc', ['manual', 'electrica', 'solar'], (c, v) => { c.acc = v; });
+    for (const k of ['estor', 'persext', 'mosq']) prueba(k, ['0', '1'], (c, v) => { c[k] = v === '1'; });
+    prueba('obra', ['sustitucion', 'nuevo'], (c, v) => { c.obra = v; });
+    return out;
+  }
+  if (o.tipo === 'claraboya') {
+    prueba('talla', Object.keys(C.claraboya.talla), (c, v) => { c.talla = v; });
+    prueba('acc', ['fija', 'electrica'], (c, v) => { c.acc = v; });
+    prueba('estor', ['0', '1'], (c, v) => { c.estor = v === '1'; });
+    prueba('obra', ['sustitucion', 'nuevo'], (c, v) => { c.obra = v; });
+    return out;
+  }
+  prueba('mat', ['pvc', 'alu'], (c, v) => { c.mat = v; });
+  prueba('gama', ['eco', 'confort', 'premium'], (c, v) => { c.gama = v; });
+  prueba('col', Object.keys(C.color), (c, v) => { c.col = v; });
+  prueba('vid', Object.keys(C.vidrio_m2), (c, v) => { c.vid = v; });
+  prueba('pers', ['no', 'manual', 'motor', 'radio', 'solar'], (c, v) => { c.pers = v; });
+  prueba('mosq', ['no', 'enrollable', 'plisada'], (c, v) => { c.mosq = v; });
+  if (o.tipo === 'ventana' || o.tipo === 'balconera') {
+    prueba('fijo', ['no', 'sup', 'inf'], (c, v) => { c.fijo = v; });
+    out.aper = {};
+    o.aper.forEach((a, i) => {
+      for (const v of ['fija', 'practicable', 'osc']) {
+        const c = JSON.parse(JSON.stringify(o)); c.aper[i] = v;
+        out.aper[i + ':' + v] = total(limpia(c, C), C) - actual;
+      }
+    });
+  }
+  if (o.tipo === 'balconera') prueba('umbral', ['0', '1'], (c, v) => { c.umbral = v === '1'; });
+  if (o.tipo === 'corredera') prueba('elev', ['0', '1'], (c, v) => { c.elev = v === '1'; });
+  return out;
+}
+
+module.exports = (req, res) => {
+  res.setHeader('Cache-Control', 'no-store');
+  res.setHeader('Content-Type', 'application/json; charset=utf-8');
+  if (req.method !== 'POST') { res.statusCode = 405; return res.end(JSON.stringify({ error: 'Usa POST' })); }
+  let d = req.body;
+  if (typeof d === 'string') { try { d = JSON.parse(d); } catch (e) { d = {}; } }
+  d = d || {};
+  const C = tabla();
+  const items = (Array.isArray(d.items) ? d.items.slice(0, 60) : []).map((it) => limpia(it || {}, C));
+  const lineas = items.map((o) => (aPresupuestar(o) ? { unidad: 0, total: 0, presupuestar: true } : { unidad: r5(precioUnidad(o, C)), total: total(o, C) }));
+  const base_ = lineas.reduce((s, l) => s + l.total, 0);
+  const out = {}, actual = total(o, C);
+  const prueba = (k, vals, set) => {
+    out[k] = {};
+    for (const v of vals) { const c = JSON.parse(JSON.stringify(o)); set(c, v); out[k][v] = total(limpia(c, C), C) - actual; }
+  };
+  if (o.tipo === 'techo') {
+    prueba('talla', Object.keys(C.techo.talla), (c, v) => { c.talla = v; });
+    prueba('aper', ['giratoria', 'proyectante'], (c, v) => { c.aper = v; });
+    prueba('acc', ['manual', 'electrica', 'solar'], (c, v) => { c.acc = v; });
+    for (const k of ['estor', 'persext', 'mosq']) prueba(k, ['0', '1'], (c, v) => { c[k] = v === '1'; });
+    prueba('obra', ['sustitucion', 'nuevo'], (c, v) => { c.obra = v; });
+    return out;
+  }
+  if (o.tipo === 'claraboya') {
+    prueba('talla', Object.keys(C.claraboya.talla), (c, v) => { c.talla = v; });
+    prueba('acc', ['fija', 'electrica'], (c, v) => { c.acc = v; });
+    prueba('estor', ['0', '1'], (c, v) => { c.estor = v === '1'; });
+    prueba('obra', ['sustitucion', 'nuevo'], (c, v) => { c.obra = v; });
+    return out;
+  }
+  prueba('mat', ['pvc', 'alu'], (c, v) => { c.mat = v; });
+  prueba('gama', ['eco', 'confort', 'premium'], (c, v) => { c.gama = v; });
+  prueba('col', Object.keys(C.color), (c, v) => { c.col = v; });
+  prueba('vid', Object.keys(C.vidrio_m2), (c, v) => { c.vid = v; });
+  prueba('pers', ['no', 'manual', 'motor', 'radio', 'solar'], (c, v) => { c.pers = v; });
+  prueba('mosq', ['no', 'enrollable', 'plisada'], (c, v) => { c.mosq = v; });
+  if (o.tipo === 'ventana' || o.tipo === 'balconera') {
+    prueba('fijo', ['no', 'sup', 'inf'], (c, v) => { c.fijo = v; });
+    out.aper = {};
+    o.aper.forEach((a, i) => {
+      for (const v of ['fija', 'practicable', 'osc']) {
+        const c = JSON.parse(JSON.stringify(o)); c.aper[i] = v;
+        out.aper[i + ':' + v] = total(limpia(c, C), C) - actual;
+      }
+    });
+  }
+  if (o.tipo === 'balconera') prueba('umbral', ['0', '1'], (c, v) => { c.umbral = v === '1'; });
+  if (o.tipo === 'corredera') prueba('elev', ['0', '1'], (c, v) => { c.elev = v === '1'; });
+  return out;
+}
+
+module.exports = (req, res) => {
+  res.setHeader('Cache-Control', 'no-store');
+  res.setHeader('Content-Type', 'application/json; charset=utf-8');
+  if (req.method !== 'POST') { res.statusCode = 405; return res.end(JSON.stringify({ error: 'Usa POST' })); }
+  let d = req.body;
+  if (typeof d === 'string') { try { d = JSON.parse(d); } catch (e) { d = {}; } }
+  d = d || {};
+  const C = tabla();
+  const items = (Array.isArray(d.items) ? d.items.slice(0, 60) : []).map((it) => limpia(it || {}, C));
+  const lineas = items.map((o) => (aPresupuestar(o) ? { unidad: 0, total: 0, presupuestar: true } : { unidad: r5(precioUnidad(o, C)), total: total(o, C) }));
+  const base_ = lineas.reduce((s, l) => s + l.total, 0);
+  const out = {}, actual = total(o, C);
+  const prueba = (k, vals, set) => {
+    out[k] = {};
+    for (const v of vals) { const c = JSON.parse(JSON.stringify(o)); set(c, v); out[k][v] = total(limpia(c, C), C) - actual; }
+  };
+  if (o.tipo === 'techo') {
+    prueba('talla', Object.keys(C.techo.talla), (c, v) => { c.talla = v; });
+    prueba('aper', ['giratoria', 'proyectante'], (c, v) => { c.aper = v; });
+    prueba('acc', ['manual', 'electrica', 'solar'], (c, v) => { c.acc = v; });
+    for (const k of ['estor', 'persext', 'mosq']) prueba(k, ['0', '1'], (c, v) => { c[k] = v === '1'; });
+    prueba('obra', ['sustitucion', 'nuevo'], (c, v) => { c.obra = v; });
+    return out;
+  }
+  if (o.tipo === 'claraboya') {
+    prueba('talla', Object.keys(C.claraboya.talla), (c, v) => { c.talla = v; });
+    prueba('acc', ['fija', 'electrica'], (c, v) => { c.acc = v; });
+    prueba('estor', ['0', '1'], (c, v) => { c.estor = v === '1'; });
+    prueba('obra', ['sustitucion', 'nuevo'], (c, v) => { c.obra = v; });
+    return out;
+  }
+  prueba('mat', ['pvc', 'alu'], (c, v) => { c.mat = v; });
+  prueba('gama', ['eco', 'confort', 'premium'], (c, v) => { c.gama = v; });
+  prueba('col', Object.keys(C.color), (c, v) => { c.col = v; });
+  prueba('vid', Object.keys(C.vidrio_m2), (c, v) => { c.vid = v; });
+  prueba('pers', ['no', 'manual', 'motor', 'radio', 'solar'], (c, v) => { c.pers = v; });
+  prueba('mosq', ['no', 'enrollable', 'plisada'], (c, v) => { c.mosq = v; });
+  if (o.tipo === 'ventana' || o.tipo === 'balconera') {
+    prueba('fijo', ['no', 'sup', 'inf'], (c, v) => { c.fijo = v; });
+    out.aper = {};
+    o.aper.forEach((a, i) => {
+      for (const v of ['fija', 'practicable', 'osc']) {
+        const c = JSON.parse(JSON.stringify(o)); c.aper[i] = v;
+        out.aper[i + ':' + v] = total(limpia(c, C), C) - actual;
+      }
+    });
+  }
+  if (o.tipo === 'balconera') prueba('umbral', ['0', '1'], (c, v) => { c.umbral = v === '1'; });
+  if (o.tipo === 'corredera') prueba('elev', ['0', '1'], (c, v) => { c.elev = v === '1'; });
+  return out;
+}
+
+module.exports = (req, res) => {
+  res.setHeader('Cache-Control', 'no-store');
+  res.setHeader('Content-Type', 'application/json; charset=utf-8');
+  if (req.method !== 'POST') { res.statusCode = 405; return res.end(JSON.stringify({ error: 'Usa POST' })); }
+  let d = req.body;
+  if (typeof d === 'string') { try { d = JSON.parse(d); } catch (e) { d = {}; } }
+  d = d || {};
+  const C = tabla();
+  const items = (Array.isArray(d.items) ? d.items.slice(0, 60) : []).map((it) => limpia(it || {}, C));
+  const lineas = items.map((o) => (aPresupuestar(o) ? { unidad: 0, total: 0, presupuestar: true } : { unidad: r5(precioUnidad(o, C)), total: total(o, C) }));
   const base_ = lineas.reduce((s, l) => s + l.total, 0);
   // La misma casa en el otro material, para comparar lado a lado.
   const alt = { pvc: 0, alu: 0 };
@@ -185,7 +367,7 @@ module.exports = (req, res) => {
     hayCarpinteria = true;
     for (const m of ['pvc', 'alu']) alt[m] += total(Object.assign({}, o, { mat: m }), C);
   }
-  const out = { lineas, base: base_, iva_pct: C.iva, iva: Math.round(base_ * C.iva) / 100, total: Math.round(base_ * (100 + C.iva)) / 100, comparar: hayCarpinteria ? alt : null };
+  const out = { lineas, base: base_, iva_pct: C.iva, iva: Math.round(base_ * C.iva) / 100, total: Math.round(base_ * (100 + C.iva)) / 100, comparar: null, hay_presupuestar: lineas.some((l) => l.presupuestar) };
   const pi = Number(d.probe);
   if (Number.isInteger(pi) && items[pi]) out.variantes = variantes(items[pi], C);
   res.end(JSON.stringify(out));
