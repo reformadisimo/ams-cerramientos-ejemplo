@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow"><title>Conversaciones del asistente | AMS Cerramientos</title>
+<style>
+:root{--tinta:#12202B;--suave:#5B6B78;--linea:#D7DEE4;--fondo:#F3F5F7;--acento:#C2410C}
+@media(prefers-color-scheme:dark){:root{--tinta:#EAF0F5;--suave:#A9B7C2;--linea:#2C3E4D;--fondo:#0D1820;--acento:#F08A57}}
+*{box-sizing:border-box}body{margin:0;background:var(--fondo);color:var(--tinta);font:17px/1.55 Inter,system-ui,sans-serif}
+main{max-width:860px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:clamp(26px,5vw,34px);line-height:1.15;margin:8px 0 6px}
+.sub{color:var(--suave);margin:0 0 18px}
+.top{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.num{background:Canvas;border:1px solid var(--linea);border-radius:12px;padding:12px}
+.num b{display:block;font-size:28px;line-height:1.1}.num span{color:var(--suave);font-size:14px}
+.barra{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.barra button,.btn{background:Canvas;color:var(--tinta);border:1px solid var(--linea);border-radius:999px;padding:10px 14px;font:600 15px Inter,system-ui,sans-serif;cursor:pointer}
+.barra button.on{background:var(--acento);border-color:var(--acento);color:#fff}
+.conv{background:Canvas;border:1px solid var(--linea);border-radius:14px;margin:12px 0;overflow:hidden}
+.conv>summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+.conv>summary::-webkit-details-marker{display:none}
+.conv>summary .t{font-weight:700}.conv>summary .m{color:var(--suave);font-size:14px}
+.tag{font-size:13px;font-weight:700;border-radius:999px;padding:3px 10px}
+.llamada{background:#DCFCE7;color:#14532D}.duda{background:#FEF3C7;color:#78350F}
+.msgs{padding:4px 16px 16px;display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--linea)}
+.b{max-width:90%;padding:9px 12px;border-radius:12px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:16px}
+.user{align-self:flex-end;background:var(--tinta);color:var(--fondo)}
+.assistant{align-self:flex-start;background:var(--fondo);border:1px solid var(--linea)}
+.contacto{align-self:stretch;background:#DCFCE7;color:#14532D;font-weight:700}
+.duda-b{align-self:stretch;background:#FEF3C7;color:#78350F}
+.vacio,.err{background:Canvas;border:1px dashed var(--linea);border-radius:14px;padding:22px;color:var(--suave)}
+.err{color:#B91C1C;border-color:#B91C1C}
+input{width:100%;padding:12px;border:1px solid var(--linea);border-radius:10px;font-size:17px;background:Canvas;color:var(--tinta);margin:8px 0}
+@media(max-width:560px){.top{grid-template-columns:1fr}}
+</style></head><body><main>
+<h1>Conversaciones del asistente</h1>
+<p class="sub">Todo lo que la gente ha preguntado al asistente de la web de AMS, con la más reciente arriba. Esta página es privada: solo se abre con la clave de acceso.</p>
+<div id="acc" hidden><p>Escribe la clave de acceso que te hemos enviado:</p><input id="k" type="password" autocomplete="off" aria-label="Clave de acceso"><button class="btn" id="go">Entrar</button></div>
+<div id="app" hidden>
+<div class="top"><div class="num"><b id="n1">0</b><span>conversaciones hoy</span></div><div class="num"><b id="n7">0</b><span>en los últimos 7 días</span></div><div class="num"><b id="nl">0</b><span>piden que les llamen</span></div></div>
+<div class="barra" role="group" aria-label="Filtrar"><button data-f="todas" class="on">Todas</button><button data-f="llamada">Piden llamada</button><button data-f="duda">Preguntas sin respuesta</button><button id="rec" class="btn">Actualizar</button></div>
+<div id="lista"></div></div>
+<div id="msg"></div>
+</main>
+<script>
+(function(){
+var URL='https://thzntlymcsazcjrddqjm.supabase.co',KEY='sb_publishable_rkrwbrgbW_ebOtWTSoY_mA_LZu8SsT5';
+var $=function(i){return document.getElementById(i)},datos=[],filtro='todas';
+function clave(){try{return localStorage.getItem('ams_conv_k')||''}catch(e){return ''}}
+function guarda(k){try{localStorage.setItem('ams_conv_k',k)}catch(e){}}
+function olvida(){try{localStorage.removeItem('ams_conv_k')}catch(e){}}
+(function(){var m=location.hash.match(/clave=([A-Za-z0-9]+)/);if(m){guarda(m[1]);history.replaceState(null,'',location.pathname)}})();
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function fecha(d){return new Date(d).toLocaleString('es-ES',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',timeZone:'Europe/Madrid'})}
+async function carga(){
+  var k=clave();if(!k){$('acc').hidden=false;$('app').hidden=true;return}
+  $('msg').innerHTML='';
+  try{
+    var r=await fetch(URL+'/rest/v1/rpc/ams_chat_leer',{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json'},body:JSON.stringify({clave:k,dias:90})});
+    if(!r.ok){olvida();$('acc').hidden=false;$('app').hidden=true;$('msg').innerHTML='<p class="err">La clave no es correcta. Inténtalo de nuevo.</p>';return}
+    datos=await r.json();$('acc').hidden=true;$('app').hidden=false;pinta();
+  }catch(e){$('msg').innerHTML='<p class="err">No se han podido cargar las conversaciones. Prueba de nuevo en un minuto.</p>'}
+}
+function pinta(){
+  var hoy=new Date().toLocaleDateString('es-ES',{timeZone:'Europe/Madrid'}),sem=Date.now()-7*864e5;
+  $('n1').textContent=datos.filter(function(c){return new Date(c.inicio).toLocaleDateString('es-ES',{timeZone:'Europe/Madrid'})===hoy}).length;
+  $('n7').textContent=datos.filter(function(c){return new Date(c.inicio).getTime()>sem}).length;
+  $('nl').textContent=datos.filter(function(c){return c.pide_llamada}).length;
+  var v=datos.filter(function(c){return filtro==='llamada'?c.pide_llamada:filtro==='duda'?c.sin_respuesta:true});
+  if(!v.length){$('lista').innerHTML='<div class="vacio"><b>Todavía no hay conversaciones aquí.</b><br>Es normal al principio: la web aún no tiene mucho tráfico y la gente tarda en acostumbrarse a hablar con un asistente. Esto va creciendo durante semanas y meses, y mucho más si lo promocionamos.</div>';return}
+  $('lista').innerHTML=v.map(function(c,i){
+    var ms=c.mensajes||[],pr=(ms.find(function(m){return m.rol==='user'})||{}).contenido||'(sin mensaje)',nm=ms.filter(function(m){return m.rol==='user'}).length;
+    return '<details class="conv"'+(i===0?' open':'')+'><summary><span class="t">'+esc(pr.length>90?pr.slice(0,90)+'…':pr)+'</span>'+(c.pide_llamada?'<span class="tag llamada">Pide llamada</span>':'')+(c.sin_respuesta?'<span class="tag duda">Sin respuesta</span>':'')+'<span class="m">'+fecha(c.inicio)+' · '+nm+' pregunta'+(nm===1?'':'s')+(c.pagina?' · desde '+esc(c.pagina):'')+'</span></summary><div class="msgs">'+
+      ms.map(function(m){var cl=m.rol==='duda'?'duda-b':m.rol,tx=m.rol==='contacto'?'Dejó sus datos: '+m.contenido:m.rol==='duda'?'El asistente no supo contestar esto: '+m.contenido:m.contenido;return '<div class="b '+cl+'">'+esc(tx)+'</div>'}).join('')+'</div></details>'}).join('');
+}
+$('go').addEventListener('click',function(){var k=$('k').value.trim();if(k){guarda(k);carga()}});
+$('k').addEventListener('keydown',function(e){if(e.key==='Enter')$('go').click()});
+$('rec').addEventListener('click',carga);
+document.querySelector('.barra').addEventListener('click',function(e){var f=e.target.getAttribute&&e.target.getAttribute('data-f');if(!f)return;filtro=f;[].forEach.call(document.querySelectorAll('.barra [data-f]'),function(b){b.classList.toggle('on',b===e.target)});pinta()});
+carga();
+})();
+</script></body></html>

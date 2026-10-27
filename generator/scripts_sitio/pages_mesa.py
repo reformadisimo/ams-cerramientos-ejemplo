@@ -1,0 +1,722 @@
+# Mesa de control de AMS Cerramientos (demostracion con datos inventados).
+# Modelo: la mesa de Reformadisimo (components/mesa/Mesa.tsx + lib/panelCliente.ts).
+# Pagina independiente y privada: /guia-javi/panel. La vista completa es /guia-javi/panel-completo.
+# Una sola fuente de datos (DATA): de ella salen modulos, luces, tareas, cifras, conclusion y respuestas.
+import json
+
+DATA = {
+    "hoy": "2026-10-27",
+    "periodo": ["2026-09-30", "2026-10-27"],
+    "fallos": [],
+    "contactos": {
+        "actual": {"formulario": 8, "configurador": 11, "whatsapp": 9, "llamadas": 7, "chat": 3},
+        "antes": {"formulario": 6, "configurador": 8, "whatsapp": 8, "llamadas": 6, "chat": 3},
+        "visitasMedicion": {"actual": 12, "antes": 9},
+        "aceptados": {"actual": 4, "antes": 3},
+        "esperando": [
+            {"quien": "R. P.", "que": "4 ventanas de PVC en Alcalá de Henares", "horas": 31},
+            {"quien": "S. T.", "que": "Cerramiento de terraza de 12 m² en Torrejón", "horas": 27},
+        ],
+        "horasRespuesta": 2.2,
+    },
+    "web": {
+        "visitas": {"actual": 2940, "antes": 2620},
+        "configurador": {"usos": 142, "usosAntes": 118},
+        "cancelasVisitas": 94,
+        "sistemas": "Todo al día",
+    },
+    "ads": {
+        "actualizado": "2026-10-27",
+        "antes": {"coste": 780, "contactos": 12},
+        "webVe": 4,
+        "antesCamp": {"Ventanas de PVC en Alcalá": [300,5], "Ventanas de aluminio": [190,3], "Cerramientos de terraza": [170,2], "Cancelas de aluminio": [60,1], "Mosquiteras y persianas": [60,1]},
+        "campanas": [
+            {"n": "Ventanas de PVC en Alcalá", "coste": 330, "conv": 6},
+            {"n": "Ventanas de aluminio", "coste": 200, "conv": 4},
+            {"n": "Cerramientos de terraza", "coste": 190, "conv": 3},
+            {"n": "Cancelas de aluminio", "coste": 60, "conv": 1},
+            {"n": "Mosquiteras y persianas", "coste": 60, "conv": 0},
+        ],
+    },
+    "resenas": {
+        "nota": 4.8, "total": 63, "antes": 61,
+        "sinResponder": [{"estrellas": 3, "dias": 9}],
+        "fichaSale": {"actual": 1480, "antes": 1358},
+        "fichaLlamadas": {"actual": 21, "antes": 17},
+        "ia": {"nombran": 3, "de": 10, "antes": 2},
+    },
+    "competencia": [
+        {"n": "Competidor A (Alcalá)", "t": "Sin cambios importantes.", "luz": "verde"},
+        {"n": "Competidor B (Alcalá)", "t": "Ha bajado un 10 % el precio de las ventanas de PVC hasta el 15 de noviembre. No hace falta reaccionar: es una oferta con fecha.", "luz": "verde"},
+        {"n": "Competidor C (Guadalajara)", "t": "Ha estrenado una página de cancelas de aluminio. La tuya ya tiene 8 modelos con fotos reales.", "luz": "verde"},
+        {"n": "Competidor D (Guadalajara)", "t": "Sin cambios importantes.", "luz": "verde"},
+    ],
+}
+
+CSS = r'''
+@font-face{font-family:Inter;font-weight:400;font-display:swap;src:url(/fonts/inter-400.woff2) format("woff2")}
+@font-face{font-family:Inter;font-weight:600;font-display:swap;src:url(/fonts/inter-600.woff2) format("woff2")}
+@font-face{font-family:Inter;font-weight:700;font-display:swap;src:url(/fonts/inter-700.woff2) format("woff2")}
+:root{--ink:#12202B;--lin:#dde5ec;--fon:#f3f6f9;--ac:#C2410C;--acl:#fff1e8;--sua:#51606e;--bl:#fff}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--fon);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.45;-webkit-text-size-adjust:100%}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+.bar{position:sticky;top:0;z-index:30;background:var(--ink);color:#fff;display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 12px}
+.bar a{color:#fff;font-weight:700;text-decoration:none;font-size:.92rem;min-height:44px;display:inline-flex;align-items:center}
+.bar .q{min-width:44px;min-height:44px;border-radius:50%;border:2px solid #fff;background:transparent;color:#fff;font-weight:700;font-size:1.1rem}
+.bar .q:hover,.bar .q:focus-visible{background:#fff;color:var(--ink)}
+.w{max-width:780px;margin:0 auto;padding:0 16px 110px}
+.demo{background:#e6eef6;border:1px solid #c5d6e6;border-radius:12px;padding:10px 14px;margin:14px 0 0;font-size:.9rem}
+.fallo{background:#fff4dc;border:1px solid #e8c777;border-radius:12px;padding:10px 14px;margin:10px 0 0;font-size:.95rem}
+.k{margin:18px 0 0;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ac)}
+h1{margin:4px 0 0;font-size:clamp(1.7rem,6vw,2.3rem);line-height:1.15}
+.sub{margin:6px 0 0;color:var(--sua);font-size:.95rem}
+h2{margin:0;font-size:1.35rem;line-height:1.2}
+.btn{min-height:46px;border-radius:999px;border:1px solid var(--lin);background:#fff;padding:0 18px;font-weight:600;font-size:.95rem;transition:background-color .15s,border-color .15s,color .15s}
+.btn:hover{border-color:var(--ink)}
+.btn.p{background:var(--ac);border-color:var(--ac);color:#fff}
+.btn.p:hover{background:#9a3309}
+.btn.s{border:2px solid var(--ink)}
+.btn[disabled]{opacity:.5;cursor:default}
+:focus-visible{outline:3px solid #1D6FB8;outline-offset:2px}
+.lz{display:inline-block;flex:none;border-radius:50%}
+.concl{margin:18px 0 0;border-radius:22px;padding:20px}
+.concl.verde{background:#e7f4ec}.concl.ambar{background:#fdf1dc}.concl.rojo{background:#fbeceb}
+.concl .t{display:flex;align-items:center;gap:10px;margin:0;font-size:clamp(1.35rem,5vw,1.7rem);font-weight:700;line-height:1.2}
+.concl ul{margin:12px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+.concl li{display:flex;gap:10px;font-size:1.04rem;line-height:1.4}
+.concl li:before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:rgba(18,32,43,.4);margin-top:.55em}
+.concl .btn{margin-top:16px}
+.hoy{margin:14px 0 0;border:2px solid var(--ac);border-radius:22px;background:#fff;padding:16px 18px}
+.hoy h2{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sua)}
+.tarea .tx{margin:8px 0 0;font-size:1.2rem;font-weight:700;line-height:1.3}
+.tarea.peq .tx{font-size:1.02rem}
+.tarea .po{margin:4px 0 0;color:#3b4a58;font-size:.97rem}
+.tarea .ac{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px}
+.tarea.hecha .tx{text-decoration:line-through;color:#7b8794}
+.tarea.peq{border-top:1px solid var(--lin);padding-top:12px;margin-top:12px}
+.mas{margin-top:14px}
+.lnk{background:none;border:0;padding:0;min-height:44px;font-weight:600;font-size:1rem;text-decoration:underline;text-underline-offset:4px}
+.sec{margin:28px 0 0;scroll-margin-top:68px}
+.sec>p.ay{margin:4px 0 0;color:var(--sua);font-size:.92rem}
+.lista{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:12px}
+.mod{background:#fff;border:1px solid var(--lin);border-radius:20px;scroll-margin-top:68px}
+.mod.ab{border-color:var(--ink)}
+.mod>button{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px 14px;align-items:center;width:100%;background:none;border:0;text-align:left;padding:14px;min-height:64px}
+.mod .nom{font-weight:700;font-size:1.1rem}
+.mod .est{font-weight:700;font-size:.9rem;margin-left:8px}
+.mod .fr{display:block;margin-top:2px;color:#3b4a58;font-size:.95rem}
+.mod .ver{grid-column:2;justify-self:start;background:var(--acl);color:#9a3309;border-radius:999px;padding:8px 16px;font-weight:700;font-size:.9rem}
+.det{border-top:1px solid var(--lin);padding:6px 14px 14px}
+.det .co{margin:10px 0 0;font-size:.97rem;color:#3b4a58}
+.det ul{list-style:none;margin:8px 0 0;padding:0}
+.det li{display:flex;flex-direction:column;gap:2px;padding:10px 0;border-top:1px solid var(--lin);font-size:.95rem}
+.det li:first-child{border-top:0}
+.det li .a{display:flex;align-items:center;gap:8px;color:var(--sua)}
+.det li .b{font-weight:700}
+.bat{display:inline-flex;align-items:center}
+.bat .c{display:flex;gap:3px;border:2px solid;border-radius:6px;padding:3px}
+.bat .c i{display:block;width:9px;height:18px;border-radius:2px;background:#e6e9ee}
+.bat .p{display:block;width:4px;height:10px;margin-left:2px;border-radius:0 2px 2px 0}
+.cif{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:12px}
+.cif li{background:#fff;border:1px solid var(--lin);border-radius:20px;padding:14px;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:start}
+.cif .fr{margin:0;font-weight:700;font-size:1.1rem;line-height:1.3}
+.cif .de{margin:2px 0 0;color:#3b4a58;font-size:.95rem}
+.cif .es{margin:4px 0 0;font-weight:700;font-size:.9rem}
+.cif .qq{min-width:44px;min-height:44px;border-radius:50%;border:1px solid var(--lin);background:#fff;font-weight:700;color:var(--sua)}
+.cif .ex{grid-column:1/-1;background:#f6f8fa;border-radius:12px;padding:10px 12px;font-size:.95rem}
+.preg{margin-top:28px;background:#fff;border:1px solid var(--lin);border-radius:20px;padding:16px 18px;scroll-margin-top:68px}
+.preg form{margin:12px 0 0;display:flex;flex-wrap:wrap;gap:8px}
+.preg input[type=text]{flex:1 1 100%;min-width:0;min-height:50px;border-radius:999px;border:1px solid var(--lin);background:#f6f8fa;padding:0 16px;font-size:1rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 0}
+.chips button{min-height:44px;border-radius:999px;border:1px solid var(--lin);background:#f6f8fa;padding:6px 14px;text-align:left;font-size:.95rem}
+.resp{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:10px}
+.resp li{background:var(--acl);border-radius:14px;padding:12px 14px}
+.resp .q{margin:0;font-size:.82rem;font-weight:700;color:var(--sua)}
+.resp .r{margin:4px 0 0;font-size:1.02rem;line-height:1.5}
+.nota{margin:10px 0 0;font-size:.85rem;color:var(--sua)}
+.fin{margin:30px 0 0;text-align:center}
+.herr{margin-top:30px;background:#fff;border:1px solid var(--lin);border-radius:20px;scroll-margin-top:68px}
+.herr>button{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;background:none;border:0;text-align:left;padding:12px 18px;min-height:60px}
+.herr .pill{flex:none;border-radius:999px;background:var(--acl);color:#9a3309;font-weight:700;font-size:.9rem;padding:8px 16px}
+.herr .cu{border-top:1px solid var(--lin);padding:14px 18px 18px}
+.herr .eny{display:flex;flex-wrap:wrap;gap:8px}
+.herr a.btn{display:inline-flex;align-items:center;text-decoration:none;color:var(--ink)}
+.herr select,.herr input[type=email]{min-height:46px;border-radius:12px;border:1px solid var(--lin);padding:0 12px;background:#fff;min-width:0;max-width:100%}
+.herr form{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,255,.96);border-top:1px solid var(--lin);padding:6px 6px max(8px,env(safe-area-inset-bottom))}
+.nav ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+.nav button{width:100%;min-height:48px;border:0;background:none;border-radius:12px;font-weight:700;font-size:.95rem}
+.nav button:active{background:#eef2f6}
+@media (min-width:700px){.nav{display:none}.w{padding-bottom:60px}.mod>button{grid-template-columns:auto minmax(0,1fr) auto}.mod .ver{grid-column:3}.det li{flex-direction:row;justify-content:space-between;gap:16px}.det li .b{text-align:right;max-width:60%}.preg input[type=text]{flex:1 1 0}}
+.vel{position:fixed;inset:0;z-index:60;background:rgba(18,32,43,.55);display:grid;place-items:center;padding:16px}
+.vel[hidden]{display:none}
+.cj{background:#fff;border-radius:22px;max-width:460px;width:100%;max-height:90vh;overflow:auto;padding:22px}
+.cj h2{font-size:1.5rem}
+.cj ol{margin:12px 0 0;padding:0;list-style:none;display:grid;gap:8px;font-size:1.05rem}
+.cj ol li{display:flex;gap:12px;align-items:center}
+.cj ol b{flex:none;width:28px;height:28px;border-radius:50%;background:var(--ac);color:#fff;display:grid;place-items:center;font-size:.9rem}
+.cj .ms{margin-top:14px;background:#f6f8fa;border-radius:14px;padding:12px 14px;font-size:.93rem;display:grid;gap:8px}
+.cj .ms p{margin:0}
+.cj .pie{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center}
+
+.vistas{margin:14px 0 0;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.seg{display:inline-flex;border:1px solid var(--lin);border-radius:999px;background:#fff;padding:2px}
+.seg button{min-height:40px;border:0;background:none;border-radius:999px;padding:0 16px;font-weight:600;font-size:.95rem;color:#3b4a58}
+.seg button[aria-pressed=true]{background:var(--ink);color:#fff}
+.chb{min-height:44px;border-radius:999px;border:1px solid var(--lin);background:#fff;padding:0 14px;font-weight:600;font-size:.93rem}
+.chb[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.chb.tm[aria-pressed=true]{background:#e4f1f5;border-color:#1c8caa;color:var(--ink)}
+.chb.tm[aria-pressed=false]{color:#7b8794}
+.fl{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 0}
+.rg{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 0;font-size:.92rem;color:#3b4a58}
+.rg label{display:flex;align-items:center;gap:6px}
+.rg input{min-height:44px;border:1px solid var(--lin);border-radius:12px;padding:0 10px;background:#fff;max-width:100%}
+.lab{margin:14px 0 0;font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--sua)}
+.tabs{display:flex;gap:8px;overflow-x:auto;margin:18px -16px 0;padding:0 16px 4px}
+.tabs .chb{flex:none}
+.kps{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:12px;grid-template-columns:minmax(0,1fr)}
+.kps li{background:#fff;border:1px solid var(--lin);border-radius:20px;padding:14px 16px}
+.kps .kn{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--sua)}
+.kps .kv{display:block;margin-top:4px;font-size:1.9rem;font-weight:700;line-height:1.1}
+.kps .kd{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:6px;font-size:.88rem;color:var(--sua)}
+.kps .kh{margin:6px 0 0;font-size:.88rem;color:#3b4a58}
+.pl{border-radius:999px;padding:2px 9px;font-weight:700;font-size:.8rem;background:#eef2f6;color:#51606e}
+.pl.b{background:#ebf1e8;color:#4d7047}.pl.m{background:#f8e8ea;color:#a3505a}
+.caja{margin:14px 0 0;background:#fff;border:1px solid var(--lin);border-radius:20px;padding:14px 16px}
+.caja ul{list-style:none;margin:8px 0 0;padding:0}
+.caja li{display:flex;flex-direction:column;gap:2px;padding:10px 0;border-top:1px solid var(--lin);font-size:.95rem}
+.caja li:first-child{border-top:0}
+.caja .b{font-weight:700}
+.gm{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;background:#f6f8fa;border-radius:12px;padding:8px 12px;font-size:.92rem;margin-top:4px}
+.herr2{margin-top:30px;scroll-margin-top:68px}
+.hg{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:10px}
+.hg a{display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:60px;background:#fff;border:1px solid var(--lin);border-radius:16px;padding:10px 16px;text-decoration:none;color:var(--ink)}
+.hg a:hover{border-color:var(--ink)}
+.hg b{display:block}.hg span{display:block;color:#51606e;font-size:.9rem}
+.hg i{font-style:normal;font-weight:700;color:var(--ac)}
+.hg .ej{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#7b8794}
+.corr{margin-top:30px;background:#fff;border:1px solid var(--lin);border-radius:20px;padding:16px 18px;scroll-margin-top:68px}
+.corr form{margin:8px 0 0;display:flex;flex-wrap:wrap;gap:8px}
+.corr input[type=email]{flex:1 1 220px;min-width:0;min-height:46px;border-radius:999px;border:1px solid var(--lin);background:#f6f8fa;padding:0 16px;font-size:1rem}
+.corr .ok{margin:8px 0 0;font-size:.93rem;color:#1d6a42}.corr .no{margin:8px 0 0;font-size:.93rem;color:#a3505a}
+.sl{margin-top:14px;border-top:1px solid var(--lin);padding-top:10px}
+.sl li{list-style:none;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;font-size:.92rem;margin-top:8px}
+.sl ul{margin:0;padding:0}
+.prev{margin-top:12px}
+.prev summary{min-height:44px;display:flex;align-items:center;font-weight:600;cursor:pointer}
+.prev .em{margin-top:6px;background:#f6f8fa;border:1px solid var(--lin);border-radius:14px;padding:14px 16px;font-size:.93rem}
+.prev .em h3{margin:0 0 6px;font-size:1.05rem}.prev .em p{margin:6px 0 0}.prev .em b{font-weight:700}
+.chart text{font-family:inherit}
+@media (min-width:700px){.kps{grid-template-columns:repeat(2,minmax(0,1fr))}.caja li{flex-direction:row;justify-content:space-between;gap:16px}.caja .b{text-align:right;max-width:60%}.hg{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media print{.bar,.nav,.vel{display:none}}
+'''
+
+JS = r'''
+(function(){
+var D = __DATA__;
+var fl=/[?&]fallo=([a-z]+)/.exec(location.search);if(fl)D.fallos=[fl[1]];
+var LUZ={verde:{c:"#2f9a62",t:"Todo bien"},ambar:{c:"#d68a1c",t:"Mira esto"},rojo:{c:"#cf3f3a",t:"Importante"},gris:{c:"#a7a39a",t:"Sin datos aún"},azul:{c:"#1c8caa",t:"Datos de tu negocio"}};
+var SEG={verde:4,ambar:2,rojo:1,gris:0,azul:3};
+var MESES=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+function $(s,r){return (r||document).querySelector(s)}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function num(n){return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,".")}
+function dec(n,d){var m=Math.pow(10,d||1);return (Math.round(n*m)/m).toString().replace(".",",")}
+function eur(n){return num(n)+" €"}
+function sum(o){var t=0;for(var k in o)t+=o[k];return t}
+function plural(n,u,v){return num(n)+" "+(n===1?u:v)}
+function fechaPal(s){var m=/^(\d{4})-(\d{2})-(\d{2})/.exec(s);return m?Number(m[3])+" de "+MESES[Number(m[2])-1]:s}
+function primeraFrase(s){var i=s.search(/\.\s/);return i===-1?s:s.slice(0,i+1)}
+function delta(a,b){if(!isFinite(a)||!isFinite(b))return null;if(b>0)return (a-b)/b*100;return a>0?null:0}
+function frente(a,b){var v=delta(a,b);if(v===null)return "sin comparación con antes";if(Math.abs(v)<0.5)return "igual que antes";return (v>0?"+":"-")+num(Math.abs(v))+" % frente a antes"}
+function horas(h){var m=Math.round(h*60);return m<60?m+" min":Math.floor(m/60)+" h"+(m%60?" "+(m%60)+" min":"")}
+
+/* ── Cálculos: una sola fuente para pantalla, cifras y respuestas ── */
+var R={};
+(function(){
+  var c=D.contactos,a=c.actual,b=c.antes;
+  R.contactos=sum(a);R.contactosAntes=sum(b);
+  R.pres=a.formulario+a.configurador;R.presAntes=b.formulario+b.configurador;
+  R.sinOrigen=a.whatsapp+a.llamadas;
+  R.pctSinOrigen=R.contactos>0?R.sinOrigen/R.contactos*100:0;
+  var cs=0,cv=0;D.ads.campanas.forEach(function(x){cs+=x.coste;cv+=x.conv});
+  R.coste=cs;R.conv=cv;R.cpl=cv>0?cs/cv:NaN;
+  R.cplAntes=D.ads.antes.contactos>0?D.ads.antes.coste/D.ads.antes.contactos:NaN;
+  R.webCpl=D.ads.webVe>0?cs/D.ads.webVe:NaN;
+  /* Regla de oro: con la medición incompleta no se recomienda pausar nada. */
+  R.incompleta=cs>0&&((R.contactos>0&&R.pctSinOrigen>=40)||(cv>0&&D.ads.webVe===0)||(isFinite(R.cpl)&&isFinite(R.webCpl)&&R.webCpl>3*R.cpl));
+  R.mejor=null;R.peor=null;
+  D.ads.campanas.forEach(function(x){
+    if(x.conv>0&&(!R.mejor||x.coste/x.conv<R.mejor.coste/R.mejor.conv))R.mejor=x;
+    if(x.conv===0&&x.coste>0&&(!R.peor||x.coste>R.peor.coste))R.peor=x;
+  });
+})();
+
+/* ── Módulos (como panelCliente.ts) ── */
+function modulos(){
+  var c=D.contactos,r=D.resenas,w=D.web,L=[];
+  /* La web */
+  var vis=w.visitas.actual,conv=vis>0?R.contactos/vis*100:NaN,convA=w.visitas.antes>0?R.contactosAntes/w.visitas.antes*100:NaN;
+  var fW=D.fallos.indexOf("analytics")>=0||D.fallos.indexOf("web")>=0;
+  L.push({id:"web",titulo:"La web",ver:"Ver cómo va",luz:fW?"gris":"verde",estado:fW?"Sin datos aún":null,
+    conclusion:fW?"No hemos podido leer los datos de la web ahora mismo. Las cifras de esta parte pueden estar incompletas.":"La web va bien: "+num(vis)+" visitas ("+frente(vis,w.visitas.antes).replace(" frente a antes","")+"). "+dec(conv)+" de cada 100 visitas acaba en un contacto.",
+    filas:[
+      {t:"Visitas a la web",v:num(vis)+" ("+frente(vis,w.visitas.antes)+")"},
+      {t:"Visitas que acaban en contacto",v:dec(conv)+" % ("+R.contactos+" de "+num(vis)+"). Antes: "+dec(convA)+" %"},
+      {t:"Configurador de ventanas",v:num(w.configurador.usos)+" usos · "+a(c.actual.configurador)+" piden presupuesto"},
+      {t:"Lo que funciona",v:"La página de cancelas ya tiene "+w.cancelasVisitas+" visitas con sus fotos reales.",luz:"verde"},
+      {t:"Sistemas",v:w.sistemas,luz:"verde"}]});
+  function a(n){return n}
+  /* Contactos y presupuestos */
+  var esp=c.esperando,ambC=esp.length>0;
+  L.push({id:"contactos",titulo:"Contactos y presupuestos",ver:"Ver los contactos",luz:ambC?"ambar":"azul",estado:ambC?null:"Datos de tu negocio",
+    conclusion:(ambC?(esp.length===1?"1 persona que pidió presupuesto lleva":esp.length+" personas que pidieron presupuesto llevan")+" más de un día sin respuesta. ":"")+R.contactos+" contactos en total, y "+R.pres+" piden presupuesto.",
+    punto:ambC?(esp.length===1?"Una persona que pidió presupuesto lleva":"Dos personas que pidieron presupuesto llevan")+" más de un día sin respuesta.":null,
+    filas:[
+      {t:"Contactos",v:R.contactos+" ("+frente(R.contactos,R.contactosAntes)+")"},
+      {t:"De dónde llegan",v:"Formulario "+c.actual.formulario+" · Configurador "+c.actual.configurador+" · WhatsApp "+c.actual.whatsapp+" · Llamadas "+c.actual.llamadas+" · Chat "+c.actual.chat},
+      {t:"Piden presupuesto",v:R.pres+" ("+frente(R.pres,R.presAntes)+")"},
+      {t:"Visitas de medición",v:c.visitasMedicion.actual+" ("+frente(c.visitasMedicion.actual,c.visitasMedicion.antes)+")"},
+      {t:"Trabajos aceptados",v:c.aceptados.actual+" (antes "+c.aceptados.antes+"). Se firman semanas después: un mes flojo no es mala señal.",luz:"azul"},
+      {t:"Tiempo en responder",v:"Mitad de los contactos, en menos de "+horas(c.horasRespuesta)}
+    ].concat(esp.map(function(e){return {t:"Esperando respuesta: "+e.quien,v:e.que+" · hace "+e.horas+" horas",luz:"ambar"}}))});
+  /* Anuncios */
+  var fA=D.fallos.indexOf("anuncios")>=0;
+  var filasA=[
+    {t:"Invertido en Google Ads",v:eur(R.coste)+" ("+frente(R.coste,D.ads.antes.coste)+")"},
+    {t:"Contactos que cuenta Google",v:R.conv+" (antes "+D.ads.antes.contactos+")"},
+    {t:"Contactos que ve tu web",v:D.ads.webVe+" de los "+R.conv+(R.incompleta?". Los demás llegan sin que sepamos que vienen de un anuncio.":""),luz:R.incompleta?"ambar":null},
+    {t:"Coste por contacto",v:isFinite(R.cpl)?eur(R.cpl)+" ("+frente(R.cpl,R.cplAntes)+") según Google":"Sin contactos medidos"}];
+  D.ads.campanas.forEach(function(x){
+    var sin=x.conv===0;
+    filasA.push({t:x.n,v:eur(x.coste)+" · "+(sin?"sin contactos medidos"+(R.incompleta?". No se toca hasta completar la medición":""):plural(x.conv,"contacto","contactos")+" · "+eur(x.coste/x.conv)+" cada uno"),luz:sin?"ambar":null});
+  });
+  L.push({id:"anuncios",titulo:"Anuncios",ver:"Ver campañas",luz:fA?"gris":(R.incompleta?"ambar":"verde"),estado:fA?"Sin datos aún":(R.incompleta?"Medición incompleta":null),
+    conclusion:fA?"No hemos podido leer Google Ads ahora mismo. Las cifras de esta parte pueden estar incompletas.":(R.incompleta?"Medición incompleta: no sabemos de dónde vienen "+R.sinOrigen+" de los "+R.contactos+" contactos. ":"")+"Cada contacto de anuncios cuesta "+(isFinite(R.cpl)?eur(R.cpl):"—")+" según Google (antes "+(isFinite(R.cplAntes)?eur(R.cplAntes):"—")+"). "+(R.incompleta?"Hasta completar la medición no conviene pausar ninguna campaña.":""),
+    punto:R.incompleta?"La medición de los anuncios está incompleta: no sabemos de dónde vienen "+R.sinOrigen+" de "+R.contactos+" contactos, así que no toques las campañas todavía.":null,
+    filas:filasA});
+  /* Reputación */
+  var sr=r.sinResponder,peor=0;sr.forEach(function(x){if(x.estrellas<=2)peor=1});
+  var luzR=peor?"rojo":(sr.length?"ambar":"verde");
+  L.push({id:"reputacion",titulo:"Reputación",ver:"Ver las reseñas",luz:luzR,
+    conclusion:sr.length?(sr.length===1?"1 reseña sin contestar desde hace "+sr[0].dias+" días. ":sr.length+" reseñas sin contestar. ")+"Google "+dec(r.nota)+" con "+r.total+" reseñas ("+(r.total-r.antes)+" nuevas).":"Google "+dec(r.nota)+" con "+r.total+" reseñas. Todas contestadas.",
+    punto:sr.length?(sr.length===1?"Una reseña de "+sr[0].estrellas+" estrellas sigue sin contestar desde hace "+sr[0].dias+" días.":sr.length+" reseñas siguen sin contestar."):null,
+    filas:[
+      {t:"Google",v:dec(r.nota)+" de 5 · "+r.total+" reseñas ("+(r.total-r.antes)+" nuevas)"},
+      {t:"Sin contestar",v:sr.length?sr.map(function(x){return "1 de "+x.estrellas+" estrellas, hace "+x.dias+" días"}).join(" · "):"Ninguna",luz:sr.length?"ambar":"verde"},
+      {t:"Veces que sale tu ficha de Google",v:num(r.fichaSale.actual)+" ("+frente(r.fichaSale.actual,r.fichaSale.antes)+")"},
+      {t:"Llamadas desde la ficha",v:r.fichaLlamadas.actual+" (antes "+r.fichaLlamadas.antes+")"},
+      {t:"Asistentes de IA",v:"Te nombran en "+r.ia.nombran+" de "+r.ia.de+" preguntas sobre ventanas en tu zona (antes "+r.ia.antes+")"}]});
+  /* Competencia */
+  var worst="verde";D.competencia.forEach(function(x){if(x.luz==="rojo")worst="rojo";else if(x.luz==="ambar"&&worst!=="rojo")worst="ambar"});
+  var cambios=D.competencia.filter(function(x){return !/^Sin cambios/.test(x.t)});
+  L.push({id:"competencia",titulo:"Competencia",ver:"Ver cambios",luz:worst,
+    conclusion:worst==="verde"?"Sin movimientos que exijan reaccionar. "+(cambios.length?plural(cambios.length,"competidor se ha movido","competidores se han movido")+" esta semana.":""):"Hay un movimiento de la competencia que conviene mirar.",
+    filas:D.competencia.map(function(x){return {t:x.n,v:x.t,luz:x.luz}})});
+  return L;
+}
+
+function tareas(M){
+  var T=[],c=D.contactos,r=D.resenas;
+  if(c.esperando.length)T.push({id:"t-llamar",o:1,texto:c.esperando.length===1?"Llama a la persona que espera presupuesto":"Llama a las "+c.esperando.length+" personas que esperan presupuesto",porque:c.esperando.map(function(e){return e.quien+" ("+e.que+")"}).join(" y ")+". Llevan más de un día sin respuesta.",ir:"contactos",boton:"Ver quiénes son"});
+  if(r.sinResponder.length)T.push({id:"t-resena",o:r.sinResponder.some(function(x){return x.estrellas<=2})?0:2,texto:"Contesta la reseña de "+r.sinResponder[0].estrellas+" estrellas",porque:"Lleva "+r.sinResponder[0].dias+" días sin respuesta. Contestar con calma a las reseñas flojas da confianza a quien las lee.",ir:"reputacion",boton:"Ver las reseñas"});
+  if(R.incompleta)T.push({id:"t-medicion",o:3,texto:"Completa la medición de llamadas y WhatsApp",porque:R.sinOrigen+" de "+R.contactos+" contactos ("+num(R.pctSinOrigen)+" %) llegan sin que sepamos de dónde. Hasta entonces, no pauses ni cambies campañas.",ir:"anuncios",boton:"Ver los anuncios"});
+  T.sort(function(x,y){return x.o-y.o});
+  return T.slice(0,5);
+}
+
+function relojes(){
+  var r=D.resenas;
+  return [
+    {t:"Contactos",luz:"verde",frase:plural(R.contactos,"persona se ha puesto","personas se han puesto")+" en contacto",detalle:isFinite(delta(R.contactos,R.contactosAntes))&&delta(R.contactos,R.contactosAntes)!==null?(delta(R.contactos,R.contactosAntes)>=0?num(Math.abs(delta(R.contactos,R.contactosAntes)))+" % más que antes ("+R.contactosAntes+").":num(Math.abs(delta(R.contactos,R.contactosAntes)))+" % menos que antes ("+R.contactosAntes+")."):"Todavía no hay periodo anterior para comparar.",ayuda:"Personas distintas que te han escrito o llamado: formulario, configurador, WhatsApp, llamada o chat de la web."},
+    {t:"Presupuestos pedidos",luz:"verde",frase:plural(R.pres,"persona ha pedido","personas han pedido")+" presupuesto",detalle:R.contactos>0?"Son "+num(R.pres/R.contactos*100)+" de cada 100 contactos.":"",ayuda:"Contactos que han pedido presupuesto de forma expresa, por el formulario o por el configurador de ventanas."},
+    {t:"Coste por contacto",luz:R.incompleta?"ambar":"verde",frase:"Cada contacto de anuncios cuesta "+(isFinite(R.cpl)?eur(R.cpl):"—"),detalle:(isFinite(R.cplAntes)?"Antes costaba "+eur(R.cplAntes)+". ":"")+(R.incompleta?"Medición incompleta: tu web solo ve "+D.ads.webVe+" de los "+R.conv+".":""),ayuda:"El dinero gastado en Google Ads dividido entre los contactos que cuenta Google. Cuanto más bajo, mejor. Mientras la medición esté incompleta, es una cifra orientativa."},
+    {t:"Nota en Google",luz:"verde",frase:"Tus clientes te valoran con un "+dec(r.nota),detalle:"Sobre 5, con "+r.total+" reseñas de Google.",ayuda:"La valoración media que han dejado los clientes en tu ficha de Google, sobre 5."}
+  ];
+}
+
+/* ── Preguntale a la mesa (en la demo se contesta en el propio navegador) ── */
+function responde(q,M,T){
+  var s=q.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,""),c=D.contactos.actual;
+  if(/instagram|facebook|tiktok|redes|meta/.test(s))return "Las redes sociales todavía no están conectadas a esta mesa. Lo que sí vemos son los anuncios de Google Ads: "+R.conv+" contactos con "+eur(R.coste)+" invertidos. Las redes las verás en la vista completa.";
+  if(/que hago|primero|hoy|prioridad|urgente|empiezo/.test(s))return T.length?T[0].texto+". "+T[0].porque:"Hoy no hay nada pendiente. Todo va bien.";
+  if(/(campana|anuncio).*(mejor|funciona|rinde|barat)|mejor campana/.test(s))return R.mejor?"La que mejor funciona es «"+R.mejor.n+"»: "+eur(R.mejor.coste)+" y "+plural(R.mejor.conv,"contacto","contactos")+", "+eur(R.mejor.coste/R.mejor.conv)+" cada uno."+(R.incompleta?" Ojo: la medición está incompleta, así que son cifras orientativas.":""):"Todavía no hay contactos medidos en ninguna campaña.";
+  if(/peor|menos.*(trae|funciona)|mosquit|sin contactos/.test(s))return R.peor?"La que menos ha traído es «"+R.peor.n+"»: "+eur(R.peor.coste)+" sin ningún contacto medido."+(R.incompleta?" No la pausaría todavía: la medición está incompleta y puede estar trayendo contactos que no vemos.":""):"Todas las campañas tienen al menos un contacto medido.";
+  if(/cuesta|coste|cpl|cuanto.*contacto/.test(s))return "Cada contacto de anuncios cuesta "+(isFinite(R.cpl)?eur(R.cpl):"—")+" según Google ("+frente(R.cpl,R.cplAntes)+")."+(R.incompleta?" Es orientativo: tu web solo ve "+D.ads.webVe+" de los "+R.conv+" contactos que cuenta Google.":"");
+  if(/gast|invert|dinero/.test(s))return "En los últimos 28 días has invertido "+eur(R.coste)+" en Google Ads ("+frente(R.coste,D.ads.antes.coste)+").";
+  if(/anuncio|campana|google ads|publicidad/.test(s))return M[2].conclusion.trim();
+  if(/resena|valoracion|opinion|nota|estrella/.test(s))return M[3].conclusion;
+  if(/ficha|mapa/.test(s))return "Tu ficha de Google ha salido "+num(D.resenas.fichaSale.actual)+" veces ("+frente(D.resenas.fichaSale.actual,D.resenas.fichaSale.antes)+") y ha generado "+D.resenas.fichaLlamadas.actual+" llamadas.";
+  if(/\bia\b|chatgpt|inteligencia|asistente/.test(s))return "Los asistentes de IA te nombran en "+D.resenas.ia.nombran+" de "+D.resenas.ia.de+" preguntas sobre ventanas en tu zona (antes "+D.resenas.ia.antes+").";
+  if(/compet|rival|otros|precio.*otr/.test(s))return M[4].conclusion.trim()+" "+D.competencia[1].t;
+  if(/presupuest/.test(s))return R.pres+" personas han pedido presupuesto ("+frente(R.pres,R.presAntes)+"): "+c.formulario+" por el formulario y "+c.configurador+" por el configurador.";
+  if(/firm|acept|vend|factur|trabajos/.test(s))return D.contactos.aceptados.actual+" trabajos aceptados (antes "+D.contactos.aceptados.antes+"). Se firman semanas después de pedir presupuesto, así que un periodo reciente con pocas firmas no significa que vaya mal.";
+  if(/contacto|cuantos|clientes|llamad|whatsapp|formulario|configurador|chat/.test(s))return R.contactos+" contactos en 28 días ("+frente(R.contactos,R.contactosAntes)+"): formulario "+c.formulario+", configurador "+c.configurador+", WhatsApp "+c.whatsapp+", llamadas "+c.llamadas+" y chat "+c.chat+".";
+  if(/visita|web|pagina|trafico|movil|cancela/.test(s))return M[0].conclusion;
+  return "Eso no lo tengo en los datos de la mesa. Puedo contestarte sobre contactos, presupuestos, anuncios, reseñas, competencia y la web. Para lo demás, mira la vista completa.";
+}
+
+/* ── Pintado ── */
+var M=modulos(),T=tareas(M),RL=relojes();
+function luzDot(l,g){var s=g?14:9;return '<span class="lz" style="width:'+s+'px;height:'+s+'px;background:'+LUZ[l].c+';box-shadow:0 0 0 '+(g?4:3)+'px '+LUZ[l].c+'26" aria-hidden="true"></span>'}
+function bat(l){var n=SEG[l],c=LUZ[l].c,bc=l==="gris"?"#c9c2b3":c,h='<span class="bat" aria-hidden="true"><span class="c" style="border-color:'+bc+'">';for(var i=0;i<4;i++)h+='<i style="'+(i<n?"background:"+c:"")+'"></i>';return h+'</span><span class="p" style="background:'+bc+'"></span></span>'}
+function est(m){return m.estado||LUZ[m.luz].t}
+
+/* "Ya lo he revisado" caduca a los 7 días: una tarea viva vuelve a salir. */
+var HK="ams-mesa-hechas",hechas={};
+try{var g=JSON.parse(localStorage.getItem(HK)||"{}"),lim=new Date(Date.now()-7*864e5).toISOString().slice(0,10);for(var k in g)if(typeof g[k]==="string"&&g[k]>=lim)hechas[k]=g[k]}catch(e){}
+function marca(id){if(hechas[id])delete hechas[id];else hechas[id]=new Date().toISOString().slice(0,10);try{localStorage.setItem(HK,JSON.stringify(hechas))}catch(e){}pintaHoy()}
+var abierto=null,verMas=false;
+
+function conclData(){
+  var rojos=M.filter(function(m){return m.luz==="rojo"}).length,amb=M.filter(function(m){return m.luz==="ambar"}).length;
+  var puntos=M.filter(function(m){return m.punto}).map(function(m){return m.punto});
+  var n=M.filter(function(m){return m.luz==="rojo"||m.luz==="ambar"}).length;
+  var cl=rojos?"rojo":(amb?"ambar":"verde");
+  var tit=rojos?(n===1?"Hay una cosa importante":"Hay "+num(n)+" cosas, y alguna es importante"):(amb?(n===1?"Hay una cosa que mirar":"Hay "+(n===3?"tres":n===2?"dos":n)+" cosas que mirar"):"Hoy no hay nada urgente");
+  if(!puntos.length)puntos=["Todas las partes van bien."];
+  return {cl:cl,tit:tit,puntos:puntos};
+}
+function pintaConclusion(){
+  var c=conclData(),cl=c.cl;
+  var h='<section class="concl '+cl+'" aria-live="polite"><p class="t">'+luzDot(cl,true)+esc(c.tit)+'</p>';
+  h+='<ul>'+c.puntos.map(function(p){return '<li>'+esc(p)+'</li>'}).join("")+'</ul>';
+  if(T.length)h+='<button type="button" class="btn p" id="ir-hoy">'+(cl==="verde"?"Ver qué tengo que hacer":"Ver lo más importante")+'</button>';
+  $("#concl").innerHTML=h+'</section>';
+  var b=$("#ir-hoy");if(b)b.onclick=function(){$("#m-hoy").scrollIntoView()};
+}
+function filaTarea(t,grande){
+  var ok=!!hechas[t.id],mod=M.filter(function(m){return m.id===t.ir})[0];
+  return '<div class="tarea'+(grande?"":" peq")+(ok?" hecha":"")+'"><p class="tx">'+esc(t.texto)+'</p><p class="po">'+esc(t.porque)+'</p><div class="ac">'+(mod?'<button type="button" class="btn p" data-abre="'+mod.id+'">'+esc(t.boton||"Abrir "+mod.titulo)+'</button>':"")+'<button type="button" class="btn" data-ok="'+t.id+'" aria-pressed="'+ok+'">'+(ok?"Revisado":"Ya lo he revisado")+'</button></div></div>';
+}
+function pintaHoy(){
+  var pend=T.filter(function(t){return !hechas[t.id]}),pr=pend[0],resto=T.filter(function(t){return t!==pr});
+  var h='<h2>Lo primero que haría hoy</h2>';
+  h+=pr?filaTarea(pr,true):'<p style="margin:8px 0 0;font-size:1.05rem">'+(T.length?"Ya has revisado todo lo de hoy. Bien hecho.":"Hoy no hay nada pendiente.")+'</p>';
+  if(resto.length){h+='<div class="mas"><button type="button" class="lnk" id="vm" aria-expanded="'+verMas+'">'+(verMas?"Ocultar":"Hay "+(resto.length===1?"1 acción más":resto.length+" acciones más"))+'</button>';if(verMas)h+=resto.map(function(t){return filaTarea(t,false)}).join("");h+='</div>'}
+  var el=$("#m-hoy");el.innerHTML=h;
+  var vm=$("#vm");if(vm)vm.onclick=function(){verMas=!verMas;pintaHoy()};
+  [].forEach.call(el.querySelectorAll("[data-ok]"),function(b){b.onclick=function(){marca(b.getAttribute("data-ok"))}});
+  [].forEach.call(el.querySelectorAll("[data-abre]"),function(b){b.onclick=function(){abre(b.getAttribute("data-abre"))}});
+}
+function pintaTemas(){
+  var h="";
+  M.forEach(function(m){
+    var ab=abierto===m.id;
+    h+='<li class="mod'+(ab?" ab":"")+'" id="tema-'+m.id+'"><button type="button" aria-expanded="'+ab+'" data-m="'+m.id+'">'+bat(m.luz)+'<span><span class="nom">'+esc(m.titulo)+'</span><span class="est" style="color:'+LUZ[m.luz].c+'">'+esc(est(m))+'</span><span class="fr">'+esc(primeraFrase(m.conclusion))+'</span></span><span class="ver">'+(ab?"Cerrar":esc(m.ver))+'</span></button>';
+    if(ab){
+      h+='<div class="det">';
+      if(primeraFrase(m.conclusion)!==m.conclusion)h+='<p class="co">'+esc(m.conclusion)+'</p>';
+      h+='<ul>'+m.filas.map(function(f){return '<li><span class="a">'+(f.luz?luzDot(f.luz,false):"")+esc(f.t)+'</span><span class="b">'+esc(f.v)+'</span></li>'}).join("")+'</ul></div>';
+    }
+    h+='</li>';
+  });
+  $("#temas").innerHTML=h;
+  [].forEach.call($("#temas").querySelectorAll("[data-m]"),function(b){b.onclick=function(){var id=b.getAttribute("data-m");abierto=abierto===id?null:id;pintaTemas()}});
+}
+function abre(id){abierto=id;pintaTemas();setTimeout(function(){$("#tema-"+id).scrollIntoView()},40)}
+var infoAb=null;
+function pintaCifras(){
+  var h="";
+  RL.forEach(function(r,i){
+    var ab=infoAb===i;
+    h+='<li><span style="margin-top:6px">'+luzDot(r.luz,true)+'</span><div><p class="fr">'+esc(r.frase)+'</p><p class="de">'+esc(r.detalle)+'</p><p class="es" style="color:'+LUZ[r.luz].c+'">'+LUZ[r.luz].t+'</p></div><button type="button" class="qq" aria-label="Qué significa: '+esc(r.t)+'" aria-expanded="'+ab+'" data-i="'+i+'">?</button>'+(ab?'<p class="ex">'+esc(r.ayuda)+'</p>':"")+'</li>';
+  });
+  $("#cifras").innerHTML=h;
+  [].forEach.call($("#cifras").querySelectorAll("[data-i]"),function(b){b.onclick=function(){var i=Number(b.getAttribute("data-i"));infoAb=infoAb===i?null:i;pintaCifras()}});
+}
+
+/* Pregúntale a la mesa */
+var rs=[];
+try{rs=JSON.parse(sessionStorage.getItem("ams-mesa-resp")||"[]")}catch(e){}
+function pintaResp(){
+  $("#resp").innerHTML=rs.map(function(x){return '<li><p class="q">'+esc(x.q)+'</p><p class="r">'+esc(x.a)+'</p></li>'}).join("");
+  $("#chips").hidden=rs.length>0;
+}
+function pregunta(t){
+  t=(t||"").trim();if(!t)return;
+  rs=[{q:t,a:responde(t,M,T)}].concat(rs).slice(0,5);
+  try{sessionStorage.setItem("ams-mesa-resp",JSON.stringify(rs))}catch(e){}
+  $("#q").value="";pintaResp();
+}
+$("#fq").onsubmit=function(e){e.preventDefault();pregunta($("#q").value)};
+[].forEach.call(document.querySelectorAll("#chips button"),function(b){b.onclick=function(){pregunta(b.textContent)}});
+(function(){
+  var SR=window.SpeechRecognition||window.webkitSpeechRecognition,b=$("#dicta");
+  if(!SR){b.hidden=true;return}
+  b.onclick=function(){try{var r=new SR();r.lang="es-ES";r.interimResults=false;b.textContent="Te escucho…";
+    r.onresult=function(e){var t=e.results[0][0].transcript;$("#q").value=t;pregunta(t)};
+    r.onend=function(){b.textContent="Dictar"};r.onerror=function(){b.textContent="Dictar";$("#qn").textContent="No he podido escucharte. Escribe la pregunta o comprueba el micrófono."};
+    r.start()}catch(e){b.textContent="Dictar"}};
+})();
+
+/* Barra del móvil */
+[].forEach.call(document.querySelectorAll(".nav [data-ir]"),function(b){b.onclick=function(){var id=b.getAttribute("data-ir");if(id!=="m-mas"&&id!=="m-correo")mostrar("sencilla");setTimeout(function(){$("#"+id).scrollIntoView()},40)}});
+
+/* Guía de una pantalla (la primera vez) y botón ? */
+var vel=$("#vel"),volver=null;
+function abreGuia(){volver=document.activeElement;vel.hidden=false;$("#entrar").focus()}
+function cierraGuia(){vel.hidden=true;try{localStorage.setItem("ams-mesa-guia","1")}catch(e){}if(volver&&volver.focus)volver.focus()}
+$("#entrar").onclick=cierraGuia;$("#ayuda").onclick=abreGuia;
+$("#vermas").onclick=function(){var m=$("#ms");m.hidden=!m.hidden;this.textContent=m.hidden?"Ver una explicación más completa":"Menos explicación";this.setAttribute("aria-expanded",String(!m.hidden))};
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!vel.hidden)cierraGuia()});
+try{if(!localStorage.getItem("ams-mesa-guia"))abreGuia()}catch(e){abreGuia()}
+
+/* ===== Series diarias de ejemplo (inventadas, siempre iguales) ===== */
+function rng(seed){var h=2166136261,i;for(i=0;i<seed.length;i++)h=Math.imul(h^seed.charCodeAt(i),16777619);return function(){h=Math.imul(h^(h>>>15),2246822507);h=Math.imul(h^(h>>>13),3266489909);h^=h>>>16;return (h>>>0)/4294967296}}
+function addD(s,n){var d=new Date(s+"T12:00:00Z");d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10)}
+var N=800,DIAS=[],IX={};(function(){for(var i=N-1;i>=0;i--)DIAS.push(addD(D.hoy,-i));DIAS.forEach(function(d,i){IX[d]=i})})();
+function dow(d){return new Date(d+"T12:00:00Z").getUTCDay()}
+function poi(r,m){var L=Math.exp(-m),k=0,p=1;do{k++;p*=r()}while(p>L);return k-1}
+function fx(a,from,to,target,r){var s=0,i,g=0;for(i=from;i<=to;i++)s+=a[i];while(s<target&&g++<20000){i=from+Math.floor(r()*(to-from+1));a[i]++;s++}while(s>target&&g++<40000){i=from+Math.floor(r()*(to-from+1));if(a[i]>0){a[i]--;s--}}}
+function fac(i,fin){var d=DIAS[i],m=Number(d.slice(5,7)),w=dow(d);return Math.max(0.35,1+0.0009*(i-N))*(m===8?0.55:1)*((w===0||w===6)?fin:1)}
+function mk(nom,act,ant,fin){var r=rng(nom),a=[],i;for(i=0;i<N;i++)a.push(poi(r,act/28*fac(i,fin||0.6)));fx(a,N-28,N-1,act,r);fx(a,N-56,N-29,ant,r);return a}
+function mkC(nom,act,ant){var r=rng(nom),a=[],i;for(i=0;i<N;i++)a.push(Math.round(act/28*fac(i,0.8)*(0.7+0.6*r())));fx(a,N-28,N-1,act,r);fx(a,N-56,N-29,ant,r);return a}
+var CA=D.contactos.actual,CB=D.contactos.antes;
+var S={form:mk("form",CA.formulario,CB.formulario),conf:mk("conf",CA.configurador,CB.configurador),wa:mk("wa",CA.whatsapp,CB.whatsapp),ll:mk("ll",CA.llamadas,CB.llamadas),chat:mk("chat",CA.chat,CB.chat),vis:mk("vis",D.web.visitas.actual,D.web.visitas.antes,0.7),camC:{},camV:{}};
+D.ads.campanas.forEach(function(c){var an=D.ads.antesCamp[c.n];S.camC[c.n]=mkC("c"+c.n,c.coste,an[0]);S.camV[c.n]=mk("v"+c.n,c.conv,an[1])});
+function ag(i1,i2){
+  var o={form:0,conf:0,wa:0,ll:0,chat:0,vis:0,coste:0,conv:0,camp:{}},i,j=Math.max(0,i1),k=Math.min(N-1,i2);
+  for(i=j;i<=k;i++){o.form+=S.form[i];o.conf+=S.conf[i];o.wa+=S.wa[i];o.ll+=S.ll[i];o.chat+=S.chat[i];o.vis+=S.vis[i]}
+  D.ads.campanas.forEach(function(c){var a=0,v=0;for(i=j;i<=k;i++){a+=S.camC[c.n][i];v+=S.camV[c.n][i]}o.camp[c.n]=[a,v];o.coste+=a;o.conv+=v});
+  o.contactos=o.form+o.conf+o.wa+o.ll+o.chat;o.pres=o.form+o.conf;o.puls=o.wa+o.ll;
+  o.cvr=o.vis>0?o.contactos/o.vis*100:NaN;o.cpl=o.conv>0?o.coste/o.conv:NaN;return o;
+}
+var MA=["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
+function fcorta(s,conAnio){return Number(s.slice(8))+" "+MA[Number(s.slice(5,7))-1]+(conAnio?" "+s.slice(0,4):"")}
+function rtxt(a,b){return a===b?fcorta(a,true):fcorta(a,a.slice(0,4)!==b.slice(0,4))+" – "+fcorta(b,true)}
+
+/* ===== Todas las cifras ===== */
+var PRE=[["hoy","Hoy"],["ayer","Ayer"],["7d","7 días"],["28d","28 días"],["3m","3 meses"],["mes","Este mes"],["mesp","Mes pasado"],["12m","12 meses"],["dia","Un día"]];
+var P={pre:"28d",a:addD(D.hoy,-27),b:D.hoy,cmp:"ant",met:"contactos",tab:"res",sel:null};
+function rangoPre(k){var h=D.hoy,f,u;if(k==="hoy")return[h,h];if(k==="ayer")return[addD(h,-1),addD(h,-1)];if(k==="7d")return[addD(h,-6),h];if(k==="28d")return[addD(h,-27),h];if(k==="3m")return[addD(h,-89),h];if(k==="mes")return[h.slice(0,8)+"01",h];if(k==="mesp"){f=h.slice(0,8)+"01";u=addD(f,-1);return[u.slice(0,8)+"01",u]}if(k==="12m")return[addD(h,-364),h];return null}
+function rangoCmp(){var i1=IX[P.a],i2=IX[P.b],L,c1,c2;if(P.cmp==="nada"||i1===undefined||i2===undefined)return null;L=i2-i1+1;
+  if(P.cmp==="ant"){c1=i1-L;c2=i1-1}else{c1=IX[addD(P.a,-365)];c2=IX[addD(P.b,-365)];if(c1===undefined||c2===undefined)return null}
+  return c1<0?null:[c1,c2]}
+function pill(a,b,menos){
+  if(!isFinite(a)||!isFinite(b))return "";
+  var v=delta(a,b);
+  if(v===null)return '<span class="pl">sin datos antes</span>';
+  if(Math.abs(v)<0.5)return '<span class="pl">= igual</span>';
+  if(menos===2)return '<span class="pl">'+(v>0?"▲ ":"▼ ")+num(Math.abs(v))+' %</span>';
+  var bien=menos?v<0:v>0;
+  return '<span class="pl '+(bien?"b":"m")+'">'+(v>0?"▲ ":"▼ ")+num(Math.abs(v))+" %"+(bien?" · mejor":" · peor")+'</span>';
+}
+function f1(n){return isFinite(n)?dec(n)+" %":"—"}
+var KP=[["Visitas a la web","vis",num,0,"Veces que alguien entra en la web."],
+ ["Contactos","contactos",num,0,"Personas que han escrito o llamado: formulario, configurador, WhatsApp, llamada o chat."],
+ ["Presupuestos pedidos","pres",num,0,"Contactos que piden presupuesto de forma expresa, por el formulario o el configurador."],
+ ["WhatsApp y llamar","puls",num,0,"Veces que pulsan el botón de WhatsApp o de llamar. No son conversaciones."],
+ ["Visitas que acaban en contacto","cvr",f1,0,"De cada 100 visitas a la web, cuántas acaban dejando sus datos."],
+ ["Inversión en anuncios","coste",eur,2,"Lo gastado en Google Ads."],
+ ["Coste por contacto de anuncios","cpl",function(n){return isFinite(n)?eur(n):"—"},1,"Lo que cuesta cada contacto que cuenta Google. Cuanto más bajo, mejor."]];
+var MET=[["contactos","Contactos",num],["pres","Presupuestos",num],["puls","WhatsApp y llamar",num],["vis","Visitas a la web",num],["coste","Inversión en anuncios",eur],["cpl","Coste por contacto",function(n){return isFinite(n)?eur(n):"sin dato"}]];
+function buck(i1,i2){var n=i2-i1+1,B=[],i,s;if(n<=62){for(i=i1;i<=i2;i++)B.push([i,i]);return{m:"d",B:B}}if(n<=200){for(i=i1;i<=i2;i+=7)B.push([i,Math.min(i+6,i2)]);return{m:"w",B:B}}s=i1;for(i=i1;i<=i2;i++){if(i===i2||DIAS[i+1].slice(0,7)!==DIAS[i].slice(0,7)){B.push([s,i]);s=i+1}}return{m:"m",B:B}}
+function chartHTML(){
+  var i1=IX[P.a],i2=IX[P.b],bk=buck(i1,i2),cr=rangoCmp(),sh=cr?cr[0]-i1:0,met=MET.filter(function(x){return x[0]===P.met})[0],fmt=met[2],pts=[],narrow=window.innerWidth<=640;
+  bk.B.forEach(function(b){
+    var o=ag(b[0],b[1]),v=o[met[0]],c,ec;
+    if(cr&&b[0]+sh>=0&&b[1]+sh<=N-1){c=ag(b[0]+sh,b[1]+sh)[met[0]];ec=bk.m==="m"?MA[Number(DIAS[b[0]+sh].slice(5,7))-1]:fcorta(DIAS[b[0]+sh])}
+    pts.push({e:bk.m==="m"?MA[Number(DIAS[b[0]].slice(5,7))-1]:fcorta(DIAS[b[0]]),v:v,c:c,ec:ec});
+  });
+  var w=narrow?380:760,h=narrow?190:230,iz=8,ab=26,ar=14,n=pts.length,ok=function(x){return x!==undefined&&isFinite(x)};
+  var hayC=pts.some(function(p){return ok(p.c)}),mx=1;pts.forEach(function(p){if(ok(p.v)&&p.v>mx)mx=p.v;if(ok(p.c)&&p.c>mx)mx=p.c});
+  var paso=(w-iz*2)/Math.max(1,n),X=function(i){return iz+paso*i+paso/2},Y=function(v){return ar+(h-ab-ar)*(1-v/mx)};
+  var sel=P.sel!==null&&P.sel<n?P.sel:n-1,svg='<svg viewBox="0 0 '+w+' '+h+'" class="chart" style="width:100%;height:auto" role="img" aria-label="Gráfico de '+esc(met[1])+'">',k,i;
+  [0.25,0.5,0.75,1].forEach(function(f){svg+='<line x1="'+iz+'" x2="'+(w-iz)+'" y1="'+Y(mx*f)+'" y2="'+Y(mx*f)+'" stroke="#dde5ec" stroke-dasharray="3 4"/><text x="'+(w-iz)+'" y="'+(Y(mx*f)-3)+'" font-size="12" fill="#6a7786" text-anchor="end">'+esc(fmt(mx*f))+'</text>'});
+  svg+='<line x1="'+iz+'" x2="'+(w-iz)+'" y1="'+(h-ab)+'" y2="'+(h-ab)+'" stroke="#cfd8e0"/>';
+  var barras=n<=14;
+  if(barras){pts.forEach(function(p,i){var bw=Math.max(3,paso*(hayC?0.36:0.62));if(hayC&&ok(p.c))svg+='<rect x="'+(X(i)-bw-1)+'" y="'+Y(p.c)+'" width="'+bw+'" height="'+(h-ab-Y(p.c))+'" rx="3" fill="#d68a1c" opacity="'+(i===sel?0.55:0.3)+'"/>';if(ok(p.v))svg+='<rect x="'+(hayC?X(i)+1:X(i)-bw/2)+'" y="'+Y(p.v)+'" width="'+bw+'" height="'+(h-ab-Y(p.v))+'" rx="3" fill="#12202B" opacity="'+(i===sel?1:0.7)+'"/>'})}
+  else{
+    var ln=function(key){return pts.map(function(p,i){return ok(p[key])?X(i)+","+Y(p[key]):null}).filter(Boolean).join(" ")};
+    if(hayC)svg+='<polyline points="'+ln("c")+'" fill="none" stroke="#d68a1c" stroke-width="2" stroke-dasharray="5 5"/>';
+    svg+='<polygon points="'+X(0)+","+(h-ab)+" "+ln("v")+" "+X(n-1)+","+(h-ab)+'" fill="#12202B" opacity="0.08"/><polyline points="'+ln("v")+'" fill="none" stroke="#12202B" stroke-width="2.4" stroke-linejoin="round"/>';
+    if(ok(pts[sel].v))svg+='<circle cx="'+X(sel)+'" cy="'+Y(pts[sel].v)+'" r="5" fill="#12202B" stroke="#fff" stroke-width="2"/>';
+  }
+  var cada=Math.max(1,Math.ceil(n/(narrow?4:8)));
+  pts.forEach(function(p,i){if(i%cada===0||i===n-1)svg+='<text x="'+X(i)+'" y="'+(h-8)+'" font-size="12" fill="#6a7786" text-anchor="middle">'+esc(p.e)+'</text>'});
+  pts.forEach(function(p,i){svg+='<rect data-j="'+i+'" x="'+(iz+paso*i)+'" y="0" width="'+paso+'" height="'+h+'" fill="transparent" style="cursor:pointer"/>'});
+  svg+='</svg>';
+  var p=pts[sel];
+  return svg+'<div class="gm"><span><b>'+esc(p.e)+'</b>: <b>'+esc(ok(p.v)?fmt(p.v):"sin dato")+'</b>'+(hayC&&p.c!==undefined?' · antes ('+esc(p.ec)+'): <b>'+esc(ok(p.c)?fmt(p.c):"sin dato")+'</b>':"")+'</span><span style="color:#7b8794;font-size:.85rem">Toca una barra para ver cada punto</span></div>';
+}
+function pintaChart(){var el=$("#chartbox");if(!el)return;el.innerHTML=chartHTML();[].forEach.call(el.querySelectorAll("[data-j]"),function(r){r.onclick=function(){P.sel=Number(r.getAttribute("data-j"));pintaChart()}})}
+function pintaCompleta(){
+  $("#per").innerHTML=PRE.map(function(x){return '<button type="button" class="chb" aria-pressed="'+(P.pre===x[0])+'" data-p="'+x[0]+'">'+x[1]+'</button>'}).join("");
+  $("#cmp").innerHTML=[["ant","el periodo anterior"],["anio","el mismo periodo del año pasado"],["nada","nada"]].map(function(x){return '<button type="button" class="chb" aria-pressed="'+(P.cmp===x[0])+'" data-c="'+x[0]+'">'+x[1]+'</button>'}).join("");
+  $("#d1").value=P.a;$("#d2").value=P.b;$("#d1").min=$("#d2").min=DIAS[0];$("#d1").max=$("#d2").max=D.hoy;
+  var i1=IX[P.a],i2=IX[P.b],L=i2-i1+1,cr=rangoCmp();
+  $("#pertxt").textContent="Estás viendo "+rtxt(P.a,P.b)+" ("+L+(L===1?" día":" días")+"). "+(cr?"Cada flecha lo compara con "+(P.cmp==="ant"?(L===1?"el día justo anterior":"los "+L+" días justo anteriores"):"el mismo periodo del año pasado")+": "+rtxt(DIAS[cr[0]],DIAS[cr[1]])+".":(P.cmp==="nada"?"Sin comparación.":"No hay datos para comparar con ese periodo."));
+  $("#tabs").innerHTML=[["res","Resumen"],["con","Contactos"],["ads","Anuncios"]].map(function(x){return '<button type="button" class="chb" aria-pressed="'+(P.tab===x[0])+'" data-t="'+x[0]+'">'+x[1]+'</button>'}).join("");
+  var o=ag(i1,i2),c=cr?ag(cr[0],cr[1]):null,h="";
+  if(P.tab==="res"){
+    h+='<ul class="kps">'+KP.map(function(k){var v=o[k[1]];return '<li><span class="kn">'+k[0]+'</span><span class="kv">'+esc(k[2](v))+'</span><span class="kd">'+(c?pill(v,c[k[1]],k[3])+(isFinite(c[k[1]])?'<span>antes: '+esc(k[2](c[k[1]]))+'</span>':""):"")+'</span><p class="kh">'+esc(k[4])+'</p></li>'}).join("")+'</ul>';
+    h+='<section class="caja"><h2 style="font-size:1.15rem">'+esc(MET.filter(function(x){return x[0]===P.met})[0][1])+'</h2><div class="fl" role="group" aria-label="Qué mostrar">'+MET.map(function(m){return '<button type="button" class="chb" aria-pressed="'+(P.met===m[0])+'" data-m="'+m[0]+'">'+m[1]+'</button>'}).join("")+'</div><div id="chartbox" style="margin-top:10px"></div></section>';
+  }else if(P.tab==="con"){
+    var CH=[["Formulario","form"],["Configurador de ventanas","conf"],["WhatsApp","wa"],["Llamadas","ll"],["Chat de la web","chat"]];
+    h+='<section class="caja"><h2 style="font-size:1.15rem">De dónde llegan los contactos</h2><ul>'+CH.map(function(x){return '<li><span class="a">'+x[0]+'</span><span class="b">'+num(o[x[1]])+(c?" "+pill(o[x[1]],c[x[1]],0)+' <span style="font-weight:400;color:#51606e">antes: '+num(c[x[1]])+'</span>':"")+'</span></li>'}).join("")+'<li><span class="a"><b>Total</b></span><span class="b">'+num(o.contactos)+(c?" "+pill(o.contactos,c.contactos,0):"")+'</span></li></ul></section>';
+    var ps=o.contactos>0?o.puls/o.contactos*100:NaN;
+    h+='<p class="nota" style="margin-top:12px">'+(isFinite(ps)&&ps>=40?"Medición incompleta: "+num(o.puls)+" de "+num(o.contactos)+" contactos ("+num(ps)+" %) llegan por WhatsApp o llamada sin que sepamos de dónde vienen.":(isFinite(ps)?"WhatsApp y llamadas son el "+num(ps)+" % de los contactos: la mayoría trae su origen.":"No hay contactos en estas fechas."))+'</p>';
+  }else{
+    h+='<section class="caja"><h2 style="font-size:1.15rem">Google Ads</h2><ul><li><span class="a">Invertido</span><span class="b">'+eur(o.coste)+(c?" "+pill(o.coste,c.coste,2):"")+'</span></li><li><span class="a">Contactos según Google</span><span class="b">'+num(o.conv)+(c?" "+pill(o.conv,c.conv,0):"")+'</span></li><li><span class="a">Coste por contacto</span><span class="b">'+(isFinite(o.cpl)?eur(o.cpl):"—")+(c?" "+pill(o.cpl,c.cpl,1):"")+'</span></li></ul></section>';
+    h+='<section class="caja"><h2 style="font-size:1.15rem">Cada campaña</h2><ul>'+D.ads.campanas.map(function(m){var a=o.camp[m.n],b=c?c.camp[m.n]:null;return '<li><span class="a">'+esc(m.n)+'</span><span class="b">'+eur(a[0])+" · "+plural(a[1],"contacto","contactos")+" · "+(a[1]>0?eur(a[0]/a[1])+" cada uno":"sin contactos")+(b?' <span style="font-weight:400;color:#51606e">antes: '+eur(b[0])+" · "+num(b[1])+'</span>':"")+'</span></li>'}).join("")+'</ul></section>';
+    h+='<p class="nota" style="margin-top:12px">Los contactos son los que cuenta Google. Mientras la medición esté incompleta, tu web ve solo una parte de ellos: no pauses ninguna campaña por estas cifras.</p>';
+  }
+  $("#cbody").innerHTML=h;
+  [].forEach.call($("#cbody").querySelectorAll("[data-m]"),function(b){b.onclick=function(){P.met=b.getAttribute("data-m");P.sel=null;pintaCompleta()}});
+  pintaChart();
+}
+function fijaRango(a,b){if(a<DIAS[0])a=DIAS[0];if(b>D.hoy)b=D.hoy;if(a>b){var t=a;a=b;b=t}if(a<DIAS[0])a=DIAS[0];P.a=a;P.b=b;P.sel=null}
+$("#per").onclick=function(e){var b=e.target.closest("[data-p]");if(!b)return;var k=b.getAttribute("data-p"),r;P.pre=k;if(k==="dia"){r=[P.b,P.b]}else r=rangoPre(k);fijaRango(r[0],r[1]);pintaCompleta()};
+$("#cmp").onclick=function(e){var b=e.target.closest("[data-c]");if(!b)return;P.cmp=b.getAttribute("data-c");P.sel=null;pintaCompleta()};
+$("#tabs").onclick=function(e){var b=e.target.closest("[data-t]");if(!b)return;P.tab=b.getAttribute("data-t");pintaCompleta()};
+$("#d1").onchange=$("#d2").onchange=function(){if(!$("#d1").value||!$("#d2").value)return;P.pre="custom";fijaRango($("#d1").value,$("#d2").value);pintaCompleta()};
+var rz=null;window.addEventListener("resize",function(){clearTimeout(rz);rz=setTimeout(function(){if(!$("#v-completa").hidden)pintaChart()},150)});
+
+/* ===== Cambiar de vista ===== */
+function mostrar(v){$("#v-sencilla").hidden=v!=="sencilla";$("#v-completa").hidden=v!=="completa";[].forEach.call(document.querySelectorAll(".vistas [data-v]"),function(b){b.setAttribute("aria-pressed",String(b.getAttribute("data-v")===v))});if(v==="completa")pintaCompleta()}
+[].forEach.call(document.querySelectorAll(".vistas [data-v]"),function(b){b.onclick=function(){mostrar(b.getAttribute("data-v"));$(".vistas").scrollIntoView()}});
+$("#vcompleta").onclick=function(){mostrar("completa");$(".vistas").scrollIntoView()};
+$("#cper").onclick=function(){mostrar("completa");$("#m-per").scrollIntoView()};
+$("#ayuda2").onclick=function(){abreGuia()};
+[].forEach.call(document.querySelectorAll("[data-abre]"),function(a){if(a.tagName==="A")a.onclick=function(e){e.preventDefault();mostrar("sencilla");abre(a.getAttribute("data-abre"))}});
+
+/* ===== Resumen por correo (como la mesa de Reformadísimo; en la demo no se envía nada) ===== */
+var TEM=[["hoy","Lo más importante hoy"],["cifras","Las cuatro cifras"],["web","La web"],["contactos","Contactos y presupuestos"],["anuncios","Anuncios"],["reputacion","Reputación"],["competencia","Competencia"]];
+var FR=[["ahora","Solo una vez, ahora"],["diario","Cada día"],["semanal","Cada lunes"],["mensual","Cada mes (día 1)"]];
+var FRT={ahora:"ahora mismo",diario:"cada mañana",semanal:"cada lunes por la mañana",mensual:"el día 1 de cada mes"};
+var cf={frec:"semanal",temas:TEM.map(function(x){return x[0]})},sus=[];
+try{sus=JSON.parse(localStorage.getItem("ams-mesa-sus")||"[]")}catch(e){}
+function guardaSus(){try{localStorage.setItem("ams-mesa-sus",JSON.stringify(sus))}catch(e){}}
+function pintaCf(){
+  $("#cf-frec").innerHTML=FR.map(function(x){return '<button type="button" class="chb" aria-pressed="'+(cf.frec===x[0])+'" data-f="'+x[0]+'">'+x[1]+'</button>'}).join("");
+  $("#cf-temas").innerHTML=TEM.map(function(x){var on=cf.temas.indexOf(x[0])>=0;return '<button type="button" class="chb tm" aria-pressed="'+on+'" data-k="'+x[0]+'">'+(on?"✓ ":"")+x[1]+'</button>'}).join("");
+  $("#cf-sin").hidden=cf.temas.length>0;$("#cf-ok").textContent=cf.frec==="ahora"?"Enviármelo ahora":"Programarlo";$("#cf-ok").disabled=!cf.temas.length;
+  var c=conclData(),on=function(k){return cf.temas.indexOf(k)>=0},h='<div class="em"><h3>AMS Cerramientos · resumen '+(cf.frec==="diario"?"de cada día":cf.frec==="mensual"?"del mes":"de la semana")+'</h3>';
+  if(on("hoy")){h+='<p><b>'+esc(c.tit)+'.</b> '+esc(c.puntos.join(" "))+'</p>';if(T[0])h+='<p><b>Lo primero que haría hoy:</b> '+esc(T[0].texto)+'. '+esc(T[0].porque)+'</p>'}
+  if(on("cifras"))h+='<p><b>Las cuatro cifras:</b><br>'+RL.map(function(r){return esc(r.frase)+(r.detalle?". "+esc(r.detalle):"")}).join("<br>")+'</p>';
+  M.forEach(function(m){if(on(m.id))h+='<p><b>'+esc(m.titulo)+' ('+esc(est(m))+'):</b> '+esc(m.conclusion)+'</p>'});
+  $("#cf-prev").innerHTML=h+'</div>';
+  $("#cf-lista").hidden=!sus.length;
+  $("#cf-ul").innerHTML=sus.map(function(x){return '<li><span><b>'+esc(x.frec==="diario"?"Cada día":x.frec==="semanal"?"Cada lunes":"Cada mes")+'</b> a '+esc(x.email)+'<span style="color:#7b8794"> · '+esc(x.temas.map(function(k){return TEM.filter(function(t){return t[0]===k})[0][1]}).join(", "))+'</span></span><button type="button" class="btn" data-q="'+x.id+'">Quitar</button></li>'}).join("");
+}
+$("#cf-frec").onclick=function(e){var b=e.target.closest("[data-f]");if(!b)return;cf.frec=b.getAttribute("data-f");pintaCf()};
+$("#cf-temas").onclick=function(e){var b=e.target.closest("[data-k]");if(!b)return;var k=b.getAttribute("data-k"),i=cf.temas.indexOf(k);if(i>=0)cf.temas.splice(i,1);else cf.temas.push(k);pintaCf()};
+$("#cf-ul").onclick=function(e){var b=e.target.closest("[data-q]");if(!b)return;var id=Number(b.getAttribute("data-q"));sus=sus.filter(function(x){return x.id!==id});guardaSus();$("#cf-msg").textContent="";pintaCf()};
+$("#cf-form").onsubmit=function(e){
+  e.preventDefault();var m=$("#cf-mail").value.trim(),msg=$("#cf-msg");
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(m)){msg.className="no";msg.textContent="Escribe un correo válido, por ejemplo tu@correo.es.";return}
+  if(cf.frec==="ahora"){msg.className="ok";msg.textContent="Esto es una demostración: no se envía nada. En la mesa de verdad, el resumen te llegaría ahora mismo a "+m+".";return}
+  sus.push({id:Date.now(),email:m,frec:cf.frec,temas:cf.temas.slice()});guardaSus();
+  msg.className="ok";msg.textContent="Programado (demostración, no se envía nada): te llegaría "+FRT[cf.frec]+" a "+m+".";pintaCf();
+};
+pintaCf();
+
+/* Cabecera */
+$("#sub").textContent="Últimos 28 días (del "+fechaPal(D.periodo[0])+" al "+fechaPal(D.periodo[1])+"), comparado con los 28 anteriores · Google Ads actualizado el "+fechaPal(D.ads.actualizado);
+if(D.fallos.length){$("#fallo").hidden=false;$("#fallo").textContent="No hemos podido leer: "+D.fallos.join(", ")+". Las cifras de esas partes pueden estar incompletas; no tomes decisiones con ellas."}
+pintaConclusion();pintaHoy();pintaTemas();pintaCifras();pintaResp();
+window.__mesa={M:M,T:T,RL:RL,R:R};
+})();
+'''
+
+HTML = r'''<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Mesa de control (demostración) | AMS Cerramientos</title>
+<meta name="description" content="Mesa de control de AMS Cerramientos con datos inventados: cómo va todo, qué necesita atención y qué hacer hoy.">
+<style>__CSS__</style>
+</head>
+<body>
+<div class="bar"><a href="/guia-javi">&larr; Volver a la guía</a><button type="button" class="q" id="ayuda" aria-label="Ayuda: cómo funciona la mesa">?</button></div>
+<main class="w" id="top">
+<div class="demo"><b>Demostración con datos inventados.</b> Así verás tu mesa cuando conectemos tus cuentas. Ninguna cifra de esta página es real.</div>
+<div class="fallo" id="fallo" hidden></div>
+<p class="k">AMS Cerramientos · mesa de control</p>
+<h1>Cómo va AMS Cerramientos</h1>
+<p class="sub" id="sub"></p>
+<div class="vistas"><span class="seg" role="group" aria-label="Qué ver"><button type="button" data-v="sencilla" aria-pressed="true">Resumen</button><button type="button" data-v="completa" aria-pressed="false">Todas las cifras</button></span><button type="button" class="chb" id="ayuda2">Ayuda</button><button type="button" class="chb" id="cper">Cambiar periodo</button></div>
+<div id="v-sencilla">
+<div id="concl"></div>
+<section class="hoy" id="m-hoy" aria-label="Lo primero que haría hoy"></section>
+<section class="sec" id="m-temas"><h2>Cómo está cada parte</h2>
+<p class="ay">Batería llena y verde, todo bien; naranja, mira esto; roja, importante. Pulsa cada una para ver el detalle.</p>
+<ul class="lista" id="temas"></ul></section>
+<section class="sec" id="m-cifras"><h2>Las cuatro cifras que importan</h2><ul class="cif" id="cifras"></ul></section>
+<section class="preg" id="m-pregunta"><h2>Pregúntale a la mesa</h2>
+<p class="ay" style="margin:4px 0 0;color:#51606e;font-size:.95rem">Escribe o dicta tu pregunta como se la harías a una persona. Contesta solo con los datos de la mesa y nunca se inventa una cifra.</p>
+<form id="fq"><input type="text" id="q" placeholder="Escribe aquí tu pregunta" aria-label="Tu pregunta" autocomplete="off"><button type="button" class="btn" id="dicta">Dictar</button><button type="submit" class="btn p">Preguntar</button></form>
+<p class="nota" id="qn"></p>
+<div id="chips"><p class="nota" style="margin-top:10px"><b>O pulsa una de estas:</b></p><div class="chips"><button type="button">¿Qué campaña funciona mejor?</button><button type="button">¿Cuántos presupuestos hemos recibido?</button><button type="button">¿Qué hago primero esta semana?</button></div></div>
+<ul class="resp" id="resp" aria-live="polite"></ul>
+<p class="nota">En esta demostración las respuestas son de ejemplo y salen de las cifras de arriba. En la versión real las escribe Claude y cada pregunta tiene un pequeño coste que decides tú; te lo explicamos en la guía.</p>
+</section>
+<p class="fin"><button type="button" class="btn s" id="vcompleta">Ver todas las cifras y gráficas</button></p>
+<p class="sub" style="text-align:center">Ahí están los canales, las campañas, el selector de fechas y la comparación.</p>
+</div>
+<div id="v-completa" hidden>
+<section class="sec" id="m-per"><h2>Todas las cifras</h2>
+<p class="ay">Elige el periodo y contra qué compararlo. Todo se recalcula al momento.</p>
+<div class="fl" id="per" role="group" aria-label="Periodo"></div>
+<div class="rg"><label>Desde <input type="date" id="d1" aria-label="Desde"></label><label>hasta <input type="date" id="d2" aria-label="Hasta"></label></div>
+<p class="lab">Comparar con</p>
+<div class="fl" id="cmp" role="group" aria-label="Comparar con"></div>
+<p class="nota" id="pertxt"></p>
+</section>
+<div class="tabs" id="tabs" role="group" aria-label="Qué mirar"></div>
+<div id="cbody"></div>
+<p class="nota" style="margin-top:20px">Fuentes y su última actualización (en esta demostración todo es de ejemplo): la web y el CRM, al momento · Google Analytics, al momento · Search Console, con 2 días de retraso · Google Ads, al día de hoy · Ficha de Google, al día de hoy · reseñas, a mano. Las pruebas del equipo no cuentan.</p>
+<p class="fin"><a class="btn" style="display:inline-flex;align-items:center;text-decoration:none;color:#12202B" href="/guia-javi/panel-completo">Ver la vista antigua, con redes, correos y más gráficos</a></p>
+</div>
+<section class="herr2" id="m-mas"><h2>Herramientas</h2>
+<ul class="hg">
+<li><a href="/guia-javi/lupa"><span><b>La lupa</b><span>La web con lo que hace la gente encima: dónde tocan, hasta dónde bajan, conclusiones</span></span><i>→</i></a></li>
+<li><a href="/guia-javi/crm"><span><b>CRM</b><span>Contactos, visitas y trabajos, de cada persona</span></span><i>→</i></a></li>
+<li><a href="/guia-javi/panel-completo"><span><b>Coste por cliente</b><span>Lo invertido frente a contactos, visitas y trabajos aceptados</span></span><i>→</i></a></li>
+<li><a href="/guia-javi"><span><b>Plan de marketing</b><span>La guía viva del plan, con lo hecho y lo pendiente</span></span><i>→</i></a></li>
+<li><a href="#tema-reputacion" data-abre="reputacion"><span><b>Espejo de la IA <em class="ej">ejemplo</em></b><span>Qué dicen de nosotros ChatGPT, Gemini y Claude. Se activa al conectar tus cuentas</span></span><i>→</i></a></li>
+<li><a href="#tema-competencia" data-abre="competencia"><span><b>Vigía de la competencia <em class="ej">ejemplo</em></b><span>Sus webs, reseñas y puestos en Google, cada semana. Se activa al conectar tus cuentas</span></span><i>→</i></a></li>
+<li><a href="/guia-javi/panel-completo"><span><b>Redes y correos <em class="ej">ejemplo</em></b><span>Instagram, Facebook, TikTok y tus correos automáticos</span></span><i>→</i></a></li>
+</ul></section>
+<section class="corr" id="m-correo"><h2>Recibe un resumen por correo</h2>
+<p class="ay" style="margin:4px 0 0;color:#51606e;font-size:.95rem">Elige cada cuánto y de qué. Pon tu correo y te lo mandamos solo, sin que tengas que entrar.</p>
+<p class="lab">1. Cada cuánto</p><div class="fl" id="cf-frec" role="group" aria-label="Cada cuánto"></div>
+<p class="lab">2. De qué</p><div class="fl" id="cf-temas" role="group" aria-label="De qué"></div>
+<p class="no" id="cf-sin" hidden>Elige al menos un tema para poder programarlo.</p>
+<p class="lab">3. A qué correo</p>
+<form id="cf-form"><input type="email" id="cf-mail" placeholder="tu@correo.es" aria-label="A qué correo" autocomplete="email"><button type="submit" class="btn p" id="cf-ok">Programarlo</button></form>
+<p id="cf-msg" role="status"></p>
+<details class="prev"><summary>Ver cómo sería el correo</summary><div id="cf-prev"></div></details>
+<div class="sl" id="cf-lista" hidden><p class="lab" style="margin:0">Resúmenes programados</p><ul id="cf-ul"></ul></div>
+<p class="nota">Demostración: no se envía nada. En la versión real, el correo sale con el mismo texto que ves en pantalla.</p>
+</section>
+</main>
+<nav class="nav" aria-label="Ir a"><ul><li><button type="button" data-ir="top">Estado</button></li><li><button type="button" data-ir="m-cifras">Cifras</button></li><li><button type="button" data-ir="m-pregunta">Preguntar</button></li><li><button type="button" data-ir="m-mas">Más</button></li></ul></nav>
+<div class="vel" id="vel" role="dialog" aria-modal="true" aria-label="Cómo funciona la mesa" hidden><div class="cj">
+<h2>Esta mesa te cuenta tres cosas</h2>
+<ol><li><b>1</b>Cómo va todo.</li><li><b>2</b>Qué necesita atención.</li><li><b>3</b>Qué haría hoy.</li></ol>
+<p style="margin:14px 0 0;font-size:1.02rem;color:#3b4a58">No necesitas entender de marketing. Pulsa cualquier apartado y te lo explicamos.</p>
+<div class="ms" id="ms" hidden>
+<p><b>Los colores</b> siempre dicen lo mismo: verde, todo bien; naranja, mira esto; rojo, importante; gris, sin datos aún; azul, datos de tu negocio.</p>
+<p><b>Las baterías</b> de cada parte (la web, contactos y presupuestos, anuncios, reputación y competencia) se llenan cuando va bien y se vacían cuando algo falla.</p>
+<p><b>El «?»</b> de cada cifra te explica qué es y si está bien.</p>
+<p><b>Pregúntale a la mesa</b> con tus palabras o díctalo. Y si prefieres no entrar, pide el resumen por correo.</p>
+</div>
+<div class="pie"><button type="button" class="lnk" id="vermas" aria-expanded="false">Ver una explicación más completa</button><button type="button" class="btn p" id="entrar">Entrar en mi mesa</button></div>
+</div></div>
+<script>__JS__</script>
+</body>
+</html>'''
+
+
+def pagina_html():
+    js = JS.replace("__DATA__", json.dumps(DATA, ensure_ascii=False))
+    return HTML.replace("__CSS__", CSS).replace("__JS__", js)

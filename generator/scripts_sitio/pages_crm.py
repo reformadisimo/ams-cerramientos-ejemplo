@@ -1,0 +1,240 @@
+# CRM de demostracion para Javi (datos inventados, se dice en pantalla). Pagina: /guia-javi/crm
+import json
+
+LEADS = [
+ # id, nombre, trabajo, importe, origen, etapa, zona, dias, tel, nota, historia
+ [1,"Luis M.","4 ventanas de PVC",3900,"Google Ads","nuevo","Alcalá de Henares",0,"6** *** 412","Ha usado la calculadora de ventanas y pide presupuesto.",[["Hoy 10:30","Pide presupuesto en la web"],["Hoy 10:12","Usa la calculadora: 4 ventanas de PVC"],["Hoy 10:05","Llega desde el anuncio «Ventanas de PVC»"]]],
+ [2,"Julia R.","Cerramiento de terraza, 11 m²",7800,"Chat de la web","nuevo","Villalbilla",0,"6** *** 088","Preguntó en el chat si podéis medir esta semana.",[["Hoy 08:05","Deja su teléfono en el chat"],["Hoy 08:01","Pregunta si se puede cerrar sin licencia"]]],
+ [3,"Pablo S.","Mosquiteras y persianas",950,"Instagram","nuevo","Torrejón de Ardoz",1,"6** *** 730","Viene del vídeo de la terraza.",[["Ayer 19:20","Escribe por WhatsApp"],["Ayer 19:15","Ve el vídeo en Instagram"]]],
+ [4,"Rosa D.","Revisar presupuesto de otra empresa",0,"Revisa tu presupuesto","nuevo","Alcalá de Henares",2,"6** *** 951","Subió un presupuesto de 6.400 € para que lo miréis.",[["Hace 2 días","Sube su presupuesto a la herramienta"]]],
+ [5,"Ana G.","Ventanas de aluminio color madera",5200,"Google (sin pagar)","contactado","Meco",3,"6** *** 275","Llamada hecha. Prefiere visita el jueves por la tarde.",[["Hace 3 días","Llamada de 6 minutos"],["Hace 3 días","Pide presupuesto desde «PVC o aluminio»"]]],
+ [6,"Marcos T.","Cancela de aluminio",1800,"Recomendación","contactado","Villalbilla",4,"6** *** 640","Le recomendó un vecino de la urbanización.",[["Hace 4 días","Llama por recomendación"]]],
+ [7,"Elena V.","6 ventanas de PVC",5600,"Google Ads","visita","Alcalá de Henares",6,"6** *** 133","Visita de medición el martes a las 17:00.",[["Hace 2 días","Visita de medición reservada"],["Hace 5 días","Llamada de seguimiento"],["Hace 6 días","Pide presupuesto"]]],
+ [8,"Raúl C.","Cerramiento de terraza, 8 m²",6100,"Google (sin pagar)","visita","Loeches",7,"6** *** 508","Dudaba entre cristal y policarbonato.",[["Hace 3 días","Visita de medición hecha"],["Hace 7 días","Llega desde la guía de terrazas"]]],
+ [9,"Carmen B.","Ventanas de PVC, 5 unidades",4400,"Google Ads","presupuesto","Alcalá de Henares",9,"6** *** 884","Presupuesto enviado. Lo revisa con su marido.",[["Hace 2 días","Recibe el presupuesto"],["Hace 6 días","Visita de medición"],["Hace 9 días","Pide presupuesto"]]],
+ [10,"Iván P.","Ventanas de aluminio",6900,"Facebook","presupuesto","Daganzo",10,"6** *** 217","Compara con otras dos empresas.",[["Hace 4 días","Recibe el presupuesto"],["Hace 10 días","Llega desde un anuncio de Facebook"]]],
+ [11,"Silvia N.","Cerramiento de terraza, 14 m²",9800,"Chat de la web","presupuesto","Villalbilla",12,"6** *** 902","Pide financiar en 12 cuotas.",[["Hace 3 días","Recibe el presupuesto"],["Hace 12 días","Empieza en el chat"]]],
+ [12,"Jorge F.","3 ventanas de PVC",2700,"Google Ads","aceptado","Alcalá de Henares",14,"6** *** 355","Aceptado. Instalación en 3 semanas.",[["Ayer","Acepta el presupuesto"],["Hace 9 días","Presupuesto enviado"],["Hace 14 días","Pide presupuesto"]]],
+ [13,"Marta L.","Cerramiento de terraza, 10 m²",8400,"Recomendación","aceptado","San Fernando de Henares",16,"6** *** 761","Aceptado con señal del 30 %.",[["Hace 2 días","Paga la señal"],["Hace 16 días","Llama por recomendación"]]],
+ [14,"David O.","7 ventanas de PVC",6300,"Google (sin pagar)","instalado","Alcalá de Henares",30,"6** *** 429","Instalado. Se le pidió reseña por WhatsApp.",[["Hace 3 días","Instalación terminada"],["Hace 3 días","Reseña pedida"]]],
+ [15,"Teresa A.","Mosquiteras",600,"Google Ads","instalado","Meco",28,"6** *** 096","Instalado. Reseña de 5 estrellas.",[["Hace 8 días","Instalación terminada"],["Hace 6 días","Deja 5 estrellas en Google"]]],
+ [16,"Alberto H.","Cerramiento de terraza, 9 m²",7200,"TikTok","perdido","Torrejón de Ardoz",20,"6** *** 614","Se decidió por otra empresa, más barata.",[["Hace 5 días","Dice que ha elegido otra empresa"],["Hace 20 días","Pide presupuesto"]]],
+ [17,"Nuria E.","Ventanas de aluminio",3300,"Google Ads","perdido","Madrid",22,"6** *** 387","Aplaza la obra al año que viene.",[["Hace 8 días","Aplaza la obra"]]],
+ [18,"Sergio M.","Ventanas de PVC, 8 unidades",7100,"Google Ads","instalado","Alcalá de Henares",35,"6** *** 570","Instalado. Recomienda a un vecino.",[["Hace 12 días","Instalación terminada"],["Hace 10 días","Trae a un amigo (Marcos T.)"]]],
+]
+ETAPAS = [["nuevo","Nuevos","Hay que llamarles hoy"],["contactado","Contactados","Falta fijar visita"],["visita","Visita","Medición reservada o hecha"],["presupuesto","Presupuesto enviado","Esperando respuesta"],["aceptado","Aceptados","Pendientes de instalar"],["instalado","Instalados","Pedir reseña"]]
+INV = {"Google Ads":560,"Facebook":90,"TikTok":50,"Instagram":0,"Google (sin pagar)":0,"Chat de la web":0,"Recomendación":0,"Revisa tu presupuesto":0}
+
+def pagina_html():
+    datos = json.dumps({"leads":LEADS,"etapas":ETAPAS,"inv":INV}, ensure_ascii=False)
+    return PAGINA.replace("__DATA__", datos)
+
+PAGINA = r'''<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow"><title>Tu CRM (demostración) | AMS Cerramientos</title>
+<style>
+@font-face{font-family:Inter;font-weight:400;font-display:swap;src:url(/fonts/inter-400.woff2) format("woff2")}
+@font-face{font-family:Inter;font-weight:600;font-display:swap;src:url(/fonts/inter-600.woff2) format("woff2")}
+@font-face{font-family:Inter;font-weight:700;font-display:swap;src:url(/fonts/inter-700.woff2) format("woff2")}
+*{box-sizing:border-box}body{margin:0;background:#f3f6f9;font-family:Inter,system-ui,sans-serif;color:#1f2a36;line-height:1.45}
+.bar{background:#12202B;color:#fff;padding:12px 16px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}.bar a{color:#fff;font-weight:700;text-decoration:none;font-size:.92rem}.bar span{color:#cfe0f2;font-size:.85rem}
+main{max-width:1200px;margin:0 auto;padding:16px}
+.demo{background:#fff4e5;border:1px solid #f1c27d;border-radius:10px;padding:10px 14px;font-size:.9rem;margin-bottom:14px}
+.cab{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+h1{margin:0 0 2px;font-size:1.5rem;color:#12202B}.sub{margin:0;color:#51606e;font-size:.95rem}
+.btn{border:0;background:#C2410C;color:#fff;font:inherit;font-weight:700;border-radius:10px;padding:10px 16px;cursor:pointer}.btn.s{background:#fff;color:#12202B;border:1px solid #cfd8e1;font-weight:600}.btn.p{background:#12202B}.btn.r{background:#fff;color:#9b1c1c;border:1px solid #e3b4b4}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:14px}
+.k{background:#fff;border-radius:12px;padding:12px 14px;box-shadow:0 1px 3px rgba(18,32,43,.08)}.k b{display:block;font-size:1.5rem;color:#12202B}.k span{font-size:.82rem;color:#51606e}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}.tabs button{border:1px solid #cfd8e1;background:#fff;border-radius:999px;padding:8px 14px;font:inherit;font-weight:600;cursor:pointer;color:#12202B}.tabs button.on{background:#C2410C;border-color:#C2410C;color:#fff}
+.tab{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px}.col{background:#e8eef4;border-radius:12px;min-width:210px;flex:1;padding:10px}
+.col h3{margin:0;font-size:.95rem;color:#12202B}.col small{display:block;color:#51606e;margin-bottom:8px;font-size:.78rem}.col h3 em{font-style:normal;background:#12202B;color:#fff;border-radius:999px;padding:1px 8px;font-size:.78rem;margin-left:4px}
+.card{background:#fff;border-radius:10px;padding:10px;margin-bottom:8px;box-shadow:0 1px 2px rgba(18,32,43,.1);border-left:4px solid #1D6FB8}
+.card .t{cursor:pointer}.card b{display:block;font-size:.92rem}.card span{display:block;font-size:.82rem;color:#51606e}.card .eu{color:#12202B;font-weight:700}
+.mv{display:flex;gap:6px;margin-top:6px}.mv button{flex:1;border:1px solid #cfd8e1;background:#f3f6f9;border-radius:7px;padding:4px;font:inherit;font-size:.8rem;cursor:pointer;color:#12202B}.mv button:disabled{opacity:.3;cursor:default}
+.tag{display:inline-block;font-size:.72rem;background:#eef4fb;color:#1D6FB8;border-radius:6px;padding:1px 6px;margin-top:4px}
+.panel{background:#fff;border-radius:12px;padding:14px;box-shadow:0 1px 3px rgba(18,32,43,.08);overflow-x:auto}.panel h2{margin:0 0 6px;font-size:1.15rem;color:#12202B}.panel h3{margin:16px 0 4px;font-size:1rem;color:#12202B}.panel p,.panel li{font-size:.92rem}
+table{border-collapse:collapse;width:100%;font-size:.9rem}th,td{text-align:left;padding:8px 10px;border-bottom:1px solid #e5ebf1;white-space:nowrap}th{color:#51606e;font-size:.8rem}
+tr.f{cursor:pointer}tr.f:hover{background:#f3f6f9}.num{text-align:right}.good{color:#17602f;font-weight:700}
+.bb{height:10px;background:#e8eef4;border-radius:6px;min-width:90px}.bb i{display:block;height:100%;background:#C2410C;border-radius:6px}
+.nota{font-size:.88rem;color:#51606e;margin:10px 0 0}
+.fil{margin-bottom:10px}.fil input,.fil select{font:inherit;padding:8px 10px;border:1px solid #cfd8e1;border-radius:8px;margin-right:6px;margin-bottom:6px}
+.vm{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin:10px 0}.vm div{background:#f3f6f9;border-radius:10px;padding:12px}.vm b{display:block;margin-bottom:4px}.vm span{font-size:.88rem}
+#fi{position:fixed;inset:0;background:rgba(18,32,43,.45);display:none;justify-content:flex-end;z-index:5}#fi.on{display:flex}
+#fi aside{background:#fff;width:min(440px,100%);height:100%;overflow:auto;padding:18px}
+#fi h2{margin:0 0 2px}#fi .x{float:right;border:0;background:#e8eef4;border-radius:8px;padding:6px 10px;cursor:pointer;font:inherit}
+.fm label{display:block;font-size:.82rem;color:#51606e;margin:10px 0 3px}.fm input,.fm select,.fm textarea{width:100%;font:inherit;padding:9px 10px;border:1px solid #cfd8e1;border-radius:8px}.fm textarea{min-height:70px}
+.fm .ob{color:#C2410C}.g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tl{border-left:2px solid #cfd8e1;margin:8px 0 0 6px;padding-left:12px}.tl div{margin-bottom:10px;font-size:.9rem}.tl small{display:block;color:#51606e}
+.btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.pie{font-size:.82rem;color:#51606e;margin:16px 0}
+.av{background:#fdecec;color:#9b1c1c;border-radius:8px;padding:8px 10px;font-size:.85rem;margin-top:8px;display:none}
+.rw{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid #e5ebf1;cursor:pointer;flex-wrap:wrap}.rw:last-child{border-bottom:0}.rw b{display:block;font-size:.95rem}.rw .s{display:block;font-size:.85rem;color:#51606e}.rr{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.ch{font-size:.75rem;font-weight:700;border-radius:999px;padding:3px 9px;white-space:nowrap}.ch.ro{background:#fdecec;color:#9b1c1c}.ch.am{background:#fff4e5;color:#9a5b00}.ch.gr{background:#e6f4ec;color:#17602f}.ch.az{background:#eef4fb;color:#1D6FB8}
+.sec{background:#fff;border-radius:12px;padding:14px 16px;box-shadow:0 1px 3px rgba(18,32,43,.08);margin-bottom:12px}.sec h2{margin:0 0 2px;font-size:1.1rem;color:#12202B}.sec .sb{margin:0 0 6px;font-size:.88rem;color:#51606e}
+.mini{border:1px solid #cfd8e1;background:#fff;color:#12202B;border-radius:8px;padding:5px 10px;font:inherit;font-size:.82rem;font-weight:600;cursor:pointer}
+.pb{height:10px;background:#e8eef4;border-radius:6px;margin:6px 0}.pb i{display:block;height:100%;background:#17602f;border-radius:6px}
+.hoyh{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 12px}.toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:#12202B;color:#fff;padding:12px 16px;border-radius:10px;max-width:92vw;z-index:9;font-size:.92rem;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+.msgb{width:100%;min-height:170px;font:inherit;padding:10px;border:1px solid #cfd8e1;border-radius:8px}.det{border:1px solid #e5ebf1;border-radius:10px;padding:8px 12px;margin:10px 0}.det summary{cursor:pointer;font-weight:700;font-size:.92rem}
+</style></head><body>
+<div class="bar"><a href="/guia-javi#s55">&larr; Volver a la guía</a><span>AMS Cerramientos &middot; Tu CRM</span></div>
+<main>
+<div class="demo"><b>Esta demostración funciona de verdad.</b> Prueba a añadir un cliente, moverlo de fase, escribir una nota o importar una lista. Los datos que metas se quedan solo en este navegador y puedes volver a los de ejemplo cuando quieras. Los nombres, teléfonos e importes de ejemplo son inventados.</div>
+<div class="cab"><div><h1>Tus clientes, de un vistazo</h1><p class="sub">Cada persona que te pide presupuesto, con su origen, avanzando hasta la instalación.</p></div>
+<div><button class="btn" id="nuevo">+ Nuevo cliente</button> <button class="btn s" id="imp">Importar lista</button> <button class="btn s" id="exp">Descargar en Excel</button></div></div>
+<div class="kpis" id="kpis"></div>
+<div class="tabs" id="tabs"></div><div id="vista"></div>
+<p class="pie">En el CRM real, la base de datos es privada y está en un servidor con copia de seguridad, no en un navegador. Los datos son tuyos, se guardan con el consentimiento de cada cliente y con aviso de privacidad.</p>
+<input type="file" id="fcsv" accept=".csv,text/csv" style="display:none">
+</main>
+<div id="fi"><aside id="ficha"></aside></div>
+<script>
+var D=__DATA__,E=D.etapas,INV=D.inv,KEY="ams-crm-demo-v2",L=[],MEM=null;
+var ETN={};E.forEach(function(e){ETN[e[0]]=e[1]});ETN.perdido="Perdidos";
+var FASES=E.map(function(e){return e[0]}).concat(["perdido"]);
+var ORIG=Object.keys(INV).concat(["Llamada","WhatsApp directo","Otro"]).filter(function(v,i,a){return a.indexOf(v)==i});
+var TRAB=["Ventanas de PVC","Ventanas de aluminio","Cerramiento de terraza","Cancela o puerta","Mosquiteras y persianas","Otro"];
+function esc(t){return String(t==null?"":t).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function eu(n){n=+n||0;return n?String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,".")+" €":"—"}
+function ahora(){var d=new Date();return d.toLocaleDateString("es-ES",{day:"2-digit",month:"2-digit"})+" "+d.toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"})}
+function sem(){return D.leads.map(function(x){return{id:x[0],nombre:x[1],trabajo:x[2],importe:x[3],origen:x[4],fase:x[5],zona:x[6],dias:x[7],tel:x[8],correo:"",nota:x[9],hist:x[10].map(function(h){return{t:h[0],x:h[1]}})}})}
+function carga(){try{var r=localStorage.getItem(KEY);if(r){L=JSON.parse(r);return}}catch(e){}L=MEM?JSON.parse(MEM):sem()}
+function guarda(){var s=JSON.stringify(L);MEM=s;try{localStorage.setItem(KEY,s)}catch(e){}}
+function cuando(d){return d==0?"hoy":d==1?"ayer":"hace "+d+" días"}
+function ev(x,t){x.hist.unshift({t:ahora(),x:t})}
+function buscar(id){for(var i=0;i<L.length;i++)if(L[i].id==id)return L[i]}
+function kpis(){var g=L.filter(function(x){return x.fase=="aceptado"||x.fase=="instalado"}),tot=g.reduce(function(s,x){return s+(+x.importe||0)},0),invT=0;for(var k in INV)invT+=INV[k];
+ document.getElementById("kpis").innerHTML=
+ '<div class="k"><b>'+L.length+'</b><span>personas este mes</span></div>'+
+ '<div class="k"><b>'+L.filter(function(x){return x.fase=="nuevo"}).length+'</b><span>nuevas sin llamar</span></div>'+
+ '<div class="k"><b>'+g.length+'</b><span>han dicho que sí</span></div>'+
+ '<div class="k"><b>'+(L.length?Math.round(g.length/L.length*100):0)+' %</b><span>de cada 100 acaban comprando</span></div>'+
+ '<div class="k"><b>'+eu(tot)+'</b><span>en trabajos aceptados</span></div>'+
+ '<div class="k"><b>'+(g.length?eu(Math.round(invT/g.length)):"—")+'</b><span>de anuncios por cada cliente</span></div>'}
+var tabs=[["dia","Tu día"],["tab","Tablero"],["lis","Lista"],["ins","Instalaciones"],["age","Agenda"],["ori","De dónde vienen"],["como","Cómo funciona"]],cur="dia";
+function pintaTabs(){document.getElementById("tabs").innerHTML=tabs.map(function(t){return '<button class="'+(t[0]==cur?"on":"")+'" data-t="'+t[0]+'">'+t[1]+'</button>'}).join("");
+ [].forEach.call(document.querySelectorAll("#tabs button"),function(b){b.onclick=function(){cur=b.dataset.t;pintaTabs();vista()}})}
+function card(x,i,n){return '<div class="card"><div class="t" data-id="'+x.id+'"><b>'+esc(x.nombre)+'</b><span>'+esc(x.trabajo)+'</span><span class="eu">'+eu(x.importe)+'</span><span class="tag">'+esc(x.origen)+'</span></div><div class="mv"><button data-m="-1" data-id="'+x.id+'"'+(x.fase=="nuevo"||x.fase=="perdido"?" disabled":"")+' aria-label="Mover a la fase anterior">&larr;</button><button data-m="1" data-id="'+x.id+'"'+(x.fase=="instalado"||x.fase=="perdido"?" disabled":"")+' aria-label="Mover a la fase siguiente">&rarr;</button></div></div>'}
+function mueve(id,d){var x=buscar(id),i=FASES.indexOf(x.fase)+d;if(i<0||i>5)return;var er=puedeIr(x,FASES[i]);if(er){aviso(er);return}x.fase=FASES[i];ev(x,"Pasa a: "+ETN[x.fase]);guarda();vista();kpis()}
+function vista(){var h="";if(cur=="dia"||cur=="ins"||cur=="age"){document.getElementById("vista").innerHTML=cur=="dia"?diaHtml():cur=="ins"?insHtml():ageHtml();enlaza();enlazaMsg();return}
+ if(cur=="tab"){h='<div class="tab">'+FASES.map(function(f){var e=f=="perdido"?["perdido","Perdidos","Se quedan guardados"]:E.filter(function(y){return y[0]==f})[0],fl=L.filter(function(x){return x.fase==f});return '<div class="col"><h3>'+e[1]+'<em>'+fl.length+'</em></h3><small>'+e[2]+'</small>'+fl.map(card).join("")+'</div>'}).join("")+'</div><p class="nota">Pulsa una tarjeta para ver su ficha. Con las flechas la pasas a la fase de antes o de después.</p>'}
+ if(cur=="lis"){h='<div class="panel"><div class="fil"><input id="q" placeholder="Buscar por nombre, trabajo o zona"><select id="o"><option value="">Todos los orígenes</option>'+ORIG.map(function(o){return '<option>'+esc(o)+'</option>'}).join("")+'</select><select id="fs"><option value="">Todas las fases</option>'+FASES.map(function(f){return '<option value="'+f+'">'+ETN[f]+'</option>'}).join("")+'</select></div><div id="tb"></div></div>'}
+ if(cur=="ori"){var rows=ORIG.map(function(o){var f=L.filter(function(x){return x.origen==o}),g=f.filter(function(x){return x.fase=="aceptado"||x.fase=="instalado"});return{o:o,n:f.length,g:g.length,v:g.reduce(function(s,x){return s+(+x.importe||0)},0),i:INV[o]||0}}).filter(function(r){return r.n}).sort(function(a,b){return b.v-a.v});
+  var mx=Math.max.apply(null,rows.map(function(r){return r.v}).concat([1]));
+  h='<div class="panel"><table><tr><th>Origen</th><th class="num">Personas</th><th class="num">Compran</th><th class="num">Trabajo aceptado</th><th></th><th class="num">Anuncios</th><th class="num">Coste por cliente</th></tr>'+rows.map(function(r){return '<tr><td><b>'+esc(r.o)+'</b></td><td class="num">'+r.n+'</td><td class="num">'+r.g+'</td><td class="num">'+eu(r.v)+'</td><td><div class="bb"><i style="width:'+Math.round(r.v/mx*100)+'%"></i></div></td><td class="num">'+(r.i?eu(r.i):"gratis")+'</td><td class="num '+(r.i?"":"good")+'">'+(r.g?(r.i?eu(Math.round(r.i/r.g)):"0 €"):"—")+'</td></tr>'}).join("")+'</table><p class="nota">Esto es lo que no te da Google Ads por sí solo: cuáles de las personas que llegan acaban comprando y cuánto trabajo traen de verdad. Con esto se decide dónde poner el dinero de los anuncios. Se recalcula solo cada vez que cambias algo.</p></div>'}
+ if(cur=="como"){h='<div class="panel"><h2>Cuatro formas de que un cliente entre en el CRM</h2><div class="vm">'+
+  '<div><b>1. Solos, sin que hagas nada</b><span>Calculadora, formulario de presupuesto, chat y botón de WhatsApp de la web. Entra con su nombre, teléfono, lo que ha pedido y de dónde viene (anuncio, Google, Bing, Instagram...). Te llega además un aviso al móvil.</span></div>'+
+  '<div><b>2. A mano, en diez segundos</b><span>Para una llamada, una recomendación o alguien que te para en la calle: pulsas «+ Nuevo cliente» y rellenas lo mínimo. Pruébalo arriba.</span></div>'+
+  '<div><b>3. Importando lo que ya tienes</b><span>Si tienes clientes en una hoja de Excel o en una agenda, los subimos de una vez. Prueba el botón «Importar lista» con un archivo CSV.</span></div>'+
+  '<div><b>4. Conectando tu CRM actual</b><span>Si ya usas uno, no creamos otro: nos conectamos y los datos fluyen entre los dos.</span></div></div>'+
+  '<h3>Lo único que hace falta para apuntar a alguien</h3><p>Nombre, un teléfono o un correo, y de dónde viene. Todo lo demás (trabajo, importe, zona, notas) se puede completar después.</p>'+
+  '<h3>Qué haces tú día a día</h3><ul><li>Miras la columna <b>Nuevos</b> y llamas.</li><li>Cada vez que algo avanza (visita hecha, presupuesto enviado, aceptado), pulsas la flecha de la tarjeta.</li><li>Si no sale adelante, la mueves a <b>Perdidos</b> y apuntas el motivo. Así queda guardado.</li><li>Cuando se instala, la tarjeta pasa a <b>Instalados</b> y se le pide la reseña de Google y de Bing.</li></ul>'+
+  '<h3>Qué hacemos nosotros</h3><ul><li>Montarlo, conectarlo a la web, a los anuncios y a los correos.</li><li>Avisarte si alguien lleva días sin atender.</li><li>Sacar cada mes el informe de qué origen trae más trabajo y qué cuesta cada cliente.</li><li>Copias de seguridad y que puedas descargar todo cuando quieras (el botón «Descargar en Excel» ya lo hace).</li></ul>'+
+  '<h3>Cómo se entra (esto es lo que tendrías en el CRM real)</h3><ol><li>Pulsas tu enlace privado, que no sale en Google ni está enlazado desde la web, y la primera vez eliges «Primera vez».</li><li>Pones el correo de la empresa. Te llega un enlace para crear tu contraseña.</li><li>Desde entonces, cada vez que entras te llega además un código de 6 cifras al correo. Es una llave extra para que nadie más pueda entrar como tú.</li></ol>'+
+  '<h3>Quién ve qué</h3><p>Cuando des de alta a alguien (un instalador, una persona de administración), te llega un correo con dos botones: <b>Aprobar</b> o <b>Rechazar</b>. Nadie entra sin tu visto bueno. Cada persona ve solo lo suyo: el instalador, sus obras; tú, todo.</p>'+
+  '<h3>Siempre al día</h3><ul><li>Los clientes que llegan por la web, el chat, la calculadora o WhatsApp <b>entran solos y al momento</b>, con su origen.</li><li>Los datos de anuncios y de tu ficha de Google se actualizan <b>cada mañana</b>.</li><li>Cada mañana, a las 8, te llega un correo con lo que pide atención ese día.</li><li>Cada domingo se hace una <b>copia de seguridad</b> de todo.</li></ul>'+
+  '<h3>Y además</h3><ul><li><b>Escríbeme el mensaje:</b> con lo apuntado en la ficha, prepara el WhatsApp de seguimiento con tu tono. Tú lo lees, lo cambias si quieres y lo envías desde tu móvil. Nada se manda solo.</li><li><b>Informe de visita obligatorio:</b> no se puede pasar a presupuesto sin contar quién estaba, cómo es la casa, qué quieren y tus impresiones.</li><li><b>Motivo de pérdida:</b> aplazado, no firmó o descartado, siempre con el porqué. Así sabrás por qué pierdes trabajos, no solo cuántos.</li><li><b>Agenda de visitas</b>, con invitación a tu Google Calendar.</li><li><b>Instalaciones</b> con parte diario, avance y lista de entrega.</li><li><b>Buzón de ideas</b> y una guía corta para cada puesto.</li><li><b>Descargar todo en Excel</b> con un botón.</li></ul>'+
+  '<p class="nota">Está conectado a tu <a href="/guia-javi/panel">panel de control</a>: allí ves, por origen, cuánto cuesta cada cliente. Y está vivo: si echas en falta un campo, un listado o una cifra, nos lo dices y se añade.</p>'+
+  '<p class="nota">Es opcional: sin tu sí no se monta nada.</p></div>'}
+ document.getElementById("vista").innerHTML=h;
+ if(cur=="lis"){var f=function(){var q=document.getElementById("q").value.toLowerCase(),o=document.getElementById("o").value,fs=document.getElementById("fs").value;
+  var r=L.filter(function(x){return(!o||x.origen==o)&&(!fs||x.fase==fs)&&(!q||(x.nombre+x.trabajo+x.zona).toLowerCase().indexOf(q)>-1)});
+  document.getElementById("tb").innerHTML='<table><tr><th>Cliente</th><th>Trabajo</th><th>Zona</th><th>Origen</th><th>Fase</th><th class="num">Importe</th><th>Entró</th></tr>'+r.map(function(x){return '<tr class="f" data-id="'+x.id+'"><td><b>'+esc(x.nombre)+'</b></td><td>'+esc(x.trabajo)+'</td><td>'+esc(x.zona)+'</td><td>'+esc(x.origen)+'</td><td>'+ETN[x.fase]+'</td><td class="num">'+eu(x.importe)+'</td><td>'+cuando(x.dias)+'</td></tr>'}).join("")+'</table>'+(r.length?'':'<p class="nota">No hay ningún cliente con esos filtros.</p>');enlaza()};
+  document.getElementById("q").oninput=f;document.getElementById("o").onchange=f;document.getElementById("fs").onchange=f;f()}
+ enlaza()}
+function enlaza(){[].forEach.call(document.querySelectorAll("[data-id]:not(button)"),function(c){c.onclick=function(){abre(+c.dataset.id)}});
+ [].forEach.call(document.querySelectorAll("button[data-m]"),function(b){b.onclick=function(){mueve(+b.dataset.id,+b.dataset.m)}})}
+function opts(a,v){return a.map(function(o){var val=Array.isArray(o)?o[0]:o,tx=Array.isArray(o)?o[1]:o;return '<option value="'+esc(val)+'"'+(val==v?" selected":"")+'>'+esc(tx)+'</option>'}).join("")}
+function panelLat(h){document.getElementById("ficha").innerHTML=h;document.getElementById("fi").classList.add("on");document.getElementById("cx").onclick=cierra}
+function formNuevo(){panelLat('<button class="x" id="cx">Cerrar</button><h2>Nuevo cliente</h2><div style="color:#51606e;font-size:.9rem">Lo mínimo: nombre, teléfono o correo, y de dónde viene.</div><div class="fm">'+
+ '<label>Nombre <span class="ob">*</span></label><input id="n_nom" maxlength="60" autocomplete="off">'+
+ '<div class="g2"><div><label>Teléfono</label><input id="n_tel" inputmode="tel" maxlength="20"></div><div><label>Correo</label><input id="n_cor" type="email" maxlength="80"></div></div>'+
+ '<label>Qué necesita</label><select id="n_tra">'+opts(TRAB)+'</select>'+
+ '<div class="g2"><div><label>Importe estimado (€)</label><input id="n_imp" inputmode="numeric" maxlength="8"></div><div><label>Zona</label><input id="n_zon" maxlength="40"></div></div>'+
+ '<label>De dónde viene <span class="ob">*</span></label><select id="n_ori">'+opts(ORIG,"Llamada")+'</select>'+
+ '<label>Nota</label><textarea id="n_not" maxlength="400"></textarea></div><div class="av" id="n_av"></div>'+
+ '<div class="btns"><button class="btn" id="n_ok">Guardar cliente</button><button class="btn s" id="n_no">Cancelar</button></div>');
+ document.getElementById("n_no").onclick=cierra;
+ document.getElementById("n_ok").onclick=function(){var v=function(i){return document.getElementById(i).value.trim()},av=document.getElementById("n_av");
+  if(!v("n_nom")){av.style.display="block";av.textContent="Falta el nombre.";return}
+  if(!v("n_tel")&&!v("n_cor")){av.style.display="block";av.textContent="Pon al menos un teléfono o un correo.";return}
+  var id=L.reduce(function(m,x){return Math.max(m,x.id)},0)+1;
+  var x={id:id,nombre:v("n_nom"),trabajo:v("n_tra"),importe:parseInt(v("n_imp").replace(/\D/g,""))||0,origen:v("n_ori"),fase:"nuevo",zona:v("n_zon")||"—",dias:0,tel:v("n_tel")||"—",correo:v("n_cor"),nota:v("n_not"),hist:[]};
+  ev(x,"Apuntado a mano ("+x.origen+")");L.unshift(x);guarda();cierra();cur="tab";pintaTabs();vista();kpis()}}
+function abre0(id){var x=buscar(id);if(!x)return;
+ panelLat('<button class="x" id="cx">Cerrar</button><h2>'+esc(x.nombre)+'</h2><div style="color:#51606e">'+esc(x.trabajo)+' &middot; '+esc(x.zona)+'</div><div class="fm">'+
+ '<div class="g2"><div><label>Fase</label><select id="e_fas">'+opts(FASES.map(function(f){return[f,ETN[f]]}),x.fase)+'</select></div><div><label>Importe (€)</label><input id="e_imp" inputmode="numeric" value="'+(x.importe||"")+'"></div></div>'+
+ '<div class="g2"><div><label>Teléfono</label><input id="e_tel" value="'+esc(x.tel)+'"></div><div><label>Origen</label><select id="e_ori">'+opts(ORIG,x.origen)+'</select></div></div>'+
+ '<label>Nota fija</label><textarea id="e_not" maxlength="400">'+esc(x.nota)+'</textarea>'+
+ '<label>Añadir al historial</label><input id="e_ev" maxlength="140" placeholder="Por ejemplo: le llamo el jueves"></div>'+
+ '<div class="btns"><button class="btn" id="e_ok">Guardar cambios</button><button class="btn r" id="e_del">Borrar</button></div>'+
+ '<h3 style="margin:16px 0 4px">Todo lo que ha pasado</h3><div class="tl">'+x.hist.map(function(e){return '<div><small>'+esc(e.t)+'</small>'+esc(e.x)+'</div>'}).join("")+'</div>'+
+ '<p class="nota">En el CRM real también verías aquí los correos que le han llegado y las páginas que ha visitado.</p>');
+ document.getElementById("e_ok").onclick=function(){var v=function(i){return document.getElementById(i).value.trim()};
+  var f=v("e_fas");if(f!=x.fase){ev(x,"Pasa a: "+ETN[f]);x.fase=f}
+  var im=parseInt(v("e_imp").replace(/\D/g,""))||0;if(im!=x.importe){ev(x,"Importe: "+eu(im));x.importe=im}
+  if(v("e_ori")!=x.origen){ev(x,"Origen: "+v("e_ori"));x.origen=v("e_ori")}
+  x.tel=v("e_tel")||"—";x.nota=v("e_not");if(v("e_ev"))ev(x,v("e_ev"));guarda();cierra();vista();kpis()};
+ document.getElementById("e_del").onclick=function(){if(document.getElementById("e_del").dataset.s){L=L.filter(function(y){return y.id!=id});guarda();cierra();vista();kpis()}else{document.getElementById("e_del").dataset.s=1;document.getElementById("e_del").textContent="Pulsa otra vez para borrar"}}}
+function cierra(){document.getElementById("fi").classList.remove("on")}
+document.getElementById("fi").onclick=function(e){if(e.target.id=="fi")cierra()};
+document.getElementById("nuevo").onclick=formNuevo;
+document.getElementById("exp").onclick=function(){var c=[["Nombre","Teléfono","Correo","Trabajo","Importe","Zona","Origen","Fase","Nota"]].concat(L.map(function(x){return[x.nombre,x.tel,x.correo,x.trabajo,x.importe,x.zona,x.origen,ETN[x.fase],x.nota]}));
+ var t="﻿"+c.map(function(r){return r.map(function(v){return '"'+String(v==null?"":v).replace(/"/g,'""')+'"'}).join(";")}).join("\r\n");
+ var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([t],{type:"text/csv;charset=utf-8"}));a.download="clientes-ams.csv";document.body.appendChild(a);a.click();a.remove()};
+document.getElementById("imp").onclick=function(){panelLat('<button class="x" id="cx">Cerrar</button><h2>Importar una lista</h2><p style="font-size:.92rem">Sube un archivo <b>CSV</b> (en Excel: Guardar como, CSV) con una fila por cliente y estas columnas, en este orden:</p><p style="font-size:.9rem;background:#f3f6f9;border-radius:8px;padding:8px">nombre; teléfono; trabajo; importe; zona; origen</p><p class="nota">Los clientes importados entran en la fase «Nuevos». Los puedes borrar uno a uno desde su ficha.</p><div class="btns"><button class="btn" id="i_ok">Elegir archivo</button></div><div class="av" id="i_av"></div>');
+ document.getElementById("i_ok").onclick=function(){document.getElementById("fcsv").click()}};
+document.getElementById("fcsv").onchange=function(e){var f=e.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(){var ls=String(r.result).replace(/^﻿/,"").split(/\r?\n/).filter(function(l){return l.trim()}),n=0;
+  var id=L.reduce(function(m,x){return Math.max(m,x.id)},0);
+  ls.forEach(function(l,i){var c=l.split(/[;,\t]/).map(function(v){return v.replace(/^"|"$/g,"").trim()});if(i==0&&/nombre/i.test(c[0]))return;if(!c[0])return;id++;n++;
+   var x={id:id,nombre:c[0].slice(0,60),tel:(c[1]||"—").slice(0,20),trabajo:(c[2]||"Otro").slice(0,60),importe:parseInt((c[3]||"").replace(/\D/g,""))||0,zona:(c[4]||"—").slice(0,40),origen:(c[5]||"Otro").slice(0,40),fase:"nuevo",dias:0,correo:"",nota:"",hist:[]};
+   if(ORIG.indexOf(x.origen)<0)ORIG.push(x.origen);ev(x,"Importado de una lista");L.unshift(x)});
+  e.target.value="";guarda();cierra();cur="tab";pintaTabs();vista();kpis();var a=document.getElementById("vista");a.insertAdjacentHTML("afterbegin",'<div class="demo">Importados '+n+' clientes.</div>')};r.readAsText(f)};
+
+var HOY0=new Date().setHours(0,0,0,0),DIA=864e5;
+var SEG={1:["Llamar hoy: ha usado la calculadora",0,1],2:["Llamar y proponer una medición esta semana",0,1],3:["Contestar su WhatsApp",0,0],4:["Revisar su presupuesto y responderle",-1,0],5:["Confirmar la visita del jueves por la tarde",3,0],6:["Llamar para ir a medir la cancela",-1,0],7:["Visita de medición, martes a las 17:00",1,1],8:["Preguntarle qué ha decidido: cristal o policarbonato",-2,0],9:["Llamar: ¿lo ha hablado con su marido?",0,1],10:["Mandarle la comparativa de calidades",3,0],11:["Enviarle las opciones de financiación",0,1],12:["Confirmar la fecha de instalación",5,0],13:["Cobrar el resto al terminar",12,0],14:["Recordarle la reseña por WhatsApp",2,0]};
+var AGE=[[0,"17:00","Julia R.","Medición de cerramiento de terraza","Villalbilla"],[1,"17:00","Elena V.","Medición de 6 ventanas de PVC","Alcalá de Henares"],[3,"16:30","Ana G.","Visita para ventanas de aluminio","Meco"],[4,"10:00","Pablo S.","Mosquiteras y persianas","Torrejón de Ardoz"]];
+var INS=[["Marta L.","Cerramiento de terraza, 10 m²","Montaje",60,"Falta el parte de hoy","Ayer: 7 horas, 2 personas. Hoy: pendiente de que lo rellenen.","Falta una pieza de remate; llega mañana a primera hora.",1],["Jorge F.","3 ventanas de PVC","Fabricación",25,"Sin parte (aún no empieza)","Medidas confirmadas. Instalación prevista en tres semanas.","Pedido a fábrica hecho.",0],["David O.","7 ventanas de PVC","Posventa",100,"Entregada hace 3 días","Lista de entrega firmada.","Revisión a los 30 días. Reseña pedida por WhatsApp.",0],["Teresa A.","Mosquiteras","Entregada",100,"Lista de entrega firmada","Instalación terminada sin incidencias.","Reseña de 5 estrellas en Google.",0]];
+function cuando2(ms){var d=Math.round((ms-HOY0)/DIA);return d==0?["Hoy","am"]:d==1?["Mañana","gr"]:d>1?["En "+d+" días","gr"]:d==-1?["Vencido desde ayer","ro"]:["Vencido hace "+(-d)+" días","ro"]}
+function fixLeads(){L.forEach(function(x){if(x.sigf===undefined){var s=SEG[x.id];if(s){x.sig=s[0];x.sigf=HOY0+s[1]*DIA;x.cal=!!s[2]}else if(x.fase=="nuevo"){x.sig="Llamar hoy";x.sigf=HOY0;x.cal=false}}
+ if(!x.inf){x.inf={q:"",c:"",n:"",i:""};if(["presupuesto","aceptado","instalado"].indexOf(x.fase)>-1||x.id==8){x.inf={q:"El cliente y su pareja",c:x.zona+". "+x.trabajo+".",n:x.trabajo,i:x.nota}}}
+ if(!x.mot)x.mot="";if(!x.motn)x.motn=""})}
+function infOk(x){var i=x.inf||{};return !!(i.q&&i.c&&i.n&&i.i)}
+function puedeIr(x,f){if(["presupuesto","aceptado","instalado"].indexOf(f)>-1&&FASES.indexOf(f)>FASES.indexOf(x.fase)&&!infOk(x))return "Antes de pasar a «"+ETN[f]+"», rellena el informe de visita en la ficha: quién estaba, cómo es la casa, qué quieren y tus impresiones.";
+ if(f=="perdido"&&!x.mot)return "Para marcarlo como perdido, di el motivo en la ficha: aplazado, no firmó o descartado.";return ""}
+function aviso(t){var o=document.getElementById("toast");if(o)o.remove();var d=document.createElement("div");d.id="toast";d.className="toast";d.textContent=t;document.body.appendChild(d);setTimeout(function(){d.remove()},6000)}
+function nom1(x){return String(x.nombre).split(" ")[0]}
+function msgPara(x){var n=nom1(x),t=String(x.trabajo).charAt(0).toLowerCase()+String(x.trabajo).slice(1),z=x.zona&&x.zona!="—"?" en "+x.zona:"";
+ if(x.fase=="nuevo")return "Hola "+n+", soy Javi, de AMS Cerramientos. Hemos recibido tu petición de presupuesto ("+t+z+"). ¿Te viene bien que te llame hoy, o prefieres que pasemos a medir esta semana? La visita y la medición son gratuitas. Un saludo.";
+ if(x.fase=="contactado")return "Hola "+n+", te escribo por lo que hablamos de "+t+". Para darte un precio exacto lo mejor es pasar a medir: es gratis y no te compromete a nada. ¿Qué día y hora te vienen mejor esta semana?";
+ if(x.fase=="visita")return "Hola "+n+", te recuerdo la visita de medición de "+t+". Si te surge cualquier cosa, dímelo por aquí y lo cambiamos. Hasta pronto.";
+ if(x.fase=="presupuesto")return "Hola "+n+", ¿pudiste mirar el presupuesto de "+t+"? Si tienes cualquier duda sobre el precio, los plazos o la financiación, te la resuelvo encantado. Un saludo.";
+ if(x.fase=="aceptado")return "Hola "+n+", gracias por confiar en nosotros. Te confirmo en cuanto tengamos la fecha de instalación de "+t+". Cualquier cosa, estoy aquí.";
+ if(x.fase=="instalado")return "Hola "+n+", ¿todo bien con "+t+"? Si estás contento, nos ayudaría mucho una reseña en Google: son 30 segundos. Y si algo no está como esperabas, dímelo y lo arreglamos. Gracias.";
+ return "Hola "+n+", ¿cómo va todo? Si más adelante retomas lo de "+t+", aquí estamos."}
+function abreMsg(id){var x=buscar(id);if(!x)return;panelLat('<button class="x" id="cx">Cerrar</button><h2>Mensaje para '+esc(x.nombre)+'</h2><div style="color:#51606e;font-size:.9rem">Preparado con lo apuntado en su ficha. Léelo, cámbialo si quieres y envíalo tú desde tu móvil. Nada se manda solo.</div><div class="fm"><label>WhatsApp</label><textarea class="msgb" id="mg_t">'+esc(msgPara(x))+'</textarea></div><div class="btns"><button class="btn" id="mg_c">Copiar mensaje</button><button class="btn s" id="mg_x">Cerrar</button></div><p class="nota" id="mg_o"></p>');
+ document.getElementById("mg_x").onclick=cierra;document.getElementById("mg_c").onclick=function(){var t=document.getElementById("mg_t");t.select();var ok=false;try{ok=document.execCommand("copy")}catch(e){}try{if(navigator.clipboard)navigator.clipboard.writeText(t.value);ok=true}catch(e){}document.getElementById("mg_o").textContent=ok?"Copiado. Pégalo en WhatsApp.":"Selecciona el texto y cópialo."};}
+function enlazaMsg(){[].forEach.call(document.querySelectorAll("[data-msg]"),function(b){b.onclick=function(e){e.stopPropagation();abreMsg(+b.dataset.msg)}})}
+function diaHtml(){var nu=L.filter(function(x){return x.fase=="nuevo"}).sort(function(a,b){return a.dias-b.dias}),sg=L.filter(function(x){return x.sigf!==undefined&&x.fase!="perdido"&&x.fase!="nuevo"}).sort(function(a,b){return a.sigf-b.sigf}),ven=L.filter(function(x){return x.sigf!==undefined&&x.fase!="perdido"&&x.sigf<HOY0}).length;
+ var h='<div class="sec"><h2>Buenos días, Javi. Esto es lo que toca hoy</h2><p class="sb">Lo ves nada más entrar. Cada persona del equipo ve lo suyo según su puesto: un instalador, sus obras; tú, todo.</p><div class="hoyh"><span class="ch am">'+nu.length+' clientes nuevos a los que llamar</span><span class="ch '+(ven?'ro':'gr')+'">'+ven+' seguimientos vencidos</span><span class="ch az">'+AGE.length+' visitas esta semana</span><span class="ch '+(INS.some(function(i){return i[7]})?'ro':'gr')+'">'+INS.filter(function(i){return i[7]}).length+' obra pide atención</span></div></div>';
+ h+='<div class="sec"><h2>Llamar ya</h2><p class="sb">Clientes nuevos, con cuánto llevan esperando.</p>'+(nu.length?nu.map(function(x){var e=x.dias==0?"Entró hoy":x.dias==1?"Entró ayer":"Lleva "+x.dias+" días esperando";return '<div class="rw" data-id="'+x.id+'"><div><b>'+esc(x.nombre)+' · '+esc(x.trabajo)+'</b><span class="s">'+e+' · '+esc(x.origen)+(x.cal?' · muy interesado':'')+'</span></div><div class="rr"><button class="mini" data-msg="'+x.id+'">Escríbeme el mensaje</button></div></div>'}).join(""):'<p class="nota">Nadie sin llamar. Bien.</p>')+'</div>';
+ h+='<div class="sec"><h2>Seguimientos</h2><p class="sb">Cada cliente lleva su siguiente paso y su fecha. Si se pasa, sale en rojo.</p>'+sg.map(function(x){var c=cuando2(x.sigf);return '<div class="rw" data-id="'+x.id+'"><div><b>'+esc(x.nombre)+' · '+esc(ETN[x.fase])+'</b><span class="s">'+esc(x.sig||"")+'</span></div><div class="rr"><span class="ch '+c[1]+'">'+c[0]+'</span><button class="mini" data-msg="'+x.id+'">Escríbeme el mensaje</button></div></div>'}).join("")+'</div>';
+ h+='<div class="sec"><h2>Visitas de esta semana</h2><p class="sb">A cada visita le llega una invitación a tu Google Calendar.</p>'+AGE.map(function(a){var d=new Date(HOY0+a[0]*DIA),dn=a[0]==0?"Hoy":a[0]==1?"Mañana":d.toLocaleDateString("es-ES",{weekday:"long"});return '<div class="rw" style="cursor:default"><div><b>'+dn+', '+a[1]+' · '+esc(a[2])+'</b><span class="s">'+esc(a[3])+' · '+esc(a[4])+'</span></div></div>'}).join("")+'</div>';
+ h+='<div class="sec"><h2>Instalaciones que piden atención</h2>'+(INS.filter(function(i){return i[7]}).map(function(i){return '<div class="rw" style="cursor:default"><div><b>'+esc(i[0])+' · '+esc(i[1])+'</b><span class="s">'+esc(i[6])+'</span></div><span class="ch ro">'+esc(i[4])+'</span></div>'}).join("")||'<p class="nota">Todo en orden.</p>')+'</div>';return h}
+function insHtml(){return '<div class="sec"><h2>Instalaciones</h2><p class="sb">Cada obra con su fase, su avance, el parte diario (horas, personas, incidencias), la posventa y la lista de entrega. El instalador rellena el parte desde el móvil, en un minuto.</p>'+INS.map(function(i){return '<div class="rw" style="cursor:default;display:block"><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap"><div><b>'+esc(i[0])+' · '+esc(i[1])+'</b><span class="s">Fase: '+esc(i[2])+'</span></div><span class="ch '+(i[7]?'ro':'gr')+'">'+esc(i[4])+'</span></div><div class="pb"><i style="width:'+i[3]+'%"></i></div><span class="s">Avance '+i[3]+' %. '+esc(i[5])+' '+esc(i[6])+'</span></div>'}).join("")+'</div>'}
+function ageHtml(){return '<div class="sec"><h2>Agenda de visitas</h2><p class="sb">Quién, cuándo, dónde y para qué. Al reservar una visita, el cliente y tú recibís la invitación en el calendario.</p>'+AGE.map(function(a){var d=new Date(HOY0+a[0]*DIA),dn=a[0]==0?"Hoy":a[0]==1?"Mañana":d.toLocaleDateString("es-ES",{weekday:"long",day:"numeric",month:"long"});return '<div class="rw" style="cursor:default"><div><b>'+dn+' · '+a[1]+'</b><span class="s">'+esc(a[2])+' · '+esc(a[3])+' · '+esc(a[4])+'</span></div></div>'}).join("")+'</div>'}
+function abre(id){abre0(id);var x=buscar(id);if(!x)return;fixLeads();var f=document.getElementById("ficha"),h3=[].filter.call(f.querySelectorAll("h3"),function(e){return e.textContent.indexOf("Todo lo que ha pasado")>-1})[0];if(!h3)return;
+ var c=x.sigf!==undefined?cuando2(x.sigf):["Sin fecha","az"],i=x.inf||{q:"",c:"",n:"",i:""};
+ h3.insertAdjacentHTML("beforebegin",'<h3 style="margin:16px 0 4px">Qué toca después</h3><div class="fm"><label>Siguiente paso</label><input id="s_txt" maxlength="120" value="'+esc(x.sig||"")+'"><div class="g2"><div><label>Para cuándo</label><select id="s_dia"><option value="">Dejar como está</option><option value="0">Hoy</option><option value="1">Mañana</option><option value="3">En 3 días</option><option value="7">En una semana</option><option value="14">En dos semanas</option></select></div><div><label>Interés</label><select id="s_cal"><option value="0"'+(x.cal?"":" selected")+'>Normal</option><option value="1"'+(x.cal?" selected":"")+'>Muy interesado</option></select></div></div><p class="nota" id="s_est">Ahora: <span class="ch '+c[1]+'">'+c[0]+'</span>. Si está muy interesado, mejor en 1 o 2 días.</p><button class="btn s" id="m_btn" style="margin-top:6px">Escríbeme el mensaje</button></div>'+
+ '<details class="det"'+(infOk(x)?'':' open')+'><summary>Informe de visita (obligatorio para pasar a presupuesto)</summary><div class="fm"><label>Quién estaba</label><input id="i_q" maxlength="120" value="'+esc(i.q)+'"><label>Cómo es la casa</label><input id="i_c" maxlength="160" value="'+esc(i.c)+'"><label>Qué quieren hacer</label><input id="i_n" maxlength="160" value="'+esc(i.n)+'"><label>Tus impresiones</label><textarea id="i_i" maxlength="300">'+esc(i.i)+'</textarea></div></details>'+
+ '<details class="det"><summary>Si no sale adelante</summary><div class="fm"><label>Motivo</label><select id="p_mot"><option value="">—</option><option'+(x.mot=="Aplazado"?" selected":"")+'>Aplazado</option><option'+(x.mot=="No firmó (eligió otra empresa)"?" selected":"")+'>No firmó (eligió otra empresa)</option><option'+(x.mot=="Descartado"?" selected":"")+'>Descartado</option></select><label>Por qué (para aprender)</label><input id="p_not" maxlength="160" value="'+esc(x.motn||"")+'"></div></details>');
+ var g=function(i){return document.getElementById(i)};
+ g("m_btn").onclick=function(){abreMsg(x.id)};
+ g("s_txt").oninput=function(){x.sig=g("s_txt").value;guarda()};
+ g("s_dia").onchange=function(){var v=g("s_dia").value;if(v!==""){x.sigf=HOY0+(+v)*DIA;guarda();var c2=cuando2(x.sigf);g("s_est").innerHTML='Ahora: <span class="ch '+c2[1]+'">'+c2[0]+'</span>.'}};
+ g("s_cal").onchange=function(){x.cal=g("s_cal").value=="1";guarda()};
+ ["q","c","n","i"].forEach(function(k){g("i_"+k).oninput=function(){x.inf=x.inf||{};x.inf[k]=g("i_"+k).value;guarda()}});
+ g("p_mot").onchange=function(){x.mot=g("p_mot").value;guarda()};g("p_not").oninput=function(){x.motn=g("p_not").value;guarda()};
+ var ok=g("e_ok"),orig=ok.onclick;ok.onclick=function(ev){var nf=g("e_fas").value;if(nf!=x.fase){var er=puedeIr(x,nf);if(er){aviso(er);var ds=f.querySelectorAll("details");var di=nf=="perdido"?1:0;if(ds[di])ds[di].open=true;return}}return orig.call(this,ev)}}
+
+carga();fixLeads();pintaTabs();vista();kpis();
+</script></body></html>'''
