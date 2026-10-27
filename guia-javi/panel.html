@@ -12,6 +12,7 @@
 @font-face{font-family:Inter;font-weight:700;font-display:swap;src:url(/fonts/inter-700.woff2) format("woff2")}
 :root{--ink:#12202B;--lin:#dde5ec;--fon:#f3f6f9;--ac:#C2410C;--acl:#fff1e8;--sua:#51606e;--bl:#fff}
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{margin:0;background:var(--fon);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.45;-webkit-text-size-adjust:100%}
@@ -115,6 +116,56 @@ h2{margin:0;font-size:1.35rem;line-height:1.2}
 .cj .ms{margin-top:14px;background:#f6f8fa;border-radius:14px;padding:12px 14px;font-size:.93rem;display:grid;gap:8px}
 .cj .ms p{margin:0}
 .cj .pie{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center}
+
+.vistas{margin:14px 0 0;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.seg{display:inline-flex;border:1px solid var(--lin);border-radius:999px;background:#fff;padding:2px}
+.seg button{min-height:40px;border:0;background:none;border-radius:999px;padding:0 16px;font-weight:600;font-size:.95rem;color:#3b4a58}
+.seg button[aria-pressed=true]{background:var(--ink);color:#fff}
+.chb{min-height:44px;border-radius:999px;border:1px solid var(--lin);background:#fff;padding:0 14px;font-weight:600;font-size:.93rem}
+.chb[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.chb.tm[aria-pressed=true]{background:#e4f1f5;border-color:#1c8caa;color:var(--ink)}
+.chb.tm[aria-pressed=false]{color:#7b8794}
+.fl{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 0}
+.rg{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 0;font-size:.92rem;color:#3b4a58}
+.rg label{display:flex;align-items:center;gap:6px}
+.rg input{min-height:44px;border:1px solid var(--lin);border-radius:12px;padding:0 10px;background:#fff;max-width:100%}
+.lab{margin:14px 0 0;font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--sua)}
+.tabs{display:flex;gap:8px;overflow-x:auto;margin:18px -16px 0;padding:0 16px 4px}
+.tabs .chb{flex:none}
+.kps{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:12px;grid-template-columns:minmax(0,1fr)}
+.kps li{background:#fff;border:1px solid var(--lin);border-radius:20px;padding:14px 16px}
+.kps .kn{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--sua)}
+.kps .kv{display:block;margin-top:4px;font-size:1.9rem;font-weight:700;line-height:1.1}
+.kps .kd{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:6px;font-size:.88rem;color:var(--sua)}
+.kps .kh{margin:6px 0 0;font-size:.88rem;color:#3b4a58}
+.pl{border-radius:999px;padding:2px 9px;font-weight:700;font-size:.8rem;background:#eef2f6;color:#51606e}
+.pl.b{background:#ebf1e8;color:#4d7047}.pl.m{background:#f8e8ea;color:#a3505a}
+.caja{margin:14px 0 0;background:#fff;border:1px solid var(--lin);border-radius:20px;padding:14px 16px}
+.caja ul{list-style:none;margin:8px 0 0;padding:0}
+.caja li{display:flex;flex-direction:column;gap:2px;padding:10px 0;border-top:1px solid var(--lin);font-size:.95rem}
+.caja li:first-child{border-top:0}
+.caja .b{font-weight:700}
+.gm{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;background:#f6f8fa;border-radius:12px;padding:8px 12px;font-size:.92rem;margin-top:4px}
+.herr2{margin-top:30px;scroll-margin-top:68px}
+.hg{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:10px}
+.hg a{display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:60px;background:#fff;border:1px solid var(--lin);border-radius:16px;padding:10px 16px;text-decoration:none;color:var(--ink)}
+.hg a:hover{border-color:var(--ink)}
+.hg b{display:block}.hg span{display:block;color:#51606e;font-size:.9rem}
+.hg i{font-style:normal;font-weight:700;color:var(--ac)}
+.hg .ej{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#7b8794}
+.corr{margin-top:30px;background:#fff;border:1px solid var(--lin);border-radius:20px;padding:16px 18px;scroll-margin-top:68px}
+.corr form{margin:8px 0 0;display:flex;flex-wrap:wrap;gap:8px}
+.corr input[type=email]{flex:1 1 220px;min-width:0;min-height:46px;border-radius:999px;border:1px solid var(--lin);background:#f6f8fa;padding:0 16px;font-size:1rem}
+.corr .ok{margin:8px 0 0;font-size:.93rem;color:#1d6a42}.corr .no{margin:8px 0 0;font-size:.93rem;color:#a3505a}
+.sl{margin-top:14px;border-top:1px solid var(--lin);padding-top:10px}
+.sl li{list-style:none;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;font-size:.92rem;margin-top:8px}
+.sl ul{margin:0;padding:0}
+.prev{margin-top:12px}
+.prev summary{min-height:44px;display:flex;align-items:center;font-weight:600;cursor:pointer}
+.prev .em{margin-top:6px;background:#f6f8fa;border:1px solid var(--lin);border-radius:14px;padding:14px 16px;font-size:.93rem}
+.prev .em h3{margin:0 0 6px;font-size:1.05rem}.prev .em p{margin:6px 0 0}.prev .em b{font-weight:700}
+.chart text{font-family:inherit}
+@media (min-width:700px){.kps{grid-template-columns:repeat(2,minmax(0,1fr))}.caja li{flex-direction:row;justify-content:space-between;gap:16px}.caja .b{text-align:right;max-width:60%}.hg{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media print{.bar,.nav,.vel{display:none}}
 </style>
 </head>
@@ -126,6 +177,8 @@ h2{margin:0;font-size:1.35rem;line-height:1.2}
 <p class="k">AMS Cerramientos · mesa de control</p>
 <h1>Cómo va AMS Cerramientos</h1>
 <p class="sub" id="sub"></p>
+<div class="vistas"><span class="seg" role="group" aria-label="Qué ver"><button type="button" data-v="sencilla" aria-pressed="true">Resumen</button><button type="button" data-v="completa" aria-pressed="false">Todas las cifras</button></span><button type="button" class="chb" id="ayuda2">Ayuda</button><button type="button" class="chb" id="cper">Cambiar periodo</button></div>
+<div id="v-sencilla">
 <div id="concl"></div>
 <section class="hoy" id="m-hoy" aria-label="Lo primero que haría hoy"></section>
 <section class="sec" id="m-temas"><h2>Cómo está cada parte</h2>
@@ -140,14 +193,45 @@ h2{margin:0;font-size:1.35rem;line-height:1.2}
 <ul class="resp" id="resp" aria-live="polite"></ul>
 <p class="nota">En esta demostración las respuestas son de ejemplo y salen de las cifras de arriba. En la versión real las escribe Claude y cada pregunta tiene un pequeño coste que decides tú; te lo explicamos en la guía.</p>
 </section>
-<p class="fin"><a class="btn s" style="display:inline-flex;align-items:center;text-decoration:none;color:#12202B" href="/guia-javi/panel-completo">Ver todas las cifras y gráficas</a></p>
-<p class="sub" style="text-align:center">Ahí están los canales, las campañas, las redes y los gráficos paso a paso.</p>
-<section class="herr" id="m-mas"><button type="button" id="bmas" aria-expanded="false"><span><b style="display:block;font-size:1.05rem">Más herramientas</b><span style="color:#51606e;font-size:.95rem">El CRM, la lupa y recibir el resumen por correo</span></span><span class="pill" id="pmas">Abrir</span></button>
-<div class="cu" id="cu" hidden>
-<div class="eny"><a class="btn" href="/guia-javi/crm">Tu CRM</a><a class="btn" href="/guia-javi/lupa">La lupa de tu web</a><a class="btn" href="/guia-javi/resumen">Tu resumen diario, semanal y mensual</a></div>
-<form id="fc"><select id="fr" aria-label="Cada cuánto"><option>Cada día</option><option>Cada lunes</option><option>Cada mes</option><option>Ahora mismo</option></select><input type="email" id="em" placeholder="tu correo" aria-label="Tu correo"><button type="submit" class="btn p">Recibir el resumen</button></form>
-<p class="nota" id="fcr">Un correo corto con lo mismo que ves aquí, para no tener que entrar.</p>
-</div></section>
+<p class="fin"><button type="button" class="btn s" id="vcompleta">Ver todas las cifras y gráficas</button></p>
+<p class="sub" style="text-align:center">Ahí están los canales, las campañas, el selector de fechas y la comparación.</p>
+</div>
+<div id="v-completa" hidden>
+<section class="sec" id="m-per"><h2>Todas las cifras</h2>
+<p class="ay">Elige el periodo y contra qué compararlo. Todo se recalcula al momento.</p>
+<div class="fl" id="per" role="group" aria-label="Periodo"></div>
+<div class="rg"><label>Desde <input type="date" id="d1" aria-label="Desde"></label><label>hasta <input type="date" id="d2" aria-label="Hasta"></label></div>
+<p class="lab">Comparar con</p>
+<div class="fl" id="cmp" role="group" aria-label="Comparar con"></div>
+<p class="nota" id="pertxt"></p>
+</section>
+<div class="tabs" id="tabs" role="group" aria-label="Qué mirar"></div>
+<div id="cbody"></div>
+<p class="nota" style="margin-top:20px">Fuentes y su última actualización (en esta demostración todo es de ejemplo): la web y el CRM, al momento · Google Analytics, al momento · Search Console, con 2 días de retraso · Google Ads, al día de hoy · Ficha de Google, al día de hoy · reseñas, a mano. Las pruebas del equipo no cuentan.</p>
+<p class="fin"><a class="btn" style="display:inline-flex;align-items:center;text-decoration:none;color:#12202B" href="/guia-javi/panel-completo">Ver la vista antigua, con redes, correos y más gráficos</a></p>
+</div>
+<section class="herr2" id="m-mas"><h2>Herramientas</h2>
+<ul class="hg">
+<li><a href="/guia-javi/lupa"><span><b>La lupa</b><span>La web con lo que hace la gente encima: dónde tocan, hasta dónde bajan, conclusiones</span></span><i>→</i></a></li>
+<li><a href="/guia-javi/crm"><span><b>CRM</b><span>Contactos, visitas y trabajos, de cada persona</span></span><i>→</i></a></li>
+<li><a href="/guia-javi/panel-completo"><span><b>Coste por cliente</b><span>Lo invertido frente a contactos, visitas y trabajos aceptados</span></span><i>→</i></a></li>
+<li><a href="/guia-javi"><span><b>Plan de marketing</b><span>La guía viva del plan, con lo hecho y lo pendiente</span></span><i>→</i></a></li>
+<li><a href="#tema-reputacion" data-abre="reputacion"><span><b>Espejo de la IA <em class="ej">ejemplo</em></b><span>Qué dicen de nosotros ChatGPT, Gemini y Claude. Se activa al conectar tus cuentas</span></span><i>→</i></a></li>
+<li><a href="#tema-competencia" data-abre="competencia"><span><b>Vigía de la competencia <em class="ej">ejemplo</em></b><span>Sus webs, reseñas y puestos en Google, cada semana. Se activa al conectar tus cuentas</span></span><i>→</i></a></li>
+<li><a href="/guia-javi/panel-completo"><span><b>Redes y correos <em class="ej">ejemplo</em></b><span>Instagram, Facebook, TikTok y tus correos automáticos</span></span><i>→</i></a></li>
+</ul></section>
+<section class="corr" id="m-correo"><h2>Recibe un resumen por correo</h2>
+<p class="ay" style="margin:4px 0 0;color:#51606e;font-size:.95rem">Elige cada cuánto y de qué. Pon tu correo y te lo mandamos solo, sin que tengas que entrar.</p>
+<p class="lab">1. Cada cuánto</p><div class="fl" id="cf-frec" role="group" aria-label="Cada cuánto"></div>
+<p class="lab">2. De qué</p><div class="fl" id="cf-temas" role="group" aria-label="De qué"></div>
+<p class="no" id="cf-sin" hidden>Elige al menos un tema para poder programarlo.</p>
+<p class="lab">3. A qué correo</p>
+<form id="cf-form"><input type="email" id="cf-mail" placeholder="tu@correo.es" aria-label="A qué correo" autocomplete="email"><button type="submit" class="btn p" id="cf-ok">Programarlo</button></form>
+<p id="cf-msg" role="status"></p>
+<details class="prev"><summary>Ver cómo sería el correo</summary><div id="cf-prev"></div></details>
+<div class="sl" id="cf-lista" hidden><p class="lab" style="margin:0">Resúmenes programados</p><ul id="cf-ul"></ul></div>
+<p class="nota">Demostración: no se envía nada. En la versión real, el correo sale con el mismo texto que ves en pantalla.</p>
+</section>
 </main>
 <nav class="nav" aria-label="Ir a"><ul><li><button type="button" data-ir="top">Estado</button></li><li><button type="button" data-ir="m-cifras">Cifras</button></li><li><button type="button" data-ir="m-pregunta">Preguntar</button></li><li><button type="button" data-ir="m-mas">Más</button></li></ul></nav>
 <div class="vel" id="vel" role="dialog" aria-modal="true" aria-label="Cómo funciona la mesa" hidden><div class="cj">
@@ -164,7 +248,7 @@ h2{margin:0;font-size:1.35rem;line-height:1.2}
 </div></div>
 <script>
 (function(){
-var D = {"hoy": "2026-10-27", "periodo": ["2026-09-30", "2026-10-27"], "fallos": [], "contactos": {"actual": {"formulario": 8, "configurador": 11, "whatsapp": 9, "llamadas": 7, "chat": 3}, "antes": {"formulario": 6, "configurador": 8, "whatsapp": 8, "llamadas": 6, "chat": 3}, "visitasMedicion": {"actual": 12, "antes": 9}, "aceptados": {"actual": 4, "antes": 3}, "esperando": [{"quien": "R. P.", "que": "4 ventanas de PVC en Alcalá de Henares", "horas": 31}, {"quien": "S. T.", "que": "Cerramiento de terraza de 12 m² en Torrejón", "horas": 27}], "horasRespuesta": 2.2}, "web": {"visitas": {"actual": 2940, "antes": 2620}, "configurador": {"usos": 142, "usosAntes": 118}, "cancelasVisitas": 94, "sistemas": "Todo al día"}, "ads": {"actualizado": "2026-10-27", "antes": {"coste": 780, "contactos": 12}, "webVe": 4, "campanas": [{"n": "Ventanas de PVC en Alcalá", "coste": 330, "conv": 6}, {"n": "Ventanas de aluminio", "coste": 200, "conv": 4}, {"n": "Cerramientos de terraza", "coste": 190, "conv": 3}, {"n": "Cancelas de aluminio", "coste": 60, "conv": 1}, {"n": "Mosquiteras y persianas", "coste": 60, "conv": 0}]}, "resenas": {"nota": 4.8, "total": 63, "antes": 61, "sinResponder": [{"estrellas": 3, "dias": 9}], "fichaSale": {"actual": 1480, "antes": 1358}, "fichaLlamadas": {"actual": 21, "antes": 17}, "ia": {"nombran": 3, "de": 10, "antes": 2}}, "competencia": [{"n": "Competidor A (Alcalá)", "t": "Sin cambios importantes.", "luz": "verde"}, {"n": "Competidor B (Alcalá)", "t": "Ha bajado un 10 % el precio de las ventanas de PVC hasta el 15 de noviembre. No hace falta reaccionar: es una oferta con fecha.", "luz": "verde"}, {"n": "Competidor C (Guadalajara)", "t": "Ha estrenado una página de cancelas de aluminio. La tuya ya tiene 8 modelos con fotos reales.", "luz": "verde"}, {"n": "Competidor D (Guadalajara)", "t": "Sin cambios importantes.", "luz": "verde"}]};
+var D = {"hoy": "2026-10-27", "periodo": ["2026-09-30", "2026-10-27"], "fallos": [], "contactos": {"actual": {"formulario": 8, "configurador": 11, "whatsapp": 9, "llamadas": 7, "chat": 3}, "antes": {"formulario": 6, "configurador": 8, "whatsapp": 8, "llamadas": 6, "chat": 3}, "visitasMedicion": {"actual": 12, "antes": 9}, "aceptados": {"actual": 4, "antes": 3}, "esperando": [{"quien": "R. P.", "que": "4 ventanas de PVC en Alcalá de Henares", "horas": 31}, {"quien": "S. T.", "que": "Cerramiento de terraza de 12 m² en Torrejón", "horas": 27}], "horasRespuesta": 2.2}, "web": {"visitas": {"actual": 2940, "antes": 2620}, "configurador": {"usos": 142, "usosAntes": 118}, "cancelasVisitas": 94, "sistemas": "Todo al día"}, "ads": {"actualizado": "2026-10-27", "antes": {"coste": 780, "contactos": 12}, "webVe": 4, "antesCamp": {"Ventanas de PVC en Alcalá": [300, 5], "Ventanas de aluminio": [190, 3], "Cerramientos de terraza": [170, 2], "Cancelas de aluminio": [60, 1], "Mosquiteras y persianas": [60, 1]}, "campanas": [{"n": "Ventanas de PVC en Alcalá", "coste": 330, "conv": 6}, {"n": "Ventanas de aluminio", "coste": 200, "conv": 4}, {"n": "Cerramientos de terraza", "coste": 190, "conv": 3}, {"n": "Cancelas de aluminio", "coste": 60, "conv": 1}, {"n": "Mosquiteras y persianas", "coste": 60, "conv": 0}]}, "resenas": {"nota": 4.8, "total": 63, "antes": 61, "sinResponder": [{"estrellas": 3, "dias": 9}], "fichaSale": {"actual": 1480, "antes": 1358}, "fichaLlamadas": {"actual": 21, "antes": 17}, "ia": {"nombran": 3, "de": 10, "antes": 2}}, "competencia": [{"n": "Competidor A (Alcalá)", "t": "Sin cambios importantes.", "luz": "verde"}, {"n": "Competidor B (Alcalá)", "t": "Ha bajado un 10 % el precio de las ventanas de PVC hasta el 15 de noviembre. No hace falta reaccionar: es una oferta con fecha.", "luz": "verde"}, {"n": "Competidor C (Guadalajara)", "t": "Ha estrenado una página de cancelas de aluminio. La tuya ya tiene 8 modelos con fotos reales.", "luz": "verde"}, {"n": "Competidor D (Guadalajara)", "t": "Sin cambios importantes.", "luz": "verde"}]};
 var fl=/[?&]fallo=([a-z]+)/.exec(location.search);if(fl)D.fallos=[fl[1]];
 var LUZ={verde:{c:"#2f9a62",t:"Todo bien"},ambar:{c:"#d68a1c",t:"Mira esto"},rojo:{c:"#cf3f3a",t:"Importante"},gris:{c:"#a7a39a",t:"Sin datos aún"},azul:{c:"#1c8caa",t:"Datos de tu negocio"}};
 var SEG={verde:4,ambar:2,rojo:1,gris:0,azul:3};
@@ -319,15 +403,19 @@ try{var g=JSON.parse(localStorage.getItem(HK)||"{}"),lim=new Date(Date.now()-7*8
 function marca(id){if(hechas[id])delete hechas[id];else hechas[id]=new Date().toISOString().slice(0,10);try{localStorage.setItem(HK,JSON.stringify(hechas))}catch(e){}pintaHoy()}
 var abierto=null,verMas=false;
 
-function pintaConclusion(){
+function conclData(){
   var rojos=M.filter(function(m){return m.luz==="rojo"}).length,amb=M.filter(function(m){return m.luz==="ambar"}).length;
   var puntos=M.filter(function(m){return m.punto}).map(function(m){return m.punto});
   var n=M.filter(function(m){return m.luz==="rojo"||m.luz==="ambar"}).length;
   var cl=rojos?"rojo":(amb?"ambar":"verde");
   var tit=rojos?(n===1?"Hay una cosa importante":"Hay "+num(n)+" cosas, y alguna es importante"):(amb?(n===1?"Hay una cosa que mirar":"Hay "+(n===3?"tres":n===2?"dos":n)+" cosas que mirar"):"Hoy no hay nada urgente");
-  var h='<section class="concl '+cl+'" aria-live="polite"><p class="t">'+luzDot(cl,true)+esc(tit)+'</p>';
   if(!puntos.length)puntos=["Todas las partes van bien."];
-  h+='<ul>'+puntos.map(function(p){return '<li>'+esc(p)+'</li>'}).join("")+'</ul>';
+  return {cl:cl,tit:tit,puntos:puntos};
+}
+function pintaConclusion(){
+  var c=conclData(),cl=c.cl;
+  var h='<section class="concl '+cl+'" aria-live="polite"><p class="t">'+luzDot(cl,true)+esc(c.tit)+'</p>';
+  h+='<ul>'+c.puntos.map(function(p){return '<li>'+esc(p)+'</li>'}).join("")+'</ul>';
   if(T.length)h+='<button type="button" class="btn p" id="ir-hoy">'+(cl==="verde"?"Ver qué tengo que hacer":"Ver lo más importante")+'</button>';
   $("#concl").innerHTML=h+'</section>';
   var b=$("#ir-hoy");if(b)b.onclick=function(){$("#m-hoy").scrollIntoView()};
@@ -397,13 +485,8 @@ $("#fq").onsubmit=function(e){e.preventDefault();pregunta($("#q").value)};
     r.start()}catch(e){b.textContent="Dictar"}};
 })();
 
-/* Más herramientas */
-function abreMas(){$("#cu").hidden=false;$("#bmas").setAttribute("aria-expanded","true");$("#pmas").textContent="Cerrar"}
-$("#bmas").onclick=function(){var ab=$("#cu").hidden;$("#cu").hidden=!ab;this.setAttribute("aria-expanded",String(ab));$("#pmas").textContent=ab?"Cerrar":"Abrir"};
-$("#fc").onsubmit=function(e){e.preventDefault();var m=$("#em").value.trim();$("#fcr").textContent=m?"En la demostración no se envía nada. En la versión real, el resumen "+$("#fr").value.toLowerCase()+" llegaría a "+m+".":"Escribe un correo para ver cómo quedaría."};
-
 /* Barra del móvil */
-[].forEach.call(document.querySelectorAll(".nav [data-ir]"),function(b){b.onclick=function(){var id=b.getAttribute("data-ir");if(id==="m-mas")abreMas();setTimeout(function(){$("#"+id).scrollIntoView()},30)}});
+[].forEach.call(document.querySelectorAll(".nav [data-ir]"),function(b){b.onclick=function(){var id=b.getAttribute("data-ir");if(id!=="m-mas"&&id!=="m-correo")mostrar("sencilla");setTimeout(function(){$("#"+id).scrollIntoView()},40)}});
 
 /* Guía de una pantalla (la primera vez) y botón ? */
 var vel=$("#vel"),volver=null;
@@ -413,6 +496,156 @@ $("#entrar").onclick=cierraGuia;$("#ayuda").onclick=abreGuia;
 $("#vermas").onclick=function(){var m=$("#ms");m.hidden=!m.hidden;this.textContent=m.hidden?"Ver una explicación más completa":"Menos explicación";this.setAttribute("aria-expanded",String(!m.hidden))};
 document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!vel.hidden)cierraGuia()});
 try{if(!localStorage.getItem("ams-mesa-guia"))abreGuia()}catch(e){abreGuia()}
+
+/* ===== Series diarias de ejemplo (inventadas, siempre iguales) ===== */
+function rng(seed){var h=2166136261,i;for(i=0;i<seed.length;i++)h=Math.imul(h^seed.charCodeAt(i),16777619);return function(){h=Math.imul(h^(h>>>15),2246822507);h=Math.imul(h^(h>>>13),3266489909);h^=h>>>16;return (h>>>0)/4294967296}}
+function addD(s,n){var d=new Date(s+"T12:00:00Z");d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10)}
+var N=800,DIAS=[],IX={};(function(){for(var i=N-1;i>=0;i--)DIAS.push(addD(D.hoy,-i));DIAS.forEach(function(d,i){IX[d]=i})})();
+function dow(d){return new Date(d+"T12:00:00Z").getUTCDay()}
+function poi(r,m){var L=Math.exp(-m),k=0,p=1;do{k++;p*=r()}while(p>L);return k-1}
+function fx(a,from,to,target,r){var s=0,i,g=0;for(i=from;i<=to;i++)s+=a[i];while(s<target&&g++<20000){i=from+Math.floor(r()*(to-from+1));a[i]++;s++}while(s>target&&g++<40000){i=from+Math.floor(r()*(to-from+1));if(a[i]>0){a[i]--;s--}}}
+function fac(i,fin){var d=DIAS[i],m=Number(d.slice(5,7)),w=dow(d);return Math.max(0.35,1+0.0009*(i-N))*(m===8?0.55:1)*((w===0||w===6)?fin:1)}
+function mk(nom,act,ant,fin){var r=rng(nom),a=[],i;for(i=0;i<N;i++)a.push(poi(r,act/28*fac(i,fin||0.6)));fx(a,N-28,N-1,act,r);fx(a,N-56,N-29,ant,r);return a}
+function mkC(nom,act,ant){var r=rng(nom),a=[],i;for(i=0;i<N;i++)a.push(Math.round(act/28*fac(i,0.8)*(0.7+0.6*r())));fx(a,N-28,N-1,act,r);fx(a,N-56,N-29,ant,r);return a}
+var CA=D.contactos.actual,CB=D.contactos.antes;
+var S={form:mk("form",CA.formulario,CB.formulario),conf:mk("conf",CA.configurador,CB.configurador),wa:mk("wa",CA.whatsapp,CB.whatsapp),ll:mk("ll",CA.llamadas,CB.llamadas),chat:mk("chat",CA.chat,CB.chat),vis:mk("vis",D.web.visitas.actual,D.web.visitas.antes,0.7),camC:{},camV:{}};
+D.ads.campanas.forEach(function(c){var an=D.ads.antesCamp[c.n];S.camC[c.n]=mkC("c"+c.n,c.coste,an[0]);S.camV[c.n]=mk("v"+c.n,c.conv,an[1])});
+function ag(i1,i2){
+  var o={form:0,conf:0,wa:0,ll:0,chat:0,vis:0,coste:0,conv:0,camp:{}},i,j=Math.max(0,i1),k=Math.min(N-1,i2);
+  for(i=j;i<=k;i++){o.form+=S.form[i];o.conf+=S.conf[i];o.wa+=S.wa[i];o.ll+=S.ll[i];o.chat+=S.chat[i];o.vis+=S.vis[i]}
+  D.ads.campanas.forEach(function(c){var a=0,v=0;for(i=j;i<=k;i++){a+=S.camC[c.n][i];v+=S.camV[c.n][i]}o.camp[c.n]=[a,v];o.coste+=a;o.conv+=v});
+  o.contactos=o.form+o.conf+o.wa+o.ll+o.chat;o.pres=o.form+o.conf;o.puls=o.wa+o.ll;
+  o.cvr=o.vis>0?o.contactos/o.vis*100:NaN;o.cpl=o.conv>0?o.coste/o.conv:NaN;return o;
+}
+var MA=["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
+function fcorta(s,conAnio){return Number(s.slice(8))+" "+MA[Number(s.slice(5,7))-1]+(conAnio?" "+s.slice(0,4):"")}
+function rtxt(a,b){return a===b?fcorta(a,true):fcorta(a,a.slice(0,4)!==b.slice(0,4))+" – "+fcorta(b,true)}
+
+/* ===== Todas las cifras ===== */
+var PRE=[["hoy","Hoy"],["ayer","Ayer"],["7d","7 días"],["28d","28 días"],["3m","3 meses"],["mes","Este mes"],["mesp","Mes pasado"],["12m","12 meses"],["dia","Un día"]];
+var P={pre:"28d",a:addD(D.hoy,-27),b:D.hoy,cmp:"ant",met:"contactos",tab:"res",sel:null};
+function rangoPre(k){var h=D.hoy,f,u;if(k==="hoy")return[h,h];if(k==="ayer")return[addD(h,-1),addD(h,-1)];if(k==="7d")return[addD(h,-6),h];if(k==="28d")return[addD(h,-27),h];if(k==="3m")return[addD(h,-89),h];if(k==="mes")return[h.slice(0,8)+"01",h];if(k==="mesp"){f=h.slice(0,8)+"01";u=addD(f,-1);return[u.slice(0,8)+"01",u]}if(k==="12m")return[addD(h,-364),h];return null}
+function rangoCmp(){var i1=IX[P.a],i2=IX[P.b],L,c1,c2;if(P.cmp==="nada"||i1===undefined||i2===undefined)return null;L=i2-i1+1;
+  if(P.cmp==="ant"){c1=i1-L;c2=i1-1}else{c1=IX[addD(P.a,-365)];c2=IX[addD(P.b,-365)];if(c1===undefined||c2===undefined)return null}
+  return c1<0?null:[c1,c2]}
+function pill(a,b,menos){
+  if(!isFinite(a)||!isFinite(b))return "";
+  var v=delta(a,b);
+  if(v===null)return '<span class="pl">sin datos antes</span>';
+  if(Math.abs(v)<0.5)return '<span class="pl">= igual</span>';
+  if(menos===2)return '<span class="pl">'+(v>0?"▲ ":"▼ ")+num(Math.abs(v))+' %</span>';
+  var bien=menos?v<0:v>0;
+  return '<span class="pl '+(bien?"b":"m")+'">'+(v>0?"▲ ":"▼ ")+num(Math.abs(v))+" %"+(bien?" · mejor":" · peor")+'</span>';
+}
+function f1(n){return isFinite(n)?dec(n)+" %":"—"}
+var KP=[["Visitas a la web","vis",num,0,"Veces que alguien entra en la web."],
+ ["Contactos","contactos",num,0,"Personas que han escrito o llamado: formulario, configurador, WhatsApp, llamada o chat."],
+ ["Presupuestos pedidos","pres",num,0,"Contactos que piden presupuesto de forma expresa, por el formulario o el configurador."],
+ ["WhatsApp y llamar","puls",num,0,"Veces que pulsan el botón de WhatsApp o de llamar. No son conversaciones."],
+ ["Visitas que acaban en contacto","cvr",f1,0,"De cada 100 visitas a la web, cuántas acaban dejando sus datos."],
+ ["Inversión en anuncios","coste",eur,2,"Lo gastado en Google Ads."],
+ ["Coste por contacto de anuncios","cpl",function(n){return isFinite(n)?eur(n):"—"},1,"Lo que cuesta cada contacto que cuenta Google. Cuanto más bajo, mejor."]];
+var MET=[["contactos","Contactos",num],["pres","Presupuestos",num],["puls","WhatsApp y llamar",num],["vis","Visitas a la web",num],["coste","Inversión en anuncios",eur],["cpl","Coste por contacto",function(n){return isFinite(n)?eur(n):"sin dato"}]];
+function buck(i1,i2){var n=i2-i1+1,B=[],i,s;if(n<=62){for(i=i1;i<=i2;i++)B.push([i,i]);return{m:"d",B:B}}if(n<=200){for(i=i1;i<=i2;i+=7)B.push([i,Math.min(i+6,i2)]);return{m:"w",B:B}}s=i1;for(i=i1;i<=i2;i++){if(i===i2||DIAS[i+1].slice(0,7)!==DIAS[i].slice(0,7)){B.push([s,i]);s=i+1}}return{m:"m",B:B}}
+function chartHTML(){
+  var i1=IX[P.a],i2=IX[P.b],bk=buck(i1,i2),cr=rangoCmp(),sh=cr?cr[0]-i1:0,met=MET.filter(function(x){return x[0]===P.met})[0],fmt=met[2],pts=[],narrow=window.innerWidth<=640;
+  bk.B.forEach(function(b){
+    var o=ag(b[0],b[1]),v=o[met[0]],c,ec;
+    if(cr&&b[0]+sh>=0&&b[1]+sh<=N-1){c=ag(b[0]+sh,b[1]+sh)[met[0]];ec=bk.m==="m"?MA[Number(DIAS[b[0]+sh].slice(5,7))-1]:fcorta(DIAS[b[0]+sh])}
+    pts.push({e:bk.m==="m"?MA[Number(DIAS[b[0]].slice(5,7))-1]:fcorta(DIAS[b[0]]),v:v,c:c,ec:ec});
+  });
+  var w=narrow?380:760,h=narrow?190:230,iz=8,ab=26,ar=14,n=pts.length,ok=function(x){return x!==undefined&&isFinite(x)};
+  var hayC=pts.some(function(p){return ok(p.c)}),mx=1;pts.forEach(function(p){if(ok(p.v)&&p.v>mx)mx=p.v;if(ok(p.c)&&p.c>mx)mx=p.c});
+  var paso=(w-iz*2)/Math.max(1,n),X=function(i){return iz+paso*i+paso/2},Y=function(v){return ar+(h-ab-ar)*(1-v/mx)};
+  var sel=P.sel!==null&&P.sel<n?P.sel:n-1,svg='<svg viewBox="0 0 '+w+' '+h+'" class="chart" style="width:100%;height:auto" role="img" aria-label="Gráfico de '+esc(met[1])+'">',k,i;
+  [0.25,0.5,0.75,1].forEach(function(f){svg+='<line x1="'+iz+'" x2="'+(w-iz)+'" y1="'+Y(mx*f)+'" y2="'+Y(mx*f)+'" stroke="#dde5ec" stroke-dasharray="3 4"/><text x="'+(w-iz)+'" y="'+(Y(mx*f)-3)+'" font-size="12" fill="#6a7786" text-anchor="end">'+esc(fmt(mx*f))+'</text>'});
+  svg+='<line x1="'+iz+'" x2="'+(w-iz)+'" y1="'+(h-ab)+'" y2="'+(h-ab)+'" stroke="#cfd8e0"/>';
+  var barras=n<=14;
+  if(barras){pts.forEach(function(p,i){var bw=Math.max(3,paso*(hayC?0.36:0.62));if(hayC&&ok(p.c))svg+='<rect x="'+(X(i)-bw-1)+'" y="'+Y(p.c)+'" width="'+bw+'" height="'+(h-ab-Y(p.c))+'" rx="3" fill="#d68a1c" opacity="'+(i===sel?0.55:0.3)+'"/>';if(ok(p.v))svg+='<rect x="'+(hayC?X(i)+1:X(i)-bw/2)+'" y="'+Y(p.v)+'" width="'+bw+'" height="'+(h-ab-Y(p.v))+'" rx="3" fill="#12202B" opacity="'+(i===sel?1:0.7)+'"/>'})}
+  else{
+    var ln=function(key){return pts.map(function(p,i){return ok(p[key])?X(i)+","+Y(p[key]):null}).filter(Boolean).join(" ")};
+    if(hayC)svg+='<polyline points="'+ln("c")+'" fill="none" stroke="#d68a1c" stroke-width="2" stroke-dasharray="5 5"/>';
+    svg+='<polygon points="'+X(0)+","+(h-ab)+" "+ln("v")+" "+X(n-1)+","+(h-ab)+'" fill="#12202B" opacity="0.08"/><polyline points="'+ln("v")+'" fill="none" stroke="#12202B" stroke-width="2.4" stroke-linejoin="round"/>';
+    if(ok(pts[sel].v))svg+='<circle cx="'+X(sel)+'" cy="'+Y(pts[sel].v)+'" r="5" fill="#12202B" stroke="#fff" stroke-width="2"/>';
+  }
+  var cada=Math.max(1,Math.ceil(n/(narrow?4:8)));
+  pts.forEach(function(p,i){if(i%cada===0||i===n-1)svg+='<text x="'+X(i)+'" y="'+(h-8)+'" font-size="12" fill="#6a7786" text-anchor="middle">'+esc(p.e)+'</text>'});
+  pts.forEach(function(p,i){svg+='<rect data-j="'+i+'" x="'+(iz+paso*i)+'" y="0" width="'+paso+'" height="'+h+'" fill="transparent" style="cursor:pointer"/>'});
+  svg+='</svg>';
+  var p=pts[sel];
+  return svg+'<div class="gm"><span><b>'+esc(p.e)+'</b>: <b>'+esc(ok(p.v)?fmt(p.v):"sin dato")+'</b>'+(hayC&&p.c!==undefined?' · antes ('+esc(p.ec)+'): <b>'+esc(ok(p.c)?fmt(p.c):"sin dato")+'</b>':"")+'</span><span style="color:#7b8794;font-size:.85rem">Toca una barra para ver cada punto</span></div>';
+}
+function pintaChart(){var el=$("#chartbox");if(!el)return;el.innerHTML=chartHTML();[].forEach.call(el.querySelectorAll("[data-j]"),function(r){r.onclick=function(){P.sel=Number(r.getAttribute("data-j"));pintaChart()}})}
+function pintaCompleta(){
+  $("#per").innerHTML=PRE.map(function(x){return '<button type="button" class="chb" aria-pressed="'+(P.pre===x[0])+'" data-p="'+x[0]+'">'+x[1]+'</button>'}).join("");
+  $("#cmp").innerHTML=[["ant","el periodo anterior"],["anio","el mismo periodo del año pasado"],["nada","nada"]].map(function(x){return '<button type="button" class="chb" aria-pressed="'+(P.cmp===x[0])+'" data-c="'+x[0]+'">'+x[1]+'</button>'}).join("");
+  $("#d1").value=P.a;$("#d2").value=P.b;$("#d1").min=$("#d2").min=DIAS[0];$("#d1").max=$("#d2").max=D.hoy;
+  var i1=IX[P.a],i2=IX[P.b],L=i2-i1+1,cr=rangoCmp();
+  $("#pertxt").textContent="Estás viendo "+rtxt(P.a,P.b)+" ("+L+(L===1?" día":" días")+"). "+(cr?"Cada flecha lo compara con "+(P.cmp==="ant"?(L===1?"el día justo anterior":"los "+L+" días justo anteriores"):"el mismo periodo del año pasado")+": "+rtxt(DIAS[cr[0]],DIAS[cr[1]])+".":(P.cmp==="nada"?"Sin comparación.":"No hay datos para comparar con ese periodo."));
+  $("#tabs").innerHTML=[["res","Resumen"],["con","Contactos"],["ads","Anuncios"]].map(function(x){return '<button type="button" class="chb" aria-pressed="'+(P.tab===x[0])+'" data-t="'+x[0]+'">'+x[1]+'</button>'}).join("");
+  var o=ag(i1,i2),c=cr?ag(cr[0],cr[1]):null,h="";
+  if(P.tab==="res"){
+    h+='<ul class="kps">'+KP.map(function(k){var v=o[k[1]];return '<li><span class="kn">'+k[0]+'</span><span class="kv">'+esc(k[2](v))+'</span><span class="kd">'+(c?pill(v,c[k[1]],k[3])+(isFinite(c[k[1]])?'<span>antes: '+esc(k[2](c[k[1]]))+'</span>':""):"")+'</span><p class="kh">'+esc(k[4])+'</p></li>'}).join("")+'</ul>';
+    h+='<section class="caja"><h2 style="font-size:1.15rem">'+esc(MET.filter(function(x){return x[0]===P.met})[0][1])+'</h2><div class="fl" role="group" aria-label="Qué mostrar">'+MET.map(function(m){return '<button type="button" class="chb" aria-pressed="'+(P.met===m[0])+'" data-m="'+m[0]+'">'+m[1]+'</button>'}).join("")+'</div><div id="chartbox" style="margin-top:10px"></div></section>';
+  }else if(P.tab==="con"){
+    var CH=[["Formulario","form"],["Configurador de ventanas","conf"],["WhatsApp","wa"],["Llamadas","ll"],["Chat de la web","chat"]];
+    h+='<section class="caja"><h2 style="font-size:1.15rem">De dónde llegan los contactos</h2><ul>'+CH.map(function(x){return '<li><span class="a">'+x[0]+'</span><span class="b">'+num(o[x[1]])+(c?" "+pill(o[x[1]],c[x[1]],0)+' <span style="font-weight:400;color:#51606e">antes: '+num(c[x[1]])+'</span>':"")+'</span></li>'}).join("")+'<li><span class="a"><b>Total</b></span><span class="b">'+num(o.contactos)+(c?" "+pill(o.contactos,c.contactos,0):"")+'</span></li></ul></section>';
+    var ps=o.contactos>0?o.puls/o.contactos*100:NaN;
+    h+='<p class="nota" style="margin-top:12px">'+(isFinite(ps)&&ps>=40?"Medición incompleta: "+num(o.puls)+" de "+num(o.contactos)+" contactos ("+num(ps)+" %) llegan por WhatsApp o llamada sin que sepamos de dónde vienen.":(isFinite(ps)?"WhatsApp y llamadas son el "+num(ps)+" % de los contactos: la mayoría trae su origen.":"No hay contactos en estas fechas."))+'</p>';
+  }else{
+    h+='<section class="caja"><h2 style="font-size:1.15rem">Google Ads</h2><ul><li><span class="a">Invertido</span><span class="b">'+eur(o.coste)+(c?" "+pill(o.coste,c.coste,2):"")+'</span></li><li><span class="a">Contactos según Google</span><span class="b">'+num(o.conv)+(c?" "+pill(o.conv,c.conv,0):"")+'</span></li><li><span class="a">Coste por contacto</span><span class="b">'+(isFinite(o.cpl)?eur(o.cpl):"—")+(c?" "+pill(o.cpl,c.cpl,1):"")+'</span></li></ul></section>';
+    h+='<section class="caja"><h2 style="font-size:1.15rem">Cada campaña</h2><ul>'+D.ads.campanas.map(function(m){var a=o.camp[m.n],b=c?c.camp[m.n]:null;return '<li><span class="a">'+esc(m.n)+'</span><span class="b">'+eur(a[0])+" · "+plural(a[1],"contacto","contactos")+" · "+(a[1]>0?eur(a[0]/a[1])+" cada uno":"sin contactos")+(b?' <span style="font-weight:400;color:#51606e">antes: '+eur(b[0])+" · "+num(b[1])+'</span>':"")+'</span></li>'}).join("")+'</ul></section>';
+    h+='<p class="nota" style="margin-top:12px">Los contactos son los que cuenta Google. Mientras la medición esté incompleta, tu web ve solo una parte de ellos: no pauses ninguna campaña por estas cifras.</p>';
+  }
+  $("#cbody").innerHTML=h;
+  [].forEach.call($("#cbody").querySelectorAll("[data-m]"),function(b){b.onclick=function(){P.met=b.getAttribute("data-m");P.sel=null;pintaCompleta()}});
+  pintaChart();
+}
+function fijaRango(a,b){if(a<DIAS[0])a=DIAS[0];if(b>D.hoy)b=D.hoy;if(a>b){var t=a;a=b;b=t}if(a<DIAS[0])a=DIAS[0];P.a=a;P.b=b;P.sel=null}
+$("#per").onclick=function(e){var b=e.target.closest("[data-p]");if(!b)return;var k=b.getAttribute("data-p"),r;P.pre=k;if(k==="dia"){r=[P.b,P.b]}else r=rangoPre(k);fijaRango(r[0],r[1]);pintaCompleta()};
+$("#cmp").onclick=function(e){var b=e.target.closest("[data-c]");if(!b)return;P.cmp=b.getAttribute("data-c");P.sel=null;pintaCompleta()};
+$("#tabs").onclick=function(e){var b=e.target.closest("[data-t]");if(!b)return;P.tab=b.getAttribute("data-t");pintaCompleta()};
+$("#d1").onchange=$("#d2").onchange=function(){if(!$("#d1").value||!$("#d2").value)return;P.pre="custom";fijaRango($("#d1").value,$("#d2").value);pintaCompleta()};
+var rz=null;window.addEventListener("resize",function(){clearTimeout(rz);rz=setTimeout(function(){if(!$("#v-completa").hidden)pintaChart()},150)});
+
+/* ===== Cambiar de vista ===== */
+function mostrar(v){$("#v-sencilla").hidden=v!=="sencilla";$("#v-completa").hidden=v!=="completa";[].forEach.call(document.querySelectorAll(".vistas [data-v]"),function(b){b.setAttribute("aria-pressed",String(b.getAttribute("data-v")===v))});if(v==="completa")pintaCompleta()}
+[].forEach.call(document.querySelectorAll(".vistas [data-v]"),function(b){b.onclick=function(){mostrar(b.getAttribute("data-v"));$(".vistas").scrollIntoView()}});
+$("#vcompleta").onclick=function(){mostrar("completa");$(".vistas").scrollIntoView()};
+$("#cper").onclick=function(){mostrar("completa");$("#m-per").scrollIntoView()};
+$("#ayuda2").onclick=function(){abreGuia()};
+[].forEach.call(document.querySelectorAll("[data-abre]"),function(a){if(a.tagName==="A")a.onclick=function(e){e.preventDefault();mostrar("sencilla");abre(a.getAttribute("data-abre"))}});
+
+/* ===== Resumen por correo (como la mesa de Reformadísimo; en la demo no se envía nada) ===== */
+var TEM=[["hoy","Lo más importante hoy"],["cifras","Las cuatro cifras"],["web","La web"],["contactos","Contactos y presupuestos"],["anuncios","Anuncios"],["reputacion","Reputación"],["competencia","Competencia"]];
+var FR=[["ahora","Solo una vez, ahora"],["diario","Cada día"],["semanal","Cada lunes"],["mensual","Cada mes (día 1)"]];
+var FRT={ahora:"ahora mismo",diario:"cada mañana",semanal:"cada lunes por la mañana",mensual:"el día 1 de cada mes"};
+var cf={frec:"semanal",temas:TEM.map(function(x){return x[0]})},sus=[];
+try{sus=JSON.parse(localStorage.getItem("ams-mesa-sus")||"[]")}catch(e){}
+function guardaSus(){try{localStorage.setItem("ams-mesa-sus",JSON.stringify(sus))}catch(e){}}
+function pintaCf(){
+  $("#cf-frec").innerHTML=FR.map(function(x){return '<button type="button" class="chb" aria-pressed="'+(cf.frec===x[0])+'" data-f="'+x[0]+'">'+x[1]+'</button>'}).join("");
+  $("#cf-temas").innerHTML=TEM.map(function(x){var on=cf.temas.indexOf(x[0])>=0;return '<button type="button" class="chb tm" aria-pressed="'+on+'" data-k="'+x[0]+'">'+(on?"✓ ":"")+x[1]+'</button>'}).join("");
+  $("#cf-sin").hidden=cf.temas.length>0;$("#cf-ok").textContent=cf.frec==="ahora"?"Enviármelo ahora":"Programarlo";$("#cf-ok").disabled=!cf.temas.length;
+  var c=conclData(),on=function(k){return cf.temas.indexOf(k)>=0},h='<div class="em"><h3>AMS Cerramientos · resumen '+(cf.frec==="diario"?"de cada día":cf.frec==="mensual"?"del mes":"de la semana")+'</h3>';
+  if(on("hoy")){h+='<p><b>'+esc(c.tit)+'.</b> '+esc(c.puntos.join(" "))+'</p>';if(T[0])h+='<p><b>Lo primero que haría hoy:</b> '+esc(T[0].texto)+'. '+esc(T[0].porque)+'</p>'}
+  if(on("cifras"))h+='<p><b>Las cuatro cifras:</b><br>'+RL.map(function(r){return esc(r.frase)+(r.detalle?". "+esc(r.detalle):"")}).join("<br>")+'</p>';
+  M.forEach(function(m){if(on(m.id))h+='<p><b>'+esc(m.titulo)+' ('+esc(est(m))+'):</b> '+esc(m.conclusion)+'</p>'});
+  $("#cf-prev").innerHTML=h+'</div>';
+  $("#cf-lista").hidden=!sus.length;
+  $("#cf-ul").innerHTML=sus.map(function(x){return '<li><span><b>'+esc(x.frec==="diario"?"Cada día":x.frec==="semanal"?"Cada lunes":"Cada mes")+'</b> a '+esc(x.email)+'<span style="color:#7b8794"> · '+esc(x.temas.map(function(k){return TEM.filter(function(t){return t[0]===k})[0][1]}).join(", "))+'</span></span><button type="button" class="btn" data-q="'+x.id+'">Quitar</button></li>'}).join("");
+}
+$("#cf-frec").onclick=function(e){var b=e.target.closest("[data-f]");if(!b)return;cf.frec=b.getAttribute("data-f");pintaCf()};
+$("#cf-temas").onclick=function(e){var b=e.target.closest("[data-k]");if(!b)return;var k=b.getAttribute("data-k"),i=cf.temas.indexOf(k);if(i>=0)cf.temas.splice(i,1);else cf.temas.push(k);pintaCf()};
+$("#cf-ul").onclick=function(e){var b=e.target.closest("[data-q]");if(!b)return;var id=Number(b.getAttribute("data-q"));sus=sus.filter(function(x){return x.id!==id});guardaSus();$("#cf-msg").textContent="";pintaCf()};
+$("#cf-form").onsubmit=function(e){
+  e.preventDefault();var m=$("#cf-mail").value.trim(),msg=$("#cf-msg");
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(m)){msg.className="no";msg.textContent="Escribe un correo válido, por ejemplo tu@correo.es.";return}
+  if(cf.frec==="ahora"){msg.className="ok";msg.textContent="Esto es una demostración: no se envía nada. En la mesa de verdad, el resumen te llegaría ahora mismo a "+m+".";return}
+  sus.push({id:Date.now(),email:m,frec:cf.frec,temas:cf.temas.slice()});guardaSus();
+  msg.className="ok";msg.textContent="Programado (demostración, no se envía nada): te llegaría "+FRT[cf.frec]+" a "+m+".";pintaCf();
+};
+pintaCf();
 
 /* Cabecera */
 $("#sub").textContent="Últimos 28 días (del "+fechaPal(D.periodo[0])+" al "+fechaPal(D.periodo[1])+"), comparado con los 28 anteriores · Google Ads actualizado el "+fechaPal(D.ads.actualizado);
