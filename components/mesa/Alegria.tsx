@@ -117,7 +117,7 @@ export const elige = (lista: string[], clave: string) => lista[[...clave].reduce
 
 /* ── "Avisar de un error": siempre a mano. Abre el correo ya escrito, sin formularios ni cuentas. En el ejemplo no envía nada. ── */
 /** Cambia esta dirección por la del negocio de cada mesa. */
-export const CORREO_ERRORES = "info@amscerramientos.es";
+export const CORREO_ERRORES = "delarubiaignacio@gmail.com";
 export function AvisarError({ demo }: { demo?: boolean }) {
   const clase = "inline-flex min-h-[44px] items-center gap-2.5 rounded-full border border-line bg-white py-1 pl-1.5 pr-4 text-[15px] font-semibold text-ink hover:border-ink";
   const dentro = (<><Loseta n="campana" color={C.anuncios} tam={32} />Avisar de un error</>);

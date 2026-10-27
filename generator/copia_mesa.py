@@ -51,6 +51,7 @@ CAMBIOS += [
  ("Mesa", 'ayuda: "Lo gastado en Google, Meta y ChatGPT."', 'ayuda: "Lo gastado en anuncios de Google."'),
  ("Mesa", 'fuente="Supermetrics · Google Ads, Meta y ChatGPT Ads"', 'fuente="Supermetrics · Google Ads"'),
 ]
+CAMBIOS += [("Mesa", "<BotonOir resumen={resumen} tareas={tareas} />", "")]  # decisión de Ig: sin "Oír resumen"
 # la expresión de intención comercial y la lista de logos
 REG_VIEJA = re.compile(r'if \(/\^reformas\?\$/\.test\(t\) \|\| /\(empresa.*?\.test\(t\)\) return "Comercial";')
 REG_NUEVA = 'if (/(empresa|empresas|instalador|instaladores|presupuesto|precio|precios|cu[aá]nto cuesta|cuanto vale|coste|ventanas? (de )?(pvc|aluminio)|cerramientos?|cerrar (una |la )?terraza|cancelas?|pérgolas?|pergolas?|mosquiteras?|persianas?|contratar|comprar)/.test(t)) return "Comercial";'
@@ -73,5 +74,5 @@ ruta.write_text(t)
 ale = H / "components/mesa/Alegria.tsx"
 a = ale.read_text()
 assert 'CORREO_ERRORES = "info@reformadisimo.es"' in a
-ale.write_text(a.replace('CORREO_ERRORES = "info@reformadisimo.es"', 'CORREO_ERRORES = "info@amscerramientos.es"'))
+ale.write_text(a.replace('CORREO_ERRORES = "info@reformadisimo.es"', 'CORREO_ERRORES = "delarubiaignacio@gmail.com"'))
 print("Mesa.tsx copiada y adaptada a AMS")

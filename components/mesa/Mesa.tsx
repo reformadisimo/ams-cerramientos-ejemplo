@@ -1550,7 +1550,7 @@ function Ayudas({ vista, cambiaVista, abreGuia, resumen, tareas }: { vista: "sen
           </button>
         ))}
       </span>
-      <BotonOir resumen={resumen} tareas={tareas} />
+      
       <button type="button" onClick={abreGuia} className="min-h-[44px] rounded-full border border-line bg-white px-4 text-[15px] font-semibold text-ink hover:border-ink">Ayuda</button>
     </div>
   );
@@ -1731,7 +1731,7 @@ function CabeceraSencilla({ resumen, tareas, abreGuia, cambiarPeriodo, actualiza
       <h1 className="mt-1 font-serif text-[clamp(30px,5vw,42px)] font-medium italic leading-tight text-ink">Cómo va AMS</h1>
       <p className="mt-1 text-[15px] text-ink/65">Últimos 28 días, comparado con los 28 anteriores · {alDia ? "actualizado hoy" : actualizado ? `anuncios actualizados el ${fechaEnPalabras(actualizado)}` : "anuncios sin actualizar"}</p>
       <div className="mt-3 flex flex-wrap gap-2">
-        <BotonOir resumen={resumen} tareas={tareas} />
+        
         <button type="button" onClick={abreGuia} className="min-h-[44px] rounded-full border border-line bg-white px-4 text-[15px] font-semibold text-ink hover:border-ink">Ayuda</button>
         <button type="button" onClick={cambiarPeriodo} className="min-h-[44px] rounded-full border border-line bg-white px-4 text-[15px] font-semibold text-ink/75 hover:border-ink">Cambiar periodo</button>
       </div>
