@@ -70,11 +70,22 @@
 @media(max-width:1100px){.lp-grid{grid-template-columns:minmax(0,1fr)}.lp-pgs{display:flex;gap:8px;overflow-x:auto}.lp-pgs .lp-pg{min-width:170px;flex:none;border-color:#eef2f5}}
 @media(prefers-reduced-motion:no-preference){.lp-chip,.lp-pg,.lp-seg button{transition:background-color .15s,opacity .15s,color .15s}}
 
+.lp-nb{white-space:nowrap}
+@media(max-width:700px){
+.lp-demo{padding:6px 12px;font-size:.8rem}.lp-demo .lp-largo{display:none}
+.lp-cab{flex-wrap:nowrap;overflow-x:auto;padding:8px 12px 6px;gap:8px}
+.lp-cab>*{flex:none}.lp-cab h1{display:none}.lp-seg button{white-space:nowrap;padding:6px 11px}.lp-sel{white-space:nowrap}
+.lp-sub{display:none}
+.lp-conc{margin:0 12px 10px;padding:8px 12px}.lp-conc-top{gap:8px}.lp-conc-top>span:not(.lp-tag){display:none}.lp-conc-top b{font-size:.95rem}
+.lp-grid{padding:0 12px 20px}.lp-grid>aside:first-child{order:2}.lp-grid>section{order:1}.lp-grid>aside:last-child{order:3}
+.lp-esc{padding:8px 4px}.lp-cap{flex-wrap:nowrap;overflow-x:auto;gap:6px}.lp-chip{flex:none;white-space:nowrap;padding:6px 10px;font-size:.78rem;min-height:36px;gap:6px}.lp-chip s{width:16px}
+}
+
 </style>
 </head>
 <body>
 <div class="lp-barra"><a href="/guia-javi">&larr; Volver a la guía</a><span>AMS Cerramientos · La lupa</span></div>
-<div class="lp-demo"><b>Datos de ejemplo sobre vuestra propia web.</b> Ninguna cifra ni toque de esta página es real: sirve para que veas cómo sería. Con tu web publicada y conectada, aquí aparecerá lo que haga la gente de verdad.</div>
+<div class="lp-demo"><b>Datos de ejemplo sobre vuestra propia web.</b><span class="lp-largo"> Ninguna cifra ni toque de esta página es real: sirve para que veas cómo sería. Con tu web publicada y conectada, aquí aparecerá lo que haga la gente de verdad.</span></div>
 <header class="lp-cab"><h1>La lupa <small>· tu web con lo que hace la gente encima</small></h1>
 <div class="lp-seg" id="lp-dias" role="group" aria-label="Periodo"><button type="button" data-v="7">7 días</button><button type="button" data-v="28" class="on">28 días</button><button type="button" data-v="90">90 días</button></div>
 <div class="lp-seg" id="lp-disp" role="group" aria-label="Dispositivo"><button type="button" data-v="movil" class="on">Móvil</button><button type="button" data-v="pc">Ordenador</button></div>
@@ -158,7 +169,7 @@ function pintaPanel(){
  var sig=p.sig.map(function(x){var i=PAGES.map(function(q){return q.p}).indexOf(x[0]);return '<div class="lp-fila btn" data-i="'+i+'"><span>'+esc(i>=0?PAGES[i].n:x[0])+'</span><span>'+x[1]+' %</span></div>'}).join('')+'<div class="lp-fila"><span>Se van de la web</span><span>'+p.fuera+' %</span></div>';
  var clar={rabia:Math.round(v*.04),sinresp:Math.round(v*.09),atras:Math.round(v*.07)};
  $('lp-der').innerHTML='<h2>Esta página</h2><p style="margin:0 0 10px;font-weight:700;font-size:1.1rem">'+esc(p.n)+'</p>'
- +'<div class="lp-cifras"><div class="lp-n"><b>'+v+'</b><span>vistas</span></div><div class="lp-n"><b>'+p.baja+' %</b><span>bajan (mediana)</span></div><div class="lp-n"><b>'+fmt(final(p).toFixed(final(p)<10?1:0))+' %</b><span>llegan al final</span></div><div class="lp-n"><b>'+p.act+' s</b><span>activos (mediana)</span></div><div class="lp-n"><b>'+p.s10+' %</b><span>se van en menos de 10 s</span></div><div class="lp-n"><b>'+p.fuera+' %</b><span>se van de la web aquí</span></div></div>'
+ +'<div class="lp-cifras"><div class="lp-n"><b>'+v+'</b><span>vistas</span></div><div class="lp-n"><b>'+p.baja+' %</b><span>bajan (mediana)</span></div><div class="lp-n"><b>'+fmt(final(p).toFixed(final(p)<10?1:0))+' %</b><span>llegan al final</span></div><div class="lp-n"><b>'+p.act+' s</b><span>activos (mediana)</span></div><div class="lp-n"><b>'+p.s10+' %</b><span>se van en menos de 10&nbsp;segundos</span></div><div class="lp-n"><b>'+p.fuera+' %</b><span>se van de la web aquí</span></div></div>'
  +'<h3>Microsoft Clarity (ejemplo)</h3><div class="lp-fila"><span>Clics en algo que no responde</span><span>'+clar.sinresp+'</span></div><div class="lp-fila"><span>Clics de rabia</span><span>'+clar.rabia+'</span></div><div class="lp-fila"><span>Vuelven atrás enseguida</span><span>'+clar.atras+'</span></div>'
  +'<h3>Lo más tocado</h3>'+filas(top(cont,5))+'<h3>Tocan y no pasa nada</h3>'+filas(top(vano,4))
  +'<h3>De dónde vienen</h3>'+via.map(function(x){return '<div class="lp-fila"><span>'+x[0]+'</span><span>'+p.via[x[1]]+' %</span></div>'}).join('')
@@ -169,11 +180,11 @@ function pintaPanel(){
  $('lp-sen').onclick=function(){S.senal=!S.senal;pintaPanel();aplicaSenal()};
  $('lp-gua').onclick=guardaNota;pintaNotas()}
 function pintaNotas(){
- var l=S.notas.filter(function(n){return n.pg===S.pg});
- $('lp-nl').innerHTML=l.map(function(n,i){return '<li class="'+(n.ok?'hecha':'')+'"><span>'+(n.pin?'('+(i+1)+') ':'')+esc(n.autor)+': '+esc(n.t)+'</span><button type="button" data-n="'+S.notas.indexOf(n)+'" style="margin:0">'+(n.ok?'Reabrir':'Hecha')+'</button></li>'}).join('');
+ var l=S.notas.filter(function(n){return n.pg===S.pg});var cnt=0;
+ $('lp-nl').innerHTML=l.map(function(n,i){return '<li class="'+(n.ok?'hecha':'')+'"><span>'+(n.pin&&n.disp===S.disp?'('+(++cnt)+') ':'')+esc(n.autor)+' ['+(n.disp==='pc'?'ordenador':'móvil')+']'+': '+esc(n.t)+'</span><button type="button" data-n="'+S.notas.indexOf(n)+'" style="margin:0">'+(n.ok?'Reabrir':'Hecha')+'</button></li>'}).join('');
  [].forEach.call(document.querySelectorAll('#lp-nl button'),function(b){b.onclick=function(){var n=S.notas[+b.getAttribute('data-n')];n.ok=!n.ok;pintaNotas();dibuja()}})}
 function guardaNota(){var t=$('lp-nt').value.trim();if(!t){$('lp-nt').focus();return}
- S.notas.push({pg:S.pg,t:t,autor:$('lp-aut').value,pin:S.pin,ok:false});$('lp-nt').value='';S.pin=null;S.senal=false;S.nt='';pintaPanel();dibuja()}
+ S.notas.push({pg:S.pg,disp:S.disp,t:t,autor:$('lp-aut').value,pin:S.pin,ok:false});$('lp-nt').value='';S.pin=null;S.senal=false;S.nt='';pintaPanel();dibuja()}
 // ---- marco y capas
 function lab(el){if(!el)return 'Zona sin nada';var t=(el.getAttribute('aria-label')||el.alt||el.textContent||'').replace(/\s+/g,' ').trim();if(el.tagName==='IMG')t=(el.alt||'').slice(0,20);
  var pre={IMG:'Foto',H1:'Titular',H2:'Titular',INPUT:'Campo',SELECT:'Campo',TEXTAREA:'Campo'}[el.tagName]||'';
@@ -186,9 +197,10 @@ function tomaTaps(doc){
  var dead=[0,0,0,0,1,1,0,1],t=[];
  function pick(){var q=r()*tot,k=0;for(;k<8;k++){q-=w[k];if(q<=0)break}return Math.min(k,7)}
  for(var j=0;j<n;j++){var k=pick(),x,y,lb,d=!!dead[k];
-  if(k===7){x=r();y=Math.min(H-5,Math.pow(r(),1.7)*H);lb='Zona sin nada'}
-  else{var g=grupos[k],o=g[Math.floor(Math.pow(r(),1.3)*g.length)];x=Math.min(.98,Math.max(.02,(o.x+o.w*(.5+(r()-.5)*.7))/W));y=o.y+o.h*(.5+(r()-.5)*.7);lb=lab(o.e)}
+  if(k===7){x=r();var u;do{u=r()}while(r()>alcanza(p,u*100)/100);y=Math.min(H-5,u*H);lb='Zona sin nada'}
+  else{var g=grupos[k],o,ok=0,tr=0;do{o=g[Math.floor(r()*g.length)];tr++;ok=r()<Math.max(.06,alcanza(p,Math.min(100,(o.y+o.h/2)/H*100))/100)}while(!ok&&tr<12);x=Math.min(.98,Math.max(.02,(o.x+o.w*(.5+(r()-.5)*.7))/W));y=o.y+o.h*(.5+(r()-.5)*.7);lb=lab(o.e)}
   t.push({x:x,y:y,dead:d,k:k,lab:lb})}
+ [0,2].forEach(function(gk){grupos[gk].slice(0,60).forEach(function(o){var pc=Math.min(100,(o.y+o.h/2)/H*100),n2=Math.max(1,Math.round(alcanza(p,pc)/100*(gk===0?3:2)));for(var z=0;z<n2;z++)t.push({x:Math.min(.98,Math.max(.02,(o.x+o.w*(.5+(r()-.5)*.6))/W)),y:o.y+o.h*(.5+(r()-.5)*.6),dead:false,k:gk,lab:lab(o.e)})})});
  return t}
 function ocultaFijos(doc){[].forEach.call(doc.querySelectorAll('body *'),function(e){if(e.id==='lp-ov'||(e.closest&&e.closest('#lp-ov')))return;var cs=doc.defaultView.getComputedStyle(e);if(cs.position==='fixed')e.style.setProperty('display','none','important')})}
 var PAL=(function(){var c=document.createElement('canvas');c.width=1;c.height=256;var g=c.getContext('2d'),gr=g.createLinearGradient(0,0,0,256);gr.addColorStop(0,'rgba(40,90,220,0)');gr.addColorStop(.25,'rgba(40,150,230,.55)');gr.addColorStop(.5,'rgba(60,200,120,.75)');gr.addColorStop(.72,'rgba(250,210,40,.85)');gr.addColorStop(1,'rgba(230,40,30,.95)');g.fillStyle=gr;g.fillRect(0,0,1,256);return g.getImageData(0,0,1,256).data})();
@@ -205,7 +217,7 @@ function dibuja(){
   S.taps.forEach(function(t){var x=t.x*cw,y=t.y*ch/H;if(y>ch)return;var gr=g.createRadialGradient(x,y,0,x,y,R);gr.addColorStop(0,'rgba(0,0,0,.16)');gr.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=gr;g.fillRect(x-R,y-R,2*R,2*R)});
   var im=g.getImageData(0,0,cw,ch),d=im.data,mx=1,i;for(i=3;i<d.length;i+=4)if(d[i]>mx)mx=d[i];for(i=0;i<d.length;i+=4){var al=d[i+3];if(al){var o=Math.min(255,Math.pow(al/mx,.8)*255)|0;d[i]=PAL[o*4];d[i+1]=PAL[o*4+1];d[i+2]=PAL[o*4+2];d[i+3]=PAL[o*4+3]*.9}}g.putImageData(im,0,0);ov.appendChild(cv)}
  if(S.capas.vano&&S.taps){S.taps.forEach(function(t){if(!t.dead)return;var s=Math.round(11*k),e=doc.createElement('div');e.style.cssText='position:absolute;width:'+s+'px;height:'+s+'px;border-radius:50%;background:#e03131;border:'+Math.max(2,Math.round(2*k))+'px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.25);left:'+(t.x*W-s/2)+'px;top:'+(t.y-s/2)+'px;opacity:.85';ov.appendChild(e)})}
- var c=0;S.notas.forEach(function(n){if(n.pg!==S.pg)return;c++;if(!n.pin||n.ok)return;pin(doc,ov,n.pin,c,k)});
+ var c=0;S.notas.forEach(function(n){if(n.pg!==S.pg||n.disp!==S.disp)return;c++;if(!n.pin||n.ok)return;pin(doc,ov,n.pin,c,k)});
  if(S.pin)pin(doc,ov,S.pin,'+',k);
  aplicaSenal()}
 function pin(doc,ov,pn,txt,k){var s=Math.round(26*k),e=doc.createElement('div');e.textContent=txt;e.style.cssText='position:absolute;width:'+s+'px;height:'+s+'px;border-radius:50% 50% 50% 0;background:#F2C23E;color:#12202B;font:800 '+Math.round(13*k)+'px Inter,Arial,sans-serif;display:flex;align-items:center;justify-content:center;border:2px solid #12202B;left:'+(pn.x*doc.documentElement.clientWidth-s/2)+'px;top:'+(pn.y-s)+'px';ov.appendChild(e)}
@@ -222,7 +234,8 @@ function monta(){
 function listo(){
  var f=$('lp-if'),doc;try{doc=f.contentDocument}catch(e){return}if(!doc||!doc.body)return;
  var path=f.contentWindow.location.pathname.replace(/\.html$/,'').replace(/\/$/,'')||'/';
- var i=PAGES.map(function(q){return q.p}).indexOf(path);if(i>=0&&i!==S.pg){S.pg=i;f.setAttribute('data-p',PAGES[i].p);pintaLista()}
+ var i=PAGES.map(function(q){return q.p}).indexOf(path);S.sin=i<0;if(i>=0&&i!==S.pg){S.pg=i;S.pin=null;S.senal=false;f.setAttribute('data-p',PAGES[i].p);pintaLista()}
+ if(S.sin){S.taps=[];S.doc=doc;f.setAttribute('data-p',path);$('lp-der').innerHTML='<h2>Esta página</h2><p style="margin:0 0 8px;font-weight:700">'+esc(path)+'</p><p style="font-size:.9rem;color:#33495C">Esta página no tiene datos de ejemplo. Vuelve a una de la lista de la izquierda para ver el mapa de calor.</p>';return}
  var run=function(){if(!doc.defaultView||f.contentDocument!==doc)return;ocultaFijos(doc);S.doc=doc;S.taps=tomaTaps(doc);pintaPanel();dibuja()};
  setTimeout(run,700);setTimeout(function(){if(!doc.defaultView||f.contentDocument!==doc)return;var H=Math.max(doc.documentElement.scrollHeight,doc.body.scrollHeight);if(Math.abs(H-(S.altura||0))>30){S.altura=H;run()}},2600)}
 function setPg(i){S.pg=i;S.pin=null;S.senal=false;pintaLista();monta();pintaPanel()}
