@@ -1,0 +1,172 @@
+[
+  {
+    "n": 1,
+    "archivo": "01-cancelas-galeria.webp",
+    "origen": "https://amscerramientos.es/wp-content/uploads/2015/06/1.jpg",
+    "origenPx": "2272x1704",
+    "origenBytes": 2212639,
+    "ancho": 1400,
+    "alto": 1050,
+    "bytes": 200994
+  },
+  {
+    "n": 2,
+    "archivo": "02-cerramientos-galeria.webp",
+    "origen": "https://amscerramientos.es/wp-content/uploads/2015/04/foto02.jpg",
+    "origenPx": "650x488",
+    "origenBytes": 343415,
+    "ancho": 650,
+    "alto": 488,
+    "bytes": 63304
+  },
+  {
+    "n": 8,
+    "archivo": "08-aluminio-soldado.webp",
+    "origen": "https://amscerramientos.es/wp-content/uploads/2015/04/ALUMINIO_SOLDADO.jpg",
+    "origenPx": "928x241",
+    "origenBytes": 98078,
+    "ancho": 928,
+    "alto": 241,
+    "bytes": 45524
+  },
+  {
+    "n": 10,
+    "archivo": "10-cancela-efecto-gris.webp",
+    "origen": "https://amscerramientos.es/wp-content/uploads/2019/05/cancela-aluminio-soldado-efecto-gris.jpeg",
+    "origenPx": "2592x1936",
+    "origenBytes": 1396154,
+    "ancho": 1400,
+    "alto": 1046,
+    "bytes": 405806
+  },
+  {
+    "n": 12,
+    "archivo": "12-reja-mallorquina.webp",
+    "origen": "https://amscerramientos.es/wp-content/uploads/2015/04/rejasm_02.jpg",
+    "origenPx": "660x660",
+    "origenBytes": 106455,
+    "ancho": 660,
+    "alto": 660,
+    "bytes": 29944
+  },
+  {
+    "n": 16,
+    "archivo": "16-cristal-ahorro-energetico.webp",
+    "origen": "https://amscerramientos.es/wp-content/uploads/2015/03/Cristal_Ahorro_Energetico-960x340.jpg",
+    "origenPx": "960x340",
+    "origenBytes": 68658,
+    "ancho": 960,
+    "alto": 340,
+    "bytes": 56148
+  },
+  {
+    "n": 17,
+    "archivo": "17-acabados-y-calidades.webp",
+    "origen": "https://amscerramientos.es/wp-content/uploads/2015/03/Calidad_Destacado-960x340.jpg",
+    "origenPx": "960x340",
+    "origenBytes": 89176,
+    "ancho": 960,
+    "alto": 340,
+    "bytes": 69392
+  },
+  {
+    "n": 20,
+    "archivo": "20-ventanas-pvc-kommerling.webp",
+    "origen": "https://amscerramientos.es/wp-content/uploads/2023/06/KOMMERLING-Ventanas-PVC_001-960x340.webp",
+    "origenPx": "960x340",
+    "origenBytes": 43450,
+    "ancho": 960,
+    "alto": 340,
+    "bytes": 40920
+  },
+  {
+    "n": 21,
+    "archivo": "21-pergolas-alcala.webp",
+    "origen": "https://amscerramientos.es/wp-content/uploads/2024/01/Instalador-Pergolas-Alcala-de-Henares-960x340.webp",
+    "origenPx": "960x340",
+    "origenBytes": 65126,
+    "ancho": 960,
+    "alto": 340,
+    "bytes": 60600
+  },
+  {
+    "n": 22,
+    "archivo": "22-cancelas-aluminio.webp",
+    "origen": "https://amscerramientos.es/wp-content/uploads/2026/07/Cancelas-de-Aluminio-Madrid.png",
+    "origenPx": "190x190",
+    "origenBytes": 57484,
+    "ancho": 190,
+    "alto": 190,
+    "bytes": 7426
+  },
+  {
+    "n": 23,
+    "archivo": "23-cerramientos-aluminio.webp",
+    "origen": "https://amscerramientos.es/wp-content/uploads/2026/07/Cerramientos-de-Aluminio-Madrid.png",
+    "origenPx": "190x190",
+    "origenBytes": 72004,
+    "ancho": 190,
+    "alto": 190,
+    "bytes": 11012
+  },
+  {
+    "n": 24,
+    "archivo": "24-acristalamiento-termico.webp",
+    "origen": "https://amscerramientos.es/wp-content/uploads/2026/07/Aacristalamiento-termico-Madrid.png",
+    "origenPx": "190x190",
+    "origenBytes": 67016,
+    "ancho": 190,
+    "alto": 190,
+    "bytes": 10326
+  },
+  {
+    "n": 25,
+    "archivo": "25-ventanas-oscilobatientes.webp",
+    "origen": "https://amscerramientos.es/wp-content/uploads/2026/08/Ventanas-oscilobatientes-en-Alcala-de-Henares.jpeg",
+    "origenPx": "1376x768",
+    "origenBytes": 703223,
+    "ancho": 1376,
+    "alto": 768,
+    "bytes": 80970
+  },
+  {
+    "n": 26,
+    "archivo": "26-cerramientos-terrazas.webp",
+    "origen": "https://amscerramientos.es/wp-content/uploads/2026/08/Cerramientos-de-terrazas-2026.jpeg",
+    "origenPx": "1365x768",
+    "origenBytes": 858437,
+    "ancho": 1365,
+    "alto": 768,
+    "bytes": 176380
+  },
+  {
+    "n": 28,
+    "archivo": "28-kommerling-76-ad-xtrem.webp",
+    "origen": "https://amscerramientos.es/wp-content/uploads/2023/05/KOMMERLING76-AD-Xtrem.png",
+    "origenPx": "1080x1080",
+    "origenBytes": 588045,
+    "ancho": 1000,
+    "alto": 1000,
+    "bytes": 218782
+  },
+  {
+    "n": 30,
+    "archivo": "30-sistemas-kommerling.webp",
+    "origen": "https://amscerramientos.es/wp-content/uploads/2023/05/Los-sistemas-KOMMERLING-esconden-todo-un-mundo-de-posibilidades.png",
+    "origenPx": "1080x1080",
+    "origenBytes": 915260,
+    "ancho": 1080,
+    "alto": 1080,
+    "bytes": 566682
+  },
+  {
+    "n": 31,
+    "archivo": "31-colores-ventanas.webp",
+    "origen": "https://amscerramientos.es/wp-content/uploads/2015/03/Colores_Ventanas_Aluminio_PVC.png",
+    "origenPx": "500x461",
+    "origenBytes": 231971,
+    "ancho": 500,
+    "alto": 461,
+    "bytes": 91324
+  }
+]
