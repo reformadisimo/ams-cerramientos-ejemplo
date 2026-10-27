@@ -20,6 +20,7 @@ var waUrl='https://wa.me/34639788220?text='+encodeURIComponent(txt);
 var mailUrl='mailto:info@amscerramientos.es?subject='+encodeURIComponent('Presupuesto desde la web: '+nombre)+'&body='+encodeURIComponent(txt);
 var movil=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)||(navigator.maxTouchPoints>1&&/Macintosh/.test(navigator.userAgent));
 var n=nombre.replace(/</g,'');
+if(window.amsEvento)window.amsEvento('generate_lead',{pagina:location.pathname,via:movil?'whatsapp':'correo'});
 var ok=document.createElement('div');ok.className='form-ok';ok.setAttribute('role','status');
 if(movil){window.open(waUrl,'_blank');
 ok.innerHTML='<strong>Gracias, '+n+'. Se abre WhatsApp con tu petición: solo tienes que pulsar enviar.</strong><br>Si no se ha abierto, <a href="'+waUrl+'" target="_blank" rel="noopener">pulsa aquí</a> o llámanos al <a href="tel:+34639788220">639 78 82 20</a>.';}

@@ -1,9 +1,9 @@
 /* Aviso de cookies de AMS Cerramientos: aceptar todas, rechazar o configurar.
-   Las tecnicas siempre estan activas. El mapa de Google (terceros) solo se carga con permiso. */
+   Las tecnicas siempre estan activas. El mapa de Google (terceros) y la medicion de visitas solo se activan con permiso. */
 (function () {
   var KEY = 'ams-cookies';
   function leer() { try { return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { return null; } }
-  function guardar(v) { try { localStorage.setItem(KEY, JSON.stringify(v)); } catch (e) {} aplicar(v); }
+  function guardar(v) { try { localStorage.setItem(KEY, JSON.stringify(v)); } catch (e) {} aplicar(v); try { window.dispatchEvent(new Event('ams-cookies')); } catch (e) {} }
   function aplicar(v) {
     document.querySelectorAll('[data-ck-src]').forEach(function (f) {
       var ph = f.parentNode.querySelector('.ck-ph');
@@ -22,25 +22,25 @@
   document.querySelectorAll('iframe[data-ck-src]').forEach(function (f) {
     var d = document.createElement('div'); d.className = 'ck-ph';
     d.innerHTML = '<span>Para ver el mapa hace falta aceptar las cookies de Google Maps.</span><button type="button">Aceptar y ver el mapa</button>';
-    d.querySelector('button').onclick = function () { guardar({ terceros: true }); };
+    d.querySelector('button').onclick = function () { var p = leer() || {}; guardar({ terceros: true, medicion: p.medicion === true }); };
     f.parentNode.insertBefore(d, f);
   });
   function cerrar() { var e = document.getElementById('ck'); if (e) e.remove(); }
   function mostrar() {
     cerrar();
     var d = document.createElement('div'); d.id = 'ck'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-label', 'Aviso de cookies');
-    d.innerHTML = '<h2>Cookies</h2><p>Usamos cookies técnicas, necesarias para que la web funcione. Con tu permiso, también las de terceros (por ahora, el mapa de Google Maps). Puedes aceptar todas, rechazarlas o elegir. Más información en la <a href="/cookies">política de cookies</a>.</p>' +
-      '<div class="o"><label><input type="checkbox" checked disabled><span><b>Técnicas</b>: siempre activas, no se pueden desactivar.</span></label><label><input type="checkbox" id="ck-t"><span><b>Terceros</b>: Google Maps en la página de contacto.</span></label></div>' +
+    d.innerHTML = '<h2>Cookies</h2><p>Usamos cookies técnicas, necesarias para que la web funcione. Con tu permiso, también las de medición de visitas (Google Analytics) y las de terceros (el mapa de Google Maps). Puedes aceptar todas, rechazarlas o elegir. Más información en la <a href="/cookies">política de cookies</a>.</p>' +
+      '<div class="o"><label><input type="checkbox" checked disabled><span><b>Técnicas</b>: siempre activas, no se pueden desactivar.</span></label><label><input type="checkbox" id="ck-m"><span><b>Medición</b>: Google Analytics, para saber cuántas personas visitan la web y qué páginas ven. No te identifica.</span></label><label><input type="checkbox" id="ck-t"><span><b>Terceros</b>: Google Maps en la página de contacto.</span></label></div>' +
       '<div class="b"><button type="button" class="p" id="ck-a">Aceptar todas</button><button type="button" id="ck-r">Rechazar</button><button type="button" id="ck-c">Configurar</button></div>';
     document.body.appendChild(d);
-    var cfg = false, v = leer(); if (v && v.terceros) document.getElementById('ck-t').checked = true;
-    document.getElementById('ck-a').onclick = function () { guardar({ terceros: true }); cerrar(); };
-    document.getElementById('ck-r').onclick = function () { guardar({ terceros: false }); cerrar(); };
+    var cfg = false, v = leer(); if (v && v.terceros) document.getElementById('ck-t').checked = true; if (v && v.medicion) document.getElementById('ck-m').checked = true;
+    document.getElementById('ck-a').onclick = function () { guardar({ terceros: true, medicion: true }); cerrar(); };
+    document.getElementById('ck-r').onclick = function () { guardar({ terceros: false, medicion: false }); cerrar(); };
     document.getElementById('ck-c').onclick = function () {
       if (!cfg) { cfg = true; d.querySelector('.o').style.display = 'block'; this.textContent = 'Guardar mi elección'; }
-      else { guardar({ terceros: document.getElementById('ck-t').checked }); cerrar(); }
+      else { guardar({ terceros: document.getElementById('ck-t').checked, medicion: document.getElementById('ck-m').checked }); cerrar(); }
     };
   }
   document.addEventListener('click', function (e) { var a = e.target.closest && e.target.closest('[data-ck-open]'); if (a) { e.preventDefault(); mostrar(); } });
-  var v0 = leer(); aplicar(v0); if (!v0) mostrar();
+  var v0 = leer(); aplicar(v0); if (!v0 || v0.medicion === undefined) mostrar();
 })();
