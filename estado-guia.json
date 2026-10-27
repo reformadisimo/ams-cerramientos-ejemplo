@@ -1,40 +1,40 @@
 {
-  "version": "2026-10-27T10:30",
-  "fecha": "27 de octubre de 2026",
-  "aviso": "Hoy te dejamos dos novedades: la lupa de demostración y tus tarifas ya en la calculadora. Gracias por los tarifarios, Javi.",
-  "ultimo": [
-    {
-      "f": "27 oct",
-      "t": "Recibidas tus respuestas a las dudas de la calculadora: el precio lleva el vidrio estándar y cualquier otro se presupuesta aparte; a partir de 2 metros de ancho también se presupuesta a mano. Ya está así en la web."
-    },
-    {
-      "f": "27 oct",
-      "t": "Recibido el acuerdo de la ayuda digital de 2023 (Kit Digital). Lo estamos revisando."
-    },
-    {
-      "f": "27 oct",
-      "t": "Nueva en la guía: la lupa de demostración. Con datos de ejemplo sobre tu web, muestra dónde toca la gente, hasta dónde baja y dónde se va, para mejorarla con datos. Estará con datos reales cuando la web esté publicada y conectemos Analytics y Clarity."
-    },
-    {
-      "f": "27 oct",
-      "t": "Tus tarifas ya están en la calculadora de la web: ventanas con y sin persiana, puertas balconeras en blanco, motor a 135 euros. El aluminio sale como «a presupuestar»."
-    },
-    {
-      "f": "27 oct",
-      "t": "Recibidos tus tarifarios de ventanas sin persiana y sin montaje y los de puertas (con y sin cajón). Los pasamos a la calculadora de la web."
-    },
-    {
-      "f": "27 oct",
-      "t": "Anotado: los precios son siempre más IVA, no hay descuento por más de tres ventanas, y el aluminio se presupuesta aparte. Motor con pulsador (TTGO): 135 euros, sin la instalación eléctrica hasta el punto de luz."
-    }
-  ],
-  "cuentas": {
-    "ads": "La gestiona tu agencia actual. Ya se lo has pedido (26 de octubre) y te ha contestado que te llamará el 27 para hablarlo. Si la cuenta es de la agencia y no se puede traspasar, la solución es abrir una cuenta nueva a tu nombre, con tu tarjeta."
+ "version": "2026-10-27T10:30",
+ "fecha": "27 de octubre de 2026",
+ "aviso": "Hoy te dejamos dos novedades: la lupa de demostración y tus tarifas ya en la calculadora. Gracias por los tarifarios, Javi.",
+ "ultimo": [
+  {
+   "f": "27 oct",
+   "t": "Con tus fotos de las cancelas, la página de cancelas ya muestra cada modelo con fotos reales de tus trabajos y una galería para verlas todas."
   },
-  "resueltas": [
-    1,
-    2,
-    4
-  ],
-  "nuevas": []
+  {
+   "f": "27 oct",
+   "t": "Recibidas tus respuestas a las dudas de la calculadora: el precio lleva el vidrio estándar y cualquier otro se presupuesta aparte; a partir de 2 metros de ancho también se presupuesta a mano. Ya está así en la web."
+  },
+  {
+   "f": "27 oct",
+   "t": "Recibido el acuerdo de la ayuda digital de 2023 (Kit Digital). Lo estamos revisando."
+  },
+  {
+   "f": "27 oct",
+   "t": "Nueva en la guía: la lupa de demostración. Con datos de ejemplo sobre tu web, muestra dónde toca la gente, hasta dónde baja y dónde se va, para mejorarla con datos. Estará con datos reales cuando la web esté publicada y conectemos Analytics y Clarity."
+  },
+  {
+   "f": "27 oct",
+   "t": "Tus tarifas ya están en la calculadora de la web: ventanas con y sin persiana, puertas balconeras en blanco, motor a 135 euros. El aluminio sale como «a presupuestar»."
+  },
+  {
+   "f": "27 oct",
+   "t": "Recibidos tus tarifarios de ventanas sin persiana y sin montaje y los de puertas (con y sin cajón). Los pasamos a la calculadora de la web."
+  }
+ ],
+ "cuentas": {
+  "ads": "La gestiona tu agencia actual. Ya se lo has pedido (26 de octubre) y te ha contestado que te llamará el 27 para hablarlo. Si la cuenta es de la agencia y no se puede traspasar, la solución es abrir una cuenta nueva a tu nombre, con tu tarjeta."
+ },
+ "resueltas": [
+  1,
+  2,
+  4
+ ],
+ "nuevas": []
 }
