@@ -237,7 +237,7 @@ function renderOpts(){
    '<div class="cf-reco">¿Es una buhardilla nueva? Dinos cuántos m² tiene la habitación y te decimos qué tamaño necesita: <input type="number" id="cfM2" min="3" max="80" placeholder="m²" style="width:90px;min-height:38px;margin-left:6px"> <span id="cfM2r"></span></div>');
   h+=sec('Cómo se abre','',
    '<div class="cf-cards">'+opt('aper','giratoria','<b>Giratoria</b>','Gira por el centro. Fácil de limpiar desde dentro.',it.aper==='giratoria')+opt('aper','proyectante','<b>Proyectante</b>','Se abre hacia fuera desde abajo. Mejor vista, sin estorbar.',it.aper==='proyectante')+'</div>');
-  h+=sec('Manual o con motor','La eléctrica y la solar se cierran solas si llueve.',
+  h+=sec('Manual o con motor','La eléctrica y la solar se cierran solas si llueve. El motor no incluye la instalación eléctrica hasta el punto de luz.',
    '<div class="cf-opts">'+opt('acc','manual','Manual','',it.acc==='manual')+opt('acc','electrica','Eléctrica','Con mando',it.acc==='electrica')+opt('acc','solar','Solar','Sin cables',it.acc==='solar')+'</div>');
   h+=sec('Accesorios','',
    '<div class="cf-opts">'+tog('estor','Estor interior','Oscurece y da intimidad',it.estor)+tog('persext','Persiana exterior solar','Frena el calor del verano',it.persext)+tog('mosq','Mosquitera','',it.mosq)+'</div>');
