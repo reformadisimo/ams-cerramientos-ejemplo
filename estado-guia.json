@@ -1,8 +1,20 @@
 {
-  "version": "2026-10-26T19:50",
-  "fecha": "26 de octubre de 2026",
-  "aviso": "",
+  "version": "2026-10-27T03:10",
+  "fecha": "27 de octubre de 2026",
+  "aviso": "Hemos recibido tus tarifarios y tus respuestas de ayer noche. Gracias, Javi: ya están apuntadas arriba.",
   "ultimo": [
+    {
+      "f": "27 oct",
+      "t": "Recibidos tus tarifarios de ventanas sin persiana y sin montaje y los de puertas (con y sin cajón). Los pasamos a la calculadora de la web."
+    },
+    {
+      "f": "27 oct",
+      "t": "Anotado: los precios son siempre más IVA, no hay descuento por más de tres ventanas, y el aluminio se presupuesta aparte. Motor con pulsador (TTGO): 135 euros, sin la instalación eléctrica hasta el punto de luz."
+    },
+    {
+      "f": "27 oct",
+      "t": "Nos cuentas que la ayuda digital (Kit Digital) ya se pidió y la tramitó Raúl. Si tienes a mano el documento de esa ayuda (el acuerdo o la resolución), nos viene bien verlo."
+    },
     {
       "f": "26 oct",
       "t": "Raúl te ha contestado que te llamará mañana para hablar de los accesos. Cuando habléis, pídele que lo que acordéis te lo confirme por escrito."
@@ -19,6 +31,10 @@
   "cuentas": {
     "ads": "La gestiona tu agencia actual. Ya se lo has pedido (26 de octubre) y te ha contestado que te llamará el 27 para hablarlo. Si la cuenta es de la agencia y no se puede traspasar, la solución es abrir una cuenta nueva a tu nombre, con tu tarjeta."
   },
-  "resueltas": [],
+  "resueltas": [
+    1,
+    2,
+    4
+  ],
   "nuevas": []
 }
