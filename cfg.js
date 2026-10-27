@@ -26,8 +26,8 @@ var GAMA={pvc:{eco:['Económica',['Perfil de 70 mm','5 cámaras']],confort:['Con
  alu:{eco:['Sin rotura de puente térmico',['Para trasteros, garajes o cerramientos sin calefacción']],confort:['Con rotura de puente térmico',['Alugom','La más vendida']],premium:['Rotura de alta gama',['Hoja oculta y perfil más fino','Máximo aislamiento en aluminio']]}};
 var COL=[['blanco','Blanco','#FFFFFF'],['color','Gris antracita u otro color liso','#3F454B'],['bicolor','Blanco dentro, color fuera','linear-gradient(90deg,#fff 50%,#3F454B 50%)'],['madera','Imitación madera','#8A5A35'],['negro','Negro mate','#1B1C1E']];
 var COLHEX={blanco:'#FFFFFF',color:'#3F454B',bicolor:'#3F454B',madera:'#8A5A35',negro:'#1B1C1E'};
-var VID=[['doble','Doble vidrio','Básico'],['bajoe','Térmico bajo emisivo','Recomendado'],['solar','Control solar','Fachadas con mucho sol'],['mate','Translúcido','Para baños'],['acustico','Acústico','Calles con ruido'],['seguridad','Seguridad laminado','Bajos y casas con niños'],['triple','Triple vidrio','Máximo aislamiento']];
-var VID_RAPIDO=['doble','bajoe','acustico','seguridad'];
+var VID=[['solar','Control solar (Guardian Sun)','Estándar, incluido en el precio'],['doble','Doble vidrio','Se presupuesta aparte'],['bajoe','Térmico bajo emisivo','Se presupuesta aparte'],['mate','Translúcido','Para baños. Se presupuesta aparte'],['acustico','Acústico','Calles con ruido. Se presupuesta aparte'],['seguridad','Seguridad laminado','Se presupuesta aparte'],['triple','Triple vidrio','Se presupuesta aparte']];
+var VID_RAPIDO=['solar','acustico','seguridad'];
 var PERS=[['no','Sin persiana'],['manual','Manual, con cinta'],['motor','Con motor e interruptor'],['radio','Con motor y mando'],['solar','Motor solar, sin cables']];
 var MOSQ=[['no','Sin mosquitera'],['enrollable','Enrollable'],['plisada','Plisada, para puertas']];
 var APER=[['osc','Oscilobatiente','Se abre y se inclina'],['practicable','Abatible','Se abre como una puerta'],['fija','Fija','No se abre']];
@@ -41,7 +41,7 @@ function defItem(tipo){
  var t=TT[tipo],it={tipo:tipo,n:1,hab:''};
  if(tipo==='techo')return Object.assign(it,{talla:'78x118',aper:'giratoria',acc:'manual',estor:false,persext:false,mosq:false,obra:'sustitucion'});
  if(tipo==='claraboya')return Object.assign(it,{talla:'80',acc:'fija',estor:false,obra:'sustitucion'});
- Object.assign(it,{w:t.def.w,h:t.def.h,hojas:t.def.hojas,mat:t.def.mat||'pvc',gama:'confort',col:'blanco',vid:'bajoe',pers:'no',mosq:'no',fijo:'no',umbral:false,elev:false,aper:[]});
+ Object.assign(it,{w:t.def.w,h:t.def.h,hojas:t.def.hojas,mat:t.def.mat||'pvc',gama:'confort',col:'blanco',vid:'solar',pers:'no',mosq:'no',fijo:'no',umbral:false,elev:false,aper:[]});
  fixAper(it);return it;
 }
 function fixAper(it){
@@ -350,12 +350,12 @@ function updateDeltas(){
   var k=el.dataset.dk,val=el.dataset.dv,txt='',cls='d';
   if(v&&v[k]&&v[k][val]!==undefined){var d=v[k][val];
    var on=el.closest('.cf-o')&&el.closest('.cf-o').classList.contains('on');
-   if(on&&d===0)txt='Elegido';else if(d===0)txt='Mismo precio';else{txt=(d>0?'+':'−')+eur(Math.abs(d));cls+=d>0?' up':' dn';}
+   if(d==='aparte')txt='Aparte';else if(on&&d===0)txt='Elegido';else if(d===0)txt='Mismo precio';else{txt=(d>0?'+':'−')+eur(Math.abs(d));cls+=d>0?' up':' dn';}
   }
   el.textContent=txt;el.className=cls;
  });
  var now=$('cfNow');
- if(S.res&&S.res._probe!=null&&S.res.lineas[S.res._probe]){var l=S.res.lineas[S.res._probe];now.textContent=l.presupuestar?'A presupuestar':eur(l.total);$('cfNowSub').textContent=l.presupuestar?'El aluminio se calcula a medida: te lo preparamos tras medir':(S.cur.n>1?S.cur.n+' × '+eur(l.unidad)+' · ':'')+'instalada, sin IVA';}
+ if(S.res&&S.res._probe!=null&&S.res.lineas[S.res._probe]){var l=S.res.lineas[S.res._probe];now.textContent=l.presupuestar?'A presupuestar':eur(l.total);$('cfNowSub').textContent=l.presupuestar?'El aluminio se calcula a medida: te lo preparamos tras medir':(S.cur.n>1?S.cur.n+' × '+eur(l.unidad)+' · ':'')+'instalada, sin IVA'+(l.vidrio_aparte?'. Con el vidrio estándar: el que has elegido se presupuesta aparte':'');}
  else if(S.err){now.textContent='—';$('cfNowSub').textContent='No hemos podido calcularlo ahora.';}
 }
 
@@ -365,7 +365,7 @@ function renderSummary(){
  var list=S.items.map(function(it,i){return {it:S.curIdx===i&&S.cur?S.cur:it,i:i,editing:S.curIdx===i};});
  if(S.cur&&S.curIdx<0)list.push({it:S.cur,i:S.items.length,editing:true,nuevo:true});
  if(!list.length)$('cfItems').innerHTML='<li class="cf-empty">Elige qué quieres poner y aquí irá apareciendo, con su precio.</li>';
- else $('cfItems').innerHTML=list.map(function(x){var it=x.it,p=ok&&r.lineas[x.i]?(r.lineas[x.i].presupuestar?'A presupuestar':eur(r.lineas[x.i].total)):'…';
+ else $('cfItems').innerHTML=list.map(function(x){var it=x.it,p=ok&&r.lineas[x.i]?(r.lineas[x.i].presupuestar?'A presupuestar':eur(r.lineas[x.i].total)+(r.lineas[x.i].vidrio_aparte?' + vidrio':'')):'…';
   return '<li class="'+(x.editing?'editing':'')+'"><div class="cf-it"><span class="cf-pf sm">'+foto(it)+'</span><div><b>'+(it.n>1?it.n+' × ':'')+esc((it.hab?it.hab+' · ':'')+nombre(it))+'</b><small>'+esc(detalle(it))+'</small></div><span class="p">'+p+'</span>'+
   (x.nuevo?'<div class="cf-it-acts"><small style="color:#9A3412;font-weight:700">Configurando. Pulsa "Añadir al presupuesto".</small></div>':x.editing?'<div class="cf-it-acts"><small style="color:#9A3412;font-weight:700">Editando</small></div>':'<div class="cf-it-acts"><button type="button" data-edit="'+x.i+'">Cambiar</button><button type="button" data-dup="'+x.i+'">Duplicar</button><button type="button" data-del="'+x.i+'">Quitar</button></div>')+'</div></li>';}).join('');
  var n=list.reduce(function(s,x){return s+x.it.n;},0);
@@ -458,7 +458,7 @@ function valid(){
  var b=$('cfErr');if(e.length){b.textContent='Nos falta: '+e.join(', ')+'.';b.classList.add('show');return false;}b.classList.remove('show');return true;
 }
 function resumen(){
- var r=S.res,L=S.items.map(function(it,i){return '- '+(it.n>1?it.n+' × ':'')+(it.hab?it.hab+': ':'')+nombre(it)+', '+detalle(it)+(r&&r.lineas[i]?(r.lineas[i].presupuestar?' (a presupuestar)':' ('+eur(r.lineas[i].total)+' + IVA)'):'');});
+ var r=S.res,L=S.items.map(function(it,i){return '- '+(it.n>1?it.n+' × ':'')+(it.hab?it.hab+': ':'')+nombre(it)+', '+detalle(it)+(r&&r.lineas[i]?(r.lineas[i].presupuestar?' (a presupuestar)':' ('+eur(r.lineas[i].total)+' + IVA'+(r.lineas[i].vidrio_aparte?', vidrio especial aparte':'')+')'):'');});
  if(r)L.push('','Total: '+eur(r.total)+' con IVA'+(r.hay_presupuestar?' (sin contar lo que va a presupuestar)':''));return L.join('\n');
 }
 $('cfWa').addEventListener('click',function(){
@@ -469,7 +469,7 @@ $('cfWa').addEventListener('click',function(){
 $('cfPdf').addEventListener('click',function(){
  if(!valid())return;var r=S.res;if(!r){return;}
  var hoy=new Date(),ref='AMS-'+hoy.getFullYear().toString().slice(2)+String(hoy.getMonth()+1).padStart(2,'0')+String(hoy.getDate()).padStart(2,'0')+'-'+String(Math.floor(Math.random()*900+100));
- var rows=S.items.map(function(it,i){return '<tr><td style="width:70px">'+foto(it,'pdfimg')+'</td><td><b>'+esc((it.hab?it.hab+' · ':'')+nombre(it))+'</b><br>'+esc(detalle(it))+'</td><td class="r">'+it.n+'</td><td class="r">'+(r.lineas[i].presupuestar?'A presupuestar':eur(r.lineas[i].unidad))+'</td><td class="r">'+(r.lineas[i].presupuestar?'—':eur(r.lineas[i].total))+'</td></tr>';}).join('');
+ var rows=S.items.map(function(it,i){return '<tr><td style="width:70px">'+foto(it,'pdfimg')+'</td><td><b>'+esc((it.hab?it.hab+' · ':'')+nombre(it))+'</b><br>'+esc(detalle(it))+'</td><td class="r">'+it.n+'</td><td class="r">'+(r.lineas[i].presupuestar?'A presupuestar':eur(r.lineas[i].unidad))+'</td><td class="r">'+(r.lineas[i].presupuestar?'—':eur(r.lineas[i].total)+(r.lineas[i].vidrio_aparte?'<br><small>vidrio aparte</small>':''))+'</td></tr>';}).join('');
  var base=location.origin;
  $('cfPrint').innerHTML='<div class="pr-head"><img src="/img/logo-ams-color.svg" alt="AMS Cerramientos" class="pr-logo"><div class="pr-title"><h1>Presupuesto orientativo</h1><div>Referencia '+ref+' · '+hoy.toLocaleDateString('es-ES')+' · válido 30 días</div></div></div>'+
   '<div class="pr-for"><span>Para</span><b>'+esc(C.nombre)+'</b> · '+esc(C.tel)+' · '+esc(C.email)+' · Obra en '+esc(C.loc)+'</div>'+

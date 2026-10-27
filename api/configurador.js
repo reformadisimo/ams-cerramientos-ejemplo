@@ -44,7 +44,7 @@ function limpia(it, C) {
   o.mat = it.mat === 'alu' ? 'alu' : 'pvc';
   o.gama = en({ eco: 1, confort: 1, premium: 1 }, it.gama, 'confort');
   o.col = en(C.color, it.col, 'blanco');
-  o.vid = en(C.vidrio_m2, it.vid, 'bajoe');
+  o.vid = en(C.vidrio_m2, it.vid, 'solar');
   o.pers = en({ no: 1, manual: 1, motor: 1, radio: 1, solar: 1 }, it.pers, 'no');
   o.mosq = en({ no: 1, enrollable: 1, plisada: 1 }, it.mosq, 'no');
   o.fijo = t === 'fijo' || t === 'corredera' ? 'no' : en({ no: 1, sup: 1, inf: 1 }, it.fijo, 'no');
@@ -67,7 +67,7 @@ function limpia(it, C) {
 // la tabla "sin cajon". Las tablas "sin montaje" suman montaje (250 EUR) porque el configurador da precio instalado.
 const sube = (cm) => Math.ceil(cm / 10 - 1e-9) / 10;
 function extras(o, C, T, m2) {
-  let p = Math.max(0, C.vidrio_m2[o.vid] - C.vidrio_m2.solar) * m2;
+  let p = 0; // el vidrio estandar (Guardian Sun 4/16/4) va en la tarifa; cualquier otro se presupuesta aparte
   if (o.pers === 'motor') p += T.motor_eur !== undefined ? T.motor_eur : Math.max(0, C.persiana.fijo.motor - C.persiana.fijo.manual);
   else if (o.pers === 'radio' || o.pers === 'solar') p += Math.max(0, C.persiana.fijo[o.pers] - C.persiana.fijo.manual);
   if (o.mosq !== 'no') p += C.mosquitera[o.mosq][0] + C.mosquitera[o.mosq][1] * m2;
@@ -107,11 +107,15 @@ function tarifaPuerta(o, C) {
   return p + extras(o, C, T, o.w * o.h / 10000);
 }
 
+const aPresupuestarAncho = (o) => (o.tipo === 'ventana' || o.tipo === 'balconera' || o.tipo === 'corredera' || o.tipo === 'fijo') && o.w > 200;
 // El aluminio no tiene tarifa: se presupuesta a medida (Javi, 26 oct).
-const aPresupuestar = (o) => (o.tipo === 'ventana' || o.tipo === 'balconera' || o.tipo === 'corredera' || o.tipo === 'fijo') && o.mat === 'alu';
+const aPresupuestar = (o) => ((o.tipo === 'ventana' || o.tipo === 'balconera' || o.tipo === 'corredera' || o.tipo === 'fijo') && o.mat === 'alu') || aPresupuestarAncho(o);
+const tarifa = (o, C) => { const t = tarifaVentana(o, C); return t !== null ? t : tarifaPuerta(o, C); };
+// Con tarifa de Javi, un vidrio que no sea el estandar no suma: se presupuesta aparte.
+const vidrioAparte = (o, C) => o.vid !== 'solar' && tarifa(o, C) !== null;
+// Mas de 2 m de ancho: refuerzos y precio a mano (Javi, 27 oct).
 function precioUnidad(o, C) {
-  let pt = tarifaVentana(o, C);
-  if (pt === null) pt = tarifaPuerta(o, C);
+  const pt = tarifa(o, C);
   if (pt !== null) return pt;
   if (o.tipo === 'techo') {
     const T = C.techo;
@@ -175,6 +179,7 @@ function variantes(o, C) {
   prueba('gama', ['eco', 'confort', 'premium'], (c, v) => { c.gama = v; });
   prueba('col', Object.keys(C.color), (c, v) => { c.col = v; });
   prueba('vid', Object.keys(C.vidrio_m2), (c, v) => { c.vid = v; });
+  for (const v of Object.keys(C.vidrio_m2)) { const c = limpia(Object.assign({}, o, { vid: v }), C); if (v !== 'solar' && tarifa(c, C) !== null) out.vid[v] = 'aparte'; }
   prueba('pers', ['no', 'manual', 'motor', 'radio', 'solar'], (c, v) => { c.pers = v; });
   prueba('mosq', ['no', 'enrollable', 'plisada'], (c, v) => { c.mosq = v; });
   if (o.tipo === 'ventana' || o.tipo === 'balconera') {
@@ -201,7 +206,7 @@ module.exports = (req, res) => {
   d = d || {};
   const C = tabla();
   const items = (Array.isArray(d.items) ? d.items.slice(0, 60) : []).map((it) => limpia(it || {}, C));
-  const lineas = items.map((o) => (aPresupuestar(o) ? { unidad: 0, total: 0, presupuestar: true } : { unidad: r5(precioUnidad(o, C)), total: total(o, C) }));
+  const lineas = items.map((o) => (aPresupuestar(o) ? { unidad: 0, total: 0, presupuestar: true } : { unidad: r5(precioUnidad(o, C)), total: total(o, C), vidrio_aparte: vidrioAparte(o, C) }));
   const base_ = lineas.reduce((s, l) => s + l.total, 0);
   const out = {}, actual = total(o, C);
   const prueba = (k, vals, set) => {
@@ -227,6 +232,7 @@ module.exports = (req, res) => {
   prueba('gama', ['eco', 'confort', 'premium'], (c, v) => { c.gama = v; });
   prueba('col', Object.keys(C.color), (c, v) => { c.col = v; });
   prueba('vid', Object.keys(C.vidrio_m2), (c, v) => { c.vid = v; });
+  for (const v of Object.keys(C.vidrio_m2)) { const c = limpia(Object.assign({}, o, { vid: v }), C); if (v !== 'solar' && tarifa(c, C) !== null) out.vid[v] = 'aparte'; }
   prueba('pers', ['no', 'manual', 'motor', 'radio', 'solar'], (c, v) => { c.pers = v; });
   prueba('mosq', ['no', 'enrollable', 'plisada'], (c, v) => { c.mosq = v; });
   if (o.tipo === 'ventana' || o.tipo === 'balconera') {
@@ -253,7 +259,7 @@ module.exports = (req, res) => {
   d = d || {};
   const C = tabla();
   const items = (Array.isArray(d.items) ? d.items.slice(0, 60) : []).map((it) => limpia(it || {}, C));
-  const lineas = items.map((o) => (aPresupuestar(o) ? { unidad: 0, total: 0, presupuestar: true } : { unidad: r5(precioUnidad(o, C)), total: total(o, C) }));
+  const lineas = items.map((o) => (aPresupuestar(o) ? { unidad: 0, total: 0, presupuestar: true } : { unidad: r5(precioUnidad(o, C)), total: total(o, C), vidrio_aparte: vidrioAparte(o, C) }));
   const base_ = lineas.reduce((s, l) => s + l.total, 0);
   const out = {}, actual = total(o, C);
   const prueba = (k, vals, set) => {
@@ -279,6 +285,7 @@ module.exports = (req, res) => {
   prueba('gama', ['eco', 'confort', 'premium'], (c, v) => { c.gama = v; });
   prueba('col', Object.keys(C.color), (c, v) => { c.col = v; });
   prueba('vid', Object.keys(C.vidrio_m2), (c, v) => { c.vid = v; });
+  for (const v of Object.keys(C.vidrio_m2)) { const c = limpia(Object.assign({}, o, { vid: v }), C); if (v !== 'solar' && tarifa(c, C) !== null) out.vid[v] = 'aparte'; }
   prueba('pers', ['no', 'manual', 'motor', 'radio', 'solar'], (c, v) => { c.pers = v; });
   prueba('mosq', ['no', 'enrollable', 'plisada'], (c, v) => { c.mosq = v; });
   if (o.tipo === 'ventana' || o.tipo === 'balconera') {
@@ -305,7 +312,7 @@ module.exports = (req, res) => {
   d = d || {};
   const C = tabla();
   const items = (Array.isArray(d.items) ? d.items.slice(0, 60) : []).map((it) => limpia(it || {}, C));
-  const lineas = items.map((o) => (aPresupuestar(o) ? { unidad: 0, total: 0, presupuestar: true } : { unidad: r5(precioUnidad(o, C)), total: total(o, C) }));
+  const lineas = items.map((o) => (aPresupuestar(o) ? { unidad: 0, total: 0, presupuestar: true } : { unidad: r5(precioUnidad(o, C)), total: total(o, C), vidrio_aparte: vidrioAparte(o, C) }));
   const base_ = lineas.reduce((s, l) => s + l.total, 0);
   const out = {}, actual = total(o, C);
   const prueba = (k, vals, set) => {
@@ -331,6 +338,7 @@ module.exports = (req, res) => {
   prueba('gama', ['eco', 'confort', 'premium'], (c, v) => { c.gama = v; });
   prueba('col', Object.keys(C.color), (c, v) => { c.col = v; });
   prueba('vid', Object.keys(C.vidrio_m2), (c, v) => { c.vid = v; });
+  for (const v of Object.keys(C.vidrio_m2)) { const c = limpia(Object.assign({}, o, { vid: v }), C); if (v !== 'solar' && tarifa(c, C) !== null) out.vid[v] = 'aparte'; }
   prueba('pers', ['no', 'manual', 'motor', 'radio', 'solar'], (c, v) => { c.pers = v; });
   prueba('mosq', ['no', 'enrollable', 'plisada'], (c, v) => { c.mosq = v; });
   if (o.tipo === 'ventana' || o.tipo === 'balconera') {
@@ -357,7 +365,7 @@ module.exports = (req, res) => {
   d = d || {};
   const C = tabla();
   const items = (Array.isArray(d.items) ? d.items.slice(0, 60) : []).map((it) => limpia(it || {}, C));
-  const lineas = items.map((o) => (aPresupuestar(o) ? { unidad: 0, total: 0, presupuestar: true } : { unidad: r5(precioUnidad(o, C)), total: total(o, C) }));
+  const lineas = items.map((o) => (aPresupuestar(o) ? { unidad: 0, total: 0, presupuestar: true } : { unidad: r5(precioUnidad(o, C)), total: total(o, C), vidrio_aparte: vidrioAparte(o, C) }));
   const base_ = lineas.reduce((s, l) => s + l.total, 0);
   // La misma casa en el otro material, para comparar lado a lado.
   const alt = { pvc: 0, alu: 0 };

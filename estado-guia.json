@@ -1,8 +1,16 @@
 {
-  "version": "2026-10-27T06:50",
+  "version": "2026-10-27T10:30",
   "fecha": "27 de octubre de 2026",
   "aviso": "Hoy te dejamos dos novedades: la lupa de demostración y tus tarifas ya en la calculadora. Gracias por los tarifarios, Javi.",
   "ultimo": [
+    {
+      "f": "27 oct",
+      "t": "Recibidas tus respuestas a las dudas de la calculadora: el precio lleva el vidrio estándar y cualquier otro se presupuesta aparte; a partir de 2 metros de ancho también se presupuesta a mano. Ya está así en la web."
+    },
+    {
+      "f": "27 oct",
+      "t": "Recibido el acuerdo de la ayuda digital de 2023 (Kit Digital). Lo estamos revisando."
+    },
     {
       "f": "27 oct",
       "t": "Nueva en la guía: la lupa de demostración. Con datos de ejemplo sobre tu web, muestra dónde toca la gente, hasta dónde baja y dónde se va, para mejorarla con datos. Estará con datos reales cuando la web esté publicada y conectemos Analytics y Clarity."
@@ -18,14 +26,6 @@
     {
       "f": "27 oct",
       "t": "Anotado: los precios son siempre más IVA, no hay descuento por más de tres ventanas, y el aluminio se presupuesta aparte. Motor con pulsador (TTGO): 135 euros, sin la instalación eléctrica hasta el punto de luz."
-    },
-    {
-      "f": "27 oct",
-      "t": "Nos cuentas que la ayuda digital (Kit Digital) ya se pidió y la tramitó Raúl. Si tienes a mano el documento de esa ayuda (el acuerdo o la resolución), nos viene bien verlo."
-    },
-    {
-      "f": "26 oct",
-      "t": "Raúl te ha contestado que te llamará mañana para hablar de los accesos. Cuando habléis, pídele que lo que acordéis te lo confirme por escrito."
     }
   ],
   "cuentas": {
