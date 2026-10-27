@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Tu panel de control (demostración) | AMS Cerramientos</title>
+<meta name="description" content="Así vería Javi sus presupuestos, anuncios, posiciones en Google, IA y reseñas en un solo panel. Datos de ejemplo.">
+<style>
+@font-face{font-family:Inter;font-weight:400;font-display:swap;src:url(/fonts/inter-400.woff2) format("woff2")}
+@font-face{font-family:Inter;font-weight:600;font-display:swap;src:url(/fonts/inter-600.woff2) format("woff2")}
+@font-face{font-family:Inter;font-weight:700;font-display:swap;src:url(/fonts/inter-700.woff2) format("woff2")}
+*{box-sizing:border-box}body{margin:0;background:#f3f6f9;font-family:Inter,system-ui,sans-serif;color:#1f2a36}
+.pn-barra{background:#12202B;color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.pn-barra a{color:#fff;font-weight:700;text-decoration:none;font-size:.92rem}.pn-barra span{color:#cfe0f2;font-size:.85rem}
+.pn{max-width:1180px;margin:0 auto;padding:18px 16px 50px;color:#1f2a36}
+.pn-aviso-demo{background:#fff8ec;border:1px solid #f1dfb8;color:#4a3a1a;border-radius:12px;padding:10px 14px;font-size:.92rem;margin-bottom:16px}
+.pn-cabeza{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:14px;margin-bottom:16px}
+.pn-hola{margin:0;color:#6a7786;font-weight:600}
+.pn-cabeza h1{margin:2px 0 4px;font-size:clamp(1.6rem,3.5vw,2.2rem);color:#12202B}
+.pn-actualizado{margin:0;font-size:.88rem;color:#17602f;display:flex;align-items:center;gap:6px}
+.pn-punto{width:9px;height:9px;border-radius:50%;background:#1f9d55;box-shadow:0 0 0 0 rgba(31,157,85,.6);animation:pnlatido 1.8s infinite}
+@keyframes pnlatido{0%{box-shadow:0 0 0 0 rgba(31,157,85,.55)}70%{box-shadow:0 0 0 9px rgba(31,157,85,0)}100%{box-shadow:0 0 0 0 rgba(31,157,85,0)}}
+.pn-rangos{display:flex;background:#eef1f4;border-radius:12px;padding:4px;gap:4px}
+.pn-rangos button{border:0;background:transparent;padding:8px 14px;border-radius:9px;font-weight:700;color:#33414f;cursor:pointer}
+.pn-rangos button.activo{background:#fff;color:#12202B;box-shadow:0 2px 6px rgba(13,44,72,.12)}
+.pn-kpis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin-bottom:12px}
+.pn-kpi{background:#fff;border:1px solid #e3e8ee;border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.pn-kpi small{color:#6a7786;font-size:.78rem;font-weight:700}
+.pn-kpi b{font-size:1.7rem;color:#12202B;line-height:1.1}
+.pn-kpi>span{font-size:.8rem;color:#6a7786}
+.pn-kpi-grande{background:#12202B;border-color:#12202B}
+.pn-kpi-grande small,.pn-kpi-grande>span{color:#cfe0f2}
+.pn-kpi-grande b{color:#f5c04a;font-size:2.3rem}
+.pn-delta{font-weight:800}
+.pn-sube{color:#17602f}
+.pn-baja{color:#C2410C}
+.pn-kpi-grande .pn-sube{color:#7fe0a5}
+.pn-barra-pres{display:block;height:6px;background:#eef1f4;border-radius:999px;overflow:hidden}
+.pn-barra-pres span{display:block;height:100%;background:#1D6FB8}
+.pn-fila{display:grid;gap:12px;margin-bottom:12px}
+.pn-2{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}
+.pn-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.pn-caja{background:#fff;border:1px solid #e3e8ee;border-radius:16px;padding:16px;min-width:0;margin-bottom:0}
+section.pn-caja{margin-bottom:12px}
+.pn-caja-cabeza{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px;margin-bottom:10px}
+.pn-caja-cabeza h2{margin:0;font-size:1.05rem;color:#12202B}
+.pn-fuente{font-size:.75rem;color:#8a96a3}
+.pn-grafico{width:100%;height:auto;display:block}
+.pn-leyenda{margin:6px 0 0;font-size:.8rem;color:#6a7786;display:flex;align-items:center;gap:6px}
+.pn-leyenda i{width:10px;height:10px;border-radius:3px;display:inline-block;margin-left:8px}
+.pn-origen{display:grid;grid-template-columns:130px minmax(0,1fr);gap:12px;align-items:center}
+.pn-rosco{width:130px;height:130px}
+.pn-origen ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px}
+.pn-origen li{display:grid;grid-template-columns:10px minmax(0,1fr) auto;gap:8px;align-items:center;font-size:.85rem}
+.pn-origen li i{width:10px;height:10px;border-radius:3px}
+.pn-canales{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-top:12px}
+.pn-canales div{background:#f6f8fa;border-radius:10px;padding:8px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.pn-canales b{font-size:1.2rem;color:#12202B}
+.pn-canales small{font-size:.7rem;color:#6a7786;line-height:1.2}
+.pn-tabla-cabeza,.pn-tabla-fila{display:grid;grid-template-columns:minmax(0,1.6fr) repeat(3,minmax(0,.7fr)) minmax(0,1.2fr);gap:8px;align-items:center;padding:9px 6px;font-size:.9rem}
+.pn-tabla-cabeza{font-size:.75rem;font-weight:800;color:#6a7786;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid #e3e8ee}
+.pn-tabla-fila{border-bottom:1px solid #f0f3f6}
+.pn-camp{font-weight:700;color:#12202B}
+.pn-busquedas{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.pn-busquedas li{display:flex;justify-content:space-between;gap:8px;align-items:center;border-bottom:1px solid #f0f3f6;padding-bottom:6px}
+.pn-q{display:flex;flex-direction:column;font-size:.86rem;color:#1f2a36;min-width:0}
+.pn-q small{color:#8a96a3;font-size:.72rem}
+.pn-pos{display:flex;flex-direction:column;align-items:flex-end;font-size:.78rem}
+.pn-pos b{font-size:1.05rem;color:#12202B}
+.pn-ia-cifra{margin:0 0 8px;font-size:.95rem;color:#33414f}
+.pn-ia-cifra b{font-size:2rem;color:#12202B}
+.pn-ia-barras{display:flex;align-items:flex-end;gap:6px;height:80px;margin-bottom:8px}
+.pn-ia-barras span{flex:1;background:linear-gradient(180deg,#7a4fb3,#b494dc);border-radius:5px 5px 0 0;min-height:4px}
+.pn-nota-peq{margin:0;font-size:.82rem;color:#6a7786;line-height:1.45}
+.pn-progreso{height:10px;background:#eef1f4;border-radius:999px;overflow:hidden;margin-bottom:8px}
+.pn-progreso span{display:block;height:100%;background:#f5a623}
+.pn-actividad{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.pn-actividad li{display:grid;grid-template-columns:78px minmax(0,1fr);gap:10px;font-size:.88rem;line-height:1.4}
+.pn-actividad small{display:block;color:#8a96a3;font-size:.74rem}
+.pn-tipo{align-self:start;background:#eef3fa;color:#12202B;font-weight:800;font-size:.7rem;text-transform:uppercase;letter-spacing:.04em;border-radius:999px;padding:3px 8px;text-align:center}
+.pn-avisos{list-style:none;margin:0 0 12px;padding:0;display:flex;flex-direction:column;gap:8px}
+.pn-avisos li{border-radius:10px;padding:9px 12px;font-size:.88rem;line-height:1.4}
+.pn-bien{background:#eef8f1;color:#1d3d29;border-left:4px solid #17602f}
+.pn-aviso{background:#fff8ec;color:#4a3a1a;border-left:4px solid #f5a623}
+.pn-clarity{background:#f6f8fa;border-radius:10px;padding:10px 12px;font-size:.86rem;display:flex;flex-direction:column;gap:3px;color:#33414f}
+.pn-clarity b{color:#12202B}
+.pn-pie{font-size:.8rem;color:#8a96a3;margin:14px 0 0;line-height:1.5}
+@media (max-width:1100px){.pn-kpis{grid-template-columns:repeat(3,minmax(0,1fr))}.pn-3{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+@media (max-width:800px){.pn-2,.pn-3{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:600px){
+  .pn-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .pn-kpi-grande{grid-column:1/-1}
+  .pn-tabla-cabeza{display:none}
+  .pn-tabla-fila{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:4px}
+  .pn-camp{grid-column:1/-1}
+  .pn-tabla-fila span[data-t]::before{content:attr(data-t) ": ";color:#8a96a3;font-size:.75rem}
+  .pn-canales{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+/* Panel v2: en directo, pestañas y más bloques */
+.pn-ahora{background:#12202B;color:#fff;border-radius:16px;padding:12px 18px;display:flex;align-items:center;gap:12px}
+.pn-ahora b{font-size:2.2rem;color:#7fe0a5;line-height:1}
+.pn-ahora span{font-size:.85rem;color:#cfe0f2;max-width:130px;line-height:1.3}
+.pn-conectado{background:#fff;border:1px solid #e3e8ee;border-radius:14px;padding:10px 12px;margin-bottom:12px;display:flex;flex-direction:column;gap:8px}
+.pn-conectado-t{font-size:.78rem;font-weight:800;color:#17602f;text-transform:uppercase;letter-spacing:.06em}
+.pn-conectado-tira{display:flex;flex-wrap:wrap;gap:6px}
+.pn-chip{display:inline-flex;align-items:center;gap:6px;background:#f6f8fa;border:1px solid #e3e8ee;border-radius:999px;padding:4px 10px 4px 5px;font-size:.78rem;color:#33414f}
+.pn-chip .lg-logo{border-radius:5px;object-fit:contain}
+.pn-ok{width:7px;height:7px;border-radius:50%;background:#1f9d55}
+.pn-pestanas{display:flex;gap:4px;overflow-x:auto;background:#eef1f4;border-radius:14px;padding:5px;margin-bottom:14px;scrollbar-width:none}
+.pn-pestanas::-webkit-scrollbar{display:none}
+.pn-pestanas button{flex:none;border:0;background:transparent;padding:10px 16px;border-radius:10px;font-weight:700;color:#33414f;cursor:pointer;white-space:nowrap;font-size:.92rem}
+.pn-pestanas button.activo{background:#12202B;color:#fff;box-shadow:0 3px 10px rgba(13,44,72,.25)}
+.pn-vista{animation:pnentra .35s ease}
+@keyframes pnentra{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.pn-kpis-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.pn-grafico-caja{position:relative}
+.pn-tooltip{margin:4px 0 0;font-size:.82rem;color:#6a7786;min-height:1.3em}
+.pn-tooltip b{color:#12202B}
+.pn-barra-anim{transform-origin:bottom;transform-box:fill-box;animation:pncrece .6s cubic-bezier(.2,.8,.2,1) both;transition:opacity .15s}
+@keyframes pncrece{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.pn-linea-anim{stroke-dasharray:1400;stroke-dashoffset:1400;animation:pndibuja 1.4s .3s ease forwards}
+@keyframes pndibuja{to{stroke-dashoffset:0}}
+.pn-feed-caja{display:flex;flex-direction:column}
+.pn-feed{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.pn-ev{display:grid;grid-template-columns:10px minmax(0,1fr);gap:10px;align-items:start;padding:7px 9px;border-radius:10px;background:#f6f8fa;animation:pnentra .4s ease}
+.pn-ev:first-child{background:#eef8f1}
+.pn-ev i{width:10px;height:10px;border-radius:50%;margin-top:5px;background:#1D6FB8}
+.pn-ev-consulta i{background:#C2410C}.pn-ev-whatsapp i{background:#1f9d55}.pn-ev-llamada i{background:#12202B}.pn-ev-herramienta i{background:#17602f}.pn-ev-correo i{background:#7a4fb3}.pn-ev-chat i{background:#f5a623}
+.pn-ev b{display:block;font-size:.86rem;color:#12202B}
+.pn-ev small{font-size:.75rem;color:#6a7786}
+.pn-dinero{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.pn-dinero div{background:#f6f8fa;border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:2px}
+.pn-dinero small{font-size:.75rem;color:#6a7786;font-weight:700}
+.pn-dinero b{font-size:1.35rem;color:#12202B}
+.pn-dinero span{font-size:.78rem;color:#17602f;font-weight:700}
+.pn-barra-pres{margin-bottom:6px}
+.pn-salud{display:flex;flex-wrap:wrap;justify-content:space-around;gap:10px;margin-bottom:8px}
+.pn-medidor{display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center}
+.pn-medidor small{font-size:.74rem;color:#6a7786;max-width:90px;line-height:1.2}
+.pn-agentes{width:76px;height:76px;border-radius:50%;background:#e3f4e8;color:#17602f;font-weight:900;font-size:1.25rem;display:flex;align-items:center;justify-content:center}
+.pn-checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.pn-checks li{position:relative;padding-left:24px;font-size:.88rem;color:#33414f;line-height:1.4}
+.pn-checks li::before{content:"";position:absolute;left:0;top:2px;width:16px;height:16px;border-radius:50%;background:#1f9d55 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'><path d='M20 6L9 17l-5-5'/></svg>") center/11px no-repeat}
+.pn-embudo{display:flex;flex-direction:column;align-items:center;gap:6px}
+.pn-embudo-paso{display:flex;justify-content:space-between;align-items:center;gap:10px;background:linear-gradient(90deg,#12202B,#1D6FB8);color:#fff;border-radius:10px;padding:10px 16px;min-width:220px;animation:pnentra .5s ease both}
+.pn-embudo-paso:nth-child(2){background:linear-gradient(90deg,#14406a,#2f80d8)}
+.pn-embudo-paso:nth-child(3){background:linear-gradient(90deg,#17602f,#2a9152)}
+.pn-embudo-paso:nth-child(4){background:linear-gradient(90deg,#C2410C,#d0643f)}
+.pn-embudo-paso:nth-child(5){background:linear-gradient(90deg,#b37400,#f5a623)}
+.pn-embudo-paso b{font-size:1.25rem}
+.pn-embudo-paso span{font-size:.85rem;text-align:right}
+.pn-leads{display:flex;flex-direction:column;gap:6px}
+.pn-lead{display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px;border-radius:10px;border:1px solid #eef1f4}
+.pn-avatar{width:40px;height:40px;border-radius:50%;background:#eef3fa;color:#12202B;font-weight:800;font-size:.78rem;display:flex;align-items:center;justify-content:center}
+.pn-lead-txt{display:flex;flex-direction:column;min-width:0}
+.pn-lead-txt b{font-size:.9rem;color:#12202B}
+.pn-lead-txt small{font-size:.75rem;color:#6a7786}
+.pn-estado{font-size:.72rem;font-weight:800;border-radius:999px;padding:4px 9px;white-space:nowrap}
+.pn-e-nuevo{background:#fde8dc;color:#C2410C}.pn-e-llamado{background:#eef3fa;color:#12202B}.pn-e-consulta{background:#fbeccc;color:#7a5410}.pn-e-cliente{background:#dcf1e3;color:#17602f}
+.pn-tres{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-bottom:10px}
+.pn-cuatro{grid-template-columns:repeat(4,minmax(0,1fr))}
+.pn-tres div{background:#f6f8fa;border-radius:10px;padding:10px 6px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.pn-tres b{font-size:1.35rem;color:#12202B}
+.pn-tres small{font-size:.72rem;color:#6a7786;line-height:1.2}
+.pn-barras-h{list-style:none;margin:0 0 8px;padding:0;display:flex;flex-direction:column;gap:6px}
+.pn-barras-h li{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) 42px;gap:8px;align-items:center;font-size:.8rem;color:#33414f}
+.pn-pista{height:8px;background:#eef1f4;border-radius:999px;overflow:hidden}
+.pn-pista span{display:block;height:100%;background:#7a4fb3;border-radius:999px;animation:pnancho .8s ease both}
+@keyframes pnancho{from{width:0!important}}
+.pn-barras-h b{text-align:right;color:#12202B}
+.pn-redes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:12px}
+.pn-red{background:#fff;border:1px solid #e3e8ee;border-radius:16px;padding:14px}
+.pn-red-cabeza{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:10px;align-items:center;margin-bottom:6px}
+.pn-red-cabeza .lg-logo{border-radius:7px}
+.pn-red-cabeza span{display:flex;flex-direction:column}
+.pn-red-cabeza small{font-size:.74rem;color:#6a7786}
+.pn-red-num{align-items:flex-end;font-size:1.5rem;font-weight:800;color:#12202B}
+.pn-red-num .pn-delta{font-size:.78rem}
+.pn-mini{width:100%;height:60px;display:block;margin-bottom:6px}
+.pn-salud-grande{justify-content:space-between}
+@media (max-width:900px){.pn-kpis-4{grid-template-columns:repeat(2,minmax(0,1fr))}.pn-redes{grid-template-columns:minmax(0,1fr)}.pn-cuatro{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.pn-ahora{width:100%}.pn-lead{grid-template-columns:36px minmax(0,1fr)}.pn-estado{grid-column:2;justify-self:start}.pn-embudo-paso{min-width:0}.pn-dinero{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.pn-vista,.pn-ev,.pn-barra-anim,.pn-linea-anim,.pn-pista span,.pn-embudo-paso{animation:none!important;stroke-dashoffset:0}}
+
+.pn-bajo-grafico{margin:12px 0 0}
+.pn-pide{margin-top:16px;background:linear-gradient(135deg,#12202B,#24405a);color:#fff;border-radius:16px;padding:18px 20px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px}
+.pn-pide>div:first-child{display:flex;flex-direction:column;gap:4px;max-width:640px}
+.pn-pide b{font-size:1.15rem}
+.pn-pide span{color:#cfe0f2;font-size:.92rem;line-height:1.5}
+.pn-pide-botones{display:flex;flex-wrap:wrap;gap:8px}
+.pn-pide-botones a{border-radius:10px;padding:11px 16px;font-weight:800;text-decoration:none;font-size:.92rem}
+.pn-pide-wa{background:#1f9d55;color:#fff}
+.pn-pide-correo{background:#fff;color:#12202B}
+
+.pn-pide-form{display:flex;gap:8px;flex:1;min-width:min(100%,320px);max-width:520px}
+.pn-pide-form input{flex:1;min-width:0;border:0;border-radius:10px;padding:11px 12px;font-size:.92rem}
+.pn-pide-form button{border:0;background:#f5c04a;color:#3a2a00;font-weight:800;border-radius:10px;padding:11px 16px;cursor:pointer}
+.pn-pide-ok{margin:0;background:#dcf1e3;color:#17602f;border-radius:10px;padding:11px 14px;font-weight:700;font-size:.9rem}
+
+.pn-gastos{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+.pn-gasto{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;border-left:5px solid #d5dde7;background:#f6f8fa}
+.pn-gasto span{display:flex;flex-direction:column;min-width:0}
+.pn-gasto b{font-size:.92rem;color:#12202B}
+.pn-gasto small{font-size:.76rem;color:#6a7786}
+.pn-gasto strong{font-size:1.05rem;color:#12202B;white-space:nowrap}
+.pn-g-fijo{border-left-color:#12202B;background:#eef3fa}
+.pn-g-incluido{border-left-color:#17602f;background:#eef8f1}
+.pn-g-incluido strong{color:#17602f}
+.pn-g-variable{border-left-color:#C2410C}
+.pn-g-opcional{border-left-color:#f5a623;background:#fff8ec}
+.pn-meses{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;align-items:end;height:200px}
+.pn-mes{display:flex;flex-direction:column;align-items:center;gap:3px;height:100%;justify-content:flex-end}
+.pn-mes-col{width:70%;height:150px;display:flex;flex-direction:column-reverse;justify-content:flex-start;border-radius:6px 6px 0 0;overflow:hidden;background:#f6f8fa}
+.pn-mes-col i{display:block;width:100%;animation:pncrece .6s ease both;transform-origin:bottom}
+.pn-mes b{font-size:.74rem;color:#12202B}
+.pn-mes small{font-size:.72rem;color:#6a7786}
+.pn-e-visita{background:#fbeccc;color:#7a5410}
+.lg-logo{display:inline-block;object-fit:contain;border-radius:6px;flex:none;vertical-align:middle}
+
+</style>
+</head>
+<body>
+<div class="pn-barra"><a href="/guia-javi/panel">&larr; Volver a la mesa</a><span>AMS Cerramientos · Panel de control</span></div>
+<main class="pn">
+<div class="pn-aviso-demo"><b>Demostración con datos de ejemplo.</b> Así verías tu panel cuando conectemos tus cuentas. Ninguna cifra de esta página es real.</div>
+<header class="pn-cabeza"><div><p class="pn-hola">Buenos días, Javi</p><h1>Tu panel de control</h1><p class="pn-actualizado"><span class="pn-punto"></span> En directo · actualizado hace <span id="seg">0</span> s</p></div>
+<div class="pn-ahora"><b id="ahora">9</b><span>personas en tu web ahora mismo</span></div></header>
+<div class="pn-conectado" aria-label="Herramientas conectadas"><span class="pn-conectado-t" id="conectado-t"></span><div class="pn-conectado-tira" id="conectado"></div></div>
+<nav class="pn-pestanas" role="tablist" aria-label="Secciones del panel" id="pest"></nav>
+<div id="vista"></div>
+<section class="pn-pide"><div><b>¿Echas algún dato de menos? ¿Quieres otro informe?</b><span>Pídenoslo y lo añadimos a tu panel: lo que quieras medir, cada cuánto y cómo quieres verlo. También va incluido.</span></div>
+<form class="pn-pide-form" id="pide-form"><input id="pide-in" placeholder="Por ejemplo: presupuestos de Torrejón, o un informe solo de terrazas" aria-label="Qué quieres añadir a tu panel"><button type="submit">Pedirlo</button></form></section>
+<p class="pn-pie">Datos de ejemplo. Con tus accesos, cada bloque se conecta a su fuente: tu web (presupuestos, chat y herramientas, al momento), Google Analytics (al momento), Google Ads (cada 3 horas), Search Console (con 2 o 3 días de retraso, como da Google), Meta, Instagram, TikTok, tu ficha de Google, Resend, PageSpeed y Clarity.</p>
+</main>
+<script>
+(function(){
+var D={"cons": [1, 1, 2, 1, 0, 1, 3, 2, 2, 3, 2, 1, 0, 3, 4, 2, 4, 3, 1, 1, 4, 4, 3, 5, 4, 1, 1, 4, 5, 32], "vis": [44, 37, 52, 49, 24, 22, 60, 57, 51, 66, 62, 30, 27, 70, 76, 64, 81, 72, 38, 33, 84, 88, 77, 95, 86, 44, 37, 92, 99, 88], "hoy": {"vis": 96, "cons": 4, "clics": 14}, "pest": [["resumen", "Resumen"], ["clientes", "Clientes"], ["anuncios", "Anuncios"], ["google", "Google e IA"], ["redes", "Redes"], ["web", "Tu web"], ["gastos", "Gastos"], ["equipo", "Nuestro trabajo"]], "conectado": [["Google Analytics", "Visitas"], ["Search Console", "Búsquedas"], ["Google Ads", "Anuncios"], ["Ficha de Google", "Reseñas"], ["Bing", "Búsquedas y ficha"], ["Instagram", "Seguidores"], ["Facebook", "Anuncios y página"], ["TikTok", "Vídeos y anuncios"], ["WhatsApp", "Presupuestos"], ["Resend", "Correos"], ["Semrush", "Posiciones e IA"], ["ChatGPT", "Visibilidad IA"], ["PageSpeed", "Velocidad"], ["Vercel", "Web y copias"]], "origen": [["Google Ads", 38, "#C2410C"], ["Google (sin pagar)", 24, "#1D6FB8"], ["Chat de la web", 12, "#17602f"], ["WhatsApp directo", 9, "#1f9d55"], ["Instagram, Facebook y TikTok", 7, "#7a4fb3"], ["Recomendación y otros", 10, "#8a96a3"]], "camp": [{"n": "Ventanas de PVC", "inv": 210, "clics": 190, "cons": 14, "tend": -8}, {"n": "Ventanas de aluminio", "inv": 150, "clics": 130, "cons": 9, "tend": -5}, {"n": "Cerramientos de terraza", "inv": 140, "clics": 88, "cons": 7, "tend": 4}, {"n": "Marca (AMS Cerramientos)", "inv": 60, "clics": 96, "cons": 8, "tend": -2}], "meta": {"inv": 90, "alcance": 9200, "clics": 210, "cons": 5}, "tiktok": {"inv": 50, "clics": 120, "cons": 2}, "busq": [["ventanas pvc alcalá de henares", 170, 4, 15], ["cerramientos de terraza madrid", 590, 9, 24], ["ventanas aluminio color madera", 320, 7, 19], ["precio ventanas pvc", 2900, 18, 41], ["mosquiteras a medida", 480, 11, 26], ["ventanas pvc villalbilla", 30, 2, 9]], "ia": [0, 1, 1, 2, 2, 3, 3, 4], "redes": [{"red": "Instagram", "serie": [1120, 1131, 1150, 1172, 1203, 1241, 1290, 1332, 1385, 1430, 1459, 1486], "color": "#c13584", "extra": "Vídeo más visto: «Terraza cerrada en un día», 6.800 reproducciones"}, {"red": "Facebook", "serie": [620, 622, 626, 631, 636, 642, 650, 659, 668, 676, 684, 693], "color": "#1877f2", "extra": "Anuncios: 9.200 personas alcanzadas en Alcalá y alrededores"}, {"red": "TikTok", "serie": [0, 0, 12, 34, 68, 112, 170, 238, 310, 384, 461, 540], "color": "#111111", "extra": "Cuenta nueva: 540 seguidores en 10 semanas"}], "correos": {"env": 266, "cons": 7, "lista": [["Hemos recibido tu petición", 78], ["Así es una visita nuestra", 64], ["PVC o aluminio", 58], ["Lo que dicen quienes ya cambiaron", 61], ["Ayudas y cuotas", 55], ["¿Te ayudo con algo?", 52], ["Tu presupuesto sigue guardado", 49]]}, "chat": {"conv": 168, "llamar": 12, "fuera": 55, "preguntan": "cuánto cuesta cambiar las ventanas, PVC o aluminio, si se puede cerrar la terraza sin licencia y cuánto tardáis en instalar."}, "herr": [["Calculadora de ventanas", 210], ["Configurador de ventanas", 118], ["Cerramiento de terraza", 86], ["Revisa tu presupuesto", 44], ["Comprobador de ayudas", 27]], "leads": [["L. M.", "4 ventanas de PVC en Alcalá de Henares", "Google Ads · Ventanas de PVC", "Formulario", "Hace 12 min", "Nuevo"], ["J. R.", "Cerramiento de terraza de 11 m²", "Chat de la web, 23:40", "Chat", "Hoy, 08:05", "Llamado"], ["A. G.", "Ventanas de aluminio color madera", "Google · guía PVC o aluminio", "WhatsApp", "Ayer", "Visita reservada"], ["P. S.", "Mosquiteras y persianas", "Instagram · vídeo", "WhatsApp", "Ayer", "Visita reservada"], ["M. T.", "Cancela de aluminio", "Correo de seguimiento n.º 5", "Llamada", "Lunes", "Cliente"], ["R. D.", "Presupuesto de otra empresa para revisar", "Revisa tu presupuesto", "Formulario", "Lunes", "Llamado"]], "act": [["Hoy, 10:42", "Web", "Subido el botón de WhatsApp en la calculadora de ventanas: en Clarity vimos que costaba encontrarlo."], ["Hoy, 09:15", "Anuncios", "Pausada la palabra «ventanas baratas»: traía curiosos, no clientes. Ahorro estimado: 35 € al mes."], ["Ayer, 18:30", "Reseñas", "Publicada la respuesta a la reseña de Carmen, con tu visto bueno."], ["Ayer, 12:00", "Blog", "Publicado: «PVC o aluminio: cuál te conviene de verdad»."], ["Ayer, 10:00", "Redes", "Montado y programado tu vídeo de la terraza cerrada en un día."], ["Lunes, 08:00", "Informe", "Enviado el informe semanal a tu móvil."], ["Domingo, 20:10", "Correos", "Nueva serie para quien pide un cerramiento de terraza, lista para que la revises."], ["Viernes", "Diseño", "Nuevo anuncio para la campaña de ventanas de aluminio."], ["Jueves", "IA", "Actualizada la ficha para las IA con vuestras marcas y zonas de trabajo."]], "eventos": [["visita", "Nueva visita desde Google", "Lee «PVC o aluminio: cuál te conviene»"], ["herramienta", "Alguien usa la calculadora de ventanas", "4 ventanas de PVC, oscilobatientes"], ["visita", "Nueva visita desde un anuncio", "Página de cerramientos de terraza"], ["whatsapp", "Pulsación en WhatsApp", "Desde la calculadora, en el móvil"], ["correo", "Correo abierto", "«Así es una visita nuestra»"], ["visita", "Nueva visita desde Instagram", "Vídeo «Terraza cerrada en un día»"], ["herramienta", "Cálculo de cerramiento de terraza", "11 m² en PVC"], ["llamada", "Pulsación en llamar", "Desde la página de contacto"], ["chat", "Conversación en el chat", "Pregunta si podéis medir esta semana"], ["visita", "Nueva visita desde ChatGPT", "Página de ventanas de PVC"], ["consulta", "Nuevo presupuesto pedido", "Formulario · Ventanas de PVC · Google Ads"]], "meses": ["May", "Jun", "Jul", "Ago", "Sep", "Oct"], "gm": [[560, 0, 0, 28], [560, 90, 0, 41], [560, 90, 350, 57], [500, 60, 0, 39], [560, 140, 0, 78], [560, 140, 0, 100]], "versiones": 321};
+var $=function(s){return document.querySelector(s)};
+var num=function(n){return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,'.')};
+var eur=function(n){return num(n)+' €'};
+var LOGO={'Google Analytics':'google-analytics-icono.png','Search Console':'google-search-console.png','Google Ads':'google-ads-icono.png','Ficha de Google':'google-business-profile-icono.png','Bing':'bing.svg','Instagram':'instagram.jpg','Facebook':'facebook.png','TikTok':'tiktok.png','WhatsApp':'whatsapp-business.jpg','Resend':'resend.svg','Semrush':'semrush.svg','ChatGPT':'openai.svg','PageSpeed':'pagespeedinsights.svg','Vercel':'vercel.svg'};
+function logo(n,t){return '<img class="lg-logo" src="/img/panel/'+LOGO[n]+'" alt="Logotipo de '+n+'" width="'+t+'" height="'+t+'" loading="lazy">'}
+function delta(v,inv,suf){var bueno=inv?v<0:v>0;return '<span class="pn-delta '+(bueno?'pn-sube':'pn-baja')+'">'+(v>0?'+':'')+v+(suf||'')+'</span>'}
+function caja(t,f,h,c){return '<div class="pn-caja '+(c||'')+'"><div class="pn-caja-cabeza"><h2>'+t+'</h2>'+(f?'<span class="pn-fuente">'+f+'</span>':'')+'</div>'+h+'</div>'}
+function sum(a){return a.reduce(function(x,y){return x+y},0)}
+function cuenta(el,val){if(!el)return;var d=el._v||0;el._v=val;var t0=performance.now();(function p(t){var k=Math.min(1,(t-t0)/700);el.textContent=num(d+(val-d)*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(p)})(t0)}
+function grafico(datos,linea){var max=Math.max.apply(null,datos),maxL=Math.max.apply(null,linea),w=600,h=180,paso=w/datos.length,s='';
+ datos.forEach(function(v,i){var a=(v/max)*(h-40);s+='<g data-i="'+i+'"><rect x="'+(i*paso)+'" y="0" width="'+paso+'" height="'+(h-16)+'" fill="transparent"/><rect class="pn-barra-anim b" x="'+(i*paso+3)+'" y="'+(h-16-a)+'" width="'+(paso-6)+'" height="'+a+'" rx="3" fill="#C2410C" opacity=".9" style="animation-delay:'+(i*18)+'ms"/></g>'});
+ var pts=linea.map(function(v,i){return (i*paso+paso/2)+','+(h-16-(v/maxL)*(h-40))}).join(' ');
+ return '<div class="pn-grafico-caja"><svg viewBox="0 0 '+w+' '+h+'" class="pn-grafico" role="img" aria-label="Presupuestos y visitas por día (ejemplo)" id="gr">'+s+'<polyline points="'+pts+'" fill="none" stroke="#1D6FB8" stroke-width="2.5" stroke-linejoin="round" class="pn-linea-anim"/><line x1="0" y1="'+(h-16)+'" x2="'+w+'" y2="'+(h-16)+'" stroke="#d5dde7"/><text x="0" y="'+(h-2)+'" font-size="11" fill="#6a7786">Hace 30 días</text><text x="'+w+'" y="'+(h-2)+'" font-size="11" fill="#6a7786" text-anchor="end">Hoy</text></svg><p class="pn-tooltip" id="tt">Pasa el dedo o el ratón por las barras para ver cada día.</p></div>'}
+function enlazaGrafico(datos,linea){var g=$('#gr');if(!g)return;var tt=$('#tt');function mostrar(i){var bs=g.querySelectorAll('.b');for(var k=0;k<bs.length;k++)bs[k].setAttribute('opacity',k===i?'.9':'.35');tt.innerHTML='<b>'+(i===datos.length-1?'Hoy':'Hace '+(datos.length-1-i)+' días')+'</b>: '+datos[i]+' presupuestos y '+linea[i]+' visitas'}
+ g.querySelectorAll('g').forEach(function(e){var i=+e.getAttribute('data-i');e.addEventListener('mouseenter',function(){mostrar(i)});e.addEventListener('click',function(){mostrar(i)})});
+ g.addEventListener('mouseleave',function(){g.querySelectorAll('.b').forEach(function(b){b.setAttribute('opacity','.9')});tt.textContent='Pasa el dedo o el ratón por las barras para ver cada día.'})}
+function rosco(datos,centro,sub){var tot=sum(datos.map(function(d){return d[1]})),ac=0,r=52,c=2*Math.PI*r,s='';datos.forEach(function(d){var l=d[1]/tot*c;s+='<circle cx="70" cy="70" r="'+r+'" fill="none" stroke="'+d[2]+'" stroke-width="22" stroke-dasharray="'+l+' '+(c-l)+'" stroke-dashoffset="'+(-ac)+'" transform="rotate(-90 70 70)"/>';ac+=l});
+ return '<svg viewBox="0 0 140 140" class="pn-rosco" role="img" aria-label="'+sub+'">'+s+'<text x="70" y="68" text-anchor="middle" font-size="24" font-weight="800" fill="#12202B">'+centro+'</text><text x="70" y="87" text-anchor="middle" font-size="11" fill="#6a7786">'+sub+'</text></svg>'}
+function linea(serie,color){var mn=Math.min.apply(null,serie),mx=Math.max.apply(null,serie),w=220,h=56,p=serie.map(function(v,i){return (i/(serie.length-1)*w)+','+(h-4-((v-mn)/Math.max(1,mx-mn))*(h-8))}).join(' ');return '<svg viewBox="0 0 '+w+' '+h+'" class="pn-mini" aria-hidden="true"><polygon points="0,'+h+' '+p+' '+w+','+h+'" fill="'+color+'" opacity=".1"/><polyline points="'+p+'" fill="none" stroke="'+color+'" stroke-width="2.5" stroke-linejoin="round" class="pn-linea-anim"/></svg>'}
+function medidor(v,et){var r=30,c=2*Math.PI*r,col=v>=90?'#17602f':v>=50?'#e67e22':'#c0392b';return '<div class="pn-medidor"><svg viewBox="0 0 76 76" width="76" height="76" aria-hidden="true"><circle cx="38" cy="38" r="30" fill="none" stroke="#eef1f4" stroke-width="7"/><circle cx="38" cy="38" r="30" fill="none" stroke="'+col+'" stroke-width="7" stroke-dasharray="'+(v/100*c)+' '+c+'" transform="rotate(-90 38 38)" stroke-linecap="round"/><text x="38" y="44" text-anchor="middle" font-size="18" font-weight="800" fill="'+col+'">'+v+'</text></svg><small>'+et+'</small></div>'}
+function barrasH(items,max,color){return '<ul class="pn-barras-h">'+items.map(function(x){return '<li><span>'+x[0]+'</span><span class="pn-pista"><span style="width:'+(x[1]/max*100)+'%;'+(color?'background:'+color:'')+'"></span></span><b>'+x[2]+'</b></li>'}).join('')+'</ul>'}
+function tres(a,cls){return '<div class="pn-tres '+(cls||'')+'">'+a.map(function(x){return '<div><b>'+x[0]+'</b><small>'+x[1]+'</small></div>'}).join('')+'</div>'}
+function kpi(t,b,s,g,id){return '<div class="pn-kpi '+(g?'pn-kpi-grande':'')+'"><small>'+t+'</small><b'+(id?' id="'+id+'"':'')+'>'+b+'</b><span>'+s+'</span></div>'}
+
+var cons30=sum(D.cons),vis30=sum(D.vis);
+var totAds=D.camp.reduce(function(a,c){return {inv:a.inv+c.inv,cons:a.cons+c.cons}},{inv:0,cons:0});
+var otras=D.meta.inv+D.tiktok.inv;
+var iaAhora=D.ia[D.ia.length-1];
+var hoy={vis:D.hoy.vis,cons:D.hoy.cons,clics:D.hoy.clics},ahora=9,seg=0,tab='resumen',feed=[],cont=100;
+D.eventos.slice(0,5).forEach(function(e,i){feed.push({id:i,tipo:e[0],t:e[1],d:e[2],hace:'hace '+((i+1)*2)+' min'})});
+
+function feedHtml(){return feed.map(function(e){return '<li class="pn-ev pn-ev-'+e.tipo+'"><i></i><span><b>'+e.t+'</b><small>'+e.d+' · '+e.hace+'</small></span></li>'}).join('')}
+
+var T={};
+T.resumen=function(){
+ return '<section class="pn-kpis">'+
+  kpi('Presupuestos pedidos hoy',hoy.cons,num(cons30)+' en los últimos 30 días · '+delta(34),1,'k-cons')+
+  kpi('Visitas hoy',hoy.vis,num(vis30)+' en 30 días · '+delta(34,0,' %'),0,'k-vis')+
+  kpi('Pulsaciones en llamar y WhatsApp hoy',hoy.clics,'Cada una, con su origen',0,'k-clics')+
+  kpi('Coste por presupuesto (Google Ads)',eur(Math.round(totAds.inv/totAds.cons)),delta(-3,1,' €')+' en un mes')+
+  kpi('Nota en Google','4,6 ★',delta(8)+' reseñas este mes · objetivo 4,8')+
+  kpi('Te nombran las IA',iaAhora+' de 15','preguntas vigiladas')+'</section>'+
+ '<section class="pn-fila pn-2">'+
+  caja('Presupuestos y visitas, día a día','Tu web y Google Analytics · al momento',grafico(D.cons,D.vis)+'<p class="pn-leyenda"><i style="background:#C2410C"></i> Presupuestos <i style="background:#1D6FB8"></i> Visitas</p>'+tres([[Math.max.apply(null,D.cons),'presupuestos, el mejor día'],[(cons30/30).toFixed(1).replace('.',','),'presupuestos al día de media'],['<span class="pn-sube">+'+Math.round((hoy.cons/(cons30/30)-1)*100)+' %</span>','hoy frente a la media']],'pn-bajo-grafico'))+
+  caja('Ahora mismo en tu web','En directo','<ul class="pn-feed" id="feed">'+feedHtml()+'</ul>','pn-feed-caja')+'</section>'+
+ '<section class="pn-fila pn-3">'+
+  caja('De dónde vienen los presupuestos','Últimos 30 días','<div class="pn-origen">'+rosco(D.origen,String(cons30),'presupuestos')+'<ul>'+D.origen.map(function(o){return '<li><i style="background:'+o[2]+'"></i><span>'+o[0]+'</span><b>'+o[1]+'</b></li>'}).join('')+'</ul></div>')+
+  caja('Tu dinero, este mes','Google Ads, Meta y TikTok','<div class="pn-dinero"><div><small>Google Ads</small><b>'+eur(totAds.inv)+'</b><span>'+totAds.cons+' presupuestos</span></div><div><small>Instagram, Facebook y TikTok</small><b>'+eur(otras)+'</b><span>'+(D.meta.cons+D.tiktok.cons)+' presupuestos</span></div></div><div class="pn-barra-pres"><span style="width:'+((totAds.inv+otras)/1000*100)+'%"></span></div><p class="pn-nota-peq">'+eur(totAds.inv+otras)+' de 1.000 € de tope. Cada euro, con el presupuesto que trae. Tú decides el tope.</p>')+
+  caja('Tu web, en forma','Comprobado hace 6 min','<div class="pn-salud">'+medidor(94,'Velocidad móvil')+medidor(96,'Accesibilidad')+'<div class="pn-medidor"><span class="pn-agentes">3/3</span><small>Agentes de IA</small></div></div><ul class="pn-checks"><li>En línea: 99,99 % este mes</li><li>Copia guardada hace 2 horas</li><li>0 enlaces rotos</li></ul>')+'</section>';
+};
+T.clientes=function(){
+ var emb=[['Visitas',vis30],['Usan una herramienta',520],['Dejan sus datos o escriben',cons30],['Aceptan una visita',38],['Te contratan (lo apuntas tú)',17]];
+ return caja('El camino hasta cliente','Últimos 30 días','<div class="pn-embudo">'+emb.map(function(e,i){return '<div class="pn-embudo-paso" style="width:'+(100-i*15)+'%"><b>'+num(e[1])+'</b><span>'+e[0]+'</span></div>'}).join('')+'</div>').replace('pn-caja ','pn-caja ')+'<div style="height:12px"></div>'+
+ caja('Últimos presupuestos','Formularios, WhatsApp, llamadas y chat · al momento','<div class="pn-leads">'+D.leads.map(function(l){var k=l[5].split(' ')[0].toLowerCase();return '<div class="pn-lead"><span class="pn-avatar">'+l[0]+'</span><span class="pn-lead-txt"><b>'+l[1]+'</b><small>'+l[2]+' · '+l[3]+' · '+l[4]+'</small></span><span class="pn-estado pn-e-'+k+'">'+l[5]+'</span></div>'}).join('')+'</div>')+'<div style="height:12px"></div>'+
+ '<section class="pn-fila pn-3">'+
+  caja('Correos de seguimiento','Resend · al momento',tres([[D.correos.env,'enviados'],['61 %','los abren'],[D.correos.cons,'presupuestos desde un correo']])+barrasH(D.correos.lista.map(function(c){return [c[0],c[1],c[1]+' %']}),100))+
+  caja('El asistente de la web','Chat · al momento',tres([[D.chat.conv,'conversaciones'],[D.chat.llamar,'piden que les llames'],[D.chat.fuera+' %','fuera de horario']])+'<p class="pn-nota-peq"><b>Lo que más preguntan:</b> '+D.chat.preguntan+'</p>')+
+  caja('Tus herramientas','Usos en 30 días',barrasH(D.herr.map(function(h){return [h[0],h[1],h[1]]}),D.herr[0][1],'#17602f')+'<p class="pn-nota-peq">Una de cada cinco personas que usan una herramienta acaba escribiéndote.</p>')+'</section>';
+};
+T.anuncios=function(){
+ var tot=totAds.inv+otras,con=totAds.cons+D.meta.cons+D.tiktok.cons;
+ return '<section class="pn-kpis pn-kpis-4">'+kpi('Invertido este mes',eur(tot),'Google Ads, Meta y TikTok',1)+kpi('Presupuestos desde anuncios',con,delta(11)+' frente al mes pasado')+kpi('Coste por presupuesto',eur(Math.round(tot/con)),delta(-3,1,' €'))+kpi('Palabras que no traen clientes',31,'bloqueadas este mes')+'</section>'+
+ caja('Google Ads, campaña a campaña','Google Ads · actualizado hace 3 horas','<div class="pn-tabla"><div class="pn-tabla-cabeza"><span>Campaña</span><span>Invertido</span><span>Clics</span><span>Presupuestos</span><span>Coste por presupuesto</span></div>'+D.camp.map(function(c){return '<div class="pn-tabla-fila"><span class="pn-camp">'+c.n+'</span><span data-t="Invertido">'+eur(c.inv)+'</span><span data-t="Clics">'+c.clics+'</span><span data-t="Presupuestos">'+c.cons+'</span><span data-t="Coste por presupuesto"><b>'+eur(Math.round(c.inv/c.cons))+'</b> '+delta(c.tend,1,' %')+'</span></div>'}).join('')+'</div>')+'<div style="height:12px"></div>'+
+ '<section class="pn-fila pn-2">'+caja('Instagram, Facebook y TikTok','Meta y TikTok · al momento',tres([[num(D.meta.alcance),'personas alcanzadas en la zona'],[D.meta.clics+D.tiktok.clics,'clics'],[eur(Math.round(otras/(D.meta.cons+D.tiktok.cons))),'por presupuesto']]))+
+ caja('Lo que hemos ajustado','Esta semana','<ul class="pn-checks"><li>Pausada «ventanas baratas»: curiosos, no clientes</li><li>Subida la puja en «ventanas pvc alcalá de henares»</li><li>Nuevo anuncio que lleva directo a la calculadora</li></ul>')+'</section>';
+};
+T.google=function(){
+ return '<section class="pn-kpis pn-kpis-4">'+kpi('Visitas desde Google','860','al mes · antes 190',1)+kpi('Búsquedas en primera página','41',delta(28)+' desde el inicio')+kpi('Autoridad del dominio','11','antes 6')+kpi('Artículos publicados','12','este mes')+'</section>'+
+ '<section class="pn-fila pn-2">'+caja('Tus búsquedas clave','Search Console · hace 2 días','<ul class="pn-busquedas">'+D.busq.map(function(b){return '<li><span class="pn-q">'+b[0]+'<small>'+num(b[1])+' búsquedas al mes · antes en el '+b[3]+'.º</small></span><span class="pn-pos"><b>'+b[2]+'.º</b><span class="pn-delta pn-sube">▲ '+(b[3]-b[2])+'</span></span></li>'}).join('')+'</ul>')+
+ caja('Te recomiendan las IA','ChatGPT, Gemini y Google · cada semana','<p class="pn-ia-cifra"><b>'+iaAhora+'</b> de 15 preguntas</p><div class="pn-ia-barras" aria-label="Evolución semanal (ejemplo)">'+D.ia.map(function(v,i){return '<span style="height:'+(v/15*100)+'%" title="Semana '+(i+1)+': '+v+'"></span>'}).join('')+'</div><p class="pn-nota-peq">ChatGPT ya te nombra en «¿Qué empresa de cerramientos de terraza me recomiendas en Alcalá de Henares?». Llegan 6 visitas al mes desde ChatGPT.</p>')+'</section>'+
+ caja('Tus reseñas','Ficha de Google · hoy','<div class="pn-resenas"><p class="pn-ia-cifra"><b>4,6</b> ★ con 52 reseñas · objetivo 4,8</p><div class="pn-progreso"><span style="width:55%"></span></div><p class="pn-nota-peq">Faltan <b>11 reseñas de cinco estrellas</b> para llegar al 4,7. Este mes: 8 nuevas, todas contestadas con tu visto bueno. 31 pedidas por WhatsApp.</p></div>');
+};
+T.redes=function(){
+ return '<section class="pn-redes">'+D.redes.map(function(r){var u=r.serie[r.serie.length-1],i=r.serie[0];return '<div class="pn-red"><div class="pn-red-cabeza">'+logo(r.red,30)+'<span><b>'+r.red+'</b><small>Seguidores</small></span><span class="pn-red-num"><span class="cnt" data-v="'+u+'">0</span><span class="pn-delta pn-sube">+'+num(u-i)+'</span></span></div>'+linea(r.serie,r.color)+'<p class="pn-nota-peq">'+r.extra+'</p></div>'}).join('')+'</section>'+
+ caja('Este mes en redes','Instagram, Facebook y TikTok',tres([[14,'publicaciones'],[5,'vídeos montados por nosotros'],['31.200','reproducciones'],[D.meta.cons+D.tiktok.cons,'presupuestos desde redes']],'pn-cuatro'));
+};
+T.web=function(){
+ return caja('Velocidad y calidad','PageSpeed de Google · comprobado hace 6 min','<div class="pn-salud pn-salud-grande">'+medidor(94,'Velocidad móvil')+medidor(96,'Accesibilidad')+medidor(96,'Buenas prácticas')+medidor(100,'SEO')+'<div class="pn-medidor"><span class="pn-agentes">3/3</span><small>Navegación con IA</small></div></div><p class="pn-nota-peq">Lo comprobamos solos cada día. Si alguna nota baja, nos llega un aviso y lo arreglamos antes de que lo notes. Tu web anterior sacaba 56 de velocidad en el móvil.</p>')+'<div style="height:12px"></div>'+
+ '<section class="pn-fila pn-3">'+caja('Seguridad','Al momento','<ul class="pn-checks"><li>Sin WordPress ni complementos que atacar</li><li>Certificado de seguridad válido</li><li>Sin panel de administración que forzar</li></ul>')+
+ caja('Copias de seguridad','Vercel','<p class="pn-ia-cifra"><b>'+D.versiones+'</b> versiones guardadas</p><p class="pn-nota-peq">La última, hace 2 horas. Podemos volver a cualquiera en unos minutos: la de ayer, la de hace un mes o la de hace cuatro.</p>')+
+ caja('Siempre en línea','Este mes','<p class="pn-ia-cifra"><b>99,99 %</b></p><p class="pn-nota-peq">0 enlaces rotos. Las direcciones antiguas de tu web llevan a la página nueva que les corresponde.</p>')+'</section>'+
+ caja('Lo que vemos en Clarity','Mapas de calor y grabaciones anónimas','<ul class="pn-avisos"><li class="pn-aviso">El 41 % de quien llega a cerramientos de terraza desde un anuncio no baja hasta la calculadora. Lo hemos subido arriba.</li><li class="pn-bien">La calculadora de ventanas es lo más pulsado de la portada en el móvil.</li><li class="pn-bien">Nadie se atasca ya en el formulario de contacto: lo terminan 9 de cada 10.</li></ul>');
+};
+T.gastos=function(){
+ var G=[['Nuestros honorarios','0 €','Web, SEO, anuncios, redes, diseño, correos e informes: todo incluido, sin coste para ti','incluido'],['Servidor y mantenimiento de la web','0 €','Incluido: alojamiento, copias y seguridad','incluido'],['SEO (dentro y fuera de tu web)','0 €','Incluido: contenidos, técnico, local y análisis de enlaces','incluido'],['Google Ads',eur(totAds.inv),'Lo pagas tú a Google, con tu tarjeta','variable'],['Instagram, Facebook y TikTok',eur(otras),'Lo pagas tú a cada red, con tu tarjeta','variable'],['Notas de prensa, artículos en medios y vídeos','0 €','Opcional: te pasamos el presupuesto antes y lo pagas tú al medio o al profesional','opcional'],['Asistente de IA','4 €','Por uso: '+D.chat.conv+' conversaciones este mes','variable'],['Dominio en IONOS','≈ 12–33 €/año','Lo pagas tú, como hasta ahora','fijo']];
+ return caja('Lo que te cuesta tu marketing este mes','Octubre · todo en un solo sitio','<div class="pn-gastos">'+G.map(function(g){return '<div class="pn-gasto pn-g-'+g[3]+'"><span><b>'+g[0]+'</b><small>'+g[2]+'</small></span><strong>'+g[1]+'</strong></div>'}).join('')+'</div><p class="pn-nota-peq">Este mes, en total: <b>'+eur(totAds.inv+otras+4)+'</b>, todo en anuncios y en el asistente. Nuestro trabajo: <b>0 €</b>. Cada euro, con el presupuesto que trae.</p>')+'<div style="height:12px"></div>'+
+ '<section class="pn-fila pn-2">'+caja('Mes a mes','Lo que pagas aparte de nuestro trabajo','<div class="pn-meses">'+D.gm.map(function(m,i){var t=m[0]+m[1]+m[2];return '<div class="pn-mes" title="'+D.meses[i]+': '+eur(t)+'"><span class="pn-mes-col"><i style="height:'+(m[2]/1000*100)+'%;background:#f5a623"></i><i style="height:'+(m[1]/1000*100)+'%;background:#7a4fb3"></i><i style="height:'+(m[0]/1000*100)+'%;background:#C2410C"></i></span><b>'+eur(t)+'</b><small>'+D.meses[i]+'</small></div>'}).join('')+'</div><p class="pn-leyenda"><i style="background:#C2410C"></i> Google Ads <i style="background:#7a4fb3"></i> Meta y TikTok <i style="background:#f5a623"></i> Notas de prensa</p>')+
+ caja('Lo que te cuesta cada presupuesto','Gasto aparte ÷ presupuestos pedidos','<ul class="pn-barras-h">'+D.gm.map(function(m,i){var c=Math.round((m[0]+m[1]+m[2])/m[3]);return '<li><span>'+D.meses[i]+'</span><span class="pn-pista"><span style="width:'+(c/25*100)+'%;background:#1D6FB8"></span></span><b>'+eur(c)+'</b></li>'}).join('')+'</ul><p class="pn-nota-peq">En julio se compró un pack de notas de prensa de ejemplo: sube ese mes y luego trae visitas desde Google sin pagar.</p>')+'</section>';
+};
+T.equipo=function(){
+ return '<section class="pn-kpis pn-kpis-4">'+kpi('Tareas hechas este mes','<span class="cnt" data-v="74">0</span>','sin que tengas que pedirlas',1)+kpi('Cambios en la web','22','el mismo día que se pidieron')+kpi('Tiempo medio de respuesta','2 h 15 min','a lo que nos pides')+kpi('Informes enviados','4 + 30','semanales y diarios')+'</section>'+
+ caja('Lo que hemos hecho por ti','Nuestro equipo · al momento','<ul class="pn-actividad">'+D.act.map(function(a){return '<li><span class="pn-tipo">'+a[1]+'</span><span>'+a[2]+'<small>'+a[0]+'</small></span></li>'}).join('')+'</ul>');
+};
+
+function pinta(){
+ $('#vista').innerHTML='<div class="pn-vista">'+T[tab]()+'</div>';
+ var m0={'k-cons':hoy.cons,'k-vis':hoy.vis,'k-clics':hoy.clics};for(var k0 in m0){var e0=$('#'+k0);if(e0)e0._v=m0[k0]}
+ if(tab==='resumen')enlazaGrafico(D.cons,D.vis);
+ document.querySelectorAll('.cnt').forEach(function(e){cuenta(e,+e.getAttribute('data-v'))});
+ document.querySelectorAll('#pest button').forEach(function(b){var a=b.getAttribute('data-t')===tab;b.className=a?'activo':'';b.setAttribute('aria-selected',a)});
+}
+$('#pest').innerHTML=D.pest.map(function(p){return '<button role="tab" data-t="'+p[0]+'">'+p[1]+'</button>'}).join('');
+$('#pest').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;tab=b.getAttribute('data-t');pinta()});
+$('#conectado-t').textContent=D.conectado.length+' herramientas conectadas';
+$('#conectado').innerHTML=D.conectado.map(function(c){return '<span class="pn-chip" title="'+c[0]+': '+c[1]+'">'+logo(c[0],20)+'<span>'+c[0]+'</span><i class="pn-ok" aria-label="conectado"></i></span>'}).join('');
+cuenta($('#ahora'),ahora);
+setInterval(function(){seg++;var s=$('#seg');if(s)s.textContent=seg},1000);
+var idx=5;
+setInterval(function(){var e=D.eventos[idx%D.eventos.length];idx++;
+ feed=[{id:cont++,tipo:e[0],t:e[1],d:e[2],hace:'ahora mismo'}].concat(feed.slice(0,6).map(function(x,n){return {id:x.id,tipo:x.tipo,t:x.t,d:x.d,hace:n===0?'hace unos segundos':x.hace}}));
+ if(e[0]==='visita')hoy.vis++;if(e[0]==='consulta')hoy.cons++;if(e[0]==='whatsapp'||e[0]==='llamada')hoy.clics++;
+ ahora=Math.max(3,Math.min(17,ahora+(Math.random()>.5?1:-1)));cuenta($('#ahora'),ahora);seg=0;var s=$('#seg');if(s)s.textContent=0;
+ if(tab==='resumen'){var f=$('#feed');if(f)f.innerHTML=feedHtml();cuenta($('#k-cons'),hoy.cons);cuenta($('#k-vis'),hoy.vis);cuenta($('#k-clics'),hoy.clics)}
+},4500);
+var form=$('#pide-form');form.addEventListener('submit',function(e){e.preventDefault();var v=$('#pide-in').value.trim();if(v)form.innerHTML='<p class="pn-pide-ok">Recibido. Te diríamos cuándo lo tienes en tu panel. (Demostración: no se ha enviado nada.)</p>'});
+pinta();
+})();
+
+</script>
+</body>
+</html>
