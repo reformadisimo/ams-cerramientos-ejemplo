@@ -19,7 +19,7 @@ export default function Page() {
       <div className="bg-[#11343d] px-4 py-2 text-center text-[14px] leading-snug text-white">
         Mesa de control de AMS, <b>de ejemplo, con cifras inventadas</b>. Lo que todavía no está conectado (ventas, lupa, plan, espejo de la IA, vigía, preguntar y resumen por correo) se muestra como ejemplo.
       </div>
-      <Mesa datos={{ ...(d as Parameters<typeof Mesa>[0]["datos"]), hoy, clave: "demo" }} temas={p.temas} resumenHoy={p.resumen} tareas={p.tareas} relojes={p.relojes} />
+      <Mesa datos={{ ...(d as Parameters<typeof Mesa>[0]["datos"]), hoy, clave: "demo" }} temas={p.temas} resumenHoy={p.resumen} tareas={p.tareas} relojes={p.relojes} base={p.base} />
     </>
   );
 }

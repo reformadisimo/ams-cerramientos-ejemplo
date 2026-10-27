@@ -1,4 +1,4 @@
-import type { Modulo, Reloj, Tarea, Resumen } from "@/lib/mesaTipos";
+import type { Modulo, Reloj, Tarea, Resumen, CifrasBase } from "@/lib/mesaTipos";
 import { ventanasDe, detalleDemo } from "@/lib/mesaDemo";
 
 /* Pantalla principal de la mesa de control de EJEMPLO para AMS: mismas piezas que la de verdad
@@ -11,7 +11,7 @@ const eur = (n: number) => `${nf.format(Math.round(n))} €`;
 const cambio = (a: number, b: number) => (b ? `${a >= b ? "+" : "-"}${nf.format(Math.round((Math.abs(a - b) / b) * 100))} % frente a antes` : "sin dato antes");
 const suma = (s: string, n: number) => { const d = new Date(`${s}T12:00:00Z`); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); };
 
-export function panelDemo(hoy: string): { temas: Modulo[]; resumen: Resumen; tareas: Tarea[]; relojes: Reloj[] } {
+export function panelDemo(hoy: string): { temas: Modulo[]; resumen: Resumen; tareas: Tarea[]; relojes: Reloj[]; base: CifrasBase } {
   const { act, ant, fichaAct, fichaAnt } = ventanasDe(hoy);
   const det = detalleDemo(suma(hoy, -28), suma(hoy, -1), hoy);
   const lupaVis = det.lupa.reduce((s, x) => s + x.visitas, 0);
@@ -83,10 +83,12 @@ export function panelDemo(hoy: string): { temas: Modulo[]; resumen: Resumen; tar
   ];
 
   const relojes: Reloj[] = [
-    { frase: `${act.contactos} personas dejaron sus datos`, detalle: `${Math.abs(chContactos)} % ${chContactos >= 0 ? "más" : "menos"} que antes.`, t: "Contactos", v: `${act.contactos}`, sub: cambio(act.contactos, ant.contactos), lleno: 0.7, luz: "verde", ayuda: "Personas distintas que han enviado un formulario desde la web. Una misma persona solo cuenta una vez al día." },
-    { frase: `${act.visitas} pidieron una visita`, detalle: `Son ${pideVisita} de cada 100 personas que dejaron sus datos.`, t: "Piden la visita", v: `${pideVisita} %`, sub: "de los contactos", lleno: pideVisita / 100, luz: "verde", ayuda: "De cada 100 personas que dejaron sus datos, cuántas solicitaron una visita." },
-    { frase: `Cada contacto de anuncios costó ${eur(cpc)}`, detalle: `Antes costaba ${eur(cpcAnt)}.`, t: "Coste por contacto", v: eur(cpc), sub: cambio(cpc, cpcAnt), lleno: 0.6, luz: "ambar", ayuda: "El dinero gastado en anuncios dividido entre los contactos conseguidos por esos anuncios. Cuanto más bajo, mejor." },
+    { n: act.contactos, frase: `${act.contactos} personas dejaron sus datos`, detalle: `${Math.abs(chContactos)} % ${chContactos >= 0 ? "más" : "menos"} que antes.`, t: "Contactos", v: `${act.contactos}`, sub: cambio(act.contactos, ant.contactos), lleno: 0.7, luz: "verde", ayuda: "Personas distintas que han enviado un formulario desde la web. Una misma persona solo cuenta una vez al día." },
+    { n: act.visitas, frase: `${act.visitas} pidieron una visita`, detalle: `Son ${pideVisita} de cada 100 personas que dejaron sus datos.`, t: "Piden la visita", v: `${pideVisita} %`, sub: "de los contactos", lleno: pideVisita / 100, luz: "verde", ayuda: "De cada 100 personas que dejaron sus datos, cuántas solicitaron una visita." },
+    { n: Math.round(cpc), frase: `Cada contacto de anuncios costó ${eur(cpc)}`, detalle: `Antes costaba ${eur(cpcAnt)}.`, t: "Coste por contacto", v: eur(cpc), sub: cambio(cpc, cpcAnt), lleno: 0.6, luz: "ambar", ayuda: "El dinero gastado en anuncios dividido entre los contactos conseguidos por esos anuncios. Cuanto más bajo, mejor." },
     { frase: `Tus clientes te valoran con un ${nf1.format(nota)}`, detalle: `Sobre 5, con ${resenas} reseñas de Google.`, t: "Nota en Google", v: nf1.format(nota), sub: `${resenas} reseñas`, lleno: nota / 5, luz: "verde", ayuda: "La valoración media que han dejado los clientes en Google, sobre 5." },
   ];
-  return { temas, resumen, tareas, relojes };
+  /* Cifras base de 28 días para "Tus sueños y tus cuentas": salen de los mismos datos inventados que el resto de la mesa. */
+  const base: CifrasBase = { dias: 28, coste: Math.round(act.inversion), contactosAnuncios: adsCont, contactos: act.contactos, visitasPedidas: act.visitas, leadsCrm: act.contactos, firmas: act.firmas, ticket: act.firmas ? Math.round(act.importeFirmado / act.firmas) : 3400, medicionIncompleta: false };
+  return { temas, resumen, tareas, relojes, base };
 }

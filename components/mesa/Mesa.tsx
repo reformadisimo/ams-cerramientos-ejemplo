@@ -2,7 +2,9 @@
 import type { Modulo, Reloj, Tarea, Resumen } from "@/lib/mesaTipos";
 import { LUZ, TEMAS_RESUMEN, primeraFrase, frasesDe, fechaEnPalabras, type Luz } from "@/lib/mesaTextos";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Loseta, Icono, ICONO_AREA, ICONO_CIFRA, ICONO_BARRA, FranjaConectado, Despedida, useSaludo, elige, CHISPA_TODO_BIEN, CHISPA_HECHO, CHISPA_SIN_TAREAS, CHISPA_TODO_REVISADO } from "@/components/mesa/Alegria";
+import { Ludoteca } from "@/components/mesa/Suenos";
+import type { CifrasBase } from "@/components/mesa/Suenos";
+import { Plegable, Apartados, GuiaDeUso, LogoMarca, iconoDeTitulo, Que, QueTexto, EXPLICA, GLOSARIO, terminosEn, C as PALETA_ALEGRIA, Loseta, Icono, ICONO_AREA, ICONO_CIFRA, ICONO_BARRA, FranjaConectado, Despedida, MarcaTitulo, ICONO_MEDIDA, tinte, LogoCanal, LogoFila, useSaludo, elige, CHISPA_TODO_BIEN, CHISPA_HECHO, CHISPA_SIN_TAREAS, CHISPA_TODO_REVISADO } from "@/components/mesa/Alegria";
 
 /* ── MESA DE CONTROL (26-oct, cl·v811) ──
    Todo se calcula aquí, en el navegador, a partir de las series diarias que manda el
@@ -161,7 +163,7 @@ const METRICAS: Metrica[] = [
   { id: "inversion", nombre: "Inversión en anuncios", f: (t) => t.ads.coste, formato: eur, fuente: "Supermetrics", ayuda: "Lo gastado en anuncios de Google." },
   // Coste por contacto según las propias plataformas: hoy casi todo el anuncio aterriza en la landing de la agencia,
   // así que la web solo ve una parte de esas peticiones. Cuando los anuncios lleven a la web, se mira también el de la web.
-  { id: "cpl", nombre: "Coste por contacto de anuncios", f: (t) => (t.ads.conv ? t.ads.coste / t.ads.conv : NaN), formato: eur, menosEsMejor: true, fuente: "Supermetrics · contactos que cuenta cada plataforma", ayuda: "Lo que nos cuesta cada contacto que traen los anuncios. Cuanto más bajo, mejor." },
+  { id: "cpl", nombre: "Coste por contacto de anuncios", f: (t) => (t.ads.conv ? t.ads.coste / t.ads.conv : NaN), formato: eur, menosEsMejor: true, fuente: "Anuncios · contactos que cuenta cada plataforma", ayuda: "Lo que nos cuesta cada contacto que traen los anuncios. Cuanto más bajo, mejor." },
   { id: "sesiones", nombre: "Visitas a la web", f: (t) => t.ga.sesiones, formato: num, fuente: "Analytics", ayuda: "Veces que alguien entra en la web (Analytics)." },
   { id: "organico", nombre: "Clics desde Google", f: (t) => t.gsc.clics, formato: num, fuente: "Search Console", ayuda: "Entran desde Google sin anuncio (lo que no se paga)." },
   { id: "rebote", nombre: "Rebote", f: (t) => (t.ga.sesiones ? (1 - t.ga.interes / t.ga.sesiones) * 100 : NaN), formato: (n) => `${nf1.format(n)} %`, menosEsMejor: true, fuente: "Analytics · sesiones sin interacción", ayuda: "De cada 100 visitas, cuántas se van sin hacer nada (menos de 10 segundos, una sola página y ninguna acción). Cuanto más bajo, mejor." },
@@ -199,7 +201,7 @@ function Mini({ serie: serie0, color }: { serie: number[]; color: string }) {
 }
 
 type Punto = { etq: string; etqLarga: string; v: number; c?: number; etqC?: string };
-function Grafico({ puntos, formato, color = COLOR.teal, alto = 230, barras = false }: { puntos: Punto[]; formato: (n: number) => string; color?: string; alto?: number; barras?: boolean }) {
+function Grafico({ puntos, formato, color = COLOR.teal, alto = 230, barras = false, menosEsMejor = false }: { puntos: Punto[]; formato: (n: number) => string; color?: string; alto?: number; barras?: boolean; menosEsMejor?: boolean }) {
   const [sel, setSel] = useState<number | null>(null);
   // En el móvil el dibujo es más estrecho para que las letras se lean
   const [estrecho, setEstrecho] = useState(false);
@@ -210,7 +212,7 @@ function Grafico({ puntos, formato, color = COLOR.teal, alto = 230, barras = fal
     m.addEventListener("change", f);
     return () => m.removeEventListener("change", f);
   }, []);
-  const w = estrecho ? 380 : 760, h = estrecho ? Math.round(alto * 0.85) : alto, izq = 8, abajo = 26, arriba = 14;
+  const w = estrecho ? 380 : 760, h = estrecho ? Math.round(alto * 0.85) : alto, izq = 8, abajo = 26, arriba = 30;
   const fmt = (v: number) => (Number.isFinite(v) ? formato(v) : "sin dato");
   const ok = (v: number | undefined): v is number => v !== undefined && Number.isFinite(v);
   const hayC = puntos.some((p) => ok(p.c));
@@ -223,6 +225,12 @@ function Grafico({ puntos, formato, color = COLOR.teal, alto = 230, barras = fal
   const cada = Math.max(1, Math.ceil(n / (estrecho ? 4 : 8)));
   const usaBarras = barras || n <= 14;
   const s = sel ?? n - 1;
+  /* cl·v927: alegría en la gráfica: mejor y peor punto marcados, números encima y casillas de color debajo */
+  const validos = puntos.map((p, i) => ({ i, v: p.v })).filter((q) => ok(q.v));
+  const mejor = validos.length ? validos.reduce((a, q) => (menosEsMejor ? q.v < a.v : q.v > a.v) ? q : a) : null;
+  const peor = validos.length > 1 ? validos.reduce((a, q) => (menosEsMejor ? q.v > a.v : q.v < a.v) ? q : a) : null;
+  const media = validos.length ? validos.reduce((a, q) => a + q.v, 0) / validos.length : 0;
+  const etiquetaCada = Math.max(1, Math.ceil(n / (estrecho ? 7 : 16)));
   if (!n) return <p className="rounded-[12px] bg-cream px-3 py-3 text-[14px] text-ink/60">Todavía no hay datos para estas fechas.</p>;
   return (
     <div className="relative">
@@ -249,9 +257,12 @@ function Grafico({ puntos, formato, color = COLOR.teal, alto = 230, barras = fal
             {hayC && <polyline points={linea("c")} fill="none" stroke={COLOR.ambar} strokeWidth={2} strokeDasharray="5 5" strokeLinejoin="round" />}
             <polygon points={`${x(0)},${h - abajo} ${linea("v")} ${x(n - 1)},${h - abajo}`} fill={color} opacity={0.1} />
             <polyline points={linea("v")} fill="none" stroke={color} strokeWidth={2.6} strokeLinejoin="round" />
-            {sel !== null && ok(puntos[sel].v) && <circle cx={x(sel)} cy={y(puntos[sel].v)} r={5} fill={color} stroke="#fff" strokeWidth={2} />}
+            {puntos.map((p, i) => ok(p.v) ? <circle key={i} cx={x(i)} cy={y(p.v)} r={sel === i ? 6 : 3.5} fill={color} stroke="#fff" strokeWidth={1.5} /> : null)}
+            {puntos.map((p, i) => ok(p.v) && p.v > 0 && (i % etiquetaCada === 0 || i === n - 1 || i === mejor?.i) ? <text key={"t" + i} x={x(i)} y={y(p.v) - 9} fontSize={11.5} fontWeight={700} fill={color} textAnchor="middle">{fmt(p.v)}</text> : null)}
           </>
         )}
+        {mejor && <g><circle cx={x(mejor.i)} cy={y(mejor.v)} r={11} fill="#FFDE00" stroke={COLOR.ink} strokeWidth={1.5} /><text x={x(mejor.i)} y={y(mejor.v) + 4} fontSize={12} textAnchor="middle" fill={COLOR.ink}>★</text></g>}
+        {peor && peor.i !== mejor?.i && <circle cx={x(peor.i)} cy={y(peor.v)} r={8} fill="none" stroke="#a3505a" strokeWidth={2.5} />}
         {sel !== null && <line x1={x(sel)} x2={x(sel)} y1={arriba} y2={h - abajo} stroke={COLOR.ink} strokeOpacity={0.18} />}
         {puntos.map((p, i) =>
           i % cada === 0 || i === n - 1 ? (
@@ -267,8 +278,15 @@ function Grafico({ puntos, formato, color = COLOR.teal, alto = 230, barras = fal
           <b className="text-ink">{puntos[s]?.etqLarga}</b>: <b style={{ color }}>{fmt(puntos[s]?.v ?? NaN)}</b>
           {hayC && puntos[s]?.c !== undefined ? <> · antes ({puntos[s]?.etqC}): <b className="text-[#8c6d33]">{fmt(puntos[s].c ?? NaN)}</b></> : null}
         </span>
-        <span className="text-[12px] text-ink/50">{sel === null ? "Pasa el ratón o toca una barra para ver cada punto" : ""}</span>
+        <span className="text-[12px] text-ink/50">{sel === null ? "Pasa el ratón o toca un punto" : ""}</span>
       </div>
+      {validos.length > 1 && (
+        <div className="mt-2 grid grid-cols-3 gap-2">
+          <button type="button" onClick={() => setSel(mejor!.i)} className="rounded-[14px] px-3 py-2 text-left text-white" style={{ background: "#2f9a62" }}><span className="block text-[11px] font-bold uppercase tracking-wide opacity-85">★ Mejor</span><span className="block font-serif text-[20px] italic leading-tight">{fmt(mejor!.v)}</span><span className="block truncate text-[12px] opacity-85">{puntos[mejor!.i].etq}</span></button>
+          <div className="rounded-[14px] px-3 py-2 text-white" style={{ background: color }}><span className="block text-[11px] font-bold uppercase tracking-wide opacity-85">Media</span><span className="block font-serif text-[20px] italic leading-tight">{media < 100 && media % 1 !== 0 ? nf1.format(media) : fmt(media)}</span><span className="block truncate text-[12px] opacity-85">por {puntos.length >= 20 ? "día" : "tramo"}</span></div>
+          {peor && peor.i !== mejor?.i && <button type="button" onClick={() => setSel(peor.i)} className="rounded-[14px] px-3 py-2 text-left text-white" style={{ background: "#a3505a" }}><span className="block text-[11px] font-bold uppercase tracking-wide opacity-85">Peor</span><span className="block font-serif text-[20px] italic leading-tight">{fmt(peor.v)}</span><span className="block truncate text-[12px] opacity-85">{puntos[peor.i].etq}</span></button>}
+        </div>
+      )}
     </div>
   );
 }
@@ -299,8 +317,8 @@ function Barras({ filas, formato = num, compara }: { filas: [string, number, str
     <ul className="space-y-2.5">
       {filas.map(([k, v, col], i) => (
         <li key={k}>
-          <div className="flex items-baseline justify-between gap-3 text-[14px]">
-            <span className="truncate font-semibold text-ink">{k}</span>
+          <div className="flex items-center justify-between gap-3 text-[14px]">
+            <span className="flex min-w-0 items-center truncate font-semibold text-ink"><LogoCanal canal={k} />{k}</span>
             <span className="flex shrink-0 items-center gap-2 font-semibold text-ink">
               {formato(v)}
               {compara ? <Delta a={v} b={compara[k] ?? 0} /> : null}
@@ -315,26 +333,46 @@ function Barras({ filas, formato = num, compara }: { filas: [string, number, str
   );
 }
 
-function Caja({ titulo, fuente, children, className = "", accion }: { titulo: string; fuente?: string; children: React.ReactNode; className?: string; accion?: React.ReactNode }) {
+function Caja({ titulo, fuente, children, className = "", accion, plegada, explica }: { titulo: string; fuente?: string; children: React.ReactNode; className?: string; accion?: React.ReactNode; plegada?: string; explica?: string }) {
+  const [que, setQue] = useState(false); // cl·v931: "?" junto al título
+  const [queFuente, setQueFuente] = useState(false); // cl·v932: "?" junto a la fuente si lleva jerga
+  const texto = explica ?? EXPLICA[titulo];
+  /* cl·v930: `plegada="pista"` convierte la caja en una línea cerrada con su icono (el de iconoDeTitulo) y esa pista; se abre con + */
+  if (plegada !== undefined) {
+    const ic = iconoDeTitulo(titulo);
+    return (
+      <Plegable id={"caja-" + titulo.toLowerCase().replace(/[^a-z0-9]+/g, "-")} icono={ic?.n ?? "documento"} color={ic?.color ?? COLOR.ink} titulo={titulo} pista={plegada || fuente}>
+        <div className="pt-2">{texto && <QueTexto texto={texto} />}{accion && <div className="mb-3 mt-2">{accion}</div>}{children}</div>
+      </Plegable>
+    );
+  }
   return (
     <section className={`min-w-0 rounded-[22px] border border-line bg-white p-5 shadow-[0_22px_50px_-42px_rgba(17,52,61,0.55)] sm:p-6 ${className}`}>
       <div className="mb-4 flex flex-wrap items-start justify-between gap-2">
-        <div>
-          <h2 className="font-serif text-[21px] font-medium italic leading-tight text-ink">{titulo}</h2>
-          {fuente ? <p className="mt-0.5 text-[12px] font-semibold uppercase tracking-[0.12em] text-ink/40">{fuente}</p> : null}
+        <div className="flex min-w-0 items-center gap-3">
+          <MarcaTitulo titulo={titulo} tam={40} />
+          <div className="min-w-0">
+            <h2 className="flex items-center gap-2 font-serif text-[21px] font-medium italic leading-tight text-ink">{titulo}{texto && <Que texto={texto} etiqueta={titulo} abierto={que} onToggle={() => setQue(!que)} />}</h2>
+            {fuente ? <p className="mt-0.5 flex items-center gap-1.5 text-[12px] font-semibold uppercase tracking-[0.12em] text-ink/40">{fuente}{terminosEn(fuente).length > 0 && <Que texto="" etiqueta={`la fuente ${fuente}`} abierto={queFuente} onToggle={() => setQueFuente(!queFuente)} tam={20} />}</p> : null}
+          </div>
         </div>
         {accion}
       </div>
+      {que && texto && <div className="mb-3"><QueTexto texto={texto} /></div>}
+      {queFuente && fuente && <div className="mb-3">{terminosEn(fuente).map((k) => <QueTexto key={k} texto={`${k}: ${GLOSARIO[k]}`} />)}</div>}
       {children}
     </section>
   );
 }
 
-type Col<T> = { k: string; t: string; v: (r: T) => number | string; f?: (r: T) => React.ReactNode; num?: boolean };
-function Tabla<T>({ filas, cols, inicial, vacio = "Sin datos en este periodo." }: { filas: T[]; cols: Col<T>[]; inicial: string; vacio?: string }) {
+type Col<T> = { k: string; t: string; v: (r: T) => number | string; f?: (r: T) => React.ReactNode; num?: boolean; ayuda?: string };
+function Tabla<T>({ filas, cols, inicial, vacio = "Sin datos en este periodo.", color = COLOR.teal }: { filas: T[]; cols: Col<T>[]; inicial: string; vacio?: string; color?: string }) {
   const [orden, setOrden] = useState(inicial);
   const [asc, setAsc] = useState(false);
+  const [que, setQue] = useState<string | null>(null); // cl·v931: "?" en cada columna
   const col = cols.find((c) => c.k === orden) ?? cols[0];
+  /* cl·v929: la columna por la que ordenas lleva una barra proporcional, y la primera fila una estrella */
+  const maxCol = col.num ? Math.max(1, ...filas.map((r) => Number(col.v(r)) || 0)) : 0;
   const ordenadas = [...filas].sort((a, b) => {
     const x = col.v(a), y = col.v(b);
     const r = typeof x === "number" && typeof y === "number" ? x - y : String(x).localeCompare(String(y));
@@ -352,15 +390,21 @@ function Tabla<T>({ filas, cols, inicial, vacio = "Sin datos en este periodo." }
                   {c.t}
                   {orden === c.k ? <span aria-hidden="true">{asc ? "▲" : "▼"}</span> : null}
                 </button>
+                {(c.ayuda ?? EXPLICA[c.t]) && <span className="ml-1 inline-block align-middle"><Que texto={c.ayuda ?? EXPLICA[c.t]} etiqueta={c.t} abierto={que === c.k} onToggle={() => setQue(que === c.k ? null : c.k)} tam={22} /></span>}
               </th>
             ))}
           </tr>
+          {que && <tr><td colSpan={cols.length} className="px-2 pb-2"><QueTexto texto={`${cols.find((c) => c.k === que)?.t}: ${cols.find((c) => c.k === que)?.ayuda ?? EXPLICA[cols.find((c) => c.k === que)?.t ?? ""]}`} /></td></tr>}
         </thead>
         <tbody>
           {ordenadas.map((r, i) => (
             <tr key={i} className="hover:bg-cream/70">
-              {cols.map((c) => (
-                <td key={c.k} className={`border-b border-line/60 px-2 py-2.5 ${c.num ? "text-right tabular-nums" : ""}`}>{c.f ? c.f(r) : c.num ? num(Number(c.v(r))) : String(c.v(r))}</td>
+              {cols.map((c, ci) => (
+                <td key={c.k} className={`border-b border-line/60 px-2 py-2.5 ${c.num ? "text-right tabular-nums" : ""}`}>
+                  {ci === 0 && i === 0 && !asc ? <span aria-hidden="true" className="mr-1.5 inline-grid h-5 w-5 place-items-center rounded-full bg-yellow text-[11px] text-ink">★</span> : null}
+                  {c.f ? c.f(r) : c.num ? num(Number(c.v(r))) : String(c.v(r))}
+                  {c.k === col.k && c.num && maxCol > 0 ? <span className="mt-1 block h-1.5 w-full overflow-hidden rounded-full bg-[#f1ece2]"><span className="block h-full rounded-full" style={{ width: `${Math.max(2, ((Number(c.v(r)) || 0) / maxCol) * 100)}%`, background: color }} /></span> : null}
+                </td>
               ))}
             </tr>
           ))}
@@ -390,9 +434,10 @@ function rangoDe(p: Preset, hoy: string): [string, string] {
 type Compara = "anterior" | "anio" | "no";
 
 type Pestana = "resumen" | "ventas" | "anuncios" | "web" | "google" | "redes";
+const ICONO_PESTANA: Record<Pestana, [string, string]> = { resumen: ["estrella", "#c79a00"], ventas: ["persona", "#2f6fd0"], anuncios: ["megafono", "#d93f3f"], web: ["globo", "#2a6f86"], google: ["lupa", "#1d6b3a"], redes: ["chat", "#d9822b"] };
 const PESTANAS: [Pestana, string][] = [["resumen", "Resumen"], ["ventas", "Ventas (CRM)"], ["anuncios", "Anuncios"], ["web", "La web"], ["google", "Google sin pagar"], ["redes", "Ficha de Google y redes"]];
 
-export default function Mesa({ datos, temas, resumenHoy, tareas, relojes }: { datos: DatosMesa; temas?: Modulo[]; resumenHoy?: Resumen; tareas?: Tarea[]; relojes?: Reloj[] }) {
+export default function Mesa({ datos, temas, resumenHoy, tareas, relojes, base }: { datos: DatosMesa; temas?: Modulo[]; resumenHoy?: Resumen; tareas?: Tarea[]; relojes?: Reloj[]; base?: CifrasBase }) {
   /* Vista sencilla o completa (27-oct, cl·v890; Ig: "que lo entienda quien no sabe nada"). Se recuerda en este navegador. */
   const [vista, setVista] = useState<"sencilla" | "completa">("sencilla");
   const [guia, setGuia] = useState(false);
@@ -541,7 +586,9 @@ export default function Mesa({ datos, temas, resumenHoy, tareas, relojes }: { da
   }, [datos]);
 
   return (
-    <div className="min-h-screen bg-cream pb-20">
+    <div className="min-h-screen bg-cream pb-20 xl:pl-[272px]">
+      {/* cl·v928: guía de uso fija a la izquierda en pantallas grandes (en el móvil va plegada bajo la cabecera) */}
+      <GuiaDeUso />
       {/* Cabecera */}
       <div className="border-b border-line bg-white">
         <div className="mx-auto max-w-[1240px] px-4 py-6 sm:px-6">
@@ -572,10 +619,15 @@ export default function Mesa({ datos, temas, resumenHoy, tareas, relojes }: { da
           )}
           </>)}
 
-          {sencillaPosible && vista === "sencilla" ? (
-            <Sencilla temas={temas!} resumen={resumenHoy} tareas={tareas ?? []} relojes={relojes ?? []} clave={datos.clave} irCompleta={() => cambiaVista("completa")} herramientas={<Accesos sinId demo={datos.clave === "demo"} irA={(p) => { cambiaVista("completa"); setPestana(p); setTimeout(() => document.querySelector('[role="tablist"]')?.scrollIntoView({ behavior: suave(), block: "start" }), 80); }} />} />
-          ) : (<>
-          {/* Periodo */}
+          {sencillaPosible && vista === "sencilla" && (
+            <Sencilla temas={temas!} resumen={resumenHoy} tareas={tareas ?? []} relojes={relojes ?? []} base={base} hoy={datos.hoy} realEntre={(x, y) => { const ds = listaDias(x, y); if (ds.some((q) => !datos.web[q])) return null; return ds.reduce((s, q) => s + datos.web[q].peticiones, 0); }} clave={datos.clave} irCompleta={() => cambiaVista("completa")} herramientas={<Accesos sinId demo={datos.clave === "demo"} irA={(p) => { cambiaVista("completa"); setPestana(p); setTimeout(() => document.querySelector('[role="tablist"]')?.scrollIntoView({ behavior: suave(), block: "start" }), 80); }} />} />
+          )}
+          {/* cl·v922: las cifras completas salen siempre debajo del resumen, sin botón; lo que ya está arriba no se repite */}
+          {(() => { const soloCifras = sencillaPosible && vista === "sencilla"; return (<>
+          {!soloCifras && <Ludoteca {...dolorYBien(relojes ?? [], temas ?? [])} contactos={relojes?.[0]?.n} preguntas={juegos(relojes ?? [])} base={base} hoy={datos.hoy} realEntre={(x, y) => { const ds = listaDias(x, y); if (ds.some((q) => !datos.web[q])) return null; return ds.reduce((t, q) => t + datos.web[q].peticiones, 0); }} demo={datos.clave === "demo"} nombreEmpresa="AMS Cerramientos" lineas={["Ventanas de piso", "Cerramiento de terraza", "Cerramiento de chalet", "Obra completa", "Comunidades de vecinos"]} capacidadTexto="¿Cuántos trabajos puedes instalar al mes?" notaPublico="Podemos montar la versión B de tu web: cerramientos de chalet, terrazas y obra completa, con su propia campaña. La de hoy sigue igual. Tú decides el reparto y lo medimos." />}
+          {!soloCifras && <GuiaDeUso modo="plegada" />}
+          {/* cl·v921: todo plegado en una línea; se abre lo que se quiera y las cifras quedan a un vistazo */}
+          <Plegable id="pl-fechas" icono="historia" color={PALETA_ALEGRIA.camino} titulo="Fechas y comparación" pista={`${textoRango(a, b)} · ${compara === "no" ? "sin comparar" : compara === "anio" ? "frente al año pasado" : "frente al periodo anterior"}`}>
           <div className="mt-5 flex flex-wrap items-center gap-2">
             {PRESETS.map(([p, t]) => (
               <button key={p} type="button" onClick={() => elige(p)} className={`min-h-[44px] rounded-full border px-3.5 py-1.5 text-[14px] font-semibold transition-colors ${preset === p ? "border-ink bg-ink text-white" : "border-line bg-white text-ink hover:border-ink"}`}>
@@ -617,24 +669,45 @@ export default function Mesa({ datos, temas, resumenHoy, tareas, relojes }: { da
             </details>
           </div>
 
+          </Plegable>
+          {!soloCifras && (
+          <Plegable id="pl-temas" icono="grid" color={PALETA_ALEGRIA.web} titulo="Cómo está cada parte" pista={temas ? temas.map((m) => `${m.titulo}: ${m.estado ?? LUZ[m.luz].t}`).join(" · ") : undefined}>
           {temas && temas.length > 0 && <Temas temas={temas} resumen={resumenHoy} />}
+          </Plegable>
+          )}
+          {!soloCifras && tareas && tareas.length > 0 && (
+          <Plegable id="pl-hoy" icono="check" color={PALETA_ALEGRIA.dinero} titulo="Lo más importante hoy" pista={tareas[0]?.texto}>
           {tareas && tareas.length > 0 && <QueHagoHoy tareas={tareas} />}
+          </Plegable>
+          )}
+          {!soloCifras && (
+          <Plegable id="pl-mas" icono="ajustes" color={PALETA_ALEGRIA.ventas} titulo="Más herramientas" pista="CRM, lupa, plan, guía y más">
           {<Accesos demo={datos.clave === "demo"} irA={(p) => { setPestana(p); setTimeout(() => document.querySelector('[role="tablist"]')?.scrollIntoView({ behavior: suave(), block: "start" }), 50); }} />}
+          </Plegable>
+          )}
+          {!soloCifras && (
+          <Plegable id="pl-pregunta" icono="chat" color={PALETA_ALEGRIA.ia} titulo="Pregunta lo que quieras" pista="Escribe o dicta; contesta con las cifras de 28 días">
           <Pregunta clave={datos.clave} />
+          </Plegable>
+          )}
+          {!soloCifras && (
+          <Plegable id="pl-correo" icono="sobre" color={PALETA_ALEGRIA.mercado} titulo="Recibe un resumen por correo" pista="Cada día, cada lunes o cada mes">
           <Resumenes clave={datos.clave} />
+          </Plegable>
+          )}
 
           <nav className="relative mt-5 flex gap-1 overflow-x-auto pr-8 [mask-image:linear-gradient(to_right,black_calc(100%_-_36px),transparent)] sm:pr-0 sm:[mask-image:none]" role="tablist">
             {PESTANAS.map(([p, t]) => (
               <button key={p} role="tab" aria-selected={pestana === p} type="button" onClick={() => setPestana(p)} className={`whitespace-nowrap rounded-t-[14px] border-b-[3px] px-4 py-2.5 text-[15px] font-semibold transition-colors ${pestana === p ? "border-yellow text-ink" : "border-transparent text-ink/50 hover:text-ink"}`}>
-                {t}
+                <span className="inline-flex items-center gap-2"><span aria-hidden="true" className="grid h-6 w-6 place-items-center rounded-[8px] text-white" style={{ background: ICONO_PESTANA[p][1], opacity: pestana === p ? 1 : 0.55 }}><Icono n={ICONO_PESTANA[p][0]} className="h-4 w-4" /></span>{t}</span>
               </button>
             ))}
           </nav>
-          </>)}
+          </>); })()}
         </div>
       </div>
 
-      {(!sencillaPosible || vista === "completa") && (
+      {(
       <div className="mx-auto max-w-[1240px] space-y-5 px-4 pt-6 sm:px-6">
         {!!datos.fallos?.length && (
           <p className="rounded-[16px] border-2 border-[#a3505a] bg-[#f8e8ea] px-4 py-3 text-[15px] leading-snug text-ink">
@@ -644,6 +717,12 @@ export default function Mesa({ datos, temas, resumenHoy, tareas, relojes }: { da
         {errorDetalle && (
           <p className="rounded-[16px] border border-[#e8d9b8] bg-[#fbf6ea] px-4 py-3 text-[15px] leading-snug text-ink">No se han podido cargar las cifras del CRM, la lupa y los rankings de estas fechas. <button type="button" onClick={() => setIntento((n) => n + 1)} className="font-semibold underline underline-offset-2">Volver a intentarlo</button></p>
         )}
+        {/* cl·v936: dónde estoy y cómo vuelvo, siempre a la vista */}
+        <p className="flex flex-wrap items-center gap-2 text-[14px] text-ink/70">
+          <span>Estás viendo: <b className="text-ink">Todas las cifras › {PESTANAS.find(([p]) => p === pestana)?.[1]}</b></span>
+          {pestana !== "resumen" && <button type="button" onClick={() => { setPestana("resumen"); setTimeout(() => document.querySelector('[role="tablist"]')?.scrollIntoView({ behavior: suave(), block: "start" }), 30); }} className="min-h-[44px] rounded-full border border-line bg-white px-3 text-[13px] font-semibold text-ink">← Volver al resumen de cifras</button>}
+          <button type="button" onClick={() => { if (sencillaPosible && vista !== "sencilla") cambiaVista("sencilla"); window.scrollTo({ top: 0 }); }} className="min-h-[44px] rounded-full border border-line bg-white px-3 text-[13px] font-semibold text-ink">↑ Inicio de la mesa</button>
+        </p>
         {pestana === "resumen" && (
           <>
             <TresPreguntas T={T} C={C} crm={detalle?.crm ?? null} cargando={cargando} largo={largo} />
@@ -652,10 +731,10 @@ export default function Mesa({ datos, temas, resumenHoy, tareas, relojes }: { da
               {kpis.map(({ m, extra }) => {
                 const v = m.f(T);
                 return (
-                  <button key={m.id} type="button" onClick={() => setMetrica(m.id)} className={`rounded-[20px] border bg-white p-4 text-left transition-colors ${metrica === m.id ? "border-teal shadow-[0_18px_40px_-30px_rgba(28,140,170,0.9)]" : "border-line hover:border-ink/30"}`}>
-                    <p className="text-[12px] font-bold uppercase tracking-[0.1em] text-ink/50">{m.nombre}</p>
-                    <p className="mt-0.5 text-[12.5px] leading-snug text-ink/55">{m.ayuda}</p>
-                    <p className="mt-1.5 font-serif text-[clamp(26px,3.4vw,34px)] font-medium leading-none text-ink">{Number.isFinite(v) ? m.formato(v) : "-"}</p>
+                  <button key={m.id} type="button" onClick={() => setMetrica(m.id)} style={{ background: tinte((ICONO_MEDIDA[m.id] ?? ["estrella", "#1a3d47"])[1]) }} className={`rounded-[20px] border p-4 text-left transition-colors ${metrica === m.id ? "border-teal shadow-[0_18px_40px_-30px_rgba(28,140,170,0.9)]" : "border-line hover:border-ink/30"}`}>
+                    <span className="flex items-center gap-2.5"><Loseta n={(ICONO_MEDIDA[m.id] ?? ["estrella", "#1a3d47"])[0]} color={(ICONO_MEDIDA[m.id] ?? ["estrella", "#1a3d47"])[1]} tam={36} /><span className="text-[12px] font-bold uppercase tracking-[0.1em] text-ink/60">{m.nombre}</span></span>
+                    <span className="mt-0.5 block text-[12.5px] leading-snug text-ink/55">{m.ayuda}</span>
+                    <p className="mt-1.5 flex items-center gap-2 font-serif text-[clamp(26px,3.4vw,34px)] font-medium leading-none text-ink">{Number.isFinite(v) ? m.formato(v) : "-"}{(() => { const d = C && Number.isFinite(m.f(C)) ? delta(v, m.f(C)) : null; if (d === null || Math.abs(d) < 0.5) return null; const bueno = m.menosEsMejor ? d < 0 : d > 0; return <span aria-hidden="true" className="grid h-8 w-8 place-items-center rounded-full text-[16px] text-white" style={{ background: bueno ? "#2f9a62" : "#a3505a" }}>{d > 0 ? "▲" : "▼"}</span>; })()}</p>
                     <div className="mt-2 flex flex-wrap items-center gap-1.5 text-[12px] text-ink/55">
                       {C ? <Delta a={v} b={m.f(C)} menosEsMejor={m.menosEsMejor} /> : null}
                       {C && Number.isFinite(m.f(C)) && delta(v, m.f(C)) !== null ? <span>antes {m.formato(m.f(C))}</span> : null}
@@ -665,10 +744,10 @@ export default function Mesa({ datos, temas, resumenHoy, tareas, relojes }: { da
                   </button>
                 );
               })}
-              <CifraFija nombre="Visitas comerciales" ayuda="Visitas técnicas a casas de clientes, del CRM (clientes que entraron en estas fechas)." v={detalle ? num(crmT.visitas) : errorDetalle ? "-" : "…"} antes={crmA ? num(crmA.visitas) : undefined} a={crmT.visitas} b={crmA?.visitas} />
-              <CifraFija nombre="Contratos firmados" ayuda="Trabajos firmados de los clientes que entraron en estas fechas (CRM)." v={detalle ? num(crmT.firm) : errorDetalle ? "-" : "…"} antes={crmA && crmT.firm ? num(crmA.firm) : undefined} a={crmT.firm} b={crmT.firm ? crmA?.firm : undefined} extra={crmT.imp ? eur(crmT.imp) : crmT.leads ? "Un presupuesto tarda semanas en firmarse: los contactos de estas fechas aún están en marcha" : "Las firmas antiguas llegarán con la base de clientes"} />
-              {(() => { const m = M("cpl"); const v = m.f(T); return <CifraFija nombre="Coste por contacto" ayuda={m.ayuda} v={T.ads.conv ? m.formato(v) : T.ads.coste ? "Sin contactos medidos" : "-"} antes={C && C.ads.conv ? m.formato(m.f(C)) : undefined} a={v} b={C ? m.f(C) : undefined} menosEsMejor extra={`${nf1.format(T.ads.conv)} contactos según las plataformas · ${eur(T.ads.coste)} invertidos`} />; })()}
-              <CifraFija nombre="Margen de los trabajos" ayuda="Margen previsto de los trabajos captados." v="Pendiente" extra="Falta apuntar el coste previsto y real de cada trabajo" pendiente />
+              <CifraFija icono="comerciales" nombre="Visitas comerciales" ayuda="Visitas técnicas a casas de clientes, del CRM (clientes que entraron en estas fechas)." v={detalle ? num(crmT.visitas) : errorDetalle ? "-" : "…"} antes={crmA ? num(crmA.visitas) : undefined} a={crmT.visitas} b={crmA?.visitas} />
+              <CifraFija icono="firmados" nombre="Contratos firmados" ayuda="Trabajos firmados de los clientes que entraron en estas fechas (CRM)." v={detalle ? num(crmT.firm) : errorDetalle ? "-" : "…"} antes={crmA && crmT.firm ? num(crmA.firm) : undefined} a={crmT.firm} b={crmT.firm ? crmA?.firm : undefined} extra={crmT.imp ? eur(crmT.imp) : crmT.leads ? "Un presupuesto tarda semanas en firmarse: los contactos de estas fechas aún están en marcha" : "Las firmas antiguas llegarán con la base de clientes"} />
+              {(() => { const m = M("cpl"); const v = m.f(T); return <CifraFija icono="cpl" nombre="Coste por contacto" ayuda={m.ayuda} v={T.ads.conv ? m.formato(v) : T.ads.coste ? "Sin contactos medidos" : "-"} antes={C && C.ads.conv ? m.formato(m.f(C)) : undefined} a={v} b={C ? m.f(C) : undefined} menosEsMejor extra={`${nf1.format(T.ads.conv)} contactos según las plataformas · ${eur(T.ads.coste)} invertidos`} />; })()}
+              <CifraFija icono="margen" nombre="Margen de los trabajos" ayuda="Margen previsto de los trabajos captados." v="Pendiente" extra="Falta apuntar el coste previsto y real de cada trabajo" pendiente />
             </div>
 
               <PorCanal T={T} C={C} />
@@ -686,17 +765,19 @@ export default function Mesa({ datos, temas, resumenHoy, tareas, relojes }: { da
                 </div>
               }
             >
-              <div className="mb-3 flex flex-wrap gap-1.5">
-                {METRICAS.map((m) => (
-                  <button key={m.id} type="button" onClick={() => setMetrica(m.id)} className={`min-h-[44px] rounded-full border px-3.5 py-1 text-[14px] font-semibold transition-colors ${metrica === m.id ? "border-teal bg-[#e7f2f5] text-teal-deep" : "border-line text-ink/70 hover:border-ink"}`}>
-                    {m.nombre}
+              <div className="-mx-5 mb-3 flex gap-1.5 overflow-x-auto px-5 pb-1 [scrollbar-width:thin] sm:mx-0 sm:flex-wrap sm:px-0">
+                {METRICAS.map((m) => { const [ic, col] = ICONO_MEDIDA[m.id] ?? ["estrella", "#1a3d47"]; const on = metrica === m.id; return (
+                  <button key={m.id} type="button" onClick={() => setMetrica(m.id)} aria-pressed={on} className="inline-flex min-h-[44px] shrink-0 items-center gap-2 whitespace-nowrap rounded-full border py-1 pl-1.5 pr-3.5 text-[14px] font-semibold transition-colors" style={on ? { background: col, borderColor: col, color: "#fff" } : { background: tinte(col), borderColor: `${col}55`, color: COLOR.ink }}>
+                    <Loseta n={ic} color={on ? "#ffffff33" : col} tam={28} />{m.nombre}
                   </button>
-                ))}
+                ); })}
               </div>
-              <Grafico puntos={serieDe(met)} formato={met.formato} />
+              <QueTexto texto={`${met.nombre}: ${met.ayuda}`} />
+              <div className="mt-3" />
+              <Grafico puntos={serieDe(met)} formato={met.formato} color={(ICONO_MEDIDA[metrica] ?? ["", COLOR.teal])[1]} menosEsMejor={met.menosEsMejor} />
               {C ? (
                 <p className="mt-2 flex flex-wrap items-center gap-3 text-[12.5px] text-ink/60">
-                  <span className="inline-flex items-center gap-1.5"><i className="inline-block h-2.5 w-4 rounded-sm" style={{ background: COLOR.teal }} /> {textoRango(a, b)}</span>
+                  <span className="inline-flex items-center gap-1.5"><i className="inline-block h-2.5 w-4 rounded-sm" style={{ background: (ICONO_MEDIDA[metrica] ?? ["", COLOR.teal])[1] }} /> {textoRango(a, b)}</span>
                   <span className="inline-flex items-center gap-1.5"><i className="inline-block h-2.5 w-4 rounded-sm" style={{ background: COLOR.ambar, opacity: 0.6 }} /> {textoRango(ca, cb)}</span>
                 </p>
               ) : null}
@@ -711,13 +792,19 @@ export default function Mesa({ datos, temas, resumenHoy, tareas, relojes }: { da
               </Caja>
               <Caja titulo="Lo más destacado" fuente="Calculado con los datos del periodo">
                 {destacados.length ? (
-                  <ul className="space-y-3">
-                    {destacados.map((t, i) => (
-                      <li key={i} className="flex gap-3 text-[15px] leading-snug text-ink/85">
-                        <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full" style={{ background: PALETA[i % PALETA.length] }} />
-                        {t}
-                      </li>
-                    ))}
+                  <ul className="space-y-2">
+                    {destacados.map((t, i) => {
+                      /* cl·v928: cada destacado con su icono, su color y su cifra grande */
+                      const [ic, col] = /Suben/.test(t) ? ["rayo", "#2f9a62"] : /Bajan/.test(t) ? ["campana", "#a3505a"] : /canal/.test(t) ? ["mapa", PALETA_ALEGRIA.web] : /invierte/.test(t) ? ["megafono", PALETA_ALEGRIA.anuncios] : /WhatsApp/.test(t) ? ["telefono", PALETA_ALEGRIA.aviso] : ["moneda", PALETA_ALEGRIA.dinero];
+                      const cifra = t.match(/\d[\d.,]*\s?(?:%|€)?/)?.[0];
+                      return (
+                        <li key={i} className="flex items-center gap-3 rounded-[14px] px-3 py-2.5" style={{ background: tinte(col) }}>
+                          <Loseta n={ic} color={col} tam={36} />
+                          <span className="min-w-0 flex-1 text-[14.5px] leading-snug text-ink/85">{t}</span>
+                          {cifra && <span className="shrink-0 font-serif text-[22px] italic leading-none" style={{ color: col }}>{cifra.trim()}</span>}
+                        </li>
+                      );
+                    })}
                   </ul>
                 ) : <p className="text-[14px] text-ink/50">Aún no hay datos suficientes en este periodo.</p>}
               </Caja>
@@ -763,9 +850,9 @@ export default function Mesa({ datos, temas, resumenHoy, tareas, relojes }: { da
                 const canal = Object.entries(CANALES_PAGO).find(([, v]) => v === k)?.[0] ?? "";
                 const pet = T.porCanal[canal] ?? 0;
                 return (
-                  <section key={k} className="rounded-[22px] border bg-white p-5" style={{ borderColor: `${p.color}55` }}>
-                    <p className="flex items-center gap-2 text-[13px] font-bold uppercase tracking-[0.1em]" style={{ color: p.color }}><i className="h-2.5 w-2.5 rounded-full" style={{ background: p.color }} />{p.nombre}</p>
-                    <p className="mt-2 font-serif text-[32px] leading-none text-ink">{eur(x.coste)}</p>
+                  <section key={k} className="rounded-[22px] border p-5" style={{ borderColor: `${p.color}55`, background: tinte(p.color) }}>
+                    <p className="flex items-center gap-2.5 text-[13px] font-bold uppercase tracking-[0.1em]" style={{ color: p.color }}><span className="grid h-9 w-9 place-items-center rounded-[10px] border border-line bg-white"><LogoMarca nombre={k === "google" ? "Google Ads" : k === "meta" ? "Meta" : "ChatGPT"} tam={24} /></span>{p.nombre}</p>
+                    <p className="mt-2 flex items-center gap-2 font-serif text-[32px] leading-none text-ink">{eur(x.coste)}{x.coste > 0 && (() => { const mediaPet = T.ads.coste && T.peticiones ? T.ads.coste / Math.max(1, Object.entries(CANALES_PAGO).reduce((t, [c]) => t + (T.porCanal[c] ?? 0), 0)) : 0; const cpp = pet ? x.coste / pet : 0; if (!cpp || !mediaPet) return null; const bueno = cpp <= mediaPet; return <span className="rounded-full px-2.5 py-1 text-[12px] font-bold text-white" style={{ background: bueno ? "#2f9a62" : "#a3505a" }}>{bueno ? "Rinde mejor que la media" : "Rinde peor que la media"}</span>; })()}</p>
                     <div className="mt-1.5 flex items-center gap-2 text-[12.5px] text-ink/55">{y ? <><Delta a={x.coste} b={y.coste} /> antes {eur(y.coste)}</> : null}</div>
                     <dl className="mt-4 grid grid-cols-2 gap-x-3 gap-y-2 text-[13.5px]">
                       <dt className="text-ink/55">Clics</dt><dd className="text-right font-semibold">{num(x.clics)}</dd>
@@ -788,7 +875,7 @@ export default function Mesa({ datos, temas, resumenHoy, tareas, relojes }: { da
                 filas={campanas}
                 inicial="coste"
                 cols={[
-                  { k: "nombre", t: "Campaña", v: (r) => r.nombre, f: (r) => <span className="flex items-center gap-2"><i className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ background: PLATAFORMA[r.plat]?.color }} /><span className="font-semibold">{r.nombre}</span></span> },
+                  { k: "nombre", t: "Campaña", v: (r) => r.nombre, f: (r) => <span className="flex items-center gap-2"><span className="grid h-7 w-7 shrink-0 place-items-center rounded-[8px] border border-line bg-white"><LogoMarca nombre={r.plat === "google" ? "Google Ads" : r.plat === "meta" ? "Meta" : "ChatGPT"} tam={18} /></span><span className="font-semibold">{r.nombre}</span></span> },
                   { k: "coste", t: "Inversión", v: (r) => r.coste, num: true, f: (r) => <span className="inline-flex items-center gap-2">{eur(r.coste)}{C ? <Delta a={r.coste} b={r.antes} /> : null}</span> },
                   { k: "clics", t: "Clics", v: (r) => r.clics, num: true },
                   { k: "cpc", t: "Por clic", v: (r) => (r.clics ? r.coste / r.clics : 0), num: true, f: (r) => (r.clics ? eur2(r.coste / r.clics) : "-") },
@@ -800,7 +887,7 @@ export default function Mesa({ datos, temas, resumenHoy, tareas, relojes }: { da
               <p className="mt-3 text-[12.5px] text-ink/50">"Contactos" es lo que cuenta cada plataforma. Las peticiones reales, por canal, están arriba y en el Resumen.</p>
             </Caja>
 
-            <Caja titulo="Inversión mes a mes" fuente="Toda la historia guardada">
+            <Caja titulo="Inversión mes a mes" fuente="Toda la historia guardada" plegada="Cuánto se ha invertido cada mes desde el principio, por plataforma">
               <HistoriaMeses historia={historia} />
             </Caja>
           </>
@@ -831,7 +918,7 @@ export default function Mesa({ datos, temas, resumenHoy, tareas, relojes }: { da
                   inicial="sesiones"
                   vacio={datos.google ? "Sin datos en este periodo." : "Analytics no está conectado."}
                   cols={[
-                    { k: "canal", t: "Canal", v: (r) => r.canal, f: (r) => <span className="font-semibold">{CANAL_GA_ES[r.canal] ?? r.canal}</span> },
+                    { k: "canal", t: "Canal", v: (r) => r.canal, f: (r) => <span className="flex items-center font-semibold"><LogoCanal canal={GRUPO_GA[r.canal] ?? r.canal} />{CANAL_GA_ES[r.canal] ?? r.canal}</span> },
                     { k: "sesiones", t: "Visitas", v: (r) => r.sesiones, num: true, f: (r) => <span className="inline-flex items-center gap-2">{num(r.sesiones)}{C ? <Delta a={r.sesiones} b={r.antes} /> : null}</span> },
                     { k: "int", t: "Con interés", v: (r) => (r.sesiones ? r.interes / r.sesiones : 0), num: true, f: (r) => (r.sesiones ? pct((r.interes / r.sesiones) * 100) : "-") },
                     { k: "clave", t: "Acciones clave", v: (r) => r.clave, num: true },
@@ -842,7 +929,7 @@ export default function Mesa({ datos, temas, resumenHoy, tareas, relojes }: { da
                 <Barras filas={(detalle?.paginas ?? []).slice(0, 12).map((p) => [p.pagina, p.n])} />
               </Caja>
             </div>
-            <Caja titulo="Qué hace la gente en cada página" fuente={cargando ? "Cargando…" : "La lupa · solo quien acepta cookies de analítica"}>
+            <Caja titulo="Qué hace la gente en cada página" fuente={cargando ? "Cargando…" : "La lupa · solo quien acepta cookies de analítica"} plegada="Cuánto bajan, cuánto se quedan y quién se va enseguida, página a página">
               <Tabla
                 filas={detalle?.lupa ?? []}
                 inicial="visitas"
@@ -858,10 +945,10 @@ export default function Mesa({ datos, temas, resumenHoy, tareas, relojes }: { da
               />
             </Caja>
             <div className="grid grid-cols-[minmax(0,1fr)] gap-5 lg:grid-cols-2">
-              <Caja titulo="Dónde pulsan WhatsApp y llamar" fuente="Web">
+              <Caja titulo="Dónde pulsan WhatsApp y llamar" fuente="Web" plegada="En qué páginas pulsan el botón de WhatsApp o de llamar">
                 <Barras filas={(detalle?.clicsPagina ?? []).map((c) => [`${c.pagina} · ${({ whatsapp: "WhatsApp", llamada: "Llamar", llamar: "Llamar" } as Record<string, string>)[c.canal] ?? c.canal}`, c.n])} />
               </Caja>
-              <Caja titulo="Páginas de entrada" fuente="Analytics">
+              <Caja titulo="Páginas de entrada" fuente="Analytics" plegada="Por qué página llega cada visita">
                 <Tabla
                   filas={detalle?.entradas ?? []}
                   inicial="sesiones"
@@ -905,7 +992,7 @@ export default function Mesa({ datos, temas, resumenHoy, tareas, relojes }: { da
               <Grafico puntos={serieDe(M("organico"))} formato={num} color={COLOR.salvia} />
             </Caja>
             <div className="grid grid-cols-[minmax(0,1fr)] gap-5 lg:grid-cols-2">
-              <Caja titulo="Qué buscan cuando nos encuentran" fuente={cargando ? "Cargando…" : "Search Console"}>
+              <Caja titulo="Qué buscan cuando nos encuentran" plegada="Las palabras que escriben en Google y por las que salimos" fuente={cargando ? "Cargando…" : "Search Console"}>
                 <Tabla
                   filas={detalle?.gsc?.busquedas ?? []}
                   inicial="clics"
@@ -919,7 +1006,7 @@ export default function Mesa({ datos, temas, resumenHoy, tareas, relojes }: { da
                   ]}
                 />
               </Caja>
-              <Caja titulo="Páginas que traen visitas desde Google" fuente={cargando ? "Cargando…" : "Search Console"}>
+              <Caja titulo="Páginas que traen visitas desde Google" plegada="Qué páginas nuestras aparecen en Google y cuántos clics traen" fuente={cargando ? "Cargando…" : "Search Console"}>
                 <Tabla
                   filas={detalle?.gsc?.paginas ?? []}
                   inicial="clics"
@@ -935,12 +1022,13 @@ export default function Mesa({ datos, temas, resumenHoy, tareas, relojes }: { da
           </>
         )}
 
+        <Despedida demo={datos.clave === "demo"} />
         <p className="pt-4 text-center text-[12.5px] text-ink/45">
           Fuentes y su última actualización: la web y el CRM, al momento · Google Analytics, al momento (el día de hoy es provisional) · Search Console, datos hasta el {ultGsc ? fechaLarga(ultGsc) : "(sin datos)"} · Google Ads (Supermetrics), {datos.anuncios.actualizado ? `al ${fechaLarga(datos.anuncios.actualizado)}` : "sin datos"} · Ficha de Google e Instagram (Supermetrics), {datos.redes?.actualizado ? `al ${fechaLarga(datos.redes.actualizado)}` : "sin datos"}</p>
       </div>
       )}
       {sencillaPosible && <BarraMovil vista={vista} />}
-      {sencillaPosible && vista === "completa" && <VolverInicio irSencilla={() => { cambiaVista("sencilla"); window.scrollTo({ top: 0 }); }} />}
+      <VolverInicio irSencilla={() => { if (sencillaPosible && vista !== "sencilla") cambiaVista("sencilla"); history.replaceState(null, "", " "); window.scrollTo({ top: 0 }); }} />
       {guia && <Guia cerrar={cierraGuia} />}
     </div>
   );
@@ -993,8 +1081,10 @@ function TresPreguntas({ T, C, crm, cargando, largo }: { T: Totales; C: Totales 
     { pregunta: "¿Qué canal nos hace ganar más?", color: c3, frase: f3, dato: "" },
   ];
   const COL = { verde: ["#ebf1e8", "#3f6b39", "Todo bien"], ambar: ["#f7efe0", "#7c5e27", "Mira esto"], rojo: ["#f8e8ea", "#a3505a", "Importante"], gris: ["#f1efec", "#6b6b6b", "Sin datos aún"] } as const;
+  const peor = filas.some((r) => r.color === "rojo") ? "rojo" : filas.some((r) => r.color === "ambar") ? "ambar" : filas.some((r) => r.color === "verde") ? "verde" : "gris";
   return (
-    <div className="grid gap-3 lg:grid-cols-3">
+    <Plegable id="pl-preguntas" icono="lupa" color={COL[peor][1]} titulo="Las tres preguntas del dueño" pista={filas.map((r) => `${r.pregunta.replace(/[¿?]/g, "")}: ${COL[r.color][2]}`).join(" · ")}>
+    <div className="grid gap-3 pt-1 lg:grid-cols-3">
       {filas.map((r) => {
         const [bg, fg, txt] = COL[r.color];
         return (
@@ -1006,6 +1096,7 @@ function TresPreguntas({ T, C, crm, cargando, largo }: { T: Totales; C: Totales 
         );
       })}
     </div>
+    </Plegable>
   );
 }
 
@@ -1015,7 +1106,7 @@ function Embudo({ pasos, sinPct = false }: { pasos: [string, number, number | un
     <ol className="space-y-2.5">
       {pasos.map(([t, v, c], i) => (
         <li key={t} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 sm:grid-cols-[230px_minmax(0,1fr)_auto]">
-          <span className="text-[14px] font-semibold text-ink">{t}{!sinPct && i > 0 && pasos[i - 1][1] ? <span className="block text-[12px] font-normal text-ink/50">{nf1.format((v / pasos[i - 1][1]) * 100)} % del paso anterior</span> : null}</span>
+          <span className="flex items-center gap-2 text-[14px] font-semibold text-ink"><Loseta n={["globo", "persona", "casa", "documento", "check"][Math.min(i, 4)]} color={PALETA[i % PALETA.length]} tam={28} /><span>{t}{!sinPct && i > 0 && pasos[i - 1][1] ? <span className="block text-[12px] font-normal text-ink/50">{nf1.format((v / pasos[i - 1][1]) * 100)} % del paso anterior</span> : null}</span></span>
           <div className="order-3 col-span-2 h-7 overflow-hidden rounded-[10px] bg-[#f6f1e7] sm:order-none sm:col-span-1">
             <div className="h-full rounded-[10px]" style={{ width: `${Math.max(2, (v / max) * 100)}%`, background: PALETA[i % PALETA.length] }} />
           </div>
@@ -1064,24 +1155,38 @@ function Ventas({ crm, cargando, inversion }: { crm: Detalle["crm"]; cargando: b
   const resp = crm.reduce((a, r) => ({ n: a.n + (r.respondidos ?? 0), h: a.h + (r.horas_resp ?? 0), v: a.v + (r.vencidas ?? 0) }), { n: 0, h: 0, v: 0 });
   const media = resp.n ? resp.h / resp.n : null;
   const tiempo = media === null ? "-" : media < 1 ? `${Math.round(media * 60)} min` : media < 48 ? `${num(Math.round(media * 10) / 10)} h` : `${num(Math.round(media / 24))} días`;
+  const [ayudaAbierta, setAyudaAbierta] = useState<string | null>(null);
   return (
     <>
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-        {[
-          ["Contactos", num(t.leads)],
-          ["Visitas", num(t.visitas)],
-          ["Presupuestos", num(t.presupuestos)],
-          ["Trabajos firmados", num(t.firmados)],
-          ["Importe firmado", eur(t.firmado)],
-          ["Coste en anuncios por trabajo firmado", pago ? eur(inversion / pago) : "-"],
-          ["Tiempo medio hasta la primera llamada", tiempo],
-          ["Seguimientos atrasados", num(resp.v)],
-        ].map(([k, v]) => (
-          <div key={k} className="rounded-[20px] border border-line bg-white p-4">
-            <p className="text-[12px] font-bold uppercase tracking-[0.1em] text-ink/50">{k}</p>
-            <p className="mt-1 font-serif text-[28px] leading-none text-ink">{v}</p>
+        {([
+          ["Contactos", num(t.leads), "persona", PALETA_ALEGRIA.ventas],
+          ["Visitas", num(t.visitas), "casa", PALETA_ALEGRIA.web],
+          ["Presupuestos", num(t.presupuestos), "documento", PALETA_ALEGRIA.camino],
+          ["Trabajos firmados", num(t.firmados), "check", PALETA_ALEGRIA.mercado],
+          ["Importe firmado", eur(t.firmado), "moneda", PALETA_ALEGRIA.dinero],
+          ["Coste en anuncios por trabajo firmado", pago ? eur(inversion / pago) : "-", "megafono", PALETA_ALEGRIA.anuncios],
+          ["Tiempo medio hasta la primera llamada", tiempo, "telefono", PALETA_ALEGRIA.aviso],
+          ["Seguimientos atrasados", num(resp.v), "campana", resp.v >= 10 ? "#a3505a" : PALETA_ALEGRIA.ia],
+        ] as [string, string, string, string][]).map(([k, v, ic, col]) => {
+          const ayuda: Record<string, string> = {
+            Contactos: "Personas que han entrado en el CRM en estas fechas, por cualquier canal (web, teléfono, WhatsApp, Instagram, recomendación).",
+            Visitas: "De esos contactos, a cuántos se les ha hecho ya la visita técnica en casa.",
+            Presupuestos: "A cuántos se les ha entregado presupuesto.",
+            "Trabajos firmados": "Cuántos han firmado el pedido. Un presupuesto tarda semanas en decidirse: los contactos de estas fechas todavía pueden firmar.",
+            "Importe firmado": "Suma de los contratos firmados por contactos de estas fechas.",
+            "Coste en anuncios por trabajo firmado": "Lo invertido en anuncios dividido entre los trabajos firmados que vinieron de anuncios. Cuanto más bajo, mejor.",
+            "Tiempo medio hasta la primera llamada": "Cuánto tardamos, de media, en llamar a un contacto nuevo. Cuanto antes, más probable que firme.",
+            "Seguimientos atrasados": "Contactos con la fecha de seguimiento ya pasada en el CRM: alguien tiene que llamarlos.",
+          };
+          return (
+          <div key={k} className="rounded-[20px] border border-line p-4" style={{ background: tinte(col) }}>
+            <p className="flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.1em] text-ink/55"><Loseta n={ic} color={col} tam={30} /><span className="min-w-0 flex-1">{k}</span>{ayuda[k] && <Que texto={ayuda[k]} etiqueta={k} abierto={ayudaAbierta === k} onToggle={() => setAyudaAbierta(ayudaAbierta === k ? null : k)} />}</p>
+            <p className="mt-2 font-serif text-[28px] leading-none" style={{ color: col }}>{v}</p>
+            {ayudaAbierta === k && <p className="mt-2 rounded-[10px] bg-white/80 px-2.5 py-2 text-[13px] leading-snug text-ink/80">{ayuda[k]}</p>}
           </div>
-        ))}
+          );
+        })}
       </div>
       <Caja titulo="De la petición al trabajo" fuente={cargando ? "Cargando…" : "CRM · contactos que entraron en el periodo y hasta dónde han llegado"}>
         <Embudo pasos={[["Contactos", t.leads, undefined], ["Visita técnica", t.visitas, undefined], ["Presupuesto entregado", t.presupuestos, undefined], ["Firman el trabajo", t.firmados, undefined]]} />
@@ -1092,7 +1197,7 @@ function Ventas({ crm, cargando, inversion }: { crm: Detalle["crm"]; cargando: b
           inicial="leads"
           vacio="El CRM aún no tiene contactos en este periodo."
           cols={[
-            { k: "origen", t: "Origen", v: (r) => r.origen, f: (r) => <span className="font-semibold">{r.origen}</span> },
+            { k: "origen", t: "Origen", v: (r) => r.origen, f: (r) => <span className="flex items-center font-semibold"><LogoCanal canal={r.origen} />{r.origen}</span> },
             { k: "leads", t: "Contactos", v: (r) => r.leads, num: true },
             { k: "visitas", t: "Visitas", v: (r) => r.visitas, num: true },
             { k: "presupuestos", t: "Presupuestos", v: (r) => r.presupuestos, num: true },
@@ -1112,11 +1217,12 @@ function Ventas({ crm, cargando, inversion }: { crm: Detalle["crm"]; cargando: b
 /* ══ cl·v832: portada de dirección, rebote, canales, intención de búsqueda y alertas con criterio ══ */
 
 /** Tarjeta de cifra sin serie diaria (CRM, coste, pendientes). */
-function CifraFija({ nombre, ayuda, v, antes, a, b, extra, menosEsMejor = false, pendiente = false }: { nombre: string; ayuda: string; v: string; antes?: string; a?: number; b?: number; extra?: string; menosEsMejor?: boolean; pendiente?: boolean }) {
+function CifraFija({ icono, nombre, ayuda, v, antes, a, b, extra, menosEsMejor = false, pendiente = false }: { icono?: string; nombre: string; ayuda: string; v: string; antes?: string; a?: number; b?: number; extra?: string; menosEsMejor?: boolean; pendiente?: boolean }) {
+  const [que, setQue] = useState(false); // cl·v931
   return (
-    <div className={`rounded-[20px] border p-4 ${pendiente ? "border-dashed border-ink/25 bg-cream/60" : "border-line bg-white"}`}>
-      <p className="text-[12px] font-bold uppercase tracking-[0.1em] text-ink/50">{nombre}</p>
-      <p className="mt-0.5 text-[12.5px] leading-snug text-ink/55">{ayuda}</p>
+    <div className={`rounded-[20px] border p-4 ${pendiente ? "border-dashed border-ink/25 bg-cream/60" : "border-line"}`} style={pendiente || !icono ? undefined : { background: tinte(ICONO_MEDIDA[icono][1]) }}>
+      <span className="flex items-center gap-2.5">{icono && <Loseta n={ICONO_MEDIDA[icono][0]} color={pendiente ? "#a7a39a" : ICONO_MEDIDA[icono][1]} tam={36} />}<span className="min-w-0 flex-1 text-[12px] font-bold uppercase tracking-[0.1em] text-ink/60">{nombre}</span><Que texto={ayuda} etiqueta={nombre} abierto={que} onToggle={() => setQue(!que)} /></span>
+      {que && <QueTexto texto={ayuda} />}
       <p className={`mt-1.5 font-serif leading-none ${pendiente ? "text-[24px] italic text-ink/45" : "text-[clamp(26px,3.4vw,34px)] font-medium text-ink"}`}>{v}</p>
       {antes !== undefined && a !== undefined && b !== undefined ? <div className="mt-2 flex flex-wrap items-center gap-1.5 text-[12px] text-ink/55"><Delta a={a} b={b} menosEsMejor={menosEsMejor} /><span>antes {antes}</span></div> : null}
       {extra ? <p className="mt-2 text-[12px] text-ink/50">{extra}</p> : null}
@@ -1154,7 +1260,7 @@ function PorCanal({ T, C }: { T: Totales; C: Totales | null }) {
         filas={filas}
         inicial="sesiones"
         cols={[
-          { k: "canal", t: "Canal", v: (r) => r.canal, f: (r) => <span className="font-semibold">{r.canal}</span> },
+          { k: "canal", t: "Canal", v: (r) => r.canal, f: (r) => <span className="inline-flex items-center font-semibold"><LogoCanal canal={r.canal} />{r.canal}</span> },
           { k: "sesiones", t: "Visitas", v: (r) => r.sesiones, num: true, f: (r) => (r.sesiones ? num(r.sesiones) : "-") },
           { k: "rebote", t: "Rebote", v: (r) => r.rebote ?? -1, num: true, f: (r) => (r.rebote === null ? "-" : <span>{pct(r.rebote)}{antes[r.canal]?.rebote != null ? <span className="ml-1 text-[12px] text-ink/45">(antes {pct(antes[r.canal].rebote!)})</span> : null}</span>) },
           { k: "contactos", t: "Contactos", v: (r) => r.contactos, num: true, f: (r) => <span>{num(r.contactos)}{antes[r.canal] ? <span className="ml-1 text-[12px] text-ink/45">(antes {num(antes[r.canal].contactos)})</span> : null}</span> },
@@ -1182,7 +1288,7 @@ function Intencion({ busquedas, cargando }: { busquedas: { busqueda: string; cli
   for (const b of busquedas) { const i = intencionDe(b.busqueda); t[i].clics += b.clics; t[i].impr += b.impresiones; }
   const total = Object.values(t).reduce((x, v) => x + v.clics, 0);
   return (
-    <Caja titulo="¿Nos buscan para contratar o para informarse?" fuente={cargando ? "Cargando…" : "Search Console · las 100 búsquedas con más clics"}>
+    <Caja titulo="¿Nos buscan para contratar o para informarse?" plegada="Reparto de las búsquedas entre quien quiere contratar y quien solo mira" fuente={cargando ? "Cargando…" : "Search Console · las 100 búsquedas con más clics"}>
       {total ? (
         <>
           <div className="flex h-8 overflow-hidden rounded-full">
@@ -1245,7 +1351,7 @@ function BloqueRebote({ T, C, rebote, cargando, conectado }: { T: Totales; C: To
           </div>
         </div>
       </Caja>
-      <Caja titulo="Páginas que pueden estar perdiendo clientes" fuente="Analytics · páginas de servicio con más rebote que la media y casi sin contactos">
+      <Caja titulo="Páginas que pueden estar perdiendo clientes" plegada="Páginas de servicio con más rebote que la media" fuente="Analytics · páginas de servicio con más rebote que la media y casi sin contactos">
         {pierden.length ? (
           <ul className="space-y-2">{pierden.map((p) => <li key={p.pagina} className="rounded-[14px] bg-[#f8e8ea] px-3 py-2 text-[14px] text-ink"><b>{p.pagina}</b>: {num(p.sesiones)} visitas, rebote {pct(p.rebote)} (la media de las páginas de servicio es {pct(mediaServ)}), {num(p.contactos)} acciones clave. Merece revisar qué ve la gente al llegar.</li>)}</ul>
         ) : <p className="text-[14px] text-[#3f6b39]">{rebote ? "Ninguna página de servicio destaca para mal en este periodo." : cargando ? "Cargando…" : "Sin datos."}</p>}
@@ -1307,15 +1413,20 @@ function Alertas({ T, C, datos, largo, b }: { T: Totales; C: Totales | null; dat
   // Fuente de anuncios desactualizada
   if (datos.anuncios.actualizado && entre(datos.anuncios.actualizado, datos.hoy) > 3) al.push({ tono: "ambar", texto: `Los datos de anuncios no se actualizan desde el ${fechaLarga(datos.anuncios.actualizado)}.`, accion: "Revisar la conexión de Supermetrics." });
   if (!al.length) return null;
+  /* cl·v925: una sola línea cerrada con el resumen de las alertas; "+" las abre */
+  const rojas = al.filter((x) => x.tono === "rojo").length;
+  const corto = (t: string) => t.replace(/^(El |La |Los |Las )/, "").split(/[:(]/)[0].trim().replace(/\.$/, "");
   return (
-    <div className="space-y-2">
-      {al.map((x, i) => (
-        <div key={i} className={`rounded-[16px] border-2 px-4 py-3 text-[14.5px] ${x.tono === "rojo" ? "border-[#a3505a] bg-[#f8e8ea]" : "border-[#c9a36a] bg-[#f7efe0]"}`}>
-          <b className={x.tono === "rojo" ? "text-[#a3505a]" : "text-[#7c5e27]"}>Alerta: </b><span className="text-ink">{x.texto}</span>
-          <span className="block text-[13.5px] text-ink/65">Qué hacer: {x.accion}</span>
-        </div>
-      ))}
-    </div>
+    <Plegable id="pl-alertas" icono="campana" color={rojas ? "#a3505a" : "#c9a36a"} titulo={`${al.length} ${al.length === 1 ? "alerta" : "alertas"}${rojas ? ` (${rojas} ${rojas === 1 ? "importante" : "importantes"})` : ""}`} pista={al.map((x) => corto(x.texto)).join(" · ")}>
+      <div className="space-y-2 pt-1">
+        {al.map((x, i) => (
+          <div key={i} className={`rounded-[16px] border-2 px-4 py-3 text-[14.5px] ${x.tono === "rojo" ? "border-[#a3505a] bg-[#f8e8ea]" : "border-[#c9a36a] bg-[#f7efe0]"}`}>
+            <b className={x.tono === "rojo" ? "text-[#a3505a]" : "text-[#7c5e27]"}>Alerta: </b><span className="text-ink">{x.texto}</span>
+            <span className="block text-[13.5px] text-ink/65">Qué hacer: {x.accion}</span>
+          </div>
+        ))}
+      </div>
+    </Plegable>
   );
 }
 
@@ -1326,7 +1437,7 @@ function BloqueClarity({ c, cargando }: { c: Detalle["clarity"]; cargando: boole
   const peor = (k: "rabia_pct" | "muertos_pct" | "vuelven_pct") => [...pags].filter((x) => (x[k] ?? 0) > 0).sort((a, b) => (b[k] ?? 0) - (a[k] ?? 0))[0];
   const r = peor("rabia_pct"), m = peor("muertos_pct"), v = peor("vuelven_pct");
   return (
-    <Caja titulo="Dónde se atasca la gente (Clarity)" fuente={cargando ? "Cargando…" : c?.dias ? `Microsoft Clarity · ${c.dias} ${c.dias === 1 ? "día guardado" : "días guardados"} en este periodo · solo quien acepta cookies` : "Microsoft Clarity"}>
+    <Caja titulo="Dónde se atasca la gente (Clarity)" plegada="Clics rabiosos, clics sin respuesta y scroll, según Microsoft Clarity" fuente={cargando ? "Cargando…" : c?.dias ? `Microsoft Clarity · ${c.dias} ${c.dias === 1 ? "día guardado" : "días guardados"} en este periodo · solo quien acepta cookies` : "Microsoft Clarity"}>
       {!c || !c.dias ? (
         <p className="text-[14px] text-ink/55">{cargando ? "Cargando…" : "No hay datos de Clarity guardados para estas fechas. Se guardan cada mañana desde el 11 de octubre de 2026 (Microsoft solo deja pedir los últimos días)."}</p>
       ) : (
@@ -1393,26 +1504,33 @@ function BloqueRedes({ r, a, b, ca, cb, compara }: { r: Redes | null; a: string;
           {r.resenas.map((x) => {
             const h = desde(x.fuente);
             const nuevas = h && h[0] < x.fecha ? x.total - h[3] : null;
+            /* cl·v934: cada reseña con su logo, estrellas pintadas y color según la nota */
+            const sobre5 = x.escala === 10 ? x.nota / 2 : x.nota;
+            const col = sobre5 >= 4.5 ? "#2f9a62" : sobre5 >= 4 ? "#c79a00" : "#a3505a";
             return (
-              <CifraFija key={x.fuente} nombre={x.fuente} ayuda={`${num(x.total)} opiniones${x.auto ? "" : " (dato apuntado a mano)"}`} v={`${nf1.format(x.nota)}${x.escala === 10 ? "/10" : " de 5"}`}
-                extra={nuevas !== null ? `${nuevas >= 0 ? "+" : ""}${num(nuevas)} opiniones desde el ${fechaLarga(h![0])}` : `Al ${fechaLarga(x.fecha)}`} />
+              <div key={x.fuente} className="rounded-[20px] border border-line p-4" style={{ background: tinte(col) }}>
+                <p className="flex items-center gap-2.5"><span className="grid h-9 w-9 place-items-center rounded-[10px] border border-line bg-white"><LogoMarca nombre={x.fuente} tam={24} /></span><span className="text-[12px] font-bold uppercase tracking-[0.1em] text-ink/60">{x.fuente}</span></p>
+                <p className="mt-2 flex items-end gap-2"><span className="font-serif text-[34px] leading-none" style={{ color: col }}>{nf1.format(x.nota)}</span><span className="pb-1 text-[13px] text-ink/55">{x.escala === 10 ? "sobre 10" : "sobre 5"}</span></p>
+                <p className="mt-1.5 text-[18px] leading-none tracking-[2px]" aria-label={`${nf1.format(sobre5)} de 5 estrellas`} style={{ color: col }}>{"★".repeat(Math.round(sobre5))}<span className="text-ink/20">{"★".repeat(5 - Math.round(sobre5))}</span></p>
+                <p className="mt-2 text-[13px] text-ink/70">{num(x.total)} opiniones{x.auto ? "" : " (apuntado a mano)"}{nuevas !== null ? ` · ${nuevas >= 0 ? "+" : ""}${num(nuevas)} desde el ${fechaLarga(h![0])}` : ""}</p>
+              </div>
             );
           })}
         </div>
         <p className="mt-3 text-[13px] leading-relaxed text-ink/60">Instagram y Google son la prueba de confianza de la web. Si una nota cambia, hay que cambiarla también en la web para que coincida: díselo a Claude.</p>
       </Caja>
 
-      <Caja titulo="Ficha de Google (Google Maps y búsqueda)" fuente={`Supermetrics · datos hasta el ${ultF ? fechaLarga(ultF) : "(sin datos)"} · Google los da con unos 3 días de retraso`}>
+      <Caja titulo="Ficha de Google (Google Maps y búsqueda)" fuente={`Ficha de Google · datos hasta el ${ultF ? fechaLarga(ultF) : "(sin datos)"} · Google los da con unos 3 días de retraso`}>
         {recorte > 0 ? <p className="mb-3 rounded-[12px] bg-cream px-3 py-2 text-[13px] text-ink/65">Google aún no ha dado los últimos {recorte} {recorte === 1 ? "día" : "días"}: aquí se cuenta hasta el {fechaLarga(fb)}{sinC ? "" : ", y la comparación igual"}.</p> : null}
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
           {filaF.map(([t, ayuda, i]) => (
-            <CifraFija key={t} nombre={t} ayuda={ayuda} v={num(F.t[i])} {...(hayC(FC) && FC!.t ? { a: F.t[i], b: FC!.t[i], antes: num(FC!.t[i]) } : {})} extra={!sinC && !hayC(FC) ? `Sin datos antes (se guardan desde el ${fechaLarga(primeraF)})` : undefined} />
+            <CifraFija key={t} icono={["sesiones", "margen", "organico", "pulsaciones", "comerciales"][i]} nombre={t} ayuda={ayuda} v={num(F.t[i])} {...(hayC(FC) && FC!.t ? { a: F.t[i], b: FC!.t[i], antes: num(FC!.t[i]) } : {})} extra={!sinC && !hayC(FC) ? `Sin datos antes (se guardan desde el ${fechaLarga(primeraF)})` : undefined} />
           ))}
         </div>
         <p className="mt-3 text-[13px] leading-relaxed text-ink/60">Es la ficha que sale a la derecha en Google y en el mapa. Las llamadas y «Sitio web» desde aquí son clientes muy calientes: ya nos estaban buscando.</p>
       </Caja>
 
-      <Caja titulo={`Instagram @${r.instagram.usuario ?? "amscerramientos"} (sin anuncios)`} fuente={`Supermetrics · ${num(r.instagram.seguidores)} seguidores y ${num(r.instagram.publicaciones)} publicaciones al ${fechaLarga(r.actualizado)}`}>
+      <Caja titulo={`Instagram @${r.instagram.usuario ?? "amscerramientos"} (sin anuncios)`} explica={EXPLICA["Instagram (sin anuncios)"]} plegada={`${num(r.instagram.seguidores)} seguidores · alcance, visualizaciones y nuevos seguidores`} fuente={`Instagram · ${num(r.instagram.seguidores)} seguidores y ${num(r.instagram.publicaciones)} publicaciones al ${fechaLarga(r.actualizado)}`}>
         <div className="grid gap-3 sm:grid-cols-3">
           <CifraFija nombre="Personas alcanzadas al día" ayuda="Cuentas distintas que ven algo nuestro, de media cada día." v={num(I.alcMedio)} {...(hayC(IC) ? { a: I.alcMedio, b: IC!.alcMedio, antes: num(IC!.alcMedio) } : {})} extra={!sinC && !hayC(IC) ? `Sin datos antes (se guardan desde el ${fechaLarga(primeraI)})` : undefined} />
           <CifraFija nombre="Visualizaciones" ayuda="Veces que se ven nuestros reels, publicaciones e historias." v={num(I.vis)} {...(hayC(IC) ? { a: I.vis, b: IC!.vis, antes: num(IC!.vis) } : {})} />
@@ -1464,7 +1582,7 @@ function Accesos({ irA, sinId, demo }: { irA: (p: Pestana) => void; sinId?: bool
               {x.href && demo ? (
                 <div className={clase} style={estilo}>{dentro}<span className="mt-2 inline-block whitespace-nowrap rounded-full bg-white px-2.5 py-0.5 text-[12px] font-semibold text-ink/55">Ejemplo: aquí se abriría</span></div>
               ) : x.href ? (
-                <a href={x.href} {...(x.fuera || /^\/(crm|plan)-/.test(x.href) ? { target: "_blank", rel: "noopener noreferrer" } : {})} className={clase} style={estilo}>{dentro}</a>
+                <a href={x.href} target="_blank" rel="noopener noreferrer" className={clase} style={estilo}>{dentro}<span className="mt-2 inline-block whitespace-nowrap rounded-full bg-white px-2.5 py-0.5 text-[12px] font-semibold text-ink/55">Se abre aparte; la mesa se queda aquí</span></a>
               ) : x.pestana ? (
                 <button type="button" onClick={() => irA(x.pestana!)} className={`${clase} w-full`} style={estilo}>{dentro}</button>
               ) : x.tema ? (
@@ -1504,8 +1622,8 @@ function Temas({ temas, resumen }: { temas: Modulo[]; resumen?: Resumen }) {
         {temas.map((t) => (
           <li key={t.id} className="shrink-0">
             <button type="button" aria-expanded={abierto === t.id} onClick={() => setAbierto(abierto === t.id ? null : t.id)} className={`flex h-full w-full min-w-[150px] flex-col gap-1.5 rounded-[16px] border px-4 py-3 text-left transition-colors ${abierto === t.id ? "border-ink bg-[#fbf6ea]" : "border-line bg-white hover:border-ink/40"}`}>
-              <span className="flex items-center gap-2.5"><LuzTema luz={t.luz} g /><span className="text-[15.5px] font-semibold text-ink">{t.titulo}</span></span>
-              <span className="text-[13px] leading-snug text-ink/55">{t.estado ?? LUZ[t.luz].t} · {abierto === t.id ? "cerrar" : "ver"}</span>
+              <span className="flex items-center gap-2.5"><Loseta n={(t.icono ?? ICONO_AREA[t.id]?.[0]) || "estrella"} color={t.color ?? ICONO_AREA[t.id]?.[1] ?? "#1a3d47"} tam={36} /><span className="text-[15.5px] font-semibold text-ink">{t.titulo}</span></span>
+              <span className="flex items-center gap-1.5 text-[13px] leading-snug text-ink/65"><LuzTema luz={t.luz} />{t.estado ?? LUZ[t.luz].t} · {abierto === t.id ? "cerrar" : "ver"}</span>
             </button>
           </li>
         ))}
@@ -1513,14 +1631,14 @@ function Temas({ temas, resumen }: { temas: Modulo[]; resumen?: Resumen }) {
       {m && (
         <section className="mt-3 rounded-[20px] border border-line bg-white px-5 py-4" aria-label={m.titulo}>
           <div className="flex items-start justify-between gap-3">
-            <p className="flex flex-wrap items-baseline gap-x-2"><span className="font-serif text-[21px] italic text-ink">{m.titulo}</span><span className="text-[13px] text-ink/50">{m.que} · últimos 28 días</span></p>
+            <p className="flex flex-wrap items-center gap-x-3 gap-y-1"><Loseta n={(m.icono ?? ICONO_AREA[m.id]?.[0]) || "estrella"} color={m.color ?? ICONO_AREA[m.id]?.[1] ?? "#1a3d47"} tam={40} /><span className="font-serif text-[21px] italic text-ink">{m.titulo}</span><span className="text-[13px] text-ink/50">{m.que} · últimos 28 días</span></p>
             <button type="button" onClick={() => setAbierto(null)} className="min-h-[44px] shrink-0 rounded-full border border-line px-4 text-[15px] font-semibold text-ink hover:border-ink">Cerrar</button>
           </div>
           <p className="mt-1 text-[15px] leading-snug text-ink/80">{m.conclusion}</p>
           <ul className="mt-3 divide-y divide-line">
             {m.filas.map((f, i) => (
               <li key={i} className="flex flex-wrap items-start justify-between gap-x-4 gap-y-1 py-2.5 text-[14.5px]">
-                <span className="flex items-center gap-2 text-ink/70">{f.luz ? <LuzTema luz={f.luz} /> : null}{f.t}</span>
+                <span className="flex items-center gap-2 text-ink/70">{f.luz ? <LuzTema luz={f.luz} /> : null}<LogoFila texto={f.t} />{f.t}</span>
                 <span className="max-w-[640px] text-right font-semibold text-ink">{f.v}</span>
               </li>
             ))}
@@ -1537,7 +1655,7 @@ function Temas({ temas, resumen }: { temas: Modulo[]; resumen?: Resumen }) {
 }
 
 /* ── Ayudas para quien no sabe nada (27-oct, cl·v890) ──
-   Vista sencilla / completa, guía de cuatro pasos, "Escúchalo" (lee el resumen en voz alta),
+   Vista sencilla / completa, guía de cuatro pasos, 
    qué hago hoy, relojes con su "¿Qué es esto?", pregúntale a la mesa y barra fija en el móvil. */
 
 function Ayudas({ vista, cambiaVista, abreGuia, resumen, tareas }: { vista: "sencilla" | "completa"; cambiaVista: (v: "sencilla" | "completa") => void; abreGuia: () => void; resumen?: Resumen; tareas: Tarea[] }) {
@@ -1550,7 +1668,6 @@ function Ayudas({ vista, cambiaVista, abreGuia, resumen, tareas }: { vista: "sen
           </button>
         ))}
       </span>
-      
       <button type="button" onClick={abreGuia} className="min-h-[44px] rounded-full border border-line bg-white px-4 text-[15px] font-semibold text-ink hover:border-ink">Ayuda</button>
     </div>
   );
@@ -1572,7 +1689,8 @@ function useHechas() {
   }, []);
   const marca = (id: string) => setHechas((h) => {
     const n = { ...h }; if (n[id]) delete n[id]; else n[id] = new Date().toISOString().slice(0, 10);
-    try { localStorage.setItem("rd-mesa-hechas", JSON.stringify(n)); } catch {}
+    try { localStorage.setItem("rd-mesa-hechas", JSON.stringify(n)); if (n[id]) localStorage.setItem("rd-mesa-logro-revisar", "1"); } catch {}
+    queueMicrotask(() => window.dispatchEvent(new Event("mesa-logro")));
     return n;
   });
   return { hechas, marca };
@@ -1580,16 +1698,18 @@ function useHechas() {
 
 function QueHagoHoy({ tareas }: { tareas: Tarea[] }) {
   const { hechas, marca } = useHechas();
+  const [todas, setTodas] = useState(false); // cl·v919: plegado, solo la primera; "Ver las N más" abre el resto
+  const lista = todas ? tareas : tareas.slice(0, 1);
   return (
     <section id="mesa-hoy" className="mt-5 scroll-mt-4 rounded-[20px] border-2 border-yellow bg-white px-5 py-4">
       <h2 className="font-serif text-[22px] italic text-ink">Lo más importante hoy</h2>
-      {tareas.length ? (
+      {tareas.length ? (<>
         <ol className="mt-2 space-y-2.5">
-          {tareas.map((t, i) => {
+          {lista.map((t, i) => {
             const ok = !!hechas[t.id];
             return (
               <li key={t.id} className="flex items-start gap-3">
-                <span className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-yellow text-[14px] font-bold text-ink">{i + 1}</span>
+                <span className="mt-0.5 shrink-0"><Loseta n={ok ? "check" : (ICONO_AREA[t.ir ?? ""]?.[0] ?? "estrella")} color={ok ? "#2f9a62" : (ICONO_AREA[t.ir ?? ""]?.[1] ?? "#c79a00")} tam={34} /></span>
                 <span className="min-w-0 flex-1">
                   <span className={`block text-[16px] font-semibold leading-snug ${ok ? "text-ink/45 line-through" : "text-ink"}`}>{t.texto}</span>
                   <span className="block text-[14px] leading-snug text-ink/65">{t.porque}{t.donde ? <span className="text-ink/45"> · Está en «{t.donde}»</span> : null}</span>
@@ -1599,7 +1719,8 @@ function QueHagoHoy({ tareas }: { tareas: Tarea[] }) {
             );
           })}
         </ol>
-      ) : <p className="mt-1 text-[15px] text-ink/70">Hoy no hay nada pendiente. Todo va bien.</p>}
+        {tareas.length > 1 && <button type="button" onClick={() => setTodas(!todas)} aria-expanded={todas} className="mt-3 inline-flex min-h-[44px] items-center text-[15px] font-semibold text-ink underline underline-offset-4">{todas ? "Plegar" : `Ver ${tareas.length - 1 === 1 ? "la otra" : `las ${tareas.length - 1} más`}`}</button>}
+      </>) : <p className="mt-1 text-[15px] text-ink/70">Hoy no hay nada pendiente. Todo va bien.</p>}
     </section>
   );
 }
@@ -1671,9 +1792,9 @@ function Pregunta({ clave }: { clave: string }) {
   );
 }
 
-function Sencilla({ temas, resumen, tareas, relojes, clave, irCompleta, herramientas }: { temas: Modulo[]; resumen?: Resumen; tareas: Tarea[]; relojes: Reloj[]; clave: string; irCompleta: () => void; herramientas: React.ReactNode }) {
+function Sencilla({ temas, resumen, tareas, relojes, base, hoy, realEntre, clave, irCompleta, herramientas }: { temas: Modulo[]; resumen?: Resumen; tareas: Tarea[]; relojes: Reloj[]; base?: CifrasBase; hoy: string; realEntre: (a: string, b: string) => number | null; clave: string; irCompleta: () => void; herramientas: React.ReactNode }) {
   const [abierto, setAbierto] = useState<string | null>(null);
-  const abreTema = useCallback((id: string) => { setAbierto(id); setTimeout(() => document.getElementById(`tema-${id}`)?.scrollIntoView({ behavior: suave(), block: "start" }), 50); }, []);
+  const abreTema = useCallback((id: string) => { setAbierto(id); history.replaceState(null, "", "#pl-temas"); window.dispatchEvent(new HashChangeEvent("hashchange")); setTimeout(() => document.getElementById(`tema-${id}`)?.scrollIntoView({ behavior: suave(), block: "start" }), 120); }, []);
   useEffect(() => {
     const f = (e: Event) => abreTema(String((e as CustomEvent).detail));
     window.addEventListener("mesa-tema", f);
@@ -1683,18 +1804,19 @@ function Sencilla({ temas, resumen, tareas, relojes, clave, irCompleta, herramie
   }, [abreTema]);
   return (
     <div className="pb-6">
+      <Ludoteca {...dolorYBien(relojes, temas)} contactos={relojes[0]?.n} preguntas={juegos(relojes)} base={base} hoy={hoy} realEntre={realEntre} demo={clave === "demo"} nombreEmpresa="AMS Cerramientos" lineas={["Ventanas de piso", "Cerramiento de terraza", "Cerramiento de chalet", "Obra completa", "Comunidades de vecinos"]} capacidadTexto="¿Cuántos trabajos puedes instalar al mes?" notaPublico="Podemos montar la versión B de tu web: cerramientos de chalet, terrazas y obra completa, con su propia campaña. La de hoy sigue igual. Tú decides el reparto y lo medimos." />
+      <GuiaDeUso modo="plegada" />
       <Conclusion resumen={resumen} hayTarea={tareas.length > 0} />
-      <TareaPrincipal tareas={tareas} temas={temas} abreTema={abreTema} />
-      <EstadoLista temas={temas} abierto={abierto} setAbierto={setAbierto} />
-      {relojes.length > 0 && <CifrasFrase relojes={relojes} />}
-      <FranjaConectado nombres={["Google Analytics", "Search Console", "Google Ads", "Ficha de Google", "Instagram", "WhatsApp", "Semrush", "ChatGPT", "Gemini", "Claude"]} />
-      <Pregunta clave={clave} />
-      <p className="mt-6 text-center">
-        <button type="button" onClick={irCompleta} className="min-h-[48px] rounded-full border-2 border-ink px-6 text-[15px] font-semibold text-ink">Ver todas las cifras y gráficas</button>
-      </p>
-      <p className="mt-2 text-center text-[14px] text-ink/60">Ahí están los canales, las campañas, los recorridos paso a paso y las fechas a elegir.</p>
-      <MasHerramientas clave={clave} herramientas={herramientas} />
-      <Despedida demo={clave === "demo"} />
+      {/* cl·v925: apartados en rejilla compacta; el que se abre se despliega debajo. Las cifras completas vienen después, ya abiertas */}
+      <Apartados items={[
+        { id: "pl-hoy", icono: "check", color: PALETA_ALEGRIA.dinero, titulo: "Lo primero que haría hoy", pista: tareas[0]?.texto ?? "Nada pendiente", nodo: <TareaPrincipal tareas={tareas} temas={temas} abreTema={abreTema} /> },
+        { id: "pl-temas", icono: "grid", color: PALETA_ALEGRIA.web, titulo: "Cómo está cada parte", pista: temas.map((m) => `${m.titulo}: ${m.estado ?? LUZ[m.luz].t}`).join(" · "), nodo: <EstadoLista temas={temas} abierto={abierto} setAbierto={setAbierto} /> },
+        ...(relojes.length > 0 ? [{ id: "pl-cifras", icono: "moneda", color: PALETA_ALEGRIA.camino, titulo: "Las cuatro cifras que importan", pista: relojes.map((r) => r.frase ?? r.t).join(" · "), nodo: <CifrasFrase relojes={relojes} /> }] : []),
+        { id: "pl-pregunta", icono: "chat", color: PALETA_ALEGRIA.ia, titulo: "Pregunta lo que quieras", pista: "Escribe o dicta", nodo: <Pregunta clave={clave} /> },
+        { id: "pl-mas", icono: "ajustes", color: PALETA_ALEGRIA.ventas, titulo: "Más herramientas", pista: "Correo, CRM, lupa, plan", nodo: <MasHerramientas clave={clave} herramientas={herramientas} /> },
+        { id: "pl-conectado", icono: "red", color: PALETA_ALEGRIA.mercado, titulo: "Conectado con", pista: "Analytics, Ads, WhatsApp…", nodo: <FranjaConectado nombres={["Google Analytics", "Search Console", "Google Ads", "Ficha de Google", "Instagram", "WhatsApp", "Semrush", "ChatGPT", "Gemini", "Claude"]} /> },
+      ]} />
+      <p id="mesa-cifras-todas" className="mt-5 scroll-mt-4 font-serif text-[22px] italic text-ink">Todas las cifras</p>
     </div>
   );
 }
@@ -1731,7 +1853,6 @@ function CabeceraSencilla({ resumen, tareas, abreGuia, cambiarPeriodo, actualiza
       <h1 className="mt-1 font-serif text-[clamp(30px,5vw,42px)] font-medium italic leading-tight text-ink">Cómo va AMS</h1>
       <p className="mt-1 text-[15px] text-ink/65">Últimos 28 días, comparado con los 28 anteriores · {alDia ? "actualizado hoy" : actualizado ? `anuncios actualizados el ${fechaEnPalabras(actualizado)}` : "anuncios sin actualizar"}</p>
       <div className="mt-3 flex flex-wrap gap-2">
-        
         <button type="button" onClick={abreGuia} className="min-h-[44px] rounded-full border border-line bg-white px-4 text-[15px] font-semibold text-ink hover:border-ink">Ayuda</button>
         <button type="button" onClick={cambiarPeriodo} className="min-h-[44px] rounded-full border border-line bg-white px-4 text-[15px] font-semibold text-ink/75 hover:border-ink">Cambiar periodo</button>
       </div>
@@ -1739,56 +1860,23 @@ function CabeceraSencilla({ resumen, tareas, abreGuia, cambiarPeriodo, actualiza
   );
 }
 
-function BotonOir({ resumen, tareas }: { resumen?: Resumen; tareas: Tarea[] }) {
-  const [hablando, setHablando] = useState(false);
-  const [puede, setPuede] = useState(true);
-  useEffect(() => {
-    setPuede(typeof window !== "undefined" && "speechSynthesis" in window);
-    return () => { try { window.speechSynthesis?.cancel(); } catch {} };
-  }, []);
-  const oir = () => {
-    try {
-      const sy = window.speechSynthesis;
-      if (hablando) { sy.cancel(); setHablando(false); return; }
-      const texto = [resumen ? `${resumen.titulo}. ${(resumen.puntos?.length ? resumen.puntos : [resumen.texto]).join(" ")}` : "", tareas[0] ? `Lo primero que haría hoy: ${tareas[0].texto}. ${tareas[0].porque}` : "Hoy no hay nada pendiente."].join(" ");
-      // Frase a frase: Chrome corta las lecturas de más de 15 segundos, y en el iPhone un cancel()
-      // justo antes de speak() deja mudo el botón. Por eso ni se cancela ni se lee todo de golpe.
-      const frases = frasesDe(texto);
-      const voz = sy.getVoices().find((v) => v.lang.startsWith("es"));
-      frases.forEach((f, i) => {
-        const u = new SpeechSynthesisUtterance(f);
-        u.lang = "es-ES";
-        if (voz) u.voice = voz;
-        if (i === frases.length - 1) u.onend = () => setHablando(false);
-        u.onerror = () => setHablando(false);
-        sy.speak(u);
-      });
-      setHablando(true);
-    } catch {}
-  };
-  if (!puede) return null;
-  return <button type="button" onClick={oir} className="min-h-[44px] rounded-full border border-line bg-white px-4 text-[15px] font-semibold text-ink hover:border-ink">{hablando ? "Parar" : "Oír resumen"}</button>;
-}
-
 function Conclusion({ resumen, hayTarea }: { resumen?: Resumen; hayTarea: boolean }) {
   if (!resumen) return null;
   const urgente = /importante|atención/i.test(resumen.titulo);
   const puntos = resumen.puntos?.length ? resumen.puntos : [resumen.texto];
+  /* cl·v926: también plegada: el titular dice lo que pasa; dentro, los motivos y el botón */
   return (
-    <section className={`mt-5 rounded-[22px] px-5 py-5 ${urgente ? "bg-[#fbeceb]" : "bg-[#e7f4ec]"}`}>
-      <p className="flex items-center gap-2.5 font-serif text-[clamp(24px,4vw,30px)] italic leading-tight text-ink">
-        <LuzTema luz={urgente ? "rojo" : "verde"} g />{resumen.titulo}
-      </p>
-      {puntos.length > 1 ? (
-        <ul className="mt-3 space-y-2.5">
-          {puntos.map((p, i) => <li key={i} className="flex gap-2.5 text-[17px] leading-snug text-ink/85"><span className="mt-[9px] h-2 w-2 shrink-0 rounded-full bg-ink/40" />{p}</li>)}
+    <Plegable id="pl-conclusion" icono={urgente ? "campana" : "check"} color={urgente ? "#a3505a" : "#2f9a62"} titulo={resumen.titulo} pista={puntos.join(" · ")}>
+      <div className={`rounded-[16px] px-4 py-3 ${urgente ? "bg-[#fbeceb]" : "bg-[#e7f4ec]"}`}>
+        <ul className="space-y-1.5">
+          {puntos.map((p, i) => <li key={i} className="flex gap-2.5 text-[15.5px] leading-snug text-ink/85"><span className="mt-[9px] h-2 w-2 shrink-0 rounded-full bg-ink/40" />{p}</li>)}
         </ul>
-      ) : <p className="mt-2 text-[17px] leading-snug text-ink/85">{puntos[0]}</p>}
-      {!urgente && !/^Para mirar/.test(resumen.texto) && <p className="mt-2 text-[15px] italic leading-snug text-ink/60">{elige(CHISPA_TODO_BIEN, resumen.titulo + resumen.texto)}</p>}
-      {hayTarea && (
-        <button type="button" onClick={() => document.getElementById("mesa-hoy")?.scrollIntoView({ behavior: suave(), block: "start" })} className="mt-4 min-h-[48px] rounded-full bg-yellow px-6 text-[15.5px] font-semibold text-ink">{urgente ? "Ver lo más importante" : "Ver qué tengo que hacer"}</button>
-      )}
-    </section>
+        {!urgente && !/^Para mirar/.test(resumen.texto) && <p className="mt-2 text-[15px] italic leading-snug text-ink/60">{elige(CHISPA_TODO_BIEN, resumen.titulo + resumen.texto)}</p>}
+        {hayTarea && (
+          <button type="button" onClick={() => { history.replaceState(null, "", "#pl-hoy"); window.dispatchEvent(new HashChangeEvent("hashchange")); setTimeout(() => document.getElementById("pl-hoy")?.scrollIntoView({ behavior: suave(), block: "start" }), 80); }} className="mt-3 min-h-[48px] rounded-full bg-yellow px-6 text-[15px] font-semibold text-ink">Ver lo más importante</button>
+        )}
+      </div>
+    </Plegable>
   );
 }
 
@@ -1867,7 +1955,7 @@ function EstadoLista({ temas, abierto, setAbierto }: { temas: Modulo[]; abierto:
                   <ul className="mt-2 divide-y divide-line">
                     {m.filas.map((f, i) => (
                       <li key={i} className="flex flex-col gap-0.5 py-2.5 text-[15px] sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-                        <span className="flex items-center gap-2 text-ink/70">{f.luz ? <LuzTema luz={f.luz} /> : null}{f.t}</span>
+                        <span className="flex items-center gap-2 text-ink/70">{f.luz ? <LuzTema luz={f.luz} /> : null}<LogoFila texto={f.t} />{f.t}</span>
                         <span className="font-semibold text-ink sm:max-w-[60%] sm:text-right">{f.v}</span>
                       </li>
                     ))}
@@ -1887,6 +1975,26 @@ function EstadoLista({ temas, abierto, setAbierto }: { temas: Modulo[]; abierto:
   );
 }
 
+/** Las preguntas de "Adivina la cifra", hechas con las cifras de hoy (solo las que hay). */
+const techo = (n: number) => Math.max(10, Math.ceil((n * 3) / 10) * 10);
+/** Puntos de dolor y de satisfacción para "Tus sueños y tus cuentas" (cl·v923): salen de las cuatro cifras y de las partes. */
+function dolorYBien(relojes: Reloj[], temas: Modulo[]) {
+  const frase = (r: Reloj) => (r.frase ?? `${r.t}: ${r.v}`) + (r.detalle ? ` (${r.detalle.replace(/\.$/, "")})` : "");
+  const temaDeCifra = ["web", "web", "anuncios", "dicen"]; // a qué parte lleva cada una de las cuatro cifras
+  /* las partes solo añaden lo que las cifras no cuentan ya (anuncios ya va en el coste por contacto; ventas, en los contactos) */
+  const partes = (luz: Luz[]) => temas.filter((m) => luz.includes(m.luz) && m.id !== "anuncios" && m.id !== "tuyo").map((m) => ({ texto: m.conclusion, ir: m.id }));
+  const cifras = (luz: Luz[]) => relojes.map((r, i) => ({ r, i })).filter(({ r }) => luz.includes(r.luz)).map(({ r, i }) => ({ texto: frase(r), ir: temaDeCifra[i] }));
+  const dolor = [...cifras(["rojo", "ambar"]), ...partes(["rojo"])].slice(0, 3);
+  const bien = [...cifras(["verde"]), ...partes(["verde"])].slice(0, 3);
+  return { dolor, bien };
+}
+function juegos(r: Reloj[]) {
+  const o: { texto: string; real: number; unidad: string; max: number }[] = [];
+  if (r[0]?.n) o.push({ texto: "¿Cuántas personas crees que han dejado sus datos en los últimos 28 días?", real: r[0].n, unidad: "personas", max: techo(r[0].n) });
+  if (r[1]?.n) o.push({ texto: "¿Y cuántas han pedido una visita?", real: r[1].n, unidad: "visitas", max: techo(r[1].n) });
+  if (r[2]?.n) o.push({ texto: "¿Cuánto crees que ha costado cada contacto de los anuncios?", real: r[2].n, unidad: "€", max: techo(r[2].n) });
+  return o;
+}
 function CifrasFrase({ relojes }: { relojes: Reloj[] }) {
   const [info, setInfo] = useState<string | null>(null);
   return (
@@ -1916,13 +2024,14 @@ function CifrasFrase({ relojes }: { relojes: Reloj[] }) {
 }
 
 function BarraMovil({ vista }: { vista: "sencilla" | "completa" }) {
-  const ir = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: suave(), block: "start" });
+  /* cl·v922: los apartados van plegados; el botón pone el ancla (#pl-…) para que el Plegable se abra y baja hasta él */
+  const ir = (id: string) => { const pl: Record<string, string> = { "mesa-hoy": "pl-hoy", "mesa-temas": "pl-temas", "mesa-pregunta": "pl-pregunta", "mesa-herramientas": "pl-mas" }; const dest = document.getElementById(pl[id]) ? pl[id] : id; history.replaceState(null, "", "#" + dest); window.dispatchEvent(new HashChangeEvent("hashchange")); setTimeout(() => document.getElementById(dest)?.scrollIntoView({ behavior: suave(), block: "start" }), 60); };
   const botones: [string, string][] = [["mesa-hoy", "Hoy"], ["mesa-temas", "Estado"], ["mesa-pregunta", "Preguntar"], ["mesa-herramientas", "Más"]];
   return (
     <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-white/95 px-2 pb-[max(8px,env(safe-area-inset-bottom))] pt-2 backdrop-blur sm:hidden" aria-label="Ir a">
       <ul className="grid grid-cols-4 gap-1">
         {botones.map(([id, t]) => (
-          <li key={id}><button type="button" onClick={() => { if (id === "mesa-herramientas") window.dispatchEvent(new Event("mesa-mas")); if (id === "mesa-hoy" && vista === "completa") window.scrollTo({ top: 0, behavior: suave() }); else setTimeout(() => ir(id), 30); }} className="flex min-h-[56px] w-full flex-col items-center justify-center gap-0.5 rounded-[12px] text-[13px] font-semibold text-ink active:bg-cream"><span aria-hidden="true" className="grid h-7 w-7 place-items-center rounded-[9px] text-white" style={{ background: ICONO_BARRA[id][1] }}><Icono n={ICONO_BARRA[id][0]} className="h-4 w-4" /></span>{t}</button></li>
+          <li key={id}><button type="button" onClick={() => { if (id === "mesa-herramientas") window.dispatchEvent(new Event("mesa-mas")); setTimeout(() => ir(id), 30); }} className="flex min-h-[56px] w-full flex-col items-center justify-center gap-0.5 rounded-[12px] text-[13px] font-semibold text-ink active:bg-cream"><span aria-hidden="true" className="grid h-7 w-7 place-items-center rounded-[9px] text-white" style={{ background: ICONO_BARRA[id][1] }}><Icono n={ICONO_BARRA[id][0]} className="h-4 w-4" /></span>{t}</button></li>
         ))}
       </ul>
     </nav>
@@ -1968,9 +2077,9 @@ function VolverInicio({ irSencilla }: { irSencilla: () => void }) {
   }, []);
   if (!ver) return null;
   return (
-    <div className="fixed bottom-[76px] right-3 z-40 flex flex-col items-end gap-2 sm:bottom-5 sm:right-5">
-      <button type="button" onClick={() => window.scrollTo({ top: 0 })} className="min-h-[44px] rounded-full border border-line bg-white px-4 text-[14px] font-semibold text-ink shadow-md">Arriba</button>
-      <button type="button" onClick={irSencilla} className="min-h-[44px] rounded-full bg-ink px-4 text-[14px] font-semibold text-white shadow-md">Volver al inicio de la mesa</button>
+    <div className="fixed bottom-[76px] right-3 z-40 sm:bottom-5 sm:right-5">
+      {/* cl·v936: un solo botón, siempre que se haya bajado, en las dos vistas: para no perderse nunca */}
+      <button type="button" onClick={irSencilla} className="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-ink py-1 pl-1.5 pr-4 text-[14px] font-semibold text-white shadow-lg"><Loseta n="casa" color="#ffffff33" tam={34} />Volver al inicio</button>
     </div>
   );
 }
