@@ -1,8 +1,16 @@
 {
-  "version": "2026-10-27T03:10",
+  "version": "2026-10-27T06:50",
   "fecha": "27 de octubre de 2026",
-  "aviso": "Hemos recibido tus tarifarios y tus respuestas de ayer noche. Gracias, Javi: ya están apuntadas arriba.",
+  "aviso": "Hoy te dejamos dos novedades: la lupa de demostración y tus tarifas ya en la calculadora. Gracias por los tarifarios, Javi.",
   "ultimo": [
+    {
+      "f": "27 oct",
+      "t": "Nueva en la guía: la lupa de demostración. Con datos de ejemplo sobre tu web, muestra dónde toca la gente, hasta dónde baja y dónde se va, para mejorarla con datos. Estará con datos reales cuando la web esté publicada y conectemos Analytics y Clarity."
+    },
+    {
+      "f": "27 oct",
+      "t": "Tus tarifas ya están en la calculadora de la web: ventanas con y sin persiana, puertas balconeras en blanco, motor a 135 euros. El aluminio sale como «a presupuestar»."
+    },
     {
       "f": "27 oct",
       "t": "Recibidos tus tarifarios de ventanas sin persiana y sin montaje y los de puertas (con y sin cajón). Los pasamos a la calculadora de la web."
@@ -18,14 +26,6 @@
     {
       "f": "26 oct",
       "t": "Raúl te ha contestado que te llamará mañana para hablar de los accesos. Cuando habléis, pídele que lo que acordéis te lo confirme por escrito."
-    },
-    {
-      "f": "26 oct",
-      "t": "Has pedido por correo a tu agencia actual el acceso de Administrador a Google Ads y a Analytics. Esperamos su respuesta."
-    },
-    {
-      "f": "26 oct",
-      "t": "Nuevo compromiso por escrito, más arriba: «Tuyo es el control. Siempre.»"
     }
   ],
   "cuentas": {

@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>La lupa de tu web (demostración) | AMS Cerramientos</title>
+<meta name="description" content="Así verías lo que hace la gente en tu web: dónde toca, dónde se para y dónde se va. Datos de ejemplo.">
+<style>
+@font-face{font-family:Inter;font-weight:400;font-display:swap;src:url(/fonts/inter-400.woff2) format("woff2")}
+@font-face{font-family:Inter;font-weight:600;font-display:swap;src:url(/fonts/inter-600.woff2) format("woff2")}
+@font-face{font-family:Inter;font-weight:700;font-display:swap;src:url(/fonts/inter-700.woff2) format("woff2")}
+*{box-sizing:border-box}body{margin:0;background:#f3f6f9;font-family:Inter,system-ui,sans-serif;color:#1f2a36}
+.lp-barra{background:#12202B;color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.lp-barra a{color:#fff;font-weight:700;text-decoration:none;font-size:.92rem}.lp-barra span{color:#cfe0f2;font-size:.85rem}
+.lp-demo{background:#FFF1C7;border-bottom:2px solid #E8C04A;padding:10px 16px;font-size:.92rem;color:#12202B}
+.lp-cab{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;padding:16px 16px 6px}
+.lp-cab h1{margin:0;font-size:1.25rem}.lp-cab h1 small{font-weight:400;color:#5B6B78;font-size:1rem}
+.lp-seg{display:inline-flex;border:1px solid #cdd7e1;border-radius:999px;background:#fff;padding:3px;gap:2px}
+.lp-seg button{border:0;background:none;padding:7px 13px;border-radius:999px;font:600 .88rem Inter,sans-serif;color:#33495C;cursor:pointer;min-height:36px}
+.lp-seg button.on{background:#12202B;color:#fff}
+.lp-sel{border:1px solid #cdd7e1;border-radius:999px;background:#fff;padding:8px 12px;font:600 .88rem Inter,sans-serif;color:#33495C;min-height:42px}
+.lp-sub{padding:0 16px 12px;color:#33495C;font-size:.9rem}
+.lp-conc{margin:0 16px 14px;background:#fff;border:1px solid #dbe4ec;border-radius:14px;padding:12px 16px}
+.lp-conc-top{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center}
+.lp-conc-top b{font-size:1.05rem}
+.lp-tag{background:#1b8aa6;color:#fff;border-radius:999px;padding:4px 12px;font-size:.8rem;font-weight:700}
+.lp-barfia{flex:1;min-width:140px;max-width:300px;display:flex;align-items:center;gap:8px;font-size:.8rem;color:#5B6B78}
+.lp-barfia i{flex:1;height:6px;background:#e5ebf0;border-radius:6px;overflow:hidden;display:block}.lp-barfia i u{display:block;height:100%;background:#1b8aa6}
+.lp-ver{border:0;background:#F2C23E;color:#12202B;font:700 .9rem Inter,sans-serif;border-radius:999px;padding:8px 18px;cursor:pointer;min-height:40px}
+.lp-lista{display:none;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:10px;margin-top:12px}
+.lp-conc.abierto .lp-lista{display:grid}
+.lp-c{border:1px solid #dbe4ec;border-radius:12px;padding:12px 14px;font-size:.9rem;line-height:1.45}
+.lp-c b{display:flex;gap:8px;align-items:flex-start}.lp-c b i{flex:none;width:10px;height:10px;border-radius:50%;margin-top:5px}
+.lp-c p{margin:6px 0 8px;color:#33495C}
+.lp-c a{color:#1b6f88;font-weight:600;cursor:pointer;text-decoration:underline;font-size:.88rem}
+.lp-grid{display:grid;grid-template-columns:minmax(0,230px) minmax(0,1fr) minmax(0,310px);gap:14px;padding:0 16px 24px;align-items:start}
+.lp-col{background:#fff;border:1px solid #dbe4ec;border-radius:14px;padding:12px}
+.lp-col h2{margin:0 0 8px;font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:#5B6B78}
+.lp-pg{display:block;width:100%;text-align:left;border:1px solid transparent;border-radius:10px;background:none;padding:9px 10px;cursor:pointer;font:inherit;color:#1f2a36}
+.lp-pg.on{border-color:#1b8aa6;background:#f1f9fb}
+.lp-pg div{display:flex;justify-content:space-between;gap:8px;font-weight:600;font-size:.9rem}
+.lp-pg i{display:block;height:5px;border-radius:5px;background:#e5ebf0;margin:6px 0 4px;overflow:hidden}.lp-pg i u{display:block;height:100%;background:#1b8aa6}
+.lp-pg small{color:#5B6B78;font-size:.76rem}
+.lp-cap{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.lp-chip{display:inline-flex;align-items:center;gap:8px;border:1px solid #cdd7e1;border-radius:999px;background:#fff;padding:8px 14px;cursor:pointer;font:600 .85rem Inter,sans-serif;color:#33495C;min-height:40px}
+.lp-chip.off{opacity:.45}.lp-chip s{width:22px;height:12px;border-radius:12px;display:block;text-decoration:none}
+.lp-esc{display:flex;justify-content:center;background:#eef3f7;border-radius:12px;padding:14px 8px;overflow:hidden}
+.lp-tel{background:#12202B;border-radius:34px;padding:12px;width:100%;max-width:414px}
+.lp-tel.pc{max-width:none;border-radius:14px;padding:8px}
+.lp-vent{position:relative;width:100%;overflow:hidden;border-radius:22px;background:#fff}
+.lp-tel.pc .lp-vent{border-radius:8px}
+.lp-vent iframe{border:0;background:#fff;display:block;transform-origin:0 0}
+.lp-hint{font-size:.8rem;color:#5B6B78;margin:8px 2px 0}
+.lp-cifras{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 10px}
+.lp-n b{display:block;font-size:1.55rem;color:#1b8aa6;line-height:1.1}.lp-n span{font-size:.78rem;color:#5B6B78;line-height:1.3;display:block}
+.lp-col h3{margin:14px 0 6px;font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:#5B6B78}
+.lp-fila{display:flex;justify-content:space-between;gap:8px;font-size:.86rem;padding:4px 0;border-bottom:1px solid #eef2f5}
+.lp-fila span:last-child{font-weight:700;white-space:nowrap}
+.lp-fila.btn{cursor:pointer}.lp-fila.btn:hover{background:#f1f9fb}
+.lp-nota{margin-top:14px;border:2px solid #F2C23E;border-radius:12px;padding:12px;background:#fffdf3}
+.lp-nota h3{margin-top:0}
+.lp-nota textarea{width:100%;min-height:64px;border:1px solid #cdd7e1;border-radius:8px;padding:8px;font:inherit;font-size:.9rem;box-sizing:border-box;resize:vertical}
+.lp-nota button{border:1px solid #12202B;background:#fff;color:#12202B;border-radius:999px;padding:8px 14px;font:600 .85rem Inter,sans-serif;cursor:pointer;min-height:40px;margin:6px 6px 0 0}
+.lp-nota button.pri{background:#12202B;color:#fff}
+.lp-nl{list-style:none;margin:10px 0 0;padding:0;font-size:.86rem}
+.lp-nl li{display:flex;gap:8px;justify-content:space-between;padding:6px 0;border-bottom:1px solid #eef2f5}
+.lp-nl li.hecha span{text-decoration:line-through;color:#8a96a3}
+.lp-pie{padding:0 16px 28px;color:#5B6B78;font-size:.84rem;max-width:900px}
+@media(max-width:1100px){.lp-grid{grid-template-columns:minmax(0,1fr)}.lp-pgs{display:flex;gap:8px;overflow-x:auto}.lp-pgs .lp-pg{min-width:170px;flex:none;border-color:#eef2f5}}
+@media(prefers-reduced-motion:no-preference){.lp-chip,.lp-pg,.lp-seg button{transition:background-color .15s,opacity .15s,color .15s}}
+
+</style>
+</head>
+<body>
+<div class="lp-barra"><a href="/guia-javi">&larr; Volver a la guía</a><span>AMS Cerramientos · La lupa</span></div>
+<div class="lp-demo"><b>Datos de ejemplo sobre vuestra propia web.</b> Ninguna cifra ni toque de esta página es real: sirve para que veas cómo sería. Con tu web publicada y conectada, aquí aparecerá lo que haga la gente de verdad.</div>
+<header class="lp-cab"><h1>La lupa <small>· tu web con lo que hace la gente encima</small></h1>
+<div class="lp-seg" id="lp-dias" role="group" aria-label="Periodo"><button type="button" data-v="7">7 días</button><button type="button" data-v="28" class="on">28 días</button><button type="button" data-v="90">90 días</button></div>
+<div class="lp-seg" id="lp-disp" role="group" aria-label="Dispositivo"><button type="button" data-v="movil" class="on">Móvil</button><button type="button" data-v="pc">Ordenador</button></div>
+<select class="lp-sel" id="lp-fte" aria-label="Fuente del tráfico"><option value="todas">Todas las fuentes</option><option value="ads">Anuncios de Google</option><option value="google">Google normal</option><option value="directo">Directo</option><option value="redes">Instagram y Facebook</option></select></header>
+<p class="lp-sub" id="lp-sub"></p>
+<section class="lp-conc" id="lp-conc" aria-label="Conclusiones"></section>
+<main class="lp-grid" id="lp-centro">
+<aside class="lp-col"><h2>Páginas, de más a menos vistas</h2><div class="lp-pgs" id="lp-pgs"></div></aside>
+<section class="lp-col"><div class="lp-cap" role="group" aria-label="Capas">
+<button type="button" class="lp-chip" data-c="calor"><s style="background:linear-gradient(90deg,#2896e6,#3cc878,#fad228,#e6281e)"></s>Dónde tocan</button>
+<button type="button" class="lp-chip" data-c="vano"><s style="background:#e03131;width:14px;height:14px;border-radius:50%"></s>Tocan y no pasa nada</button>
+<button type="button" class="lp-chip" data-c="baja"><s style="background:#12202B"></s>Hasta dónde bajan</button></div>
+<div class="lp-esc"><div class="lp-tel" id="lp-tel"><div class="lp-vent" id="lp-vent"><iframe id="lp-if" title="Tu web con la lupa encima" src="about:blank"></iframe></div></div></div>
+<p class="lp-hint">Es vuestra web de verdad: puedes bajar y navegar dentro. Encima se pinta lo que hacen las visitas de ejemplo.</p></section>
+<aside class="lp-col" id="lp-der"></aside>
+</main>
+<p class="lp-pie">Cómo funciona de verdad: solo se apunta a quien acepta las cookies de analítica; se guarda qué tocan y hasta dónde bajan, nunca lo que escriben; no hay datos personales y todo se borra solo a los 90 días. Los datos son tuyos. Las conclusiones salen de reglas fijas sobre los datos, y se vuelven más fiables con las visitas: menos de 100 son pistas, hasta 1.000 tendencias, y desde 1.000 son firmes.</p>
+<script>
+(function(){
+'use strict';
+var $=function(i){return document.getElementById(i)};
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]})}
+// Datos inventados. w: peso de cada tipo de toque [contacto,boton,enlace,campo,foto,titular,menu,aire]
+var PAGES=[
+ {p:'/',n:'Portada',v:96,baja:38,fuera:58,s10:31,act:21,via:{ads:44,google:26,directo:18,redes:12},sig:[['/ventanas-pvc',30],['/configurador',22],['/contacto',18]],w:[7,10,12,0,14,9,10,6],cr:7},
+ {p:'/ventanas-pvc',n:'Ventanas de PVC',v:61,baja:55,fuera:44,s10:18,act:38,via:{ads:30,google:50,directo:12,redes:8},sig:[['/configurador',34],['/contacto',22],['/cerramientos-terrazas',8]],w:[9,8,10,0,26,8,6,5],cr:9},
+ {p:'/blog/pvc-o-aluminio',n:'Blog: PVC o aluminio',v:48,baja:22,fuera:100,s10:41,act:9,via:{ads:2,google:92,directo:4,redes:2},sig:[],w:[2,3,10,0,10,8,6,4],cr:2},
+ {p:'/cerramientos-terrazas',n:'Cerramientos de terraza',v:44,baja:48,fuera:47,s10:22,act:33,via:{ads:38,google:34,directo:10,redes:18},sig:[['/contacto',27],['/configurador',16],['/ventanas-pvc',10]],w:[8,10,10,0,12,7,6,5],cr:8},
+ {p:'/contacto',n:'Contacto',v:31,baja:62,fuera:35,s10:10,act:44,via:{ads:36,google:30,directo:26,redes:8},sig:[['/',20],['/ventanas-pvc',45]],w:[28,6,4,12,2,5,6,4],cr:28},
+ {p:'/configurador',n:'Configurador',v:27,baja:70,fuera:37,s10:7,act:71,via:{ads:48,google:22,directo:20,redes:10},sig:[['/contacto',44],['/',19]],w:[10,22,4,18,2,6,6,4],cr:12},
+ {p:'/cancelas-puertas',n:'Cancelas y puertas',v:33,baja:12,fuera:70,s10:49,act:11,via:{ads:6,google:64,directo:14,redes:16},sig:[['/contacto',20],['/',10]],w:[5,6,8,0,18,10,8,6],cr:5}
+];
+var DIAS={7:.27,28:1,90:3.2},DISP={movil:1,pc:.45};
+var S={dias:28,disp:'movil',fuente:'todas',pg:0,capas:{calor:1,vano:1,baja:1},notas:[],senal:false,pin:null,taps:null,doc:null,n:0};
+function rng(seed){var a=seed>>>0;return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function fac(p){var f=DIAS[S.dias]*DISP[S.disp];if(S.fuente!=='todas')f*=p.via[S.fuente]/100;return f}
+function vistas(p){return Math.round(p.v*fac(p))}
+function totales(){var v=0,t=0;PAGES.forEach(function(p){v+=vistas(p)});return v}
+function visitas(){return Math.max(1,Math.round(totales()/1.5))}
+function ppv(){return totales()/visitas()}
+function alcanza(p,pct){var L=p.baja/Math.LN2;return Math.max(.1,100*Math.exp(-pct/L))}
+function final(p){return alcanza(p,100)}
+function fmt(n){return String(n).replace('.',',')}
+// ---- conclusiones, con reglas fijas
+function conclusiones(){
+ var c=[],i,p,v;
+ PAGES.forEach(function(p){v=vistas(p);if(v<8)return;
+  if(p.fuera>=85)c.push({s:3,pg:p,t:'En '+p.p+' se va de la web el '+p.fuera+' % de quien la ve.',x:'Llegan desde Google a leer el artículo y se van: pon arriba, antes del texto, una invitación clara a ver ventanas o a pedir la visita gratuita.'});
+  if(p.baja<=15)c.push({s:3,pg:p,t:'En '+p.p+' casi nadie baja: la mitad de la gente no pasa del '+p.baja+' % de la página.',x:'Lo importante (qué ofrecéis, precio, cómo contactar) tiene que estar en la primera pantalla. Lo de abajo, más corto.'});
+  if(p.s10>=45)c.push({s:2,pg:p,t:'En '+p.p+' el '+p.s10+' % de la gente se va en menos de 10 segundos.',x:'No encuentran enseguida lo que buscaban. Revisa el titular y la primera imagen: tienen que decir en un vistazo de qué va la página.'});
+ });
+ // toques que no hacen nada: la foto de ventanas
+ c.push({s:3,pg:PAGES[1],t:'En /ventanas-pvc mucha gente toca las fotos creyendo que se abren y no pasa nada.',x:'Haz que las fotos se amplíen al tocarlas, o que lleven a la ventana que enseñan. Es gente interesada que se queda con las ganas.'});
+ if(ppv()<=1.6)c.push({s:2,pg:PAGES[0],t:'Casi todo el mundo ve una sola página ('+fmt(ppv().toFixed(1))+' páginas por visita de media): entra, mira y se va.',x:'La página por la que entran tiene que llevarles a la siguiente: ventanas, cuánto cuesta o la visita gratuita, bien visibles.'});
+ var best=null;PAGES.forEach(function(p){if(vistas(p)>=8&&(!best||p.cr>best.cr))best=p});
+ if(best)c.push({s:1,pg:best,t:'Donde más se pulsa WhatsApp, llamar o el formulario es '+best.p+': '+best.cr+' toques de contacto por cada 100 vistas.',x:'Es la página que mejor convierte: llévale tráfico (enlaces desde otras páginas, anuncios) y copia lo que funciona en las demás.'});
+ c.sort(function(a,b){return b.s-a.s});return c}
+function pintaConc(){
+ var c=conclusiones(),n=visitas(),tag=n<100?'Pistas':n<1000?'Tendencias':'Firmes';
+ var txt=n<100?'Con '+n+' visitas son solo pistas. Hacia las 1.000 serán tendencias firmes.':n<1000?'Con '+n+' visitas ya son tendencias. A partir de 1.000 serán firmes.':'Con '+n+' visitas ya son firmes.';
+ var col={3:'#d64545',2:'#b8903a',1:'#2f9e5b'};
+ $('lp-conc').innerHTML='<div class="lp-conc-top"><b>Conclusiones</b><span class="lp-tag">'+tag+'</span><span style="font-size:.85rem;color:#5B6B78;flex:1;min-width:160px">'+txt+'</span><span class="lp-barfia"><i><u style="width:'+Math.min(100,n/10)+'%"></u></i>'+n+' de 1.000</span><button type="button" class="lp-ver" id="lp-ver" aria-expanded="'+($('lp-conc').classList.contains('abierto'))+'">'+($('lp-conc').classList.contains('abierto')?'Ocultar':'Ver las '+c.length)+'</button></div><div class="lp-lista">'+c.map(function(x,i){return '<div class="lp-c"><b><i style="background:'+col[x.s]+'"></i><span>'+esc(x.t)+'</span></b><p>'+esc(x.x)+'</p><a data-pg="'+PAGES.indexOf(x.pg)+'">Verlo en la web</a></div>'}).join('')+'</div>';
+ $('lp-ver').onclick=function(){$('lp-conc').classList.toggle('abierto');pintaConc()};
+ [].forEach.call(document.querySelectorAll('.lp-c a'),function(a){a.onclick=function(){setPg(+a.getAttribute('data-pg'));$('lp-centro').scrollIntoView({block:'start'})}});
+ $('lp-sub').innerHTML='<b>'+n+'</b> visitas · <b>'+totales()+'</b> páginas vistas · <b>'+fmt(ppv().toFixed(1))+'</b> páginas por visita · <b>22 s</b> activos por visita (mediana) · solo quien acepta cookies de analítica'}
+// ---- lista de páginas
+function pintaLista(){
+ var mx=Math.max.apply(null,PAGES.map(vistas));
+ var o=PAGES.map(function(p,i){return {p:p,i:i,v:vistas(p)}}).sort(function(a,b){return b.v-a.v});
+ $('lp-pgs').innerHTML=o.map(function(x){return '<button type="button" class="lp-pg'+(x.i===S.pg?' on':'')+'" data-i="'+x.i+'"><div><span>'+esc(x.p.n)+'</span><span>'+x.v+'</span></div><i><u style="width:'+Math.round(100*x.v/mx)+'%"></u></i><small>bajan '+x.p.baja+' % · se van aquí '+x.p.fuera+' %</small></button>'}).join('');
+ [].forEach.call(document.querySelectorAll('.lp-pg'),function(b){b.onclick=function(){setPg(+b.getAttribute('data-i'))}})}
+// ---- panel derecho
+function pintaPanel(){
+ if($('lp-nt')){S.nt=$('lp-nt').value;S.aut=$('lp-aut').value}
+ var p=PAGES[S.pg],v=vistas(p),t=S.taps||[];
+ var cont={},vano={};
+ t.forEach(function(x){var m=x.dead?vano:cont;m[x.lab]=(m[x.lab]||0)+1});
+ function top(m,k){return Object.keys(m).map(function(a){return [a,m[a]]}).sort(function(a,b){return b[1]-a[1]}).slice(0,k)}
+ function filas(a){return a.length?a.map(function(x){return '<div class="lp-fila"><span>'+esc(x[0])+'</span><span>'+x[1]+'</span></div>'}).join(''):'<div class="lp-fila"><span>Nada destacable</span><span></span></div>'}
+ var via=[['Anuncio de Google','ads'],['Google normal','google'],['Directo','directo'],['Instagram y Facebook','redes']];
+ var sig=p.sig.map(function(x){var i=PAGES.map(function(q){return q.p}).indexOf(x[0]);return '<div class="lp-fila btn" data-i="'+i+'"><span>'+esc(i>=0?PAGES[i].n:x[0])+'</span><span>'+x[1]+' %</span></div>'}).join('')+'<div class="lp-fila"><span>Se van de la web</span><span>'+p.fuera+' %</span></div>';
+ var clar={rabia:Math.round(v*.04),sinresp:Math.round(v*.09),atras:Math.round(v*.07)};
+ $('lp-der').innerHTML='<h2>Esta página</h2><p style="margin:0 0 10px;font-weight:700;font-size:1.1rem">'+esc(p.n)+'</p>'
+ +'<div class="lp-cifras"><div class="lp-n"><b>'+v+'</b><span>vistas</span></div><div class="lp-n"><b>'+p.baja+' %</b><span>bajan (mediana)</span></div><div class="lp-n"><b>'+fmt(final(p).toFixed(final(p)<10?1:0))+' %</b><span>llegan al final</span></div><div class="lp-n"><b>'+p.act+' s</b><span>activos (mediana)</span></div><div class="lp-n"><b>'+p.s10+' %</b><span>se van en menos de 10 s</span></div><div class="lp-n"><b>'+p.fuera+' %</b><span>se van de la web aquí</span></div></div>'
+ +'<h3>Microsoft Clarity (ejemplo)</h3><div class="lp-fila"><span>Clics en algo que no responde</span><span>'+clar.sinresp+'</span></div><div class="lp-fila"><span>Clics de rabia</span><span>'+clar.rabia+'</span></div><div class="lp-fila"><span>Vuelven atrás enseguida</span><span>'+clar.atras+'</span></div>'
+ +'<h3>Lo más tocado</h3>'+filas(top(cont,5))+'<h3>Tocan y no pasa nada</h3>'+filas(top(vano,4))
+ +'<h3>De dónde vienen</h3>'+via.map(function(x){return '<div class="lp-fila"><span>'+x[0]+'</span><span>'+p.via[x[1]]+' %</span></div>'}).join('')
+ +'<h3>Adónde van después</h3>'+sig
+ +'<div class="lp-nota"><h3>Una nota para nosotros</h3><p style="margin:0 0 8px;font-size:.82rem;color:#5B6B78">Escribe qué quieres cambiar y, si quieres, señala el sitio exacto en el móvil. Así lo vemos tal cual lo ves tú.</p><select class="lp-sel" id="lp-aut" aria-label="Quién escribe"><option>Javi</option><option>Ignacio</option></select><textarea id="lp-nt" placeholder="Por ejemplo: aquí quiero un botón de WhatsApp más grande" aria-label="Qué quieres cambiar"></textarea><button type="button" id="lp-sen">'+(S.senal?'Toca ahora en el móvil...':'Señalar un sitio en la página')+'</button><button type="button" class="pri" id="lp-gua">Guardar nota</button><p style="margin:6px 0 0;font-size:.78rem;color:#5B6B78">En esta demostración la nota no se envía a nadie. Con tu web conectada, nos llega por correo con la página y el sitio exacto.</p><ul class="lp-nl" id="lp-nl"></ul></div>';
+ [].forEach.call(document.querySelectorAll('.lp-fila.btn'),function(e){e.onclick=function(){var i=+e.getAttribute('data-i');if(i>=0)setPg(i)}});
+ $('lp-nt').value=S.nt||'';if(S.aut)$('lp-aut').value=S.aut;
+ $('lp-sen').onclick=function(){S.senal=!S.senal;pintaPanel();aplicaSenal()};
+ $('lp-gua').onclick=guardaNota;pintaNotas()}
+function pintaNotas(){
+ var l=S.notas.filter(function(n){return n.pg===S.pg});
+ $('lp-nl').innerHTML=l.map(function(n,i){return '<li class="'+(n.ok?'hecha':'')+'"><span>'+(n.pin?'('+(i+1)+') ':'')+esc(n.autor)+': '+esc(n.t)+'</span><button type="button" data-n="'+S.notas.indexOf(n)+'" style="margin:0">'+(n.ok?'Reabrir':'Hecha')+'</button></li>'}).join('');
+ [].forEach.call(document.querySelectorAll('#lp-nl button'),function(b){b.onclick=function(){var n=S.notas[+b.getAttribute('data-n')];n.ok=!n.ok;pintaNotas();dibuja()}})}
+function guardaNota(){var t=$('lp-nt').value.trim();if(!t){$('lp-nt').focus();return}
+ S.notas.push({pg:S.pg,t:t,autor:$('lp-aut').value,pin:S.pin,ok:false});$('lp-nt').value='';S.pin=null;S.senal=false;S.nt='';pintaPanel();dibuja()}
+// ---- marco y capas
+function lab(el){if(!el)return 'Zona sin nada';var t=(el.getAttribute('aria-label')||el.alt||el.textContent||'').replace(/\s+/g,' ').trim();if(el.tagName==='IMG')t=(el.alt||'').slice(0,20);
+ var pre={IMG:'Foto',H1:'Titular',H2:'Titular',INPUT:'Campo',SELECT:'Campo',TEXTAREA:'Campo'}[el.tagName]||'';
+ t=t.slice(0,26);return (pre?pre+(t?': ':''):'')+(t||(pre?'':(el.tagName==='A'?'Enlace':el.tagName==='BUTTON'?'Botón':el.tagName.toLowerCase())))}
+var SEL=['a[href^="tel:"],a[href*="wa.me"],.btn-call,.btn-quote','a.b1,a.btn,button,.cta a','main a,article a,footer a','input,select,textarea','main img,article img,section img','h1,h2','header summary,header button,.menu-toggle,header a'];
+function tomaTaps(doc){
+ var p=PAGES[S.pg],n=Math.min(650,Math.round(vistas(p)*2.4)),r=rng(S.pg*97+(S.disp==='pc'?7:1)),W=doc.documentElement.clientWidth,H=Math.max(doc.documentElement.scrollHeight,doc.body.scrollHeight);
+ var sc=doc.defaultView.pageYOffset||0,grupos=SEL.map(function(s){var out=[];[].forEach.call(doc.querySelectorAll(s),function(e){if(e.closest&&e.closest('#lp-ov'))return;var b=e.getBoundingClientRect();if(b.width<8||b.height<8)return;var cs=doc.defaultView.getComputedStyle(e);if(cs.position==='fixed')return;out.push({e:e,x:b.left,y:b.top+sc,w:b.width,h:b.height})});return out});
+ var w=p.w.slice(),tot=0,i;for(i=0;i<7;i++){if(!grupos[i].length)w[i]=0}for(i=0;i<8;i++)tot+=w[i];
+ var dead=[0,0,0,0,1,1,0,1],t=[];
+ function pick(){var q=r()*tot,k=0;for(;k<8;k++){q-=w[k];if(q<=0)break}return Math.min(k,7)}
+ for(var j=0;j<n;j++){var k=pick(),x,y,lb,d=!!dead[k];
+  if(k===7){x=r();y=Math.min(H-5,Math.pow(r(),1.7)*H);lb='Zona sin nada'}
+  else{var g=grupos[k],o=g[Math.floor(Math.pow(r(),1.3)*g.length)];x=Math.min(.98,Math.max(.02,(o.x+o.w*(.5+(r()-.5)*.7))/W));y=o.y+o.h*(.5+(r()-.5)*.7);lb=lab(o.e)}
+  t.push({x:x,y:y,dead:d,k:k,lab:lb})}
+ return t}
+function ocultaFijos(doc){[].forEach.call(doc.querySelectorAll('body *'),function(e){if(e.id==='lp-ov'||(e.closest&&e.closest('#lp-ov')))return;var cs=doc.defaultView.getComputedStyle(e);if(cs.position==='fixed')e.style.setProperty('display','none','important')})}
+var PAL=(function(){var c=document.createElement('canvas');c.width=1;c.height=256;var g=c.getContext('2d'),gr=g.createLinearGradient(0,0,0,256);gr.addColorStop(0,'rgba(40,90,220,0)');gr.addColorStop(.25,'rgba(40,150,230,.55)');gr.addColorStop(.5,'rgba(60,200,120,.75)');gr.addColorStop(.72,'rgba(250,210,40,.85)');gr.addColorStop(1,'rgba(230,40,30,.95)');g.fillStyle=gr;g.fillRect(0,0,1,256);return g.getImageData(0,0,1,256).data})();
+function dibuja(){
+ var doc=S.doc;if(!doc||!doc.body)return;
+ var old=doc.getElementById('lp-ov');if(old)old.parentNode.removeChild(old);
+ var W=doc.documentElement.clientWidth,H=Math.max(doc.documentElement.scrollHeight,doc.body.scrollHeight),p=PAGES[S.pg];
+ var k=S.disp==='pc'?(1366/ $('lp-vent').clientWidth):1;
+ var ov=doc.createElement('div');ov.id='lp-ov';ov.style.cssText='position:absolute;left:0;top:0;width:'+W+'px;height:'+H+'px;z-index:2147483000;pointer-events:none;overflow:hidden';
+ doc.body.appendChild(ov);
+ if(S.capas.baja){for(var q=0;q<10;q++){var a=alcanza(p,q*10+10),b=doc.createElement('div');b.style.cssText='position:absolute;left:0;width:100%;top:'+(H*q/10)+'px;height:'+(H/10)+'px;background:rgba(18,32,43,'+((1-a/100)*.5).toFixed(3)+')';ov.appendChild(b);
+   if(q>0){var l=doc.createElement('div');l.textContent=fmt((alcanza(p,q*10)).toFixed(alcanza(p,q*10)<10?1:0))+' % llega aquí';l.style.cssText='position:absolute;left:6px;top:'+(H*q/10)+'px;background:#12202B;color:#fff;font:700 '+Math.round(12*k)+'px Inter,Arial,sans-serif;padding:'+Math.round(3*k)+'px '+Math.round(8*k)+'px;border-radius:'+Math.round(10*k)+'px;opacity:.92';ov.appendChild(l)}}}
+ if(S.capas.calor&&S.taps){var cw=Math.max(1,Math.round(W/2)),ch=Math.max(1,Math.min(7000,Math.round(H/2))),cv=doc.createElement('canvas');cv.width=cw;cv.height=ch;cv.style.cssText='position:absolute;left:0;top:0;width:100%;height:100%';var g=cv.getContext('2d'),R=Math.max(14,Math.round(cw*.075));
+  S.taps.forEach(function(t){var x=t.x*cw,y=t.y*ch/H;if(y>ch)return;var gr=g.createRadialGradient(x,y,0,x,y,R);gr.addColorStop(0,'rgba(0,0,0,.16)');gr.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=gr;g.fillRect(x-R,y-R,2*R,2*R)});
+  var im=g.getImageData(0,0,cw,ch),d=im.data,mx=1,i;for(i=3;i<d.length;i+=4)if(d[i]>mx)mx=d[i];for(i=0;i<d.length;i+=4){var al=d[i+3];if(al){var o=Math.min(255,Math.pow(al/mx,.8)*255)|0;d[i]=PAL[o*4];d[i+1]=PAL[o*4+1];d[i+2]=PAL[o*4+2];d[i+3]=PAL[o*4+3]*.9}}g.putImageData(im,0,0);ov.appendChild(cv)}
+ if(S.capas.vano&&S.taps){S.taps.forEach(function(t){if(!t.dead)return;var s=Math.round(11*k),e=doc.createElement('div');e.style.cssText='position:absolute;width:'+s+'px;height:'+s+'px;border-radius:50%;background:#e03131;border:'+Math.max(2,Math.round(2*k))+'px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.25);left:'+(t.x*W-s/2)+'px;top:'+(t.y-s/2)+'px;opacity:.85';ov.appendChild(e)})}
+ var c=0;S.notas.forEach(function(n){if(n.pg!==S.pg)return;c++;if(!n.pin||n.ok)return;pin(doc,ov,n.pin,c,k)});
+ if(S.pin)pin(doc,ov,S.pin,'+',k);
+ aplicaSenal()}
+function pin(doc,ov,pn,txt,k){var s=Math.round(26*k),e=doc.createElement('div');e.textContent=txt;e.style.cssText='position:absolute;width:'+s+'px;height:'+s+'px;border-radius:50% 50% 50% 0;background:#F2C23E;color:#12202B;font:800 '+Math.round(13*k)+'px Inter,Arial,sans-serif;display:flex;align-items:center;justify-content:center;border:2px solid #12202B;left:'+(pn.x*doc.documentElement.clientWidth-s/2)+'px;top:'+(pn.y-s)+'px';ov.appendChild(e)}
+function aplicaSenal(){var doc=S.doc;if(!doc)return;var ov=doc.getElementById('lp-ov');if(!ov)return;ov.style.pointerEvents=S.senal?'auto':'none';ov.style.cursor=S.senal?'crosshair':'';
+ ov.onclick=S.senal?function(ev){var W=doc.documentElement.clientWidth;var xr=ev.pageX/W,y=ev.pageY;ov.style.pointerEvents='none';var el=doc.elementFromPoint(ev.clientX,ev.clientY);S.pin={x:xr,y:y,lab:lab(el)};S.senal=false;pintaPanel();dibuja()}:null}
+function monta(){
+ var p=PAGES[S.pg],cont=$('lp-vent'),tel=$('lp-tel'),f=$('lp-if');
+ tel.className='lp-tel'+(S.disp==='pc'?' pc':'');
+ var cw=cont.clientWidth,hv=S.disp==='pc'?Math.round(Math.min(560,Math.max(360,cw*.62))):640;
+ cont.style.height=hv+'px';
+ if(S.disp==='pc'){var sc=cw/1366;f.style.width='1366px';f.style.height=Math.round(hv/sc)+'px';f.style.transform='scale('+sc+')'}
+ else{f.style.width='100%';f.style.height=hv+'px';f.style.transform='none'}
+ S.taps=null;S.doc=null;var url=p.p;if(f.getAttribute('data-p')!==url||f.getAttribute('data-d')!==S.disp){f.setAttribute('data-p',url);f.setAttribute('data-d',S.disp);f.src=url}else{listo()}}
+function listo(){
+ var f=$('lp-if'),doc;try{doc=f.contentDocument}catch(e){return}if(!doc||!doc.body)return;
+ var path=f.contentWindow.location.pathname.replace(/\.html$/,'').replace(/\/$/,'')||'/';
+ var i=PAGES.map(function(q){return q.p}).indexOf(path);if(i>=0&&i!==S.pg){S.pg=i;f.setAttribute('data-p',PAGES[i].p);pintaLista()}
+ var run=function(){if(!doc.defaultView||f.contentDocument!==doc)return;ocultaFijos(doc);S.doc=doc;S.taps=tomaTaps(doc);pintaPanel();dibuja()};
+ setTimeout(run,700);setTimeout(function(){if(!doc.defaultView||f.contentDocument!==doc)return;var H=Math.max(doc.documentElement.scrollHeight,doc.body.scrollHeight);if(Math.abs(H-(S.altura||0))>30){S.altura=H;run()}},2600)}
+function setPg(i){S.pg=i;S.pin=null;S.senal=false;pintaLista();monta();pintaPanel()}
+function todo(){pintaConc();pintaLista();pintaPanel();monta()}
+// ---- filtros y capas
+function seg(id,key,conv){[].forEach.call(document.querySelectorAll('#'+id+' button'),function(b){b.onclick=function(){S[key]=conv?conv(b.getAttribute('data-v')):b.getAttribute('data-v');[].forEach.call(document.querySelectorAll('#'+id+' button'),function(x){x.classList.toggle('on',x===b)});S.pin=null;todo()}})}
+seg('lp-dias','dias',Number);seg('lp-disp','disp');
+$('lp-fte').onchange=function(){S.fuente=this.value;todo()};
+[].forEach.call(document.querySelectorAll('.lp-chip'),function(c){c.onclick=function(){var k=c.getAttribute('data-c');S.capas[k]=S.capas[k]?0:1;c.classList.toggle('off',!S.capas[k]);dibuja()}});
+$('lp-if').addEventListener('load',listo);
+var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){var w=window.innerWidth;if(S.w===w)return;S.w=w;monta()},250)});
+S.w=window.innerWidth;todo();
+})();
+
+</script>
+</body>
+</html>
