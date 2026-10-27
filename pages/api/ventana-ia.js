@@ -114,3 +114,8 @@ module.exports = async (req, res) => {
   } catch (e) { console.error('ventana-ia envio', String((e && e.message) || e)); return json(res, 502, { ok: false, motivo: 'envio' }); }
 };
 module.exports._prompt = prompt;
+
+module.exports.config = { api: { bodyParser: { sizeLimit: "6mb" } } };
+
+/* Next.js (pages/api) pide la función como exportación "default" */
+module.exports.default = module.exports;

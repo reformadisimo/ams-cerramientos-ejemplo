@@ -1,5 +1,5 @@
 // Calcula la horquilla de precio en el servidor, para que el preciario no se vea en la página.
-const base = require('./_preciario.js');
+const base = require('../../lib/preciario.js');
 
 function mezcla(a, b) {
   if (!b || typeof b !== 'object' || Array.isArray(b)) return b === undefined ? a : b;
@@ -89,3 +89,6 @@ module.exports = (req, res) => {
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
   res.end(JSON.stringify(out));
 };
+
+/* Next.js (pages/api) pide la función como exportación "default" */
+module.exports.default = module.exports;

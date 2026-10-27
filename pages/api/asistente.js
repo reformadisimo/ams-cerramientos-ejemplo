@@ -5,7 +5,7 @@
 // POST { mensajes:[{role,content}] }            -> texto en directo
 // POST { accion:'contacto', nombre, telefono, consentimiento, mensajes } -> { ok }
 // POST { accion:'duda', pregunta }               -> { ok }  (pregunta que el asistente no supo contestar)
-const { promptAsistente, conocimientoWeb } = require('./_asistente-prompt.js');
+const { promptAsistente, conocimientoWeb } = require('../../lib/asistente-prompt.js');
 const DESTINO = process.env.ASISTENTE_PARA || 'delarubiaignacio@gmail.com';
 const DE = process.env.ASISTENTE_DE || process.env.RESPUESTAS_DE || 'Asistente AMS <guia@send.miestela.app>';
 const MODELOS = [process.env.ASISTENTE_MODELO || 'claude-sonnet-5-5', 'claude-sonnet-4-5'];
@@ -123,3 +123,6 @@ module.exports = async (req, res) => {
   res.write('\n\nAhora mismo no puedo responder. Llámanos al 639 78 82 20 o escríbenos por WhatsApp.');
   return res.end();
 };
+
+/* Next.js (pages/api) pide la función como exportación "default" */
+module.exports.default = module.exports;

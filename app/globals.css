@@ -1,0 +1,823 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light; }
+
+/* Android/Chrome no debe inflar la letra por su cuenta (en iOS no pasa). */
+/* OJO HISTÓRICO (13-jun): aquí vivía `overflow-x: clip` — y era EL fantasma.
+   En el WebKit de iOS, clip está roto (crea contenedor desplazable, no recorte:
+   mismo bug que la funda el 10-jun) y EN LA RAÍZ desdobla el viewport:
+   clientHeight se queda con las barras escondidas (733) mientras el visible
+   real baila (624). Resultado: ±109px de desierto tras el pie en cada baile de
+   barras de Chrome, flotantes viajando con la página y pildorita descolgada.
+   La seguridad horizontal NO va aquí: va en cada elemento origen (min-w-0,
+   fundas overflow-hidden en cintas) y el Chivato caza a los que se escapen.
+   `hidden` tampoco es opción: rompe la cabecera sticky. Raíz LIMPIA. */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+/* Fondo en el PROPIO html (no solo en body): en iOS el rebote elastico pinta
+   el fondo del html, y la propagacion body→canvas no cubre bien esa zona. Sin
+   esto se ve un "pozo" de color distinto al rebotar abajo. Solo pintura. */
+/* OJO HISTÓRICO (13-jun): aquí vivía también `overscroll-behavior-y: none`.
+   En el WebKit de iOS suprime el MUELLE del rebote: Chrome te deja pasar del
+   final del documento y NO te devuelve — el "desierto que se queda" tras el
+   pie, con los flotantes de viaje. Se puso para tapar el pozo de color al
+   rebotar, pero el pozo ya lo cura este fondo crema pintado en el html. */
+html { background: theme("colors.cream"); }
+body {
+  background: theme("colors.cream");
+  color: theme("colors.ink");
+  font-family: theme("fontFamily.sans");
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  /* OJO HISTÓRICO (13-jun): aquí vivía `overflow-x: clip` (la "red de
+     seguridad" horizontal). Fuera también: en iOS el clip está roto y el body
+     se volvía contenedor desplazable. La red de verdad es arreglar el origen
+     de cada desbordamiento — y el Chivato (#chivato) para cazar rezagados. */
+}
+
+/* ─── OFICIO INVISIBLE (cl·v497) ──────────────────────────────────────────
+   Los detalles que nadie se toma y que el cerebro lee como "hecho a mano":
+   la selección de texto, el foco, el cursor, las casillas y hasta la barra
+   de scroll respiran la marca. Todo pintura, cero movimiento. Es la firma de
+   que detrás hay una mano, no una plantilla. */
+
+/* Selección de texto con la marca (en vez del azul del sistema) */
+::selection { background: theme("colors.teal"); color: theme("colors.paper"); }
+::-moz-selection { background: theme("colors.teal"); color: theme("colors.paper"); }
+
+/* Foco bonito y accesible: anillo teal con aire (WCAG 2.4.7), nunca feo */
+:focus-visible { outline: 2px solid theme("colors.teal"); outline-offset: 3px; border-radius: 3px; }
+:focus:not(:focus-visible) { outline: none; }
+
+/* Al enfocar un campo, un halo teal suave lo abraza: "estás en el sitio
+   correcto, te acompaño". Baja la ansiedad del formulario. Solo pintura. */
+input:focus, textarea:focus, select:focus {
+  box-shadow: 0 0 0 4px color-mix(in srgb, theme("colors.teal") 14%, transparent);
+  border-color: theme("colors.teal");
+  transition: box-shadow .2s ease, border-color .2s ease;
+}
+
+/* El cursor de escritura y las casillas/radios, teñidos de marca */
+input, textarea, select { caret-color: theme("colors.teal"); }
+html { accent-color: theme("colors.teal"); }
+
+/* La barra de scroll, en teal discreto sobre crema (mejora progresiva) */
+@supports (scrollbar-color: auto) {
+  html { scrollbar-color: theme("colors.teal") theme("colors.cream"); }
+}
+
+/* Tipografía de revista: titulares que nunca dejan una palabra huérfana ni
+   una línea coja, y cuerpo que reparte mejor las últimas líneas. */
+h1, h2, h3 { text-wrap: balance; }
+p { text-wrap: pretty; }
+
+/* La letra de reserva de Roboto (cl·v612): la misma que generaba next/font/google,
+   con sus mismas medidas. Pinta el texto los primeros instantes y los símbolos que
+   Roboto no tiene (→ ★ ✓...). */
+@font-face {
+  font-family: "Roboto Fallback";
+  src: local("Arial");
+  ascent-override: 92.98%;
+  descent-override: 24.47%;
+  line-gap-override: 0%;
+  size-adjust: 99.78%;
+}
+
+/* Grano impreso (cl·v500): una textura finísima sobre toda la página, como el
+   papel de una revista buena. Quita la "planitud digital" de los degradados y
+   da calidez de imprenta. Es estática (válida con Reduce Motion) y no bloquea
+   nada (pointer-events: none). Soft-light: no oscurece, solo textura. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 35;
+  pointer-events: none;
+  opacity: 0.04;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
+@layer components {
+  /* Callout editorial: filete ámbar/teal arriba y abajo — NUNCA borde izquierdo */
+  .callout {
+    border-top: 1px solid theme("colors.line");
+    border-bottom: 1px solid theme("colors.line");
+    padding: 1.25rem 0;
+  }
+  /* Sección estándar con respiración */
+  .section { padding: clamp(3.25rem, 7vw, 5.5rem) 1.25rem; }
+  .container { max-width: theme("maxWidth.content"); margin-inline: auto; }
+  /* Resaltado editorial tipo subrayador (no bloque sólido) para cifras clave */
+  /* Enlace editorial: teal con filete ámbar */
+  .ix {
+    color: theme("colors.teal");
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid theme("colors.line");
+  }
+  .ix:hover { border-bottom-color: theme("colors.teal-deep"); }
+  /* Acordeón FAQ con marcador +/− (sin triángulo nativo) */
+  .faq details {
+    background: theme("colors.paper");
+    border: 1px solid theme("colors.line");
+    border-radius: 12px;
+    padding: 0 18px;
+    margin: 0 0 10px;
+  }
+  .faq summary {
+    list-style: none;
+    cursor: pointer;
+    font-weight: 600;
+    color: theme("colors.teal");
+    padding: 15px 0;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; color: theme("colors.teal-deep"); font-weight: 700; font-size: 20px; }
+  .faq details[open] summary::after { content: "–"; }
+  .faq details[open] summary { border-bottom: 1px solid theme("colors.line"); }
+  .faq details p { margin: 0; padding: 6px 0 16px; font-size: 15.5px; }
+
+  /* ── Detalles editoriales v3 ─────────────────────────────────────────── */
+  /* Antetítulo con filete ámbar */
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+    color: theme("colors.teal-deep"); margin: 0;
+  }
+  .eyebrow::before { content: ""; width: 26px; height: 3px; border-radius: 9999px; background: theme("colors.yellow"); }
+  /* Capitular de revista en el primer párrafo */
+  /* Atmósfera cálida tras el héroe (no color plano) */
+  /* Chip de tranquilidad */
+}
+
+/* Revelado suave al entrar en viewport (lo activa EditorialFx) */
+.rise { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease; }
+.rise.in { opacity: 1; transform: none; }
+/* Con movimiento reducido: nada se desplaza, pero la cascada vive por
+   fundido — aparición suave escalonada, que es segura y sigue teniendo alma. */
+@media (prefers-reduced-motion: reduce) { .rise { transform: none; transition: opacity .55s ease; } .rise.in { opacity: 1; } }
+
+/* ── La curva de intensidad ──────────────────────────────────────────────
+   Los primeros ~50s de sesión son la fiesta: todo propaga a plena potencia.
+   Después, EditorialFx pone .rd-calma en <html> y la web baja el pistón:
+   revelados más cortos y sutiles, destellos finitos. Elegante-serena. */
+.rd-calma .rise { transform: translateY(8px); transition: opacity .4s ease, transform .4s ease; }
+.rd-calma .rise.in .palabra-estrella::after { animation-iteration-count: 3; }
+/* Barra fina de progreso de lectura */
+/* 25-oct (cl·v775): de 2 a 3 px y en el teal de marca; antes casi no se veía. */
+.readbar { position: fixed; top: var(--alto-cabecera, 0px); left: 0; height: 3px; width: 0; z-index: 60;
+  background: theme("colors.teal"); border-radius: 0 3px 3px 0; transition: width .1s linear; pointer-events: none; }
+
+/* Mimo móvil: respuesta táctil */
+* { -webkit-tap-highlight-color: transparent; }
+a, button { transition: transform 0.12s ease; }
+a:active, button:active { transform: scale(0.97); }
+
+/* ── El blog: vestir el HTML heredado con el traje v20 ── */
+.articulo { font-size: 16.5px; line-height: 1.7; color: rgb(31 41 46 / 0.87); }
+.articulo h2 { font-family: var(--font-lora), Georgia, serif; font-style: italic; font-weight: 600; color: #5e3a1f; font-size: clamp(24px, 3.6vw, 30px); line-height: 1.25; margin: 2.2em 0 0.7em; }
+.articulo h3 { font-family: var(--font-lora), Georgia, serif; font-style: italic; font-weight: 600; color: #5e3a1f; font-size: clamp(20px, 3vw, 24px); margin: 1.8em 0 0.6em; }
+.articulo h4 { font-weight: 700; color: #5e3a1f; margin: 1.5em 0 0.5em; }
+/* 25-oct (cl·v808): más vida en los artículos sin tocar el texto: subtítulos con filo de color,
+   casos y apartados menores como píldoras, viñetas en color. */
+.articulo h3 { border-left: 4px solid #d9a7ae; padding-left: 0.6em; }
+.articulo h4 { display: inline-block; background: #f8e9e2; color: #b5643f; border-radius: 999px; padding: 0.3em 0.95em; font-size: 14.5px; letter-spacing: 0.01em; }
+.articulo ul li::marker { color: #b5646e; }
+.articulo ol li::marker { color: #2C7C98; font-weight: 700; }
+.articulo p { margin: 0.9em 0; }
+.articulo a { color: #338CAB; text-decoration: underline; text-decoration-color: rgb(51 140 171 / 0.35); text-underline-offset: 3px; }
+.articulo a:hover { text-decoration-color: #338CAB; }
+.articulo ul, .articulo ol { margin: 0.9em 0; padding-left: 1.4em; }
+.articulo li { margin: 0.4em 0; }
+.articulo img { border-radius: 14px; border: 1px solid rgb(184 146 74 / 0.25); margin: 1.4em 0; height: auto; max-width: 100%; }
+.articulo figure { margin: 1.4em 0; }
+.articulo figcaption { font-size: 13px; color: rgb(31 41 46 / 0.55); margin-top: 0.4em; }
+.articulo blockquote { border-top: 2px solid #b8924a; border-bottom: 2px solid #b8924a; padding: 1em 0; margin: 1.6em 0; font-family: var(--font-lora), Georgia, serif; font-style: italic; color: #5e3a1f; }
+.articulo .tabla-carril { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 1.4em 0; border-radius: 10px; }
+/* 26-oct (cl·v854): las tablas de /cuanto-cuesta-reforma/<n>-metros2 se salían de ancho en el móvil (fuera de .articulo) */
+.tabla-carril { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+/* Tablas y cifras de los posts importados: que nunca desborden en móvil */
+.articulo { overflow-wrap: anywhere; }
+/* 26-oct (cl·v864): en las tablas no se parten palabras por la mitad en el móvil; la tabla se desplaza de lado */
+.articulo table th, .articulo table td { overflow-wrap: normal; word-break: normal; min-width: 7.5em; }
+.articulo .rd-table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }
+.articulo [class*="rd-hero"] { min-width: 0; overflow-wrap: anywhere; }
+@media (max-width: 640px) { .articulo [style*="flex:1 1"] { flex-basis: 240px !important; min-width: 0; } }
+.articulo table { width: 100%; min-width: 460px; border-collapse: collapse; margin: 0; font-size: 14.5px; }
+.articulo th, .articulo td { border: 1px solid rgb(184 146 74 / 0.3); padding: 0.55em 0.7em; text-align: left; }
+.articulo th { background: rgb(184 146 74 / 0.08); color: #5e3a1f; }
+.articulo iframe { max-width: 100%; border-radius: 14px; }
+
+/* ── Clara con vida ──
+   10-oct (cl·v621): el mismo latido, ahora por la tarjeta gráfica. Antes la sombra
+   se repintaba en cada fotograma (box-shadow animado, sin parar, en todas las
+   páginas). Ahora el botón solo escala, y la sombra suave y la intensa viven en dos
+   capas (::before y ::after) que se funden por opacidad. Comprobado fotograma a
+   fotograma contra el original: diferencia media por debajo de 1 sobre 255. */
+@keyframes clara-respira { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.035); } }
+@keyframes clara-respira-suave { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+@keyframes clara-respira-honda { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
+.clara-vive { animation: clara-respira 3.2s ease-in-out infinite; }
+.clara-vive:hover { animation-play-state: paused; transform: scale(1.05); }
+@media (prefers-reduced-motion: no-preference) {
+  .clara-vive { position: relative; box-shadow: none; }
+  .clara-vive::before, .clara-vive::after { content: ""; position: absolute; inset: -2px; border-radius: inherit; pointer-events: none; }
+  .clara-vive::before { box-shadow: 0 14px 34px -12px rgba(28,140,170,0.65); animation: clara-respira-suave 3.2s ease-in-out infinite; }
+  .clara-vive::after { box-shadow: 0 18px 40px -12px rgba(28,140,170,0.85); opacity: 0; animation: clara-respira-honda 3.2s ease-in-out infinite; }
+  .clara-vive:hover::before, .clara-vive:hover::after { animation-play-state: paused; }
+}
+.clara-vase { animation: clara-vase .32s ease forwards !important; }
+@keyframes clara-vase { to { opacity: 0; transform: translateY(10px) scale(0.96); } }
+@keyframes clara-aparece {
+  from { opacity: 0; transform: translateY(8px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.clara-pop { animation: clara-aparece 0.35s ease-out both; }
+@media (prefers-reduced-motion: reduce) {
+  .clara-vive { animation: none; }
+  .clara-pop { animation: none; }
+}
+
+/* ── Alegría de scroll, comedida ── */
+/* Fotos que se revelan con cortinilla de crema */
+.wipe { clip-path: inset(0 100% 0 0); transition: clip-path 1s cubic-bezier(.22,.61,.36,1); }
+.wipe.in { clip-path: inset(0 0 0 0); }
+
+
+/* El botón amarillo con destello al pasar */
+.ctapill { position: relative; overflow: hidden; }
+.ctapill::after { content: ""; position: absolute; top: 0; left: -80%; height: 100%; width: 50%;
+  background: linear-gradient(105deg, transparent, rgba(255,255,255,.55), transparent);
+  transform: skewX(-18deg); transition: left .55s ease; }
+.ctapill:hover::after { left: 130%; }
+
+/* Logo estático: sin saludo, sin brillo (cl·v518) */
+.marca-rotu { background-image: linear-gradient(transparent 76%, rgba(255,222,0,.5) 76%, rgba(255,222,0,.5) 92%, transparent 92%);
+  background-repeat: no-repeat; background-size: 0% 100%; border-radius: 3px; }
+@media (prefers-reduced-motion: reduce) { .marca-rotu { background-size: 0 !important; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .wipe { clip-path: none; transition: none; }
+  .ctapill::after { display: none; }
+}
+
+/* La R que te sube */
+
+/* ── La entrada triunfal del hero ── */
+@keyframes ent-sube { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+.ent-1, .ent-2, .ent-3, .ent-4 { opacity: 0; animation: ent-sube .65s cubic-bezier(.22,.61,.36,1) forwards; }
+.ent-1 { animation-delay: .05s } .ent-2 { animation-delay: .16s } .ent-3 { animation-delay: .3s }
+.ent-4 { animation-delay: .42s }
+
+/* Las palabras de la frase estrella entran una a una, con garbo. */
+
+/* ── La palabra estrella: el mensaje de la web, con potencia ─────────────
+   Pintura amarilla a toda altura que barre la palabra al entrar, y un
+   destello de brillo que la cruza periódicamente. Se activa cuando su
+   ancestro .rise recibe .in (sin JS extra). */
+.palabra-estrella { animation: estrella-respira 2s ease-in-out .8s infinite;
+  position: relative; display: inline-block; padding: 0 .18em; overflow: hidden;
+  background-image: linear-gradient(#b8924a, #b8924a); background-repeat: no-repeat;
+  background-size: 0% 100%; }
+.rise.in .palabra-estrella { background-size: 100% 100%; transition: background-size .8s cubic-bezier(.22,.9,.32,1) 1.05s; }
+.palabra-estrella::after { content: ""; position: absolute; inset: 0;
+  transform: translateX(-130%) skewX(-18deg);
+  background: linear-gradient(100deg, transparent 30%, rgba(255,255,255,.85) 50%, transparent 70%); }
+.rise.in .palabra-estrella::after { animation: estrella-flash 3.6s ease 1.7s infinite; }
+@keyframes estrella-flash {
+  0% { transform: translateX(-130%) skewX(-18deg); }
+  16% { transform: translateX(130%) skewX(-18deg); }
+  100% { transform: translateX(130%) skewX(-18deg); }
+}
+/* Vida SIN movimiento, para quien pide "reducir movimiento": ni el casco ni
+   nada se desplaza, pero todo respira por brillo y por fundido (seguros). */
+@media (prefers-reduced-motion: reduce) {
+  /* las palabras entran más despacio: la cascada se ve, no se intuye */
+  /* la estrella: el amarillo se pinta despacio y la palabra RESPIRA en luz,
+     un latido dorado innegable, cada pocos segundos, para siempre */
+  .palabra-estrella { background-size: 0% 100%; }
+  .rise.in .palabra-estrella { background-size: 100% 100%;
+    transition: background-size 1.1s ease .9s; }
+  .rise.in .palabra-estrella::after { animation: estrella-fundido 4.6s ease 1.3s infinite; }
+  /* el casco: late en luz amarilla, sin girar */
+  /* el casco: su saludo + brillo viven en la regla global (.r-logo img) */
+}
+/* El fogonazo de bienvenida: cuando una tarjeta entra (.in), un destello
+   dorado la recorre — borde teal + halo amarillo que florece y se asienta.
+   Pura pintura (sombra y color), así que vive en TODOS los dispositivos,
+   también con movimiento reducido. */
+.toca-borde.in { animation: tarjeta-luz 1.6s ease .15s 1 both; }
+/* Luz viva: las fichas clave del camino de conversión respiran en oro
+   PARA SIEMPRE, por turnos (animation-delay escalonado en el componente).
+   Pura sombra y color: vive también con movimiento reducido. */
+
+/* Las dos joyas del hero (Clara + Calculadora): brillo más fuerte y borde
+   que late a teal en el pico. Pintura pura, visible al sol en móvil. */
+
+@keyframes tarjeta-luz {
+  0% { box-shadow: 0 0 0 0 rgba(28,140,170,0); }
+  40% { box-shadow: 0 10px 34px -10px rgba(28,140,170,0.8), 0 0 0 2px rgba(28,140,170,0.55); }
+  100% { box-shadow: 0 6px 22px -14px rgba(17,52,61,0.25); }
+}
+
+/* La ficha estrella: un destello dorado en diagonal la cruza periódicamente,
+   como el reflejo en un escaparate. Pintura pura: vive en TODOS los
+   dispositivos, también con movimiento reducido. */
+/* La segunda ficha destella y late a contratiempo: se turnan, no compiten. */
+
+/* El botón que late en luz: brillo y halo, sin moverse un milímetro. */
+.boton-late { animation: boton-late 3.4s ease-in-out 1.6s infinite; }
+@keyframes boton-late {
+  0%, 100% { filter: brightness(1); box-shadow: 0 0 0 0 rgba(229,193,0,0); }
+  50% { filter: brightness(1.14) saturate(1.25); box-shadow: 0 8px 26px -6px rgba(229,193,0,0.95); }
+}
+
+/* La ola de feria: las tarjetas de la cuadrícula se encienden UNA TRAS OTRA,
+   en bucle perpetuo — borde teal, halo dorado y papel cálido en el pico.
+   Con animation-delay escalonado (i × 2.1s) la luz recorre la fila entera
+   cada 8,4 segundos. Color y sombra puros: vive con movimiento reducido. */
+/* En el pico de su ola, el título de la tarjeta se enciende en teal. */
+
+@keyframes estrella-respira {
+  0%, 100% { filter: brightness(1) saturate(1) drop-shadow(0 0 0 rgba(28,140,170,0)); }
+  50% { filter: brightness(1.65) saturate(2) drop-shadow(0 4px 38px rgba(28,140,170,1)); }
+}
+@keyframes estrella-fundido {
+  0%, 100% { opacity: 0; transform: translateX(0) skewX(-18deg); }
+  45% { opacity: 0.85; }
+}
+
+/* ── La marquesina del credo ── */
+.marquesina { overflow: hidden; }
+
+@keyframes ent-fundido { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  /* Con Reduce Motion NO saltamos a visible de golpe: el hero se COMPONE por
+     pura pintura (opacidad), escalonado. Es la primera impresión memorable que
+     también ve Ig. Sin un solo píxel de desplazamiento. (cl·v498) */
+  .ent-1,.ent-2,.ent-3,.ent-4 { opacity: 0; animation: ent-fundido .9s ease forwards; }
+}
+
+/* ── El muro de obra real: dos tiras de fotos que pasan ── */
+.muro { overflow: hidden; }
+.muro-fila { display: flex; gap: 14px; width: max-content; animation: muro-anda 78s linear infinite; will-change: transform; }
+.muro:hover .muro-fila, .muro:active .muro-fila, .muro:focus-within .muro-fila { animation-play-state: paused; } /* pausa táctil (Fase 0): en móvil el hover no existe — el dedo manda */
+@keyframes muro-anda { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.muro-foto { flex: none; display: block; width: 264px; height: 188px; border-radius: 14px; overflow: hidden; position: relative; box-shadow: 0 14px 32px -22px rgba(0,0,0,.7); }
+@media (max-width: 640px) { .muro-foto { width: 188px; height: 134px; } .muro-fila { gap: 10px; } }
+/* En Reduce Motion: nada se mueve solo; la tira se queda quieta y se
+   puede deslizar con el dedo, y entra con fundido suave (solo opacidad). */
+@media (prefers-reduced-motion: reduce) {
+  .muro-fila { animation: none; }
+  .muro { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .muro::-webkit-scrollbar { display: none; }
+}
+
+/* ── La polaroid que se transforma (hero): el barrido ES el revelado ── */
+
+/* ── La tira "esta web trabaja para ti" ── */
+.cursor-clara { animation: clara-parpadea 0.9s steps(2, start) infinite; color: #1c8caa; }
+@keyframes clara-parpadea { to { opacity: 0; } }
+.aguja-dial { transform-origin: 12px 14px; animation: dial-late 3.2s ease-in-out infinite; }
+@keyframes dial-late { 0%,100% { transform: rotate(-38deg); } 50% { transform: rotate(34deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .aguja-dial { animation: none; } /* el cursor de Clara parpadea: es opacidad */
+}
+
+/* "usar" del hero: la palabra estrella, autónoma (no depende de .rise.in). */
+
+/* Las dos joyas: un BOOM secuencial (anillo teal + halo dorado + brillo). Pintura pura. */
+.boom-joya { animation: boom-joya 4.6s ease-in-out infinite; }
+@keyframes boom-joya {
+  0%, 18%, 100% { box-shadow: 0 5px 18px -12px rgba(17,52,61,0.22); filter: brightness(1); border-color: #e7d8b4; }
+  7% { box-shadow: 0 0 0 5px rgba(28,140,170,0.9), 0 0 0 8px rgba(28,140,170,0.5), 0 24px 66px -2px rgba(28,140,170,1); filter: brightness(1.2) saturate(1.18); border-color: #1c8caa; }
+}
+
+/* Arranque diferido: las animaciones de pintura (no componibles por GPU) no
+   compiten con el pintado inicial. EditorialFx pone .rd-listo en <html> ~2,5s
+   después de cargar; hasta entonces, en pausa. La fiesta entra igual después. */
+html:not(.rd-listo) .boom-joya,
+html:not(.rd-listo) .palabra-estrella,
+html:not(.rd-listo) .palabra-estrella::after,
+html:not(.rd-listo) .cta-vida,
+html:not(.rd-listo) .cta-vida-2,
+html:not(.rd-listo) .boton-late,
+html:not(.rd-listo) .pildora-noche,
+html:not(.rd-listo) .pildora-noche::after,
+html:not(.rd-listo) .frase-brillo,
+
+/* Lo de abajo, a su tiempo (cl·v611, componente Diferido): sin maquetar ni
+   descargar hasta que te acercas. Alto de reserva por pantalla; "auto" hace
+   que, una vez vista, la sección guarde su alto real. */
+.diferido { content-visibility: auto; contain-intrinsic-block-size: auto var(--alto-movil, 800px); }
+@media (min-width: 1024px) { .diferido { contain-intrinsic-block-size: auto var(--alto-pc, 700px); } }
+
+/* La selección, en amarillo de la casa */
+::selection { background: #135e72; color: #fffdf9; }
+
+/* El baile de los botones: el recién llegado entra con un suspiro y un destello */
+.cta-baila { animation: ent-sube .45s cubic-bezier(.22,.61,.36,1) both; }
+a.cta-baila { position: relative; overflow: hidden; }
+a.cta-baila::before { content: ""; position: absolute; top: 0; left: -80%; height: 100%; width: 50%;
+  background: linear-gradient(105deg, transparent, rgba(255,255,255,.6), transparent);
+  transform: skewX(-18deg); animation: cta-destello .9s ease .5s 1 both; }
+@keyframes cta-destello { from { left: -80%; } to { left: 130%; } }
+
+/* El despertar v3: a los 20 segundos el botón de arriba (y a los 23 el de
+   abajo) cobran vida — dos latidos CAMBIANDO DE COLOR (amarillo ↔ teal de la
+   marca, texto en blanco un instante), anillo que se expande y destello.
+   Y vuelven a latir cada 20 segundos. La clase va en el propio botón. */
+/* El despertar, con dirección de orquesta: late cada 40s, hace 4 funciones
+   y se retira. Cabecera y barra entran a destiempo (20s / 31s) para no
+   sonar a la vez. Y cuando Clara habla (body.clara-habla), todos callan. */
+.cta-vida { --vida-espera: 3s; position: relative; overflow: hidden;
+  animation: vida-late 40s ease-in-out var(--vida-espera) 4; }
+.cta-vida-2 { --vida-espera: 4s; }
+
+.cta-baila.cta-vida { animation: ent-sube .45s cubic-bezier(.22,.61,.36,1) both,
+  vida-late 40s ease-in-out var(--vida-espera) 4; }
+.cta-vida::after { content: ""; position: absolute; top: 0; left: -90%; height: 100%; width: 60%;
+  background: linear-gradient(105deg, transparent, rgba(255,255,255,.9), transparent);
+  transform: skewX(-18deg); animation: vida-destello 40s linear var(--vida-espera) 4; pointer-events: none; }
+@keyframes vida-late {
+  0%, 5%, 100% { transform: scale(1); background-color: #FFDE00; color: #11343d; box-shadow: 0 10px 28px -12px rgba(229,193,0,.9); }
+  1% { transform: scale(1.1); background-color: #f0c200; color: #11343d; box-shadow: 0 0 0 8px rgba(229,193,0,.4), 0 12px 30px -10px rgba(229,193,0,.8); }
+  2% { transform: scale(1); background-color: #FFDE00; color: #11343d; box-shadow: 0 0 0 14px rgba(229,193,0,0), 0 10px 28px -12px rgba(229,193,0,.9); }
+  3% { transform: scale(1.1); background-color: #f0c200; color: #11343d; box-shadow: 0 0 0 10px rgba(229,193,0,.35), 0 12px 30px -10px rgba(229,193,0,.8); }
+  4% { transform: scale(1); background-color: #FFDE00; color: #11343d; box-shadow: 0 0 0 18px rgba(229,193,0,0), 0 10px 28px -12px rgba(229,193,0,.9); }
+}
+@keyframes vida-destello { 0% { left: -90%; } 2.5% { left: 140%; } 100% { left: 140%; } }
+
+/* El de abajo, con personalidad propia: arranca 4 segundos después del de
+   arriba, late cada 18 segundos PARA SIEMPRE, y se queda un instante más
+   en el teal de la casa — el azul que destaca sobre la barra tinta. */
+.cta-vida-2 { --vida-espera: 4s; animation: vida-late-azul 18s ease-in-out var(--vida-espera) infinite; }
+.cta-baila.cta-vida.cta-vida-2 { animation: ent-sube .45s cubic-bezier(.22,.61,.36,1) both,
+  vida-late-azul 18s ease-in-out var(--vida-espera) infinite; }
+.cta-vida-2::after { animation: vida-destello-azul 18s linear var(--vida-espera) infinite; }
+@keyframes vida-late-azul {
+  0%, 12%, 100% { transform: scale(1); background-color: #FFDE00; color: #11343d; box-shadow: 0 10px 28px -12px rgba(229,193,0,.9); }
+  2% { transform: scale(1.12); background-color: #f0c200; color: #11343d; box-shadow: 0 0 0 9px rgba(229,193,0,.45), 0 12px 32px -10px rgba(229,193,0,.9); }
+  5.5% { transform: scale(1.06); background-color: #f0c200; color: #11343d; box-shadow: 0 0 0 14px rgba(229,193,0,.2), 0 12px 32px -10px rgba(229,193,0,.9); }
+  7.5% { transform: scale(1); background-color: #FFDE00; color: #11343d; box-shadow: 0 0 0 20px rgba(229,193,0,0), 0 10px 28px -12px rgba(229,193,0,.9); }
+  9% { transform: scale(1.1); background-color: #f0c200; color: #11343d; box-shadow: 0 0 0 10px rgba(229,193,0,.4), 0 12px 32px -10px rgba(229,193,0,.9); }
+  11% { transform: scale(1); background-color: #FFDE00; color: #11343d; box-shadow: 0 0 0 16px rgba(229,193,0,0), 0 10px 28px -12px rgba(229,193,0,.9); }
+}
+@keyframes vida-destello-azul { 0% { left: -90%; } 6% { left: 140%; } 100% { left: 140%; } }
+/* Con movimiento reducido: el mismo baile de color, sin crecer un milímetro. */
+@media (prefers-reduced-motion: reduce) {
+  .cta-vida-2, .cta-baila.cta-vida.cta-vida-2 { animation: vida-late-azul-suave 18s ease-in-out var(--vida-espera) infinite; }
+}
+@keyframes vida-late-azul-suave {
+  0%, 12%, 100% { background-color: #FFDE00; color: #11343d; box-shadow: 0 10px 28px -12px rgba(229,193,0,.9); }
+  2%, 5.5% { background-color: #f0c200; color: #11343d; box-shadow: 0 0 24px rgba(229,193,0,.8); }
+  7.5% { background-color: #FFDE00; color: #11343d; }
+  9% { background-color: #f0c200; color: #11343d; box-shadow: 0 0 24px rgba(229,193,0,.8); }
+}
+
+/* Las píldoras de zona guiñan en oro: una aquí, otra allá, sin parar.
+   Pintura pura — vive también con movimiento reducido. */
+
+/* Guiño nocturno: para pastillas oscuras sobre tinta (footer). Solo pintura
+   —borde y brillo amarillo—; el fondo y el texto NO cambian (siguen oscuros y
+   legibles). Escalonado por pastilla → guiñan una y otra, lento. */
+.pildora-noche { position: relative; animation: pildora-noche 1ms linear forwards; }
+@keyframes pildora-noche { to { border-color: #e6d5b0; } }
+/* 10-oct (cl·v621): el guiño, por la tarjeta gráfica. Antes eran 32 píldoras
+   repintando borde y sombra en cada fotograma; ahora el borde de reposo se pone una
+   vez (al acabar la espera de cada una, igual que antes) y el destello de oro es una
+   capa encima que se enciende y se apaga por opacidad, con la misma espera (inherit). */
+.pildora-noche::after { content: ""; position: absolute; inset: -1px; border-radius: inherit; border: 1px solid rgba(255,222,0,.65); box-shadow: 0 4px 16px -3px rgba(255,222,0,.45); opacity: 0; pointer-events: none; animation: pildora-noche-luz 7.2s ease-in-out infinite; animation-delay: inherit; }
+@keyframes pildora-noche-luz { 0%, 90%, 100% { opacity: 0; } 95% { opacity: 1; } }
+
+body.clara-habla .cta-vida, body.clara-habla .cta-baila.cta-vida { animation-play-state: paused; }
+body.clara-habla .cta-vida::after { animation-play-state: paused; }
+
+/* ═ MÓVIL: la barra es EL escaparate — motor propio, infinito e impausable.
+   El reloj antiguo tenía tres enemigos: la píldora se re-monta al asomar la
+   barra (reinicia el contador), Clara pausa todo al hablar (8s–22s), y solo
+   había 4 funciones que podían sonar con la barra escondida. Aquí: primer
+   latido a los 10s, luego CADA 20s, para siempre, y Clara no lo pausa. ═ */
+@keyframes vida-late-20 {
+  0%, 10%, 100% { transform: scale(1); background-color: #1c8caa; color: #fffdf9; box-shadow: 0 10px 28px -12px rgba(28,140,170,.9); }
+  2% { transform: scale(1.1); background-color: #135e72; color: #fffdf9; box-shadow: 0 0 0 8px rgba(28,140,170,.4), 0 12px 30px -10px rgba(28,140,170,.8); }
+  4% { transform: scale(1); background-color: #1c8caa; color: #fffdf9; box-shadow: 0 0 0 14px rgba(28,140,170,0), 0 10px 28px -12px rgba(28,140,170,.9); }
+  6% { transform: scale(1.1); background-color: #135e72; color: #fffdf9; box-shadow: 0 0 0 10px rgba(28,140,170,.35), 0 12px 30px -10px rgba(28,140,170,.8); }
+  8% { transform: scale(1); background-color: #1c8caa; color: #fffdf9; box-shadow: 0 0 0 18px rgba(28,140,170,0), 0 10px 28px -12px rgba(28,140,170,.9); }
+}
+@keyframes vida-destello-20 { 0% { left: -90%; } 5% { left: 140%; } 100% { left: 140%; } }
+@media (max-width: 640px) {
+  .cta-vida { animation: vida-late-20 20s ease-in-out 3s infinite; }
+  .cta-baila.cta-vida { animation: ent-sube .45s cubic-bezier(.22,.61,.36,1) both, vida-late-20 20s ease-in-out 3s infinite; }
+  .cta-vida::after { animation: vida-destello-20 20s linear 3s infinite; }
+  body.clara-habla .cta-vida, body.clara-habla .cta-baila.cta-vida { animation-play-state: running; }
+  body.clara-habla .cta-vida::after { animation-play-state: running; }
+}
+
+
+/* La vida del hover, regalada al táctil: lo que en PC se enciende al pasar el
+   ratón, en el móvil se enciende solo al entrar en pantalla (familia .toca,
+   mismo motor EditorialFx que .rise). En PC no cambia nada. */
+@media (hover: none) {
+  .toca.in.toca-borde { border-color: #1c8caa; }
+}
+
+/* La ola del pie: los puntitos tricolores respiran por turnos — una onda
+   de alegría que recorre las píldoras cada pocos segundos, muy bajita. */
+.punto-ola { animation: punto-respira 9s ease-in-out infinite; animation-delay: calc(var(--ola, 0) * .28s);
+  animation-play-state: paused; }
+.pie-vivo .punto-ola { animation-play-state: running; }
+@keyframes punto-respira {
+  0%, 6%, 100% { transform: scale(1); }
+  3% { transform: scale(1.7); }
+}
+@media (prefers-reduced-motion: reduce) { .punto-ola { animation: none; } }
+
+/* El premio del héroe: la frase manuscrita se escribe sola al llegar al pie */
+.premio-frase { font-family: var(--font-caveat), cursive; clip-path: inset(-10% 100% -10% 0); }
+.pie-vivo .premio-frase { clip-path: inset(-10% 0% -10% 0); transition: clip-path 1.5s cubic-bezier(.4,0,.2,1) .35s; }
+@media (prefers-reduced-motion: reduce) { .premio-frase, .pie-vivo .premio-frase { clip-path: none; transition: none; } }
+
+/* La despedida del pie, a mano */
+
+/* Las frases manuscritas del pie, con vida: un brillo dorado las recorre
+   de izquierda a derecha, como tinta que se enciende. Pintura pura. */
+.frase-brillo { --frase-color: #5e3a1f;
+  background-image: linear-gradient(100deg, var(--frase-color) 0%, var(--frase-color) 40%, #b8924a 47%, #b8924a 52%, #b8924a 57%, var(--frase-color) 64%, var(--frase-color) 100%);
+  background-size: 300% 100%; background-position: 110% 0; background-repeat: no-repeat;
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  animation: frase-brillo 6.5s ease-in-out 1.2s infinite; }
+@keyframes frase-brillo { 0%, 16% { background-position: 110% 0; } 52%, 100% { background-position: -95% 0; } }
+/* El corazón de "con cariño": late entre el teal y el amarillo de la casa. */
+@keyframes vida-color {
+  0%, 10%, 100% { background-color: #1c8caa; color: #fffdf9; }
+  2%, 6% { background-color: #135e72; color: #fffdf9; }
+  4%, 8% { background-color: #1c8caa; color: #fffdf9; }
+}
+/* Reducir movimiento: el latido no salta ni escala, pero el color respira.
+   La señal de conversión sobrevive al ajuste de accesibilidad. */
+@media (prefers-reduced-motion: reduce) {
+  .cta-vida, .cta-baila.cta-vida { animation: vida-color 20s ease-in-out 3s infinite; }
+  .cta-vida::after { display: none; }
+}
+
+/* El saludo de la barra inferior: destello que arranca cada vez que la barra
+   asoma (se re-arma al remontar la píldora), para que el brillo del PC también
+   se sienta en móvil cuando la clienta llega al momento de decidir. */
+.cta-saluda::before, a.cta-baila.cta-saluda::before { content: ""; position: absolute; top: 0; left: -90%; height: 100%; width: 60%;
+  background: linear-gradient(105deg, transparent, rgba(255,255,255,.9), transparent);
+  transform: skewX(-18deg); animation: vida-destello 2.4s linear .35s 2; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .cta-saluda::before, a.cta-baila.cta-saluda::before { display: none; } }
+@media (prefers-reduced-motion: reduce) { .cta-baila { animation: none; } a.cta-baila::before { display: none; } }
+
+/* El despertar viajero: cualquier [data-despierta] hace su doble pum
+   (escala + anillo teal + chispazo) al entrar en pantalla — lo dispara
+   el Despertador. Sin tocar colores de fondo: vale para píldora amarilla,
+   outline teal o enlace de texto. */
+.despierta-pum { animation: despierta-late 1.5s cubic-bezier(.4,0,.2,1) both; }
+@keyframes despierta-late {
+  0%, 100% { transform: scale(1); filter: brightness(1); box-shadow: 0 0 0 0 rgba(28,140,170,0); }
+  10% { transform: scale(1.08); filter: brightness(1.18); box-shadow: 0 0 0 8px rgba(28,140,170,.38); }
+  22% { transform: scale(1); filter: brightness(1); box-shadow: 0 0 0 15px rgba(28,140,170,0); }
+  34% { transform: scale(1.06); filter: brightness(1.14); box-shadow: 0 0 0 10px rgba(28,140,170,.3); }
+  52% { transform: scale(1); filter: brightness(1); box-shadow: 0 0 0 18px rgba(28,140,170,0); }
+}
+@media (prefers-reduced-motion: reduce) { .despierta-pum { animation: none; } }
+
+/* ── F4 · Álbum de casa ── */
+/* Todas las fotos de obra, con calidez de hogar (el logo se salva) */
+img[src*="/obras/"]:not([src*="logo"]) { filter: saturate(1.18) sepia(.12) brightness(1.04) contrast(1.02); }
+
+/* La polaroid */
+.polaroid { background: #fff; padding: 10px 10px 44px; border-radius: 6px;
+  box-shadow: 0 28px 60px -28px rgba(17,52,61,.5); transform: rotate(1.4deg); }
+.polaroid img { border-radius: 3px; }
+@media (max-width: 640px) { .polaroid { transform: none; } }
+
+/* ── El álbum se monta ante tus ojos ── */
+@keyframes revela-polaroid {
+  0% { filter: brightness(2.25) contrast(0.3) saturate(0.1) sepia(0.35) blur(3px); }
+  60% { filter: brightness(1.35) contrast(0.8) saturate(0.7) sepia(0.2) blur(0.5px); }
+  100% { filter: saturate(1.18) sepia(.12) brightness(1.04) contrast(1.02) blur(0); }
+}
+.polaroid > img, .polaroid img:first-of-type { animation: revela-polaroid 2.4s ease-out .5s both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .polaroid > img, .polaroid img:first-of-type { animation: none; }
+}
+
+/* ── El pie del álbum, a mano ── */
+
+/* ── El sello con corazón, girando perezoso ── */
+
+/* ── El rotulador que pinta la palabra del titular ── */
+
+
+/* Cursor de la maquinilla: parpadeo de opacidad (pintura pura, visible con Reduce Motion) */
+
+/* Cifra recordada de la calculadora: latido de luz ámbar, pintura pura (sin movimiento) */
+
+/* La espera con voz de obra: barrido de luz ámbar, pintura pura (sin movimiento) */
+.cargando-barre { background: linear-gradient(90deg, rgba(184,146,74,.15), rgba(184,146,74,.7), rgba(184,146,74,.15)); background-size: 220% 100%; animation: cargando-barre 1.3s ease-in-out infinite; }
+@keyframes cargando-barre { 0% { background-position: 220% 0; } 100% { background-position: -220% 0; } }
+
+/* El foco del teclado, con la tinta de la casa. :where() mantiene specificity 0
+   para no pisar estilos de componente; solo aparece al navegar con teclado. */
+:where(a, button, summary, [tabindex]):focus-visible { outline: 2px solid #1c8caa; outline-offset: 3px; border-radius: 6px; }
+
+/* ── Aparición suave (modo prisa) · solo opacidad, respeta reduce-motion ── */
+
+/* ── Punto que respira (respuesta rápida) · solo opacidad ── */
+
+/* Plegado de texto largo en móvil: recorta a N líneas (pintura pura). En
+   escritorio se muestra entero y el botón "Leer más" se oculta. */
+.rd-clamp { display: -webkit-box; -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--rd-lineas, 4); line-clamp: var(--rd-lineas, 4); overflow: hidden; }
+@media (min-width: 640px) {
+  .rd-clamp { display: block; -webkit-line-clamp: unset; line-clamp: unset; overflow: visible; }
+}
+
+/* Sobriedad (María Luisa: menos efectos). El botón ya no late ni barre solo;
+   se queda quieto en teal. Conserva el brillo al pasar el ratón. */
+.cta-vida, .cta-vida-2, .cta-baila.cta-vida, .cta-baila.cta-vida.cta-vida-2 { animation: none !important; }
+.cta-vida::after, .cta-vida-2::after { display: none !important; }
+@media (max-width: 640px) { .cta-vida, .cta-baila.cta-vida { animation: none !important; } }
+
+/* María Luisa: fuera la "barra" que se desliza sola en los títulos de las
+   herramientas (Análisis 360 y todas). Ni animación ni marca: título limpio. */
+
+/* Respuesta de TresPreguntas: aparición solo de pintura (apta Reduce Motion) */
+
+/* StatsBand: cada sello se enciende al entrar en pantalla (solo pintura) */
+.sello-enciende { animation: selloEnciende 1s ease-out both; }
+.sello-enciende b { animation: selloCifra 1s ease-out both; animation-delay: inherit; }
+@keyframes selloEnciende { from { opacity: 0; } 35% { opacity: 1; } to { opacity: 1; } }
+@keyframes selloCifra {
+  from { color: #ffffff; text-shadow: none; }
+  45% { color: #FFDE00; text-shadow: 0 0 14px rgba(255,222,0,0.5); }
+  to { color: #ffffff; text-shadow: none; }
+}
+
+/* Capitular de revista: la primera letra grande en Lora itálica ámbar.
+   Solo tipografía — cero movimiento, cero JS. Perfume Telva. */
+
+/* ===== MODO CALMA POR RUTA (12-jun): en /calma y /sencilla (body.modo-calma, vía
+   components/ui/ModoCalma) los latidos, destellos y pulsos DESCANSAN. En el resto
+   de la web, toda la vida sigue encendida. */
+body.modo-calma .cta-vida, body.modo-calma .cta-vida-2, body.modo-calma .cta-baila.cta-vida, body.modo-calma .cta-baila.cta-vida.cta-vida-2, body.modo-calma .boton-late { animation: none !important; }
+body.modo-calma .cta-vida::after, body.modo-calma .cta-vida-2::after, body.modo-calma a.cta-baila::before { animation: none !important; content: none !important; }
+
+/* ===== SLIDER DE METROS de la home (13-jun): un solo control, doctrina de color
+   intacta — el pulgar es amarillo casco porque ES lo que se pulsa; la pista, neutra.
+   Solo pintura: cero transform, amable con Reduce Motion. */
+.rfm-range { -webkit-appearance: none; appearance: none; height: 34px; background: transparent; cursor: pointer; }
+.rfm-range::-webkit-slider-runnable-track { height: 6px; border-radius: 999px; background: linear-gradient(90deg, #b8924a55, #b8924a22); }
+.rfm-range::-moz-range-track { height: 6px; border-radius: 999px; background: #b8924a33; }
+.rfm-range::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; margin-top: -11px; height: 28px; width: 28px; border-radius: 999px; background: #FFDE00; border: 2px solid #11343d; box-shadow: 0 2px 8px rgba(17,52,61,.25); }
+.rfm-range::-moz-range-thumb { height: 28px; width: 28px; border-radius: 999px; background: #FFDE00; border: 2px solid #11343d; box-shadow: 0 2px 8px rgba(17,52,61,.25); }
+.rfm-range:focus-visible { outline: 2px solid #1c8caa; outline-offset: 4px; border-radius: 999px; }
+
+/* ===== FASE 0 VERSIÓN CALMA (13-jun): INTERRUPTOR GENERAL DE LATIDOS.
+   La investigación: el pulso en bucle = movimiento autónomo = ceguera de banner
+   + sensación de feria (NN/g). Los botones siguen grandes, amarillos y claros —
+   quietos. La entrada corta del baile (.cta-baila, 0,45s) SÍ se queda: es
+   microinteracción <500ms. Para resucitar latidos en el test A/B de la Fase 2,
+   este bloque pasará a depender de un feature flag de Vercel. */
+.cta-vida, .cta-vida-2, .cta-baila.cta-vida, .cta-baila.cta-vida.cta-vida-2, .boton-late, .cta-saluda { animation: none !important; }
+.cta-baila.cta-vida { animation: ent-sube .45s cubic-bezier(.22,.61,.36,1) both !important; }
+.cta-vida::after, .cta-vida-2::after, .cta-saluda::after, a.cta-baila::before { animation: none !important; content: none !important; }
+/* La tira de herramientas también en calma (13-jun): la aguja de la calculadora
+   queda quieta y las fichas dejan el boom perpetuo. Clara ya escribía solo una
+   vez (eso se queda: termina y descansa). */
+.aguja-dial, .boom-joya { animation: none !important; }
+
+/* Microcelebración del formulario de visita (cl·v489): cuando la clienta envía,
+   la tarjeta de éxito da un guiño de brillo AMARILLO y se asienta. Es PINTURA
+   (sombra + opacidad), no movimiento, así que también la ve Ig con Reduce Motion. */
+@keyframes celebra-ok {
+  0%   { box-shadow: 0 0 0 0 rgba(255,222,0,0); }
+  18%  { box-shadow: 0 0 0 4px rgba(255,222,0,0.45), 0 24px 60px -20px rgba(17,52,61,0.28); }
+  100% { box-shadow: 0 0 0 3px rgba(255,222,0,0.18), 0 24px 60px -20px rgba(17,52,61,0.22); }
+}
+.celebra-ok { animation: celebra-ok 1.2s ease-out both; }
+
+/* ─── "LA OBRA A MANO" (cl·v507) ──────────────────────────────────────────
+   El hilo conductor único: lo que importa no se subraya con una raya de
+   plantilla, sino con un TRAZO DE TINTA hecho a mano, como las obras, partida
+   a partida. Base: el trazo está pintado (lo ve todo el mundo, también con
+   Reduce Motion). Con movimiento permitido, se DIBUJA al aparecer. Es pintura
+   accesible: la WCAG no considera "movimiento" un cambio de color/opacidad. */
+
+/* enlace-trazo eliminado (identidad corporativa v516) */
+
+/* Glosario enlazado (25-oct, cl·v778): subrayado de puntos, discreto, que invita a tocar */
+a.rd-glos { color: inherit; text-decoration: underline dotted; text-decoration-color: #2C7C98; text-decoration-thickness: 2px; text-underline-offset: 4px; cursor: help; }
+a.rd-glos:hover { color: #236278; text-decoration-style: solid; }
+.rd-burbuja { animation: rd-burbuja-in .16s ease-out both; }
+@keyframes rd-burbuja-in { from { opacity: 0 } to { opacity: 1 } }
+
+/* ── Botón "Aa" de lectura (25-oct, cl·v784) ── */
+html.aa-t1 main#contenido { zoom: 1.1; }
+html.aa-t2 main#contenido { zoom: 1.2; }
+html.aa-t3 main#contenido { zoom: 1.32; }
+/* Lo que va a todo lo ancho (100vw) crecería con el zoom y abriría scroll lateral: se recorta en main, no en html/body (ahí causa el scroll fantasma del iPhone) */
+html:is(.aa-t1, .aa-t2, .aa-t3) main#contenido { overflow-x: clip; }
+html.aa-linea main#contenido :is(p, li, dd, blockquote, td) { line-height: 1.95 !important; letter-spacing: 0.012em; word-spacing: 0.06em; }
+html.aa-letra main#contenido, html.aa-letra main#contenido * { font-family: Verdana, Tahoma, "Segoe UI", Arial, sans-serif !important; font-style: normal !important; }
+html.aa-contraste main#contenido [class*="text-ink/"] { color: #11343d !important; }
+html.aa-contraste main#contenido [class*="text-white/"] { color: #ffffff !important; }
+html.aa-contraste main#contenido .articulo { color: #11343d; }
+html.aa-contraste main#contenido a { text-decoration-thickness: 2px; }
+html.aa-quieto *, html.aa-quieto *::before, html.aa-quieto *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+html.aa-quieto .rise, html.aa-quieto .wipe, html.aa-quieto .draw, html.aa-quieto [class*="ent-"] { opacity: 1 !important; transform: none !important; }
+
+/* ── Cabeceras con vida (25-oct, cl·v789) ──
+   La primera cabecera teal de cada página lleva detrás una foto real de obra muy
+   velada (la elige FondoCabecera) y una trama de plano de arquitecto. Todo es
+   pintura: no se mueve nada. Si la foto no carga, queda el teal de siempre. */
+main#contenido > section.bg-teal-deep:first-of-type:not(.cabecera-video) {
+  position: relative; isolation: isolate;
+  background-image:
+    linear-gradient(100deg, rgb(35 98 120 / 0.97) 0%, rgb(35 98 120 / 0.9) 42%, rgb(35 98 120 / 0.62) 100%),
+    var(--foto-cab-m, none);
+  background-size: cover; background-position: center;
+}
+@media (min-width: 768px) {
+  main#contenido > section.bg-teal-deep:first-of-type:not(.cabecera-video) {
+    background-image:
+      linear-gradient(100deg, rgb(35 98 120 / 0.97) 0%, rgb(35 98 120 / 0.86) 42%, rgb(35 98 120 / 0.45) 100%),
+      var(--foto-cab, none);
+  }
+}
+main#contenido > section.bg-teal-deep:first-of-type:not(.cabecera-video)::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-image:
+    linear-gradient(rgb(255 255 255 / 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.05) 1px, transparent 1px),
+    linear-gradient(rgb(255 255 255 / 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.025) 1px, transparent 1px);
+  background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px;
+  -webkit-mask-image: linear-gradient(100deg, transparent 20%, #000 75%);
+          mask-image: linear-gradient(100deg, transparent 20%, #000 75%);
+}
+main#contenido > section.bg-teal-deep:first-of-type::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; z-index: -1;
+  background: linear-gradient(90deg, #FFDE00 0 22%, transparent 22%);
+}
+
+/* Chat de "Lo que no te atreves a preguntar" (25-oct, cl·v792): solo fundidos */
+.rd-burbuja-in { animation: rd-burbuja-in .35s ease-out both; }
+@keyframes rd-punto { 0%, 80%, 100% { opacity: .25 } 40% { opacity: 1 } }
+.rd-punto { animation: rd-punto 1s ease-in-out infinite; }
+
+
+
+/* ── Kit "con vida" para reescribir artículos por dentro (25-oct, cl·v809) ──
+   Cajas para que un artículo largo se lea: resumen de 30 segundos, pasos,
+   tarjetas, cifra grande, sí/no y aviso. Paleta cálida de la casa; solo pintura. */
+.articulo .rv-claves { background: #e7f2f5; border: 1px solid #cfe4ea; border-radius: 22px; padding: 22px 24px; margin: 24px 0 30px; }
+.articulo .rv-claves .rv-titulo { font-family: var(--font-lora), Georgia, serif; font-style: italic; font-size: 22px; color: #11343d; margin: 0 0 10px; }
+.articulo .rv-claves ul { list-style: none; padding: 0; margin: 0; }
+.articulo .rv-claves li { position: relative; padding-left: 32px; margin: 10px 0; line-height: 1.5; }
+.articulo .rv-claves li::before { content: "✓"; position: absolute; left: 0; top: 1px; width: 22px; height: 22px; border-radius: 999px; background: #2C7C98; color: #fff; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.articulo ol.rv-pasos { list-style: none; counter-reset: rvp; padding: 0; margin: 22px 0; display: grid; gap: 12px; }
+.articulo ol.rv-pasos > li { counter-increment: rvp; position: relative; margin: 0; padding: 16px 18px 16px 62px; border-radius: 18px; border: 1px solid #ecdcbd; background: #f7efe0; line-height: 1.55; }
+.articulo ol.rv-pasos > li:nth-child(3n+2) { background: #f8e8ea; border-color: #efd2d6; }
+.articulo ol.rv-pasos > li:nth-child(3n) { background: #ebf1e8; border-color: #d5e2d0; }
+.articulo ol.rv-pasos > li::before { content: counter(rvp); position: absolute; left: 16px; top: 14px; width: 32px; height: 32px; border-radius: 999px; background: #fff; color: #11343d; font-family: var(--font-lora), Georgia, serif; font-style: italic; font-weight: 700; font-size: 17px; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 16px -10px rgba(17,52,61,.6); }
+.articulo ol.rv-pasos > li > strong:first-child { display: block; color: #11343d; font-size: 1.04em; margin-bottom: 2px; }
+.articulo .rv-tarjetas { display: grid; gap: 12px; margin: 22px 0; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+.articulo .rv-tarjeta { border-radius: 18px; padding: 16px 18px; border: 1px solid #cfe4ea; background: #e7f2f5; line-height: 1.5; font-size: 0.95em; }
+.articulo .rv-tarjeta:nth-child(6n+2) { background: #f8e8ea; border-color: #efd2d6; }
+.articulo .rv-tarjeta:nth-child(6n+3) { background: #f7efe0; border-color: #ecdcbd; }
+.articulo .rv-tarjeta:nth-child(6n+4) { background: #ebf1e8; border-color: #d5e2d0; }
+.articulo .rv-tarjeta:nth-child(6n+5) { background: #f8e9e2; border-color: #efd3c6; }
+.articulo .rv-tarjeta:nth-child(6n) { background: #e8edf3; border-color: #d2dce8; }
+.articulo .rv-tarjeta p { margin: 0.35em 0 0; }
+.articulo .rv-tarjeta > strong:first-child, .articulo .rv-tarjeta .rv-t { display: block; font-family: var(--font-lora), Georgia, serif; font-style: italic; font-weight: 600; font-size: 1.12em; color: #11343d; }
+.articulo .rv-dato { background: #f7efe0; border: 1px solid #ecdcbd; border-radius: 22px; padding: 20px 24px; margin: 24px 0; }
+.articulo .rv-dato .rv-cifra { display: block; font-family: var(--font-lora), Georgia, serif; font-style: italic; font-size: clamp(32px, 6vw, 46px); line-height: 1.05; color: #11343d; }
+.articulo .rv-dato p { margin: 0.5em 0 0; }
+.articulo .rv-sino { display: grid; gap: 12px; margin: 22px 0; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.articulo .rv-sino > div { border-radius: 18px; padding: 16px 18px; line-height: 1.5; }
+.articulo .rv-sino .rv-si { background: #ebf1e8; border: 1px solid #d5e2d0; }
+.articulo .rv-sino .rv-no { background: #f3f1ee; border: 1px solid #e9e2d4; }
+.articulo .rv-sino .rv-t { display: block; font-weight: 700; font-size: 0.8em; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px; }
+.articulo .rv-sino .rv-si .rv-t { color: #5f8458; }
+.articulo .rv-sino .rv-no .rv-t { color: rgb(26 61 71 / 0.55); }
+.articulo .rv-sino ul { margin: 0; padding-left: 1.1em; }
+.articulo .rv-aviso { background: #f8e8ea; border-left: 6px solid #b5646e; border-radius: 18px; padding: 16px 20px; margin: 22px 0; line-height: 1.55; }
+.articulo .rv-aviso p { margin: 0.3em 0; }
+.articulo .rv-aviso .rv-t { display: block; font-weight: 700; font-size: 0.8em; letter-spacing: 0.12em; text-transform: uppercase; color: #b5646e; margin-bottom: 4px; }
+/* 25-oct (cl·v810): las listas de los artículos no llevaban viñeta (el reset de Tailwind se la
+   quitaba). Solo las listas sin clase propia; las de cajas (rd-*, rv-*) mantienen su diseño. */
+.articulo ul:not([class]) { list-style: disc; }
+.articulo ol:not([class]) { list-style: decimal; }

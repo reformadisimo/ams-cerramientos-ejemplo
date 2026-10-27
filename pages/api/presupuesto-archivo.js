@@ -45,3 +45,8 @@ module.exports = async (req, res) => {
     return res.json({ ok: true });
   } catch (e) { return res.status(502).json({ ok: false }); }
 };
+
+module.exports.config = { api: { bodyParser: { sizeLimit: "6mb" } } };
+
+/* Next.js (pages/api) pide la función como exportación "default" */
+module.exports.default = module.exports;

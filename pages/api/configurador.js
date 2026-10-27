@@ -1,6 +1,6 @@
 // Precio en vivo del configurador profesional. Calcula en el servidor para que el
 // preciario no se vea en la pagina. POST { items: [...], probe: indice opcional }.
-const base = require('./_preciario.js');
+const base = require('../../lib/preciario.js');
 
 function mezcla(a, b) {
   if (!b || typeof b !== 'object' || Array.isArray(b)) return b === undefined ? a : b;
@@ -381,3 +381,6 @@ module.exports = (req, res) => {
   res.end(JSON.stringify(out));
 };
 module.exports._limpia = limpia;
+
+/* Next.js (pages/api) pide la función como exportación "default" */
+module.exports.default = module.exports;
