@@ -35,7 +35,7 @@ module.exports = {
   async headers() {
     const larga = [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }];
     return [
-      { source: "/:path*", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] },
+      { source: "/((?!opinion|img/resena-og).*)", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] },
       { source: "/fonts/:path*", headers: larga },
       { source: "/img/:path*", headers: larga },
       { source: "/:path*.js", headers: [{ key: "Cache-Control", value: "public, max-age=86400" }] },
