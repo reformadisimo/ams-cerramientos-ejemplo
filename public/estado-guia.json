@@ -1,8 +1,16 @@
 {
- "version": "2026-10-27T14:20",
+ "version": "2026-10-27T17:50",
  "fecha": "27 de octubre de 2026",
- "aviso": "Gracias por las fotos y los precios de las cancelas, Javi. Ya están en la web. Tienes cuatro preguntas nuevas, muy cortas.",
+ "aviso": "Ya tienes tu propia cuenta de Google Analytics y nosotros tenemos acceso. Gracias, Javi, lo has hecho muy bien.",
  "ultimo": [
+  {
+   "f": "27 oct",
+   "t": "Tu cuenta de Google Analytics ya está creada, es tuya y nos has dado acceso de administrador. Nos has pasado también el código de medición, así que ya podemos conectarla con la web nueva."
+  },
+  {
+   "f": "27 oct",
+   "t": "Anotado: el montaje de las cancelas va incluido en el precio. Ya está así en la página de cancelas y en la calculadora."
+  },
   {
    "f": "27 oct",
    "t": "Recibidas tus fotos de la web antigua y tus precios de cancelas. 14 de las 17 fotos que marcaste ya están en sus páginas; los precios extra (celosía o solera, lama ovalada y perfil de aluminio entre lamas) ya salen en la página de cancelas."
@@ -18,22 +26,11 @@
   {
    "f": "27 oct",
    "t": "Recibidas tus respuestas a las dudas de la calculadora: el precio lleva el vidrio estándar y cualquier otro se presupuesta aparte; a partir de 2 metros de ancho también se presupuesta a mano. Ya está así en la web."
-  },
-  {
-   "f": "27 oct",
-   "t": "Recibido el acuerdo de la ayuda digital de 2023 (Kit Digital). Lo estamos revisando."
-  },
-  {
-   "f": "27 oct",
-   "t": "Nueva en la guía: la lupa de demostración. Con datos de ejemplo sobre tu web, muestra dónde toca la gente, hasta dónde baja y dónde se va, para mejorarla con datos. Estará con datos reales cuando la web esté publicada y conectemos Analytics y Clarity."
-  },
-  {
-   "f": "27 oct",
-   "t": "Tus tarifas ya están en la calculadora de la web: ventanas con y sin persiana, puertas balconeras en blanco, motor a 135 euros. El aluminio sale como «a presupuestar»."
   }
  ],
  "cuentas": {
-  "ads": "La gestiona tu agencia actual. Ya se lo has pedido (26 de octubre) y te ha contestado que te llamará el 27 para hablarlo. Si la cuenta es de la agencia y no se puede traspasar, la solución es abrir una cuenta nueva a tu nombre, con tu tarjeta."
+  "ads": "La gestiona tu agencia actual. Ya se lo has pedido (26 de octubre) y te ha contestado que te llamará el 27 para hablarlo. Si la cuenta es de la agencia y no se puede traspasar, la solución es abrir una cuenta nueva a tu nombre, con tu tarjeta. Lo dejamos para más adelante, sin prisa.",
+  "analytics": "Ya tienes tu propia cuenta de Google Analytics, creada por ti con tu correo de Gmail de empresa, y nos has dado acceso de administrador. Nos has pasado el código de medición para conectarla con la web nueva."
  },
  "resueltas": [
   1,
