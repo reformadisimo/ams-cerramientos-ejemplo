@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Dar acceso a tu ficha de Google en 4 pasos | AMS Cerramientos</title>
+<style>
+:root{--tinta:#12202B;--naranja:#E08A00;--verde:#0A8F4E;--linea:#DCE2E7;--fondo:#F4F7F9}
+*{box-sizing:border-box}body{margin:0;font:18px/1.5 Arial,Helvetica,sans-serif;color:var(--tinta);background:var(--fondo)}
+header{background:var(--tinta);color:#fff;padding:22px 16px}.w{max-width:640px;margin:0 auto}
+header img{height:44px;background:#fff;border-radius:8px;padding:6px 10px;display:block;margin-bottom:18px}
+h1{font-size:28px;line-height:1.2;margin:0 0 8px}header p{margin:0;color:#C9D3DB}
+main{padding:20px 16px 48px}
+.paso{background:#fff;border:1px solid var(--linea);border-radius:16px;padding:18px 18px 20px;margin-bottom:16px}
+.n{display:inline-flex;width:38px;height:38px;border-radius:50%;background:var(--naranja);color:#fff;font-weight:700;align-items:center;justify-content:center;margin-bottom:8px}
+.paso h2{font-size:22px;margin:0 0 6px}.paso p{margin:0 0 12px}
+.btn{display:flex;align-items:center;justify-content:center;min-height:56px;border-radius:12px;background:var(--verde);color:#fff;font-weight:700;font-size:19px;text-decoration:none;border:0;width:100%;cursor:pointer;font-family:inherit}
+.btn.sec{background:var(--tinta)}
+.mail{display:block;background:var(--fondo);border:2px dashed var(--naranja);border-radius:12px;padding:14px;text-align:center;font-weight:700;font-size:19px;word-break:break-all;margin-bottom:12px}
+.ok{color:var(--verde);font-weight:700;min-height:1.4em;margin:8px 0 0;text-align:center}
+.nota{font-size:16px;color:#4A5A68;background:#fff;border-left:4px solid var(--verde);padding:12px 14px;border-radius:8px}
+.menu{background:var(--fondo);border-radius:10px;padding:10px 14px;font-weight:700;margin:0 0 12px}
+</style></head><body>
+<header><div class="w"><img src="/img/logo-ams-color.svg" alt="AMS Cerramientos">
+<h1>Dar acceso a tu ficha de Google</h1><p>Cuatro pasos desde el móvil. Dos minutos. Sin instalar nada.</p></div></header>
+<main><div class="w">
+
+<div class="paso"><span class="n">1</span><h2>Abre tu ficha</h2>
+<p>Entra con el correo de la empresa (el que usas para tu ficha de Google).</p>
+<a class="btn" href="https://business.google.com/" target="_blank" rel="noopener">Abrir mi ficha de Google</a></div>
+
+<div class="paso"><span class="n">2</span><h2>Entra en la configuración</h2>
+<p>Pulsa en tu empresa <b>AMS Cerramientos y Servicios</b> y busca los tres puntos o el engranaje. Elige:</p>
+<p class="menu">Configuración de la empresa</p></div>
+
+<div class="paso"><span class="n">3</span><h2>Abre "Gestión de personas y acceso"</h2>
+<p>Es una de las opciones de esa lista. Pulsa en <b>Añadir</b> (o el símbolo +).</p></div>
+
+<div class="paso"><span class="n">4</span><h2>Escribe este correo y elige "Administrador"</h2>
+<span class="mail" id="c">delarubiaignacio@gmail.com</span>
+<button class="btn sec" id="b" type="button">Copiar el correo</button>
+<p class="ok" id="ok" role="status"></p>
+<p>En "Acceso" pon <b>Administrador</b> y pulsa <b>Invitar</b>. Ya está.</p></div>
+
+<p class="nota">Con este acceso contestamos tus reseñas, subimos fotos y novedades y mantenemos la ficha al día. <b>Nada se publica sin que tú lo veas antes.</b> Puedes quitar el acceso cuando quieras, en esa misma pantalla.</p>
+</div></main>
+<script>
+document.getElementById('b').onclick=function(){var t='delarubiaignacio@gmail.com',o=document.getElementById('ok');
+function f(){var r=document.createRange();r.selectNodeContents(document.getElementById('c'));var s=getSelection();s.removeAllRanges();s.addRange(r);o.textContent='Selecciónalo y cópialo';}
+try{navigator.clipboard.writeText(t).then(function(){o.textContent='Correo copiado. Ya puedes pegarlo.'},f)}catch(e){f()}}
+</script></body></html>
