@@ -20,7 +20,8 @@ a{color:var(--navy)}a:hover{color:#B8430A}
 .nav>a.on,.drop.on>button{color:var(--peach)}
 .drop{position:relative}
 .drop-menu{position:absolute;top:100%;left:0;min-width:300px;padding:8px;background:#fff;border-radius:10px;box-shadow:0 12px 32px rgba(0,0,0,.22);display:none}
-.drop:hover .drop-menu,.drop:focus-within .drop-menu,.drop.open .drop-menu{display:block}
+.drop.open .drop-menu{display:block}
+@media (hover:hover) and (pointer:fine){.drop:hover .drop-menu,.drop:focus-within .drop-menu{display:block}}
 .drop-menu a{display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:10px;color:var(--navy);text-decoration:none;font-weight:600;font-size:15px}
 .drop-menu{min-width:340px}
 .mi{flex:none;width:38px;height:38px;border-radius:10px;background:#FFF1E8;color:#C2410C;display:inline-flex;align-items:center;justify-content:center;transition:background .15s,color .15s}
@@ -33,7 +34,9 @@ a{color:var(--navy)}a:hover{color:#B8430A}
 .drop-menu a.ver-todo{grid-column:1/-1;background:linear-gradient(90deg,#12202B,#1F3A52);color:#fff;margin-bottom:6px}.drop-menu a.ver-todo small{color:#C8D4DE}.drop-menu a.ver-todo:hover{background:linear-gradient(90deg,#1F3A52,#2A4D6B);color:#fff}
 .mobile a.ver-todo{background:#1C2F3F;border-radius:10px;padding:6px 10px;margin:6px 0;border-bottom:0}.mobile a.ver-todo .mt small{display:block;color:#9FB0BE;font-weight:400;font-size:13px}
 #hprog{position:absolute;left:0;right:0;bottom:0;height:3px;background:transparent;pointer-events:none}#hprog i{display:block;height:100%;width:0;background:linear-gradient(90deg,#FFC53D,#FF9F1C);border-radius:0 3px 3px 0}
-.drop:hover .drop-menu.two,.drop:focus-within .drop-menu.two,.drop.open .drop-menu.two{display:grid;grid-template-columns:1fr 1fr;gap:2px 8px}
+.drop .drop-menu.two{display:none}
+.drop.open .drop-menu.two{display:grid;grid-template-columns:1fr 1fr;gap:2px 8px}
+@media (hover:hover) and (pointer:fine){.drop:hover .drop-menu.two,.drop:focus-within .drop-menu.two{display:grid;grid-template-columns:1fr 1fr;gap:2px 8px}}
 .mobile a{gap:12px}.mobile a .mi{width:32px;height:32px}.mobile a .mt small{display:none}.mobile a .mi svg{width:18px;height:18px}
 .drop-menu a:hover,.drop-menu a.on{background:var(--bg);color:#B8430A}
 .actions{display:flex;align-items:center;gap:10px;margin-left:auto;flex:none}
