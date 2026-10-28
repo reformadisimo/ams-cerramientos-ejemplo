@@ -1808,17 +1808,33 @@ function Sencilla({ temas, resumen, tareas, relojes, base, hoy, realEntre, clave
       <GuiaDeUso modo="plegada" />
       <Conclusion resumen={resumen} hayTarea={tareas.length > 0} />
       {/* cl·v925: apartados en rejilla compacta; el que se abre se despliega debajo. Las cifras completas vienen después, ya abiertas */}
+      <ResumenLinea clave={clave} />
       <Apartados items={[
         { id: "pl-hoy", icono: "check", color: PALETA_ALEGRIA.dinero, titulo: "Lo primero que haría hoy", pista: tareas[0]?.texto ?? "Nada pendiente", nodo: <TareaPrincipal tareas={tareas} temas={temas} abreTema={abreTema} /> },
         { id: "pl-temas", icono: "grid", color: PALETA_ALEGRIA.web, titulo: "Cómo está cada parte", pista: temas.map((m) => `${m.titulo}: ${m.estado ?? LUZ[m.luz].t}`).join(" · "), nodo: <EstadoLista temas={temas} abierto={abierto} setAbierto={setAbierto} /> },
         ...(relojes.length > 0 ? [{ id: "pl-cifras", icono: "moneda", color: PALETA_ALEGRIA.camino, titulo: "Las cuatro cifras que importan", pista: relojes.map((r) => r.frase ?? r.t).join(" · "), nodo: <CifrasFrase relojes={relojes} /> }] : []),
         { id: "pl-pregunta", icono: "chat", color: PALETA_ALEGRIA.ia, titulo: "Pregunta lo que quieras", pista: "Escribe o dicta", nodo: <Pregunta clave={clave} /> },
-        { id: "pl-resumen-correo", icono: "sobre", color: PALETA_ALEGRIA.mercado, titulo: "Recibe un resumen por correo", pista: "Cada día, cada lunes o cada mes", nodo: <Resumenes clave={clave} /> },
         { id: "pl-mas", icono: "ajustes", color: PALETA_ALEGRIA.ventas, titulo: "Más herramientas", pista: "CRM, lupa, plan y más", nodo: <MasHerramientas clave={clave} herramientas={herramientas} /> },
         { id: "pl-conectado", icono: "red", color: PALETA_ALEGRIA.mercado, titulo: "Conectado con", pista: "Analytics, Ads, WhatsApp…", nodo: <FranjaConectado nombres={["Google Analytics", "Search Console", "Google Ads", "Ficha de Google", "Instagram", "WhatsApp", "Semrush", "ChatGPT", "Gemini", "Claude"]} /> },
       ]} />
       <p id="mesa-cifras-todas" className="mt-5 scroll-mt-4 font-serif text-[22px] italic text-ink">Todas las cifras</p>
     </div>
+  );
+}
+
+/* Resumen por correo: una línea propia, ancha y a la vista (pedido de Ig, 28-oct). */
+function ResumenLinea({ clave }: { clave: string }) {
+  const [ab, setAb] = useState(false);
+  useEffect(() => { const f = () => { if (window.location.hash === "#pl-resumen-correo") setAb(true); }; f(); window.addEventListener("hashchange", f); return () => window.removeEventListener("hashchange", f); }, []);
+  return (
+    <section className="mt-3" aria-label="Recibe un resumen por correo" id="pl-resumen-correo">
+      <button type="button" aria-expanded={ab} onClick={() => setAb(!ab)} className="flex min-h-[64px] w-full items-center gap-3 rounded-[18px] border-2 border-[#2e8b57] bg-[#eef8f1] px-3 py-2 text-left hover:border-ink">
+        <Loseta n="sobre" color={PALETA_ALEGRIA.mercado} tam={40} />
+        <span className="min-w-0 flex-1"><span className="block font-serif text-[19px] italic leading-tight text-ink">Recibe un resumen por correo</span><span className="block text-[14px] leading-tight text-ink/70">Cada día, cada lunes o cada mes, sin tener que entrar. Tú eliges de qué.</span></span>
+        <span className="shrink-0 rounded-full bg-yellow px-3.5 py-2 text-[13.5px] font-semibold text-ink">{ab ? "Cerrar" : "Programarlo"}</span>
+      </button>
+      {ab && <div className="mt-2"><Resumenes clave={clave} /></div>}
+    </section>
   );
 }
 

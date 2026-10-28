@@ -371,7 +371,7 @@ export const GUIA_PASOS: { icono: string; color: string; t: string; d: string; a
   { icono: "mando", color: "#7a4fd0", t: "Sueña y haz cuentas", d: "Arriba, en «Tus sueños y tus cuentas»: mueve la inversión, marca tu meta y ponnos a prueba. Son estimaciones, para pensar.", ancla: "mesa-suenos" },
   { icono: "catalejo", color: "#1d6b3a", t: "Baja a todas las cifras", d: "Las pestañas separan los temas: Ventas, Anuncios, La web, Google, Ficha y redes. En cada gráfica, la estrella es el mejor día.", ancla: "mesa-cifras-todas" },
   { icono: "chat", color: "#d9822b", t: "Pregunta lo que quieras", d: "Escribe o dicta una pregunta como se la harías a una persona. Contesta con tus cifras de 28 días.", ancla: "pl-pregunta" },
-  { icono: "sobre", color: "#2f6fd0", t: "Recíbelo por correo", d: "En «Más herramientas» puedes pedir el resumen cada día, cada lunes o cada mes, sin tener que entrar.", ancla: "pl-mas" },
+  { icono: "sobre", color: "#2f6fd0", t: "Recíbelo por correo", d: "En la línea verde de la pantalla principal puedes pedir el resumen cada día, cada lunes o cada mes, sin tener que entrar.", ancla: "pl-mas" },
   { icono: "escudo", color: "#25a244", t: "Si ves algo raro, avísanos", d: "Abajo del todo está «Avisar de un error». Nos encanta arreglarlos." },
 ];
 
