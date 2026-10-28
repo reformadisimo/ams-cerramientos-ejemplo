@@ -1813,7 +1813,8 @@ function Sencilla({ temas, resumen, tareas, relojes, base, hoy, realEntre, clave
         { id: "pl-temas", icono: "grid", color: PALETA_ALEGRIA.web, titulo: "Cómo está cada parte", pista: temas.map((m) => `${m.titulo}: ${m.estado ?? LUZ[m.luz].t}`).join(" · "), nodo: <EstadoLista temas={temas} abierto={abierto} setAbierto={setAbierto} /> },
         ...(relojes.length > 0 ? [{ id: "pl-cifras", icono: "moneda", color: PALETA_ALEGRIA.camino, titulo: "Las cuatro cifras que importan", pista: relojes.map((r) => r.frase ?? r.t).join(" · "), nodo: <CifrasFrase relojes={relojes} /> }] : []),
         { id: "pl-pregunta", icono: "chat", color: PALETA_ALEGRIA.ia, titulo: "Pregunta lo que quieras", pista: "Escribe o dicta", nodo: <Pregunta clave={clave} /> },
-        { id: "pl-mas", icono: "ajustes", color: PALETA_ALEGRIA.ventas, titulo: "Más herramientas", pista: "Correo, CRM, lupa, plan", nodo: <MasHerramientas clave={clave} herramientas={herramientas} /> },
+        { id: "pl-resumen-correo", icono: "sobre", color: PALETA_ALEGRIA.mercado, titulo: "Recibe un resumen por correo", pista: "Cada día, cada lunes o cada mes", nodo: <Resumenes clave={clave} /> },
+        { id: "pl-mas", icono: "ajustes", color: PALETA_ALEGRIA.ventas, titulo: "Más herramientas", pista: "CRM, lupa, plan y más", nodo: <MasHerramientas clave={clave} herramientas={herramientas} /> },
         { id: "pl-conectado", icono: "red", color: PALETA_ALEGRIA.mercado, titulo: "Conectado con", pista: "Analytics, Ads, WhatsApp…", nodo: <FranjaConectado nombres={["Google Analytics", "Search Console", "Google Ads", "Ficha de Google", "Instagram", "WhatsApp", "Semrush", "ChatGPT", "Gemini", "Claude"]} /> },
       ]} />
       <p id="mesa-cifras-todas" className="mt-5 scroll-mt-4 font-serif text-[22px] italic text-ink">Todas las cifras</p>
@@ -1833,10 +1834,10 @@ function MasHerramientas({ clave, herramientas }: { clave: string; herramientas:
   return (
     <section id="mesa-herramientas" className="mt-8 scroll-mt-4 rounded-[20px] border border-line bg-white">
       <button type="button" onClick={() => setAb(!ab)} aria-expanded={ab} className="flex min-h-[56px] w-full items-center justify-between gap-3 px-5 text-left">
-        <span><span className="block text-[17px] font-semibold text-ink">Más herramientas</span><span className="block text-[15px] text-ink/65">Recibir el resumen por correo, el CRM, la lupa, el plan y más</span></span>
+        <span><span className="block text-[17px] font-semibold text-ink">Más herramientas</span><span className="block text-[15px] text-ink/65">El CRM, la lupa, el plan y más</span></span>
         <span className="shrink-0 rounded-full bg-yellow px-4 py-2 text-[14px] font-semibold text-ink">{ab ? "Cerrar" : "Abrir"}</span>
       </button>
-      {ab && <div className="border-t border-line px-4 pb-4">{herramientas}<Resumenes clave={clave} /></div>}
+      {ab && <div className="border-t border-line px-4 pb-4">{herramientas}</div>}
     </section>
   );
 }
