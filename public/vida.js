@@ -44,7 +44,7 @@ document.querySelectorAll('main p,section p').forEach(function(p){
  var s=mk('vd-ic',ic(t,n),n);s.className+=(n%2?' vd-l':' vd-r');p.insertBefore(s,p.firstChild);n++;
 });
 /* 2. titulos h2 de seccion con chip */
-document.querySelectorAll('section h2,article h2').forEach(function(h){
+document.querySelectorAll('section h2,article h2,main>h2').forEach(function(h){
  if(h.closest('header,footer,nav,.site-header,.site-footer,details,.vsec2,.vsec')||h.querySelector('.vd-chip'))return;
  var t=h.textContent.trim();if(!t||t.length>110)return;
  var c=mk('vd-chip',ic(t,n),n);c.className+=(n%2?' vd-l':' vd-r');h.insertBefore(c,h.firstChild);
