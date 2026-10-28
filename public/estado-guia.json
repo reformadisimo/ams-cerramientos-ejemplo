@@ -1,8 +1,28 @@
 {
- "version": "2026-10-27T17:50",
- "fecha": "27 de octubre de 2026",
+ "version": "2026-10-28T06:20",
+ "fecha": "28 de octubre de 2026",
  "aviso": "Ya tienes tu propia cuenta de Google Analytics y nosotros tenemos acceso. Gracias, Javi, lo has hecho muy bien.",
  "ultimo": [
+  {
+   "f": "28 oct",
+   "t": "No te pedimos tu facturación: solo dos números. Cuántos de los contactos acaban siendo clientes y cuánto deja de media cada cliente. Está explicado en la guía, con ejemplo."
+  },
+  {
+   "f": "28 oct",
+   "t": "Nueva petición: tu lista de clientes y tus zonas de trabajo (dónde trabajas, dónde más te interesa y dónde no), para afinar las campañas."
+  },
+  {
+   "f": "28 oct",
+   "t": "Reseñas: el WhatsApp de ejemplo pide también una foto del trabajo, y en la guía te explicamos por qué importa."
+  },
+  {
+   "f": "28 oct",
+   "t": "La web es tuya desde el momento en que tu dominio apunta a ella, y te damos una copia completa. Está aclarado en «Tuyo es el control»."
+  },
+  {
+   "f": "28 oct",
+   "t": "La página de cancelas ya enseña cada modelo con tus fotos reales y una galería con todas, bien alineada."
+  },
   {
    "f": "27 oct",
    "t": "Tu cuenta de Google Analytics ya está creada, es tuya y nos has dado acceso de administrador. Nos has pasado también el código de medición, así que ya podemos conectarla con la web nueva."
