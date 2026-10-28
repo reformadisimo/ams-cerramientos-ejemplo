@@ -1,8 +1,20 @@
 {
- "version": "2026-10-28T06:40",
+ "version": "2026-10-28T19:00",
  "fecha": "28 de octubre de 2026",
- "aviso": "Hoy hemos añadido a la guía: no te pedimos tu facturación, solo dos números; tu lista de clientes y tus zonas de trabajo; la foto del trabajo en las reseñas; y cómo trabajamos para robarte el menor tiempo posible.",
+ "aviso": "Gracias por contarnos tus zonas y cómo te llegan los clientes: con eso ya podemos afinar las campañas. Y ya estamos pendientes de que te pasen la titularidad de la ficha de Google.",
  "ultimo": [
+  {
+   "f": "28 oct",
+   "t": "Anotadas tus zonas de trabajo (hasta unos 35 km de Villalbilla, con Alcalá de Henares y los pueblos cercanos como prioridad, y Guadalajara si hay mercado) y las zonas donde no trabajas. Las campañas se enseñarán solo donde te sirven."
+  },
+  {
+   "f": "28 oct",
+   "t": "Anotado cómo te llegan los clientes: sobre todo por buzoneo, recomendaciones, clientes antiguos y reformistas, y algunos por la web. Gracias por los importes orientativos: cancela motorizada entre 2.000 y 3.500 euros más IVA, y ventanas (4 a 8) entre 2.000 y 7.000 euros más IVA. No hace falta que lleves ningún control más."
+  },
+  {
+   "f": "28 oct",
+   "t": "Ficha de Google: has pedido al propietario actual que te pase la titularidad. En cuanto te conteste y seas propietario principal, avísanos y te explicamos el siguiente paso. Las reseñas se contestan cuando la ficha sea tuya."
+  },
   {
    "f": "28 oct",
    "t": "Cómo trabajamos: rápido, sin reuniones ni llamadas, por correo y WhatsApp, y robándote el menor tiempo posible. Al principio hace falta algo de esfuerzo por tu parte; después, casi todo tu tiempo es para tu trabajo."
@@ -12,49 +24,14 @@
    "t": "No te pedimos tu facturación: solo dos números. Cuántos de los contactos acaban siendo clientes y cuánto deja de media cada cliente. Está explicado en la guía, con ejemplo."
   },
   {
-   "f": "28 oct",
-   "t": "Nueva petición: tu lista de clientes y tus zonas de trabajo (dónde trabajas, dónde más te interesa y dónde no), para afinar las campañas."
-  },
-  {
-   "f": "28 oct",
-   "t": "Reseñas: el WhatsApp de ejemplo pide también una foto del trabajo, y en la guía te explicamos por qué importa."
-  },
-  {
-   "f": "28 oct",
-   "t": "La web es tuya desde el momento en que tu dominio apunta a ella, y te damos una copia completa. Está aclarado en «Tuyo es el control»."
-  },
-  {
-   "f": "28 oct",
-   "t": "La página de cancelas ya enseña cada modelo con tus fotos reales y una galería con todas, bien alineada."
-  },
-  {
    "f": "27 oct",
    "t": "Tu cuenta de Google Analytics ya está creada, es tuya y nos has dado acceso de administrador. Nos has pasado también el código de medición, así que ya podemos conectarla con la web nueva."
-  },
-  {
-   "f": "27 oct",
-   "t": "Anotado: el montaje de las cancelas va incluido en el precio. Ya está así en la página de cancelas y en la calculadora."
-  },
-  {
-   "f": "27 oct",
-   "t": "Recibidas tus fotos de la web antigua y tus precios de cancelas. 14 de las 17 fotos que marcaste ya están en sus páginas; los precios extra (celosía o solera, lama ovalada y perfil de aluminio entre lamas) ya salen en la página de cancelas."
-  },
-  {
-   "f": "27 oct",
-   "t": "Nueva en la guía: tu mesa de control de demostración. En una pantalla ves cómo va todo, qué necesita atención y qué haríamos hoy, y puedes preguntarle en tus palabras. Con datos de ejemplo hasta que conectemos tus cuentas."
-  },
-  {
-   "f": "27 oct",
-   "t": "Con tus fotos de las cancelas, la página de cancelas ya muestra cada modelo con fotos reales de tus trabajos y una galería para verlas todas."
-  },
-  {
-   "f": "27 oct",
-   "t": "Recibidas tus respuestas a las dudas de la calculadora: el precio lleva el vidrio estándar y cualquier otro se presupuesta aparte; a partir de 2 metros de ancho también se presupuesta a mano. Ya está así en la web."
   }
  ],
  "cuentas": {
   "ads": "La gestiona tu agencia actual. Ya se lo has pedido (26 de octubre) y te ha contestado que te llamará el 27 para hablarlo. Si la cuenta es de la agencia y no se puede traspasar, la solución es abrir una cuenta nueva a tu nombre, con tu tarjeta. Lo dejamos para más adelante, sin prisa.",
-  "analytics": "Ya tienes tu propia cuenta de Google Analytics, creada por ti con tu correo de Gmail de empresa, y nos has dado acceso de administrador. Nos has pasado el código de medición para conectarla con la web nueva."
+  "analytics": "Ya tienes tu propia cuenta de Google Analytics, creada por ti con tu correo de Gmail de empresa, y nos has dado acceso de administrador. Nos has pasado el código de medición para conectarla con la web nueva.",
+  "ficha": "Hoy el propietario principal de la ficha es la cuenta de tu agencia actual y tú figuras como gestor, por eso Google no te deja añadir ni quitar a nadie. El 28 de octubre le has pedido por WhatsApp que te pase la titularidad y estamos esperando su respuesta. Cuando seas propietario principal, nos añades como gestores. Si no contesta en un par de días, hay un plan B desde Google."
  },
  "resueltas": [
   1,
@@ -67,7 +44,9 @@
  "nuevas": [
   "La foto 4 de la web antigua, «Cerramiento de aluminio» (techo de teja y cristales), se quedó sin marcar. ¿La usamos o no?",
   "Las fotos de la ventana oscilobatiente (con vistas a una ciudad) y de la terraza cerrada con cristal y perfil oscuro parecen hechas por ordenador, no trabajos vuestros. ¿Son obras reales de AMS? Si no lo son, no las presentamos como tales; si tienes fotos propias de esos trabajos, las ponemos en su lugar.",
-  "La imagen del cristal de ahorro energético dice «ventanas con hasta un 60 % de ahorro energético». ¿Tenéis algún documento del fabricante que lo respalde? Si no, quitamos esa cifra para que no os dé problemas."
+  "La imagen del cristal de ahorro energético dice «ventanas con hasta un 60 % de ahorro energético». ¿Tenéis algún documento del fabricante que lo respalde? Si no, quitamos esa cifra para que no os dé problemas.",
+  "Para el acuerdo de colaboración nos falta tu cargo en la empresa y la fecha de la firma.",
+  "Cuando tengas la titularidad de la ficha de Google, avísanos con un WhatsApp para que te digamos el siguiente paso."
  ],
  "popup": {
   "etiqueta": "Hola de nuevo, Javi",
