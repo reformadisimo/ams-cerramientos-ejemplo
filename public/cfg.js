@@ -463,11 +463,13 @@ function resumen(){
 }
 $('cfWa').addEventListener('click',function(){
  if(!valid())return;
+ if(window.amsEvento)window.amsEvento('generate_lead',{pagina:location.pathname,via:'configurador_whatsapp'});
  var t='Hola, AMS Cerramientos. He configurado mis ventanas en vuestra web:\n\n'+resumen()+'\n\nSoy '+C.nombre+', teléfono '+C.tel+', correo '+C.email+'. La obra está en '+C.loc+'.\nMe gustaría que vinierais a medir.';
  window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(t),'_blank','noopener');
 });
 $('cfPdf').addEventListener('click',function(){
  if(!valid())return;var r=S.res;if(!r){return;}
+ if(window.amsEvento)window.amsEvento('generate_lead',{pagina:location.pathname,via:'configurador_pdf'});
  var hoy=new Date(),ref='AMS-'+hoy.getFullYear().toString().slice(2)+String(hoy.getMonth()+1).padStart(2,'0')+String(hoy.getDate()).padStart(2,'0')+'-'+String(Math.floor(Math.random()*900+100));
  var rows=S.items.map(function(it,i){return '<tr><td style="width:70px">'+foto(it,'pdfimg')+'</td><td><b>'+esc((it.hab?it.hab+' · ':'')+nombre(it))+'</b><br>'+esc(detalle(it))+'</td><td class="r">'+it.n+'</td><td class="r">'+(r.lineas[i].presupuestar?'A presupuestar':eur(r.lineas[i].unidad))+'</td><td class="r">'+(r.lineas[i].presupuestar?'—':eur(r.lineas[i].total)+(r.lineas[i].vidrio_aparte?'<br><small>vidrio aparte</small>':''))+'</td></tr>';}).join('');
  var base=location.origin;
