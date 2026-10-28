@@ -1,8 +1,12 @@
 {
- "version": "2026-10-28T06:20",
+ "version": "2026-10-28T06:25",
  "fecha": "28 de octubre de 2026",
- "aviso": "Ya tienes tu propia cuenta de Google Analytics y nosotros tenemos acceso. Gracias, Javi, lo has hecho muy bien.",
+ "aviso": "Hoy hemos añadido a la guía: no te pedimos tu facturación, solo dos números; tu lista de clientes y tus zonas de trabajo; la foto del trabajo en las reseñas; y cómo trabajamos para robarte el menor tiempo posible.",
  "ultimo": [
+  {
+   "f": "28 oct",
+   "t": "Cómo trabajamos: rápido, sin reuniones ni llamadas, por correo y WhatsApp, y robándote el menor tiempo posible. Al principio hace falta algo de esfuerzo por tu parte; después, tú a tu trabajo casi al 100 %."
+  },
   {
    "f": "28 oct",
    "t": "No te pedimos tu facturación: solo dos números. Cuántos de los contactos acaban siendo clientes y cuánto deja de media cada cliente. Está explicado en la guía, con ejemplo."
