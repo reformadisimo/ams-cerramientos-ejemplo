@@ -1,0 +1,23 @@
+/* Vida (28 oct 2026): piezas alegres para toda la web. Solo pintura, nada obligatorio se mueve. */
+.vd-ic{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:8px;margin:-2px 8px -2px -6px;color:#fff;vertical-align:middle;flex:none}
+.vd-ic svg{width:15px;height:15px;display:block}
+.vd-chip{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:14px;margin-right:12px;color:#fff;vertical-align:middle;position:relative;flex:none;box-shadow:0 8px 16px -8px var(--vs)}
+.vd-chip svg{width:24px;height:24px;display:block}
+.vd-chip::after{content:"";position:absolute;inset:2px;border-radius:inherit;background:linear-gradient(180deg,rgba(255,255,255,.28),transparent);pointer-events:none}
+.vd-lose{display:grid;place-items:center;width:52px;height:52px;border-radius:16px;color:#fff;position:relative;box-shadow:0 12px 22px -12px var(--vs);flex:none}
+.vd-lose svg{width:26px;height:26px;display:block;position:relative}
+.vd-lose::before{content:"";position:absolute;inset:3px;border-radius:inherit;background:linear-gradient(180deg,rgba(255,255,255,.28),transparent)}
+.vd-lose i{position:absolute;right:-6px;top:-6px;width:18px;height:18px;background:#FFC53D;clip-path:polygon(50% 0,62% 36%,100% 38%,70% 60%,80% 100%,50% 76%,20% 100%,30% 60%,0 38%,38% 36%)}
+.vd-r{transform:rotate(-5deg)}.vd-l{transform:rotate(5deg)}
+.vd-ok{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;color:#fff;flex:none;margin-right:12px}
+.vd-ok svg{width:15px;height:15px}
+.vd-sec{position:relative;overflow:hidden}
+.vd-sec>*:not(.vd-neb){position:relative;z-index:1}
+.vd-neb{position:absolute!important;inset:0;pointer-events:none;z-index:0}
+.vd-neb span{position:absolute;width:380px;height:380px;border-radius:50%;filter:blur(70px);opacity:.6}
+.vd-dark .vd-neb span{opacity:.16}
+.vd-neb span:nth-child(1){left:-110px;top:-110px}
+.vd-neb span:nth-child(2){right:-100px;top:34%}
+.vd-neb span:nth-child(3){left:38%;bottom:-150px}
+@media (max-width:640px){.vd-neb span{width:240px;height:240px}.vd-chip{width:38px;height:38px;border-radius:12px;margin-right:9px}}
+@media (prefers-reduced-motion:no-preference){.vd-lose i{animation:vdb 3.2s ease-in-out infinite}@keyframes vdb{50%{transform:scale(1.25) rotate(14deg)}}}
