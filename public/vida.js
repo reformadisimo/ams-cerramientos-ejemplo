@@ -44,7 +44,7 @@ document.querySelectorAll('main p,section p').forEach(function(p){
  var s=mk('vd-ic',ic(t,n),n);s.className+=(n%2?' vd-l':' vd-r');p.insertBefore(s,p.firstChild);n++;
 });
 /* 2. titulos h2 de seccion con chip */
-document.querySelectorAll('section h2').forEach(function(h){
+document.querySelectorAll('section h2,article h2').forEach(function(h){
  if(h.closest('header,footer,nav,.site-header,.site-footer,details,.vsec2,.vsec')||h.querySelector('.vd-chip'))return;
  var t=h.textContent.trim();if(!t||t.length>110)return;
  var c=mk('vd-chip',ic(t,n),n);c.className+=(n%2?' vd-l':' vd-r');h.insertBefore(c,h.firstChild);
@@ -67,7 +67,7 @@ document.querySelectorAll('section a,section div').forEach(function(a){
  var l=mk('vd-lose',ic(t,n),n);l.className+=(n%2?' vd-l':' vd-r');l.style.margin='24px 28px 0';l.style.alignSelf='flex-start';a.insertBefore(l,a.firstChild);n++;
 });
 /* 5. nebulosas de fondo en las secciones claras o de color (no en las que llevan foto) */
-var secs=document.querySelectorAll('body>section,main>section,body>main>section,body>div>section');
+var secs=document.querySelectorAll('body>section,main>section,body>main>section,body>div>section,main>article');
 var k=0;secs.forEach(function(s){
  var st=(s.getAttribute('style')||'');if(/url\(/.test(st)||s.classList.contains('vsec2')||s.querySelector('.vd-neb'))return;
  var dark=/#12202B|#C2410C/i.test(st.split(';')[0]||'');
