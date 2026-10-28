@@ -1,11 +1,11 @@
 {
- "version": "2026-10-28T06:25",
+ "version": "2026-10-28T06:40",
  "fecha": "28 de octubre de 2026",
  "aviso": "Hoy hemos añadido a la guía: no te pedimos tu facturación, solo dos números; tu lista de clientes y tus zonas de trabajo; la foto del trabajo en las reseñas; y cómo trabajamos para robarte el menor tiempo posible.",
  "ultimo": [
   {
    "f": "28 oct",
-   "t": "Cómo trabajamos: rápido, sin reuniones ni llamadas, por correo y WhatsApp, y robándote el menor tiempo posible. Al principio hace falta algo de esfuerzo por tu parte; después, tú a tu trabajo casi al 100 %."
+   "t": "Cómo trabajamos: rápido, sin reuniones ni llamadas, por correo y WhatsApp, y robándote el menor tiempo posible. Al principio hace falta algo de esfuerzo por tu parte; después, casi todo tu tiempo es para tu trabajo."
   },
   {
    "f": "28 oct",
@@ -68,5 +68,36 @@
   "La foto 4 de la web antigua, «Cerramiento de aluminio» (techo de teja y cristales), se quedó sin marcar. ¿La usamos o no?",
   "Las fotos de la ventana oscilobatiente (con vistas a una ciudad) y de la terraza cerrada con cristal y perfil oscuro parecen hechas por ordenador, no trabajos vuestros. ¿Son obras reales de AMS? Si no lo son, no las presentamos como tales; si tienes fotos propias de esos trabajos, las ponemos en su lugar.",
   "La imagen del cristal de ahorro energético dice «ventanas con hasta un 60 % de ahorro energético». ¿Tenéis algún documento del fabricante que lo respalde? Si no, quitamos esa cifra para que no os dé problemas."
- ]
+ ],
+ "popup": {
+  "etiqueta": "Hola de nuevo, Javi",
+  "titulo": "La guía ha seguido creciendo",
+  "intro": "Te dijimos que esta guía estaba viva, y es verdad: cada vez que entres encontrarás cosas nuevas, porque seguimos mirando tu caso y mejorando la web. Esto es lo último que hemos añadido (pulsa en cada punto para ir directo):",
+  "items": [
+   {
+    "t": "Nuestra forma de trabajar: conseguirte el mayor número de trabajos dándote la menor guerra posible. Sin reuniones ni llamadas, por correo y WhatsApp, y cada vez robándote menos tiempo.",
+    "h": "#forma-de-trabajar"
+   },
+   {
+    "t": "No te pedimos tu facturación: te pedimos dos números, cuántos contactos acaban siendo clientes y lo que deja cada uno.",
+    "h": "#sin-facturacion"
+   },
+   {
+    "t": "Tu lista de clientes y tus zonas de trabajo: dos cosas que hacen que las campañas funcionen mejor desde el primer día.",
+    "h": "#clientes-zonas"
+   },
+   {
+    "t": "Reseñas con foto: por qué pedimos también una foto del trabajo, y el WhatsApp de ejemplo para tus clientes.",
+    "h": "#foto-resena"
+   },
+   {
+    "t": "La web es tuya desde que tu dominio apunta a ella, con una copia completa para ti.",
+    "h": "#control"
+   },
+   {
+    "t": "Tu cancelas, con las fotos reales de tus trabajos y una galería con todas.",
+    "h": "/cancelas-de-aluminio"
+   }
+  ]
+ }
 }
