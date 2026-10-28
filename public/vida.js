@@ -76,6 +76,14 @@ var k=0;secs.forEach(function(s){
  cols.forEach(function(c){var x=document.createElement('span');x.style.background=c;nb.appendChild(x)});
  s.classList.add('vd-sec');if(dark)s.classList.add('vd-dark');s.insertBefore(nb,s.firstChild);k++;
 });
+
+/* 6. guia del cliente: etiquetas .gt, titulos de apartado, cajas y listas */
+if(document.getElementById('indice')){
+ document.querySelectorAll('.gt').forEach(function(g){if(g.querySelector('.vd-ic'))return;var t=g.textContent.trim();if(!t||t.length>70)return;var s=mk('vd-ic',ic(t,n),n);s.className+=(n%2?' vd-l':' vd-r');g.insertBefore(s,g.firstChild);g.style.display='inline-flex';g.style.alignItems='center';n++});
+ document.querySelectorAll('main h2[id^="s"]').forEach(function(h){if(h.querySelector('.vd-chip'))return;var t=h.textContent.replace('↑ índice','').trim();var c=mk('vd-chip',ic(t,n),n);c.className+=(n%2?' vd-l':' vd-r');h.insertBefore(c,h.firstChild);n++});
+ document.querySelectorAll('.box>h3').forEach(function(h){if(h.querySelector('.vd-ic'))return;var s=mk('vd-ic',ic(h.textContent,n),n);s.className+=(n%2?' vd-l':' vd-r');h.insertBefore(s,h.firstChild);n++});
+ document.querySelectorAll('.box>ul>li').forEach(function(li,i){if(li.querySelector(':scope>.vd-ok'))return;var c=document.createElement('span');c.className='vd-ok';c.setAttribute('aria-hidden','true');c.innerHTML=sv('check');col(c,i);c.style.marginTop='3px';li.style.listStyle='none';li.style.display='flex';li.style.alignItems='flex-start';var w=document.createElement('div');w.style.minWidth='0';while(li.firstChild)w.appendChild(li.firstChild);li.appendChild(c);li.appendChild(w);var ul=li.parentNode;ul.style.paddingLeft='0'});
+}
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
 })();

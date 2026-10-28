@@ -44,7 +44,7 @@ tr.f{cursor:pointer}tr.f:hover{background:#f3f6f9}.num{text-align:right}.good{co
 .pb{height:10px;background:#e8eef4;border-radius:6px;margin:6px 0}.pb i{display:block;height:100%;background:#17602f;border-radius:6px}
 .hoyh{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 12px}.toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:#12202B;color:#fff;padding:12px 16px;border-radius:10px;max-width:92vw;z-index:9;font-size:.92rem;box-shadow:0 6px 20px rgba(0,0,0,.25)}
 .msgb{width:100%;min-height:170px;font:inherit;padding:10px;border:1px solid #cfd8e1;border-radius:8px}.det{border:1px solid #e5ebf1;border-radius:10px;padding:8px 12px;margin:10px 0}.det summary{cursor:pointer;font-weight:700;font-size:.92rem}
-</style></head><body>
+</style><link rel="stylesheet" href="/vida.css?v=3"></head><body>
 <div class="bar"><a href="/guia-javi#s55">&larr; Volver a la guía</a><span>AMS Cerramientos &middot; Tu CRM</span></div>
 <main>
 <div class="demo"><b>Esta demostración funciona de verdad.</b> Prueba a añadir un cliente, moverlo de fase, escribir una nota o importar una lista. Los datos que metas se quedan solo en este navegador y puedes volver a los de ejemplo cuando quieras. Los nombres, teléfonos e importes de ejemplo son inventados.</div>
@@ -206,4 +206,4 @@ function abre(id){abre0(id);var x=buscar(id);if(!x)return;fixLeads();var f=docum
  var ok=g("e_ok"),orig=ok.onclick;ok.onclick=function(ev){var nf=g("e_fas").value;if(nf!=x.fase){var er=puedeIr(x,nf);if(er){aviso(er);var ds=f.querySelectorAll("details");var di=nf=="perdido"?1:0;if(ds[di])ds[di].open=true;return}}return orig.call(this,ev)}}
 
 carga();fixLeads();pintaTabs();vista();kpis();
-</script></body></html>
+</script><script src="/vida.js?v=3" defer></script></body></html>
