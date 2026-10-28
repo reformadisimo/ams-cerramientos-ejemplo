@@ -84,6 +84,18 @@ if(document.getElementById('indice')){
  document.querySelectorAll('.box>h3').forEach(function(h){if(h.querySelector('.vd-ic'))return;var s=mk('vd-ic',ic(h.textContent,n),n);s.className+=(n%2?' vd-l':' vd-r');h.insertBefore(s,h.firstChild);n++});
  document.querySelectorAll('.box>ul>li').forEach(function(li,i){if(li.querySelector(':scope>.vd-ok'))return;var c=document.createElement('span');c.className='vd-ok';c.setAttribute('aria-hidden','true');c.innerHTML=sv('check');col(c,i);c.style.marginTop='3px';li.style.listStyle='none';li.style.display='flex';li.style.alignItems='flex-start';var w=document.createElement('div');w.style.minWidth='0';while(li.firstChild)w.appendChild(li.firstChild);li.appendChild(c);li.appendChild(w);var ul=li.parentNode;ul.style.paddingLeft='0'});
 }
+/* 7. paginas hijas de la guia (CRM, lupa, resumen): cabecera, cifras, paneles */
+if(/\/guia-javi\//.test(location.pathname)&&!document.getElementById('indice')){
+ var hijas=function(){var m=n;
+ var h1=document.querySelector('h1');
+ if(h1&&!h1.querySelector('.vd-chip')){var pg=location.pathname;var c=mk('vd-chip',/crm/.test(pg)?'persona':/lupa/.test(pg)?'lupa':'grafica',1);c.className+=' vd-r';h1.insertBefore(c,h1.firstChild);h1.style.display='flex';h1.style.alignItems='center'}
+ var d=document.querySelector('.demo');if(d&&!d.querySelector('.vd-ic')){var q=mk('vd-ic','bombilla',4);q.className+=' vd-l';d.insertBefore(q,d.firstChild)}
+ document.querySelectorAll('.k').forEach(function(k,i){if(k.querySelector('.vd-ic'))return;var q=mk('vd-ic',['persona','telefono','check','grafica','euro','diana'][i%6],i);q.style.display='grid';q.style.margin='0 0 8px 0';q.className+=(i%2?' vd-l':' vd-r');k.insertBefore(q,k.firstChild)});
+ document.querySelectorAll('.panel>h2,.lp-col h2').forEach(function(h,i){if(h.querySelector('.vd-ic'))return;var q=mk('vd-ic',ic(h.textContent,i),i+2);q.className+=' vd-l';h.insertBefore(q,h.firstChild)});
+ document.querySelectorAll('.col h3').forEach(function(h,i){if(h.querySelector('.vd-ic'))return;var q=mk('vd-ic',['persona','telefono','casa','check','estrella','regalo'][i%6],i);h.insertBefore(q,h.firstChild)});
+ };
+ hijas();setTimeout(hijas,1200);
+}
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
 })();
