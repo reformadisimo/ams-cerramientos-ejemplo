@@ -60,15 +60,34 @@ h2{font-size:clamp(26px,4.5vw,36px);line-height:1.15;margin:0 0 10px}
 .step span{color:var(--mut)}
 .zonas{background:var(--bg)}
 .zonas p{font-size:17px;color:var(--tx);max-width:880px}
-.formsec{background:linear-gradient(180deg,#FFF3E6 0%,#fff 100%)}
-.formbox{background:#fff;border-radius:18px;box-shadow:0 10px 40px rgba(18,32,43,.12);padding:22px;max-width:620px}
 form{display:grid;gap:12px}
 label{font-weight:600;font-size:15px}
 input,select{width:100%;font:inherit;font-size:17px;padding:13px 14px;border:1.5px solid #C9D3DC;border-radius:10px;background:#fff}
-.priv{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--mut);font-weight:400}
-.priv input{width:auto;margin-top:3px}
 form .btn{width:100%;font-size:18px}
 .note{font-size:14px;color:var(--mut);margin:8px 0 0}
+.formsec{background:linear-gradient(160deg,rgba(18,32,43,.94),rgba(27,50,71,.9)),url(/img/terraza-cristal.jpg) center/cover;color:#fff;padding:48px 0}
+.fgrid{display:grid;grid-template-columns:1fr;gap:24px;align-items:center}
+.pitch h2{color:#fff;margin:14px 0 10px}
+.pitch p{color:#D6E2EE;font-size:18px;margin:0 0 6px}
+.pitch .rate{margin-top:16px;font-weight:700;color:#fff}
+.formbox{background:#fff;color:var(--tx);border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.35);padding:22px;border-top:6px solid var(--or)}
+.paso{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;margin:4px 0 2px}
+.paso b{width:30px;height:30px;border-radius:50%;background:var(--or);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:15px}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tile{position:relative;border:2px solid #DCE2E7;border-radius:14px;background:#fff;padding:0;overflow:hidden;cursor:pointer;font:inherit;text-align:left}
+.tile img{width:100%;height:84px;object-fit:cover;display:block}
+.tile span{display:block;padding:8px 10px;font-weight:700;font-size:15px;line-height:1.2}
+.tile.on{border-color:var(--or);box-shadow:0 0 0 3px rgba(194,65,12,.18)}
+.tile.on:after{content:"";position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:50%;background:var(--or) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12.5l4 4 8-9' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat}
+.formbox input:not([type=checkbox]){background:#F7F9FB;border:1.5px solid #D5DDE5;padding:15px 16px;font-size:17px}
+.formbox input:focus{outline:none;border-color:var(--or);background:#fff;box-shadow:0 0 0 3px rgba(194,65,12,.15)}
+.priv{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--mut);font-weight:400}
+.priv input{width:22px;height:22px;flex:0 0 22px;margin-top:1px;accent-color:#C2410C}
+.btn.big{font-size:19px;padding:18px 20px;box-shadow:0 8px 22px rgba(194,65,12,.35);animation:lat 2.6s ease-in-out infinite}
+@keyframes lat{0%,100%{transform:scale(1)}50%{transform:scale(1.025)}}
+@media(prefers-reduced-motion:reduce){.btn.big{animation:none}}
+.note{text-align:center}
+@media(min-width:860px){.fgrid{grid-template-columns:1fr 1fr;gap:48px}.tiles{grid-template-columns:repeat(4,1fr)}}
 footer{background:var(--navy);color:#B9C7D3;font-size:14px;padding:22px 0}
 footer a{color:#fff;margin-right:14px}
 .bar{position:fixed;left:0;right:0;bottom:0;z-index:50;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px;background:rgba(18,32,43,.96)}
@@ -142,20 +161,38 @@ footer a{color:#fff;margin-right:14px}
  <p>Villalbilla, Alcalá de Henares, Torrejón de Ardoz, San Fernando de Henares, Coslada, Mejorada del Campo, Velilla, Loeches, Torres de la Alameda, Daganzo, Ajalvir, Camarma, Meco, Azuqueca, Alovera, Villanueva de la Torre, Cabanillas del Campo, Paracuellos del Jarama, Algete, Cobeña, Alcobendas, La Moraleja, San Sebastián de los Reyes y Guadalajara.</p>
 </div></section>
 
-<section class="formsec" id="presupuesto"><div class="wrap">
- <h2>Pide tu visita y presupuesto gratis</h2>
- <p class="sub">Déjanos tu nombre y tu teléfono y te llamamos para quedar. Sin compromiso.</p>
+<section class="formsec" id="presupuesto"><div class="wrap fgrid">
+ <div class="pitch">
+  <span class="kicker">100 % gratis y sin compromiso</span>
+  <h2>Pide tu visita gratis</h2>
+  <p>Vamos a tu casa, medimos y te damos el precio cerrado por escrito. Tú decides después, con calma.</p>
+  <ul class="checks">
+   <li>Medición en tu casa, gratis</li>
+   <li>Precio cerrado por escrito</li>
+   <li>Sin compromiso ni letra pequeña</li>
+   <li>Te atiende quien lo fabrica</li>
+  </ul>
+  <p class="rate"><span class="stars">★★★★★</span> 4,5 en Google · 44 reseñas</p>
+ </div>
  <div class="formbox">
   <form>
-   <div><label for="f-n">Nombre</label><input id="f-n" name="nombre" autocomplete="name" required></div>
-   <div><label for="f-t">Teléfono</label><input id="f-t" name="telefono" type="tel" autocomplete="tel" required></div>
-   <div><label for="f-l">Localidad</label><input id="f-l" name="localidad" autocomplete="address-level2"></div>
-   <div><label for="f-s">¿Qué necesitas?</label><select id="f-s" name="servicio"><option>Ventanas de PVC</option><option>Ventanas de aluminio</option><option>Cancela de aluminio</option><option>Cerramiento de terraza</option><option>Otra cosa</option></select></div>
+   <p class="paso"><b>1</b> ¿Qué necesitas?</p>
+   <div class="tiles" role="radiogroup" aria-label="Qué necesitas">
+    <button type="button" class="tile on" data-v="Ventanas de PVC"><img src="/img/ventana-pvc.webp" alt=""><span>Ventanas de PVC</span></button>
+    <button type="button" class="tile" data-v="Cancela de aluminio"><img src="/img/cancelas/01-henares-01.webp" alt=""><span>Cancela de aluminio</span></button>
+    <button type="button" class="tile" data-v="Cerramiento de terraza"><img src="/img/terraza.webp" alt=""><span>Cerrar mi terraza</span></button>
+    <button type="button" class="tile" data-v="Ventanas de aluminio"><img src="/img/ventana-aluminio.webp" alt=""><span>Ventanas de aluminio</span></button>
+   </div>
+   <input type="hidden" name="servicio" id="f-s" value="Ventanas de PVC">
+   <p class="paso"><b>2</b> ¿Cómo te llamamos?</p>
+   <input name="nombre" autocomplete="name" placeholder="Tu nombre" aria-label="Tu nombre" required>
+   <input name="telefono" type="tel" inputmode="tel" autocomplete="tel" placeholder="Tu teléfono" aria-label="Tu teléfono" required>
+   <input name="localidad" autocomplete="address-level2" placeholder="Tu pueblo (por ejemplo, Alcalá)" aria-label="Tu localidad">
    <input type="hidden" name="mensaje" id="f-o" value="">
-   <label class="priv"><input type="checkbox" name="privacidad" required> He leído y acepto la <a href="/privacidad">política de privacidad</a>.</label>
-   <button class="btn or" type="submit">Quiero mi presupuesto gratis</button>
+   <label class="priv"><input type="checkbox" name="privacidad" required><span>Acepto la <a href="/privacidad">política de privacidad</a>. Solo usamos tus datos para llamarte.</span></label>
+   <button class="btn or big" type="submit">Quiero mi visita gratis <span aria-hidden="true">&rarr;</span></button>
+   <p class="note">Sin compromiso. O llámanos al <a href="tel:+34639788220">639 78 82 20</a>.</p>
   </form>
-  <p class="note">O si lo prefieres, llámanos al <a href="tel:+34639788220">639 78 82 20</a> o escríbenos por WhatsApp.</p>
  </div>
 </div></section>
 
@@ -170,6 +207,7 @@ footer a{color:#fff;margin-right:14px}
  if(!o)o='landing presupuesto gratis';
  var f=document.getElementById('f-o');if(f)f.value='Origen: '+o;
  ['wa-hero','wa-bar'].forEach(function(id){var a=document.getElementById(id);if(a)a.href='https://wa.me/34639788220?text='+encodeURIComponent('Hola, quiero pedir presupuesto gratis. (Origen: '+o+')')});
+document.querySelectorAll('.tile').forEach(function(t){t.addEventListener('click',function(){document.querySelectorAll('.tile').forEach(function(x){x.classList.remove('on')});t.classList.add('on');var h=document.getElementById('f-s');if(h)h.value=t.dataset.v})});
  var v=document.getElementById('v'),b=document.getElementById('snd');
  if(v&&b)b.addEventListener('click',function(){v.muted=!v.muted;if(!v.muted){v.currentTime=0;v.play()}b.textContent=v.muted?'Activar sonido':'Quitar sonido'});
 })();
