@@ -514,7 +514,7 @@ def banda(cur, link):
     elif cur == "/reparaciones":
         v, t, sub, btn, href, flt = "reforma-ventanal", "Antes de cambiarlo todo, déjanos mirarlo", "Mándanos una foto y te decimos si tiene arreglo o conviene sustituirlo, sin compromiso.", "Escribir por WhatsApp", link, "brightness(1.0) saturate(1.05)"
     elif cur == "/cerramientos-terrazas":
-        v, t, sub, btn, href, flt = "terraza-cristal", "Tu terraza, abierta todo el año", "Cuéntanos cómo es y te decimos qué sistema encaja y cuánto cuesta, sin compromiso.", "Pedir presupuesto", "/contacto", "brightness(1.12) saturate(1.1)"
+        v, t, sub, btn, href, flt = "villa-cristal", "Tu terraza, abierta todo el año", "Cuéntanos cómo es y te decimos qué sistema encaja y cuánto cuesta, sin compromiso.", "Pedir presupuesto", "/contacto", "brightness(1.12) saturate(1.1)"
     elif cur == "/pergolas":
         v, t, sub, btn, href, flt = "villa-cristal", "Sombra y cristal para disfrutar tu casa", "Pérgolas y cerramientos de aluminio a medida. Te asesoramos y medimos en tu casa.", "Pedir presupuesto", "/contacto", "brightness(1.12) saturate(1.1)"
     elif cur == "/persianas-cristales":
