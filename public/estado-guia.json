@@ -1,8 +1,12 @@
 {
- "version": "2026-10-29T14:10",
+ "version": "2026-10-29T16:00",
  "fecha": "29 de octubre de 2026",
  "aviso": "Tienes tu anuncio en vídeo y la página a la que llevaría la gente. Dale al play y dinos qué te parece.",
  "ultimo": [
+  {
+   "f": "29 oct",
+   "t": "Anotado: los importes que nos diste (cancelas y ventanas) son precio de venta, no beneficio, y nos pasarás la información que puedas, sin prisa, durante el fin de semana. Si tienes nombres y teléfonos de clientes, aunque sea solo eso, nos valen para empezar."
+  },
   {
    "f": "29 oct",
    "t": "Tu anuncio en vídeo para Instagram, Facebook y YouTube (30 segundos). Aún no está publicado: lo lanzamos con la web nueva.",
@@ -24,18 +28,6 @@
   {
    "f": "28 oct",
    "t": "Anotado que el correo de la empresa está alojado en el servidor de tu proveedor actual. Lo tendremos en cuenta: lo moveremos a un sitio que sea tuyo, con calma y sin cortarte nada."
-  },
-  {
-   "f": "28 oct",
-   "t": "Gracias por contarnos tu producto estrella: las cancelas de aluminio soldado y las ventanas de PVC. Con eso afinamos los anuncios, la portada y la ventana de salida para empujar justo eso."
-  },
-  {
-   "f": "28 oct",
-   "t": "Anotadas tus zonas de trabajo (hasta unos 35 km de Villalbilla, con Alcalá de Henares y los pueblos cercanos como prioridad, y Guadalajara si hay mercado) y las zonas donde no trabajas. Las campañas se enseñarán solo donde te sirven."
-  },
-  {
-   "f": "28 oct",
-   "t": "Anotado cómo te llegan los clientes: sobre todo por buzoneo, recomendaciones, clientes antiguos y reformistas, y algunos por la web. Gracias por los importes orientativos: cancela motorizada entre 2.000 y 3.500 euros más IVA, y ventanas (4 a 8) entre 2.000 y 7.000 euros más IVA. No hace falta que lleves ningún control más."
   }
  ],
  "cuentas": {
