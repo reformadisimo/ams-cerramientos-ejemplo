@@ -146,6 +146,12 @@ section:nth-of-type(1){background:radial-gradient(40% 50% at 95% 10%,#FFE8D6 0%,
  .vtit span{display:block;font-size:14px;color:#9FB3C4;font-weight:400}
  .vbadge{top:58px;left:-4px}
 }
+.hero{position:relative;overflow:hidden}.hero>.wrap{position:relative;z-index:2}
+.hbgd{display:none}
+@media(min-width:860px){
+ .hbgd{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+ .hero:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(18,32,43,.92) 0%,rgba(18,32,43,.72) 42%,rgba(18,32,43,.3) 70%,rgba(18,32,43,.55) 100%)}
+}
 footer{background:var(--navy);color:#B9C7D3;font-size:14px;padding:22px 0}
 footer a{color:#fff;margin-right:14px}
 .bar{position:fixed;left:0;right:0;bottom:0;z-index:50;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px;background:rgba(18,32,43,.96)}
@@ -164,7 +170,7 @@ footer a{color:#fff;margin-right:14px}
 <body>
 <header><div class="wrap"><a href="/"><img src="/img/logo-ams-blanco.svg" alt="AMS Cerramientos"></a><a class="tel" href="tel:+34639788220">639 78 82 20</a></div></header>
 
-<div class="hero"><div class="wrap">
+<div class="hero"><video class="hbgd" autoplay muted loop playsinline preload="metadata" poster="/img/taller-chispas-h.jpg" aria-hidden="true"><source src="/img/taller-chispas-h.mp4" type="video/mp4"></video><div class="wrap">
  <div class="hmain">
   <video class="hbg" autoplay muted loop playsinline preload="metadata" poster="/img/taller-chispas.jpg" aria-hidden="true"><source src="/img/taller-chispas.mp4" type="video/mp4"></video>
   <span class="kicker">Visita y presupuesto gratis</span>
