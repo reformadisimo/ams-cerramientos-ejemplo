@@ -36,7 +36,7 @@ PREGUNTAS = [
   ("¿Nos podéis pasar fotos y vídeos de obras (cancelas, rejas, terrazas, ventanas)?", ["Sí, os las paso", "Necesito pedir permiso"], ""),
   ("¿Estáis dispuestos a responder las reseñas y a pedir reseñas a los clientes contentos?", ["Sí", "No", "Con ayuda"], ""),
   ("¿Estáis dispuestos a dar la cara: salir vosotros o vuestro equipo en fotos o vídeos cortos?", ["Sí", "Mejor no", "Lo pienso"], ""),
-  ("¿Dónde preferís alojar la web?", ["En nuestro servidor", "En mi propia cuenta de Vercel", "Quiero que me lo expliquéis"], ""),
+  ("¿Dónde preferís alojar la web?", ["En nuestro servidor", "Que lo llevéis vosotros", "Quiero que me lo expliquéis"], ""),
   ("¿Algo más que queráis contarnos o preguntarnos?", [], "Lo que quieras"),
  ]),
 ]
