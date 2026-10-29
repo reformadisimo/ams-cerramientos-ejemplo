@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Visita y presupuesto gratis | AMS Cerramientos</title>
+<meta name="description" content="Especialistas en ventanas de PVC y cancelas de aluminio. Visita y presupuesto gratis, precio cerrado por escrito. Villalbilla, Alcalá de Henares y alrededores.">
+<link rel="icon" href="/favicon.png">
+<style>
+@font-face{font-family:Inter;font-weight:400;font-display:swap;src:url(/fonts/inter-400.woff2) format("woff2")}
+@font-face{font-family:Inter;font-weight:600;font-display:swap;src:url(/fonts/inter-600.woff2) format("woff2")}
+@font-face{font-family:Inter;font-weight:700;font-display:swap;src:url(/fonts/inter-700.woff2) format("woff2")}
+:root{--navy:#12202B;--navy2:#1B3247;--or:#C2410C;--or2:#E8742A;--tx:#1F2A36;--mut:#4A5A68;--bg:#F3F6F9}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;font-family:Inter,system-ui,sans-serif;color:var(--tx);line-height:1.5;padding-bottom:72px}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+header{background:var(--navy);padding:12px 0}
+header .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px}
+header img{height:40px;width:auto;display:block}
+header a.tel{color:#fff;text-decoration:none;font-weight:700;font-size:17px;white-space:nowrap}
+.hero{background:radial-gradient(120% 90% at 70% 20%,var(--navy2) 0%,var(--navy) 70%);color:#fff;padding:28px 0 36px}
+.hero .wrap{display:grid;grid-template-columns:1fr;gap:24px;align-items:center}
+.kicker{display:inline-block;background:var(--or);color:#fff;font-weight:700;letter-spacing:.06em;font-size:13px;padding:6px 12px;border-radius:999px;text-transform:uppercase}
+h1{font-size:clamp(32px,7vw,54px);line-height:1.06;margin:14px 0 12px;font-weight:700}
+h1 span{color:var(--or2)}
+.hero p.lead{font-size:clamp(17px,2.4vw,21px);color:#D6E2EE;margin:0 0 20px;max-width:560px}
+.ctas{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:17px;text-decoration:none;padding:15px 20px;border-radius:12px;border:0;cursor:pointer}
+.btn.or{background:var(--or);color:#fff}
+.btn.wa{background:#1FA855;color:#fff}
+.btn.gh{background:transparent;color:#fff;border:1.5px solid #5B6B78}
+.checks{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:8px}
+.checks li{display:flex;gap:10px;align-items:center;font-size:16px;color:#E8F0F7}
+.checks li:before{content:"";flex:0 0 22px;height:22px;border-radius:50%;background:var(--or) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12.5l4 4 8-9' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat}
+.vid{justify-self:center;width:100%;max-width:360px}
+.vid video{width:100%;aspect-ratio:9/16;border-radius:20px;background:#0B1620;box-shadow:0 18px 50px rgba(0,0,0,.45);display:block}
+.vid button{margin:10px auto 0;display:block;background:none;border:1px solid #5B6B78;color:#fff;border-radius:999px;padding:8px 16px;font-size:14px;cursor:pointer}
+.trust{background:#fff;border-bottom:1px solid #DCE2E7}
+.trust .wrap{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;padding:20px 16px}
+.trust div{text-align:center}
+.trust b{display:block;font-size:24px;color:var(--navy)}
+.trust span{font-size:14px;color:var(--mut)}
+.stars{color:#F5B400;letter-spacing:2px}
+section{padding:44px 0}
+h2{font-size:clamp(26px,4.5vw,36px);line-height:1.15;margin:0 0 10px}
+.sub{color:var(--mut);font-size:18px;margin:0 0 24px;max-width:700px}
+.cards{display:grid;grid-template-columns:1fr;gap:16px}
+.card{background:#fff;border:1px solid #DCE2E7;border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.card div{padding:18px}
+.card h3{margin:0 0 6px;font-size:22px}
+.card p{margin:0 0 12px;color:var(--mut)}
+.card a{color:var(--or);font-weight:700;text-decoration:none}
+.steps{display:grid;grid-template-columns:1fr;gap:12px;counter-reset:s}
+.step{background:var(--bg);border-radius:14px;padding:18px 18px 18px 64px;position:relative}
+.step:before{counter-increment:s;content:counter(s);position:absolute;left:18px;top:18px;width:32px;height:32px;border-radius:50%;background:var(--navy);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center}
+.step b{display:block;font-size:18px}
+.step span{color:var(--mut)}
+.zonas{background:var(--bg)}
+.zonas p{font-size:17px;color:var(--tx);max-width:880px}
+.formsec{background:linear-gradient(180deg,#FFF3E6 0%,#fff 100%)}
+.formbox{background:#fff;border-radius:18px;box-shadow:0 10px 40px rgba(18,32,43,.12);padding:22px;max-width:620px}
+form{display:grid;gap:12px}
+label{font-weight:600;font-size:15px}
+input,select{width:100%;font:inherit;font-size:17px;padding:13px 14px;border:1.5px solid #C9D3DC;border-radius:10px;background:#fff}
+.priv{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--mut);font-weight:400}
+.priv input{width:auto;margin-top:3px}
+form .btn{width:100%;font-size:18px}
+.note{font-size:14px;color:var(--mut);margin:8px 0 0}
+footer{background:var(--navy);color:#B9C7D3;font-size:14px;padding:22px 0}
+footer a{color:#fff;margin-right:14px}
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:50;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px;background:rgba(18,32,43,.96)}
+.bar a{padding:13px 10px;font-size:16px}
+@media(min-width:860px){
+ .hero .wrap{grid-template-columns:1.15fr .85fr}
+ .trust .wrap{grid-template-columns:repeat(4,1fr)}
+ .cards{grid-template-columns:1fr 1fr}
+ .steps{grid-template-columns:repeat(4,1fr)}
+ .step{padding:60px 18px 18px}
+ .bar{display:none}
+ body{padding-bottom:0}
+}
+</style>
+</head>
+<body>
+<header><div class="wrap"><a href="/"><img src="/img/logo-ams-blanco.svg" alt="AMS Cerramientos"></a><a class="tel" href="tel:+34639788220">639 78 82 20</a></div></header>
+
+<div class="hero"><div class="wrap">
+ <div>
+  <span class="kicker">Visita y presupuesto gratis</span>
+  <h1>Ventanas de PVC y <span>cancelas de aluminio</span>, hechas en nuestro taller</h1>
+  <p class="lead">Medimos en tu casa, te damos el precio cerrado por escrito y lo instalamos nosotros. Sin intermediarios y sin sorpresas.</p>
+  <div class="ctas">
+   <a class="btn or" href="#presupuesto">Pedir presupuesto gratis</a>
+   <a class="btn wa" id="wa-hero" href="https://wa.me/34639788220?text=Hola%2C%20quiero%20pedir%20presupuesto%20gratis" target="_blank" rel="noopener">WhatsApp</a>
+   <a class="btn gh" href="tel:+34639788220">Llamar</a>
+  </div>
+  <ul class="checks">
+   <li>Más de 20 años trabajando en tu zona</li>
+   <li>Taller propio en Villalbilla (Madrid)</li>
+   <li>Garantía por escrito</li>
+   <li>Instaladores oficiales Kömmerling</li>
+  </ul>
+ </div>
+ <div class="vid">
+  <video id="v" autoplay muted loop playsinline preload="metadata" poster="/img/anuncio-ams.jpg"><source src="/img/anuncio-ams.mp4" type="video/mp4"></video>
+  <button type="button" id="snd">Activar sonido</button>
+ </div>
+</div></div>
+
+<div class="trust"><div class="wrap">
+ <div><b><span class="stars">★★★★★</span> 4,5</b><span>en Google, 44 reseñas</span></div>
+ <div><b>+20 años</b><span>fabricando e instalando</span></div>
+ <div><b>Gratis</b><span>visita, medición y presupuesto</span></div>
+ <div><b>Precio cerrado</b><span>por escrito, sin sorpresas</span></div>
+</div></div>
+
+<section><div class="wrap">
+ <h2>Lo que mejor hacemos</h2>
+ <p class="sub">Somos fabricantes e instaladores. Lo que ves en el vídeo sale de nuestro taller.</p>
+ <div class="cards">
+  <div class="card"><img src="/img/ventana-pvc-hero.webp" alt="Salón con ventanal de PVC" loading="lazy"><div><h3>Ventanas de PVC</h3><p>Menos frío, menos ruido y más luz. Perfiles Kömmerling, medidos e instalados por nosotros, y nos llevamos las viejas.</p><a href="/calculadora">Calcula el precio de tus ventanas en 1 minuto</a></div></div>
+  <div class="card"><img src="/img/cancelas/01-henares-01.webp" alt="Cancela de aluminio soldado de AMS" loading="lazy"><div><h3>Cancelas de aluminio soldado</h3><p>Nuestra especialidad: a medida, soldadas en el taller y con motor si quieres. Sin mantenimiento y para muchos años.</p><a href="/cancelas-de-aluminio">Ver modelos y precios</a></div></div>
+ </div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap">
+ <h2>Así trabajamos</h2>
+ <p class="sub">Una sola empresa de principio a fin. Te atiende quien lo fabrica.</p>
+ <div class="steps">
+  <div class="step"><b>Vamos a tu casa</b><span>Vemos lo que necesitas, sin compromiso.</span></div>
+  <div class="step"><b>Medimos y presupuestamos</b><span>Precio cerrado por escrito, gratis.</span></div>
+  <div class="step"><b>Fabricamos</b><span>En nuestro taller de Villalbilla.</span></div>
+  <div class="step"><b>Instalamos</b><span>Y retiramos lo viejo. Te lo dejamos listo.</span></div>
+ </div>
+</div></section>
+
+<section class="zonas"><div class="wrap">
+ <h2>Trabajamos en tu zona</h2>
+ <p>Villalbilla, Alcalá de Henares, Torrejón de Ardoz, San Fernando de Henares, Coslada, Mejorada del Campo, Velilla, Loeches, Torres de la Alameda, Daganzo, Ajalvir, Camarma, Meco, Azuqueca, Alovera, Villanueva de la Torre, Cabanillas del Campo, Paracuellos del Jarama, Algete, Cobeña, Alcobendas, La Moraleja, San Sebastián de los Reyes y Guadalajara.</p>
+</div></section>
+
+<section class="formsec" id="presupuesto"><div class="wrap">
+ <h2>Pide tu visita y presupuesto gratis</h2>
+ <p class="sub">Déjanos tu nombre y tu teléfono y te llamamos para quedar. Sin compromiso.</p>
+ <div class="formbox">
+  <form>
+   <div><label for="f-n">Nombre</label><input id="f-n" name="nombre" autocomplete="name" required></div>
+   <div><label for="f-t">Teléfono</label><input id="f-t" name="telefono" type="tel" autocomplete="tel" required></div>
+   <div><label for="f-l">Localidad</label><input id="f-l" name="localidad" autocomplete="address-level2"></div>
+   <div><label for="f-s">¿Qué necesitas?</label><select id="f-s" name="servicio"><option>Ventanas de PVC</option><option>Ventanas de aluminio</option><option>Cancela de aluminio</option><option>Cerramiento de terraza</option><option>Otra cosa</option></select></div>
+   <input type="hidden" name="mensaje" id="f-o" value="">
+   <label class="priv"><input type="checkbox" name="privacidad" required> He leído y acepto la <a href="/privacidad">política de privacidad</a>.</label>
+   <button class="btn or" type="submit">Quiero mi presupuesto gratis</button>
+  </form>
+  <p class="note">O si lo prefieres, llámanos al <a href="tel:+34639788220">639 78 82 20</a> o escríbenos por WhatsApp.</p>
+ </div>
+</div></section>
+
+<footer><div class="wrap">AMS Cerramientos y Servicios S.L. · Villalbilla (Madrid)<br><a href="/aviso-legal">Aviso legal</a><a href="/privacidad">Privacidad</a><a href="/cookies">Cookies</a></div></footer>
+
+<div class="bar"><a class="btn gh" href="tel:+34639788220">Llamar</a><a class="btn wa" id="wa-bar" href="https://wa.me/34639788220?text=Hola%2C%20quiero%20pedir%20presupuesto%20gratis" target="_blank" rel="noopener">WhatsApp</a></div>
+
+<script>
+(function(){
+ // Origen del contacto (para saber qué anuncio funciona): se guarda y viaja con el mensaje
+ var o='';try{var q=new URLSearchParams(location.search);var s=q.get('utm_source'),c=q.get('utm_campaign');if(s){o=s+(c?' / '+c:'');localStorage.setItem('ams-origen',o)}else{o=localStorage.getItem('ams-origen')||''}}catch(e){}
+ if(!o)o='landing presupuesto gratis';
+ var f=document.getElementById('f-o');if(f)f.value='Origen: '+o;
+ ['wa-hero','wa-bar'].forEach(function(id){var a=document.getElementById(id);if(a)a.href='https://wa.me/34639788220?text='+encodeURIComponent('Hola, quiero pedir presupuesto gratis. (Origen: '+o+')')});
+ var v=document.getElementById('v'),b=document.getElementById('snd');
+ if(v&&b)b.addEventListener('click',function(){v.muted=!v.muted;if(!v.muted){v.currentTime=0;v.play()}b.textContent=v.muted?'Activar sonido':'Quitar sonido'});
+})();
+</script>
+<script src="/web.js"></script>
+<script src="/cookies.js?v=d65efbd9"></script>
+</body>
+</html>

@@ -1,8 +1,18 @@
 {
- "version": "2026-10-29T10:00",
+ "version": "2026-10-29T14:10",
  "fecha": "29 de octubre de 2026",
- "aviso": "Sobre los costes: nuestra intención es que tengas mucho trabajo lo antes posible. Si algún día hablamos de un fee, será más adelante y solo si tú quieres; por ahora ni nos lo planteamos, no hacemos esto para conseguir un fee.",
+ "aviso": "Tienes tu anuncio en vídeo y la página a la que llevaría la gente. Dale al play y dinos qué te parece.",
  "ultimo": [
+  {
+   "f": "29 oct",
+   "t": "Tu anuncio en vídeo para Instagram, Facebook y YouTube (30 segundos). Aún no está publicado: lo lanzamos con la web nueva.",
+   "u": "/guia-javi/video"
+  },
+  {
+   "f": "29 oct",
+   "t": "Y la página a la que llegaría quien vea el anuncio: con el vídeo, tus garantías, tus zonas y el botón de presupuesto gratis. Es de ejemplo, aún no está publicada.",
+   "u": "/presupuesto-gratis"
+  },
   {
    "f": "29 oct",
    "t": "Sobre los costes: nuestra intención es que tengas mucho trabajo lo antes posible. Ya hablaremos, en su caso, de un fee, pero por ahora ni nos lo planteamos: de verdad que no hacemos esto para conseguir un fee. Si algún día cambiara, solo sería con un acuerdo nuevo, por escrito y aceptado antes por ti."
@@ -78,5 +88,6 @@
     "h": "/cancelas-de-aluminio"
    }
   ]
- }
+ },
+ "enlace": "/guia-javi/video"
 }
