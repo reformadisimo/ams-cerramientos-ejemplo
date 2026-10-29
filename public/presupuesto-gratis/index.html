@@ -152,6 +152,13 @@ section:nth-of-type(1){background:radial-gradient(40% 50% at 95% 10%,#FFE8D6 0%,
  .hbgd{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
  .hero:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(18,32,43,.92) 0%,rgba(18,32,43,.72) 42%,rgba(18,32,43,.3) 70%,rgba(18,32,43,.55) 100%)}
 }
+.obra{background:linear-gradient(180deg,#fff 0%,#FFF5EC 100%)}
+.ogrid{display:grid;grid-template-columns:1fr;gap:22px;align-items:center}
+.ovid{position:relative;max-width:420px;justify-self:center;width:100%}
+.ovid video{width:100%;aspect-ratio:720/838;object-fit:cover;border-radius:20px;display:block;box-shadow:0 16px 40px rgba(18,32,43,.22);background:#ddd}
+.olive{position:absolute;top:14px;left:14px;background:#16A34A;color:#fff;font-weight:700;font-size:13px;padding:6px 12px;border-radius:999px;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.otxt p{font-size:18px;color:var(--mut);margin:0 0 12px}.otxt .oq{color:var(--tx)}
+@media(min-width:860px){.ogrid{grid-template-columns:.9fr 1.1fr;gap:48px}}
 footer{background:var(--navy);color:#B9C7D3;font-size:14px;padding:22px 0}
 footer a{color:#fff;margin-right:14px}
 .bar{position:fixed;left:0;right:0;bottom:0;z-index:50;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px;background:rgba(18,32,43,.96)}
@@ -210,6 +217,17 @@ footer a{color:#fff;margin-right:14px}
  <div class="cards">
   <div class="card rv"><img src="/img/ventana-pvc-hero.webp" alt="Salón con ventanal de PVC" loading="lazy"><div><span class="tag">Lo más pedido</span><h3>Ventanas de PVC</h3><p>Menos frío, menos ruido y más luz. Perfiles Kömmerling, medidos e instalados por nosotros, y nos llevamos las viejas.</p><a href="/calculadora">Calcula el precio de tus ventanas en 1 minuto</a></div></div>
   <div class="card rv"><img src="/img/cancelas/01-henares-01.webp" alt="Cancela de aluminio soldado de AMS" loading="lazy"><div><span class="tag">Nuestra especialidad</span><h3>Cancelas de aluminio soldado</h3><p>Nuestra especialidad: a medida, soldadas en el taller y con motor si quieres. Sin mantenimiento y para muchos años.</p><a href="/cancelas-de-aluminio">Ver modelos y precios</a></div></div>
+ </div>
+</div></section>
+
+<section class="obra"><div class="wrap ogrid">
+ <div class="ovid rv"><video autoplay muted loop playsinline preload="metadata" poster="/img/obra-cancela-alcala.jpg"><source src="/img/obra-cancela-alcala.mp4" type="video/mp4"></video><span class="olive">Trabajo real</span></div>
+ <div class="otxt rv">
+  <span class="tag">Recién montada · Alcalá de Henares</span>
+  <h2>Así queda una cancela de AMS</h2>
+  <p>Cancela de aluminio blanca, fabricada en nuestro taller y montada en Alcalá de Henares. Nos llamaron por recomendación de un vecino al que ya le habíamos hecho otra puerta.</p>
+  <p class="oq">Así nos llegan muchos de nuestros clientes: <b>por recomendación</b>.</p>
+  <a class="btn or" href="#presupuesto">Quiero una así <span aria-hidden="true">&rarr;</span></a>
  </div>
 </div></section>
 
