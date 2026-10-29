@@ -96,6 +96,23 @@ form .btn{width:100%;font-size:18px}
 .av{width:40px;height:40px;border-radius:50%;color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none}
 .rev b{display:block}.rev small{color:var(--mut)}
 @media(min-width:860px){.rgrid{grid-template-columns:repeat(3,1fr)}}
+.trust i,.step i{display:flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:16px;margin:0 auto 8px;box-shadow:0 6px 16px rgba(0,0,0,.12)}
+.trust img.g{width:16px;height:16px;vertical-align:-3px;margin-right:4px}
+.step{padding:18px 18px 18px 84px}.step i{position:absolute;left:16px;top:16px;margin:0}.step:before{display:none}
+.tag{display:inline-block;background:#FFF1E6;color:var(--or);font-weight:700;font-size:13px;padding:4px 10px;border-radius:999px;margin-bottom:8px}
+.wai{width:22px;height:22px;border-radius:6px}
+.vid{position:relative}
+.vbadge{position:absolute;top:14px;left:-10px;z-index:2;display:flex;align-items:center;gap:8px;background:#fff;color:var(--tx);border-radius:14px;padding:8px 12px;box-shadow:0 10px 28px rgba(0,0,0,.35);animation:flo 3s ease-in-out infinite}
+.vbadge img{width:28px;height:28px}.vbadge .s,.vbadge span{color:#F5A400;font-size:14px}.vbadge b{color:var(--tx);font-size:18px}
+@keyframes flo{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.gbadge{display:inline-flex;align-items:center;gap:12px;background:#fff;border:1px solid #DCE2E7;border-radius:16px;padding:10px 16px;margin:0 0 22px;box-shadow:0 6px 18px rgba(18,32,43,.08)}
+.gbadge img{width:40px;height:40px}.gbadge b{font-size:22px}.gbadge small{color:var(--mut)}
+.rev{position:relative}.gcorner{position:absolute;top:16px;right:16px;width:24px;height:24px}
+section:nth-of-type(1){background:radial-gradient(40% 50% at 95% 10%,#FFE8D6 0%,transparent 70%),radial-gradient(35% 45% at 0% 90%,#E3EEFF 0%,transparent 70%)}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.rv.vis{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}.vbadge{animation:none}}
+@media(min-width:860px){.steps .step{padding:84px 18px 18px}.steps .step i{left:18px;top:18px}}
 footer{background:var(--navy);color:#B9C7D3;font-size:14px;padding:22px 0}
 footer a{color:#fff;margin-right:14px}
 .bar{position:fixed;left:0;right:0;bottom:0;z-index:50;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px;background:rgba(18,32,43,.96)}
@@ -121,7 +138,7 @@ footer a{color:#fff;margin-right:14px}
   <p class="lead">Medimos en tu casa, te damos el precio cerrado por escrito y lo instalamos nosotros. Sin intermediarios y sin sorpresas.</p>
   <div class="ctas">
    <a class="btn or" href="#presupuesto">Pedir presupuesto gratis</a>
-   <a class="btn wa" id="wa-hero" href="https://wa.me/34639788220?text=Hola%2C%20quiero%20pedir%20presupuesto%20gratis" target="_blank" rel="noopener">WhatsApp</a>
+   <a class="btn wa" id="wa-hero" href="https://wa.me/34639788220?text=Hola%2C%20quiero%20pedir%20presupuesto%20gratis" target="_blank" rel="noopener"><img src="/img/gl-whatsapp.png" alt="" class="wai">WhatsApp</a>
    <a class="btn gh" href="tel:+34639788220">Llamar</a>
   </div>
   <ul class="checks">
@@ -131,25 +148,25 @@ footer a{color:#fff;margin-right:14px}
    <li>Instaladores oficiales Kömmerling</li>
   </ul>
  </div>
- <div class="vid">
+ <div class="vid"><div class="vbadge"><img src="/img/gl-gbp.png" alt=""><span><b>4,5</b> ★★★★★</span></div>
   <video id="v" autoplay muted loop playsinline preload="metadata" poster="/img/anuncio-ams.jpg"><source src="/img/anuncio-ams-web.mp4" type="video/mp4"></video>
   <button type="button" id="snd">Activar sonido</button>
  </div>
 </div></div>
 
 <div class="trust"><div class="wrap">
- <div><b><span class="stars">★★★★★</span> 4,5</b><span>en Google, 44 reseñas</span></div>
- <div><b>+20 años</b><span>fabricando e instalando</span></div>
- <div><b>Gratis</b><span>visita, medición y presupuesto</span></div>
- <div><b>Precio cerrado</b><span>por escrito, sin sorpresas</span></div>
+ <div class="rv"><i style="background:#F5A400"><svg viewBox="0 0 24 24" width="26" height="26" fill="#fff" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg></i><b>4,5</b><span><img src="/img/gl-gbp.png" alt="" class="g">en Google, 44 reseñas</span></div>
+ <div class="rv"><i style="background:#2563EB"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/></svg></i><b>+<span class="cnt" data-to="20">20</span> años</b><span>fabricando e instalando</span></div>
+ <div class="rv"><i style="background:#16A34A"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8v13M3 12h18M12 8c-2-4-6-4-6-1s6 1 6 1zm0 0c2-4 6-4 6-1s-6 1-6 1z"/></svg></i><b>Gratis</b><span>visita, medición y presupuesto</span></div>
+ <div class="rv"><i style="background:#C2410C"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6M9 15l2 2 4-4"/></svg></i><b>Precio cerrado</b><span>por escrito, sin sorpresas</span></div>
 </div></div>
 
 <section><div class="wrap">
  <h2>Lo que mejor hacemos</h2>
  <p class="sub">Somos fabricantes e instaladores. Lo que ves en el vídeo sale de nuestro taller.</p>
  <div class="cards">
-  <div class="card"><img src="/img/ventana-pvc-hero.webp" alt="Salón con ventanal de PVC" loading="lazy"><div><h3>Ventanas de PVC</h3><p>Menos frío, menos ruido y más luz. Perfiles Kömmerling, medidos e instalados por nosotros, y nos llevamos las viejas.</p><a href="/calculadora">Calcula el precio de tus ventanas en 1 minuto</a></div></div>
-  <div class="card"><img src="/img/cancelas/01-henares-01.webp" alt="Cancela de aluminio soldado de AMS" loading="lazy"><div><h3>Cancelas de aluminio soldado</h3><p>Nuestra especialidad: a medida, soldadas en el taller y con motor si quieres. Sin mantenimiento y para muchos años.</p><a href="/cancelas-de-aluminio">Ver modelos y precios</a></div></div>
+  <div class="card rv"><img src="/img/ventana-pvc-hero.webp" alt="Salón con ventanal de PVC" loading="lazy"><div><span class="tag">Lo más pedido</span><h3>Ventanas de PVC</h3><p>Menos frío, menos ruido y más luz. Perfiles Kömmerling, medidos e instalados por nosotros, y nos llevamos las viejas.</p><a href="/calculadora">Calcula el precio de tus ventanas en 1 minuto</a></div></div>
+  <div class="card rv"><img src="/img/cancelas/01-henares-01.webp" alt="Cancela de aluminio soldado de AMS" loading="lazy"><div><span class="tag">Nuestra especialidad</span><h3>Cancelas de aluminio soldado</h3><p>Nuestra especialidad: a medida, soldadas en el taller y con motor si quieres. Sin mantenimiento y para muchos años.</p><a href="/cancelas-de-aluminio">Ver modelos y precios</a></div></div>
  </div>
 </div></section>
 
@@ -157,10 +174,10 @@ footer a{color:#fff;margin-right:14px}
  <h2>Así trabajamos</h2>
  <p class="sub">Una sola empresa de principio a fin. Te atiende quien lo fabrica.</p>
  <div class="steps">
-  <div class="step"><b>Vamos a tu casa</b><span>Vemos lo que necesitas, sin compromiso.</span></div>
-  <div class="step"><b>Medimos y presupuestamos</b><span>Precio cerrado por escrito, gratis.</span></div>
-  <div class="step"><b>Fabricamos</b><span>En nuestro taller de Villalbilla.</span></div>
-  <div class="step"><b>Instalamos</b><span>Y retiramos lo viejo. Te lo dejamos listo.</span></div>
+  <div class="step rv"><i style="background:#2563EB"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v10H3z"/><path d="M9 21v-6h6v6"/></svg></i><b>Vamos a tu casa</b><span>Vemos lo que necesitas, sin compromiso.</span></div>
+  <div class="step rv"><i style="background:#7C3AED"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17L17 3l4 4L7 21z"/><path d="M7 13l2 2M10 10l2 2M13 7l2 2"/></svg></i><b>Medimos y presupuestamos</b><span>Precio cerrado por escrito, gratis.</span></div>
+  <div class="step rv"><i style="background:#C2410C"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg></i><b>Fabricamos</b><span>En nuestro taller de Villalbilla.</span></div>
+  <div class="step rv"><i style="background:#16A34A"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 6h12v10H2zM14 10h4l3 3v3h-7z"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg></i><b>Instalamos</b><span>Y retiramos lo viejo. Te lo dejamos listo.</span></div>
  </div>
 </div></section>
 
@@ -171,8 +188,8 @@ footer a{color:#fff;margin-right:14px}
 
 <section class="revs"><div class="wrap">
  <h2>Lo que dicen nuestros clientes</h2>
- <p class="sub"><span class="stars">★★★★★</span> 4,5 sobre 5 en Google · 44 reseñas</p>
- <div class="rgrid"><figure class="rev"><div class="stars">★★★★★</div><blockquote>“Encantados con su trabajo. El mejor presupuesto con diferencia, muy profesionales, cumplieron con los tiempos y en la instalación se fijaron en cada detalle para que quedara como queríamos. Gracias!!”</blockquote><figcaption><span class="av" style="background:#7C3AED">L</span><span><b>Laura D.</b><small>Reseña de Google · 5/5</small></span></figcaption></figure><figure class="rev"><div class="stars">★★★★★</div><blockquote>“Excelente trabajo, materiales y acabados, muy profesionales, sin duda los mejores de toda la zona y con precios muy competitivos. Lo recomiendo al 100%”</blockquote><figcaption><span class="av" style="background:#0369A1">R</span><span><b>Rafael O.</b><small>Reseña de Google · 5/5</small></span></figcaption></figure><figure class="rev"><div class="stars">★★★★★</div><blockquote>“Solicité un presupuesto de una cancela para un garaje + puerta de acceso a exterior en aluminio blanco y la verdad es que han sido super rápidos, muy profesionales y baratos. Además la puerta es muy bonita. Lo recomiendo 100%.”</blockquote><figcaption><span class="av" style="background:#0F766E">A</span><span><b>Alejandro M.</b><small>Reseña de Google · 5/5</small></span></figcaption></figure></div>
+ <p class="gbadge"><img src="/img/gl-gbp.png" alt="Google"><span><b>4,5</b> <span class="stars">★★★★★</span><br><small>44 reseñas en Google</small></span></p>
+ <div class="rgrid"><figure class="rev rv"><img src="/img/gl-gbp.png" alt="" class="gcorner"><div class="stars">★★★★★</div><blockquote>“Encantados con su trabajo. El mejor presupuesto con diferencia, muy profesionales, cumplieron con los tiempos y en la instalación se fijaron en cada detalle para que quedara como queríamos. Gracias!!”</blockquote><figcaption><span class="av" style="background:#7C3AED">L</span><span><b>Laura D.</b><small>Reseña de Google · 5/5</small></span></figcaption></figure><figure class="rev rv"><img src="/img/gl-gbp.png" alt="" class="gcorner"><div class="stars">★★★★★</div><blockquote>“Excelente trabajo, materiales y acabados, muy profesionales, sin duda los mejores de toda la zona y con precios muy competitivos. Lo recomiendo al 100%”</blockquote><figcaption><span class="av" style="background:#0369A1">R</span><span><b>Rafael O.</b><small>Reseña de Google · 5/5</small></span></figcaption></figure><figure class="rev rv"><img src="/img/gl-gbp.png" alt="" class="gcorner"><div class="stars">★★★★★</div><blockquote>“Solicité un presupuesto de una cancela para un garaje + puerta de acceso a exterior en aluminio blanco y la verdad es que han sido super rápidos, muy profesionales y baratos. Además la puerta es muy bonita. Lo recomiendo 100%.”</blockquote><figcaption><span class="av" style="background:#0F766E">A</span><span><b>Alejandro M.</b><small>Reseña de Google · 5/5</small></span></figcaption></figure></div>
 </div></section>
 
 <section class="formsec" id="presupuesto"><div class="wrap fgrid">
@@ -212,7 +229,7 @@ footer a{color:#fff;margin-right:14px}
 
 <footer><div class="wrap">AMS Cerramientos y Servicios S.L. · Villalbilla (Madrid)<br><a href="/aviso-legal">Aviso legal</a><a href="/privacidad">Privacidad</a><a href="/cookies">Cookies</a></div></footer>
 
-<div class="bar"><a class="btn gh" href="tel:+34639788220">Llamar</a><a class="btn wa" id="wa-bar" href="https://wa.me/34639788220?text=Hola%2C%20quiero%20pedir%20presupuesto%20gratis" target="_blank" rel="noopener">WhatsApp</a></div>
+<div class="bar"><a class="btn gh" href="tel:+34639788220">Llamar</a><a class="btn wa" id="wa-bar" href="https://wa.me/34639788220?text=Hola%2C%20quiero%20pedir%20presupuesto%20gratis" target="_blank" rel="noopener"><img src="/img/gl-whatsapp.png" alt="" class="wai">WhatsApp</a></div>
 
 <script>
 (function(){
@@ -222,6 +239,9 @@ footer a{color:#fff;margin-right:14px}
  var f=document.getElementById('f-o');if(f)f.value='Origen: '+o;
  ['wa-hero','wa-bar'].forEach(function(id){var a=document.getElementById(id);if(a)a.href='https://wa.me/34639788220?text='+encodeURIComponent('Hola, quiero pedir presupuesto gratis. (Origen: '+o+')')});
 document.querySelectorAll('.tile').forEach(function(t){t.addEventListener('click',function(){document.querySelectorAll('.tile').forEach(function(x){x.classList.remove('on')});t.classList.add('on');var h=document.getElementById('f-s');if(h)h.value=t.dataset.v})});
+
+ var io='IntersectionObserver' in window?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target);var c=e.target.querySelector('.cnt');if(c){var to=+c.dataset.to,n=0,t=setInterval(function(){n++;c.textContent=n;if(n>=to)clearInterval(t)},45)}}})},{threshold:.15}):null;
+ document.querySelectorAll('.rv').forEach(function(el,i){el.style.transitionDelay=(i%4)*90+'ms';if(io)io.observe(el);else el.classList.add('vis')});
  var v=document.getElementById('v'),b=document.getElementById('snd');
  if(v&&b)b.addEventListener('click',function(){v.muted=!v.muted;if(!v.muted){v.currentTime=0;v.play()}b.textContent=v.muted?'Activar sonido':'Quitar sonido'});
 })();
