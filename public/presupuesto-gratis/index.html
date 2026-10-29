@@ -88,6 +88,14 @@ form .btn{width:100%;font-size:18px}
 @media(prefers-reduced-motion:reduce){.btn.big{animation:none}}
 .note{text-align:center}
 @media(min-width:860px){.fgrid{grid-template-columns:1fr 1fr;gap:48px}.tiles{grid-template-columns:repeat(4,1fr)}}
+.revs{background:#fff}
+.rgrid{display:grid;grid-template-columns:1fr;gap:14px}
+.rev{margin:0;background:var(--bg);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:12px}
+.rev blockquote{margin:0;font-size:17px;line-height:1.55;color:var(--tx)}
+.rev figcaption{display:flex;align-items:center;gap:12px;margin-top:auto}
+.av{width:40px;height:40px;border-radius:50%;color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none}
+.rev b{display:block}.rev small{color:var(--mut)}
+@media(min-width:860px){.rgrid{grid-template-columns:repeat(3,1fr)}}
 footer{background:var(--navy);color:#B9C7D3;font-size:14px;padding:22px 0}
 footer a{color:#fff;margin-right:14px}
 .bar{position:fixed;left:0;right:0;bottom:0;z-index:50;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px;background:rgba(18,32,43,.96)}
@@ -159,6 +167,12 @@ footer a{color:#fff;margin-right:14px}
 <section class="zonas"><div class="wrap">
  <h2>Trabajamos en tu zona</h2>
  <p>Villalbilla, Alcalá de Henares, Torrejón de Ardoz, San Fernando de Henares, Coslada, Mejorada del Campo, Velilla, Loeches, Torres de la Alameda, Daganzo, Ajalvir, Camarma, Meco, Azuqueca, Alovera, Villanueva de la Torre, Cabanillas del Campo, Paracuellos del Jarama, Algete, Cobeña, Alcobendas, La Moraleja, San Sebastián de los Reyes y Guadalajara.</p>
+</div></section>
+
+<section class="revs"><div class="wrap">
+ <h2>Lo que dicen nuestros clientes</h2>
+ <p class="sub"><span class="stars">★★★★★</span> 4,5 sobre 5 en Google · 44 reseñas</p>
+ <div class="rgrid"><figure class="rev"><div class="stars">★★★★★</div><blockquote>“Encantados con su trabajo. El mejor presupuesto con diferencia, muy profesionales, cumplieron con los tiempos y en la instalación se fijaron en cada detalle para que quedara como queríamos. Gracias!!”</blockquote><figcaption><span class="av" style="background:#7C3AED">L</span><span><b>Laura D.</b><small>Reseña de Google · 5/5</small></span></figcaption></figure><figure class="rev"><div class="stars">★★★★★</div><blockquote>“Excelente trabajo, materiales y acabados, muy profesionales, sin duda los mejores de toda la zona y con precios muy competitivos. Lo recomiendo al 100%”</blockquote><figcaption><span class="av" style="background:#0369A1">R</span><span><b>Rafael O.</b><small>Reseña de Google · 5/5</small></span></figcaption></figure><figure class="rev"><div class="stars">★★★★★</div><blockquote>“Solicité un presupuesto de una cancela para un garaje + puerta de acceso a exterior en aluminio blanco y la verdad es que han sido super rápidos, muy profesionales y baratos. Además la puerta es muy bonita. Lo recomiendo 100%.”</blockquote><figcaption><span class="av" style="background:#0F766E">A</span><span><b>Alejandro M.</b><small>Reseña de Google · 5/5</small></span></figcaption></figure></div>
 </div></section>
 
 <section class="formsec" id="presupuesto"><div class="wrap fgrid">
