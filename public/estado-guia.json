@@ -1,8 +1,16 @@
 {
- "version": "2026-10-28T19:00",
- "fecha": "28 de octubre de 2026",
- "aviso": "Gracias por contarnos tus zonas y cómo te llegan los clientes: con eso ya podemos afinar las campañas. Y ya estamos pendientes de que te pasen la titularidad de la ficha de Google.",
+ "version": "2026-10-29T09:10",
+ "fecha": "29 de octubre de 2026",
+ "aviso": "Tu dominio ya está en tu cuenta de DonDominio y tu web vieja y tu correo siguen funcionando igual. Gracias por avisarnos de que el correo de la empresa está en el servidor actual: lo moveremos con calma, sin cortarte nada.",
  "ultimo": [
+  {
+   "f": "29 oct",
+   "t": "Dominio: ya tienes tu cuenta de DonDominio y has entrado tú mismo. Está todo preparado en tu cuenta, y tu web vieja y tu correo siguen funcionando igual. Antes de apuntar el dominio a la web nueva te diremos la fecha y la decides tú."
+  },
+  {
+   "f": "28 oct",
+   "t": "Anotado que el correo de la empresa está alojado en el servidor de tu proveedor actual. Lo tendremos en cuenta: lo moveremos a un sitio que sea tuyo, con calma y sin cortarte nada."
+  },
   {
    "f": "28 oct",
    "t": "Gracias por contarnos tu producto estrella: las cancelas de aluminio soldado y las ventanas de PVC. Con eso afinamos los anuncios, la portada y la ventana de salida para empujar justo eso."
@@ -18,24 +26,13 @@
   {
    "f": "28 oct",
    "t": "Ficha de Google: has pedido al propietario actual que te pase la titularidad. En cuanto te conteste y seas propietario principal, avísanos y te explicamos el siguiente paso. Las reseñas se contestan cuando la ficha sea tuya."
-  },
-  {
-   "f": "28 oct",
-   "t": "Cómo trabajamos: rápido, sin reuniones ni llamadas, por correo y WhatsApp, y robándote el menor tiempo posible. Al principio hace falta algo de esfuerzo por tu parte; después, casi todo tu tiempo es para tu trabajo."
-  },
-  {
-   "f": "28 oct",
-   "t": "No te pedimos tu facturación: solo dos números. Cuántos de los contactos acaban siendo clientes y cuánto deja de media cada cliente. Está explicado en la guía, con ejemplo."
-  },
-  {
-   "f": "27 oct",
-   "t": "Tu cuenta de Google Analytics ya está creada, es tuya y nos has dado acceso de administrador. Nos has pasado también el código de medición, así que ya podemos conectarla con la web nueva."
   }
  ],
  "cuentas": {
   "ads": "Hoy la cuenta de anuncios es de tu agencia y tú no tienes acceso. Lo más limpio es abrir una cuenta nueva de Google Ads a tu nombre, con el correo de la empresa y tu tarjeta; te guiamos paso a paso y nos das acceso. Después abrimos también la de Facebook e Instagram.",
   "analytics": "Ya tienes tu propia cuenta de Google Analytics, creada por ti con tu correo de Gmail de empresa, y nos has dado acceso de administrador. Nos has pasado el código de medición para conectarla con la web nueva.",
-  "ficha": "Hoy el propietario principal de la ficha es la cuenta de tu agencia actual y tú figuras como gestor, por eso Google no te deja añadir ni quitar a nadie. El 28 de octubre le has pedido por WhatsApp que te pase la titularidad y estamos esperando su respuesta. Cuando seas propietario principal, nos añades como gestores. Si no contesta en un par de días, hay un plan B desde Google."
+  "dominio": "Tu dominio está en tu propia cuenta de DonDominio y has entrado tú mismo. La configuración ya está preparada en tu cuenta, y tu web vieja y tu correo siguen funcionando igual. Antes de apuntarlo a la web nueva te avisamos de la fecha y la decides tú. El correo de la empresa sigue alojado en el servidor de tu proveedor actual; lo moveremos después, con calma y sin cortarte nada.",
+  "ficha": "Hoy el propietario principal de la ficha es la cuenta de tu agencia actual y tú figuras como gestor, por eso Google no te deja añadir ni quitar a nadie. El 28 de octubre le has pedido por WhatsApp que te pase la titularidad y estamos esperando su respuesta. El otro gestor que aparece viene de un anuncio de Sedinfo: lo dejamos como está y, cuando la ficha sea tuya, decides si se queda. Cuando seas propietario principal, nos añades como gestores. Si no contesta en un par de días, hay un plan B desde Google."
  },
  "resueltas": [
   1,
