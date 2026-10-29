@@ -1,8 +1,12 @@
 {
- "version": "2026-10-29T09:10",
+ "version": "2026-10-29T10:00",
  "fecha": "29 de octubre de 2026",
- "aviso": "Tu dominio ya está en tu cuenta de DonDominio y tu web vieja y tu correo siguen funcionando igual. Gracias por avisarnos de que el correo de la empresa está en el servidor actual: lo moveremos con calma, sin cortarte nada.",
+ "aviso": "Sobre los costes: nuestra intención es que tengas mucho trabajo lo antes posible. Si algún día hablamos de un fee, será más adelante y solo si tú quieres; por ahora ni nos lo planteamos, no hacemos esto para conseguir un fee.",
  "ultimo": [
+  {
+   "f": "29 oct",
+   "t": "Sobre los costes: nuestra intención es que tengas mucho trabajo lo antes posible. Ya hablaremos, en su caso, de un fee, pero por ahora ni nos lo planteamos: de verdad que no hacemos esto para conseguir un fee. Si algún día cambiara, solo sería con un acuerdo nuevo, por escrito y aceptado antes por ti."
+  },
   {
    "f": "29 oct",
    "t": "Dominio: ya tienes tu cuenta de DonDominio y has entrado tú mismo. Está todo preparado en tu cuenta, y tu web vieja y tu correo siguen funcionando igual. Antes de apuntar el dominio a la web nueva te diremos la fecha y la decides tú."
@@ -22,10 +26,6 @@
   {
    "f": "28 oct",
    "t": "Anotado cómo te llegan los clientes: sobre todo por buzoneo, recomendaciones, clientes antiguos y reformistas, y algunos por la web. Gracias por los importes orientativos: cancela motorizada entre 2.000 y 3.500 euros más IVA, y ventanas (4 a 8) entre 2.000 y 7.000 euros más IVA. No hace falta que lleves ningún control más."
-  },
-  {
-   "f": "28 oct",
-   "t": "Ficha de Google: has pedido al propietario actual que te pase la titularidad. En cuanto te conteste y seas propietario principal, avísanos y te explicamos el siguiente paso. Las reseñas se contestan cuando la ficha sea tuya."
   }
  ],
  "cuentas": {
