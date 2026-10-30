@@ -35,6 +35,12 @@ module.exports = async (req, res) => {
       out.sin_llamar = await correo(PARA, (L.length === 1 ? '1 persona espera' : L.length + ' personas esperan') + ' tu llamada',
         caja('<p style="font-size:18px;font-weight:700">' + (L.length === 1 ? 'Una persona lleva casi un día esperando' : L.length + ' personas llevan casi un día esperando') + '</p><p>Cuanto antes se llama, más trabajos se cierran.</p><table style="border-collapse:collapse">' + filas + '</table><p style="margin-top:18px"><a href="' + CRM_URL + '" style="background:#C2410C;color:#fff;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:700">Abrir tus contactos</a></p>'));
     }
+    // 1b. Seguimiento: visitas sin presupuesto (3 días) y presupuestos sin respuesta (7 y 14 días)
+    const SG = await rpc('adm_seguimiento', { p_secret: sec });
+    const lin = (c, txt) => '<tr><td style="padding:8px 6px"><b>' + esc(c.nombre) + '</b><br><span style="color:#5B6B79;font-size:13px">' + txt + '</span></td><td style="padding:8px 6px">' + (c.tel ? '<a href="tel:' + esc(String(c.tel).replace(/\D/g, '')) + '">' + esc(c.tel) + '</a>' : '') + '</td></tr>';
+    const filasS = (SG.visitas || []).map(c => lin(c, 'Fuiste a verle hace 3 días. ¿Le has pasado ya el presupuesto?')).concat((SG.presupuestos || []).map(c => lin(c, 'Le pasaste el presupuesto hace ' + Math.round((Date.now() - c.fp) / 864e5) + ' días. ¿Qué te ha dicho?')));
+    if (filasS.length) out.seguimiento = await correo(PARA, filasS.length === 1 ? 'Un cliente pendiente de respuesta' : filasS.length + ' clientes pendientes de respuesta',
+      caja('<p style="font-size:18px;font-weight:700">Toca preguntar</p><p>Una llamada a tiempo cierra muchos trabajos que se quedan en el aire.</p><table style="border-collapse:collapse">' + filasS.join('') + '</table><p style="margin-top:18px"><a href="' + CRM_URL + '" style="background:#C2410C;color:#fff;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:700">Apuntar cómo ha ido</a></p>'));
     // 2. Lunes: resumen semanal para nosotros
     const lunes = new Date().toLocaleDateString('es-ES', { weekday: 'long', timeZone: 'Europe/Madrid' }) === 'lunes';
     if (lunes || req.query.resumen === '1') {

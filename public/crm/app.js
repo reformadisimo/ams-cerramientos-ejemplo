@@ -68,9 +68,9 @@ const hoy=()=>Date.now(), dias=n=>hoy()-n*864e5;
 function demo(){return {yo:'Javi',equipo:['Javi','Óscar'],media:6000,id:20,tour:0,L:[
  {id:1,nombre:'Marta Gil',tel:'600111222',ok:'web',origen:'Anuncio de Google',tk:'ventanas',zona:'Villalbilla',f:dias(0),est:'nuevo',pide:'6 ventanas de PVC, oscilobatientes, blancas',h:[{f:dias(0),q:'Web',x:'Ha pedido presupuesto desde la web'}]},
  {id:2,nombre:'Luis Ortega',tel:'600333444',ok:'web',origen:'Calculadora de la web',tk:'cancela',zona:'Alcalá de Henares',f:dias(1),est:'nuevo',pide:'Cancela corredera motorizada, 4,5 m',h:[{f:dias(1),q:'Web',x:'Ha usado la calculadora: unos 3.100 €'}]},
- {id:3,nombre:'Pilar Romero',tel:'600555666',ok:'buzoneo',origen:'Buzoneo',tk:'ventanas',zona:'Torres de la Alameda',f:dias(3),est:'visita',quien:'Javi',h:[{f:dias(3),q:'Javi',x:'Apuntada (buzoneo)'},{f:dias(1),q:'Javi',x:'Visita hecha. Chalet, 8 ventanas de aluminio viejas.'}]},
- {id:4,nombre:'Andrés Molina',tel:'600777888',ok:'reco',origen:'Me lo han recomendado',tk:'cerramiento',zona:'Loeches',f:dias(6),est:'presupuesto',quien:'Óscar',h:[{f:dias(6),q:'Javi',x:'Lo manda su cuñado (cliente de 2024)'},{f:dias(2),q:'Óscar',x:'Presupuesto dado'}]},
- {id:5,nombre:'Sonia Prieto',tel:'600999000',ok:'web',origen:'Facebook / Instagram',tk:'cancela',zona:'Meco',f:dias(9),est:'si',importe:5400,rel:90,quien:'Javi',h:[{f:dias(9),q:'Web',x:'Ha pedido presupuesto desde Instagram'},{f:dias(4),q:'Javi',x:'Contratado'}]},
+ {id:3,nombre:'Pilar Romero',tel:'600555666',ok:'buzoneo',origen:'Buzoneo',tk:'ventanas',zona:'Torres de la Alameda',f:dias(6),est:'visita',fv:dias(4),quien:'Javi',h:[{f:dias(6),q:'Javi',x:'Apuntada (buzoneo)'},{f:dias(4),q:'Javi',x:'Visita hecha. Chalet, 8 ventanas de aluminio viejas.'}]},
+ {id:4,nombre:'Andrés Molina',tel:'600777888',ok:'reco',origen:'Me lo han recomendado',tk:'cerramiento',zona:'Loeches',f:dias(12),est:'presupuesto',fp:dias(8),quien:'Óscar',h:[{f:dias(12),q:'Javi',x:'Lo manda su cuñado (cliente de 2024)'},{f:dias(8),q:'Óscar',x:'Presupuesto dado'}]},
+ {id:5,nombre:'Sonia Prieto',tel:'600999000',ok:'web',origen:'Facebook / Instagram',tk:'cancela',zona:'Meco',f:dias(9),est:'si',quien:'Javi',h:[{f:dias(9),q:'Web',x:'Ha pedido presupuesto desde Instagram'},{f:dias(4),q:'Javi',x:'Contratado'}]},
  {id:6,nombre:'Raúl Benito',tel:'611222333',ok:'buzoneo',origen:'Buzoneo',tk:'ventanas',zona:'Villalbilla',f:dias(12),est:'si',importe:4800,rel:80,quien:'Javi',h:[{f:dias(2),q:'Javi',x:'Contratado'}]},
  {id:7,nombre:'Elena Vidal',tel:'611444555',ok:'web',origen:'Anuncio de Google',tk:'ventanas',zona:'Torrejón de Ardoz',f:dias(14),est:'no',motivo:'Por el precio',quien:'Javi',h:[{f:dias(5),q:'Javi',x:'No ha salido: por el precio'}]},
  {id:8,nombre:'Jorge Pastor',tel:'611666777',ok:'antiguo',origen:'Ya era cliente',tk:'pergola',zona:'Alcalá de Henares',f:dias(16),est:'si',importe:3900,rel:65,quien:'Óscar',h:[{f:dias(7),q:'Óscar',x:'Contratado'}]},
@@ -94,7 +94,7 @@ function fiesta(){const c=$('cf'),ctx=c.getContext('2d');c.width=innerWidth;c.he
 // ---------- datos ----------
 let D;            // {yo, equipo, media, tour, L, rol}
 let TOKEN='';
-const LOCAL=REAL?lsg(K+'-local',{media:0,tour:0,imp:{},ll:{}}):null; // en el modo real, lo que solo vive en este móvil
+const LOCAL=REAL?lsg(K+'-local',{media:0,tour:0,imp:{},ll:{},pos:{}}):null; // en el modo real, lo que solo vive en este móvil
 const COLA=REAL?lsg(K+'-cola',[]):[];
 function guarda(){
  if(!REAL){lss(K,D);return}
@@ -110,6 +110,7 @@ function deServidor(c){
  const x=Object.assign({},c);x.h=c.h||[];
  if(LOCAL.imp[x.id])x.importe=LOCAL.imp[x.id];
  if(LOCAL.ll[x.id])x.ll=LOCAL.ll[x.id];
+ LOCAL.pos=LOCAL.pos||{};if(LOCAL.pos[x.id])x.pos=LOCAL.pos[x.id];
  return x;
 }
 let enviando=false;
@@ -154,7 +155,7 @@ const A={
   D.L.unshift(x);encola({fn:'crear',id:tmp,d:{nombre:n.nombre,tel:n.tel,ok:n.ok,origen:o.n,tk:n.tk,zona:n.zona,quien:D.yo}});return x;
  },
  cambiar(x,cambios,evento){
-  if('est' in cambios){x.est=cambios.est;if(x.est!=='si'){delete x.rel}if(x.est!=='no'){delete x.motivo}}
+  if('est' in cambios){x.est=cambios.est;if(x.est==='visita'&&!x.fv)x.fv=hoy();if(x.est==='presupuesto'&&!x.fp)x.fp=hoy();delete x.pos;if(REAL)delete LOCAL.pos[x.id];if(x.est!=='si'){delete x.rel}if(x.est!=='no'){delete x.motivo}}
   ['motivo','quien','tel','rel'].forEach(k=>{if(k in cambios)x[k]=cambios[k]});
   if(evento)x.h.push({f:hoy(),q:D.yo,x:evento});
   if(!REAL){guarda();return}
@@ -166,6 +167,7 @@ const A={
   if(REAL){LOCAL.imp[x.id]=euros}
   A.cambiar(x,{rel},rel?'Factura '+txtRel(rel):'Importe apuntado');
  },
+ posponer(x,diasN){x.pos=hoy()+diasN*864e5;if(REAL)LOCAL.pos[x.id]=x.pos;guarda()},
  llamado(x,v){if(v)x.ll=v;else delete x.ll;if(REAL){if(v)LOCAL.ll[x.id]=v;else delete LOCAL.ll[x.id]}guarda()}
 };
 
@@ -175,12 +177,31 @@ const mes=()=>D.L.filter(x=>hoy()-x.f<30*864e5);
 // ---------- tarjetas ----------
 function card(x,conLlamar){
  const o=OR(x.ok),t=TR(x.tk),tl=String(x.tel||'').replace(/\D/g,'');
- let h='<div class="card"><div class="top" data-f="'+x.id+'"><div class="ic '+(esWeb(x)?'web':x.est==='si'?'si':x.est==='no'?'no':'')+'">'+ic(x.est==='si'?'check':x.est==='no'?'x':o.i)+'</div><div class="t"><b>'+esc(x.nombre)+'</b><small>'+esc(t.k?t.n:(x.pide||t.n))+(x.zona?' · '+esc(x.zona):'')+'</small><small>'+esc(x.origen||o.n)+' · '+cuando(x.f)+'</small></div><span class="st '+x.est+'">'+ETN[x.est]+'</span></div>';
+ let h='<div class="card"><div class="top" data-f="'+x.id+'"><div class="ic '+(esWeb(x)?'web':x.est==='si'?'si':x.est==='no'?'no':'')+'">'+ic(x.est==='si'?'check':x.est==='no'?'x':o.i)+'</div><div class="t"><b>'+esc(x.nombre)+'</b><small>'+esc(t.k?t.n:(x.pide||t.n))+(x.zona?' · '+esc(x.zona):'')+'</small><small>'+esc(x.origen||o.n)+' · '+cuando(x.f)+'</small>'+(x.est==='nuevo'&&diasDe(x.f)>=1?'<small class="tarde">Lleva '+(diasDe(x.f)===1?'un día':diasDe(x.f)+' días')+' esperando tu llamada</small>':'')+'</div><span class="st '+x.est+'">'+ETN[x.est]+'</span></div>';
  if(conLlamar){
   if(x.ll&&x.est==='nuevo')h+='<div class="preg"><span>¿Hablaste ya con '+esc(nombre(x))+'?</span><button class="si" data-h="'+x.id+'">Sí</button><button data-n="'+x.id+'">Aún no</button></div>';
   else if(tl)h+='<div class="acts"><a href="tel:'+tl+'" data-ll="'+x.id+'">'+ic('tel')+'Llamar</a><a class="wa" data-ll="'+x.id+'" href="https://wa.me/34'+tl.slice(-9)+'?text='+encodeURIComponent('Hola '+nombre(x)+', soy '+D.yo+' de AMS Cerramientos. ')+'" target="_blank" rel="noopener">'+WA+'WhatsApp</a></div>';
  }
  return h+'</div>';
+}
+function desde(x,k,txt){if(x[k])return x[k];const e=(x.h||[]).slice().reverse().find(e=>String(e.x).indexOf(txt)===0);return e?e.f:x.f}
+const DIA=864e5,diasDe=t=>Math.floor((hoy()-t)/DIA);
+function tocaHacer(){
+ const out=[];
+ D.L.forEach(x=>{
+  if(x.pos&&x.pos>hoy())return;
+  if(x.est==='visita'&&diasDe(desde(x,'fv','Visita hecha'))>=3)out.push({x,tipo:'vis',q:'¿Le pasaste el presupuesto a '+esc(nombre(x))+'?',d:'Fuiste a verle hace '+diasDe(desde(x,'fv','Visita hecha'))+' días.'});
+  else if(x.est==='presupuesto'&&diasDe(desde(x,'fp','Presupuesto dado'))>=7)out.push({x,tipo:'pre',q:'¿Qué te dijo '+esc(nombre(x))+' del presupuesto?',d:'Se lo pasaste hace '+diasDe(desde(x,'fp','Presupuesto dado'))+' días.'});
+  else if(x.est==='si'&&!x.rel&&D.media)out.push({x,tipo:'imp',q:'¿Cuánto factura el trabajo de '+esc(nombre(x))+'?',d:'La cifra se queda en tu móvil.'});
+ });
+ return out;
+}
+function cardToca(t){
+ const x=t.x;let b='';
+ if(t.tipo==='vis')b='<button class="si" data-tv="'+x.id+'">Sí</button><button data-tp="'+x.id+'" data-dd="2">Aún no</button>';
+ if(t.tipo==='pre')b='<button class="si" data-tc="'+x.id+'">¡Contratado!</button><button data-tn="'+x.id+'">No ha salido</button><button data-tp="'+x.id+'" data-dd="7">Lo está pensando</button>';
+ if(t.tipo==='imp')b='<button class="si" data-f2="'+x.id+'">Ponerlo</button>';
+ return '<div class="card toca"><div class="top" data-f="'+x.id+'"><div class="ic web">'+ic(t.tipo==='imp'?'medalla':t.tipo==='pre'?'doc':'casa')+'</div><div class="t"><b class="q2">'+t.q+'</b><small>'+t.d+'</small></div></div><div class="preg botones">'+b+'</div></div>';
 }
 const lista=(a,txt,ico)=>a.length?a.map(x=>card(x,x.est==='nuevo')).join(''):'<div class="vacio">'+ic(ico||'cafe')+txt+'</div>';
 function medalla(n){return n>=5?'¡Mes redondo!':n>=3?'Buen ritmo.':n>=1?'Ya hay uno. A por más.':'Todavía ninguno. Llegarán.'}
@@ -196,7 +217,9 @@ function vista(){
   const si=mes().filter(x=>x.est==='si');
   $('tit').textContent='Hola, '+D.yo;
   $('sub').textContent=nuevos.length?(nuevos.length===1?'Una persona espera tu llamada':nuevos.length+' personas esperan tu llamada'):'Nadie esperando. Todo al día.';
+  const TH=tocaHacer();
   h='<button class="big" id="nuevo">'+ic('mas')+'Apuntar a alguien</button>'+
+   (TH.length?'<h2>Toca preguntar<span class="n">'+TH.length+'</span></h2>'+TH.map(cardToca).join(''):'')+
    '<h2>Para llamar'+(nuevos.length?'<span class="n">'+nuevos.length+'</span>':'')+'</h2>'+lista(nuevos,'Nadie esperando. Los que piden presupuesto por la web aparecerán aquí solos.')+
    '<h2>En marcha'+(curso.length?'<span class="n">'+curso.length+'</span>':'')+'</h2>'+lista(curso,'Nada en marcha ahora mismo.','casa')+
    '<div class="mes"><div class="md">'+ic('medalla')+'</div><div><b>'+si.length+(si.length===1?' trabajo contratado':' trabajos contratados')+'</b><span>en los últimos 30 días. '+medalla(si.length)+'</span><button data-ir="num">Ver cómo va el mes</button></div></div>';
@@ -254,6 +277,11 @@ function enlaza(){
  document.querySelectorAll('[data-ll]').forEach(a=>a.addEventListener('click',()=>{const x=buscar(a.dataset.ll);if(x){A.llamado(x,hoy());setTimeout(vista,800)}}));
  document.querySelectorAll('[data-h]').forEach(b=>b.onclick=()=>{const x=buscar(b.dataset.h);A.llamado(x,0);A.cambiar(x,{est:'hablado'},'Ya hemos hablado');vibra();aviso('Apuntado: ya habéis hablado','check');vista()});
  document.querySelectorAll('[data-n]').forEach(b=>b.onclick=()=>{const x=buscar(b.dataset.n);A.llamado(x,0);vista()});
+ document.querySelectorAll('[data-tv]').forEach(b=>b.onclick=()=>{const x=buscar(b.dataset.tv);A.cambiar(x,{est:'presupuesto'},'Presupuesto dado');vibra();aviso('Apuntado: presupuesto dado','check');vista()});
+ document.querySelectorAll('[data-tp]').forEach(b=>b.onclick=()=>{const x=buscar(b.dataset.tp);A.posponer(x,+b.dataset.dd);aviso('Vale, te vuelvo a preguntar en '+b.dataset.dd+' días','check');vista()});
+ document.querySelectorAll('[data-tc]').forEach(b=>b.onclick=()=>{const x=buscar(b.dataset.tc);A.cambiar(x,{est:'si'},'Contratado');vibra();fiesta();const n=mes().filter(y=>y.est==='si').length;aviso('¡Enhorabuena, '+D.yo+'! '+(n===1?'Primer trabajo del mes.':'Ya van '+n+' este mes.'),'medalla');vista();ficha(x.id)});
+ document.querySelectorAll('[data-tn]').forEach(b=>b.onclick=()=>{const x=buscar(b.dataset.tn);A.cambiar(x,{est:'no'},'No ha salido');vibra();vista();ficha(x.id)});
+ document.querySelectorAll('[data-f2]').forEach(b=>b.onclick=()=>ficha(b.dataset.f2));
  document.querySelectorAll('[data-ir]').forEach(b=>b.onclick=()=>{tab=b.dataset.ir;vista();scrollTo(0,0)});
  document.querySelectorAll('[data-fl]').forEach(b=>b.onclick=()=>{filtro=b.dataset.fl;vista()});
  document.querySelectorAll('[data-yo]').forEach(b=>b.onclick=()=>{D.yo=b.dataset.yo;guarda();vista()});

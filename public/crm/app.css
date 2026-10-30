@@ -150,3 +150,9 @@ textarea.t{min-height:84px;resize:vertical}
 @keyframes pop{from{transform:scale(.3);opacity:0}to{transform:scale(1);opacity:1}}
 #nube{display:none;align-items:center;justify-content:center;gap:8px;background:#E8EEF4;color:var(--navy2);font-size:.86rem;font-weight:600;padding:8px 16px}
 #nube svg{width:18px;height:18px}
+.card .tarde{color:var(--ko);font-weight:700;white-space:normal}
+.card.toca{border:2px solid var(--or2);background:#FFFBF7}
+.card.toca .q2{white-space:normal;font-size:1.05rem}
+.preg.botones{background:none;padding:0;margin-top:12px;gap:8px}
+.preg.botones button{flex:1;min-height:46px;border:2px solid #C9D3DC;background:#fff}
+.preg.botones button.si{border-color:var(--ok);background:var(--ok);color:#fff}
