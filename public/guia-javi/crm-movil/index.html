@@ -86,6 +86,18 @@ td.n,th.n{text-align:right}
 .peq{border:1px solid #C9D3DC;background:#fff;border-radius:10px;padding:9px 12px;font-size:.9rem}
 .fila{display:flex;gap:8px;align-items:center}
 .fila input{flex:1}
+.guia{background:#fff;border:2px solid var(--or2);border-radius:16px;padding:14px 16px;margin-bottom:14px}
+.guia h3{margin:0 0 8px;font-size:1.08rem;color:var(--navy)}
+.guia ol{margin:0;padding-left:0;list-style:none;counter-reset:p}
+.guia li{counter-increment:p;position:relative;padding-left:36px;margin:10px 0;font-size:.95rem}
+.guia li:before{content:counter(p);position:absolute;left:0;top:-1px;width:26px;height:26px;border-radius:50%;background:var(--or);color:#fff;font-weight:700;font-size:.85rem;display:flex;align-items:center;justify-content:center}
+.guia .fin{display:flex;justify-content:space-between;align-items:center;margin-top:8px;gap:10px}
+.guia .fin span{font-size:.85rem;color:var(--mut)}
+.mini{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;cursor:pointer}
+.mini div{background:#fff;border:1px solid var(--ln);border-radius:14px;padding:10px 8px;text-align:center}
+.mini b{display:block;font-size:1.35rem;color:var(--navy)}
+.mini span{font-size:.74rem;color:var(--mut);line-height:1.2;display:block}
+.mini div.ver{grid-column:1/-1;padding:6px;font-size:.82rem;color:var(--or);font-weight:700;border:0;background:none}
 </style>
 </head>
 <body>
@@ -159,7 +171,16 @@ function vista(){
   var nuevos=D.L.filter(function(x){return x.est=='nuevo'});
   var curso=D.L.filter(function(x){return ['hablado','visita','presupuesto'].indexOf(x.est)>-1});
   $('sub').textContent=nuevos.length?nuevos.length+(nuevos.length==1?' persona espera':' personas esperan')+' tu llamada':'Todo atendido';
-  h='<button class="big" id="nuevo">+ Apuntar un contacto</button>'+
+  var M=D.L.filter(function(x){return hoy()-x.f<30*864e5}),si=M.filter(function(x){return x.est=='si'});
+  var med=si.length?si.reduce(function(a,x){return a+(+x.importe||0)},0)/si.length:0;
+  h=(D.vista?'':'<div class="guia"><h3>Cómo funciona, en 30 segundos</h3><ol>'+
+   '<li><b>Los que piden presupuesto por la web entran solos.</b> Te salen aquí arriba, en «Sin llamar», con su teléfono y lo que quieren.</li>'+
+   '<li><b>Los demás los apuntas tú</b> con el botón naranja: buzoneo, recomendados, clientes antiguos… Nombre, teléfono y de dónde viene. Diez segundos.</li>'+
+   '<li><b>Después de cada visita</b>, tocas el nombre y marcas cómo va: visita hecha, presupuesto dado, contratado o no.</li>'+
+   '<li><b>Y ya está.</b> Los números los saca el móvil solo, y con ellos sabemos qué anuncios te traen trabajo.</li>'+
+   '</ol><div class="fin"><span>Lo puedes volver a ver en Ajustes.</span><button class="peq" id="visto">Entendido</button></div></div>')+
+   '<div class="mini" id="mini"><div><b>'+M.length+'</b><span>contactos este mes</span></div><div><b>'+si.length+'</b><span>contratados</span></div><div><b>'+(si.length&&D.media?(med>=D.media?'+':'')+Math.round((med/D.media-1)*100)+' %':'—')+'</b><span>tus trabajos frente a tu media</span></div><div class="ver">Ver todos tus números</div></div>'+
+   '<button class="big" id="nuevo">+ Apuntar un contacto</button>'+
    '<h2>Sin llamar</h2>'+lista(nuevos,'No hay nadie esperando. Los que piden presupuesto por la web aparecen aquí solos.')+
    '<h2>En marcha</h2>'+lista(curso,'Nada en marcha ahora mismo.');
  }
@@ -201,6 +222,7 @@ function vista(){
    '<div class="media" style="margin-top:18px"><b>Tu facturación es solo tuya.</b> Pones una vez lo que facturas de media por trabajo y, después, lo que factura cada trabajo que cierras. Nosotros no vemos ninguna cifra: solo un porcentaje, si cada trabajo está por encima o por debajo de tu media. Con eso sabemos qué campañas traen los mejores trabajos.</div>'+
    '<label class="l">Tu facturación media por trabajo (€)</label><div class="fila"><input class="t" id="med" inputmode="numeric" value="'+(D.media||'')+'"><button class="peq" id="medok">Guardar</button></div>'+
    '<p class="sub">Más o menos, lo que factura de media un trabajo tuyo. Por ejemplo, 6.000 €. Se pone una vez y se puede cambiar cuando quieras.</p>'+
+   '<h2>Ayuda</h2><button class="peq" id="guia">Ver otra vez «Cómo funciona»</button>'+
    '<h2>Demostración</h2><button class="peq" id="rst">Volver a los datos de ejemplo</button>';
  }
  $('v').innerHTML=h;enlaza();
@@ -214,6 +236,9 @@ function enlaza(){
  if($('npok'))$('npok').onclick=function(){var v=$('np').value.trim();if(v&&D.equipo.indexOf(v)<0){D.equipo.push(v);guarda();vista()}};
  if($('medok'))$('medok').onclick=function(){D.media=+$('med').value.replace(/\D/g,'')||0;guarda();$('medok').textContent='Guardado'};
  if($('rst'))$('rst').onclick=function(){D=demo();guarda();vista()};
+ if($('visto'))$('visto').onclick=function(){D.vista=1;guarda();vista()};
+ if($('guia'))$('guia').onclick=function(){D.vista=0;guarda();tab='hoy';vista();window.scrollTo(0,0)};
+ if($('mini'))$('mini').onclick=function(){tab='num';vista();window.scrollTo(0,0)};
 }
 function chips(id,ops,sel){return '<div class="chips" id="'+id+'">'+ops.map(function(o){return '<button type="button" class="chip'+(o==sel?' on':'')+'" data-v="'+esc(o)+'">'+esc(o)+'</button>'}).join('')+'</div>'}
 function chipVal(id){var c=document.querySelector('#'+id+' .chip.on');return c?c.dataset.v:''}
