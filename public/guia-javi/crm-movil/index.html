@@ -108,7 +108,7 @@ td.n,th.n{text-align:right}
 
 <script>
 (function(){
-var K='ams-crm-movil-v1';
+var K='ams-crm-movil-v2';
 var ORIG_WEB=['Anuncio de Google','Google (sin anuncio)','Facebook / Instagram','Calculadora de la web','WhatsApp de la web'];
 var ORIG_MAN=['Buzoneo','Recomendado','Cliente antiguo','Reformista o constructor','Llamada','Otro'];
 var TRAB=['Ventanas','Cancela','Cerramiento','Pérgola','Puerta','Otro'];
@@ -119,17 +119,17 @@ var D;
 function hoy(){return Date.now()}
 function dias(n){return hoy()-n*864e5}
 function demo(){
- return {yo:'Javi',equipo:['Javi','Óscar'],media:3500,id:20,L:[
+ return {yo:'Javi',equipo:['Javi','Óscar'],media:6000,id:20,L:[
   {id:1,nombre:'Marta Gil',tel:'600111222',origen:'Anuncio de Google',trabajo:'Ventanas',zona:'Villalbilla',f:dias(0),est:'nuevo',web:1,pide:'6 ventanas de PVC, oscilobatientes, blancas',h:[{f:dias(0),q:'Web',x:'Ha pedido presupuesto desde la web'}]},
   {id:2,nombre:'Luis Ortega',tel:'600333444',origen:'Calculadora de la web',trabajo:'Cancela',zona:'Alcalá de Henares',f:dias(1),est:'nuevo',web:1,pide:'Cancela corredera motorizada, 4,5 m',h:[{f:dias(1),q:'Web',x:'Ha usado la calculadora: unos 3.100 €'}]},
   {id:3,nombre:'Pilar Romero',tel:'600555666',origen:'Buzoneo',trabajo:'Ventanas',zona:'Torres de la Alameda',f:dias(3),est:'visita',quien:'Javi',h:[{f:dias(3),q:'Javi',x:'Apuntado a mano (Buzoneo)'},{f:dias(1),q:'Javi',x:'Visita hecha. Chalet, 8 ventanas de aluminio viejas.'}]},
   {id:4,nombre:'Andrés Molina',tel:'600777888',origen:'Recomendado',trabajo:'Cerramiento',zona:'Loeches',f:dias(6),est:'presupuesto',quien:'Óscar',h:[{f:dias(6),q:'Javi',x:'Le recomienda su cuñado (cliente de 2024)'},{f:dias(2),q:'Óscar',x:'Presupuesto dado'}]},
-  {id:5,nombre:'Sonia Prieto',tel:'600999000',origen:'Facebook / Instagram',trabajo:'Cancela',zona:'Meco',f:dias(9),est:'si',web:1,importe:4200,quien:'Javi',h:[{f:dias(9),q:'Web',x:'Ha pedido presupuesto desde Instagram'},{f:dias(4),q:'Javi',x:'Contratado: 4.200 €'}]},
-  {id:6,nombre:'Raúl Benito',tel:'611222333',origen:'Buzoneo',trabajo:'Ventanas',zona:'Villalbilla',f:dias(12),est:'si',importe:3100,quien:'Javi',h:[{f:dias(2),q:'Javi',x:'Contratado: 3.100 €'}]},
+  {id:5,nombre:'Sonia Prieto',tel:'600999000',origen:'Facebook / Instagram',trabajo:'Cancela',zona:'Meco',f:dias(9),est:'si',web:1,importe:5400,quien:'Javi',h:[{f:dias(9),q:'Web',x:'Ha pedido presupuesto desde Instagram'},{f:dias(4),q:'Javi',x:'Contratado: 5.400 €'}]},
+  {id:6,nombre:'Raúl Benito',tel:'611222333',origen:'Buzoneo',trabajo:'Ventanas',zona:'Villalbilla',f:dias(12),est:'si',importe:4800,quien:'Javi',h:[{f:dias(2),q:'Javi',x:'Contratado: 4.800 €'}]},
   {id:7,nombre:'Elena Vidal',tel:'611444555',origen:'Anuncio de Google',trabajo:'Ventanas',zona:'Torrejón de Ardoz',f:dias(14),est:'no',web:1,motivo:'Precio',quien:'Javi',h:[{f:dias(5),q:'Javi',x:'No contratado: Precio'}]},
-  {id:8,nombre:'Jorge Pastor',tel:'611666777',origen:'Cliente antiguo',trabajo:'Pérgola',zona:'Alcalá de Henares',f:dias(16),est:'si',importe:2800,quien:'Óscar',h:[{f:dias(7),q:'Óscar',x:'Contratado: 2.800 €'}]},
+  {id:8,nombre:'Jorge Pastor',tel:'611666777',origen:'Cliente antiguo',trabajo:'Pérgola',zona:'Alcalá de Henares',f:dias(16),est:'si',importe:3900,quien:'Óscar',h:[{f:dias(7),q:'Óscar',x:'Contratado: 3.900 €'}]},
   {id:9,nombre:'Carmen Ruiz',tel:'611888999',origen:'Google (sin anuncio)',trabajo:'Ventanas',zona:'Camarma de Esteruelas',f:dias(18),est:'hablado',web:1,h:[{f:dias(17),q:'Javi',x:'Hablado por teléfono. Quiere visita después de Reyes.'}]},
-  {id:10,nombre:'Tomás Herrero',tel:'622111222',origen:'Reformista o constructor',trabajo:'Ventanas',zona:'Alcobendas',f:dias(20),est:'si',importe:6900,quien:'Javi',h:[{f:dias(10),q:'Javi',x:'Contratado: 6.900 €'}]},
+  {id:10,nombre:'Tomás Herrero',tel:'622111222',origen:'Reformista o constructor',trabajo:'Ventanas',zona:'Alcobendas',f:dias(20),est:'si',importe:8700,quien:'Javi',h:[{f:dias(10),q:'Javi',x:'Contratado: 8.700 €'}]},
   {id:11,nombre:'Nuria Sanz',tel:'622333444',origen:'Buzoneo',trabajo:'Cancela',zona:'Daganzo',f:dias(22),est:'no',motivo:'Lo deja para más adelante',h:[{f:dias(12),q:'Javi',x:'No contratado: lo deja para más adelante'}]}
  ]};
 }
@@ -191,15 +191,16 @@ function vista(){
   var mot={};M.filter(function(x){return x.est=='no'}).forEach(function(x){mot[x.motivo||'Sin motivo']=(mot[x.motivo||'Sin motivo']||0)+1});
   var mk=Object.keys(mot);
   if(mk.length)h+='<h2>Por qué no contratan</h2><table>'+mk.map(function(m){return '<tr><td>'+esc(m)+'</td><td class="n">'+mot[m]+'</td></tr>'}).join('')+'</table>';
-  h+='<p class="nota">Los importes son privados: nosotros solo vemos cómo va cada trabajo frente a tu media, no las cifras. Con esto sabemos qué campañas traen trabajo de verdad y dónde poner el dinero.</p>';
+  h+='<p class="nota">Tu facturación es privada: tú pones las cifras y nosotros no las vemos. Solo nos llega el porcentaje de cada trabajo frente a tu facturación media. Con eso sabemos qué campañas traen los mejores trabajos y dónde poner el dinero.</p>';
  }
  if(tab=='aj'){
   $('tit').textContent='Ajustes';$('sub').textContent='Se tocan una vez y ya';
   h='<label class="l">¿Quién usa este móvil?</label><div class="chips" id="yoc">'+D.equipo.map(function(p){return '<button class="chip'+(p==D.yo?' on':'')+'" data-p="'+esc(p)+'">'+esc(p)+'</button>'}).join('')+'</div>'+
    '<p class="sub">Así queda apuntado quién hizo cada visita.</p>'+
    '<label class="l">Añadir a alguien del equipo</label><div class="fila"><input class="t" id="np" placeholder="Nombre"><button class="peq" id="npok">Añadir</button></div>'+
-   '<label class="l">Tu trabajo medio (más o menos)</label><div class="fila"><input class="t" id="med" inputmode="numeric" value="'+(D.media||'')+'"><button class="peq" id="medok">Guardar</button></div>'+
-   '<p class="sub">Lo que suele costar un trabajo tuyo. Sirve para ver si cada venta está por encima o por debajo. Solo lo ves tú.</p>'+
+   '<div class="media" style="margin-top:18px"><b>Tu facturación es solo tuya.</b> Pones una vez lo que facturas de media por trabajo y, después, lo que factura cada trabajo que cierras. Nosotros no vemos ninguna cifra: solo un porcentaje, si cada trabajo está por encima o por debajo de tu media. Con eso sabemos qué campañas traen los mejores trabajos.</div>'+
+   '<label class="l">Tu facturación media por trabajo (€)</label><div class="fila"><input class="t" id="med" inputmode="numeric" value="'+(D.media||'')+'"><button class="peq" id="medok">Guardar</button></div>'+
+   '<p class="sub">Más o menos, lo que factura de media un trabajo tuyo. Por ejemplo, 6.000 €. Se pone una vez y se puede cambiar cuando quieras.</p>'+
    '<h2>Demostración</h2><button class="peq" id="rst">Volver a los datos de ejemplo</button>';
  }
  $('v').innerHTML=h;enlaza();
@@ -252,7 +253,7 @@ function ficha(id){
   (x.pide?'<div class="media"><b>Lo que pide:</b> '+esc(x.pide)+'</div>':'')+
   (tl?'<div class="acc"><a href="tel:'+tl+'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Llamar</a><a class="wa" href="'+wa+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.2z"/></svg>WhatsApp</a></div>':'')+
   '<label class="l">¿Cómo va?</label><div class="est" id="fe">'+EST.map(function(e){return '<button type="button" class="'+e[0]+(x.est==e[0]?' on':'')+'" data-e="'+e[0]+'">'+e[1]+'</button>'}).join('')+'</div>'+
-  '<div id="fsi" style="display:none"><label class="l">¿Por cuánto? (€)</label><input class="t" id="fimp" inputmode="numeric" value="'+(x.importe||'')+'"><div class="media" id="fmed"></div></div>'+
+  '<div id="fsi" style="display:none"><label class="l">¿Cuánto factura este trabajo? (€)</label><input class="t" id="fimp" inputmode="numeric" value="'+(x.importe||'')+'"><div class="media" id="fmed"></div></div>'+
   '<div id="fno" style="display:none"><label class="l">¿Por qué no?</label>'+chips('fmot',MOT,x.motivo||'')+'</div>'+
   '<label class="l">¿Quién ha ido?</label>'+chips('fq',D.equipo,x.quien||'')+
   '<label class="l">¿De dónde vino?</label>'+(x.web?'<p class="sub">'+esc(x.origen)+' (entró solo desde la web)</p>':chips('fo',ORIG_MAN,x.origen))+
@@ -263,14 +264,14 @@ function ficha(id){
  function pinta(){
   [].forEach.call(document.querySelectorAll('#fe button'),function(b){b.classList.toggle('on',b.dataset.e==est)});
   $('fsi').style.display=est=='si'?'block':'none';$('fno').style.display=est=='no'?'block':'none';
-  var v=+$('fimp').value.replace(/\D/g,'');$('fmed').style.display=v&&D.media?'block':'none';$('fmed').textContent=v?'Este trabajo está '+vsMedia(v)+'.':'';
+  var v=+$('fimp').value.replace(/\D/g,'');$('fmed').style.display=v&&D.media?'block':'none';$('fmed').textContent=v?'Este trabajo está '+vsMedia(v)+'. Nosotros solo vemos este porcentaje, no la cifra.':'';
  }
  [].forEach.call(document.querySelectorAll('#fe button'),function(b){b.onclick=function(){est=b.dataset.e;pinta()}});
  $('fimp').oninput=pinta;pinta();
  $('fok').onclick=function(){
   var av=$('fav');av.style.display='block';
   var imp=+$('fimp').value.replace(/\D/g,''),mot=chipVal('fmot');
-  if(est=='si'&&!imp){av.textContent='Pon el importe del trabajo. Solo lo ves tú.';return}
+  if(est=='si'&&!imp){av.textContent='Pon lo que factura este trabajo. La cifra solo la ves tú.';return}
   if(est=='no'&&!mot){av.textContent='Marca por qué no. Así sabemos qué mejorar.';return}
   if(est!=x.est){x.h.push({f:hoy(),q:D.yo,x:est=='si'?'Contratado: '+eu(imp):est=='no'?'No contratado: '+mot:ETN[est]});x.est=est}
   else if(est=='si'&&imp!=x.importe)x.h.push({f:hoy(),q:D.yo,x:'Importe cambiado: '+eu(imp)});
