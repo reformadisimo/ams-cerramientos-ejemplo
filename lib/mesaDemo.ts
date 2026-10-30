@@ -203,7 +203,7 @@ export function datosDemo(hoy: string) {
   const web: Record<string, unknown> = {};
   for (const d of T.ds) {
     const peticiones = Object.values(T.pet[d]).reduce((a, b) => a + b, 0);
-    web[d] = { peticiones, visitas: T.visitas[d], calculos: T.calculos[d], porCanal: T.pet[d], whatsapp: T.whatsapp[d], llamadas: T.llamadas[d], clicsPorFuente: T.clics[d], vistas: T.vistas[d] };
+    web[d] = { peticiones, visitas: T.visitas[d], calculos: T.calculos[d], porCanal: T.pet[d], whatsapp: T.whatsapp[d], llamadas: T.llamadas[d], clicsPorFuente: T.clics[d], vistas: T.vistas[d], entradas: Math.round(T.vistas[d] / 2), personas: Math.round(T.vistas[d] / 2.45) };
   }
   const redes = {
     actualizado: hoy, ficha: { diario: T.ficha },
@@ -298,7 +298,11 @@ export function detalleDemo(desde: string, hasta: string, hoy: string) {
   const pvAds = Math.min(tot.vistas, Math.round(adsClics * 1.7));
   const resto = reparteFijo(Math.max(0, tot.vistas - pvAds), [0.36, 0.3, 0.2, 0.09, 0.05]);
   const ORIG: [string, number, number][] = [["Google (búsqueda)", resto[0], 0.62], ["Directo", resto[1], 0.55], ["Meta / Instagram", resto[2], 0.9], ["Asistentes de IA", resto[3], 0.48], ["Otras webs", resto[4], 0.5]];
-  const origenes: { origen: string; n: number; movil: number; clics?: number }[] = [{ origen: "Google Ads", n: pvAds, movil: Math.round(pvAds * 0.72), clics: adsClics }, ...ORIG.map(([o, v, m]) => ({ origen: o, n: v, movil: Math.round(v * m) }))].filter((x) => x.n > 0).sort((x, y) => y.n - x.n);
+  const base0: { origen: string; n: number; movil: number; clics?: number }[] = [{ origen: "Google Ads", n: pvAds, movil: Math.round(pvAds * 0.72), clics: adsClics }, ...ORIG.map(([o, v, m]) => ({ origen: o, n: v, movil: Math.round(v * m) }))].filter((x) => x.n > 0).sort((x, y) => y.n - x.n);
+  // visitas y personas: los mismos totales que la serie diaria, repartidos como las páginas vistas (los anuncios traen visitas más cortas)
+  const ds0 = dias(desde, hasta), totE = ds0.reduce((s0, d) => s0 + Math.round((T.vistas[d] ?? 0) / 2), 0), totU = ds0.reduce((s0, d) => s0 + Math.round((T.vistas[d] ?? 0) / 2.45), 0);
+  const pesoV = base0.map((x) => x.n * (x.origen === "Google Ads" ? 1.25 : 1)), ve = reparteFijo(totE, pesoV), vu = reparteFijo(totU, pesoV);
+  const origenes = base0.map((x, i) => ({ ...x, visitas: ve[i], personas: vu[i] }));
   void n;
   return { origenes, rebote, paginas, clicsPagina, lupa, gsc: { totales: { clics: tot.gscClics, impresiones: tot.gscImp, ctr_pct: tot.gscImp ? Math.round((tot.gscClics / tot.gscImp) * 1000) / 10 : 0, posicion: Math.round(pos * 10) / 10 }, busquedas, paginas: gscPag }, entradas, crm };
 }

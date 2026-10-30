@@ -14,7 +14,7 @@ import { Plegable, Apartados, GuiaDeUso, LogoMarca, iconoDeTitulo, Que, QueTexto
    sumar día a día (páginas, búsquedas, mapas de calor) se piden a /api/mesa.
    Solo pintura en las animaciones (opacidad y color): nada se mueve. */
 
-type DiaWeb = { peticiones: number; visitas: number; calculos: number; porCanal: Record<string, number>; whatsapp: number; llamadas: number; clicsPorFuente: Record<string, number>; vistas: number };
+type DiaWeb = { peticiones: number; visitas: number; calculos: number; porCanal: Record<string, number>; whatsapp: number; llamadas: number; clicsPorFuente: Record<string, number>; vistas: number; entradas?: number; personas?: number };
 type FilaAds = [string, string, string, number, number, number, number];
 type Ga = { dia: string; canal: string; sesiones: number; usuarios: number; interes: number; clave: number };
 type GaTotal = { dia: string; sesiones: number; usuarios: number; interes: number; clave: number };
@@ -49,7 +49,7 @@ type Detalle = {
   clarity?: { dias: number; desde: string | null; paginas: FilaClarity[]; dispositivos: FilaClarity[] } | null;
   rebote?: { dispositivo: FilaRebote[]; zona: FilaRebote[]; tipo: FilaRebote[]; paginas: FilaRebote[] } | null;
   personas?: number | null;
-  origenes?: { origen: string; n: number; movil: number; clics?: number }[];
+  origenes?: { origen: string; n: number; movil: number; clics?: number; visitas?: number; personas?: number }[];
   crm: { origen: string; leads: number; visitas: number; presupuestos: number; firmados: number; firmado: number; facturado: number; descartados: number; respondidos?: number; horas_resp?: number; vencidas?: number }[];
 };
 
@@ -91,7 +91,7 @@ const CANALES_PAGO: Record<string, string> = { "Google Ads": "google", "Meta / I
 /* ── agregados de un periodo ── */
 type Totales = {
   dias: number;
-  peticiones: number; visitas: number; calculos: number; whatsapp: number; llamadas: number; vistas: number;
+  peticiones: number; visitas: number; calculos: number; whatsapp: number; llamadas: number; vistas: number; entradas: number; personas: number; conContador: number;
   porCanal: Record<string, number>; clicsPorFuente: Record<string, number>;
   ads: { coste: number; clics: number; impr: number; conv: number; porPlat: Record<string, { coste: number; clics: number; impr: number; conv: number }>; porCamp: Record<string, { plat: string; coste: number; clics: number; impr: number; conv: number }>; parcial: boolean };
   ga: { sesiones: number; usuarios: number; interes: number; clave: number; porCanal: Record<string, { sesiones: number; interes: number; clave: number }> };
@@ -100,7 +100,7 @@ type Totales = {
 
 function calcula(d: DatosMesa, a: string, b: string, recGsc = 0): Totales {
   const t: Totales = {
-    dias: entre(a, b), peticiones: 0, visitas: 0, calculos: 0, whatsapp: 0, llamadas: 0, vistas: 0, porCanal: {}, clicsPorFuente: {},
+    dias: entre(a, b), peticiones: 0, visitas: 0, calculos: 0, whatsapp: 0, llamadas: 0, vistas: 0, entradas: 0, personas: 0, conContador: 0, porCanal: {}, clicsPorFuente: {},
     ads: { coste: 0, clics: 0, impr: 0, conv: 0, porPlat: {}, porCamp: {}, parcial: false },
     ga: { sesiones: 0, usuarios: 0, interes: 0, clave: 0, porCanal: {} },
     gsc: { clics: 0, impresiones: 0, posicion: 0 },
@@ -109,6 +109,7 @@ function calcula(d: DatosMesa, a: string, b: string, recGsc = 0): Totales {
     const w = d.web[dia];
     if (!w) continue;
     t.peticiones += w.peticiones; t.visitas += w.visitas; t.calculos += w.calculos; t.whatsapp += w.whatsapp; t.llamadas += w.llamadas; t.vistas += w.vistas;
+    if (w.entradas != null) { t.entradas += w.entradas; t.personas += w.personas ?? 0; t.conContador++; }
     for (const [k, v] of Object.entries(w.porCanal)) t.porCanal[k] = (t.porCanal[k] ?? 0) + v;
     for (const [k, v] of Object.entries(w.clicsPorFuente)) t.clicsPorFuente[k] = (t.clicsPorFuente[k] ?? 0) + v;
   }
@@ -165,7 +166,7 @@ const METRICAS: Metrica[] = [
   // Coste por contacto según las propias plataformas: hoy casi todo el anuncio aterriza en la landing de la agencia,
   // así que la web solo ve una parte de esas peticiones. Cuando los anuncios lleven a la web, se mira también el de la web.
   { id: "cpl", nombre: "Coste por contacto de anuncios", f: (t) => (t.ads.conv ? t.ads.coste / t.ads.conv : NaN), formato: eur, menosEsMejor: true, fuente: "Anuncios · contactos que cuenta cada plataforma", ayuda: "Lo que nos cuesta cada contacto que traen los anuncios. Cuanto más bajo, mejor." },
-  { id: "sesiones", nombre: "Visitas a la web", f: (t) => t.ga.sesiones, formato: num, fuente: "Analytics", ayuda: "Veces que alguien entra en la web según Analytics, que solo cuenta a quien acepta las cookies (más o menos la mitad). Todas las visitas, en «De dónde vienen»." },
+  { id: "sesiones", nombre: "Visitas a la web (Analytics)", f: (t) => t.ga.sesiones, formato: num, fuente: "Analytics", ayuda: "Veces que alguien entra en la web según Analytics, que solo cuenta a quien acepta las cookies (más o menos la mitad)." },
   { id: "organico", nombre: "Clics desde Google", f: (t) => t.gsc.clics, formato: num, fuente: "Search Console", ayuda: "Entran desde Google sin anuncio (lo que no se paga)." },
   { id: "rebote", nombre: "Rebote", f: (t) => (t.ga.sesiones ? (1 - t.ga.interes / t.ga.sesiones) * 100 : NaN), formato: (n) => `${nf1.format(n)} %`, menosEsMejor: true, fuente: "Analytics · sesiones sin interacción", ayuda: "De cada 100 visitas, cuántas se van sin hacer nada (menos de 10 segundos, una sola página y ninguna acción). Cuanto más bajo, mejor." },
   { id: "conversion", nombre: "Visitas que acaban en contacto", f: (t) => (t.ga.sesiones ? (t.peticiones / t.ga.sesiones) * 100 : NaN), formato: (n) => `${nf1.format(n)} %`, fuente: "Web y Analytics", ayuda: "De cada 100 visitas a la web, cuántas acaban dejando sus datos." },
@@ -739,6 +740,7 @@ export default function Mesa({ datos, temas, resumenHoy, tareas, relojes, base }
           <>
             <TresPreguntas T={T} C={C} crm={detalle?.crm ?? null} cargando={cargando} largo={largo} />
             {!datos.fallos?.length && <Alertas T={T} C={C} datos={datos} largo={largo} b={b} />}
+            <VisitasReales T={T} C={C} origenes={detalle?.origenes ?? null} cargando={cargando} largo={largo} b={b} actualizado={datos.anuncios.actualizado} a={a} />
             <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
               {kpis.map(({ m, extra }) => {
                 const v = m.f(T);
@@ -936,20 +938,6 @@ export default function Mesa({ datos, temas, resumenHoy, tareas, relojes, base }
                     { k: "clave", t: "Acciones clave", v: (r) => r.clave, num: true },
                   ]}
                 />
-              </Caja>
-              <Caja titulo="De dónde vienen (todas las visitas)" fuente={cargando ? "Cargando…" : "Web · contador propio, sin cookies: cuenta también a quien rechaza las cookies"} explica="Todas las páginas vistas de la web, también las de quien rechaza las cookies, según de dónde viene cada persona. En las filas de anuncios, al lado, los clics que cobra la plataforma.">
-                <Tabla
-                  filas={detalle?.origenes ?? []}
-                  inicial="n"
-                  vacio={cargando ? "Cargando…" : "Sin visitas en este periodo."}
-                  cols={[
-                    { k: "origen", t: "Origen", v: (r) => r.origen, f: (r) => <span className="flex items-center font-semibold"><LogoCanal canal={r.origen} />{r.origen}</span> },
-                    { k: "n", t: "Páginas vistas", v: (r) => r.n, num: true },
-                    { k: "movil", t: "En móvil", v: (r) => (r.n ? r.movil / r.n : 0), num: true, f: (r) => (r.n ? pct((r.movil / r.n) * 100) : "-") },
-                    { k: "clics", t: "Clics que cobra el anuncio*", v: (r) => r.clics ?? -1, num: true, f: (r) => (r.clics === undefined ? "" : datos.anuncios.actualizado && b > datos.anuncios.actualizado ? "-" : num(r.clics)) },
-                  ]}
-                />
-                <p className="mt-2 text-[13px] text-ink/60">* Clics de ese periodo según la propia plataforma. Si sale «-», aún no han llegado los del día: se actualizan una vez al día.</p>
               </Caja>
               <Caja titulo="Páginas más vistas" fuente={cargando ? "Cargando…" : "Web · contador propio, sin cookies"}>
                 <Barras filas={(detalle?.paginas ?? []).slice(0, 12).map((p) => [p.pagina, p.n])} />
@@ -2209,6 +2197,56 @@ function Resumenes({ clave }: { clave: string }) {
           </ul>
         </div>
       )}
+    </section>
+  );
+}
+
+/* ── Quién entra de verdad en la web (igual que en Reformadísimo, cl·v970 a v974) ──
+   Contador propio, sin cookies y sin robots. En la mesa de EJEMPLO de AMS las cifras son inventadas. */
+const DESDE_CONTADOR: string | null = null; // día en que empezaron a contarse personas y visitas (null = siempre)
+function VisitasReales({ T, C, origenes, cargando, largo, b, a, actualizado }: { T: Totales; C: Totales | null; origenes: NonNullable<Detalle["origenes"]> | null; cargando: boolean; largo: number; b: string; a: string; actualizado: string }) {
+  const hay = T.conContador > 0;
+  const sinDato = (n: number) => (hay ? num(n) : "-");
+  const pp = T.personas ? T.vistas / T.personas : NaN;
+  const ppC = C && C.personas ? C.vistas / C.personas : NaN;
+  const cifras: { t: string; v: string; nota?: string; a?: number; b?: number; grande?: boolean }[] = [
+    { t: largo > 1 ? "Personas distintas (suma de cada día)" : "Personas distintas", v: sinDato(T.personas), nota: !hay && DESDE_CONTADOR ? `Se cuentan desde el ${fechaLarga(DESDE_CONTADOR)}` : largo > 1 ? "Quien vuelve otro día cuenta otra vez" : undefined, a: T.personas, b: C && C.conContador ? C.personas : undefined, grande: true },
+    { t: "Visitas", v: sinDato(T.entradas), nota: !hay && DESDE_CONTADOR ? `Se cuentan desde el ${fechaLarga(DESDE_CONTADOR)}` : undefined, a: T.entradas, b: C && C.conContador ? C.entradas : undefined },
+    { t: "Páginas vistas", v: num(T.vistas), nota: DESDE_CONTADOR && a < DESDE_CONTADOR ? `Antes del ${fechaLarga(DESDE_CONTADOR)} incluyen robots` : undefined, a: T.vistas, b: C?.vistas },
+    { t: "Páginas por persona", v: Number.isFinite(pp) ? nf1.format(pp) : "-", a: Number.isFinite(pp) ? pp : undefined, b: Number.isFinite(ppC) ? ppC : undefined },
+    { t: "Analytics ve", v: num(T.ga.sesiones), nota: "Solo quien acepta cookies", a: T.ga.sesiones, b: C?.ga.sesiones },
+  ];
+  const sinAnuncios = !!actualizado && b > actualizado;
+  return (
+    <section className="mb-5 rounded-[22px] border-2 border-teal/60 bg-[#eef7f8] p-4 sm:p-5">
+      <h3 className="font-serif text-[clamp(22px,3vw,28px)] italic leading-tight text-ink">Quién entra de verdad en la web</h3>
+      <p className="mt-1 text-[14px] text-ink/65">Contador propio, sin cookies: cuenta también a quien rechaza las cookies. Sin robots.</p>
+      <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+        {cifras.map((c) => (
+          <div key={c.t} className={`rounded-[16px] border bg-white p-3.5 ${c.grande ? "border-teal" : "border-line"}`}>
+            <p className="text-[12px] font-bold uppercase leading-tight tracking-[0.08em] text-ink/55">{c.t}</p>
+            <p className={`mt-1 font-serif leading-none text-ink ${c.grande ? "text-[34px]" : "text-[28px]"}`}>{c.v}</p>
+            {c.a !== undefined && c.b !== undefined && Number.isFinite(c.a) && Number.isFinite(c.b) ? <div className="mt-2"><Delta a={c.a} b={c.b} compacta /></div> : null}
+            {c.nota ? <p className="mt-1.5 text-[12px] leading-snug text-ink/55">{c.nota}</p> : null}
+          </div>
+        ))}
+      </div>
+      <p className="mt-5 text-[13px] font-bold uppercase tracking-[0.1em] text-ink/55">De dónde vienen</p>
+      <div className="mt-2 rounded-[16px] border border-line bg-white p-2">
+        <Tabla
+          filas={origenes ?? []}
+          inicial="personas"
+          vacio={cargando ? "Cargando…" : "Sin visitas en este periodo."}
+          cols={[
+            { k: "origen", t: "Origen", v: (r) => r.origen, f: (r) => <span className="flex items-center font-semibold"><LogoCanal canal={r.origen} />{r.origen}</span> },
+            { k: "personas", t: "Personas", v: (r) => r.personas ?? -1, num: true, f: (r) => (r.personas == null ? "-" : num(r.personas)) },
+            { k: "visitas", t: "Visitas", v: (r) => r.visitas ?? -1, num: true, f: (r) => (r.visitas == null ? "-" : num(r.visitas)) },
+            { k: "n", t: "Páginas vistas", v: (r) => r.n, num: true },
+            { k: "clics", t: "Clics que cobra el anuncio", v: (r) => r.clics ?? -1, num: true, f: (r) => (!(r.origen in CANALES_PAGO) ? "" : sinAnuncios ? "llega mañana" : r.clics == null ? "-" : num(r.clics)) },
+          ]}
+        />
+      </div>
+      <p className="mt-3 text-[12.5px] leading-relaxed text-ink/60">Personas: gente distinta cada día (si alguien entra tres veces el mismo día, cuenta una; desde el móvil y el ordenador, dos). Visitas: cada vez que alguien abre la web. Páginas vistas: todas las páginas que ven. Si un anuncio cobra muchos más clics que visitas llegan, esos clics se pierden por el camino.</p>
     </section>
   );
 }
