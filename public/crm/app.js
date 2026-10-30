@@ -36,6 +36,8 @@ const P={
  movil:'<rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/>',
  ojo:'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path d="M4 4l16 16"/>',
  nube:'<path d="M7 18a5 5 0 0 1-.5-10A6 6 0 0 1 18 9a4.5 4.5 0 0 1-.5 9z"/>',
+ mapa:'<path d="M12 21s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/>',
+ arroba:'<circle cx="12" cy="12" r="4"/><path d="M16 12v1.5a2.5 2.5 0 0 0 5 0V12a9 9 0 1 0-3.5 7.1"/>',
  llave:'<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3M15 8l2 2"/>'
 };
 const ic=(n,c)=>'<svg class="i'+(c?' '+c:'')+'" viewBox="0 0 24 24">'+P[n]+'</svg>';
@@ -150,13 +152,13 @@ document.addEventListener('visibilitychange',()=>{if(document.visibilityState===
 const A={
  crear(n){
   const o=OR(n.ok);
-  if(!REAL){D.id++;const x={id:D.id,nombre:n.nombre,tel:n.tel,ok:n.ok,origen:o.n,tk:n.tk,zona:n.zona,f:hoy(),est:'nuevo',quien:D.yo,h:[{f:hoy(),q:D.yo,x:'Apuntado ('+o.n.toLowerCase()+')'}]};D.L.unshift(x);guarda();return x}
-  const tmp='tmp-'+hoy(),x={id:tmp,nombre:n.nombre,tel:n.tel,ok:n.ok,origen:o.n,tk:n.tk,zona:n.zona,f:hoy(),est:'nuevo',quien:D.yo,h:[{f:hoy(),q:D.yo,x:'Apuntado ('+o.n.toLowerCase()+')'}]};
-  D.L.unshift(x);encola({fn:'crear',id:tmp,d:{nombre:n.nombre,tel:n.tel,ok:n.ok,origen:o.n,tk:n.tk,zona:n.zona,quien:D.yo}});return x;
+  if(!REAL){D.id++;const x={id:D.id,nombre:n.nombre,tel:n.tel,correo:n.correo,dir:n.dir,ok:n.ok,origen:o.n,tk:n.tk,zona:n.zona,f:hoy(),est:'nuevo',quien:D.yo,h:[{f:hoy(),q:D.yo,x:'Apuntado ('+o.n.toLowerCase()+')'}]};D.L.unshift(x);guarda();return x}
+  const tmp='tmp-'+hoy(),x={id:tmp,nombre:n.nombre,tel:n.tel,correo:n.correo,dir:n.dir,ok:n.ok,origen:o.n,tk:n.tk,zona:n.zona,f:hoy(),est:'nuevo',quien:D.yo,h:[{f:hoy(),q:D.yo,x:'Apuntado ('+o.n.toLowerCase()+')'}]};
+  D.L.unshift(x);encola({fn:'crear',id:tmp,d:{nombre:n.nombre,tel:n.tel,correo:n.correo,dir:n.dir,ok:n.ok,origen:o.n,tk:n.tk,zona:n.zona,quien:D.yo}});return x;
  },
  cambiar(x,cambios,evento){
   if('est' in cambios){x.est=cambios.est;if(x.est==='visita'&&!x.fv)x.fv=hoy();if(x.est==='presupuesto'&&!x.fp)x.fp=hoy();delete x.pos;if(REAL)delete LOCAL.pos[x.id];if(x.est!=='si'){delete x.rel}if(x.est!=='no'){delete x.motivo}}
-  ['motivo','quien','tel','rel'].forEach(k=>{if(k in cambios)x[k]=cambios[k]});
+  ['motivo','quien','tel','correo','dir','zona','rel'].forEach(k=>{if(k in cambios)x[k]=cambios[k]});
   if(evento)x.h.push({f:hoy(),q:D.yo,x:evento});
   if(!REAL){guarda();return}
   const d=Object.assign({},cambios);if(evento)d.evento=evento;
@@ -307,7 +309,7 @@ document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{tab=b.dataset.
 
 // ---------- apuntar a alguien (paso a paso) ----------
 function nuevo(){
- const N={nombre:'',ok:'',tk:'',tel:'',zona:''};let paso=0;
+ const N={nombre:'',ok:'',tk:'',tel:'',correo:'',zona:'',dir:''};let paso=0;
  function puntos(){return '<div class="puntos">'+[0,1,2,3].map(i=>'<i'+(i===paso?' class="on"':'')+'></i>').join('')+'</div>'}
  function pinta(){
   let h=cab(paso?'<button class="volver" id="atras">'+ic('atras')+'Atrás</button>':'Apuntar a alguien','');
@@ -315,14 +317,14 @@ function nuevo(){
   if(paso===0)h+='<p class="q">¿Cómo se llama?</p><p class="por">Con el nombre de pila vale.</p><input class="t" id="w1" value="'+esc(N.nombre)+'" autocomplete="off" placeholder="Por ejemplo, Marta"><p class="pista">'+ic('mic')+'Puedes dictarlo con el micrófono del teclado.</p><button class="big" id="sig" style="margin-top:22px">Siguiente</button>';
   if(paso===1)h+='<p class="q">¿Cómo te ha llegado?</p><p class="por">Esto es lo que más nos ayuda. Toca uno.</p><div class="tiles">'+ORIG.map(o=>'<button class="tile'+(N.ok===o.k?' on':'')+'" data-o="'+o.k+'">'+ic(o.i)+esc(o.n)+'</button>').join('')+'</div>';
   if(paso===2)h+='<p class="q">¿Qué quiere?</p><p class="por">Más o menos. Se puede cambiar luego.</p><div class="tiles">'+TRAB.map(t=>'<button class="tile'+(N.tk===t.k?' on':'')+'" data-tk="'+t.k+'">'+ic(t.i)+esc(t.n)+'</button>').join('')+'</div>';
-  if(paso===3)h+='<p class="q">Teléfono y pueblo</p><p class="por">Si no lo tienes a mano, déjalo vacío. Se puede poner después.</p><label class="l">Teléfono</label><input class="t" id="w4" inputmode="tel" value="'+esc(N.tel)+'" autocomplete="off"><label class="l">Pueblo</label><input class="t" id="w5" value="'+esc(N.zona)+'" autocomplete="off"><button class="big verde" id="fin" style="margin-top:24px">'+ic('check')+'Guardar</button>';
+  if(paso===3)h+='<p class="q">¿Cómo le localizamos?</p><p class="por">Lo que tengas a mano. Lo que falte se pone después.</p><label class="l">Teléfono</label><input class="t" id="w4" inputmode="tel" value="'+esc(N.tel)+'" autocomplete="off"><label class="l">Correo electrónico</label><input class="t" id="w6" type="email" inputmode="email" value="'+esc(N.correo)+'" autocomplete="off" placeholder="Muy útil: pídeselo si puedes"><label class="l">Pueblo</label><input class="t" id="w5" value="'+esc(N.zona)+'" autocomplete="off"><label class="l">Dirección de la obra</label><input class="t" id="w7" value="'+esc(N.dir)+'" autocomplete="off" placeholder="Calle y número"><button class="big verde" id="fin" style="margin-top:24px">'+ic('check')+'Guardar</button>';
   abre(h);
   if($('atras'))$('atras').onclick=()=>{paso--;pinta()};
   if(paso===0){const i=$('w1');setTimeout(()=>i.focus(),50);const ok=()=>{N.nombre=i.value.trim();if(!N.nombre){i.focus();i.style.borderColor='var(--ko)';return}paso=1;pinta()};$('sig').onclick=ok;i.onkeydown=e=>{if(e.key==='Enter')ok()}}
   if(paso===1)document.querySelectorAll('[data-o]').forEach(b=>b.onclick=()=>{N.ok=b.dataset.o;vibra();paso=2;pinta()});
   if(paso===2)document.querySelectorAll('[data-tk]').forEach(b=>b.onclick=()=>{N.tk=b.dataset.tk;vibra();paso=3;pinta()});
-  if(paso===3){$('w4').oninput=()=>N.tel=$('w4').value;$('w5').oninput=()=>N.zona=$('w5').value;$('fin').onclick=()=>{
-   N.tel=$('w4').value.trim();N.zona=$('w5').value.trim();
+  if(paso===3){$('w4').oninput=()=>N.tel=$('w4').value;$('w5').oninput=()=>N.zona=$('w5').value;$('w6').oninput=()=>N.correo=$('w6').value;$('w7').oninput=()=>N.dir=$('w7').value;$('fin').onclick=()=>{
+   N.tel=$('w4').value.trim();N.zona=$('w5').value.trim();N.correo=$('w6').value.trim();N.dir=$('w7').value.trim();
    A.crear(N);vibra();
    abre('<div class="okgrande"><div class="ci">'+ic('check')+'</div><h3>¡Apuntado!</h3><p class="sub">'+esc(N.nombre)+' ya está en tu lista. Cuando le llames o vayas a verle, tócalo y marca cómo va.</p><button class="big" id="cx" style="margin-top:22px">Vale</button></div>');
    $('cx').onclick=()=>{cierra();tab='hoy';vista();scrollTo(0,0)};tab='hoy';vista();
@@ -341,7 +343,8 @@ function ficha(id){
   let h=cab('¿Cómo va con '+esc(nombre(x))+'?',esc(t.k?t.n:'')+(x.zona?(t.k?' · ':'')+esc(x.zona):'')+(t.k||x.zona?' · ':'')+'entró '+cuando(x.f));
   h+='<div class="caja" style="margin-top:8px">'+ic(o.i)+' <b>'+esc(x.origen||o.n)+'</b>'+(x.pide?'<br>Pide: '+esc(x.pide):'')+'</div>';
   if(tl)h+='<div class="acts"><a href="tel:'+tl+'">'+ic('tel')+'Llamar</a><a class="wa" href="https://wa.me/34'+tl.slice(-9)+'?text='+encodeURIComponent('Hola '+nombre(x)+', soy '+D.yo+' de AMS Cerramientos. ')+'" target="_blank" rel="noopener">'+WA+'WhatsApp</a></div>';
-  else h+='<label class="l">Teléfono</label><div class="linea"><input class="t" id="ftel" inputmode="tel" placeholder="Si lo tienes"><button class="peq" id="ftelok">Guardar</button></div>';
+  const mapa=x.dir?'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(x.dir+(x.zona?', '+x.zona:'')):'';
+  h+='<div class="datos">'+(x.correo?'<a href="mailto:'+esc(x.correo)+'">'+ic('arroba')+esc(x.correo)+'</a>':'')+(x.dir?'<a href="'+mapa+'" target="_blank" rel="noopener">'+ic('mapa')+esc(x.dir)+(x.zona?', '+esc(x.zona):'')+'<span class="ir">Cómo llegar</span></a>':'')+'<button class="peq" id="fdat">'+ic('lapiz')+(x.tel&&x.correo&&x.dir?'Cambiar datos':'Añadir '+[!x.tel?'teléfono':'',!x.correo?'correo':'',!x.dir?'dirección':''].filter(Boolean).join(', '))+'</button></div>';
   h+='<label class="l">Marca lo que ya has hecho</label>';
   PASOS.forEach((p,i)=>{const k=i+1;const hecho=cerrado||idx>=k,sig=!cerrado&&idx===k-1;
    h+='<button class="paso'+(hecho?' hecho':sig?' sig':'')+'" data-p="'+p.k+'"><div class="ic">'+ic(hecho?'check':p.i)+'</div><div><b>'+p.n+'</b><small>'+p.d+'</small></div>'+(sig?'<span class="tag">Siguiente</span>':'')+'</button>'});
@@ -366,7 +369,8 @@ function ficha(id){
   if($('fimp')){const m=()=>{const v=+$('fimp').value.replace(/\D/g,'');$('fmed').textContent=v&&D.media?'Está '+txtRel(Math.round(v/D.media*100))+'. Nosotros solo vemos ese porcentaje, no la cifra.':'La cifra se queda en tu móvil.'};$('fimp').oninput=m;m();$('fimpok').onclick=()=>{const v=+$('fimp').value.replace(/\D/g,'');if(!v)return;A.importe(x,v);vibra();aviso('Guardado. La cifra solo la ves tú.','check');vista()}}
   if($('fmot'))chipsVivos('fmot',v=>{A.cambiar(x,{motivo:v},'Motivo: '+v.toLowerCase());vibra();aviso('Guardado','check');vista()});
   if($('fq'))chipsVivos('fq',v=>{A.cambiar(x,{quien:v});vibra();aviso('Lo lleva '+v,'check')});
-  if($('ftelok'))$('ftelok').onclick=()=>{const v=$('ftel').value.trim();if(!v)return;A.cambiar(x,{tel:v});pinta();vista()};
+  $('fdat').onclick=()=>{const b=$('fdat');b.outerHTML='<div class="caja" id="fdatc"><label class="l" style="margin-top:0">Teléfono</label><input class="t" id="dtel" inputmode="tel" value="'+esc(x.tel||'')+'"><label class="l">Correo electrónico</label><input class="t" id="dcor" type="email" inputmode="email" value="'+esc(x.correo||'')+'"><label class="l">Pueblo</label><input class="t" id="dzon" value="'+esc(x.zona||'')+'"><label class="l">Dirección de la obra</label><input class="t" id="ddir" value="'+esc(x.dir||'')+'" placeholder="Calle y número"><button class="big verde" id="ddok" style="margin-top:14px">'+ic('check')+'Guardar datos</button></div>';
+   $('ddok').onclick=()=>{const c={tel:$('dtel').value.trim(),correo:$('dcor').value.trim(),zona:$('dzon').value.trim(),dir:$('ddir').value.trim()};if(c.correo&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.correo)){$('dcor').style.borderColor='var(--ko)';$('dcor').focus();return}A.cambiar(x,c,'Datos actualizados');vibra();aviso('Datos guardados','check');pinta();vista()}};
   $('fntok').onclick=()=>{const v=$('fnt').value.trim();if(!v)return;A.cambiar(x,{},v);vibra();aviso('Nota guardada','check');pinta()};
  }
  pinta();

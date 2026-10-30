@@ -156,3 +156,8 @@ textarea.t{min-height:84px;resize:vertical}
 .preg.botones{background:none;padding:0;margin-top:12px;gap:8px}
 .preg.botones button{flex:1;min-height:46px;border:2px solid #C9D3DC;background:#fff}
 .preg.botones button.si{border-color:var(--ok);background:var(--ok);color:#fff}
+.datos{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.datos a{display:flex;align-items:center;gap:8px;color:var(--navy);text-decoration:none;background:var(--gr);border-radius:12px;padding:11px 12px;font-size:.95rem;word-break:break-word}
+.datos a svg{width:20px;height:20px;color:var(--or);flex:none}
+.datos .ir{margin-left:auto;font-weight:700;color:var(--or);font-size:.85rem;white-space:nowrap;padding-left:8px}
+.datos .peq{display:flex;align-items:center;justify-content:center;gap:6px}
