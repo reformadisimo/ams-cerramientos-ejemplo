@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#12202B">
+<title>Mis contactos | AMS Cerramientos</title>
+<link rel="icon" href="/img/logo-cuadrado.png">
+<link rel="apple-touch-icon" href="/img/logo-cuadrado.png">
+<style>
+:root{--navy:#12202B;--navy2:#1B3247;--or:#C2410C;--or2:#E8742A;--bg:#F3F6F9;--tx:#1F2A36;--mut:#5B6B79;--ln:#DDE4EA;--ok:#15803D;--okb:#DCFCE7;--ko:#B91C1C;--kob:#FEE2E2;--wa:#1FA855}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--tx);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.4}
+button,input,select,textarea{font:inherit;color:inherit}
+.app{max-width:560px;margin:0 auto;min-height:100vh;padding-bottom:86px}
+header{background:var(--navy);color:#fff;padding:14px 16px 16px;position:sticky;top:0;z-index:5}
+header .r{display:flex;align-items:center;justify-content:space-between;gap:10px}
+header img{height:26px}
+header .yo{background:rgba(255,255,255,.12);border:0;color:#fff;border-radius:20px;padding:6px 12px;font-size:.85rem}
+header h1{margin:12px 0 0;font-size:1.35rem;font-weight:700}
+header p{margin:2px 0 0;color:#B8C6D3;font-size:.9rem}
+.demo{background:#FFF7ED;color:#7C2D12;font-size:.82rem;padding:8px 16px;border-bottom:1px solid #FED7AA}
+main{padding:14px 16px}
+.big{display:block;width:100%;border:0;border-radius:14px;background:var(--or);color:#fff;font-weight:700;font-size:1.1rem;padding:16px;box-shadow:0 4px 14px rgba(194,65,12,.25)}
+.big:active{transform:scale(.99)}
+h2{font-size:.82rem;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);margin:22px 0 8px;font-weight:700}
+.card{background:#fff;border:1px solid var(--ln);border-radius:14px;padding:12px 14px;margin-bottom:9px;display:flex;gap:12px;align-items:center;cursor:pointer;width:100%;text-align:left}
+.card .i{flex:1;min-width:0}
+.card b{display:block;font-size:1.02rem}
+.card small{color:var(--mut);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tag{display:inline-block;font-size:.72rem;font-weight:700;border-radius:20px;padding:2px 8px;margin-top:4px;background:#E8EEF4;color:var(--navy2)}
+.tag.web{background:#FFEDD5;color:#9A3412}
+.st{font-size:.75rem;font-weight:700;border-radius:8px;padding:4px 8px;white-space:nowrap;background:#EEF2F6;color:var(--navy2)}
+.st.nuevo{background:#FFEDD5;color:#9A3412}.st.si{background:var(--okb);color:var(--ok)}.st.no{background:var(--kob);color:var(--ko)}
+.vacio{color:var(--mut);background:#fff;border:1px dashed var(--ln);border-radius:14px;padding:16px;text-align:center;font-size:.92rem}
+nav{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--ln);display:flex;justify-content:center;padding-bottom:env(safe-area-inset-bottom);z-index:6}
+nav div{display:flex;max-width:560px;width:100%}
+nav button{flex:1;border:0;background:none;padding:10px 4px 12px;font-size:.78rem;color:var(--mut);display:flex;flex-direction:column;align-items:center;gap:3px}
+nav button svg{width:22px;height:22px}
+nav button.on{color:var(--or);font-weight:700}
+.sheet{position:fixed;inset:0;background:rgba(18,32,43,.45);z-index:20;display:none;align-items:flex-end;justify-content:center}
+.sheet.on{display:flex}
+.pan{background:#fff;width:100%;max-width:560px;max-height:94vh;overflow:auto;border-radius:20px 20px 0 0;padding:18px 16px calc(22px + env(safe-area-inset-bottom))}
+.pan .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.pan h3{margin:0;font-size:1.25rem}
+.x{border:0;background:#EEF2F6;border-radius:50%;width:34px;height:34px;font-size:1.2rem;line-height:1;flex:none}
+label.l{display:block;font-weight:700;font-size:.9rem;margin:16px 0 7px}
+input.t,textarea.t{width:100%;border:1px solid #C9D3DC;border-radius:12px;padding:12px;font-size:1rem;background:#fff}
+textarea.t{min-height:70px;resize:vertical}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{border:1.5px solid #C9D3DC;background:#fff;border-radius:22px;padding:9px 13px;font-size:.92rem}
+.chip.on{border-color:var(--or);background:#FFF1E8;color:var(--or);font-weight:700}
+.est{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.est button{border:1.5px solid #C9D3DC;background:#fff;border-radius:12px;padding:12px 8px;font-weight:600;font-size:.92rem}
+.est button.on{border-color:var(--navy);background:var(--navy);color:#fff}
+.est button.si.on{border-color:var(--ok);background:var(--ok)}
+.est button.no.on{border-color:var(--ko);background:var(--ko)}
+.acc{display:flex;gap:8px;margin-top:12px}
+.acc a{flex:1;text-align:center;text-decoration:none;border-radius:12px;padding:11px;font-weight:700;color:#fff;background:var(--navy2);display:flex;align-items:center;justify-content:center;gap:7px}
+.acc a.wa{background:var(--wa)}
+.acc svg{width:18px;height:18px}
+.ok{margin-top:20px}
+.av{color:var(--ko);font-size:.9rem;margin-top:10px;display:none}
+.media{margin-top:8px;font-size:.92rem;border-radius:10px;padding:9px 12px;background:#EEF2F6}
+.hist{margin-top:6px;border-left:2px solid var(--ln);padding-left:12px}
+.hist div{font-size:.88rem;margin:7px 0}
+.hist small{color:var(--mut);display:block;font-size:.76rem}
+.sub{color:var(--mut);font-size:.88rem;margin:4px 0 0}
+.kp{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.kp div{background:#fff;border:1px solid var(--ln);border-radius:14px;padding:12px}
+.kp b{display:block;font-size:1.5rem;color:var(--navy)}
+.kp span{font-size:.82rem;color:var(--mut)}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--ln);border-radius:14px;overflow:hidden;font-size:.9rem}
+th,td{padding:10px 8px;text-align:left;border-bottom:1px solid var(--ln)}
+th{font-size:.75rem;color:var(--mut);text-transform:uppercase;letter-spacing:.04em;background:#F8FAFC}
+td.n,th.n{text-align:right}
+.bar{height:6px;border-radius:4px;background:#E8EEF4;margin-top:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--or2)}
+.nota{font-size:.85rem;color:var(--mut);margin-top:10px}
+.seg{display:flex;background:#E8EEF4;border-radius:12px;padding:4px;gap:4px;margin-bottom:10px}
+.seg button{flex:1;border:0;background:none;border-radius:9px;padding:8px;font-size:.88rem;font-weight:600;color:var(--mut)}
+.seg button.on{background:#fff;color:var(--navy);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.buscar{margin-bottom:10px}
+.lnk{background:none;border:0;color:var(--or);font-weight:700;padding:8px 0}
+.peq{border:1px solid #C9D3DC;background:#fff;border-radius:10px;padding:9px 12px;font-size:.9rem}
+.fila{display:flex;gap:8px;align-items:center}
+.fila input{flex:1}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+ <div class="r"><img src="/img/logo-ams-blanco.svg" alt="AMS Cerramientos"><button class="yo" id="yo"></button></div>
+ <h1 id="tit">Hoy</h1>
+ <p id="sub"></p>
+</header>
+<div class="demo">Demostración con datos inventados. Lo que apuntes se guarda solo en este móvil.</div>
+<main id="v"></main>
+</div>
+<nav><div>
+ <button data-t="hoy" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Hoy</button>
+ <button data-t="todos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.5 3.3-5.5 6.5-5.5s5.9 2 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.5c2 .6 3.2 2.5 3.5 5.5"/></svg>Contactos</button>
+ <button data-t="num"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Números</button>
+ <button data-t="aj"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>Ajustes</button>
+</div></nav>
+<div class="sheet" id="sh"><div class="pan" id="pan"></div></div>
+
+<script>
+(function(){
+var K='ams-crm-movil-v1';
+var ORIG_WEB=['Anuncio de Google','Google (sin anuncio)','Facebook / Instagram','Calculadora de la web','WhatsApp de la web'];
+var ORIG_MAN=['Buzoneo','Recomendado','Cliente antiguo','Reformista o constructor','Llamada','Otro'];
+var TRAB=['Ventanas','Cancela','Cerramiento','Pérgola','Puerta','Otro'];
+var EST=[['nuevo','Sin llamar'],['hablado','Ya hablado'],['visita','Visita hecha'],['presupuesto','Presupuesto dado'],['si','Contratado'],['no','No contratado']];
+var MOT=['Precio','Lo deja para más adelante','No contesta','Se va con otro','No es lo nuestro','Otro'];
+var ETN={};EST.forEach(function(e){ETN[e[0]]=e[1]});
+var D;
+function hoy(){return Date.now()}
+function dias(n){return hoy()-n*864e5}
+function demo(){
+ return {yo:'Javi',equipo:['Javi','Óscar'],media:3500,id:20,L:[
+  {id:1,nombre:'Marta Gil',tel:'600111222',origen:'Anuncio de Google',trabajo:'Ventanas',zona:'Villalbilla',f:dias(0),est:'nuevo',web:1,pide:'6 ventanas de PVC, oscilobatientes, blancas',h:[{f:dias(0),q:'Web',x:'Ha pedido presupuesto desde la web'}]},
+  {id:2,nombre:'Luis Ortega',tel:'600333444',origen:'Calculadora de la web',trabajo:'Cancela',zona:'Alcalá de Henares',f:dias(1),est:'nuevo',web:1,pide:'Cancela corredera motorizada, 4,5 m',h:[{f:dias(1),q:'Web',x:'Ha usado la calculadora: unos 3.100 €'}]},
+  {id:3,nombre:'Pilar Romero',tel:'600555666',origen:'Buzoneo',trabajo:'Ventanas',zona:'Torres de la Alameda',f:dias(3),est:'visita',quien:'Javi',h:[{f:dias(3),q:'Javi',x:'Apuntado a mano (Buzoneo)'},{f:dias(1),q:'Javi',x:'Visita hecha. Chalet, 8 ventanas de aluminio viejas.'}]},
+  {id:4,nombre:'Andrés Molina',tel:'600777888',origen:'Recomendado',trabajo:'Cerramiento',zona:'Loeches',f:dias(6),est:'presupuesto',quien:'Óscar',h:[{f:dias(6),q:'Javi',x:'Le recomienda su cuñado (cliente de 2024)'},{f:dias(2),q:'Óscar',x:'Presupuesto dado'}]},
+  {id:5,nombre:'Sonia Prieto',tel:'600999000',origen:'Facebook / Instagram',trabajo:'Cancela',zona:'Meco',f:dias(9),est:'si',web:1,importe:4200,quien:'Javi',h:[{f:dias(9),q:'Web',x:'Ha pedido presupuesto desde Instagram'},{f:dias(4),q:'Javi',x:'Contratado: 4.200 €'}]},
+  {id:6,nombre:'Raúl Benito',tel:'611222333',origen:'Buzoneo',trabajo:'Ventanas',zona:'Villalbilla',f:dias(12),est:'si',importe:3100,quien:'Javi',h:[{f:dias(2),q:'Javi',x:'Contratado: 3.100 €'}]},
+  {id:7,nombre:'Elena Vidal',tel:'611444555',origen:'Anuncio de Google',trabajo:'Ventanas',zona:'Torrejón de Ardoz',f:dias(14),est:'no',web:1,motivo:'Precio',quien:'Javi',h:[{f:dias(5),q:'Javi',x:'No contratado: Precio'}]},
+  {id:8,nombre:'Jorge Pastor',tel:'611666777',origen:'Cliente antiguo',trabajo:'Pérgola',zona:'Alcalá de Henares',f:dias(16),est:'si',importe:2800,quien:'Óscar',h:[{f:dias(7),q:'Óscar',x:'Contratado: 2.800 €'}]},
+  {id:9,nombre:'Carmen Ruiz',tel:'611888999',origen:'Google (sin anuncio)',trabajo:'Ventanas',zona:'Camarma de Esteruelas',f:dias(18),est:'hablado',web:1,h:[{f:dias(17),q:'Javi',x:'Hablado por teléfono. Quiere visita después de Reyes.'}]},
+  {id:10,nombre:'Tomás Herrero',tel:'622111222',origen:'Reformista o constructor',trabajo:'Ventanas',zona:'Alcobendas',f:dias(20),est:'si',importe:6900,quien:'Javi',h:[{f:dias(10),q:'Javi',x:'Contratado: 6.900 €'}]},
+  {id:11,nombre:'Nuria Sanz',tel:'622333444',origen:'Buzoneo',trabajo:'Cancela',zona:'Daganzo',f:dias(22),est:'no',motivo:'Lo deja para más adelante',h:[{f:dias(12),q:'Javi',x:'No contratado: lo deja para más adelante'}]}
+ ]};
+}
+try{D=JSON.parse(localStorage.getItem(K))}catch(e){}
+if(!D||!D.L)D=demo();
+function guarda(){try{localStorage.setItem(K,JSON.stringify(D))}catch(e){}}
+var $=function(i){return document.getElementById(i)};
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function eu(n){return (Math.round(n)||0).toLocaleString('es-ES')+' €'}
+function cuando(t){var d=Math.floor((hoy()-t)/864e5);return d<=0?'hoy':d==1?'ayer':'hace '+d+' días'}
+function fecha(t){var d=new Date(t);return d.toLocaleDateString('es-ES',{day:'numeric',month:'short'})+' '+d.toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'})}
+function esWeb(x){return ORIG_WEB.indexOf(x.origen)>-1}
+function vsMedia(imp){if(!D.media||!imp)return '';var p=Math.round((imp/D.media-1)*100);return p===0?'justo en tu media':(p>0?p+' % por encima':(-p)+' % por debajo')+' de tu media'}
+var tab='hoy',filtro='todos',q='';
+
+function card(x){
+ return '<button class="card" data-id="'+x.id+'"><div class="i"><b>'+esc(x.nombre)+'</b><small>'+esc(x.trabajo)+(x.zona?' · '+esc(x.zona):'')+' · '+cuando(x.f)+'</small><span class="tag'+(esWeb(x)?' web':'')+'">'+esc(x.origen)+'</span></div><span class="st '+x.est+'">'+ETN[x.est]+'</span></button>';
+}
+function lista(a,vac){return a.length?a.map(card).join(''):'<div class="vacio">'+vac+'</div>'}
+
+function vista(){
+ [].forEach.call(document.querySelectorAll('nav button'),function(b){b.classList.toggle('on',b.dataset.t==tab)});
+ $('yo').textContent='Soy '+D.yo;
+ var h='';
+ if(tab=='hoy'){
+  $('tit').textContent='Hola, '+D.yo;
+  var nuevos=D.L.filter(function(x){return x.est=='nuevo'});
+  var curso=D.L.filter(function(x){return ['hablado','visita','presupuesto'].indexOf(x.est)>-1});
+  $('sub').textContent=nuevos.length?nuevos.length+(nuevos.length==1?' persona espera':' personas esperan')+' tu llamada':'Todo atendido';
+  h='<button class="big" id="nuevo">+ Apuntar un contacto</button>'+
+   '<h2>Sin llamar</h2>'+lista(nuevos,'No hay nadie esperando. Los que piden presupuesto por la web aparecen aquí solos.')+
+   '<h2>En marcha</h2>'+lista(curso,'Nada en marcha ahora mismo.');
+ }
+ if(tab=='todos'){
+  $('tit').textContent='Contactos';$('sub').textContent=D.L.length+' en total';
+  var a=D.L.filter(function(x){
+   if(filtro=='marcha'&&['nuevo','hablado','visita','presupuesto'].indexOf(x.est)<0)return false;
+   if(filtro=='si'&&x.est!='si')return false;
+   if(filtro=='no'&&x.est!='no')return false;
+   return !q||(x.nombre+' '+x.tel+' '+x.zona+' '+x.origen).toLowerCase().indexOf(q.toLowerCase())>-1});
+  h='<input class="t buscar" id="q" placeholder="Buscar por nombre, teléfono o pueblo" value="'+esc(q)+'">'+
+   '<div class="seg">'+[['todos','Todos'],['marcha','En marcha'],['si','Contratados'],['no','No']].map(function(s){return '<button data-f="'+s[0]+'"'+(filtro==s[0]?' class="on"':'')+'>'+s[1]+'</button>'}).join('')+'</div>'+
+   '<div id="la">'+lista(a,'No hay ningún contacto así.')+'</div>';
+ }
+ if(tab=='num'){
+  $('tit').textContent='Tus números';$('sub').textContent='Últimos 30 días';
+  var M=D.L.filter(function(x){return hoy()-x.f<30*864e5});
+  var si=M.filter(function(x){return x.est=='si'}),cer=M.filter(function(x){return x.est=='si'||x.est=='no'});
+  var tot=si.reduce(function(s,x){return s+(+x.importe||0)},0),med=si.length?tot/si.length:0;
+  h='<div class="kp"><div><b>'+M.length+'</b><span>contactos nuevos</span></div><div><b>'+si.length+'</b><span>contratados</span></div>'+
+   '<div><b>'+(cer.length?Math.round(si.length/cer.length*100):0)+' %</b><span>de cada 100 que deciden, contratan</span></div>'+
+   '<div><b>'+(si.length&&D.media?(med>=D.media?'+':'')+Math.round((med/D.media-1)*100)+' %</b><span>tus trabajos frente a tu media</span>':'—</b><span>tus trabajos frente a tu media</span>')+'</div></div>';
+  var rows=ORIG_WEB.concat(ORIG_MAN).map(function(o){var f=M.filter(function(x){return x.origen==o});return{o:o,n:f.length,s:f.filter(function(x){return x.est=='si'}).length}}).filter(function(r){return r.n});
+  var mx=Math.max.apply(null,rows.map(function(r){return r.n}).concat([1]));
+  h+='<h2>De dónde vienen</h2><table><tr><th>Origen</th><th class="n">Llegan</th><th class="n">Contratan</th></tr>'+
+   rows.sort(function(a,b){return b.n-a.n}).map(function(r){return '<tr><td>'+esc(r.o)+(ORIG_WEB.indexOf(r.o)>-1?' <span class="tag web">web</span>':'')+'<div class="bar"><i style="width:'+Math.round(r.n/mx*100)+'%"></i></div></td><td class="n">'+r.n+'</td><td class="n">'+r.s+'</td></tr>'}).join('')+'</table>';
+  var wb=M.filter(esWeb),ot=M.filter(function(x){return !esWeb(x)});
+  h+='<h2>Web y anuncios frente al resto</h2><div class="kp"><div><b>'+wb.length+'</b><span>por la web y anuncios ('+wb.filter(function(x){return x.est=='si'}).length+' contratan)</span></div><div><b>'+ot.length+'</b><span>por buzoneo, recomendados y otros ('+ot.filter(function(x){return x.est=='si'}).length+' contratan)</span></div></div>';
+  var mot={};M.filter(function(x){return x.est=='no'}).forEach(function(x){mot[x.motivo||'Sin motivo']=(mot[x.motivo||'Sin motivo']||0)+1});
+  var mk=Object.keys(mot);
+  if(mk.length)h+='<h2>Por qué no contratan</h2><table>'+mk.map(function(m){return '<tr><td>'+esc(m)+'</td><td class="n">'+mot[m]+'</td></tr>'}).join('')+'</table>';
+  h+='<p class="nota">Los importes son privados: nosotros solo vemos cómo va cada trabajo frente a tu media, no las cifras. Con esto sabemos qué campañas traen trabajo de verdad y dónde poner el dinero.</p>';
+ }
+ if(tab=='aj'){
+  $('tit').textContent='Ajustes';$('sub').textContent='Se tocan una vez y ya';
+  h='<label class="l">¿Quién usa este móvil?</label><div class="chips" id="yoc">'+D.equipo.map(function(p){return '<button class="chip'+(p==D.yo?' on':'')+'" data-p="'+esc(p)+'">'+esc(p)+'</button>'}).join('')+'</div>'+
+   '<p class="sub">Así queda apuntado quién hizo cada visita.</p>'+
+   '<label class="l">Añadir a alguien del equipo</label><div class="fila"><input class="t" id="np" placeholder="Nombre"><button class="peq" id="npok">Añadir</button></div>'+
+   '<label class="l">Tu trabajo medio (más o menos)</label><div class="fila"><input class="t" id="med" inputmode="numeric" value="'+(D.media||'')+'"><button class="peq" id="medok">Guardar</button></div>'+
+   '<p class="sub">Lo que suele costar un trabajo tuyo. Sirve para ver si cada venta está por encima o por debajo. Solo lo ves tú.</p>'+
+   '<h2>Demostración</h2><button class="peq" id="rst">Volver a los datos de ejemplo</button>';
+ }
+ $('v').innerHTML=h;enlaza();
+}
+function enlaza(){
+ [].forEach.call(document.querySelectorAll('.card'),function(b){b.onclick=function(){ficha(+b.dataset.id)}});
+ var n=$('nuevo');if(n)n.onclick=nuevo;
+ var qi=$('q');if(qi)qi.oninput=function(){q=qi.value;var p=qi.selectionStart;vista();var z=$('q');z.focus();z.setSelectionRange(p,p)};
+ [].forEach.call(document.querySelectorAll('[data-f]'),function(b){b.onclick=function(){filtro=b.dataset.f;vista()}});
+ [].forEach.call(document.querySelectorAll('#yoc .chip'),function(b){b.onclick=function(){D.yo=b.dataset.p;guarda();vista()}});
+ if($('npok'))$('npok').onclick=function(){var v=$('np').value.trim();if(v&&D.equipo.indexOf(v)<0){D.equipo.push(v);guarda();vista()}};
+ if($('medok'))$('medok').onclick=function(){D.media=+$('med').value.replace(/\D/g,'')||0;guarda();$('medok').textContent='Guardado'};
+ if($('rst'))$('rst').onclick=function(){D=demo();guarda();vista()};
+}
+function chips(id,ops,sel){return '<div class="chips" id="'+id+'">'+ops.map(function(o){return '<button type="button" class="chip'+(o==sel?' on':'')+'" data-v="'+esc(o)+'">'+esc(o)+'</button>'}).join('')+'</div>'}
+function chipVal(id){var c=document.querySelector('#'+id+' .chip.on');return c?c.dataset.v:''}
+function chipsVivos(){[].forEach.call(document.querySelectorAll('#pan .chips'),function(g){[].forEach.call(g.querySelectorAll('.chip'),function(c){c.onclick=function(){var on=c.classList.contains('on');[].forEach.call(g.querySelectorAll('.chip'),function(o){o.classList.remove('on')});if(!on)c.classList.add('on');if(g.oncambia)g.oncambia()}})})}
+function abre(h){$('pan').innerHTML=h;$('sh').classList.add('on');document.body.style.overflow='hidden';chipsVivos();$('cx').onclick=cierra}
+function cierra(){$('sh').classList.remove('on');document.body.style.overflow=''}
+$('sh').onclick=function(e){if(e.target.id=='sh')cierra()};
+$('yo').onclick=function(){tab='aj';vista()};
+[].forEach.call(document.querySelectorAll('nav button'),function(b){b.onclick=function(){tab=b.dataset.t;vista();window.scrollTo(0,0)}});
+
+function nuevo(){
+ abre('<div class="top"><h3>Apuntar un contacto</h3><button class="x" id="cx">×</button></div>'+
+  '<label class="l">Nombre</label><input class="t" id="n1" autocomplete="off">'+
+  '<label class="l">Teléfono</label><input class="t" id="n2" inputmode="tel" autocomplete="off">'+
+  '<label class="l">¿De dónde viene?</label>'+chips('n3',ORIG_MAN.concat(['Por la web']),'')+
+  '<label class="l">¿Qué quiere?</label>'+chips('n4',TRAB,'')+
+  '<label class="l">Pueblo</label><input class="t" id="n5" autocomplete="off">'+
+  '<label class="l">Nota (si quieres)</label><textarea class="t" id="n6"></textarea>'+
+  '<div class="av" id="nav"></div><button class="big ok" id="nok">Guardar</button>');
+ $('n1').focus();
+ $('nok').onclick=function(){
+  var nom=$('n1').value.trim(),tel=$('n2').value.trim(),o=chipVal('n3');
+  var av=$('nav');av.style.display='block';
+  if(!nom){av.textContent='Falta el nombre.';return}
+  if(!o){av.textContent='Marca de dónde viene. Es lo que más nos ayuda.';return}
+  if(o=='Por la web')o='Google (sin anuncio)';
+  D.id++;var x={id:D.id,nombre:nom,tel:tel,origen:o,trabajo:chipVal('n4')||'Otro',zona:$('n5').value.trim(),f:hoy(),est:'nuevo',h:[{f:hoy(),q:D.yo,x:'Apuntado a mano ('+o+')'}]};
+  var nt=$('n6').value.trim();if(nt)x.h.push({f:hoy(),q:D.yo,x:nt});
+  D.L.unshift(x);guarda();cierra();tab='hoy';vista();
+ };
+}
+function ficha(id){
+ var x=D.L.filter(function(y){return y.id==id})[0];if(!x)return;
+ var tl=String(x.tel||'').replace(/\D/g,'');
+ var wa='https://wa.me/34'+tl+'?text='+encodeURIComponent('Hola '+x.nombre.split(' ')[0]+', soy '+D.yo+' de AMS Cerramientos. ');
+ abre('<div class="top"><div><h3>'+esc(x.nombre)+'</h3><p class="sub">'+esc(x.trabajo)+(x.zona?' · '+esc(x.zona):'')+' · entró '+cuando(x.f)+'</p></div><button class="x" id="cx">×</button></div>'+
+  (x.pide?'<div class="media"><b>Lo que pide:</b> '+esc(x.pide)+'</div>':'')+
+  (tl?'<div class="acc"><a href="tel:'+tl+'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Llamar</a><a class="wa" href="'+wa+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.2z"/></svg>WhatsApp</a></div>':'')+
+  '<label class="l">¿Cómo va?</label><div class="est" id="fe">'+EST.map(function(e){return '<button type="button" class="'+e[0]+(x.est==e[0]?' on':'')+'" data-e="'+e[0]+'">'+e[1]+'</button>'}).join('')+'</div>'+
+  '<div id="fsi" style="display:none"><label class="l">¿Por cuánto? (€)</label><input class="t" id="fimp" inputmode="numeric" value="'+(x.importe||'')+'"><div class="media" id="fmed"></div></div>'+
+  '<div id="fno" style="display:none"><label class="l">¿Por qué no?</label>'+chips('fmot',MOT,x.motivo||'')+'</div>'+
+  '<label class="l">¿Quién ha ido?</label>'+chips('fq',D.equipo,x.quien||'')+
+  '<label class="l">¿De dónde vino?</label>'+(x.web?'<p class="sub">'+esc(x.origen)+' (entró solo desde la web)</p>':chips('fo',ORIG_MAN,x.origen))+
+  '<label class="l">Apuntar algo</label><textarea class="t" id="fnt" placeholder="Ej.: chalet, 8 ventanas viejas de aluminio, quieren antes de Navidad"></textarea>'+
+  '<div class="av" id="fav"></div><button class="big ok" id="fok">Guardar</button>'+
+  '<h2>Lo que ha pasado</h2><div class="hist">'+x.h.slice().reverse().map(function(e){return '<div>'+esc(e.x)+'<small>'+fecha(e.f)+' · '+esc(e.q)+'</small></div>'}).join('')+'</div>');
+ var est=x.est;
+ function pinta(){
+  [].forEach.call(document.querySelectorAll('#fe button'),function(b){b.classList.toggle('on',b.dataset.e==est)});
+  $('fsi').style.display=est=='si'?'block':'none';$('fno').style.display=est=='no'?'block':'none';
+  var v=+$('fimp').value.replace(/\D/g,'');$('fmed').style.display=v&&D.media?'block':'none';$('fmed').textContent=v?'Este trabajo está '+vsMedia(v)+'.':'';
+ }
+ [].forEach.call(document.querySelectorAll('#fe button'),function(b){b.onclick=function(){est=b.dataset.e;pinta()}});
+ $('fimp').oninput=pinta;pinta();
+ $('fok').onclick=function(){
+  var av=$('fav');av.style.display='block';
+  var imp=+$('fimp').value.replace(/\D/g,''),mot=chipVal('fmot');
+  if(est=='si'&&!imp){av.textContent='Pon el importe del trabajo. Solo lo ves tú.';return}
+  if(est=='no'&&!mot){av.textContent='Marca por qué no. Así sabemos qué mejorar.';return}
+  if(est!=x.est){x.h.push({f:hoy(),q:D.yo,x:est=='si'?'Contratado: '+eu(imp):est=='no'?'No contratado: '+mot:ETN[est]});x.est=est}
+  else if(est=='si'&&imp!=x.importe)x.h.push({f:hoy(),q:D.yo,x:'Importe cambiado: '+eu(imp)});
+  if(est=='si')x.importe=imp;if(est=='no')x.motivo=mot;
+  var qn=chipVal('fq');if(qn)x.quien=qn;
+  if(!x.web){var o=chipVal('fo');if(o&&o!=x.origen){x.h.push({f:hoy(),q:D.yo,x:'Origen: '+o});x.origen=o}}
+  var nt=$('fnt').value.trim();if(nt)x.h.push({f:hoy(),q:D.yo,x:nt});
+  guarda();cierra();vista();
+ };
+}
+vista();
+})();
+</script>
+</body>
+</html>
