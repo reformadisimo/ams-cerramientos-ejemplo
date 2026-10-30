@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Así se verán tus anuncios | AMS Cerramientos</title>
+<link rel="icon" href="/img/logo-cuadrado.png">
+<style>
+:root{--navy:#12202B;--or:#C2410C;--or2:#E8742A;--bg:#F3F6F9;--tx:#1F2A36;--mut:#5B6B79;--ln:#DDE4EA}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.45}
+.top{background:var(--navy);color:#fff;padding:28px 16px 34px;text-align:center}
+.top img{height:32px}
+.top h1{margin:16px 0 6px;font-size:1.9rem;line-height:1.15}
+.top p{margin:0 auto;max-width:560px;color:#B8C6D3;font-size:1.05rem}
+.wrap{max-width:1040px;margin:0 auto;padding:10px 16px 60px}
+.sec{display:grid;grid-template-columns:1fr 380px;gap:34px;align-items:center;padding:38px 0;border-bottom:1px solid var(--ln)}
+.sec:nth-child(even){grid-template-columns:380px 1fr}
+.sec:nth-child(even) .txt{order:2}
+.txt .num{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--or);color:#fff;font-weight:800;margin-bottom:10px}
+.txt h2{margin:0 0 6px;font-size:1.55rem;line-height:1.2}
+.txt .donde{color:var(--or);font-weight:700;margin:0 0 12px}
+.txt ul{margin:0;padding-left:20px}
+.txt li{margin:7px 0;font-size:1.02rem}
+.txt .euros{display:inline-block;margin-top:14px;background:#fff;border:1px solid var(--ln);border-radius:12px;padding:8px 14px;font-size:.95rem}
+.txt .euros b{color:var(--navy)}
+/* movil */
+.movil{width:360px;margin:0 auto;background:#111;border-radius:42px;padding:12px;box-shadow:0 20px 50px rgba(18,32,43,.25)}
+.pant{background:#fff;border-radius:32px;overflow:hidden;height:640px;position:relative;font-family:Arial,Helvetica,sans-serif}
+.barra{height:28px;display:flex;justify-content:space-between;align-items:center;padding:0 22px;font-size:12px;font-weight:700;color:#222}
+.barra.osc{color:#fff;position:absolute;left:0;right:0;top:0;z-index:3}
+.etq{position:absolute;left:50%;transform:translateX(-50%);bottom:-34px;font-size:.85rem;color:var(--mut);white-space:nowrap}
+.fr{position:relative}
+/* buscador */
+.bus{padding:10px 14px}
+.caja{border:1px solid #dfe1e5;border-radius:24px;padding:10px 16px;font-size:14px;color:#222;display:flex;gap:8px;align-items:center;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.tabs{display:flex;gap:16px;font-size:13px;color:#5f6368;padding:12px 4px 8px;border-bottom:1px solid #eee}
+.tabs b{color:#1a0dab;border-bottom:3px solid #1a0dab;padding-bottom:6px}
+.res{padding:12px 4px;border-bottom:1px solid #f1f1f1}
+.res .pat{font-size:12px;color:#202124;display:flex;align-items:center;gap:8px}
+.res .pat i{width:26px;height:26px;border-radius:50%;background:#f1f3f4;display:inline-flex;align-items:center;justify-content:center;font-style:normal;font-size:11px;font-weight:700;color:#C2410C;overflow:hidden}
+.res .pat i img{width:26px;height:26px;object-fit:contain;background:#fff}
+.res .pat small{display:block;color:#4d5156;font-size:11px}
+.res h3{margin:6px 0 4px;color:#1a0dab;font-size:17px;font-weight:400;line-height:1.3}
+.res p{margin:0;font-size:13px;color:#4d5156;line-height:1.45}
+.res .anu{font-weight:700;color:#202124;font-size:12px}
+.sl{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.sl span{border:1px solid #dadce0;border-radius:16px;padding:5px 10px;font-size:12px;color:#1a0dab}
+.gris{opacity:.45}
+.estrellas{color:#f5a623;font-size:12px}
+/* video */
+.yt{background:#0f0f0f;height:640px;color:#fff}
+.yt .vid{position:relative;height:210px;background:#000 center/cover}
+.yt .vid .ad{position:absolute;left:8px;bottom:8px;background:#f2c94c;color:#111;font-size:11px;font-weight:700;padding:2px 6px;border-radius:3px}
+.yt .vid .skip{position:absolute;right:0;bottom:16px;background:rgba(0,0,0,.75);border:1px solid rgba(255,255,255,.4);border-right:0;padding:8px 12px;font-size:12px}
+.yt .cta{display:flex;align-items:center;gap:10px;padding:12px;border-bottom:1px solid #272727}
+.yt .cta img{width:36px;height:36px;border-radius:50%;background:#fff;object-fit:contain}
+.yt .cta b{font-size:14px;display:block}.yt .cta small{color:#aaa;font-size:12px}
+.yt .cta a{margin-left:auto;background:#3ea6ff;color:#0f0f0f;font-weight:700;font-size:13px;padding:8px 14px;border-radius:18px;text-decoration:none}
+.yt .lst{padding:12px;display:flex;gap:10px}
+.yt .lst div{flex:1;height:70px;background:#272727;border-radius:8px}
+.yt .lst2{padding:0 12px}
+.yt .lst2 i{display:block;height:10px;background:#272727;border-radius:5px;margin:10px 0}
+/* correo */
+.mail{padding:8px 0}
+.mail .hd{display:flex;gap:10px;align-items:center;padding:6px 14px 12px;font-size:20px;color:#202124}
+.mail .pes{display:flex;gap:18px;padding:0 14px 8px;font-size:13px;color:#5f6368;border-bottom:1px solid #eee}
+.mail .pes b{color:#d93025}
+.fila{display:flex;gap:12px;padding:12px 14px;border-bottom:1px solid #f3f3f3}
+.fila .av{width:38px;height:38px;border-radius:50%;flex:none;background:#e8eaed}
+.fila .av img{width:38px;height:38px;border-radius:50%;object-fit:contain;background:#fff;border:1px solid #eee}
+.fila b{font-size:14px;color:#202124}
+.fila p{margin:2px 0 0;font-size:13px;color:#5f6368}
+.fila .anu{font-size:11px;font-weight:700;color:#202124;border:1px solid #ccc;border-radius:3px;padding:0 4px;margin-right:6px}
+.fila.dest{background:#FFF7F0}
+.lin{height:10px;background:#eee;border-radius:5px;margin:6px 0}
+/* periodico */
+.per .cab{background:#8b0000;color:#fff;padding:10px 14px;font-family:Georgia,serif;font-size:20px;font-weight:700}
+.per .nota{padding:14px}
+.per .nota h4{font-family:Georgia,serif;font-size:19px;margin:0 0 8px;line-height:1.25;color:#111}
+.ban{margin:10px 14px;border:1px solid #ddd;border-radius:6px;overflow:hidden;position:relative}
+.ban img{width:100%;height:120px;object-fit:cover;display:block}
+.ban .bt{padding:10px;display:flex;align-items:center;gap:8px}
+.ban .bt b{font-size:14px;color:#111;flex:1;line-height:1.25}
+.ban .bt a{background:#C2410C;color:#fff;font-size:12px;font-weight:700;padding:8px 10px;border-radius:6px;text-decoration:none;white-space:nowrap}
+.ban .x{position:absolute;right:4px;top:4px;background:rgba(255,255,255,.9);font-size:10px;color:#666;padding:1px 4px;border-radius:2px}
+/* redes */
+.fb{background:#f0f2f5;height:640px}
+.fb .post{background:#fff;margin-top:8px}
+.fb .ph{display:flex;gap:10px;align-items:center;padding:10px 12px}
+.fb .ph img{width:40px;height:40px;border-radius:50%;object-fit:contain;background:#fff;border:1px solid #eee}
+.fb .ph b{font-size:14px;display:block;color:#050505}.fb .ph small{font-size:12px;color:#65676b}
+.fb .txt2{padding:0 12px 10px;font-size:14px;color:#050505}
+.fb .med{height:300px;background:#000 center/cover;position:relative}
+.fb .med .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:58px;height:58px;border-radius:50%;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center}
+.fb .med .play:after{content:'';border-left:20px solid #fff;border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:5px}
+.fb .pie{display:flex;align-items:center;padding:10px 12px;background:#f0f2f5;gap:10px}
+.fb .pie small{color:#65676b;font-size:11px;display:block}.fb .pie b{font-size:14px;color:#050505}
+.fb .pie a{margin-left:auto;background:#e4e6eb;color:#050505;font-weight:700;font-size:13px;padding:8px 12px;border-radius:6px;text-decoration:none;white-space:nowrap}
+.ig{background:#000 center/cover;height:640px;position:relative;color:#fff}
+.ig:before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.45),transparent 25%,transparent 65%,rgba(0,0,0,.6))}
+.ig .prog{position:absolute;top:34px;left:10px;right:10px;height:3px;background:rgba(255,255,255,.4);border-radius:2px;z-index:2}
+.ig .prog i{display:block;width:40%;height:100%;background:#fff;border-radius:2px}
+.ig .ih{position:absolute;top:46px;left:12px;display:flex;gap:8px;align-items:center;z-index:2}
+.ig .ih img{width:32px;height:32px;border-radius:50%;background:#fff;object-fit:contain}
+.ig .ih b{font-size:13px}.ig .ih small{font-size:11px;opacity:.85;display:block}
+.ig .ib{position:absolute;bottom:26px;left:0;right:0;text-align:center;z-index:2}
+.ig .ib a{display:inline-block;background:#fff;color:#111;font-weight:700;font-size:14px;padding:10px 20px;border-radius:22px;text-decoration:none}
+/* chat */
+.chat{padding:10px 14px;height:640px;background:#fff}
+.chat .q{margin:18px 0 14px auto;max-width:78%;background:#f1f1f1;border-radius:18px;padding:10px 14px;font-size:14px;color:#222}
+.chat .r{font-size:14px;color:#222;line-height:1.5}
+.spon{margin-top:12px;border:1px solid #e5e5e5;border-radius:14px;padding:12px;display:flex;gap:10px;align-items:center}
+.spon img{width:44px;height:44px;border-radius:10px;object-fit:cover}
+.spon small{font-size:11px;color:#888;display:block}.spon b{font-size:14px;color:#111}
+.spon a{margin-left:auto;font-size:12px;font-weight:700;color:#C2410C;text-decoration:none}
+/* final */
+.fin{background:#fff;border:1px solid var(--ln);border-radius:20px;padding:26px;margin-top:40px;text-align:center}
+.fin h2{margin:0 0 10px}.fin p{max-width:620px;margin:8px auto;color:var(--mut)}
+.nota-p{font-size:.85rem;color:var(--mut);text-align:center;margin-top:20px}
+@media(max-width:860px){.sec,.sec:nth-child(even){grid-template-columns:1fr;gap:26px}.sec:nth-child(even) .txt{order:0}.movil{width:330px}.pant{height:600px}}
+</style>
+</head>
+<body>
+<div class="top">
+ <img src="/img/logo-ams-blanco.svg" alt="AMS Cerramientos">
+ <h1>Así se verán tus anuncios</h1>
+ <p>Una muestra de cómo te va a ver la gente de tu zona en cada sitio: Google, YouTube, el correo, el periódico, Facebook e Instagram. Los textos y fotos son de ejemplo; los definitivos los afinamos contigo.</p>
+</div>
+<div class="wrap">
+
+<section class="sec" id="google">
+ <div class="txt"><span class="num">1</span><h2>Cuando buscan en Google</h2><p class="donde">El anuncio que más presupuestos trae</p>
+  <ul><li>Alguien escribe «ventanas PVC Alcalá» y <b>sales el primero</b>, encima de la competencia.</li><li>Debajo, enlaces directos a cancelas, terrazas y la calculadora.</li><li>Solo pagas si alguien hace clic.</li></ul>
+  <span class="euros">Con 1.200 €: <b>570 €</b> al mes</span></div>
+ <div class="fr"><div class="movil"><div class="pant">
+  <div class="barra"><span>9:41</span><span>5G</span></div>
+  <div class="bus"><div class="caja">ventanas pvc alcalá de henares</div>
+   <div class="tabs"><b>Todo</b><span>Imágenes</span><span>Maps</span><span>Noticias</span></div>
+   <div class="res"><div class="pat"><i><img src="/img/logo-cuadrado.png" alt=""></i><div><span class="anu">Patrocinado</span><small>amscerramientos.es</small></div></div>
+    <h3>Ventanas de PVC en Alcalá | Presupuesto gratis y precio cerrado</h3>
+    <p>Fabricación propia en Villalbilla. Instaladores Kömmerling. Más de 20 años en tu zona. Visita y medición gratis.</p>
+    <p class="estrellas">★★★★★ <span style="color:#4d5156">4,5 · opiniones en Google</span></p>
+    <div class="sl"><span>Cancelas de aluminio</span><span>Cerrar terraza</span><span>Calcula tu precio</span></div></div>
+   <div class="res gris"><div class="pat"><i>V</i><div>Otra empresa de ventanas<small>www.otraempresa.es</small></div></div><h3>Ventanas en Alcalá de Henares</h3><p>Instalación de ventanas de aluminio y PVC…</p></div>
+   <div class="res gris"><div class="pat"><i>C</i><div>Un comparador<small>www.comparador.es</small></div></div><h3>Precio de ventanas de PVC en 2026</h3><p>Compara presupuestos de profesionales…</p></div>
+  </div></div></div><div class="etq" style="position:static;transform:none;text-align:center;margin-top:12px">Ejemplo: búsqueda en el móvil</div></div>
+</section>
+
+<section class="sec" id="competencia">
+ <div class="txt"><span class="num">2</span><h2>Cuando buscan a la competencia</h2><p class="donde">Que te vean a ti también</p>
+  <ul><li>Si alguien busca el nombre de otra empresa de ventanas de tu zona, <b>apareces tú arriba</b> con tu oferta.</li><li>Y cuando te buscan a ti por tu nombre, sales el primero sin que nadie se cuele.</li></ul>
+  <span class="euros">Con 1.200 €: <b>100 €</b> al mes</span></div>
+ <div class="fr"><div class="movil"><div class="pant">
+  <div class="barra"><span>9:41</span><span>5G</span></div>
+  <div class="bus"><div class="caja">ventanas otraempresa alcalá</div>
+   <div class="tabs"><b>Todo</b><span>Maps</span><span>Imágenes</span></div>
+   <div class="res"><div class="pat"><i><img src="/img/logo-cuadrado.png" alt=""></i><div><span class="anu">Patrocinado</span><small>amscerramientos.es</small></div></div>
+    <h3>¿Buscas ventanas? Compara antes con AMS | Precio cerrado</h3>
+    <p>Fabricantes en Villalbilla, sin intermediarios. Te damos presupuesto gratis en 24 h y lo comparas.</p>
+    <div class="sl"><span>Pide presupuesto</span><span>Nuestros trabajos</span></div></div>
+   <div class="res gris"><div class="pat"><i>O</i><div>Otra empresa<small>www.otraempresa.es</small></div></div><h3>Otra empresa · Ventanas y puertas</h3><p>Web de la empresa que buscaba…</p></div>
+  </div></div></div><div class="etq" style="position:static;transform:none;text-align:center;margin-top:12px">Ejemplo: buscan a otra empresa</div></div>
+</section>
+
+<section class="sec" id="youtube">
+ <div class="txt"><span class="num">3</span><h2>Antes de los vídeos de YouTube</h2><p class="donde">Para que te conozca quien aún no te busca</p>
+  <ul><li>Tu vídeo de 30 segundos sale antes de lo que va a ver la gente de tus pueblos.</li><li>Con un botón para <b>pedir presupuesto</b>.</li><li>Solo pagas si lo ven entero o tocan el botón.</li></ul>
+  <span class="euros">YouTube y Gmail con 1.200 €: <b>150 €</b> al mes</span></div>
+ <div class="fr"><div class="movil"><div class="pant yt">
+  <div class="barra" style="color:#fff"><span>9:41</span><span>5G</span></div>
+  <div class="vid" style="background-image:url(/img/taller-chispas-h.jpg)"><span class="ad">Anuncio · 0:12</span><span class="skip">Omitir en 3 ▸</span></div>
+  <div class="cta"><img src="/img/logo-cuadrado.png" alt=""><div><b>AMS Cerramientos</b><small>Ventanas y cancelas a medida</small></div><a href="#">Pedir presupuesto</a></div>
+  <div class="lst"><div></div><div></div></div><div class="lst2"><i style="width:80%"></i><i style="width:55%"></i></div>
+ </div></div><div class="etq" style="position:static;transform:none;text-align:center;margin-top:12px">Ejemplo: anuncio en YouTube</div></div>
+</section>
+
+<section class="sec" id="gmail">
+ <div class="txt"><span class="num">4</span><h2>En el correo de Gmail</h2><p class="donde">Arriba del todo, en la bandeja de entrada</p>
+  <ul><li>Sale como un correo más, marcado como anuncio.</li><li>Al abrirlo, ven tu vídeo y fotos de tus trabajos.</li><li>Solo a gente de tus pueblos.</li></ul></div>
+ <div class="fr"><div class="movil"><div class="pant mail">
+  <div class="barra"><span>9:41</span><span>5G</span></div>
+  <div class="hd">☰ <span style="font-size:15px;color:#5f6368;background:#f1f3f4;border-radius:20px;padding:8px 14px;flex:1">Buscar en el correo</span></div>
+  <div class="pes"><b>Principal</b><span>Promociones</span><span>Social</span></div>
+  <div class="fila dest"><div class="av"><img src="/img/logo-cuadrado.png" alt=""></div><div><b><span class="anu">Anuncio</span>AMS Cerramientos</b><p><b style="font-weight:600;color:#202124">¿Frío en casa este invierno?</b></p><p>Ventanas de PVC a medida, fabricadas en Villalbilla. Presupuesto gratis.</p></div></div>
+  <div class="fila"><div class="av"></div><div style="flex:1"><div class="lin" style="width:40%"></div><div class="lin" style="width:85%"></div><div class="lin" style="width:65%"></div></div></div>
+  <div class="fila"><div class="av"></div><div style="flex:1"><div class="lin" style="width:30%"></div><div class="lin" style="width:90%"></div><div class="lin" style="width:55%"></div></div></div>
+  <div class="fila"><div class="av"></div><div style="flex:1"><div class="lin" style="width:45%"></div><div class="lin" style="width:75%"></div><div class="lin" style="width:60%"></div></div></div>
+ </div></div><div class="etq" style="position:static;transform:none;text-align:center;margin-top:12px">Ejemplo: anuncio en Gmail</div></div>
+</section>
+
+<section class="sec" id="display">
+ <div class="txt"><span class="num">5</span><h2>En el periódico y otras webs</h2><p class="donde">El remarketing: solo para quien ya te visitó</p>
+  <ul><li>Alguien entra en tu web, mira cancelas y se va.</li><li>Los días siguientes, <b>le sale tu anuncio</b> mientras lee el periódico, mira el tiempo o juega con el móvil.</li><li>Así no se olvida de ti y vuelve cuando está listo.</li></ul>
+  <span class="euros">Con 1.200 €: <b>60 €</b> al mes</span></div>
+ <div class="fr"><div class="movil"><div class="pant per">
+  <div class="barra"><span>9:41</span><span>5G</span></div>
+  <div class="cab">Diario de tu zona</div>
+  <div class="nota"><h4>El Corredor del Henares prepara las fiestas de invierno</h4><div class="lin" style="width:95%"></div><div class="lin" style="width:88%"></div><div class="lin" style="width:70%"></div></div>
+  <div class="ban"><span class="x">Anuncio ✕</span><img src="/img/obra-cancela-alcala.jpg" alt=""><div class="bt"><b>La cancela que viste, a medida y con precio cerrado</b><a href="#">Ver precio</a></div></div>
+  <div class="nota"><div class="lin" style="width:92%"></div><div class="lin" style="width:80%"></div><div class="lin" style="width:86%"></div></div>
+ </div></div><div class="etq" style="position:static;transform:none;text-align:center;margin-top:12px">Ejemplo: anuncio en un periódico digital</div></div>
+</section>
+
+<section class="sec" id="facebook">
+ <div class="txt"><span class="num">6</span><h2>En Facebook</h2><p class="donde">Mientras miran el móvil</p>
+  <ul><li>Tu vídeo y fotos de tus obras, entre las publicaciones de sus amigos.</li><li>Aquí está tu cliente: <b>de 35 a 65 años, con casa propia</b>, en tus pueblos.</li><li>Con un botón para pedir presupuesto.</li></ul>
+  <span class="euros">Facebook e Instagram con 1.200 €: <b>260 €</b> al mes</span></div>
+ <div class="fr"><div class="movil"><div class="pant fb">
+  <div class="barra"><span>9:41</span><span>5G</span></div>
+  <div class="post"><div class="ph"><img src="/img/logo-cuadrado.png" alt=""><div><b>AMS Cerramientos</b><small>Publicidad</small></div></div>
+   <div class="txt2">¿Frío en casa este invierno? Ventanas de PVC fabricadas en nuestro taller de Villalbilla. Presupuesto gratis y precio cerrado, sin intermediarios.</div>
+   <div class="med" style="background-image:url(/img/salon-ventanal.jpg)"><span class="play"></span></div>
+   <div class="pie"><div><small>AMSCERRAMIENTOS.ES</small><b>Presupuesto gratis</b></div><a href="#">Pedir presupuesto</a></div></div>
+ </div></div><div class="etq" style="position:static;transform:none;text-align:center;margin-top:12px">Ejemplo: anuncio en Facebook</div></div>
+</section>
+
+<section class="sec" id="instagram">
+ <div class="txt"><span class="num">7</span><h2>En Instagram</h2><p class="donde">A pantalla completa, entre historias</p>
+  <ul><li>Tu vídeo en vertical, ocupando todo el móvil.</li><li>Las chispas del taller y la cancela recién montada llaman mucho la atención.</li><li>Con un botón para saber más.</li></ul></div>
+ <div class="fr"><div class="movil"><div class="pant ig" style="background-image:url(/img/anuncios/reel.jpg)">
+  <div class="barra osc"><span>9:41</span><span>5G</span></div>
+  <div class="prog"><i></i></div>
+  <div class="ih"><img src="/img/logo-cuadrado.png" alt=""><div><b>amscerramientos</b><small>Publicidad</small></div></div>
+  <div class="ib"><a href="#">Pedir presupuesto</a></div>
+ </div></div><div class="etq" style="position:static;transform:none;text-align:center;margin-top:12px">Ejemplo: historia en Instagram</div></div>
+</section>
+
+<section class="sec" id="chatgpt">
+ <div class="txt"><span class="num">8</span><h2>En ChatGPT</h2><p class="donde">Lo nuevo: cada vez más gente pregunta aquí</p>
+  <ul><li>Alguien pregunta quién le puede cambiar las ventanas en su pueblo.</li><li>Debajo de la respuesta puede salir <b>tu anuncio</b>.</li><li>Lo probaríamos con poco dinero, solo con el presupuesto de 1.200 €.</li></ul>
+  <span class="euros">Con 1.200 €: <b>60 €</b> al mes, de prueba</span></div>
+ <div class="fr"><div class="movil"><div class="pant chat">
+  <div class="barra"><span>9:41</span><span>5G</span></div>
+  <div class="q">¿Quién me puede cambiar las ventanas en Alcalá de Henares? Quiero PVC y que aíslen bien.</div>
+  <div class="r">Para cambiar ventanas en Alcalá conviene buscar un instalador de la zona que mida en casa, te dé precio cerrado y trabaje con perfiles de buena calidad…<div class="lin" style="width:90%;margin-top:10px"></div><div class="lin" style="width:75%"></div></div>
+  <div class="spon"><img src="/img/salon-ventanal.jpg" alt=""><div><small>Patrocinado</small><b>AMS Cerramientos</b><br><span style="font-size:12px;color:#555">Ventanas de PVC a medida en tu zona</span></div><a href="#">Ver</a></div>
+ </div></div><div class="etq" style="position:static;transform:none;text-align:center;margin-top:12px">Ejemplo: anuncio en ChatGPT</div></div>
+</section>
+
+</div>
+<div class="wrap" style="padding-top:0">
+ <div class="fin"><h2>Todo lleva al mismo sitio: tu web</h2>
+  <p>Vean el anuncio donde lo vean, al tocarlo llegan a tu página de presupuesto gratis. Ahí pueden llamarte, escribirte por WhatsApp o dejar sus datos, y te llega el aviso al momento.</p>
+  <p><b>Y no se pierde nadie:</b> cada contacto queda apuntado con el anuncio del que viene, para saber qué funciona y poner el dinero ahí.</p></div>
+ <p class="nota-p">Las pantallas son una recreación para que te hagas una idea. El aspecto exacto lo pone cada plataforma y puede cambiar un poco.</p>
+</div>
+</body>
+</html>
