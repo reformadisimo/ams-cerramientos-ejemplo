@@ -450,6 +450,7 @@ $('cfShare').addEventListener('click',function(){
 /* ---------- Datos, PDF y WhatsApp ---------- */
 var C={};
 $('cfLead').addEventListener('click',function(){if(!S.items.length&&S.cur){$('cfAdd').click();}$('cfDlg').showModal();});
+var _cfgLeadOk=0;function amsLeadCfg(){if(_cfgLeadOk)return;_cfgLeadOk=1;try{if(window.amsLead)window.amsLead({nombre:C.nombre,telefono:C.tel,correo:C.email,zona:C.loc,trabajo:'ventanas',pide:resumen().slice(0,580)},'configurador')}catch(e){}}
 function valid(){
  C={nombre:$('cfNombre').value.trim(),tel:$('cfTel').value.trim(),email:$('cfEmail').value.trim(),loc:$('cfLoc').value.trim()};var e=[];
  if(!C.nombre)e.push('tu nombre');if(C.tel.replace(/\D/g,'').length<9)e.push('un teléfono de 9 cifras');
@@ -462,13 +463,13 @@ function resumen(){
  if(r)L.push('','Total: '+eur(r.total)+' con IVA'+(r.hay_presupuestar?' (sin contar lo que va a presupuestar)':''));return L.join('\n');
 }
 $('cfWa').addEventListener('click',function(){
- if(!valid())return;
+ if(!valid())return;amsLeadCfg();
  if(window.amsEvento)window.amsEvento('generate_lead',{pagina:location.pathname,via:'configurador_whatsapp'});
  var t='Hola, AMS Cerramientos. He configurado mis ventanas en vuestra web:\n\n'+resumen()+'\n\nSoy '+C.nombre+', teléfono '+C.tel+', correo '+C.email+'. La obra está en '+C.loc+'.\nMe gustaría que vinierais a medir.';
  window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(t),'_blank','noopener');
 });
 $('cfPdf').addEventListener('click',function(){
- if(!valid())return;var r=S.res;if(!r){return;}
+ if(!valid())return;amsLeadCfg();var r=S.res;if(!r){return;}
  if(window.amsEvento)window.amsEvento('generate_lead',{pagina:location.pathname,via:'configurador_pdf'});
  var hoy=new Date(),ref='AMS-'+hoy.getFullYear().toString().slice(2)+String(hoy.getMonth()+1).padStart(2,'0')+String(hoy.getDate()).padStart(2,'0')+'-'+String(Math.floor(Math.random()*900+100));
  var rows=S.items.map(function(it,i){return '<tr><td style="width:70px">'+foto(it,'pdfimg')+'</td><td><b>'+esc((it.hab?it.hab+' · ':'')+nombre(it))+'</b><br>'+esc(detalle(it))+'</td><td class="r">'+it.n+'</td><td class="r">'+(r.lineas[i].presupuestar?'A presupuestar':eur(r.lineas[i].unidad))+'</td><td class="r">'+(r.lineas[i].presupuestar?'—':eur(r.lineas[i].total)+(r.lineas[i].vidrio_aparte?'<br><small>vidrio aparte</small>':''))+'</td></tr>';}).join('');

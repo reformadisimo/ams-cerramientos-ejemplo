@@ -949,6 +949,7 @@ open(_fp, "w", encoding="utf-8").write(_t)
 # --- aviso de cookies en todas las paginas (menos la guia privada)
 shutil.copy(os.path.join(_EX, "cookies.js"), os.path.join(OUT, "cookies.js"))
 shutil.copy(os.path.join(_EX, "medicion.js"), os.path.join(OUT, "medicion.js"))
+shutil.copy(os.path.join(_EX, "origen.js"), os.path.join(OUT, "origen.js"))
 shutil.copy(os.path.join(_EX, "barra.js"), os.path.join(OUT, "barra.js"))
 import hashlib as _hl
 _VER = lambda f: _hl.md5(open(os.path.join(OUT, f), "rb").read()).hexdigest()[:8]
@@ -973,6 +974,7 @@ for _fp in _g.glob(os.path.join(OUT, "**", "*.html"), recursive=True):
     if "</body>" not in _t: continue
     if "/cookies.js" not in _t: _t = _t.replace("</body>", '<script src="/cookies.js?v=' + _VER("cookies.js") + '" defer></script></body>', 1)
     if "/medicion.js" not in _t: _t = _t.replace("</body>", '<script src="/medicion.js?v=' + _VER("medicion.js") + '" defer></script></body>', 1)
+    if "/origen.js" not in _t and os.path.basename(_fp) not in ("guia-javi.html", "conversaciones.html", "correos-ejemplo.html", "cuestionario.html") and "guia-javi" not in _fp: _t = _t.replace("</body>", '<script src="/origen.js?v=' + _VER("origen.js") + '" defer></script></body>', 1)
     if "/salida.js" not in _t: _t = _t.replace("</body>", '<script src="/salida.js" defer></script></body>', 1)
     if "/reveal.js" not in _t: _t = _t.replace("</body>", '<script src="/reveal.js" defer></script></body>', 1)
     if "/barra.js" not in _t and os.path.basename(_fp) not in ("guia-javi.html", "acceso-ficha.html", "conversaciones.html", "correos-ejemplo.html", "cuestionario.html", "fotos-web-antigua.html", "calculadora.html", "configurador.html", "visualizador.html") and "guia-javi" not in _fp: _t = _t.replace("</body>", '<script src="/barra.js" defer></script></body>', 1)
