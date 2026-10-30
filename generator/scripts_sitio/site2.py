@@ -1003,6 +1003,7 @@ for _f, _blk, _anchor in (("index.html", "amsv_index.html", '<section style="bac
             _t = _t.replace(_anchor, open(os.path.join(_EX, _blk), encoding="utf-8").read() + _anchor, 1)
             open(_fp, "w", encoding="utf-8").write(_t)
 import pages_guia; pages_guia.build(OUT)
+import enlazado; print("enlazado:", enlazado.aplicar(OUT))
 _pp = os.path.join(OUT, "api", "_asistente-prompt.js")
 if os.path.exists(_pp):
     _tp = open(_pp, encoding="utf-8").read()
