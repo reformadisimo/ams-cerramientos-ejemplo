@@ -49,6 +49,7 @@ type Detalle = {
   clarity?: { dias: number; desde: string | null; paginas: FilaClarity[]; dispositivos: FilaClarity[] } | null;
   rebote?: { dispositivo: FilaRebote[]; zona: FilaRebote[]; tipo: FilaRebote[]; paginas: FilaRebote[] } | null;
   personas?: number | null;
+  origenes?: { origen: string; n: number; movil: number; clics?: number }[];
   crm: { origen: string; leads: number; visitas: number; presupuestos: number; firmados: number; firmado: number; facturado: number; descartados: number; respondidos?: number; horas_resp?: number; vencidas?: number }[];
 };
 
@@ -164,7 +165,7 @@ const METRICAS: Metrica[] = [
   // Coste por contacto según las propias plataformas: hoy casi todo el anuncio aterriza en la landing de la agencia,
   // así que la web solo ve una parte de esas peticiones. Cuando los anuncios lleven a la web, se mira también el de la web.
   { id: "cpl", nombre: "Coste por contacto de anuncios", f: (t) => (t.ads.conv ? t.ads.coste / t.ads.conv : NaN), formato: eur, menosEsMejor: true, fuente: "Anuncios · contactos que cuenta cada plataforma", ayuda: "Lo que nos cuesta cada contacto que traen los anuncios. Cuanto más bajo, mejor." },
-  { id: "sesiones", nombre: "Visitas a la web", f: (t) => t.ga.sesiones, formato: num, fuente: "Analytics", ayuda: "Veces que alguien entra en la web (Analytics)." },
+  { id: "sesiones", nombre: "Visitas a la web", f: (t) => t.ga.sesiones, formato: num, fuente: "Analytics", ayuda: "Veces que alguien entra en la web según Analytics, que solo cuenta a quien acepta las cookies (más o menos la mitad). Todas las visitas, en «De dónde vienen»." },
   { id: "organico", nombre: "Clics desde Google", f: (t) => t.gsc.clics, formato: num, fuente: "Search Console", ayuda: "Entran desde Google sin anuncio (lo que no se paga)." },
   { id: "rebote", nombre: "Rebote", f: (t) => (t.ga.sesiones ? (1 - t.ga.interes / t.ga.sesiones) * 100 : NaN), formato: (n) => `${nf1.format(n)} %`, menosEsMejor: true, fuente: "Analytics · sesiones sin interacción", ayuda: "De cada 100 visitas, cuántas se van sin hacer nada (menos de 10 segundos, una sola página y ninguna acción). Cuanto más bajo, mejor." },
   { id: "conversion", nombre: "Visitas que acaban en contacto", f: (t) => (t.ga.sesiones ? (t.peticiones / t.ga.sesiones) * 100 : NaN), formato: (n) => `${nf1.format(n)} %`, fuente: "Web y Analytics", ayuda: "De cada 100 visitas a la web, cuántas acaban dejando sus datos." },
@@ -609,6 +610,17 @@ export default function Mesa({ datos, temas, resumenHoy, tareas, relojes, base }
               <p className="text-[13px] text-ink/55">{compara === "no" ? "sin comparar" : `frente a ${textoRango(ca, cb)}`}</p>
             </div>
           </div>
+          {/* Fechas a la vista, a un toque (igual que en Reformadísimo, cl·v970) */}
+          <div className="mt-4 flex flex-wrap items-center gap-2">
+            {PRESETS.filter(([p]) => ["hoy", "ayer", "7", "28", "mes", "mespasado"].includes(p)).map(([p, t]) => (
+              <button key={p} type="button" onClick={() => elige(p)} className={`min-h-[44px] rounded-full border px-3.5 py-1.5 text-[14px] font-semibold transition-colors ${preset === p ? "border-ink bg-ink text-white" : "border-line bg-white text-ink hover:border-ink"}`}>
+                {t}
+              </button>
+            ))}
+            <button type="button" onClick={() => { if (window.location.hash !== "#pl-fechas") window.location.hash = "pl-fechas"; else window.dispatchEvent(new HashChangeEvent("hashchange")); setTimeout(() => document.getElementById("pl-fechas")?.scrollIntoView({ behavior: suave(), block: "start" }), 30); }} className="min-h-[44px] rounded-full border border-dashed border-ink/40 bg-white px-3.5 py-1.5 text-[14px] font-semibold text-ink/75 hover:border-ink">
+              Otras fechas y comparar
+            </button>
+          </div>
 
           {sencillaPosible ? (
             <Ayudas vista={vista} cambiaVista={cambiaVista} abreGuia={() => setGuia(true)} resumen={resumenHoy} tareas={tareas ?? []} />
@@ -924,6 +936,20 @@ export default function Mesa({ datos, temas, resumenHoy, tareas, relojes, base }
                     { k: "clave", t: "Acciones clave", v: (r) => r.clave, num: true },
                   ]}
                 />
+              </Caja>
+              <Caja titulo="De dónde vienen (todas las visitas)" fuente={cargando ? "Cargando…" : "Web · contador propio, sin cookies: cuenta también a quien rechaza las cookies"} explica="Todas las páginas vistas de la web, también las de quien rechaza las cookies, según de dónde viene cada persona. En las filas de anuncios, al lado, los clics que cobra la plataforma.">
+                <Tabla
+                  filas={detalle?.origenes ?? []}
+                  inicial="n"
+                  vacio={cargando ? "Cargando…" : "Sin visitas en este periodo."}
+                  cols={[
+                    { k: "origen", t: "Origen", v: (r) => r.origen, f: (r) => <span className="flex items-center font-semibold"><LogoCanal canal={r.origen} />{r.origen}</span> },
+                    { k: "n", t: "Páginas vistas", v: (r) => r.n, num: true },
+                    { k: "movil", t: "En móvil", v: (r) => (r.n ? r.movil / r.n : 0), num: true, f: (r) => (r.n ? pct((r.movil / r.n) * 100) : "-") },
+                    { k: "clics", t: "Clics que cobra el anuncio*", v: (r) => r.clics ?? -1, num: true, f: (r) => (r.clics === undefined ? "" : datos.anuncios.actualizado && b > datos.anuncios.actualizado ? "-" : num(r.clics)) },
+                  ]}
+                />
+                <p className="mt-2 text-[13px] text-ink/60">* Clics de ese periodo según la propia plataforma. Si sale «-», aún no han llegado los del día: se actualizan una vez al día.</p>
               </Caja>
               <Caja titulo="Páginas más vistas" fuente={cargando ? "Cargando…" : "Web · contador propio, sin cookies"}>
                 <Barras filas={(detalle?.paginas ?? []).slice(0, 12).map((p) => [p.pagina, p.n])} />

@@ -293,6 +293,12 @@ export function detalleDemo(desde: string, hasta: string, hoy: string) {
     const firmado = l.reduce((s, x) => s + x.importe, 0), resp = l.filter((x) => x.resp !== null);
     return { origen: c as string, leads: l.length, visitas: l.filter((x) => x.visita).length, presupuestos: l.filter((x) => x.pres).length, firmados: l.filter((x) => x.firm).length, firmado, facturado: Math.round((firmado * 0.6) / 10) * 10, descartados: l.filter((x) => x.desc).length, respondidos: resp.length, horas_resp: Math.round(resp.reduce((s, x) => s + (x.resp ?? 0), 0) * 10) / 10, vencidas: l.length - resp.length };
   }).filter((x) => x.leads > 0);
+  // De dónde vienen (contador propio, sin cookies): reparte las páginas vistas por origen. Los clics de Google Ads salen de la serie de anuncios.
+  const adsClics = T.diario.filter((f) => entre(f[0], desde, hasta) && f[1] === "google").reduce((s, f) => s + f[4], 0);
+  const pvAds = Math.min(tot.vistas, Math.round(adsClics * 1.7));
+  const resto = reparteFijo(Math.max(0, tot.vistas - pvAds), [0.36, 0.3, 0.2, 0.09, 0.05]);
+  const ORIG: [string, number, number][] = [["Google (búsqueda)", resto[0], 0.62], ["Directo", resto[1], 0.55], ["Meta / Instagram", resto[2], 0.9], ["Asistentes de IA", resto[3], 0.48], ["Otras webs", resto[4], 0.5]];
+  const origenes: { origen: string; n: number; movil: number; clics?: number }[] = [{ origen: "Google Ads", n: pvAds, movil: Math.round(pvAds * 0.72), clics: adsClics }, ...ORIG.map(([o, v, m]) => ({ origen: o, n: v, movil: Math.round(v * m) }))].filter((x) => x.n > 0).sort((x, y) => y.n - x.n);
   void n;
-  return { rebote, paginas, clicsPagina, lupa, gsc: { totales: { clics: tot.gscClics, impresiones: tot.gscImp, ctr_pct: tot.gscImp ? Math.round((tot.gscClics / tot.gscImp) * 1000) / 10 : 0, posicion: Math.round(pos * 10) / 10 }, busquedas, paginas: gscPag }, entradas, crm };
+  return { origenes, rebote, paginas, clicsPagina, lupa, gsc: { totales: { clics: tot.gscClics, impresiones: tot.gscImp, ctr_pct: tot.gscImp ? Math.round((tot.gscClics / tot.gscImp) * 1000) / 10 : 0, posicion: Math.round(pos * 10) / 10 }, busquedas, paginas: gscPag }, entradas, crm };
 }
