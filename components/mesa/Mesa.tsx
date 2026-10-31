@@ -1373,15 +1373,15 @@ function PorCanal({ T, C }: { T: Totales; C: Totales | null }) {
         inicial="sesiones"
         cols={[
           { k: "canal", t: "Canal", v: (r) => r.canal, f: (r) => <span className="inline-flex items-center font-semibold"><LogoCanal canal={r.canal} />{r.canal}</span> },
-          { k: "sesiones", t: "Visitas", v: (r) => r.sesiones, num: true, f: (r) => (r.sesiones ? num(r.sesiones) : "-") },
-          { k: "rebote", t: "Rebote", v: (r) => r.rebote ?? -1, num: true, f: (r) => (r.rebote === null ? "-" : <span>{pct(r.rebote)}{antes[r.canal]?.rebote != null ? <span className="ml-1 text-[12px] text-ink/45">(antes {pct(antes[r.canal].rebote!)})</span> : null}</span>) },
+          { k: "sesiones", t: "Visitas (Analytics)", v: (r) => r.sesiones, num: true, f: (r) => (r.sesiones ? num(r.sesiones) : "-") },
+          { k: "rebote", t: "Rebote (Analytics)", v: (r) => r.rebote ?? -1, num: true, f: (r) => (r.rebote === null ? "-" : <span>{pct(r.rebote)}{antes[r.canal]?.rebote != null ? <span className="ml-1 text-[12px] text-ink/45">(antes {pct(antes[r.canal].rebote!)})</span> : null}</span>) },
           { k: "contactos", t: "Contactos", v: (r) => r.contactos, num: true, f: (r) => <span>{num(r.contactos)}{antes[r.canal] ? <span className="ml-1 text-[12px] text-ink/45">(antes {num(antes[r.canal].contactos)})</span> : null}</span> },
           { k: "conversion", t: "Visita a contacto", v: (r) => r.conversion ?? -1, num: true, f: (r) => (r.conversion === null ? "-" : pct(r.conversion)) },
           { k: "coste", t: "Inversión", v: (r) => r.coste, num: true, f: (r) => (r.coste ? eur(r.coste) : "-") },
           { k: "cpc", t: "Coste por contacto en la web", v: (r) => r.cpc ?? 0, num: true, f: (r) => (r.cpc ? eur(r.cpc) : "-") },
         ]}
       />
-      <VerMas corto={<>Contactos que llegan a la web. «Meta» junta anuncios e Instagram.</>} className="text-[12.5px] text-ink/50">Algunos anuncios llevan a una página propia, así que aquí su coste por contacto puede salir más alto que en la plataforma. La web no siempre distingue anuncios de Instagram.</VerMas>
+      <VerMas corto={<><b className="text-ink/70">OJO:</b> las visitas y el rebote de esta tabla son de Analytics, que solo ve a quien acepta cookies (más o menos 1 de cada 10). Las de verdad, en «Quién entra de verdad en la web». Los contactos sí son todos.</>} className="text-[12.5px] text-ink/50">«Meta» junta anuncios e Instagram. Algunos anuncios llevan a una página propia, así que aquí su coste por contacto puede salir más alto que en la plataforma. La web no siempre distingue anuncios de Instagram.</VerMas>
     </Caja>
   );
 }
