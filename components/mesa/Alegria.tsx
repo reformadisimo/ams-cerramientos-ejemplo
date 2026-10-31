@@ -313,18 +313,21 @@ export function JuegaConTusCifras({ contactos, preguntas }: { contactos?: number
 
 /** Apartado plegado en una línea (cl·v921): icono, título y una pista; se abre al pulsar. Cerrado al entrar,
     para que la mesa se recorra en un vistazo y cada cosa se despliegue solo si se quiere. */
-export function Plegable({ id, icono, color, titulo, pista, abiertoAlPrincipio, children }: { id: string; icono: string; color: string; titulo: string; pista?: string; abiertoAlPrincipio?: boolean; children: React.ReactNode }) {
+export function Plegable({ id, icono, color, titulo, pista, abiertoAlPrincipio, destacado, accion, children }: { id: string; icono: string; color: string; titulo: string; pista?: string; abiertoAlPrincipio?: boolean; destacado?: boolean; accion?: string; children: React.ReactNode }) {
   const [abierto, setAbierto] = useState(!!abiertoAlPrincipio);
   useEffect(() => {
     const f = () => { if (window.location.hash === "#" + id) setAbierto(true); };
     f(); window.addEventListener("hashchange", f); return () => window.removeEventListener("hashchange", f);
   }, [id]);
   return (
-    <section id={id} className="mt-3 scroll-mt-4 rounded-[18px] border border-line bg-white">
-      <button type="button" aria-expanded={abierto} aria-controls={id + "-dentro"} onClick={() => setAbierto(!abierto)} className="flex min-h-[56px] w-full items-center gap-3 px-3 py-2 text-left">
-        <Loseta n={icono} color={color} tam={36} />
-        <span className="min-w-0 flex-1"><span className="block text-[16px] font-semibold leading-tight text-ink">{titulo}</span>{pista && <span className="block truncate text-[13px] leading-tight text-ink/60">{pista}</span>}</span>
-        <span aria-hidden="true" className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-line text-[15px] text-ink/70">{abierto ? "–" : "+"}</span>
+    /* cl·v939: "destacado" (como en AMS): borde y fondo de color, título grande y botón amarillo con la acción */
+    <section id={id} className={`mt-3 scroll-mt-4 rounded-[18px] ${destacado ? "border-2" : "border border-line bg-white"}`} style={destacado ? { borderColor: color, background: `${color}14` } : undefined}>
+      <button type="button" aria-expanded={abierto} aria-controls={id + "-dentro"} onClick={() => setAbierto(!abierto)} className={`flex w-full items-center gap-3 px-3 text-left ${destacado ? "min-h-[72px] py-3" : "min-h-[56px] py-2"}`}>
+        <Loseta n={icono} color={color} tam={destacado ? 44 : 36} />
+        <span className="min-w-0 flex-1"><span className={destacado ? "block font-serif text-[22px] italic leading-tight text-ink" : "block text-[16px] font-semibold leading-tight text-ink"}>{titulo}</span>{pista && <span className={`block leading-tight ${destacado ? "mt-0.5 text-[14.5px] text-ink/75" : "truncate text-[13px] text-ink/60"}`}>{pista}</span>}</span>
+        {destacado && accion && !abierto
+          ? <span aria-hidden="true" className="inline-flex min-h-[44px] shrink-0 items-center rounded-full bg-yellow px-5 text-[15px] font-semibold text-ink">{accion}</span>
+          : <span aria-hidden="true" className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-line bg-white text-[15px] text-ink/70">{abierto ? "–" : "+"}</span>}
       </button>
       <div id={id + "-dentro"} hidden={!abierto} className="px-3 pb-3 [&>section]:mt-0 [&>section]:border-0 [&>section]:px-0 [&>section]:pt-0 [&>div]:mt-0">{children}<CerrarYVolver onClose={() => setAbierto(false)} a={id} /></div>
     </section>
@@ -364,14 +367,14 @@ export function Apartados({ items }: { items: Apartado[] }) {
 /* ───────────────────────── Guía de uso (cl·v928) ───────────────────────── */
 /** Pasos para alguien que no sabe nada. Para otro negocio se cambian aquí los textos y nada más. */
 export const GUIA_PASOS: { icono: string; color: string; t: string; d: string; ancla?: string }[] = [
-  { icono: "campana", color: "#a3505a", t: "Mira la primera línea", d: "Si es roja, hay algo que atender; si es verde, todo va bien. Pulsa el + para ver por qué.", ancla: "pl-conclusion" },
-  { icono: "check", color: "#c79a00", t: "Haz lo primero de hoy", d: "En «Lo primero que haría hoy» tienes una sola cosa que hacer. Cuando la revises, pulsa «Ya lo he revisado».", ancla: "pl-hoy" },
-  { icono: "grid", color: "#2a6f86", t: "Mira las baterías", d: "Cada parte del negocio tiene una batería: llena y verde, bien; naranja, mira esto; roja, importante. Pulsa una y verás el detalle.", ancla: "pl-temas" },
-  { icono: "moneda", color: "#7a4fd0", t: "Lee las cuatro cifras", d: "Cuántas personas dejaron sus datos, cuántas piden visita, qué cuesta cada contacto y tu nota en Google. Si una no se entiende, pulsa el ?.", ancla: "pl-cifras" },
-  { icono: "mando", color: "#7a4fd0", t: "Sueña y haz cuentas", d: "Arriba, en «Tus sueños y tus cuentas»: mueve la inversión, marca tu meta y ponnos a prueba. Son estimaciones, para pensar.", ancla: "mesa-suenos" },
-  { icono: "catalejo", color: "#1d6b3a", t: "Baja a todas las cifras", d: "Las pestañas separan los temas: Ventas, Anuncios, La web, Google, Ficha y redes. En cada gráfica, la estrella es el mejor día.", ancla: "mesa-cifras-todas" },
-  { icono: "chat", color: "#d9822b", t: "Pregunta lo que quieras", d: "Escribe o dicta una pregunta como se la harías a una persona. Contesta con tus cifras de 28 días.", ancla: "pl-pregunta" },
-  { icono: "sobre", color: "#2f6fd0", t: "Recíbelo por correo", d: "En la línea verde de la pantalla principal puedes pedir el resumen cada día, cada lunes o cada mes, sin tener que entrar.", ancla: "pl-mas" },
+  { icono: "campana", color: "#a3505a", t: "Mira la primera línea", d: "Roja, hay algo que atender; verde, todo bien. El + te dice por qué.", ancla: "pl-conclusion" },
+  { icono: "check", color: "#c79a00", t: "Haz lo primero de hoy", d: "Una sola tarea. Al terminar, pulsa «Ya lo he revisado».", ancla: "pl-hoy" },
+  { icono: "grid", color: "#2a6f86", t: "Mira las baterías", d: "Verde, bien; naranja, mira esto; roja, importante. Pulsa una para el detalle.", ancla: "pl-temas" },
+  { icono: "moneda", color: "#7a4fd0", t: "Lee las cuatro cifras", d: "Contactos, peticiones, coste por contacto y nota en Google. Dudas: pulsa el ?.", ancla: "pl-cifras" },
+  { icono: "mando", color: "#7a4fd0", t: "Sueña y haz cuentas", d: "Mueve la inversión y marca tu meta. Son estimaciones, para pensar.", ancla: "mesa-suenos" },
+  { icono: "catalejo", color: "#1d6b3a", t: "Baja a todas las cifras", d: "Una pestaña por tema. En cada gráfica, la estrella es el mejor día.", ancla: "mesa-cifras-todas" },
+  { icono: "chat", color: "#d9822b", t: "Pregunta lo que quieras", d: "Escríbela o díctala. Contesta con tus cifras de 28 días.", ancla: "pl-pregunta" },
+  { icono: "sobre", color: "#2f6fd0", t: "Recíbelo por correo", d: "Pide el resumen cada día, cada lunes o cada mes, sin entrar.", ancla: "pl-mas" },
   { icono: "escudo", color: "#25a244", t: "Si ves algo raro, avísanos", d: "Abajo del todo está «Avisar de un error». Nos encanta arreglarlos." },
 ];
 
@@ -399,7 +402,7 @@ export function GuiaDeUso({ pasos = GUIA_PASOS, nombre = "la mesa", modo = "late
             {actual && (
               <div className="mt-1 flex flex-wrap gap-1.5 px-1.5 pb-1">
                 <button type="button" onClick={siguiente} className="min-h-[40px] rounded-full bg-yellow px-4 text-[13.5px] font-semibold text-ink">{paso === pasos.length - 1 ? "Terminar" : "Lo he visto, siguiente"}</button>
-                <button type="button" onClick={() => guardaPaso(-1)} className="min-h-[40px] rounded-full border border-line bg-white px-3.5 text-[13.5px] font-semibold text-ink/70">Saltar la guía</button>
+                <button type="button" onClick={() => guardaPaso(-1)} className="min-h-11 rounded-full border border-line bg-white px-3.5 text-[13.5px] font-semibold text-ink/70">Saltar la guía</button>
               </div>
             )}
           </li>
@@ -423,8 +426,8 @@ export function GuiaDeUso({ pasos = GUIA_PASOS, nombre = "la mesa", modo = "late
         <div className="sticky top-0 z-30 -mx-4 mb-2 flex items-center gap-2 border-b-2 border-yellow bg-[#fffbe6] px-4 py-2 xl:hidden sm:-mx-6 sm:px-6" role="status">
           <Loseta n={pasos[paso!].icono} color={pasos[paso!].color} tam={32} />
           <span className="min-w-0 flex-1"><span className="block text-[12px] font-bold uppercase tracking-wide text-ink/55">Guía · paso {paso! + 1} de {pasos.length}</span><span className="block truncate text-[14px] font-semibold leading-tight text-ink">{pasos[paso!].t}</span></span>
-          <button type="button" onClick={siguiente} className="min-h-[40px] shrink-0 rounded-full bg-yellow px-3.5 text-[13.5px] font-semibold text-ink">{paso === pasos.length - 1 ? "Terminar" : "Siguiente"}</button>
-          <button type="button" onClick={() => guardaPaso(-1)} aria-label="Saltar la guía" className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-line bg-white text-[16px] text-ink/60">×</button>
+          <button type="button" onClick={siguiente} className="min-h-11 shrink-0 rounded-full bg-yellow px-3.5 text-[13.5px] font-semibold text-ink">{paso === pasos.length - 1 ? "Terminar" : "Siguiente"}</button>
+          <button type="button" onClick={() => guardaPaso(-1)} aria-label="Saltar la guía" className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-line bg-white text-[16px] text-ink/60">×</button>
         </div>
       )}
       <section className="mt-3 rounded-[18px] border border-line bg-white xl:hidden" aria-label="Guía de uso">
@@ -452,7 +455,7 @@ export function CerrarYVolver({ onClose, a }: { onClose: () => void; a?: string 
 /* ───────────────────────── "¿Esto qué es?" (cl·v931) ───────────────────────── */
 /** Botón redondo con "?" que abre una frase en llano. Para el dueño que no tiene por qué saber nada. */
 export function Que({ texto, etiqueta, abierto, onToggle, tam = 28 }: { texto: string; etiqueta: string; abierto: boolean; onToggle: () => void; tam?: number }) {
-  return <button type="button" aria-label={`Qué es: ${etiqueta}`} aria-expanded={abierto} onClick={(e) => { e.stopPropagation(); onToggle(); }} className={`relative grid shrink-0 place-items-center rounded-full border text-[13px] font-bold before:absolute before:-inset-2 before:content-[''] ${abierto ? "border-ink bg-ink text-white" : "border-line bg-white text-ink/70 hover:border-ink"}`} style={{ width: tam, height: tam }}>?</button>;
+  return <button type="button" aria-label={`Qué es: ${etiqueta}`} aria-expanded={abierto} onClick={(e) => { e.stopPropagation(); onToggle(); }} className={`relative grid shrink-0 place-items-center rounded-full border text-[13px] font-bold before:absolute before:-inset-3 before:content-[''] ${abierto ? "border-ink bg-ink text-white" : "border-line bg-white text-ink/70 hover:border-ink"}`} style={{ width: tam, height: tam }}>?</button>;
 }
 export function QueTexto({ texto }: { texto: string }) {
   return <p className="mt-2 rounded-[10px] bg-[#fbf6ea] px-3 py-2 text-[13.5px] leading-snug text-ink/85">{texto}</p>;

@@ -360,7 +360,7 @@ export function PonnosAPrueba({ base, hoy, realEntre, demo }: { base: CifrasBase
         <Loseta n="rayo" color={C.ia} tam={44} />
         <div>
           <h3 className="font-serif text-[21px] italic leading-tight text-ink">Ponnos a prueba</h3>
-          <p className="mt-0.5 text-[14px] text-ink/65">La mesa se moja con una predicción para los próximos 7 días. Tú también puedes. Luego se comprueba quién se acercó más, y si la mesa falla, lo verás aquí.</p>
+          <p className="mt-0.5 text-[14px] text-ink/65"><b className="text-ink">Predice los próximos 7 días, como la mesa.</b> Luego verás quién se acercó más.</p>
         </div>
       </div>
       {!ap && (
@@ -368,7 +368,7 @@ export function PonnosAPrueba({ base, hoy, realEntre, demo }: { base: CifrasBase
           <p className="text-[15px] text-ink">La mesa dice: <strong>{num(prevision)} contactos</strong> del {fecha(hoy)} al {fecha(suma(hoy, 6))} (es la media de tus últimos 28 días; una semana puede variar mucho).</p>
           <div className="mt-2 flex flex-wrap items-end gap-2">
             <label className="block text-[13px] font-semibold text-ink">Tu apuesta (opcional)<input inputMode="numeric" value={tuya} onChange={(e) => setTuya(e.target.value.replace(/[^\d]/g, ""))} placeholder={String(prevision)} className="mt-1 min-h-[44px] w-32 rounded-[10px] border border-line bg-white px-3 text-[16px] font-normal" /></label>
-            <button type="button" onClick={demo ? undefined : apostar} className="min-h-[44px] rounded-full bg-yellow px-5 text-[14.5px] font-semibold text-ink">Apostado</button>
+            <button type="button" onClick={apostar} className="min-h-[44px] rounded-full bg-yellow px-5 text-[14.5px] font-semibold text-ink">Apostado</button>
           </div>
           {demo && <p className="mt-2 text-[12.5px] font-semibold text-ink/50">Ejemplo: en la mesa real, dentro de 7 días se comprueba quién acertó.</p>}
         </div>
@@ -376,6 +376,7 @@ export function PonnosAPrueba({ base, hoy, realEntre, demo }: { base: CifrasBase
       {ap && !terminada && (
         <div className="mt-3 rounded-[14px] bg-cream px-3 py-3 text-[15px] text-ink">
           <p>Apuesta en marcha del {fecha(ap.desde)} al {fecha(ap.hasta)}: la mesa dice <strong>{num(ap.mesa)}</strong>{ap.tuya !== null && <> y tú <strong>{num(ap.tuya)}</strong></>}. Se comprueba el día siguiente.</p>
+          {demo && <p className="mt-2 text-[12.5px] font-semibold text-ink/50">Ejemplo: en la mesa real, dentro de 7 días se comprueba quién acertó. Aquí solo se guarda en tu navegador.</p>}
           <button type="button" onClick={cerrar} className="mt-2 min-h-[44px] rounded-full border border-line px-4 text-[13.5px] font-semibold text-ink">Anular la apuesta</button>
         </div>
       )}
