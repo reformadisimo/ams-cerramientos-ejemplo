@@ -88,7 +88,7 @@ function crea(){
 }
 function pinta(){
   var m=$('asm');m.innerHTML='';
-  if(EQ){var f=document.createElement('figure');f.className='eq';f.innerHTML='<img src="'+EQ+'" alt="Cerramiento de terraza instalado por AMS" width="640" height="360"><figcaption><strong>AMS Cerramientos y Servicios</strong><span>Fabricamos e instalamos ventanas, cerramientos y cancelas desde Villalbilla (Madrid). Si tu caso lo necesita, te atiende una persona del equipo.</span></figcaption>';m.appendChild(f)}
+  if(EQ){var f=document.createElement('figure');f.className='eq';f.innerHTML='<img src="'+EQ+'" alt="Cerramiento de terraza instalado por AMS" width="640" height="360"><figcaption><strong>AMS Cerramientos y Servicios</strong><span>Instalamos ventanas y fabricamos cerramientos y cancelas desde Villalbilla (Madrid). Si tu caso lo necesita, te atiende una persona del equipo.</span></figcaption>';m.appendChild(f)}
   var a=document.createElement('div');a.className='m a';a.innerHTML='<p>'+esc(BIEN)+'</p>';m.appendChild(a);
   if(!msgs.length){var c=document.createElement('div');c.className='ch';SUG.forEach(function(s){var x=document.createElement('button');x.type='button';x.textContent=s;x.addEventListener('click',function(){envia(s)});c.appendChild(x)});m.appendChild(c)}
   msgs.forEach(function(x){var d=document.createElement('div');d.className='m '+(x.role==='user'?'u':'a');d.innerHTML=x.role==='user'?'<p>'+esc(x.content)+'</p>':fmt(x.content);m.appendChild(d)});
