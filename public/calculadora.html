@@ -432,10 +432,12 @@ R.calidad=function(){
 };
 function grp(t,key,obj,cur){var h='<div class="cx-q">'+t+'</div><div class="cx-pills">';for(var k in obj)h+='<button type="button" class="cx-pill'+(cur==k?' on':'')+'" data-set="'+key+'" data-val="'+k+'">'+(cur==k?IC.check:'')+obj[k]+'</button>';return h+'</div>';}
 R.extras=function(){
+ var comp=S.per==='motor'&&S.mosq;
  return '<h2>Últimos detalles</h2><p class="cx-lead">Tres preguntas rápidas. Si dudas, deja lo que viene marcado.</p>'+
+ '<button type="button" class="cx-big'+(comp?' on':'')+'" data-completa="1" style="width:100%;text-align:left;margin:0 0 18px"><span class="cx-tag ok">Lo más pedido</span><span class="cx-check">'+IC.check+'</span><div class="cx-txt"><strong>Pídela completa</strong><span>Ventana, persiana con motor, cajón aislado y rematado, y mosquitera. Todo en la misma visita y el mismo montaje: menos obra y nada que rematar después.</span></div></button>'+
  grp('Color de la ventana','col',COL,S.col)+grp('Persianas','per',PER,S.per)+
  '<div class="cx-q">Mosquiteras</div><div class="cx-pills"><button type="button" class="cx-pill'+(!S.mosq?' on':'')+'" data-mosq="0">'+(!S.mosq?IC.check:'')+'No</button><button type="button" class="cx-pill'+(S.mosq?' on':'')+'" data-mosq="1">'+(S.mosq?IC.check:'')+'Sí, en todas</button></div>'+
- '<div class="cx-tip">'+IC.bulb+'<span>Siempre incluido: <b>retirar las ventanas viejas</b>, llevarnos los escombros e instalar con nuestro propio equipo.</span></div>';
+ '<div class="cx-tip">'+IC.bulb+'<span>Siempre incluido: <b>retirar las ventanas viejas</b>, llevarnos los escombros e instalar con nuestro propio equipo. Si cambias la persiana, <b>el cajón lo dejamos aislado y rematado</b>.</span></div>';
 };
 R.terraza=function(){
  var t=S.ter;
@@ -613,6 +615,7 @@ $('cxStep').addEventListener('click',function(e){
  if(d.mol){var i=S.mol.indexOf(d.mol);if(i>=0)S.mol.splice(i,1);else S.mol.push(d.mol);if(S.pack&&S.pack!=='custom')setPack(S.pack);render(false);return;}
  if(d.pack){setPack(d.pack);render(false);return;}
  if(d.set){S[d.set]=d.val;if(['mat','ape','vid'].indexOf(d.set)>=0)S.pack='custom';render(false);return;}
+ if(d.completa){S.per='motor';S.mosq=true;render(false);return;}
  if(d.mosq){S.mosq=d.mosq==='1';render(false);return;}
  if(d.ttipo){S.ter.tipo=d.ttipo;render(false);return;}
  if(d.lados){S.ter.lados=+d.lados;render(false);return;}

@@ -19,12 +19,27 @@ async function rpc(fn, args) {
 }
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
+
+// Filtro para que Javi vaya primero a las visitas que le compensan (reglas que él nos ha contado, 31-oct-2026).
+// Interesa: su zona (Corredor del Henares) y ventanas o cancelas normales. No encaja: Madrid capital, áticos, piezas enormes.
+const ZONA_SI = /alcal[aá]|villalbilla|torrej[oó]n|meco|azuqueca|guadalajara|camarma|daganzo|santos de la humosa|anchuelo|corpa|santorcaz|pezuela|nuevo bazt[aá]n|loeches|torres de la alameda|valverde|ajalvir|cabanillas|alovera|chiloeches|marchamalo|villanueva de la torre|quer|yunquera|fontanar|el casar|valdeavero|fresno de torote|serracines|ribatejada|campo real|pozuelo del rey|olmeda/;
+const ZONA_DUDA = /coslada|san fernando|mejorada|velilla|paracuellos|arganda|rivas|alcobendas|san sebasti[aá]n de los reyes|algete|cobe[ñn]a|fuente el saz/;
+const quitaAcentos = t => String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+function encaje(d) {
+  const z = quitaAcentos(d.zona), t = quitaAcentos(d.trabajo + ' ' + d.pide);
+  if (/\batico\b/.test(t) && /cerramiento|terraza|cerrar/.test(t)) return ['No encaja', 'cerramiento de ático'];
+  if (/^madrid( capital)?$|madrid capital|\b280[0-5]\d\b/.test(z) && !ZONA_SI.test(z)) return ['No encaja', 'Madrid capital'];
+  if (ZONA_SI.test(z)) return /ventana|pvc|cancela|puerta|cerramiento|terraza|persiana|mosquitera/.test(t) || !t.trim() ? ['Interesa', 'su zona'] : ['A valorar', 'trabajo poco habitual'];
+  if (ZONA_DUDA.test(z)) return ['A valorar', 'zona algo lejos'];
+  return ['A valorar', z ? 'zona por confirmar' : 'sin pueblo'];
+}
+
 async function aviso(d, res) {
   const clave = process.env.RESEND_API_KEY;
   if (!clave || !res || !res.ok || res.repetido) return;
   const tel = String(d.telefono || '').replace(/\D/g, '');
   const filas = [
-    ['Nombre', d.nombre], ['Teléfono', d.telefono], ['Correo', d.correo], ['Pueblo', d.zona],
+    ['Encaje', d.encaje], ['Nombre', d.nombre], ['Teléfono', d.telefono], ['Correo', d.correo], ['Pueblo', d.zona],
     ['Qué pide', d.pide], ['De dónde viene', res.origen], ['Campaña', d.utm_campaign], ['Palabra buscada', d.utm_term],
     ['Desde', (d.canal || 'formulario') + ' · ' + (d.pagina_envio || '') + ' · ' + (d.dispositivo || '')]
   ].filter(f => f[1]);
@@ -38,7 +53,7 @@ async function aviso(d, res) {
     await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: 'Bearer ' + clave, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from: DE, to: AVISO_PARA.split(',').map(s => s.trim()).filter(Boolean), subject: 'Nuevo contacto: ' + String(d.nombre).slice(0, 40) + (res.origen ? ' (' + res.origen + ')' : ''), html })
+      body: JSON.stringify({ from: DE, to: AVISO_PARA.split(',').map(s => s.trim()).filter(Boolean), subject: (d.encaje ? d.encaje.split(' (')[0] + ' · ' : '') + 'Nuevo contacto: ' + String(d.nombre).slice(0, 40) + (res.origen ? ' (' + res.origen + ')' : ''), html })
     });
   } catch (e) { /* el aviso no puede tumbar el guardado */ }
 }
@@ -60,6 +75,9 @@ module.exports = async (req, res) => {
       return res.json(r);
     }
     if (d.tipo === 'contacto') {
+      const [nivel, motivo] = encaje(d);
+      d.encaje = nivel + ' (' + motivo + ')';
+      d.pide = '[' + nivel + '] ' + String(d.pide || '');
       const r = await rpc('web_contacto', { d });
       await aviso(d, r);
       return res.json({ ok: !!(r && r.ok) });
