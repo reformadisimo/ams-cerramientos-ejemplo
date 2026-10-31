@@ -3,10 +3,11 @@
 - La web pública son páginas estáticas en `public/`. Las genera `scripts/site2.py` (fuera del repo), que va POR DETRÁS de lo publicado: no regenerar a ciegas; los cambios se hacen en `public/` directamente.
 - La mesa de control es la misma pantalla que la de Reformadísimo y Casiopea (`components/mesa/`). De ejemplo, con cifras inventadas, en `/guia-javi/panel`; la real, con clave (MESA_CLAVE), en `/mesa`.
 - Contactos y CRM: Supabase (proyecto ams-cerramientos-crm). Los euros nunca salen del móvil de Javi.
-- Contador propio sin cookies: `public/contador.js` -> `/api/vista` y `/api/tiempo` -> Neon (tablas `vistas` y `tiempos`). Sin base de datos se queda quieto.
+- Contador propio sin cookies: `public/contador.js` -> `/api/vista`, `/api/tiempo` y `/api/evento` -> Neon (tablas `vistas`, `tiempos` y `pasos_visita`). Sin base de datos se queda quieto.
 - Versión: `lib/version.ts` (pildorita abajo a la izquierda). Subirla en cada cambio.
 - Antes de subir: `git pull --rebase`, `npx tsc --noEmit` limpio. Commits como Ignacio de la Rubia. Cero emojis, tuteo, sin guiones largos.
 
 ## Avisos
 
 - 2026-10-31 (ams·v2): mesa igual que Reformadísimo y Casiopea. Fechas siempre a la vista en el recuadro morado, panel «Quién entra de verdad en la web» con 7 cifras (personas, visitas, páginas, tiempo, rebote, páginas por persona y Analytics) lo primero del resumen, textos de ayuda cortos con «Ver más». Contador propio sin cookies en las 66 páginas y mesa real en `/mesa`, quietos hasta que se conecte Neon (Vercel > Storage) y se ponga MESA_CLAVE. La mesa real lee los contactos del CRM con la función `adm_mesa` de Supabase (solo cuentas, sin euros) y arranca en «Hoy» mientras no haya días anteriores.
+- 2026-10-31 (ams·v3): como en Reformadísimo. (1) Todos los avisos de contacto (formularios, asistente que pide llamada, presupuesto subido) llevan SIEMPRE «De dónde viene» (`lib/deDonde.js` y `deDonde` en `pages/api/contacto.js`): anuncio, utm, web de origen, o «directo o sin dato (...)», y la página por la que entró; si no hay nada, «sin dato». `origen.js` guarda el primer toque de la pestaña en `ams-atrib-s` (sessionStorage). (2) Toques en WhatsApp y llamar: `contador.js` los manda a `/api/evento` (tipos `contacto_wa` y `contacto_tel`, uno de cada por visita, marcas `ams-cwa` y `ams-ctel`), tabla propia `pasos_visita`. Columna «WhatsApp y llamadas» en la tabla por origen de «Quién entra de verdad»; antes del 31-oct sale «-».

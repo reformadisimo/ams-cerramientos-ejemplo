@@ -24,6 +24,8 @@ export async function asegurarTablas() {
   await q`CREATE INDEX IF NOT EXISTS vistas_por_fecha ON vistas (creado)`;
   await q`CREATE TABLE IF NOT EXISTS tiempos (id BIGSERIAL PRIMARY KEY, pagina TEXT NOT NULL, fuente TEXT, disp TEXT, segundos INT NOT NULL, rebote BOOLEAN, creado TIMESTAMPTZ NOT NULL DEFAULT now())`;
   await q`CREATE INDEX IF NOT EXISTS tiempos_por_fecha ON tiempos (creado)`;
+  await q`CREATE TABLE IF NOT EXISTS pasos_visita (id BIGSERIAL PRIMARY KEY, tipo TEXT NOT NULL, pagina TEXT, fuente TEXT, disp TEXT, creado TIMESTAMPTZ NOT NULL DEFAULT now())`;
+  await q`CREATE INDEX IF NOT EXISTS pasos_visita_por_fecha ON pasos_visita (creado)`;
   tablasListas = true;
 }
 

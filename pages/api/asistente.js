@@ -6,6 +6,7 @@
 // POST { accion:'contacto', nombre, telefono, consentimiento, mensajes } -> { ok }
 // POST { accion:'duda', pregunta }               -> { ok }  (pregunta que el asistente no supo contestar)
 const { promptAsistente, conocimientoWeb } = require('../../lib/asistente-prompt.js');
+const { deDonde } = require('../../lib/deDonde.js');
 const DESTINO = process.env.ASISTENTE_PARA || 'delarubiaignacio@gmail.com';
 const DE = process.env.ASISTENTE_DE || process.env.RESPUESTAS_DE || 'Asistente AMS <guia@send.miestela.app>';
 const MODELOS = [process.env.ASISTENTE_MODELO || 'claude-sonnet-5-5', 'claude-sonnet-4-5'];
@@ -60,7 +61,7 @@ module.exports = async (req, res) => {
     const nombre = limpia(b.nombre, 80), tel = limpia(b.telefono, 30).replace(/[^\d+ ]/g, '');
     if (tel.replace(/\D/g, '').length < 9) return res.status(400).json({ ok: false, motivo: 'telefono' });
     if (b.consentimiento !== true) return res.status(400).json({ ok: false, motivo: 'consentimiento' });
-    const texto = ['Alguien ha pedido que le llamen desde el asistente de la web.', '', 'Nombre: ' + (nombre || '(sin nombre)'), 'Teléfono: ' + tel, '', 'Conversación:', transcribe(b.mensajes)].join('\n');
+    const texto = ['Alguien ha pedido que le llamen desde el asistente de la web.', '', 'Nombre: ' + (nombre || '(sin nombre)'), 'Teléfono: ' + tel, 'De dónde viene: ' + deDonde(b.origen), '', 'Conversación:', transcribe(b.mensajes)].join('\n');
     const ok = await correo('Te piden una llamada (asistente web AMS)', texto);
     await guarda(b.cid, 'contacto', 'Nombre: ' + (nombre || '(sin nombre)') + ' · Teléfono: ' + tel, b.pagina);
     return res.status(ok ? 200 : 502).json({ ok });

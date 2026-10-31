@@ -29,9 +29,13 @@
     if (nuevo.fbclid) o.fbc = 'fb.1.' + Date.now() + '.' + nuevo.fbclid;
     guardar(o);
   } else if (!o.t) {
+    // sin anuncio ni utm: directo (o la web de la que viene), con la página por la que entró
     o = { pagina_entrada: location.pathname, referente: ref, t: Date.now() };
+    if (!ref) o.fuente = 'directo';
     guardar(o);
   }
+  // primer toque de la pestaña: no se pierde al recargar (sin cookies, se borra al cerrar la pestaña)
+  try { if (!sessionStorage.getItem('ams-atrib-s')) sessionStorage.setItem('ams-atrib-s', JSON.stringify({ fuente: o.gclid ? 'google-ads' : o.fbclid ? 'meta' : o.utm_source || (o.referente ? 'otra web' : 'directo'), aterrizaje: o.pagina_entrada || location.pathname })); } catch (e) {}
   window.addEventListener('ams-cookies', function () { if (permiso()) guardar(o); });
 
   function disp() { return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || (navigator.maxTouchPoints > 1 && /Macintosh/.test(navigator.userAgent)) ? 'movil' : 'ordenador'; }

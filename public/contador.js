@@ -64,6 +64,16 @@
     if (s < 1 && !rebote) return;
     manda('/api/tiempo', { pagina: ruta, fuente: fuente, disp: disp, s: s, rebote: rebote });
   }
+  // Toques en WhatsApp y en llamar: uno de cada tipo por visita, sin datos de la persona.
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a[href]') : null; if (!a) return;
+    var h = a.getAttribute('href') || '', tipo = '', marca = '';
+    if (h.indexOf('tel:') === 0) { tipo = 'contacto_tel'; marca = 'ams-ctel'; }
+    else if (/wa\.me|api\.whatsapp|whatsapp:/.test(h)) { tipo = 'contacto_wa'; marca = 'ams-cwa'; }
+    if (!tipo) return;
+    try { if (sessionStorage.getItem(marca)) return; sessionStorage.setItem(marca, '1'); } catch (er) {}
+    manda('/api/evento', { tipo: tipo, pagina: ruta, fuente: fuente, disp: disp });
+  }, true);
   document.addEventListener('visibilitychange', function () {
     if (document.visibilityState === 'visible') { if (!desde) desde = Date.now(); } else mandar();
   });

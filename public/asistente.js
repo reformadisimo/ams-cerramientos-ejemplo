@@ -127,7 +127,7 @@ async function contacto(){
   mo.textContent='Enviando…';
   try{
     try{if(window.amsLead)window.amsLead({nombre:nm,telefono:tl,pide:'Ha dejado sus datos en el chat de la web'},'chat')}catch(e){}
-    var r=await fetch('/api/asistente',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({accion:'contacto',cid:cid,pagina:PAG,nombre:nm,telefono:tl,consentimiento:true,mensajes:msgs.slice(-12)})});
+    var r=await fetch('/api/asistente',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({accion:'contacto',cid:cid,pagina:PAG,nombre:nm,telefono:tl,consentimiento:true,origen:window.amsOrigen?window.amsOrigen():null,mensajes:msgs.slice(-12)})});
     var j=await r.json();
     if(j.ok){$('asl').classList.remove('on');msgs.push({role:'assistant',content:'Gracias'+(nm?', '+nm:'')+'. He pasado tu teléfono al equipo de AMS y te llamarán. Si es urgente, puedes llamar ya al 639 78 82 20.'});guarda();pinta()}
     else mo.textContent='No se ha podido enviar. Llama al 639 78 82 20.';

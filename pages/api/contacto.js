@@ -34,13 +34,19 @@ function encaje(d) {
   return ['A valorar', z ? 'zona por confirmar' : 'sin pueblo'];
 }
 
+function deDonde(origen, d) {
+  const o = String(origen || '').trim();
+  let t = !o ? 'sin dato' : /entró directo/i.test(o) ? 'directo o sin dato (escribió la dirección, un favorito, un buscador sin anuncio o una app que no dice de dónde viene)' : o;
+  if (d && d.pagina_entrada) t += ' · entró por ' + String(d.pagina_entrada).slice(0, 120);
+  return t;
+}
 async function aviso(d, res) {
   const clave = process.env.RESEND_API_KEY;
   if (!clave || !res || !res.ok || res.repetido) return;
   const tel = String(d.telefono || '').replace(/\D/g, '');
   const filas = [
     ['Encaje', d.encaje], ['Nombre', d.nombre], ['Teléfono', d.telefono], ['Correo', d.correo], ['Pueblo', d.zona],
-    ['Qué pide', d.pide], ['De dónde viene', res.origen], ['Campaña', d.utm_campaign], ['Palabra buscada', d.utm_term],
+    ['Qué pide', d.pide], ['De dónde viene', deDonde(res.origen, d)], ['Campaña', d.utm_campaign], ['Palabra buscada', d.utm_term],
     ['Desde', (d.canal || 'formulario') + ' · ' + (d.pagina_envio || '') + ' · ' + (d.dispositivo || '')]
   ].filter(f => f[1]);
   const html = '<div style="font-family:Arial,sans-serif;font-size:15px;color:#1F2A36;max-width:560px">' +
@@ -53,7 +59,7 @@ async function aviso(d, res) {
     await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: 'Bearer ' + clave, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from: DE, to: AVISO_PARA.split(',').map(s => s.trim()).filter(Boolean), subject: (d.encaje ? d.encaje.split(' (')[0] + ' · ' : '') + 'Nuevo contacto: ' + String(d.nombre).slice(0, 40) + (res.origen ? ' (' + res.origen + ')' : ''), html })
+      body: JSON.stringify({ from: DE, to: AVISO_PARA.split(',').map(s => s.trim()).filter(Boolean), subject: (d.encaje ? d.encaje.split(' (')[0] + ' · ' : '') + 'Nuevo contacto: ' + String(d.nombre).slice(0, 40) + ' (' + (res.origen || 'sin dato') + ')', html })
     });
   } catch (e) { /* el aviso no puede tumbar el guardado */ }
 }

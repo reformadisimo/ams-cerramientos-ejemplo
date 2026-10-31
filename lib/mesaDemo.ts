@@ -306,7 +306,7 @@ export function detalleDemo(desde: string, hasta: string, hoy: string) {
   const totS = ds0.reduce((s0, d) => s0 + Math.round(((T.vistas[d] ?? 0) / 2.45) * (95 + ((T.vistas[d] ?? 0) % 50))), 0);
   const pesoS = base0.map((x, i) => vu[i] * (x.origen === "Google Ads" ? 0.7 : 1.1)), vs = reparteFijo(totS, pesoS);
   const REB: Record<string, number> = { "Google Ads": 0.46, "Google (búsqueda)": 0.31, Directo: 0.35, "Meta / Instagram": 0.52, "Asistentes de IA": 0.24, "Otras webs": 0.33 };
-  const origenes = base0.map((x, i) => ({ ...x, visitas: ve[i], personas: vu[i], segundos: vs[i], rebotes: Math.round(ve[i] * (REB[x.origen] ?? 0.3)) }));
+  const origenes = base0.map((x, i) => ({ ...x, visitas: ve[i], personas: vu[i], segundos: vs[i], rebotes: Math.round(ve[i] * (REB[x.origen] ?? 0.3)), toques: Math.round(ve[i] * (x.origen === "Google Ads" ? 0.09 : x.origen === "Google (búsqueda)" ? 0.06 : 0.03)) }));
   void n;
   return { origenes, rebote, paginas, clicsPagina, lupa, gsc: { totales: { clics: tot.gscClics, impresiones: tot.gscImp, ctr_pct: tot.gscImp ? Math.round((tot.gscClics / tot.gscImp) * 1000) / 10 : 0, posicion: Math.round(pos * 10) / 10 }, busquedas, paginas: gscPag }, entradas, crm };
 }

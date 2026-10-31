@@ -1,5 +1,6 @@
 // Recibe la foto o el PDF de un presupuesto que sube un visitante y lo manda por correo (Resend) para que lo revise una persona.
 // Necesita RESEND_API_KEY. Destino: variable PRESUPUESTO_DESTINO (por defecto, el correo de Ignacio mientras la web es un ejemplo).
+const { deDonde } = require('../../lib/deDonde.js');
 const DESTINO = process.env.PRESUPUESTO_DESTINO || 'delarubiaignacio@gmail.com';
 const DE = process.env.RESPUESTAS_DE || 'Guia AMS <guia@send.miestela.app>';
 const TIPOS = { 'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp', 'application/pdf': 'pdf' };
@@ -34,7 +35,7 @@ module.exports = async (req, res) => {
   if (!tel && !mailOk) return res.status(400).json({ ok: false, motivo: 'contacto' });
   if (b.consentimiento !== true) return res.status(400).json({ ok: false, motivo: 'consentimiento' });
   visitas[ip].push(ahora);
-  const texto = ['Presupuesto subido desde la web para que lo revisemos.', '', 'Nombre: ' + (nombre || '(sin nombre)'), 'Teléfono: ' + (tel || '(no indicado)'), 'Correo: ' + (mailOk ? mail : '(no indicado)'), 'Mensaje: ' + (msg || '(sin mensaje)'), '', 'El visitante ha aceptado que revisemos el archivo para contestarle.'].join('\n');
+  const texto = ['Presupuesto subido desde la web para que lo revisemos.', '', 'Nombre: ' + (nombre || '(sin nombre)'), 'Teléfono: ' + (tel || '(no indicado)'), 'Correo: ' + (mailOk ? mail : '(no indicado)'), 'Mensaje: ' + (msg || '(sin mensaje)'), 'De dónde viene: ' + deDonde(b.origen), '', 'El visitante ha aceptado que revisemos el archivo para contestarle.'].join('\n');
   try {
     const r = await fetch('https://api.resend.com/emails', {
       method: 'POST',

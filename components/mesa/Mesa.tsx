@@ -52,7 +52,7 @@ type Detalle = {
   clarity?: { dias: number; desde: string | null; paginas: FilaClarity[]; dispositivos: FilaClarity[] } | null;
   rebote?: { dispositivo: FilaRebote[]; zona: FilaRebote[]; tipo: FilaRebote[]; paginas: FilaRebote[] } | null;
   personas?: number | null;
-  origenes?: { origen: string; n: number; movil: number; visitas: number; personas: number; segundos?: number; rebotes?: number }[];
+  origenes?: { origen: string; n: number; movil: number; visitas: number; personas: number; segundos?: number; rebotes?: number; toques?: number }[];
   crm: { origen: string; leads: number; visitas: number; presupuestos: number; firmados: number; firmado: number; facturado: number; descartados: number; respondidos?: number; horas_resp?: number; vencidas?: number }[];
 };
 
@@ -105,14 +105,15 @@ function VisitasReales({ T: T0, C, origenes, cargando, a, b, adsHasta, inicio }:
               <th className="px-3 py-2 text-right">Páginas vistas</th>
               <th className="px-3 py-2 text-right">Tiempo por persona</th>
               <th className="px-3 py-2 text-right">Rebote</th>
+              <th className="px-3 py-2 text-right">WhatsApp y llamadas</th>
               {hayAds && <th className="px-3 py-2 text-right">Clics que cobra el anuncio</th>}
             </tr>
           </thead>
           <tbody>
             {cargando && !filas.length ? (
-              <tr><td colSpan={7} className="px-3 py-3 text-ink/50">Cargando…</td></tr>
+              <tr><td colSpan={8} className="px-3 py-3 text-ink/50">Cargando…</td></tr>
             ) : !filas.length ? (
-              <tr><td colSpan={7} className="px-3 py-3 text-ink/50">Sin visitas en estas fechas.</td></tr>
+              <tr><td colSpan={8} className="px-3 py-3 text-ink/50">Sin visitas en estas fechas.</td></tr>
             ) : filas.map((r) => {
               const c = clics(r.origen);
               return (
@@ -123,6 +124,7 @@ function VisitasReales({ T: T0, C, origenes, cargando, a, b, adsHasta, inicio }:
                   <td className="px-3 py-2 text-right tabular-nums">{num(r.n)}</td>
                   <td className="px-3 py-2 text-right tabular-nums">{r.personas && r.segundos ? mmss(r.segundos / r.personas) : "-"}</td>
                   <td className="px-3 py-2 text-right tabular-nums">{r.visitas && vivo.rebotes ? `${nf.format(((r.rebotes ?? 0) / r.visitas) * 100)} %` : "-"}</td>
+                  <td className="px-3 py-2 text-right tabular-nums">{r.toques === undefined ? "-" : num(r.toques)}</td>
                   {hayAds && <td className="px-3 py-2 text-right tabular-nums text-ink/70">{esAnuncio(r.origen) ? (c === undefined ? "llega mañana" : num(c)) : ""}</td>}
                 </tr>
               );
@@ -131,7 +133,7 @@ function VisitasReales({ T: T0, C, origenes, cargando, a, b, adsHasta, inicio }:
         </table>
       </div>
       <p className="mt-2 text-[12.5px] leading-snug text-ink/55">
-        <b className="text-ink/70">Personas:</b> gente distinta cada día. <b className="text-ink/70">Visitas:</b> cada vez que alguien abre la web. <b className="text-ink/70">Tiempo:</b> el rato con la web a la vista. <b className="text-ink/70">Rebote:</b> de cada 100 visitas, cuántas se van en menos de 10 segundos sin ver otra página.
+        <b className="text-ink/70">Personas:</b> gente distinta cada día. <b className="text-ink/70">Visitas:</b> cada vez que alguien abre la web. <b className="text-ink/70">Tiempo:</b> el rato con la web a la vista. <b className="text-ink/70">Rebote:</b> de cada 100 visitas, cuántas se van en menos de 10 segundos sin ver otra página. <b className="text-ink/70">WhatsApp y llamadas:</b> visitas que tocan el botón de WhatsApp o el de llamar (cada uno cuenta una vez por visita). Se cuenta desde el 31 de octubre de 2026; antes sale «-».
       </p>
     </section>
   );
