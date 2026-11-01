@@ -114,17 +114,41 @@
     q('.sv-deshacer').addEventListener('click', function () { if (v.marco.length) v.marco.pop(); else v.folio.pop(); dibujar(); texto(); ok.hidden = true; });
     q('.sv-reiniciar').addEventListener('click', function () { v.folio = []; v.marco = []; dibujar(); texto(); ok.hidden = true; });
     [an, al].forEach(function (i) { i.addEventListener('input', function () { v.como = v.como === 'foto' ? 'foto-corregida' : 'mano'; }); });
-    q('input[type=file]').addEventListener('change', function (e) {
-      var f = e.target.files && e.target.files[0]; if (!f) return;
-      var u = URL.createObjectURL(f), im = new Image();
+    var etiqueta = q('.sv-foto span');
+    function mostrar(blob) {
+      var u = URL.createObjectURL(blob), im = new Image();
       im.onload = function () {
         var k = Math.min(1, 1400 / Math.max(im.width, im.height));
         cv.width = Math.round(im.width * k); cv.height = Math.round(im.height * k);
         v.img = im; v.folio = []; v.marco = [];
-        lienzo.style.display = 'flex'; q('.sv-foto span').textContent = 'Cambiar la foto';
+        lienzo.style.display = 'flex'; etiqueta.textContent = 'Cambiar la foto'; ok.hidden = true; ok.style.background = ''; ok.style.color = '';
         dibujar(); texto();
+        lienzo.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      };
+      im.onerror = function () {
+        URL.revokeObjectURL(u);
+        if (!blob.__convertida && /heic|heif/i.test((blob.type || '') + ' ' + (blob.name || ''))) return convertirHeic(blob);
+        error('No hemos podido abrir esa foto. Prueba con otra, o hazla directamente con el móvil desde esta página.');
       };
       im.src = u;
+    }
+    function error(t) { etiqueta.textContent = 'Hacer o elegir la foto'; ok.hidden = false; ok.style.background = '#FDECEA'; ok.style.color = '#B42318'; ok.textContent = t; }
+    function convertirHeic(blob) {
+      etiqueta.textContent = 'Abriendo la foto del iPhone...';
+      var go = function () {
+        window.heic2any({ blob: blob, toType: 'image/jpeg', quality: 0.85 }).then(function (r) { r = Array.isArray(r) ? r[0] : r; r.__convertida = true; mostrar(r); })
+          .catch(function () { error('Esa foto es del iPhone (formato HEIC) y no la podemos abrir aquí. Hazla directamente con el móvil desde esta página, o mándala como JPG.'); });
+      };
+      if (window.heic2any) return go();
+      var sc = document.createElement('script');
+      sc.src = '/vendor/heic2any.min.js';
+      sc.onload = go; sc.onerror = function () { error('Esa foto es del iPhone (formato HEIC) y no la podemos abrir aquí. Hazla directamente con el móvil desde esta página, o mándala como JPG.'); };
+      document.head.appendChild(sc);
+    }
+    q('input[type=file]').addEventListener('change', function (e) {
+      var f = e.target.files && e.target.files[0]; if (!f) return;
+      etiqueta.textContent = 'Abriendo la foto...';
+      mostrar(f);
     });
     q('.sv-quitar').addEventListener('click', function () {
       if (ventanas.length === 1) return;
