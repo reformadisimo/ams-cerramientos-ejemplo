@@ -73,22 +73,28 @@ function cerrajeria(d, P) {
   return { lineas };
 }
 
+function calcula(d) {
+  const P = preciario();
+  const calc = { ventanas, terraza, cerrajeria }[d && d.svc];
+  if (!calc) return null;
+  const out = calc(d, P);
+  out.low = out.lineas.reduce((s, l) => s + l.low, 0);
+  out.high = out.lineas.reduce((s, l) => s + l.high, 0);
+  out.iva_incluido = !!P.iva_incluido;
+  return out;
+}
+
 module.exports = (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
   if (req.method !== 'POST') { res.statusCode = 405; return res.end(JSON.stringify({ error: 'Usa POST' })); }
   let d = req.body;
   if (typeof d === 'string') { try { d = JSON.parse(d); } catch (e) { d = {}; } }
-  d = d || {};
-  const P = preciario();
-  const calc = { ventanas, terraza, cerrajeria }[d.svc];
-  if (!calc) { res.statusCode = 400; return res.end(JSON.stringify({ error: 'Servicio no válido' })); }
-  const out = calc(d, P);
-  out.low = out.lineas.reduce((s, l) => s + l.low, 0);
-  out.high = out.lineas.reduce((s, l) => s + l.high, 0);
-  out.iva_incluido = !!P.iva_incluido;
+  const out = calcula(d || {});
+  if (!out) { res.statusCode = 400; return res.end(JSON.stringify({ error: 'Servicio no válido' })); }
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
   res.end(JSON.stringify(out));
 };
+module.exports.calcula = calcula;
 
 /* Next.js (pages/api) pide la función como exportación "default" */
 module.exports.default = module.exports;

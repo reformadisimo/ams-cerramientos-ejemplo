@@ -1,13 +1,14 @@
 /* Precio con fotos (presupuesto sin visita, 1-nov-2026).
    Cada ventana: foto con un folio A4 pegado al cristal. El cliente toca las 4 esquinas del folio y las 4 del marco;
    con la homografía del folio (21 x 29,7 cm) se calcula el ancho y el alto aproximados del marco.
-   Si no hay folio, puede escribir la medida. Al dejar sus datos ve el precio orientativo al momento (la misma tarifa
-   que la calculadora, /api/precio) y la ficha con las fotos llega a AMS (/api/fotos) y a su libreta (amsLead). */
+   Si no hay folio, puede escribir la medida. Código postal, teléfono y correo obligatorios. /api/fotos calcula el precio
+   (misma tarifa que la calculadora; +25 % en los códigos postales del norte de Madrid), lo manda a AMS con las fotos y al
+   cliente por correo; aquí se enseña al momento y se puede descargar en PDF (jsPDF, /vendor). Ficha a la libreta (amsLead). */
 (function () {
   var lista = document.getElementById('sv-lista');
   if (!lista) return;
   var ventanas = [], cuenta = 0;
-  var NORTE = /moraleja|encinar|conde orgaz|piovera|alameda de osuna|paracuellos|santo domingo|algete|ciudalcampo|fuente del fresno|alcobendas|san sebasti[aá]n de los reyes|mirasierra|hortaleza|barajas/i;
+  var NORTE_CP = { '28109': 1, '28050': 1, '28043': 1, '28042': 1, '28860': 1, '28120': 1, '28707': 1 };
   var TIPOS = [['Oscilobatiente (se abre y se inclina)', 'oscilobatiente'], ['Abatible (solo se abre)', 'practicable'], ['Corredera', 'corredera'], ['Balconera (puerta a la terraza)', 'practicable'], ['Fija (no se abre)', 'corredera'], ['No lo sé', 'oscilobatiente']];
   var PERS = [['Con motor', 'motor'], ['Manual', 'manual'], ['Sin persiana', 'no'], ['Me vale la que tengo', 'no']];
 
@@ -160,57 +161,105 @@
   function numerar() { ventanas.forEach(function (v, i) { v.el.querySelector('.sv-num').textContent = i + 1; v.el.querySelector('.sv-quitar').hidden = ventanas.length === 1; }); }
 
   // ---------- zona ----------
-  var zona = document.getElementById('sv-zona'), avisoZ = document.getElementById('sv-zona-aviso');
+  var zona = document.getElementById('sv-zona'), cpEl = document.getElementById('sv-cp'), avisoZ = document.getElementById('sv-zona-aviso');
+  var cpDe = function () { return (cpEl.value || '').replace(/\D/g, '').slice(0, 5); };
   function avisoZona() {
-    avisoZ.hidden = !(NORTE.test(zona.value || '') && ventanas.length < 6);
-    avisoZ.textContent = 'En esta zona hacemos obras completas, de 6 ventanas o más. Si son menos, te atendería mejor un instalador más cercano; si más adelante cambias el resto, aquí estamos.';
+    var cp = cpDe(), t = '';
+    if (cp.length === 5 && NORTE_CP[cp] && ventanas.length < 6) t = 'En esta zona hacemos obras completas, de 6 ventanas o más. Si son menos, te atendería mejor un instalador más cercano; si más adelante cambias el resto, aquí estamos.';
+    else if (cp.length === 5 && /^280[0-5]\d$/.test(cp)) t = 'En el centro de Madrid no trabajamos. Trabajamos en el Corredor del Henares y en las urbanizaciones de chalets del norte de Madrid.';
+    avisoZ.hidden = !t; avisoZ.textContent = t;
   }
-  zona.addEventListener('input', avisoZona);
-  try { var pz = new URLSearchParams(location.search).get('zona'); if (pz) zona.value = pz.slice(0, 80); } catch (e) {}
+  cpEl.addEventListener('input', avisoZona);
+  try { var qs = new URLSearchParams(location.search), pz = qs.get('zona'), pc = qs.get('cp'); if (pz) zona.value = pz.slice(0, 80); if (pc) cpEl.value = pc.replace(/\D/g, '').slice(0, 5); } catch (e) {}
   document.getElementById('sv-mas').addEventListener('click', function () { var v = nueva(); v.el.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
   nueva();
 
   // ---------- precio y envío ----------
   var form = document.getElementById('sv-form'), st = document.getElementById('sv-s'), bt = document.getElementById('sv-b'), res = document.getElementById('sv-res');
   var eur = function (n) { return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' €'; };
+  var esc = function (x) { return String(x == null ? '' : x).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
   function msg(t, e) { st.textContent = t; st.style.color = e ? '#B42318' : '#1B6B3A'; }
-  function precioDe(x) {
-    if (!x.ancho || !x.alto) return Promise.resolve(null);
-    return fetch('/api/precio', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ svc: 'ventanas', ventanas: [{ n: 1, w: x.ancho, h: x.alto, label: x.tipo }], material: 'pvc', apertura: x.apertura, vidrio: 'termico', color: 'blanco', persiana: x.per, mosquitera: x.mosquitera }) })
-      .then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; });
+  function linea(x, k, p) { return 'Ventana ' + (k + 1) + ': ' + (x.ancho ? x.ancho + ' × ' + x.alto + ' cm, ' : 'sin medida, ') + x.tipo.split(' (')[0].toLowerCase() + (x.per !== 'no' ? ', persiana ' + x.persiana.toLowerCase() : '') + (x.mosquitera ? ', mosquitera' : ''); }
+  var ultimo = null;
+
+  function cargaPdf() {
+    if (window.jspdf) return Promise.resolve();
+    return new Promise(function (ok, ko) { var sc = document.createElement('script'); sc.src = '/vendor/jspdf.umd.min.js'; sc.onload = ok; sc.onerror = ko; document.head.appendChild(sc); });
   }
+  function pdf() {
+    var u = ultimo; if (!u) return;
+    cargaPdf().then(function () {
+      var doc = new window.jspdf.jsPDF({ unit: 'mm', format: 'a4' }), y = 20, W = 210, M = 18;
+      var txt = function (t, size, bold, color) { doc.setFont('helvetica', bold ? 'bold' : 'normal'); doc.setFontSize(size); doc.setTextColor.apply(doc, color || [18, 32, 43]); var l = doc.splitTextToSize(t, W - 2 * M); if (y + l.length * size * 0.42 > 280) { doc.addPage(); y = 20; } doc.text(l, M, y); y += l.length * size * 0.42 + 2; };
+      doc.setFillColor(31, 111, 178); doc.rect(0, 0, W, 12, 'F');
+      txt('AMS Cerramientos', 20, true); txt('Ventanas de PVC · Villalbilla (Madrid) · 639 78 82 20 · amscerramientos.es', 9, false, [74, 90, 104]);
+      y += 4; txt('Precio orientativo de tus ventanas', 15, true);
+      txt('Fecha: ' + new Date().toLocaleDateString('es-ES') + '   ·   Para: ' + (u.nombre || '-') + '   ·   Código postal: ' + u.cp + (u.pueblo ? ' (' + u.pueblo + ')' : ''), 10, false, [74, 90, 104]);
+      y += 3; txt(eur(u.precio.low) + ' a ' + eur(u.precio.high), 24, true, [27, 107, 58]);
+      txt((u.precio.iva ? 'IVA incluido. ' : 'Más IVA. ') + 'PVC de calidad, vidrio térmico, montaje y remates incluidos.', 10, false, [74, 90, 104]);
+      y += 3;
+      u.datos.forEach(function (x, k) { var p = u.precio.lineas[k]; txt('· ' + linea(x, k) + (p ? ': ' + eur(p.low) + ' a ' + eur(p.high) : ''), 11); });
+      y += 4;
+      txt('Las medidas se han calculado con la foto y el folio, y son aproximadas. Antes de fabricar vamos a tu casa, medimos con láser y te damos el presupuesto definitivo por escrito, sin compromiso.', 10, false, [74, 90, 104]);
+      txt('Te llamamos lo antes posible para quedar contigo. Si lo prefieres, llámanos o escríbenos por WhatsApp al 639 78 82 20.', 10, false, [74, 90, 104]);
+      u.fotos.forEach(function (f, k) {
+        if (!f) return;
+        var im = new Image(); im.src = f;
+        var w = 80, h = im.naturalHeight && im.naturalWidth ? w * im.naturalHeight / im.naturalWidth : 60;
+        if (h > 110) { w = w * 110 / h; h = 110; }
+        if (y + h + 8 > 285) { doc.addPage(); y = 20; }
+        txt('Ventana ' + (k + 1), 10, true); try { doc.addImage(f, 'JPEG', M, y, w, h); } catch (e) {} y += h + 6;
+      });
+      doc.save('precio-ventanas-AMS.pdf');
+    }).catch(function () { msg('No hemos podido preparar el PDF. Lo tienes también en tu correo.', 1); });
+  }
+
+  function pinta(r, n, cp, pueblo, datos, fotos, m) {
+    res.hidden = false;
+    if (!r.precio || !r.precio.low) {
+      res.innerHTML = '<p style="margin:0;line-height:1.55">' + esc(r.aviso || 'No hemos podido calcular el precio con esas medidas. Te llamamos lo antes posible.') + '</p>' +
+        '<div style="display:flex;flex-wrap:wrap;gap:12px"><a class="b1" href="tel:+34639788220">Llamar</a><a class="b2" href="https://wa.me/34639788220">Escribir por WhatsApp</a></div>';
+    } else {
+      ultimo = { nombre: n, cp: cp, pueblo: pueblo, datos: datos, fotos: fotos, precio: r.precio };
+      res.innerHTML = '<p style="margin:0;color:#4A5A68;font-weight:600">Tu precio orientativo</p>' +
+        '<div class="sv-precio">' + eur(r.precio.low) + ' a ' + eur(r.precio.high) + '</div><p style="margin:0;color:#4A5A68">' + (r.precio.iva ? 'IVA incluido. ' : 'Más IVA. ') + 'PVC de calidad, vidrio térmico, montaje y remates incluidos.</p>' +
+        '<ul>' + datos.map(function (x, k) { var p = r.precio.lineas[k]; return '<li>' + esc(linea(x, k)) + (p ? ': <b>' + eur(p.low) + ' a ' + eur(p.high) + '</b>' : '') + '</li>'; }).join('') + '</ul>' +
+        (r.correo ? '<p style="margin:0;color:#1B6B3A;font-weight:600">Te lo hemos mandado a ' + esc(m) + '.</p>' : '') +
+        '<p style="margin:0;line-height:1.55"><b>¿Y ahora?</b> Te llamamos lo antes posible para quedar contigo, medir con láser y darte el presupuesto definitivo por escrito, sin compromiso.</p>' +
+        '<div style="display:flex;flex-wrap:wrap;gap:12px"><button type="button" class="b1" id="sv-pdf">Descargar en PDF</button><a class="b2" href="tel:+34639788220">Llamar ahora</a><a class="b2" href="https://wa.me/34639788220">WhatsApp</a></div>';
+      document.getElementById('sv-pdf').addEventListener('click', pdf);
+    }
+    res.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    var n = document.getElementById('sv-n').value.trim(), t = document.getElementById('sv-t').value.trim(), m = document.getElementById('sv-e').value.trim();
+    var n = document.getElementById('sv-n').value.trim(), t = document.getElementById('sv-t').value.trim(), m = document.getElementById('sv-e').value.trim(), cp = cpDe(), pueblo = zona.value.trim();
     var datos = ventanas.map(function (v) { return v.datos(0); });
     if (!datos.some(function (x) { return x.ancho && x.alto; })) { msg('Haz la foto de al menos una ventana (o escribe su medida) para calcular el precio.', 1); return; }
-    if (t.replace(/\D/g, '').length < 9) { msg('Escribe tu teléfono para poder confirmarte el precio.', 1); return; }
+    if (cp.length !== 5) { msg('Escribe el código postal de la casa (arriba, en «Tus ventanas»): sin él no podemos calcular el precio.', 1); cpEl.focus(); return; }
+    if (t.replace(/\D/g, '').length < 9) { msg('Escribe tu teléfono.', 1); document.getElementById('sv-t').focus(); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m)) { msg('Escribe tu correo: te mandamos ahí el presupuesto.', 1); document.getElementById('sv-e').focus(); return; }
     if (!document.getElementById('sv-c').checked) { msg('Marca la casilla para que podamos ver las fotos.', 1); return; }
     var calidad = [0.72, 0.6, 0.48, 0.36], conFotos, i = 0;
     do { conFotos = ventanas.map(function (v) { return v.datos(calidad[i]); }); i++; }
     while (i < calidad.length && JSON.stringify(conFotos).length > 4000000);
+    var fotos = conFotos.map(function (x) { return x.foto || null; });
     var resumen = datos.length + ' ventanas: ' + datos.map(function (x, k) { return (k + 1) + ') ' + x.tipo + (x.ancho ? ' ' + x.ancho + 'x' + x.alto + ' cm' : '') + ', persiana ' + x.persiana.toLowerCase() + (x.mosquitera ? ', mosquitera' : ''); }).join('; ');
     bt.disabled = true; msg('Calculando tu precio...');
-    try { if (window.amsLead) window.amsLead({ nombre: n || '(sin nombre)', telefono: t, correo: m, zona: zona.value, trabajo: 'ventanas', pide: 'Precio con fotos. ' + resumen }, 'sin-visita'); } catch (er) {}
-    Promise.all(datos.map(precioDe)).then(function (ps) {
-      var lo = 0, hi = 0, iva = false, filas = '';
-      datos.forEach(function (x, k) {
-        var p = ps[k];
-        if (p) { lo += p.low; hi += p.high; iva = iva || p.iva_incluido; }
-        filas += '<li>Ventana ' + (k + 1) + ': ' + (x.ancho ? x.ancho + ' × ' + x.alto + ' cm, ' : 'sin medida, ') + x.tipo.split(' (')[0].toLowerCase() + (x.per !== 'no' ? ', persiana ' + x.persiana.toLowerCase() : '') + (x.mosquitera ? ', mosquitera' : '') + (p ? ': <b>' + eur(p.low) + ' a ' + eur(p.high) + '</b>' : '') + '</li>';
-      });
-      res.hidden = false;
-      res.innerHTML = '<p style="margin:0;color:#4A5A68;font-weight:600">Tu precio orientativo</p>' +
-        (lo ? '<div class="sv-precio">' + eur(lo) + ' a ' + eur(hi) + '</div><p style="margin:0;color:#4A5A68">' + (iva ? 'IVA incluido. ' : 'Más IVA. ') + 'PVC de calidad, montaje y remates incluidos.</p>' : '<div class="sv-precio">Te lo calculamos nosotros</div>') +
-        '<ul>' + filas + '</ul>' +
-        '<p style="margin:0;line-height:1.55"><b>¿Y ahora?</b> Te llamamos lo antes posible para confirmártelo. Si te encaja, vamos a medir con láser y te damos el presupuesto definitivo por escrito, sin compromiso.</p>' +
-        '<div style="display:flex;flex-wrap:wrap;gap:12px"><a class="b1" href="tel:+34639788220">Llamar ahora</a><a class="b2" href="https://wa.me/34639788220">Escribir por WhatsApp</a></div>';
-      res.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      msg('');
-    });
-    fetch('/api/fotos', {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nombre: n, telefono: t, correo: m, zona: zona.value, mensaje: document.getElementById('sv-m').value, consentimiento: true, ventanas: conFotos, origen: window.amsOrigen ? window.amsOrigen() : null })
-    }).then(function () { bt.disabled = false; }).catch(function () { bt.disabled = false; });
+    try { if (window.amsLead) window.amsLead({ nombre: n || '(sin nombre)', telefono: t, correo: m, zona: cp + (pueblo ? ' ' + pueblo : ''), trabajo: 'ventanas', pide: 'Precio con fotos. ' + resumen }, 'sin-visita'); } catch (er) {}
+    var base = { nombre: n, telefono: t, correo: m, cp: cp, zona: pueblo, mensaje: document.getElementById('sv-m').value, consentimiento: true, origen: window.amsOrigen ? window.amsOrigen() : null };
+    var manda = function (vs) { return fetch('/api/fotos', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.assign({}, base, { ventanas: vs })) }).then(function (r) { return r.json().catch(function () { return { ok: false }; }).then(function (j) { j.status = r.status; return j; }); }); };
+    manda(conFotos).then(function (r) {
+      if (r.ok || r.status === 400 || r.status === 429) return r;
+      return manda(datos); // si las fotos pesan demasiado, al menos el precio
+    }).catch(function () { return manda(datos); }).then(function (r) {
+      bt.disabled = false;
+      if (!r || !r.ok) {
+        var mot = { cp: 'Revisa el código postal.', telefono: 'Revisa el teléfono.', correo: 'Revisa el correo.', demasiados: 'Has hecho muchas consultas seguidas. Llámanos al 639 78 82 20 y te lo calculamos.' };
+        msg((r && mot[r.motivo]) || 'No hemos podido calcular el precio ahora. Llámanos al 639 78 82 20.', 1); return;
+      }
+      msg(''); pinta(r, n, cp, pueblo, datos, fotos, m);
+    }).catch(function () { bt.disabled = false; msg('No hemos podido calcular el precio ahora. Llámanos al 639 78 82 20.', 1); });
   });
 })();

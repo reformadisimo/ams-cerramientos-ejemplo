@@ -24,7 +24,7 @@ const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&am
 // Interesa: su zona (Corredor del Henares) y ventanas o cancelas normales. No encaja: Madrid capital, áticos, piezas enormes.
 const ZONA_SI = /alcal[aá]|villalbilla|torrej[oó]n|meco|azuqueca|guadalajara|camarma|daganzo|santos de la humosa|anchuelo|corpa|santorcaz|pezuela|nuevo bazt[aá]n|loeches|torres de la alameda|valverde|ajalvir|cabanillas|alovera|chiloeches|marchamalo|villanueva de la torre|quer|yunquera|fontanar|el casar|valdeavero|fresno de torote|serracines|ribatejada|campo real|pozuelo del rey|olmeda/;
 const ZONA_DUDA = /coslada|san fernando|mejorada|velilla|paracuellos|arganda|rivas|alcobendas|san sebasti[aá]n de los reyes|algete|cobe[ñn]a|fuente el saz/;
-const ZONA_NORTE = /moraleja|encinar|conde orgaz|piovera|alameda de osuna|paracuellos|santo domingo|ciudalcampo|fuente del fresno/;
+const ZONA_NORTE = /moraleja|encinar|conde orgaz|piovera|alameda de osuna|paracuellos|santo domingo|ciudalcampo|fuente del fresno|\b(28109|28050|28043|28042|28860|28120|28707)\b/;
 const quitaAcentos = t => String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 function encaje(d) {
   const z = quitaAcentos(d.zona), t = quitaAcentos(d.trabajo + ' ' + d.pide);
