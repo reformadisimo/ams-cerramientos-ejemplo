@@ -70,6 +70,7 @@
       '<div class="sv-lienzo"><p class="sv-paso"></p><canvas></canvas><div class="sv-botones"><button type="button" class="sv-deshacer">Deshacer el último toque</button><button type="button" class="sv-reiniciar">Volver a marcar</button></div></div>' +
       '<p class="sv-ok" hidden></p>' +
       '<p class="sv-mano">¿Sabes la medida o no tienes folio? Escríbela aquí:</p>' +
+      '<details class="sv-iphone"><summary>¿Tienes un iPhone Pro? Mídela en 10 segundos</summary><p>Abre la app <b>Medidas</b>, que ya viene en el iPhone. Apunta a una esquina de la ventana, toca <b>+</b>, lleva el punto a la otra esquina y vuelve a tocar <b>+</b>. Haz lo mismo con el alto y escribe aquí los dos números. Los iPhone Pro miden con láser (LiDAR) y aciertan mucho.</p></details>' +
       '<div class="sv-med"><label>Ancho (cm)<input type="number" inputmode="numeric" min="20" max="600" class="sv-an" placeholder="120"></label><label>Alto (cm)<input type="number" inputmode="numeric" min="20" max="400" class="sv-al" placeholder="120"></label></div>' +
       '<label style="font-weight:700;display:flex;flex-direction:column;gap:6px">¿Cómo se abre?<select class="sv-tipo">' + opts(TIPOS) + '</select></label>' +
       '<label style="font-weight:700;display:flex;flex-direction:column;gap:6px">Persiana<select class="sv-pers">' + opts(PERS) + '</select></label>' +
