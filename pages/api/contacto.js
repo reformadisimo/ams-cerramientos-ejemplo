@@ -24,9 +24,17 @@ const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&am
 // Interesa: su zona (Corredor del Henares) y ventanas o cancelas normales. No encaja: Madrid capital, áticos, piezas enormes.
 const ZONA_SI = /alcal[aá]|villalbilla|torrej[oó]n|meco|azuqueca|guadalajara|camarma|daganzo|santos de la humosa|anchuelo|corpa|santorcaz|pezuela|nuevo bazt[aá]n|loeches|torres de la alameda|valverde|ajalvir|cabanillas|alovera|chiloeches|marchamalo|villanueva de la torre|quer|yunquera|fontanar|el casar|valdeavero|fresno de torote|serracines|ribatejada|campo real|pozuelo del rey|olmeda/;
 const ZONA_DUDA = /coslada|san fernando|mejorada|velilla|paracuellos|arganda|rivas|alcobendas|san sebasti[aá]n de los reyes|algete|cobe[ñn]a|fuente el saz/;
+const ZONA_NORTE = /moraleja|encinar|conde orgaz|piovera|alameda de osuna|paracuellos|santo domingo|ciudalcampo|fuente del fresno/;
 const quitaAcentos = t => String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 function encaje(d) {
   const z = quitaAcentos(d.zona), t = quitaAcentos(d.trabajo + ' ' + d.pide);
+  // Urbanizaciones de chalets del norte de Madrid (1-nov-2026): solo obras de 6 ventanas o más
+  if (ZONA_NORTE.test(z)) {
+    const n = Number((t.match(/(\d+)\s*ventanas?/) || [])[1] || 0);
+    if (n >= 6) return ['Interesa', 'zona norte, obra de ' + n + ' ventanas'];
+    if (n > 0) return ['No encaja', 'zona norte, solo ' + n + ' ventana' + (n === 1 ? '' : 's')];
+    return ['A valorar', 'zona norte: preguntar cuántas ventanas'];
+  }
   if (/\batico\b/.test(t) && /cerramiento|terraza|cerrar/.test(t)) return ['No encaja', 'cerramiento de ático'];
   if (/^madrid( capital)?$|madrid capital|\b280[0-5]\d\b/.test(z) && !ZONA_SI.test(z)) return ['No encaja', 'Madrid capital'];
   if (ZONA_SI.test(z)) return /ventana|pvc|cancela|puerta|cerramiento|terraza|persiana|mosquitera/.test(t) || !t.trim() ? ['Interesa', 'su zona'] : ['A valorar', 'trabajo poco habitual'];
