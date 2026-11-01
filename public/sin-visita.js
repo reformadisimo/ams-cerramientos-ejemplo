@@ -65,8 +65,8 @@
     el.className = 'card sv-v';
     el.innerHTML =
       '<div class="sv-cab"><h3>Ventana <span class="sv-num"></span></h3><button type="button" class="sv-quitar">Quitar</button></div>' +
-      '<div class="sv-guia"><img src="/img/sv-ejemplo-foto.jpg" alt="Ejemplo: ventana entera, de frente, con un folio pegado en el cristal" loading="lazy"><p><b>Así tiene que quedar la foto:</b> la ventana entera, de frente, con un folio pegado en el cristal.</p></div>' +
-      '<label class="sv-foto"><input type="file" accept="image/*" capture="environment"><span>Hacer la foto</span></label>' +
+      (cuenta === 1 ? '<div class="sv-guia"><img src="/img/sv-ejemplo-foto.jpg" alt="Ejemplo: ventana entera, de frente, con un folio pegado en el cristal" loading="lazy"><p><b>Ejemplo de cómo tiene que quedar la foto:</b> la ventana entera, de frente, con un folio pegado en el cristal.</p></div>' : '<div class="sv-guia" style="display:block"><p style="margin:0">Haz una foto nueva de esta otra ventana, también con el folio pegado en el cristal.</p></div>') +
+      '<label class="sv-foto"><input type="file" accept="image/*" capture="environment"><span>' + (cuenta === 1 ? 'Hacer la foto' : 'Hacer la foto de esta ventana') + '</span></label>' +
       '<div class="sv-lienzo"><p class="sv-paso"></p><canvas></canvas><div class="sv-botones"><button type="button" class="sv-deshacer">Deshacer el último toque</button><button type="button" class="sv-reiniciar">Volver a marcar</button></div></div>' +
       '<p class="sv-ok" hidden></p>' +
       '<p class="sv-mano">¿Sabes la medida o no tienes folio? Escríbela aquí:</p>' +
@@ -80,8 +80,8 @@
     var an = q('.sv-an'), al = q('.sv-al'), etiqueta = q('.sv-foto span');
     function aviso(t, mal) { ok.hidden = false; ok.textContent = t; ok.style.background = mal ? '#FDECEA' : ''; ok.style.color = mal ? '#B42318' : ''; }
     function texto() {
-      if (v.folio.length < 4) paso.textContent = 'Paso 1: toca las 4 esquinas del folio (' + v.folio.length + ' de 4).';
-      else if (v.marco.length < 4) paso.textContent = 'Paso 2: ahora toca las 4 esquinas del marco de la ventana (' + v.marco.length + ' de 4).';
+      if (v.folio.length < 4) paso.textContent = 'Paso 1: con el dedo, toca encima de la foto las 4 esquinas del folio (' + v.folio.length + ' de 4).';
+      else if (v.marco.length < 4) paso.textContent = 'Paso 2: ahora toca las 4 esquinas de la ventana, por fuera del marco (' + v.marco.length + ' de 4).';
       else paso.textContent = 'Listo. Si algo no cuadra, pulsa «Volver a marcar».';
     }
     function dibujar() {
@@ -238,7 +238,6 @@
     var datos = ventanas.map(function (v) { return v.datos(0); });
     if (!datos.some(function (x) { return x.ancho && x.alto; })) { msg('Haz la foto de al menos una ventana (o escribe su medida) para calcular el precio.', 1); return; }
     if (cp.length !== 5) { msg('Escribe el código postal de la casa (arriba, en «Tus ventanas»): sin él no podemos calcular el precio.', 1); cpEl.focus(); return; }
-    if (t.replace(/\D/g, '').length < 9) { msg('Escribe tu teléfono.', 1); document.getElementById('sv-t').focus(); return; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m)) { msg('Escribe tu correo: te mandamos ahí el presupuesto.', 1); document.getElementById('sv-e').focus(); return; }
     if (!document.getElementById('sv-c').checked) { msg('Marca la casilla para que podamos ver las fotos.', 1); return; }
     var calidad = [0.72, 0.6, 0.48, 0.36], conFotos, i = 0;
@@ -247,8 +246,9 @@
     var fotos = conFotos.map(function (x) { return x.foto || null; });
     var resumen = datos.length + ' ventanas: ' + datos.map(function (x, k) { return (k + 1) + ') ' + x.tipo + (x.ancho ? ' ' + x.ancho + 'x' + x.alto + ' cm' : '') + ', persiana ' + x.persiana.toLowerCase() + (x.mosquitera ? ', mosquitera' : ''); }).join('; ');
     bt.disabled = true; msg('Calculando tu precio...');
-    try { if (window.amsLead) window.amsLead({ nombre: n || '(sin nombre)', telefono: t, correo: m, zona: cp + (pueblo ? ' ' + pueblo : ''), trabajo: 'ventanas', pide: 'Precio con fotos. ' + resumen }, 'sin-visita'); } catch (er) {}
-    var base = { nombre: n, telefono: t, correo: m, cp: cp, zona: pueblo, mensaje: document.getElementById('sv-m').value, consentimiento: true, origen: window.amsOrigen ? window.amsOrigen() : null };
+    try { if (window.amsLead) window.amsLead({ nombre: n || '(sin nombre)', telefono: t, correo: m, zona: cp + (pueblo ? ' ' + pueblo : ''), trabajo: 'ventanas', pide: 'Precio con fotos. ' + (publi ? 'Acepta recibir correos. ' : '') + resumen }, 'sin-visita'); } catch (er) {}
+    var publi = document.getElementById('sv-p').checked;
+    var base = { publicidad: publi, nombre: n, telefono: t, correo: m, cp: cp, zona: pueblo, mensaje: document.getElementById('sv-m').value, consentimiento: true, origen: window.amsOrigen ? window.amsOrigen() : null };
     var manda = function (vs) { return fetch('/api/fotos', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.assign({}, base, { ventanas: vs })) }).then(function (r) { return r.json().catch(function () { return { ok: false }; }).then(function (j) { j.status = r.status; return j; }); }); };
     manda(conFotos).then(function (r) {
       if (r.ok || r.status === 400 || r.status === 429) return r;
@@ -256,7 +256,7 @@
     }).catch(function () { return manda(datos); }).then(function (r) {
       bt.disabled = false;
       if (!r || !r.ok) {
-        var mot = { cp: 'Revisa el código postal.', telefono: 'Revisa el teléfono.', correo: 'Revisa el correo.', demasiados: 'Has hecho muchas consultas seguidas. Llámanos al 639 78 82 20 y te lo calculamos.' };
+        var mot = { cp: 'Revisa el código postal.', correo: 'Revisa el correo.', demasiados: 'Has hecho muchas consultas seguidas. Llámanos al 639 78 82 20 y te lo calculamos.' };
         msg((r && mot[r.motivo]) || 'No hemos podido calcular el precio ahora. Llámanos al 639 78 82 20.', 1); return;
       }
       msg(''); pinta(r, n, cp, pueblo, datos, fotos, m);

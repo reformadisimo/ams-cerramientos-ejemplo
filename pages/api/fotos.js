@@ -66,7 +66,6 @@ module.exports = async (req, res) => {
   const cp = limpia(b.cp, 5).replace(/\D/g, '');
   const mailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail);
   if (!/^\d{5}$/.test(cp)) return res.status(400).json({ ok: false, motivo: 'cp' });
-  if (tel.replace(/\D/g, '').length < 9) return res.status(400).json({ ok: false, motivo: 'telefono' });
   if (!mailOk) return res.status(400).json({ ok: false, motivo: 'correo' });
   if (b.consentimiento !== true) return res.status(400).json({ ok: false, motivo: 'consentimiento' });
   const ventanas = Array.isArray(b.ventanas) ? b.ventanas.slice(0, 40) : [];
@@ -101,7 +100,7 @@ module.exports = async (req, res) => {
     '<h2 style="color:#1f6fb2;margin:0 0 8px">Precio con fotos: ' + ventanas.length + ' ventana' + (ventanas.length === 1 ? '' : 's') + '</h2>' +
     '<p style="margin:0 0 12px"><b>Encaje:</b> ' + esc(nivel) + '<br><b>Precio que ha visto el cliente:</b> ' + esc(totalTxt) + '</p>' +
     '<table style="border-collapse:collapse;margin:0 0 14px">' +
-    [['Nombre', nombre || '(sin nombre)'], ['Teléfono', tel], ['Correo', mail], ['Código postal', cp + (zona.nombre ? ' (' + zona.nombre + ')' : '')], ['Pueblo o urbanización', pueblo || '-'], ['Mensaje', msg || '-'], ['De dónde viene', deDonde(b.origen)]].map(([k, v]) => '<tr><td style="padding:3px 12px 3px 0;color:#666">' + k + '</td><td style="padding:3px 0"><b>' + esc(v) + '</b></td></tr>').join('') +
+    [['Nombre', nombre || '(sin nombre)'], ['Teléfono', tel || '(no lo ha puesto)'], ['Correo', mail], ['Acepta correos de ofertas', b.publicidad === true ? 'Sí' : 'No'], ['Código postal', cp + (zona.nombre ? ' (' + zona.nombre + ')' : '')], ['Pueblo o urbanización', pueblo || '-'], ['Mensaje', msg || '-'], ['De dónde viene', deDonde(b.origen)]].map(([k, v]) => '<tr><td style="padding:3px 12px 3px 0;color:#666">' + k + '</td><td style="padding:3px 0"><b>' + esc(v) + '</b></td></tr>').join('') +
     '</table><ul style="margin:0 0 12px;padding-left:20px">' + lineasTxt.map(t => '<li>' + esc(t) + '</li>').join('') + '</ul>' +
     '<p style="margin:0;color:#666;font-size:13px">Medidas aproximadas, calculadas con la foto y el folio (o escritas por el cliente). Se confirman en la visita. ' + adjuntos.length + ' foto' + (adjuntos.length === 1 ? '' : 's') + ' adjunta' + (adjuntos.length === 1 ? '' : 's') + '.</p></div>';
   const htmlCliente = '<div style="font-family:Arial,sans-serif;font-size:15px;line-height:1.55;color:#222;max-width:620px">' +
