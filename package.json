@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@neondatabase/serverless": "^0.10.4",
+    "@vercel/functions": "^1.6.0",
     "next": "^15.5.27",
     "react": "18.3.1",
     "react-dom": "18.3.1"

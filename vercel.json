@@ -6,6 +6,9 @@
     },
     "pages/api/asistente.js": {
       "maxDuration": 60
+    },
+    "pages/api/presupuesto-archivo.js": {
+      "maxDuration": 120
     }
   },
   "crons": [

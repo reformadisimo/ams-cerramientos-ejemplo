@@ -1,6 +1,8 @@
 // Recibe la foto o el PDF de un presupuesto que sube un visitante y lo manda por correo (Resend) para que lo revise una persona.
 // Necesita RESEND_API_KEY. Destino: variable PRESUPUESTO_DESTINO (por defecto, el correo de Ignacio mientras la web es un ejemplo).
 const { deDonde } = require('../../lib/deDonde.js');
+const { waitUntil } = require('@vercel/functions');
+const { analiza } = require('../../lib/analisisPresupuesto.js');
 const DESTINO = process.env.PRESUPUESTO_DESTINO || 'delarubiaignacio@gmail.com';
 const DE = process.env.RESPUESTAS_DE || 'Guia AMS <guia@send.miestela.app>';
 const SB_URL = process.env.CRM_SUPABASE_URL || 'https://jrfqllllhweswhvwylog.supabase.co';
@@ -49,6 +51,11 @@ module.exports = async (req, res) => {
     try {
       await fetch(SB_URL + '/rest/v1/rpc/web_contacto', { method: 'POST', headers: { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY, 'Content-Type': 'application/json' }, body: JSON.stringify({ d: Object.assign({}, (b.origen && typeof b.origen === 'object') ? b.origen : {}, { nombre: nombre || '(sin nombre)', telefono: tel, correo: mailOk ? mail : '', trabajo: 'ventanas', pide: 'Sube el presupuesto de otra empresa' + (empresa ? ' (' + empresa + ')' : '') + ' para que se lo comparemos' + (msg ? '. ' + msg : ''), canal: 'revisa-presupuesto', tipo: 'contacto' }) }) });
     } catch (e) {}
+    // Informe con IA (2-nov-2026): lee el presupuesto, lo compara con nuestra tarifa, mira sus opiniones y deja un borrador.
+    // Va por detrás (waitUntil) y llega a DESTINO como segundo correo; al cliente no le sale nada sin aprobarlo.
+    if (process.env.ANTHROPIC_API_KEY && process.env.ANALISIS_IA !== '0') {
+      waitUntil(analiza({ tipo, datos, nombre, tel, mail: mailOk ? mail : '', empresa, msg, destino: DESTINO, de: DE, resendKey: clave }).catch(e => console.error('analisis', e && e.message)));
+    }
     return res.json({ ok: true });
   } catch (e) { return res.status(502).json({ ok: false }); }
 };

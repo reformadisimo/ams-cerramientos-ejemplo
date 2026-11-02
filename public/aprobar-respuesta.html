@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Revisar y enviar respuesta | AMS Cerramientos</title>
+<style>
+:root{--tinta:#12202B;--azul:#1f6fb2;--verde:#0A8F4E;--linea:#DCE2E7;--fondo:#F4F7F9;--rojo:#B42318}
+*{box-sizing:border-box}body{margin:0;font:17px/1.5 Arial,Helvetica,sans-serif;color:var(--tinta);background:var(--fondo)}
+header{background:var(--tinta);color:#fff;padding:20px 16px}.w{max-width:680px;margin:0 auto}
+h1{font-size:25px;line-height:1.2;margin:0 0 6px}header p{margin:0;color:#C9D3DB}
+main{padding:18px 16px 48px}
+.caja{background:#fff;border:1px solid var(--linea);border-radius:14px;padding:16px;margin-bottom:14px}
+.aviso{border-left:5px solid var(--azul);background:#EEF5FB}
+label{display:block;font-weight:700;margin:0 0 6px;color:var(--azul)}
+.dato{font-weight:700;overflow-wrap:anywhere}
+textarea{width:100%;min-height:340px;font:16px/1.55 Arial,Helvetica,sans-serif;border:2px solid var(--linea);border-radius:10px;padding:12px;color:var(--tinta);resize:vertical}
+textarea:focus{outline:none;border-color:var(--azul)}
+.btn{display:flex;align-items:center;justify-content:center;min-height:56px;border-radius:12px;background:var(--verde);color:#fff;font-weight:700;font-size:19px;border:0;width:100%;cursor:pointer;font-family:inherit}
+.btn[disabled]{opacity:.55;cursor:default}
+.msg{font-weight:700;min-height:1.4em;margin:10px 0 0;text-align:center}
+.msg.ok{color:var(--verde)}.msg.mal{color:var(--rojo)}
+ul{margin:6px 0 0;padding-left:20px}
+</style></head>
+<body>
+<header><div class="w"><h1>Revisar y enviar la respuesta</h1><p>Comparar presupuesto de otra empresa</p></div></header>
+<main><div class="w">
+<div class="caja aviso"><b>Antes de enviar, léelo.</b> Lo ha preparado la IA con el presupuesto y las opiniones que ha encontrado. Cambia lo que quieras:
+<ul><li>que el precio y lo que falta cuadren con el informe;</li><li>que no diga nada feo de la otra empresa;</li><li>que no prometa nada que no vayamos a cumplir.</li></ul>
+No sale nada hasta que pulses el botón verde.</div>
+<div id="carga" class="caja">Cargando el borrador...</div>
+<div id="form" hidden>
+<div class="caja"><label>Para</label><div class="dato" id="para"></div><label style="margin-top:10px">Asunto</label><div class="dato" id="asunto"></div></div>
+<div class="caja"><label for="texto">Texto para el cliente</label><textarea id="texto"></textarea></div>
+<button class="btn" id="enviar" type="button">Enviar al cliente</button>
+<p class="msg" id="msg" role="status"></p>
+</div>
+</div></main>
+<script>
+(function(){
+  var t=(location.hash.match(/t=([^&]+)/)||[])[1]||new URLSearchParams(location.search).get('t')||'';
+  var carga=document.getElementById('carga'),form=document.getElementById('form'),msg=document.getElementById('msg'),btn=document.getElementById('enviar');
+  if(!t){carga.textContent='Este enlace no está completo. Ábrelo otra vez desde el correo del informe.';return}
+  fetch('/api/aprobar-respuesta?t='+encodeURIComponent(t)).then(function(r){return r.json()}).then(function(d){
+    if(!d.ok){carga.textContent='Este enlace ya no vale (caduca a los 14 días). Contesta al cliente desde el informe.';return}
+    document.getElementById('para').textContent=(d.nombre?d.nombre+' · ':'')+d.to;
+    document.getElementById('asunto').textContent=d.asunto;
+    document.getElementById('texto').value=d.texto;
+    carga.hidden=true;form.hidden=false;
+  }).catch(function(){carga.textContent='No se ha podido cargar. Prueba otra vez en un momento.'});
+  btn.addEventListener('click',function(){
+    var texto=document.getElementById('texto').value.trim();
+    if(texto.length<20){msg.className='msg mal';msg.textContent='El texto está casi vacío.';return}
+    btn.disabled=true;msg.className='msg';msg.textContent='Enviando...';
+    fetch('/api/aprobar-respuesta',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({t:t,texto:texto})}).then(function(r){return r.json()}).then(function(d){
+      if(d.ok){msg.className='msg ok';msg.textContent='Enviado. Le llega desde AMS y, si contesta, te llega a info@amscerramientos.es.';btn.textContent='Enviado'}
+      else{btn.disabled=false;msg.className='msg mal';msg.textContent='No se ha podido enviar. Prueba otra vez o contéstale tú.'}
+    }).catch(function(){btn.disabled=false;msg.className='msg mal';msg.textContent='No se ha podido enviar. Prueba otra vez.'});
+  });
+})();
+</script>
+</body></html>
