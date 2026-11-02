@@ -20,7 +20,7 @@ function limite(ip, mapa, max, ms) {
   mapa[ip].push(t); return true;
 }
 async function correo(asunto, texto, responder, soloEquipo) {
-  const clave = process.env.RESEND_API_KEY;
+  const clave = require('../../lib/remitente').CLAVE;
   if (!clave) return false;
   try {
     const r = await fetch('https://api.resend.com/emails', {

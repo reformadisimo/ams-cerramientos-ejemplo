@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
   if (!t) return res.status(403).json({ ok: false, motivo: 'enlace' });
   if (req.method === 'GET') return res.json({ ok: true, to: t.to, nombre: t.nombre || '', asunto: t.asunto, texto: t.texto });
   if (req.method !== 'POST') return res.status(405).json({ ok: false });
-  const clave = process.env.RESEND_API_KEY;
+  const clave = require('../../lib/remitente').CLAVE;
   if (!clave) return res.status(503).json({ ok: false, motivo: 'sin-clave' });
   const texto = String(b.texto || '').trim().slice(0, 4000);
   if (texto.length < 20) return res.status(400).json({ ok: false, motivo: 'texto' });

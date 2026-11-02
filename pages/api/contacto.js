@@ -52,7 +52,7 @@ function deDonde(origen, d) {
   return t;
 }
 async function aviso(d, res) {
-  const clave = process.env.RESEND_API_KEY;
+  const clave = require('../../lib/remitente').CLAVE;
   if (!clave || !res || !res.ok || res.repetido) return;
   const tel = String(d.telefono || '').replace(/\D/g, '');
   const filas = [

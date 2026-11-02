@@ -24,7 +24,7 @@ const limpia = (v, n) => String(v || '').replace(/[\r\n\t]+/g, ' ').trim().slice
 module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
   if (req.method !== 'POST') return res.status(405).json({ ok: false });
-  const clave = process.env.RESEND_API_KEY;
+  const clave = require('../../lib/remitente').CLAVE;
   if (!clave) return res.status(503).json({ ok: false, motivo: 'sin-clave' });
   const ip = String(req.headers['x-forwarded-for'] || '').split(',')[0] || 'x';
   const ahora = Date.now();

@@ -100,7 +100,7 @@ module.exports = async (req, res) => {
   });
 
   const respuesta = { ok: true, zona: zona.tipo, zonaNombre: zona.nombre, aviso, precio: precio && { low: precio.low, high: precio.high, iva: precio.iva, lineas: precio.lineas } };
-  const clave = process.env.RESEND_API_KEY;
+  const clave = require('../../lib/remitente').CLAVE;
   if (!clave) return res.json(Object.assign(respuesta, { correo: false }));
 
   const lineasTxt = ventanas.map((v, i) => describe(v || {}, i, precio && precio.lineas[i]));

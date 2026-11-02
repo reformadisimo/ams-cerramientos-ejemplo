@@ -16,7 +16,7 @@ async function rpc(fn, args) {
   return r.json();
 }
 async function correo(to, subject, html) {
-  const r = await fetch('https://api.resend.com/emails', { method: 'POST', headers: { Authorization: 'Bearer ' + process.env.RESEND_API_KEY, 'Content-Type': 'application/json' }, body: JSON.stringify({ from: DE, to, bcc: to === PARA ? AV.bcc : undefined, subject, html }) });
+  const r = await fetch('https://api.resend.com/emails', { method: 'POST', headers: { Authorization: 'Bearer ' + require('../../lib/remitente').CLAVE, 'Content-Type': 'application/json' }, body: JSON.stringify({ from: DE, to, bcc: to === PARA ? AV.bcc : undefined, subject, html }) });
   return r.ok;
 }
 const caja = h => '<div style="font-family:Arial,sans-serif;font-size:15px;color:#1F2A36;max-width:600px">' + h + '</div>';
@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
   const cron = process.env.CRON_SECRET;
   if (cron && req.headers.authorization !== 'Bearer ' + cron) return res.status(401).json({ ok: false });
   const sec = process.env.CRM_ADMIN_SECRET;
-  if (!sec || !process.env.RESEND_API_KEY) return res.status(503).json({ ok: false, motivo: 'faltan claves' });
+  if (!sec || !require('../../lib/remitente').CLAVE) return res.status(503).json({ ok: false, motivo: 'faltan claves' });
   const out = {};
   try {
     // 1. Sin llamar

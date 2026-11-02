@@ -73,7 +73,7 @@ module.exports = async (req, res) => {
   } catch (e) { r = null; }
   if (tipo === 'cuando') return res.json({ ok: true });
 
-  const clave = process.env.RESEND_API_KEY;
+  const clave = require('../../lib/remitente').CLAVE;
   if (!clave) return res.json({ ok: true, correo: false });
   const telD = tel.replace(/\D/g, '');
   const filas = [['Encaje', encajeCp(cp)], ['Día preferido', diaTxt], ['Hora', hora + (Number(hora.split(':')[0]) < 14 ? ' (mañana)' : ' (tarde)')], ['Nombre', nombre], ['Teléfono', tel], ['Correo', mail || '-'], ['Código postal', cp], ['Calle', calle || '-'], ['En qué punto está', fase || '-'], ['Quiere hacerlo', cuando || '-'], ['Lo que ha visto', limpia(b.resumen, 400) || '-'], ['De dónde viene', deDonde(o)]];
