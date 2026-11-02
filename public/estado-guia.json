@@ -59,7 +59,7 @@
   "intro": "No te queremos abrumar, pero vamos a tope contigo. Pulsa en cada punto para ir directo:",
   "items": [
    {
-    "t": "Cómo es tu cliente y hasta dónde quieres llegar: 8 minutos tocando opciones.",
+    "t": "Cómo es tu cliente y hasta dónde quieres llegar: 10 minutos tocando opciones.",
     "h": "/conoce-tu-cliente"
    },
    {
@@ -95,10 +95,10 @@
    "prio": "Muy importante"
   },
   {
-   "t": "Cuéntanos cómo es tu cliente, qué más le puedes vender en la misma visita y hasta dónde quieres llevar AMS. Unos 8 minutos, casi todo tocando opciones. Con esto hacemos los anuncios a su medida y te traemos el trabajo que puedas atender.",
+   "t": "Cuéntanos cómo es tu cliente, qué más le puedes vender en la misma visita, qué meses vas flojo o cierras y hasta dónde quieres llevar AMS. Unos 10 minutos, casi todo tocando opciones; lo de dinero es opcional. Con esto hacemos los anuncios a su medida y te buscamos trabajo estable todo el año.",
    "prio": "Muy importante",
    "u": "/conoce-tu-cliente",
-   "b": "Contestar (8 minutos)"
+   "b": "Contestar (10 minutos)"
   },
   {
    "t": "Google Ads: entra en ads.google.com con el Gmail de la empresa, haz un pantallazo del número de 10 cifras que sale arriba a la derecha y mándanoslo por WhatsApp. Ese mismo día te llega la invitación de Casiopea 360 y le das a «Aceptar».",
