@@ -1,10 +1,11 @@
-/* Medicion de visitas de AMS Cerramientos con Google Analytics 4.
+/* Medicion de visitas de AMS Cerramientos con Google Analytics 4 y Microsoft Clarity.
    Reglas:
    - No se carga NADA de Google hasta que la persona acepta las cookies de medicion.
    - Solo funciona en el dominio real (amscerramientos.es): en pruebas y demos no manda datos.
    - El ID de medicion esta en un unico sitio: la constante ID. */
 (function () {
   var ID = 'G-7QY0HN6E06';
+  var CLARITY = 'z7cv1h5ti3';
   var HOSTS = ['amscerramientos.es', 'www.amscerramientos.es'];
   var KEY = 'ams-cookies';
   var cargado = false;
@@ -25,6 +26,13 @@
     document.head.appendChild(s);
     gtag('js', new Date());
     gtag('config', ID, { anonymize_ip: true, allow_google_signals: false, allow_ad_personalization_signals: false });
+    // Microsoft Clarity (mapas de calor y grabaciones), proyecto «AMS Cerramientos» (2-nov-2026). Mismas reglas: con permiso y en el dominio real.
+    (function (c, l, a, r, i, t, y) {
+      c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
+      t = l.createElement(r); t.async = 1; t.src = 'https://www.clarity.ms/tag/' + i;
+      y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, 'clarity', 'script', CLARITY);
+    try { window.clarity('consent'); } catch (e) {}
   }
 
   /* Evento propio: window.amsEvento('nombre', {parametros}). Si no hay permiso o no es el dominio real, no hace nada. */
