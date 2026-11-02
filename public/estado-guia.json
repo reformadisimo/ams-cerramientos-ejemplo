@@ -1,8 +1,13 @@
 {
- "version": "2026-11-02T17:30",
+ "version": "2026-11-02T18:50",
  "fecha": "2 de noviembre de 2026",
- "aviso": "Sorpresa: tu web nueva ya está en amscerramientos.es. No tienes que hacer nada.",
+ "aviso": "Google Ads: te explicamos paso a paso dónde sale el número y cómo mandárnoslo.",
  "ultimo": [
+  {
+   "f": "2 nov",
+   "t": "Google Ads, paso a paso: dónde sale tu número de 10 cifras y cómo mandárnoslo para que te llegue la invitación.",
+   "u": "#tareas"
+  },
   {
    "f": "2 nov",
    "t": "Sorpresa: tu web nueva ya está en amscerramientos.es, conectada a Analytics, Search Console y Clarity.",
@@ -27,20 +32,10 @@
    "f": "2 nov",
    "t": "Si un cliente te sube el presupuesto de otra empresa, te llega a info@ un informe con su precio, lo que falta, el nuestro con las mismas medidas, lo que opinan de esa empresa en Google y la respuesta ya escrita. La lees, la cambias si quieres y pulsas «Enviar». Sin tu visto bueno no le llega nada.",
    "u": "/revisa-tu-presupuesto"
-  },
-  {
-   "f": "2 nov",
-   "t": "Tus fotos ya están en la web: 7 de ventanas y 12 obras de antes y después, con una raya que se mueve con el dedo.",
-   "u": "/ventanas-pvc#antes-despues"
-  },
-  {
-   "f": "2 nov",
-   "t": "Después de ver el precio, el cliente te pide la visita con día y hora, y le preguntamos en qué punto está, para que solo vayas a medir a quien ya lo tiene decidido.",
-   "u": "/calculadora"
   }
  ],
  "cuentas": {
-  "ads": "Falta un paso tuyo: mándanos por WhatsApp el número de 10 cifras de tu cuenta de Google Ads (sale arriba a la derecha en ads.google.com). Ese mismo día te mandamos la invitación de Casiopea 360 y solo tienes que darle a «Aceptar». La tarjeta, en diciembre. Facebook e Instagram, cuando Raúl te los pase.",
+  "ads": "Falta un paso: el número de 10 cifras de tu cuenta de Google Ads (sale arriba a la derecha en ads.google.com, tipo 123-456-7890). Mándanos un pantallazo por WhatsApp y ese mismo día te llega la invitación de Casiopea 360 para darle a «Aceptar». La tarjeta, en diciembre. Facebook e Instagram, cuando Raúl te los pase.",
   "analytics": "Ya tienes tu propia cuenta de Google Analytics, creada por ti con tu correo de Gmail de empresa, y nos has dado acceso de administrador. Nos has pasado el código de medición para conectarla con la web nueva.",
   "dominio": "Hecho: tu web nueva está en amscerramientos.es desde el 2 de noviembre. Tu correo y tu teléfono siguen igual. Las direcciones de la web vieja llevan a su página nueva, para no perder lo que tenías en Google.",
   "search": "Search Console: le hemos enviado a Google el mapa de tu web nueva (70 páginas) y lo ha leído bien. Y Microsoft Clarity nos enseña, de forma anónima, cómo se mueve la gente por la web.",
@@ -103,7 +98,7 @@
    "b": "Contestar (10 minutos)"
   },
   {
-   "t": "Google Ads: entra en ads.google.com con el Gmail de la empresa, haz un pantallazo del número de 10 cifras que sale arriba a la derecha y mándanoslo por WhatsApp. Ese mismo día te llega la invitación de Casiopea 360 y le das a «Aceptar».",
+   "t": "Google Ads, paso a paso. 1) Entra en ads.google.com con el Gmail de la empresa. 2) Arriba a la derecha, junto a tu nombre, sale un número de 10 cifras tipo 123-456-7890. 3) Haz un pantallazo y mándanoslo por WhatsApp (si ya nos mandaste uno, vuelve a mandarlo por si no nos llegó). 4) Ese mismo día te llega un correo de Google Ads con la invitación de Casiopea 360: pulsa «Aceptar».",
    "u": "https://ads.google.com",
    "b": "Ir a Google Ads"
   },
