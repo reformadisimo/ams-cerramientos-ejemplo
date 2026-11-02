@@ -1,9 +1,10 @@
 // Recibe la foto o el PDF de un presupuesto que sube un visitante y lo manda por correo (Resend) para que lo revise una persona.
-// Necesita RESEND_API_KEY. Destino: variable PRESUPUESTO_DESTINO (por defecto, el correo de Ignacio mientras la web es un ejemplo).
+// Necesita RESEND_API_KEY. Destino: PRESUPUESTO_DESTINO (por defecto info@amscerramientos.es, el correo de Javi, desde el 2-nov-2026) y copia oculta a PRESUPUESTO_COPIA (Ig).
 const { deDonde } = require('../../lib/deDonde.js');
 const { waitUntil } = require('@vercel/functions');
 const { analiza } = require('../../lib/analisisPresupuesto.js');
-const DESTINO = process.env.PRESUPUESTO_DESTINO || 'delarubiaignacio@gmail.com';
+const DESTINO = process.env.PRESUPUESTO_DESTINO_AMS || 'info@amscerramientos.es';
+const COPIA = process.env.PRESUPUESTO_COPIA || 'delarubiaignacio@gmail.com';
 const DE = process.env.RESPUESTAS_DE || 'Guia AMS <guia@send.miestela.app>';
 const SB_URL = process.env.CRM_SUPABASE_URL || 'https://jrfqllllhweswhvwylog.supabase.co';
 const SB_KEY = process.env.CRM_SUPABASE_KEY || 'sb_publishable_6w-UFyFVPWAvq7OOr9F-BQ_8e7HMvuP';
@@ -44,7 +45,7 @@ module.exports = async (req, res) => {
     const r = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: 'Bearer ' + clave, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from: DE, to: [DESTINO], reply_to: mailOk ? mail : undefined, subject: '[Comparar] Presupuesto de otra empresa' + (empresa ? ': ' + empresa : '') + ' · ' + (nombre || tel || mail || 'sin nombre'), text: texto, attachments: [{ filename: 'presupuesto.' + TIPOS[tipo], content: datos }] })
+      body: JSON.stringify({ from: DE, to: [DESTINO], bcc: COPIA ? [COPIA] : undefined, reply_to: mailOk ? mail : undefined, subject: '[Comparar] Presupuesto de otra empresa' + (empresa ? ': ' + empresa : '') + ' · ' + (nombre || tel || mail || 'sin nombre'), text: texto, attachments: [{ filename: 'presupuesto.' + TIPOS[tipo], content: datos }] })
     });
     if (!r.ok) return res.status(502).json({ ok: false });
     // Libreta de clientes: se apunta como contacto (canal revisa-presupuesto). Si falla, el correo ya ha salido.
@@ -54,7 +55,7 @@ module.exports = async (req, res) => {
     // Informe con IA (2-nov-2026): lee el presupuesto, lo compara con nuestra tarifa, mira sus opiniones y deja un borrador.
     // Va por detrás (waitUntil) y llega a DESTINO como segundo correo; al cliente no le sale nada sin aprobarlo.
     if (process.env.ANTHROPIC_API_KEY && process.env.ANALISIS_IA !== '0') {
-      waitUntil(analiza({ tipo, datos, nombre, tel, mail: mailOk ? mail : '', empresa, msg, destino: DESTINO, de: DE, resendKey: clave }).catch(e => console.error('analisis', e && e.message)));
+      waitUntil(analiza({ tipo, datos, nombre, tel, mail: mailOk ? mail : '', empresa, msg, destino: DESTINO, copia: COPIA, de: DE, resendKey: clave }).catch(e => console.error('analisis', e && e.message)));
     }
     return res.json({ ok: true });
   } catch (e) { return res.status(502).json({ ok: false }); }
