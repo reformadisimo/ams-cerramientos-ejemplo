@@ -33,7 +33,7 @@ textarea:focus{outline:none;border-color:var(--azul)}
 .nota{font-size:14px;color:var(--suave);margin:8px 0 0}
 </style></head>
 <body>
-<header><div class="w"><img src="/img/logo-ams-blanco.svg" alt="AMS Cerramientos"><h1>¿Cómo es tu cliente?</h1><p>Unos 4 minutos, tocando opciones. Si no lo sabes seguro, pon lo que te parezca: nos vale.</p></div></header>
+<header><div class="w"><img src="/img/logo-ams-blanco.svg" alt="AMS Cerramientos"><h1>¿Cómo es tu cliente?</h1><p>Unos 5 minutos, tocando opciones. Si no lo sabes seguro, pon lo que te parezca: nos vale.</p></div></header>
 <main><div class="w">
 <div class="caja porque"><h2>Por qué te lo preguntamos</h2>
 Queremos conocer a tu cliente tan bien como tú. Con esto:
@@ -41,6 +41,7 @@ Queremos conocer a tu cliente tan bien como tú. Con esto:
 <li><b>Hacemos los anuncios a su medida.</b> Por ejemplo, si te llaman 6 mujeres de cada 10, ponemos más dinero en mujeres. Google y Facebook nos dejan elegir sexo, edad y zona.</li>
 <li><b>Probamos y medimos.</b> Hacemos pruebas (más hombres, más mujeres, otras edades) y nos quedamos con lo que trae mejores clientes.</li>
 <li><b>Cada vez, mejores clientes:</b> obras más grandes, de los que deciden rápido y en tu zona.</li>
+<li><b>Más trabajo en cada visita:</b> ya que vas a poner la ventana, que el cliente sepa que también le puedes poner la persiana con motor, la mosquitera o cerrarle la terraza.</li>
 </ul>
 <p class="nota">Lo que nos cuentes se queda entre nosotros. No sale en la web.</p></div>
 
@@ -125,7 +126,19 @@ Queremos conocer a tu cliente tan bien como tú. Con esto:
 <div class="caja q"><h2><span class="n">13</span>Tu cliente ideal</h2><p class="ay">El que te deja más contento: qué casa tiene, dónde vive, a qué se dedica, qué te pide. Si te viene a la cabeza uno concreto, descríbelo (sin el nombre).</p>
 <textarea name="ideal" placeholder="Por ejemplo: chalet en Alcobendas, matrimonio de unos 50, él directivo, quieren 10 ventanas con persiana con motor y lo deciden rápido"></textarea></div>
 
-<div class="caja q"><h2><span class="n">14</span>¿Algo más que debamos saber?</h2>
+<div class="caja q"><h2><span class="n">14</span>¿Cuánto suele ser una obra tuya?</h2><p class="ay">Más o menos, con IVA. Si prefieres no decirlo, déjalo sin marcar: no pasa nada.</p><div class="ops">
+<label><input type="radio" name="obra" value="Menos de 3.000 €">Menos de 3.000 €</label>
+<label><input type="radio" name="obra" value="3.000 a 6.000 €">3.000 a 6.000 €</label>
+<label><input type="radio" name="obra" value="6.000 a 10.000 €">6.000 a 10.000 €</label>
+<label><input type="radio" name="obra" value="Más de 10.000 €">Más de 10.000 €</label></div></div>
+
+<div class="caja q"><h2><span class="n">15</span>Además de la ventana, ¿qué ofreces en la visita?</h2><p class="ay">Ya que vas a la casa, aprovechamos. Marca lo que sueles ofrecer.</p><div class="ops"><label><input type="checkbox" name="ofrece" value="Persiana con motor">Persiana con motor</label><label><input type="checkbox" name="ofrece" value="Mosquitera">Mosquitera</label><label><input type="checkbox" name="ofrece" value="Cajón de persiana aislado">Cajón aislado</label><label><input type="checkbox" name="ofrece" value="Cerramiento de terraza">Cerramiento de terraza</label><label><input type="checkbox" name="ofrece" value="Cancela o puerta de garaje">Cancela</label><label><input type="checkbox" name="ofrece" value="Motor para la cancela">Motor de cancela</label><label><input type="checkbox" name="ofrece" value="Toldo o pérgola">Toldo o pérgola</label><label><input type="checkbox" name="ofrece" value="Rejas">Rejas</label><label><input type="checkbox" name="ofrece" value="Puerta de entrada">Puerta de entrada</label><label><input type="checkbox" name="ofrece" value="Ventanas del resto de la casa">Más ventanas de la casa</label></div>
+<textarea name="ofrece_nota" placeholder="¿Cuántos te dicen que sí? Por ejemplo: la mosquitera 3 de cada 10, la persiana con motor casi nadie"></textarea></div>
+
+<div class="caja q"><h2><span class="n">16</span>¿Qué te gustaría vender más?</h2><p class="ay">Lo que más te deja o más te gusta hacer. Lo empujaremos en la web, en los correos al cliente y en los anuncios.</p><div class="ops"><label><input type="checkbox" name="vender_mas" value="Persiana con motor">Persiana con motor</label><label><input type="checkbox" name="vender_mas" value="Mosquitera">Mosquitera</label><label><input type="checkbox" name="vender_mas" value="Cajón de persiana aislado">Cajón aislado</label><label><input type="checkbox" name="vender_mas" value="Cerramiento de terraza">Cerramiento de terraza</label><label><input type="checkbox" name="vender_mas" value="Cancela o puerta de garaje">Cancela</label><label><input type="checkbox" name="vender_mas" value="Motor para la cancela">Motor de cancela</label><label><input type="checkbox" name="vender_mas" value="Toldo o pérgola">Toldo o pérgola</label><label><input type="checkbox" name="vender_mas" value="Rejas">Rejas</label><label><input type="checkbox" name="vender_mas" value="Puerta de entrada">Puerta de entrada</label><label><input type="checkbox" name="vender_mas" value="Ventanas del resto de la casa">Más ventanas de la casa</label></div>
+<textarea name="vender_nota" placeholder="Si quieres, explica por qué o añade otros trabajos que hagas"></textarea></div>
+
+<div class="caja q"><h2><span class="n">17</span>¿Algo más que debamos saber?</h2>
 <textarea name="mas" placeholder="Lo que quieras: épocas del año con más trabajo, el cliente que no te interesa, lo que más te piden..."></textarea></div>
 
 <button class="btn" id="enviar" type="submit">Enviar mis respuestas</button>
@@ -136,11 +149,11 @@ Queremos conocer a tu cliente tan bien como tú. Con esto:
 (function(){
   var f=document.getElementById('f'),r=f.querySelector('input[type=range]'),o=r.nextElementSibling;
   function pinta(){var m=+r.value;o.textContent=m+' mujeres y '+(10-m)+' hombres de cada 10'}
-  r.addEventListener('input',pinta);pinta();
-  var ET={llama_mujeres:'1. Quién llama primero (mujeres de cada 10)',decide:'2. Quién decide',decide_nota:'2. Nota',trata:'3. Con quién trata',edad:'4. Edad',casa:'5. Tipo de casa',casa_nota:'5. Nota',motivo:'6. Por qué llaman',ventanas:'7. Ventanas por obra',llegan:'8. Cómo llegan hoy',primero:'9. Lo primero que pregunta',no:'10. Por qué no contratan',tardan:'11. Cuánto tardan en decidir',canal:'12. Cómo prefieren hablar',ideal:'13. Cliente ideal',mas:'14. Algo más'};
+  var movida=false;r.addEventListener('input',function(){movida=true;pinta()});pinta();
+  var ET={llama_mujeres:'1. Quién llama primero (mujeres de cada 10)',decide:'2. Quién decide',decide_nota:'2. Nota',trata:'3. Con quién trata',edad:'4. Edad',casa:'5. Tipo de casa',casa_nota:'5. Nota',motivo:'6. Por qué llaman',ventanas:'7. Ventanas por obra',llegan:'8. Cómo llegan hoy',primero:'9. Lo primero que pregunta',no:'10. Por qué no contratan',tardan:'11. Cuánto tardan en decidir',canal:'12. Cómo prefieren hablar',ideal:'13. Cliente ideal',obra:'14. Lo que suele ser una obra',ofrece:'15. Lo que ofrece además de la ventana',ofrece_nota:'15. Nota',vender_mas:'16. Lo que le gustaría vender más',vender_nota:'16. Nota',mas:'17. Algo más'};
   f.addEventListener('submit',function(e){
     e.preventDefault();var msg=document.getElementById('msg'),b=document.getElementById('enviar');
-    var fd=new FormData(f),out={};fd.forEach(function(v,k){v=String(v).trim();if(!v)return;(out[k]=out[k]||[]).push(v)});
+    var fd=new FormData(f),out={};if(!movida)fd.delete('llama_mujeres');fd.forEach(function(v,k){v=String(v).trim();if(!v)return;(out[k]=out[k]||[]).push(v)});
     var lin=['CÓMO ES EL CLIENTE DE AMS (respuestas de Javi, '+new Date().toLocaleString('es-ES')+')',''];
     Object.keys(ET).forEach(function(k){if(out[k])lin.push(ET[k]+': '+(k==='llama_mujeres'?out[k][0]+' mujeres y '+(10-out[k][0])+' hombres':out[k].join(', ')))});
     b.disabled=true;msg.className='msg';msg.textContent='Enviando...';

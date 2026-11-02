@@ -59,7 +59,7 @@
   "intro": "No te queremos abrumar, pero vamos a tope contigo. Pulsa en cada punto para ir directo:",
   "items": [
    {
-    "t": "Cómo es tu cliente: 4 minutos tocando opciones.",
+    "t": "Cómo es tu cliente y qué más le puedes vender en cada visita: 5 minutos tocando opciones.",
     "h": "/conoce-tu-cliente"
    },
    {
@@ -95,10 +95,10 @@
    "prio": "Muy importante"
   },
   {
-   "t": "Cuéntanos cómo es tu cliente: quién te llama, quién decide, edad, tipo de casa... Son 4 minutos tocando opciones. Con esto hacemos los anuncios a su medida (por ejemplo, más para mujeres si son ellas las que llaman) y probamos qué trae mejores clientes.",
+   "t": "Cuéntanos cómo es tu cliente y qué más le puedes vender en la misma visita (persiana con motor, mosquitera, terraza...). Son 5 minutos tocando opciones. Con esto hacemos los anuncios a su medida y te ayudamos a sacar más de cada visita.",
    "prio": "Muy importante",
    "u": "/conoce-tu-cliente",
-   "b": "Contestar (4 minutos)"
+   "b": "Contestar (5 minutos)"
   },
   {
    "t": "Google Ads: entra en ads.google.com con el Gmail de la empresa, haz un pantallazo del número de 10 cifras que sale arriba a la derecha y mándanoslo por WhatsApp. Ese mismo día te llega la invitación de Casiopea 360 y le das a «Aceptar».",
