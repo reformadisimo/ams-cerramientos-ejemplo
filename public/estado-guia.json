@@ -37,7 +37,7 @@
  "cuentas": {
   "ads": "Falta un paso tuyo: mándanos por WhatsApp el número de 10 cifras de tu cuenta de Google Ads (sale arriba a la derecha en ads.google.com). Ese mismo día te mandamos la invitación de Casiopea 360 y solo tienes que darle a «Aceptar». La tarjeta, en diciembre. Facebook e Instagram, cuando Raúl te los pase.",
   "analytics": "Ya tienes tu propia cuenta de Google Analytics, creada por ti con tu correo de Gmail de empresa, y nos has dado acceso de administrador. Nos has pasado el código de medición para conectarla con la web nueva.",
-  "dominio": "Tu dominio está en tu cuenta de DonDominio y la configuración está preparada. La web nueva pasa a amscerramientos.es en cuanto nos digas «adelante» (te proponemos el martes 3). Tu correo y tu teléfono siguen igual.",
+  "dominio": "Nos has dado el «adelante»: la web nueva se sube el martes 3 de noviembre. No tienes que hacer nada; tu correo y tu teléfono siguen igual.",
   "search": "Search Console: ya tenemos acceso y está resuelto.",
   "ficha": "Ya tenemos acceso a tu ficha de Google: descripción nueva, logo y portada con un trabajo tuyo. Las reseñas las contestamos nosotros cada semana; las malas, siempre contigo antes."
  },
@@ -84,7 +84,8 @@
  "tareas": [
   {
    "t": "Confírmanos por WhatsApp si subimos la web nueva mañana martes, o qué día prefieres. Con un «adelante» nos vale.",
-   "prio": "Hoy"
+   "prio": "Hoy",
+   "hecho": true
   },
   {
    "t": "Revisa los precios: haz 3 o 4 precios de ventanas de obras que conozcas y dinos si te encajan. Es lo más importante, porque el cliente llega sabiendo el precio.",
