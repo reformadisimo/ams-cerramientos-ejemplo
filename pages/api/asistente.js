@@ -7,7 +7,8 @@
 // POST { accion:'duda', pregunta }               -> { ok }  (pregunta que el asistente no supo contestar)
 const { promptAsistente, conocimientoWeb } = require('../../lib/asistente-prompt.js');
 const { deDonde } = require('../../lib/deDonde.js');
-const DESTINO = process.env.ASISTENTE_PARA || 'delarubiaignacio@gmail.com';
+const AV = require('../../lib/avisos.js');
+const DESTINO = AV.PARA_TXT;
 const DE = process.env.ASISTENTE_DE || process.env.RESPUESTAS_DE || 'Asistente AMS <guia@send.miestela.app>';
 const MODELOS = [process.env.ASISTENTE_MODELO || 'claude-sonnet-5-5', 'claude-sonnet-4-5'];
 const usos = {}, avisos = {};
@@ -18,14 +19,14 @@ function limite(ip, mapa, max, ms) {
   if (mapa[ip].length >= max) return false;
   mapa[ip].push(t); return true;
 }
-async function correo(asunto, texto, responder) {
+async function correo(asunto, texto, responder, soloEquipo) {
   const clave = process.env.RESEND_API_KEY;
   if (!clave) return false;
   try {
     const r = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: 'Bearer ' + clave, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from: DE, to: [DESTINO], subject: asunto, text: texto, reply_to: responder || undefined })
+      body: JSON.stringify({ from: DE, to: soloEquipo ? AV.COPIA : AV.PARA, bcc: soloEquipo ? undefined : AV.bcc, subject: asunto, text: texto, reply_to: responder || undefined })
     });
     return r.ok;
   } catch (e) { return false; }
@@ -69,7 +70,7 @@ module.exports = async (req, res) => {
   if (b.accion === 'duda') {
     if (!limite(ip, avisos, 8, 3600000)) return res.json({ ok: true });
     await guarda(b.cid, 'duda', limpia(b.pregunta, 400), b.pagina);
-    const ok = await correo('Pregunta sin respuesta del asistente (AMS)', 'El asistente no ha sabido contestar esto:\n\n' + limpia(b.pregunta, 400) + '\n\nAñádelo a las notas de Javi para que la próxima vez lo sepa.');
+    const ok = await correo('Pregunta sin respuesta del asistente (AMS)', 'El asistente no ha sabido contestar esto:\n\n' + limpia(b.pregunta, 400) + '\n\nAñádelo a las notas de Javi para que la próxima vez lo sepa.', undefined, true);
     return res.json({ ok });
   }
 

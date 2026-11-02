@@ -3,7 +3,8 @@
 // La clave publicable de Supabase es pública por diseño: la base de datos solo deja usar las funciones permitidas.
 const SB_URL = process.env.CRM_SUPABASE_URL || 'https://jrfqllllhweswhvwylog.supabase.co';
 const SB_KEY = process.env.CRM_SUPABASE_KEY || 'sb_publishable_6w-UFyFVPWAvq7OOr9F-BQ_8e7HMvuP';
-const AVISO_PARA = process.env.CRM_AVISOS_PARA || 'delarubiaignacio@gmail.com';
+const AV = require('../../lib/avisos.js');
+const AVISO_PARA = AV.PARA_TXT;
 const DE = process.env.CRM_AVISOS_DE || process.env.RESPUESTAS_DE || 'Contactos AMS <guia@send.miestela.app>';
 const CRM_URL = process.env.CRM_URL || 'https://ams-cerramientos-ejemplo.vercel.app/mis-contactos/';
 const visitas = {};
@@ -69,7 +70,7 @@ async function aviso(d, res) {
     await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: 'Bearer ' + clave, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from: DE, to: AVISO_PARA.split(',').map(s => s.trim()).filter(Boolean), subject: (d.encaje ? d.encaje.split(' (')[0] + ' · ' : '') + 'Nuevo contacto: ' + String(d.nombre).slice(0, 40) + ' (' + (res.origen || 'sin dato') + ')', html })
+      body: JSON.stringify({ from: DE, to: AVISO_PARA.split(',').map(s => s.trim()).filter(Boolean), bcc: AV.bcc, subject: (d.encaje ? d.encaje.split(' (')[0] + ' · ' : '') + 'Nuevo contacto: ' + String(d.nombre).slice(0, 40) + ' (' + (res.origen || 'sin dato') + ')', html })
     });
   } catch (e) { /* el aviso no puede tumbar el guardado */ }
 }

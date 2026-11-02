@@ -3,8 +3,9 @@
 // Necesita CRM_ADMIN_SECRET y RESEND_API_KEY. Destino: CRM_AVISOS_PARA (de momento, Ig; cuando la web sea la de Javi, Javi).
 const SB_URL = process.env.CRM_SUPABASE_URL || 'https://jrfqllllhweswhvwylog.supabase.co';
 const SB_KEY = process.env.CRM_SUPABASE_KEY || 'sb_publishable_6w-UFyFVPWAvq7OOr9F-BQ_8e7HMvuP';
-const PARA = (process.env.CRM_AVISOS_PARA || 'delarubiaignacio@gmail.com').split(',').map(s => s.trim()).filter(Boolean);
-const RESUMEN_PARA = (process.env.CRM_RESUMEN_PARA || 'delarubiaignacio@gmail.com').split(',').map(s => s.trim()).filter(Boolean);
+const AV = require('../../lib/avisos.js');
+const PARA = AV.PARA;
+const RESUMEN_PARA = AV.COPIA; // el resumen de la semana es para nosotros (Ig)
 const DE = process.env.CRM_AVISOS_DE || process.env.RESPUESTAS_DE || 'Contactos AMS <guia@send.miestela.app>';
 const CRM_URL = process.env.CRM_URL || 'https://ams-cerramientos-ejemplo.vercel.app/mis-contactos/';
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -15,7 +16,7 @@ async function rpc(fn, args) {
   return r.json();
 }
 async function correo(to, subject, html) {
-  const r = await fetch('https://api.resend.com/emails', { method: 'POST', headers: { Authorization: 'Bearer ' + process.env.RESEND_API_KEY, 'Content-Type': 'application/json' }, body: JSON.stringify({ from: DE, to, subject, html }) });
+  const r = await fetch('https://api.resend.com/emails', { method: 'POST', headers: { Authorization: 'Bearer ' + process.env.RESEND_API_KEY, 'Content-Type': 'application/json' }, body: JSON.stringify({ from: DE, to, bcc: to === PARA ? AV.bcc : undefined, subject, html }) });
   return r.ok;
 }
 const caja = h => '<div style="font-family:Arial,sans-serif;font-size:15px;color:#1F2A36;max-width:600px">' + h + '</div>';

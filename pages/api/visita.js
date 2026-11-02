@@ -5,7 +5,8 @@
 const { deDonde } = require('../../lib/deDonde.js');
 const SB_URL = process.env.CRM_SUPABASE_URL || 'https://jrfqllllhweswhvwylog.supabase.co';
 const SB_KEY = process.env.CRM_SUPABASE_KEY || 'sb_publishable_6w-UFyFVPWAvq7OOr9F-BQ_8e7HMvuP';
-const PARA = process.env.CRM_AVISOS_PARA || 'delarubiaignacio@gmail.com';
+const AV = require('../../lib/avisos.js');
+const PARA = AV.PARA_TXT;
 const DE = process.env.CRM_AVISOS_DE || process.env.RESPUESTAS_DE || 'AMS Cerramientos <guia@send.miestela.app>';
 const RESPONDER_A = process.env.RESPONDER_A || 'info@amscerramientos.es';
 const CRM_URL = process.env.CRM_URL || 'https://ams-cerramientos-ejemplo.vercel.app/mis-contactos/';
@@ -94,7 +95,7 @@ module.exports = async (req, res) => {
     '<p>Te pedimos un favor: si cambian tus planes o todavía no lo tienes decidido, avísanos y la movemos sin problema. Así podemos atender antes a quien está listo para empezar, y cuando seas tú, iremos igual de rápido a tu casa.</p>' +
     '<p>Un saludo,<br>AMS Cerramientos<br>639 78 82 20</p></div>';
   const manda = body => fetch('https://api.resend.com/emails', { method: 'POST', headers: { Authorization: 'Bearer ' + clave, 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).then(x => x.ok).catch(() => false);
-  const envios = [manda({ from: DE, to: PARA.split(',').map(s => s.trim()).filter(Boolean), reply_to: mailOk ? mail : undefined, subject: (prisa ? '[Llamar ya] ' : '') + 'PIDE VISITA · ' + (CANALES[canal] || 'Web') + ': ' + nombre + ' · ' + diaTxt + ' a las ' + hora + ' · ' + cp, html: htmlAms })];
+  const envios = [manda({ from: DE, to: PARA.split(',').map(s => s.trim()).filter(Boolean), bcc: AV.bcc, reply_to: mailOk ? mail : undefined, subject: (prisa ? '[Llamar ya] ' : '') + 'PIDE VISITA · ' + (CANALES[canal] || 'Web') + ': ' + nombre + ' · ' + diaTxt + ' a las ' + hora + ' · ' + cp, html: htmlAms })];
   if (mailOk) envios.push(manda({ from: DE, to: [mail], reply_to: RESPONDER_A, subject: 'Tu visita con AMS Cerramientos: ' + diaTxt + ' a las ' + hora + ' (te la confirmamos)', html: htmlCli }));
   const [okAms] = await Promise.all(envios);
   return res.json({ ok: true, avisado: okAms, libreta: !!(r && r.ok) });

@@ -7,7 +7,8 @@
 // Necesita RESEND_API_KEY para los correos; sin ella devuelve el precio igualmente.
 const { deDonde } = require('../../lib/deDonde.js');
 const { calcula } = require('./precio.js');
-const PARA = process.env.CRM_AVISOS_PARA || 'delarubiaignacio@gmail.com';
+const AV = require('../../lib/avisos.js');
+const PARA = AV.PARA_TXT;
 const DE = process.env.CRM_AVISOS_DE || process.env.RESPUESTAS_DE || 'AMS Cerramientos <guia@send.miestela.app>';
 const RESPONDER_A = process.env.RESPONDER_A || 'info@amscerramientos.es';
 const MAX_TOTAL = 4200000; // base64; el límite de Vercel para el cuerpo es 4,5 MB
@@ -125,7 +126,7 @@ module.exports = async (req, res) => {
 
   const manda = (body) => fetch('https://api.resend.com/emails', { method: 'POST', headers: { Authorization: 'Bearer ' + clave, 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).then(r => r.ok).catch(() => false);
   const [okAms, okCli] = await Promise.all([
-    manda({ from: DE, to: PARA.split(',').map(s => s.trim()).filter(Boolean), reply_to: mail, subject: (zona.tipo === 'norte' ? 'Zona norte · ' : '') + 'Precio con fotos: ' + ventanas.length + ' ventanas · ' + cp + ' (' + deDonde(b.origen).split(' · ')[0].slice(0, 60) + ')', html: htmlAms, attachments: adjuntos }),
+    manda({ from: DE, to: PARA.split(',').map(s => s.trim()).filter(Boolean), bcc: AV.bcc, reply_to: mail, subject: (zona.tipo === 'norte' ? 'Zona norte · ' : '') + 'Precio con fotos: ' + ventanas.length + ' ventanas · ' + cp + ' (' + deDonde(b.origen).split(' · ')[0].slice(0, 60) + ')', html: htmlAms, attachments: adjuntos }),
     manda({ from: DE, to: [mail], reply_to: RESPONDER_A, subject: precio && precio.low ? 'Tu precio orientativo de ventanas: ' + eur(precio.low) + ' a ' + eur(precio.high) : 'Tu consulta de ventanas en AMS Cerramientos', html: htmlCliente })
   ]);
   return res.json(Object.assign(respuesta, { correo: okCli, avisado: okAms }));

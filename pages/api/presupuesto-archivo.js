@@ -3,8 +3,9 @@
 const { deDonde } = require('../../lib/deDonde.js');
 const { waitUntil } = require('@vercel/functions');
 const { analiza } = require('../../lib/analisisPresupuesto.js');
-const DESTINO = process.env.PRESUPUESTO_DESTINO_AMS || 'info@amscerramientos.es';
-const COPIA = process.env.PRESUPUESTO_COPIA || 'delarubiaignacio@gmail.com';
+const AV = require('../../lib/avisos.js');
+const DESTINO = AV.PARA_TXT;
+const COPIA = AV.COPIA.join(',');
 const DE = process.env.RESPUESTAS_DE || 'Guia AMS <guia@send.miestela.app>';
 const SB_URL = process.env.CRM_SUPABASE_URL || 'https://jrfqllllhweswhvwylog.supabase.co';
 const SB_KEY = process.env.CRM_SUPABASE_KEY || 'sb_publishable_6w-UFyFVPWAvq7OOr9F-BQ_8e7HMvuP';
@@ -45,7 +46,7 @@ module.exports = async (req, res) => {
     const r = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: 'Bearer ' + clave, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from: DE, to: [DESTINO], bcc: COPIA ? [COPIA] : undefined, reply_to: mailOk ? mail : undefined, subject: '[Comparar] Presupuesto de otra empresa' + (empresa ? ': ' + empresa : '') + ' · ' + (nombre || tel || mail || 'sin nombre'), text: texto, attachments: [{ filename: 'presupuesto.' + TIPOS[tipo], content: datos }] })
+      body: JSON.stringify({ from: DE, to: [DESTINO], bcc: COPIA ? COPIA.split(',') : undefined, reply_to: mailOk ? mail : undefined, subject: '[Comparar] Presupuesto de otra empresa' + (empresa ? ': ' + empresa : '') + ' · ' + (nombre || tel || mail || 'sin nombre'), text: texto, attachments: [{ filename: 'presupuesto.' + TIPOS[tipo], content: datos }] })
     });
     if (!r.ok) return res.status(502).json({ ok: false });
     // Libreta de clientes: se apunta como contacto (canal revisa-presupuesto). Si falla, el correo ya ha salido.
