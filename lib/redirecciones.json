@@ -1,5 +1,10 @@
 [
  {
+  "source": "/p",
+  "destination": "/?utm_source=pegatina&utm_medium=qr&utm_campaign=puertas",
+  "permanent": false
+ },
+ {
   "source": "/Terrazas",
   "destination": "/cerramientos-terrazas",
   "permanent": false
