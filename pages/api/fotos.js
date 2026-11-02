@@ -24,11 +24,19 @@ const r10 = n => Math.round(n / 10) * 10;
 const APERTURAS = { oscilobatiente: 1, practicable: 1, corredera: 1 };
 const PERSIANAS = { motor: 1, manual: 1, no: 1 };
 
+// Zonas de Javi (1-nov-2026): unos 35 km alrededor de Villalbilla, norte (Alcobendas, San Sebastián de los Reyes,
+// La Moraleja, Algete, San Agustín) y Guadalajara si hay mercado. No trabaja en Madrid capital ni en el sur y el oeste.
+const CP_NO = /^(2890\d|2892[0-5]|28320|2898[0-4]|2894[0-6]|28760|28770|2823[0-2]|28290|2822[0-4])$/;
+const CP_SI = /^(288\d\d|2810[08]|2870\d|28750|28110|192\d\d|1917\d)$/;
 function zonaDe(cp) {
   if (NORTE_CP[cp]) return { tipo: 'norte', nombre: NORTE_CP[cp] };
   if (/^280[0-5]\d$/.test(cp)) return { tipo: 'centro', nombre: 'Madrid capital' };
+  if (CP_NO.test(cp)) return { tipo: 'no', nombre: '' };
+  if (!/^(28|19)/.test(cp)) return { tipo: 'fuera', nombre: '' };
+  if (CP_SI.test(cp)) return { tipo: 'si', nombre: '' };
   return { tipo: 'normal', nombre: '' };
 }
+const ZONAS_TXT = 'Trabajamos en el Corredor del Henares, en el norte de Madrid (Alcobendas, San Sebastián de los Reyes, La Moraleja, Algete...) y en Guadalajara.';
 
 function precioVentanas(ventanas, zona) {
   const lineas = [];
@@ -75,10 +83,11 @@ module.exports = async (req, res) => {
   // ---------- precio ----------
   const zona = zonaDe(cp);
   let precio = null, aviso = '';
-  if (zona.tipo === 'centro') aviso = 'En el centro de Madrid no trabajamos: con el tráfico y el aparcamiento no podemos darte el servicio que queremos. Trabajamos en el Corredor del Henares y en las urbanizaciones de chalets del norte de Madrid.';
+  if (zona.tipo === 'centro') aviso = 'En el centro de Madrid no trabajamos: con el tráfico y el aparcamiento no podemos darte el servicio que queremos. ' + ZONAS_TXT;
+  else if (zona.tipo === 'no' || zona.tipo === 'fuera') aviso = 'Lo sentimos: tu zona nos queda lejos y no podríamos darte el servicio que queremos. ' + ZONAS_TXT;
   else if (zona.tipo === 'norte' && ventanas.length < MIN_NORTE) aviso = 'En ' + zona.nombre + ' hacemos obras completas, de ' + MIN_NORTE + ' ventanas o más. Para menos, te atendería mejor un instalador más cercano. Si más adelante cambias el resto, aquí estamos.';
   else precio = precioVentanas(ventanas, zona);
-  const nivel = zona.tipo === 'centro' ? 'No encaja (Madrid capital)' : zona.tipo === 'norte' ? (ventanas.length >= MIN_NORTE ? 'Interesa (zona norte, +' + Math.round((RECARGO_NORTE - 1) * 100) + ' %)' : 'No encaja (zona norte, menos de ' + MIN_NORTE + ' ventanas)') : 'Su zona o por confirmar';
+  const nivel = zona.tipo === 'centro' ? 'No encaja (Madrid capital)' : zona.tipo === 'no' || zona.tipo === 'fuera' ? 'No encaja (zona donde no trabajamos)' : zona.tipo === 'si' ? 'Interesa (su zona)' : zona.tipo === 'norte' ? (ventanas.length >= MIN_NORTE ? 'Interesa (zona norte, +' + Math.round((RECARGO_NORTE - 1) * 100) + ' %)' : 'No encaja (zona norte, menos de ' + MIN_NORTE + ' ventanas)') : 'Su zona o por confirmar';
 
   // ---------- fotos ----------
   const adjuntos = [];
@@ -110,8 +119,8 @@ module.exports = async (req, res) => {
         '<p style="font-size:26px;font-weight:bold;color:#12202B;margin:8px 0">' + eur(precio.low) + ' a ' + eur(precio.high) + '</p>' +
         '<p style="color:#555;margin:0 0 10px">' + (precio.iva ? 'IVA incluido. ' : 'Más IVA. ') + 'PVC de calidad, montaje y remates incluidos.</p>' +
         '<ul style="padding-left:20px">' + lineasTxt.map(t => '<li>' + esc(t) + '</li>').join('') + '</ul>' +
-        '<p><b>¿Y ahora?</b> Te llamamos lo antes posible para quedar contigo, medir con láser y darte el presupuesto definitivo por escrito, sin compromiso.</p>'
-      : '<p>Gracias por usar el precio con fotos de AMS Cerramientos.</p><p>' + esc(aviso || 'Te llamamos lo antes posible para darte el precio.') + '</p>') +
+        '<p><b>¿Y ahora?</b> Te contestamos el mismo día y vamos a medir con láser en 1 o 2 días, para darte el presupuesto definitivo por escrito, sin compromiso.</p>'
+      : '<p>Gracias por usar el precio con fotos de AMS Cerramientos.</p><p>' + esc(aviso || 'Te contestamos el mismo día para darte el precio.') + '</p>') +
     '<p>Si lo prefieres, llámanos o escríbenos por WhatsApp al <b>639 78 82 20</b>.</p><p>Un saludo,<br>AMS Cerramientos<br>Villalbilla (Madrid)</p></div>';
 
   const manda = (body) => fetch('https://api.resend.com/emails', { method: 'POST', headers: { Authorization: 'Bearer ' + clave, 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).then(r => r.ok).catch(() => false);

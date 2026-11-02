@@ -8,6 +8,8 @@
   var lista = document.getElementById('sv-lista');
   if (!lista) return;
   var ventanas = [], cuenta = 0;
+  var CP_NO = /^(2890\d|2892[0-5]|28320|2898[0-4]|2894[0-6]|28760|28770|2823[0-2]|28290|2822[0-4])$/;
+  var ZONAS = 'Trabajamos en el Corredor del Henares, en el norte de Madrid (Alcobendas, San Sebastián de los Reyes, La Moraleja, Algete...) y en Guadalajara.';
   var NORTE_CP = { '28109': 1, '28050': 1, '28043': 1, '28042': 1, '28860': 1, '28120': 1, '28707': 1 };
   var TIPOS = [['Oscilobatiente (se abre y se inclina)', 'oscilobatiente'], ['Abatible (solo se abre)', 'practicable'], ['Corredera', 'corredera'], ['Balconera (puerta a la terraza)', 'practicable'], ['Fija (no se abre)', 'corredera'], ['No lo sé', 'oscilobatiente']];
   var PERS = [['Con motor', 'motor'], ['Manual', 'manual'], ['Sin persiana', 'no'], ['Me vale la que tengo', 'no']];
@@ -167,7 +169,8 @@
   function avisoZona() {
     var cp = cpDe(), t = '';
     if (cp.length === 5 && NORTE_CP[cp] && ventanas.length < 6) t = 'En esta zona hacemos obras completas, de 6 ventanas o más. Si son menos, te atendería mejor un instalador más cercano; si más adelante cambias el resto, aquí estamos.';
-    else if (cp.length === 5 && /^280[0-5]\d$/.test(cp)) t = 'En el centro de Madrid no trabajamos. Trabajamos en el Corredor del Henares y en las urbanizaciones de chalets del norte de Madrid.';
+    else if (cp.length === 5 && /^280[0-5]\d$/.test(cp)) t = 'En el centro de Madrid no trabajamos. ' + ZONAS;
+    else if (cp.length === 5 && (CP_NO.test(cp) || !/^(28|19)/.test(cp))) t = 'Tu zona nos queda lejos y no podríamos darte el servicio que queremos. ' + ZONAS;
     avisoZ.hidden = !t; avisoZ.textContent = t;
   }
   cpEl.addEventListener('input', avisoZona);
@@ -202,7 +205,7 @@
       u.datos.forEach(function (x, k) { var p = u.precio.lineas[k]; txt('· ' + linea(x, k) + (p ? ': ' + eur(p.low) + ' a ' + eur(p.high) : ''), 11); });
       y += 4;
       txt('Las medidas se han calculado con la foto y el folio, y son aproximadas. Antes de fabricar vamos a tu casa, medimos con láser y te damos el presupuesto definitivo por escrito, sin compromiso.', 10, false, [74, 90, 104]);
-      txt('Te llamamos lo antes posible para quedar contigo. Si lo prefieres, llámanos o escríbenos por WhatsApp al 639 78 82 20.', 10, false, [74, 90, 104]);
+      txt('Te contestamos el mismo día y vamos a medir en 1 o 2 días. Si lo prefieres, llámanos o escríbenos por WhatsApp al 639 78 82 20.', 10, false, [74, 90, 104]);
       u.fotos.forEach(function (f, k) {
         if (!f) return;
         var im = new Image(); im.src = f;
@@ -218,7 +221,7 @@
   function pinta(r, n, cp, pueblo, datos, fotos, m) {
     res.hidden = false;
     if (!r.precio || !r.precio.low) {
-      res.innerHTML = '<p style="margin:0;line-height:1.55">' + esc(r.aviso || 'No hemos podido calcular el precio con esas medidas. Te llamamos lo antes posible.') + '</p>' +
+      res.innerHTML = '<p style="margin:0;line-height:1.55">' + esc(r.aviso || 'No hemos podido calcular el precio con esas medidas. Te contestamos el mismo día.') + '</p>' +
         '<div style="display:flex;flex-wrap:wrap;gap:12px"><a class="b1" href="tel:+34639788220">Llamar</a><a class="b2" href="https://wa.me/34639788220">Escribir por WhatsApp</a></div>';
     } else {
       ultimo = { nombre: n, cp: cp, pueblo: pueblo, datos: datos, fotos: fotos, precio: r.precio };
@@ -226,7 +229,7 @@
         '<div class="sv-precio">' + eur(r.precio.low) + ' a ' + eur(r.precio.high) + '</div><p style="margin:0;color:#4A5A68">' + (r.precio.iva ? 'IVA incluido. ' : 'Más IVA. ') + 'PVC de calidad, vidrio térmico, montaje y remates incluidos.</p>' +
         '<ul>' + datos.map(function (x, k) { var p = r.precio.lineas[k]; return '<li>' + esc(linea(x, k)) + (p ? ': <b>' + eur(p.low) + ' a ' + eur(p.high) + '</b>' : '') + '</li>'; }).join('') + '</ul>' +
         (r.correo ? '<p style="margin:0;color:#1B6B3A;font-weight:600">Te lo hemos mandado a ' + esc(m) + '.</p>' : '') +
-        '<p style="margin:0;line-height:1.55"><b>¿Y ahora?</b> Te llamamos lo antes posible para quedar contigo, medir con láser y darte el presupuesto definitivo por escrito, sin compromiso.</p>' +
+        '<p style="margin:0;line-height:1.55"><b>¿Y ahora?</b> Te contestamos el mismo día y vamos a medir con láser en 1 o 2 días, para darte el presupuesto definitivo por escrito, sin compromiso.</p>' +
         '<div style="display:flex;flex-wrap:wrap;gap:12px"><button type="button" class="b1" id="sv-pdf">Descargar en PDF</button><a class="b2" href="tel:+34639788220">Llamar ahora</a><a class="b2" href="https://wa.me/34639788220">WhatsApp</a></div>';
       document.getElementById('sv-pdf').addEventListener('click', pdf);
     }

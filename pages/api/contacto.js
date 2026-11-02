@@ -22,8 +22,9 @@ const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&am
 
 // Filtro para que Javi vaya primero a las visitas que le compensan (reglas que él nos ha contado, 31-oct-2026).
 // Interesa: su zona (Corredor del Henares) y ventanas o cancelas normales. No encaja: Madrid capital, áticos, piezas enormes.
-const ZONA_SI = /alcal[aá]|villalbilla|torrej[oó]n|meco|azuqueca|guadalajara|camarma|daganzo|santos de la humosa|anchuelo|corpa|santorcaz|pezuela|nuevo bazt[aá]n|loeches|torres de la alameda|valverde|ajalvir|cabanillas|alovera|chiloeches|marchamalo|villanueva de la torre|quer|yunquera|fontanar|el casar|valdeavero|fresno de torote|serracines|ribatejada|campo real|pozuelo del rey|olmeda/;
-const ZONA_DUDA = /coslada|san fernando|mejorada|velilla|paracuellos|arganda|rivas|alcobendas|san sebasti[aá]n de los reyes|algete|cobe[ñn]a|fuente el saz/;
+const ZONA_SI = /alcal[aá]|villalbilla|torrej[oó]n|meco|azuqueca|camarma|daganzo|santos de la humosa|anchuelo|corpa|santorcaz|pezuela|nuevo bazt[aá]n|loeches|torres de la alameda|valverde|ajalvir|cabanillas|alovera|chiloeches|marchamalo|villanueva de la torre|quer|yunquera|fontanar|el casar|valdeavero|fresno de torote|serracines|ribatejada|campo real|pozuelo del rey|olmeda|coslada|san fernando|mejorada|velilla|alcobendas|san sebasti[aá]n de los reyes|algete|cobe[ñn]a|san agust[ií]n|guadalix/; // zonas de Javi (1-nov-2026)
+const ZONA_DUDA = /guadalajara|arganda|rivas|fuente el saz/;
+const ZONA_NO = /getafe|alcorc[oó]n|\bpinto\b|\bparla\b|fuenlabrada|tres cantos|colmenar|las rozas|pozuelo de alarc|^pozuelo$|majadahonda|canillejas/; // donde Javi no trabaja
 const ZONA_NORTE = /moraleja|encinar|conde orgaz|piovera|alameda de osuna|paracuellos|santo domingo|ciudalcampo|fuente del fresno|\b(28109|28050|28043|28042|28860|28120|28707)\b/;
 const quitaAcentos = t => String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 function encaje(d) {
@@ -35,6 +36,7 @@ function encaje(d) {
     if (n > 0) return ['No encaja', 'zona norte, solo ' + n + ' ventana' + (n === 1 ? '' : 's')];
     return ['A valorar', 'zona norte: preguntar cuántas ventanas'];
   }
+  if (ZONA_NO.test(z)) return ['No encaja', 'zona donde no trabajamos'];
   if (/\batico\b/.test(t) && /cerramiento|terraza|cerrar/.test(t)) return ['No encaja', 'cerramiento de ático'];
   if (/^madrid( capital)?$|madrid capital|\b280[0-5]\d\b/.test(z) && !ZONA_SI.test(z)) return ['No encaja', 'Madrid capital'];
   if (ZONA_SI.test(z)) return /ventana|pvc|cancela|puerta|cerramiento|terraza|persiana|mosquitera/.test(t) || !t.trim() ? ['Interesa', 'su zona'] : ['A valorar', 'trabajo poco habitual'];
