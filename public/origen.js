@@ -66,7 +66,7 @@
     if (!el) return;
     var go = function () { window.amsAgenda(el, datos); };
     if (window.amsAgenda) return go();
-    var sc = document.createElement('script'); sc.src = '/agenda.js?v=1'; sc.onload = go; document.head.appendChild(sc);
+    var sc = document.createElement('script'); sc.src = '/agenda.js?v=2'; sc.onload = go; document.head.appendChild(sc);
   };
 
   // Formularios con nombre y teléfono (contacto, landing, diagnóstico...): antes de abrir WhatsApp o el correo
