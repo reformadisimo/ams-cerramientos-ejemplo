@@ -61,6 +61,13 @@
     enviar(d);
   };
   window.amsOrigen = function () { return base(); };
+  // Después del precio: cuándo quiere hacerlo y pedir la visita (public/agenda.js, se carga solo cuando hace falta)
+  window.amsPideVisita = function (el, datos) {
+    if (!el) return;
+    var go = function () { window.amsAgenda(el, datos); };
+    if (window.amsAgenda) return go();
+    var sc = document.createElement('script'); sc.src = '/agenda.js?v=1'; sc.onload = go; document.head.appendChild(sc);
+  };
 
   // Formularios con nombre y teléfono (contacto, landing, diagnóstico...): antes de abrir WhatsApp o el correo
   var TRAB = [['ventana', 'ventanas'], ['cancela', 'cancela'], ['puerta', 'puerta'], ['terraza', 'cerramiento'], ['cerramiento', 'cerramiento'], ['porche', 'cerramiento'], ['pérgola', 'pergola'], ['pergola', 'pergola']];
@@ -73,6 +80,10 @@
     var serv = v('servicio'), msg = v('mensaje'), t = '', s = serv.toLowerCase();
     TRAB.forEach(function (x) { if (!t && s.indexOf(x[0]) !== -1) t = x[1]; });
     window.amsLead({ nombre: nombre, telefono: tel, correo: correo, zona: v('localidad'), trabajo: t, pide: [serv, msg].filter(Boolean).join('. ') }, 'formulario');
+    try {
+      if (!f.__ag) { f.__ag = document.createElement('div'); f.parentNode.insertBefore(f.__ag, f.nextSibling); }
+      window.amsPideVisita(f.__ag, { nombre: nombre, telefono: tel, correo: correo, zona: v('localidad'), resumen: [serv, msg].filter(Boolean).join('. '), canal: 'formulario', clave: 'form' });
+    } catch (e2) {}
   }, true);
 
   // Clics en WhatsApp y llamar (cuántos y de qué anuncio; sin datos personales)

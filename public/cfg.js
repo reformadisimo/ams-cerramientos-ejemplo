@@ -450,7 +450,7 @@ $('cfShare').addEventListener('click',function(){
 /* ---------- Datos, PDF y WhatsApp ---------- */
 var C={};
 $('cfLead').addEventListener('click',function(){if(!S.items.length&&S.cur){$('cfAdd').click();}$('cfDlg').showModal();});
-var _cfgLeadOk=0;function amsLeadCfg(){if(_cfgLeadOk)return;_cfgLeadOk=1;try{if(window.amsLead)window.amsLead({nombre:C.nombre,telefono:C.tel,correo:C.email,zona:C.loc,trabajo:'ventanas',pide:resumen().slice(0,580)},'configurador')}catch(e){}}
+var _cfgLeadOk=0;function amsLeadCfg(){if(_cfgLeadOk)return;_cfgLeadOk=1;try{if(window.amsLead)window.amsLead({nombre:C.nombre,telefono:C.tel,correo:C.email,zona:C.loc,trabajo:'ventanas',pide:resumen().slice(0,580)},'configurador')}catch(e){}try{if(window.amsPideVisita)window.amsPideVisita($('cfAgenda'),{nombre:C.nombre,telefono:C.tel,correo:C.email,zona:C.loc,resumen:S.res?'Configurador: '+eur(S.res.total)+' con IVA':'Configurador',canal:'configurador',clave:'cf'})}catch(e){}}
 function valid(){
  C={nombre:$('cfNombre').value.trim(),tel:$('cfTel').value.trim(),email:$('cfEmail').value.trim(),loc:$('cfLoc').value.trim()};var e=[];
  if(!C.nombre)e.push('tu nombre');if(C.tel.replace(/\D/g,'').length<9)e.push('un teléfono de 9 cifras');

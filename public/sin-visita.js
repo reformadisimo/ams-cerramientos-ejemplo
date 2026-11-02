@@ -264,6 +264,7 @@
         msg((r && mot[r.motivo]) || 'No hemos podido calcular el precio ahora. Llámanos al 639 78 82 20.', 1); return;
       }
       msg(''); pinta(r, n, cp, pueblo, datos, fotos, m);
+      if (r.precio && r.precio.low && window.amsPideVisita) { var ag = document.createElement('div'); res.appendChild(ag); window.amsPideVisita(ag, { nombre: n, telefono: t, correo: m, cp: cp, zona: cp + (pueblo ? ' ' + pueblo : ''), resumen: 'Precio con fotos: ' + datos.length + ' ventana' + (datos.length === 1 ? '' : 's') + ', ' + eur(r.precio.low) + ' a ' + eur(r.precio.high), canal: 'sin-visita', clave: 'sv' }); }
     }).catch(function () { bt.disabled = false; msg('No hemos podido calcular el precio ahora. Llámanos al 639 78 82 20.', 1); });
   });
 })();
