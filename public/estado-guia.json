@@ -98,6 +98,12 @@
    "prio": "Muy importante"
   },
   {
+   "t": "Cuéntanos cómo es tu cliente: quién te llama, quién decide, edad, tipo de casa... Son 4 minutos tocando opciones. Con esto hacemos los anuncios a su medida (por ejemplo, más para mujeres si son ellas las que llaman) y probamos qué trae mejores clientes.",
+   "prio": "Muy importante",
+   "u": "/conoce-tu-cliente",
+   "b": "Contestar (4 minutos)"
+  },
+  {
    "t": "Google Ads: entra en ads.google.com con el Gmail de la empresa, haz un pantallazo del número de 10 cifras que sale arriba a la derecha y mándanoslo por WhatsApp. Ese mismo día te llega la invitación de Casiopea 360 y le das a «Aceptar».",
    "u": "https://ads.google.com",
    "b": "Ir a Google Ads"

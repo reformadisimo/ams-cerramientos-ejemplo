@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Cómo es tu cliente | AMS Cerramientos</title>
+<style>
+:root{--tinta:#12202B;--azul:#1f6fb2;--verde:#0A8F4E;--linea:#DCE2E7;--fondo:#F4F7F9;--suave:#4A5A68}
+*{box-sizing:border-box}body{margin:0;font:17px/1.5 Arial,Helvetica,sans-serif;color:var(--tinta);background:var(--fondo)}
+header{background:var(--tinta);color:#fff;padding:22px 16px}.w{max-width:680px;margin:0 auto}
+header img{height:40px;display:block;margin-bottom:14px}
+h1{font-size:27px;line-height:1.2;margin:0 0 8px}header p{margin:0;color:#C9D3DB}
+main{padding:18px 16px 60px}
+.caja{background:#fff;border:1px solid var(--linea);border-radius:14px;padding:16px 16px 18px;margin-bottom:14px}
+.porque{border-left:5px solid var(--azul);background:#EEF5FB}
+.porque h2{color:var(--azul);font-size:20px;margin:0 0 6px}
+.porque ul{margin:6px 0 0;padding-left:20px}
+.q h2{font-size:18px;margin:0 0 4px;color:var(--azul)}
+.q .n{display:inline-flex;width:28px;height:28px;border-radius:50%;background:var(--azul);color:#fff;font-size:15px;align-items:center;justify-content:center;margin-right:6px;vertical-align:1px}
+.q p.ay{margin:0 0 10px;font-size:15px;color:var(--suave)}
+.ops{display:flex;flex-wrap:wrap;gap:8px}
+.ops label{display:flex;align-items:center;gap:8px;border:2px solid var(--linea);border-radius:10px;padding:10px 12px;cursor:pointer;font-size:16px;background:#fff;flex:1 1 calc(50% - 8px);min-width:140px}
+.ops input{width:20px;height:20px;accent-color:var(--azul);flex:none}
+.ops label:has(input:checked){border-color:var(--azul);background:#EEF5FB}
+.reparto{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.reparto input[type=range]{flex:1;min-width:180px;accent-color:var(--azul);height:30px}
+.reparto output{font-weight:700;min-width:190px}
+textarea{width:100%;min-height:64px;margin-top:10px;font:16px/1.4 Arial,Helvetica,sans-serif;border:2px solid var(--linea);border-radius:10px;padding:10px;color:var(--tinta)}
+textarea:focus{outline:none;border-color:var(--azul)}
+.btn{display:flex;align-items:center;justify-content:center;min-height:58px;border-radius:12px;background:var(--verde);color:#fff;font-weight:700;font-size:19px;border:0;width:100%;cursor:pointer;font-family:inherit}
+.btn[disabled]{opacity:.6}
+.msg{font-weight:700;text-align:center;min-height:1.4em;margin:10px 0 0}
+.ok{color:var(--verde)}.mal{color:#B42318}
+.nota{font-size:14px;color:var(--suave);margin:8px 0 0}
+</style></head>
+<body>
+<header><div class="w"><img src="/img/logo-ams-blanco.svg" alt="AMS Cerramientos"><h1>¿Cómo es tu cliente?</h1><p>Unos 4 minutos, tocando opciones. Si no lo sabes seguro, pon lo que te parezca: nos vale.</p></div></header>
+<main><div class="w">
+<div class="caja porque"><h2>Por qué te lo preguntamos</h2>
+Queremos conocer a tu cliente tan bien como tú. Con esto:
+<ul>
+<li><b>Hacemos los anuncios a su medida.</b> Por ejemplo, si te llaman 6 mujeres de cada 10, ponemos más dinero en mujeres. Google y Facebook nos dejan elegir sexo, edad y zona.</li>
+<li><b>Probamos y medimos.</b> Hacemos pruebas (más hombres, más mujeres, otras edades) y nos quedamos con lo que trae mejores clientes.</li>
+<li><b>Cada vez, mejores clientes:</b> obras más grandes, de los que deciden rápido y en tu zona.</li>
+</ul>
+<p class="nota">Lo que nos cuentes se queda entre nosotros. No sale en la web.</p></div>
+
+<form id="f">
+<div class="caja q"><h2><span class="n">1</span>¿Quién te llama o te escribe primero?</h2><p class="ay">Mueve la barra. De cada 10 personas que te contactan, ¿cuántas son mujeres?</p>
+<div class="reparto"><input type="range" name="llama_mujeres" min="0" max="10" value="5" step="1" aria-label="Mujeres de cada 10"><output></output></div></div>
+
+<div class="caja q"><h2><span class="n">2</span>¿Quién decide al final?</h2><p class="ay">Cuando vas a la casa, ¿quién dice el sí?</p><div class="ops">
+<label><input type="radio" name="decide" value="Casi siempre ella">Casi siempre ella</label>
+<label><input type="radio" name="decide" value="Casi siempre él">Casi siempre él</label>
+<label><input type="radio" name="decide" value="Los dos juntos">Los dos juntos</label>
+<label><input type="radio" name="decide" value="Depende mucho">Depende mucho</label></div>
+<textarea name="decide_nota" placeholder="Si quieres, explícalo (por ejemplo: llama ella, pero el precio lo mira él)"></textarea></div>
+
+<div class="caja q"><h2><span class="n">3</span>¿Con quién sueles tratar en la visita?</h2><div class="ops">
+<label><input type="checkbox" name="trata" value="La pareja">La pareja</label>
+<label><input type="checkbox" name="trata" value="Solo ella">Solo ella</label>
+<label><input type="checkbox" name="trata" value="Solo él">Solo él</label>
+<label><input type="checkbox" name="trata" value="Hijos que ayudan a sus padres mayores">Hijos de padres mayores</label>
+<label><input type="checkbox" name="trata" value="Administrador o presidente de comunidad">Comunidades</label>
+<label><input type="checkbox" name="trata" value="Constructor o reformista">Constructores o reformistas</label></div></div>
+
+<div class="caja q"><h2><span class="n">4</span>¿Qué edad tiene la mayoría?</h2><p class="ay">Marca una o dos.</p><div class="ops">
+<label><input type="checkbox" name="edad" value="Menos de 35">Menos de 35</label>
+<label><input type="checkbox" name="edad" value="35 a 50">35 a 50</label>
+<label><input type="checkbox" name="edad" value="50 a 65">50 a 65</label>
+<label><input type="checkbox" name="edad" value="Más de 65">Más de 65</label></div></div>
+
+<div class="caja q"><h2><span class="n">5</span>¿En qué casa trabajas más?</h2><p class="ay">De cada 10 obras, más o menos.</p><div class="ops">
+<label><input type="radio" name="casa" value="Casi todo pisos">Casi todo pisos</label>
+<label><input type="radio" name="casa" value="Mitad pisos, mitad chalets">Mitad y mitad</label>
+<label><input type="radio" name="casa" value="Casi todo chalets y adosados">Casi todo chalets</label></div>
+<textarea name="casa_nota" placeholder="Si quieres, pon números (por ejemplo: 6 pisos, 3 adosados, 1 chalet)"></textarea></div>
+
+<div class="caja q"><h2><span class="n">6</span>¿Por qué te llaman?</h2><p class="ay">Marca los más habituales.</p><div class="ops">
+<label><input type="checkbox" name="motivo" value="Frío, calor o la factura de la luz">Frío, calor o la factura</label>
+<label><input type="checkbox" name="motivo" value="Ruido de la calle">Ruido</label>
+<label><input type="checkbox" name="motivo" value="Están reformando la casa">Reforman la casa</label>
+<label><input type="checkbox" name="motivo" value="Acaban de comprar la casa">Casa recién comprada</label>
+<label><input type="checkbox" name="motivo" value="Ventana rota o que no cierra">Algo roto</label>
+<label><input type="checkbox" name="motivo" value="Seguridad (robos)">Seguridad</label>
+<label><input type="checkbox" name="motivo" value="Por estética, la quieren más bonita">Estética</label>
+<label><input type="checkbox" name="motivo" value="Para vender o alquilar">Vender o alquilar</label></div></div>
+
+<div class="caja q"><h2><span class="n">7</span>¿Cuántas ventanas tiene una obra normal tuya?</h2><div class="ops">
+<label><input type="radio" name="ventanas" value="1 a 3">1 a 3</label>
+<label><input type="radio" name="ventanas" value="4 a 6">4 a 6</label>
+<label><input type="radio" name="ventanas" value="7 a 10">7 a 10</label>
+<label><input type="radio" name="ventanas" value="Más de 10">Más de 10</label></div></div>
+
+<div class="caja q"><h2><span class="n">8</span>¿Cómo te llegan hoy los clientes?</h2><p class="ay">Marca los que más.</p><div class="ops">
+<label><input type="checkbox" name="llegan" value="Recomendación de otro cliente">Recomendación</label>
+<label><input type="checkbox" name="llegan" value="Buzoneo">Buzoneo</label>
+<label><input type="checkbox" name="llegan" value="Google (ficha o búsqueda)">Google</label>
+<label><input type="checkbox" name="llegan" value="Pasan por el taller o ven la furgoneta">Taller o furgoneta</label>
+<label><input type="checkbox" name="llegan" value="Constructores y reformistas">Constructores</label>
+<label><input type="checkbox" name="llegan" value="Redes sociales">Redes sociales</label></div></div>
+
+<div class="caja q"><h2><span class="n">9</span>¿Qué es lo primero que te pregunta el cliente?</h2><div class="ops">
+<label><input type="radio" name="primero" value="El precio">El precio</label>
+<label><input type="radio" name="primero" value="Cuándo se la pones">El plazo</label>
+<label><input type="radio" name="primero" value="La marca y la calidad">La calidad</label>
+<label><input type="radio" name="primero" value="La garantía">La garantía</label></div></div>
+
+<div class="caja q"><h2><span class="n">10</span>Los que no te contratan, ¿por qué es?</h2><p class="ay">Marca los que más.</p><div class="ops">
+<label><input type="checkbox" name="no" value="Encuentran algo más barato">Más barato en otro sitio</label>
+<label><input type="checkbox" name="no" value="Lo dejan para más adelante">Lo dejan para más adelante</label>
+<label><input type="checkbox" name="no" value="Solo querían comparar precios">Solo comparaban</label>
+<label><input type="checkbox" name="no" value="El plazo no les encaja">El plazo</label>
+<label><input type="checkbox" name="no" value="No contestan y no sé por qué">No contestan</label></div></div>
+
+<div class="caja q"><h2><span class="n">11</span>¿Cuánto tardan en decidirse después de la visita?</h2><div class="ops">
+<label><input type="radio" name="tardan" value="Menos de una semana">Menos de una semana</label>
+<label><input type="radio" name="tardan" value="Dos o tres semanas">2 o 3 semanas</label>
+<label><input type="radio" name="tardan" value="Un mes o más">Un mes o más</label></div></div>
+
+<div class="caja q"><h2><span class="n">12</span>¿Cómo prefieren hablar contigo?</h2><div class="ops">
+<label><input type="radio" name="canal" value="Llamada">Llamada</label>
+<label><input type="radio" name="canal" value="WhatsApp">WhatsApp</label>
+<label><input type="radio" name="canal" value="Correo">Correo</label></div></div>
+
+<div class="caja q"><h2><span class="n">13</span>Tu cliente ideal</h2><p class="ay">El que te deja más contento: qué casa tiene, dónde vive, a qué se dedica, qué te pide. Si te viene a la cabeza uno concreto, descríbelo (sin el nombre).</p>
+<textarea name="ideal" placeholder="Por ejemplo: chalet en Alcobendas, matrimonio de unos 50, él directivo, quieren 10 ventanas con persiana con motor y lo deciden rápido"></textarea></div>
+
+<div class="caja q"><h2><span class="n">14</span>¿Algo más que debamos saber?</h2>
+<textarea name="mas" placeholder="Lo que quieras: épocas del año con más trabajo, el cliente que no te interesa, lo que más te piden..."></textarea></div>
+
+<button class="btn" id="enviar" type="submit">Enviar mis respuestas</button>
+<p class="msg" id="msg" role="status"></p>
+</form>
+</div></main>
+<script>
+(function(){
+  var f=document.getElementById('f'),r=f.querySelector('input[type=range]'),o=r.nextElementSibling;
+  function pinta(){var m=+r.value;o.textContent=m+' mujeres y '+(10-m)+' hombres de cada 10'}
+  r.addEventListener('input',pinta);pinta();
+  var ET={llama_mujeres:'1. Quién llama primero (mujeres de cada 10)',decide:'2. Quién decide',decide_nota:'2. Nota',trata:'3. Con quién trata',edad:'4. Edad',casa:'5. Tipo de casa',casa_nota:'5. Nota',motivo:'6. Por qué llaman',ventanas:'7. Ventanas por obra',llegan:'8. Cómo llegan hoy',primero:'9. Lo primero que pregunta',no:'10. Por qué no contratan',tardan:'11. Cuánto tardan en decidir',canal:'12. Cómo prefieren hablar',ideal:'13. Cliente ideal',mas:'14. Algo más'};
+  f.addEventListener('submit',function(e){
+    e.preventDefault();var msg=document.getElementById('msg'),b=document.getElementById('enviar');
+    var fd=new FormData(f),out={};fd.forEach(function(v,k){v=String(v).trim();if(!v)return;(out[k]=out[k]||[]).push(v)});
+    var lin=['CÓMO ES EL CLIENTE DE AMS (respuestas de Javi, '+new Date().toLocaleString('es-ES')+')',''];
+    Object.keys(ET).forEach(function(k){if(out[k])lin.push(ET[k]+': '+(k==='llama_mujeres'?out[k][0]+' mujeres y '+(10-out[k][0])+' hombres':out[k].join(', ')))});
+    b.disabled=true;msg.className='msg';msg.textContent='Enviando...';
+    fetch('/api/respuestas',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({texto:lin.join('\n')})}).then(function(x){return x.json()}).then(function(d){
+      if(d.ok){msg.className='msg ok';msg.textContent='Recibido. Muchas gracias, Javi: con esto afinamos los anuncios.';b.textContent='Enviado'}
+      else throw 0;
+    }).catch(function(){b.disabled=false;msg.className='msg mal';msg.textContent='No se ha podido enviar. Prueba otra vez en un momento.'});
+  });
+})();
+</script>
+</body></html>
