@@ -78,5 +78,1080 @@
     "source": "/linkedin-javi",
     "destination": "/linkedin-ams",
     "permanent": false
+  },
+  {
+    "source": "/noticias/que-eleccion-es-mas-economica-instalar-ventanas-de-pvc-o-aluminio/:rest*",
+    "destination": "/blog/pvc-o-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/ventanas-de-pvc-o-aluminio-en-madrid-cual-elegir-sin-pagar-de-mas-ni-perder-aislamiento",
+    "destination": "/blog/pvc-o-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/ventanas-de-pvc-o-aluminio-en-madrid-cual-elegir-sin-pagar-de-mas-ni-perder-aislamiento/:rest*",
+    "destination": "/blog/pvc-o-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/que-es-mas-duradero-el-pvc-o-el-aluminio-en-el-montaje-de-ventanas",
+    "destination": "/blog/pvc-o-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/que-es-mas-duradero-el-pvc-o-el-aluminio-en-el-montaje-de-ventanas/:rest*",
+    "destination": "/blog/pvc-o-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/que-es-la-rotura-de-puente-termico-con-pvc/:rest*",
+    "destination": "/blog/rotura-puente-termico",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/rotura-puente-termico",
+    "destination": "/blog/rotura-puente-termico",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/rotura-puente-termico/:rest*",
+    "destination": "/blog/rotura-puente-termico",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/como-instalar-ventanas-de-pvc-paso-a-paso",
+    "destination": "/blog/instalacion-ventanas-pvc",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/como-instalar-ventanas-de-pvc-paso-a-paso/:rest*",
+    "destination": "/blog/instalacion-ventanas-pvc",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/guia-completa-para-una-instalacion-de-ventanas-exitosa/:rest*",
+    "destination": "/blog/instalacion-ventanas-pvc",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/tiempo-de-instalacion-y-regulaciones-de-las-ventanas-de-pvc",
+    "destination": "/blog/instalacion-ventanas-pvc",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/tiempo-de-instalacion-y-regulaciones-de-las-ventanas-de-pvc/:rest*",
+    "destination": "/blog/instalacion-ventanas-pvc",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/que-es-kommerling-76-md-xtrem/:rest*",
+    "destination": "/blog/kommerling-76-ad-md-xtrem",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/innovacion-en-ventanas-kommerling-76-ad-xtrem",
+    "destination": "/blog/kommerling-76-ad-md-xtrem",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/innovacion-en-ventanas-kommerling-76-ad-xtrem/:rest*",
+    "destination": "/blog/kommerling-76-ad-md-xtrem",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/pvc-kommerling/:rest*",
+    "destination": "/ventanas-pvc",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/ventanas-pvc-a-medida-calidad-confort-y-variedad-en-ams-cerramientos",
+    "destination": "/ventanas-pvc",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/ventanas-pvc-a-medida-calidad-confort-y-variedad-en-ams-cerramientos/:rest*",
+    "destination": "/ventanas-pvc",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/composicion-quimica-de-los-materiales-utilizados-en-las-ventanas-de-pvc-y-procesos-de-fabricacion",
+    "destination": "/ventanas-pvc",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/composicion-quimica-de-los-materiales-utilizados-en-las-ventanas-de-pvc-y-procesos-de-fabricacion/:rest*",
+    "destination": "/ventanas-pvc",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/pvc-el-mejor-aislamiento-con-el-menor-impacto-ambiental",
+    "destination": "/ventanas-pvc",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/pvc-el-mejor-aislamiento-con-el-menor-impacto-ambiental/:rest*",
+    "destination": "/ventanas-pvc",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/ventanas-practicables-la-solucion-definitiva-para-aislar-tu-casa-del-ruido-exterior",
+    "destination": "/ventanas-pvc",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/ventanas-practicables-la-solucion-definitiva-para-aislar-tu-casa-del-ruido-exterior/:rest*",
+    "destination": "/ventanas-pvc",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/porque-instalar-ventanas-practicables-de-pvc-o-aluminio-en-tu-hogar",
+    "destination": "/ventanas-pvc",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/porque-instalar-ventanas-practicables-de-pvc-o-aluminio-en-tu-hogar/:rest*",
+    "destination": "/ventanas-pvc",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/guia-de-tipos-de-ventanas-y-disenos-par-nuestro-hogar",
+    "destination": "/blog/ventanas-oscilobatientes",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/guia-de-tipos-de-ventanas-y-disenos-par-nuestro-hogar/:rest*",
+    "destination": "/blog/ventanas-oscilobatientes",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/cual-es-la-mejor-epoca-del-ano-para-cambiar-las-ventanas-de-casa",
+    "destination": "/blog/mejor-epoca-cambiar-ventanas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/cual-es-la-mejor-epoca-del-ano-para-cambiar-las-ventanas-de-casa/:rest*",
+    "destination": "/blog/mejor-epoca-cambiar-ventanas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/esta-pensando-en-cambiar-las-ventanas-de-casa-en-madrid",
+    "destination": "/blog/ayudas-cambiar-ventanas-madrid",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/esta-pensando-en-cambiar-las-ventanas-de-casa-en-madrid/:rest*",
+    "destination": "/blog/ayudas-cambiar-ventanas-madrid",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/consejos-y-trucos-para-el-mejor-mantenimiento-de-las-ventanas-de-pvc-y-aluminio",
+    "destination": "/blog/mantenimiento-limpieza-ventanas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/consejos-y-trucos-para-el-mejor-mantenimiento-de-las-ventanas-de-pvc-y-aluminio/:rest*",
+    "destination": "/blog/mantenimiento-limpieza-ventanas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/como-limpiar-las-ventanas-de-pvc-y-aluminio-con-una-limpiadora-karcher",
+    "destination": "/blog/mantenimiento-limpieza-ventanas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/como-limpiar-las-ventanas-de-pvc-y-aluminio-con-una-limpiadora-karcher/:rest*",
+    "destination": "/blog/mantenimiento-limpieza-ventanas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/como-aislar-acusticamente-tu-casa",
+    "destination": "/blog/ventanas-ahorro-energia-calor-frio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/como-aislar-acusticamente-tu-casa/:rest*",
+    "destination": "/blog/ventanas-ahorro-energia-calor-frio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/ahorra-mas-con-ventanas-con-doble-acristalamiento",
+    "destination": "/blog/ventanas-ahorro-energia-calor-frio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/ahorra-mas-con-ventanas-con-doble-acristalamiento/:rest*",
+    "destination": "/blog/ventanas-ahorro-energia-calor-frio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/certificado-passivhaus",
+    "destination": "/blog/ventanas-ahorro-energia-calor-frio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/certificado-passivhaus/:rest*",
+    "destination": "/blog/ventanas-ahorro-energia-calor-frio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/como-saber-si-mi-vivienda-es-realmente-eficiente",
+    "destination": "/blog/ventanas-ahorro-energia-calor-frio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/como-saber-si-mi-vivienda-es-realmente-eficiente/:rest*",
+    "destination": "/blog/ventanas-ahorro-energia-calor-frio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/te-contamos-en-que-consiste-el-sate",
+    "destination": "/blog/ventanas-ahorro-energia-calor-frio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/te-contamos-en-que-consiste-el-sate/:rest*",
+    "destination": "/blog/ventanas-ahorro-energia-calor-frio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/todo-lo-que-debes-saber-sobre-las-casas-ecologicas-y-sus-materiales",
+    "destination": "/blog/ventanas-ahorro-energia-calor-frio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/todo-lo-que-debes-saber-sobre-las-casas-ecologicas-y-sus-materiales/:rest*",
+    "destination": "/blog/ventanas-ahorro-energia-calor-frio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/usuaria-de-tiktok-comparte-un-truco-viral-para-aislar-ventanas-durante-el-clima-frio",
+    "destination": "/blog/ventanas-ahorro-energia-calor-frio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/usuaria-de-tiktok-comparte-un-truco-viral-para-aislar-ventanas-durante-el-clima-frio/:rest*",
+    "destination": "/blog/ventanas-ahorro-energia-calor-frio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/para-las-ventanas-de-tu-hogar-que-tipo-de-cristal-utilizar",
+    "destination": "/persianas-cristales",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/para-las-ventanas-de-tu-hogar-que-tipo-de-cristal-utilizar/:rest*",
+    "destination": "/persianas-cristales",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/cristales-de-seguridad-para-proteger-tu-negocio",
+    "destination": "/persianas-cristales",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/cristales-de-seguridad-para-proteger-tu-negocio/:rest*",
+    "destination": "/persianas-cristales",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/acristalamientos-una-opcion-deco-para-ganar-espacios-exteriores",
+    "destination": "/cerramientos-terrazas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/acristalamientos-una-opcion-deco-para-ganar-espacios-exteriores/:rest*",
+    "destination": "/cerramientos-terrazas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/como-limpiar-las-persianas-de-una-casa",
+    "destination": "/persianas-cristales",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/como-limpiar-las-persianas-de-una-casa/:rest*",
+    "destination": "/persianas-cristales",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/guia-para-elegir-las-mejores-persianas-para-tu-casa",
+    "destination": "/persianas-cristales",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/guia-para-elegir-las-mejores-persianas-para-tu-casa/:rest*",
+    "destination": "/persianas-cristales",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/automatizacion-y-motorizacion-de-persianas-en-terminos-de-eficiencia-energetica",
+    "destination": "/persianas-cristales",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/automatizacion-y-motorizacion-de-persianas-en-terminos-de-eficiencia-energetica/:rest*",
+    "destination": "/persianas-cristales",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/aluminio-soldado",
+    "destination": "/cancelas-de-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/aluminio-soldado/:rest*",
+    "destination": "/cancelas-de-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/cancela-de-aluminio-soldado-2",
+    "destination": "/cancelas-de-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/cancela-de-aluminio-soldado-2/:rest*",
+    "destination": "/cancelas-de-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/cancela-de-aluminio-soldado-3",
+    "destination": "/cancelas-de-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/cancela-de-aluminio-soldado-3/:rest*",
+    "destination": "/cancelas-de-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/vallas-de-aluminio",
+    "destination": "/cancelas-de-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/vallas-de-aluminio/:rest*",
+    "destination": "/cancelas-de-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/protege-tu-piscina-y-cuida-a-tu-familia-con-vallas-de-aluminio",
+    "destination": "/cancelas-de-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/protege-tu-piscina-y-cuida-a-tu-familia-con-vallas-de-aluminio/:rest*",
+    "destination": "/cancelas-de-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/galeria-rejas",
+    "destination": "/cancelas-puertas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/galeria-rejas/:rest*",
+    "destination": "/cancelas-puertas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/rejas-o-persianas-descubre-la-opcion-mas-segura",
+    "destination": "/cancelas-puertas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/rejas-o-persianas-descubre-la-opcion-mas-segura/:rest*",
+    "destination": "/cancelas-puertas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/seguridad-en-el-hogar-cuando-colocar-rejas-en-ventanas-exteriores",
+    "destination": "/cancelas-puertas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/seguridad-en-el-hogar-cuando-colocar-rejas-en-ventanas-exteriores/:rest*",
+    "destination": "/cancelas-puertas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/que-tener-en-cuenta-en-el-sistema-de-seguridad-de-tu-casa",
+    "destination": "/cancelas-puertas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/que-tener-en-cuenta-en-el-sistema-de-seguridad-de-tu-casa/:rest*",
+    "destination": "/cancelas-puertas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/como-evitar-robos-instalando-una-buena-puerta-en-el-portal",
+    "destination": "/cancelas-puertas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/como-evitar-robos-instalando-una-buena-puerta-en-el-portal/:rest*",
+    "destination": "/cancelas-puertas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/que-son-las-puertas-seccionales",
+    "destination": "/cancelas-puertas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/que-son-las-puertas-seccionales/:rest*",
+    "destination": "/cancelas-puertas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/prefieres-puertas-correderas-o-plegables",
+    "destination": "/cancelas-puertas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/prefieres-puertas-correderas-o-plegables/:rest*",
+    "destination": "/cancelas-puertas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/que-puerta-automatica-de-garaje-es-la-mas-adecuada-para-mi-hogar",
+    "destination": "/automatismos",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/que-puerta-automatica-de-garaje-es-la-mas-adecuada-para-mi-hogar/:rest*",
+    "destination": "/automatismos",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/por-que-automatizar-el-porton-del-garage",
+    "destination": "/automatismos",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/por-que-automatizar-el-porton-del-garage/:rest*",
+    "destination": "/automatismos",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/puertas-automaticas-de-garaje-aprimatic",
+    "destination": "/automatismos",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/puertas-automaticas-de-garaje-aprimatic/:rest*",
+    "destination": "/automatismos",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/como-decorar-tu-terraza-o-patio-con-un-techo-de-policarbonato",
+    "destination": "/techos",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/como-decorar-tu-terraza-o-patio-con-un-techo-de-policarbonato/:rest*",
+    "destination": "/techos",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/tu-zona-chill-out",
+    "destination": "/techos",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/tu-zona-chill-out/:rest*",
+    "destination": "/techos",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/cerramiento-aluminio-en-alcala-de-henares",
+    "destination": "/cerramientos-terrazas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/cerramiento-aluminio-en-alcala-de-henares/:rest*",
+    "destination": "/cerramientos-terrazas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/cerramiento-de-una-buhardilla-en-alcala-de-henares",
+    "destination": "/cerramientos-terrazas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/cerramiento-de-una-buhardilla-en-alcala-de-henares/:rest*",
+    "destination": "/cerramientos-terrazas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/espacios-de-invierno",
+    "destination": "/cerramientos-terrazas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/espacios-de-invierno/:rest*",
+    "destination": "/cerramientos-terrazas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/los-cerramientos-de-estilo-industrial-estan-de-moda",
+    "destination": "/cerramientos-terrazas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/los-cerramientos-de-estilo-industrial-estan-de-moda/:rest*",
+    "destination": "/cerramientos-terrazas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/el-metal-es-clave-en-el-estilo-industrial",
+    "destination": "/cerramientos-terrazas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/el-metal-es-clave-en-el-estilo-industrial/:rest*",
+    "destination": "/cerramientos-terrazas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/que-tener-cuenta-a-la-hora-de-cerrar-tu-terraza-o-balcon-con-cerramientos-en-pvc",
+    "destination": "/cerramientos-terrazas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/que-tener-cuenta-a-la-hora-de-cerrar-tu-terraza-o-balcon-con-cerramientos-en-pvc/:rest*",
+    "destination": "/cerramientos-terrazas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/los-tipos-de-cerramientos-de-terrazas-que-mas-te-aislan-del-ruido-y-de-los-cambios-de-temperatura",
+    "destination": "/cerramientos-terrazas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/los-tipos-de-cerramientos-de-terrazas-que-mas-te-aislan-del-ruido-y-de-los-cambios-de-temperatura/:rest*",
+    "destination": "/cerramientos-terrazas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/cuales-son-los-cerramientos-mas-resistentes",
+    "destination": "/cerramientos-terrazas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/cuales-son-los-cerramientos-mas-resistentes/:rest*",
+    "destination": "/cerramientos-terrazas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/tejidos-para-toldos",
+    "destination": "/toldos",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/tejidos-para-toldos/:rest*",
+    "destination": "/toldos",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/como-mantener-un-toldo-en-invierno-y-conservarlo-en-optimas-condiciones",
+    "destination": "/toldos",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/como-mantener-un-toldo-en-invierno-y-conservarlo-en-optimas-condiciones/:rest*",
+    "destination": "/toldos",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/crea-un-espacio-de-descanso-en-tu-jardin-instalando-una-pergola",
+    "destination": "/pergolas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/crea-un-espacio-de-descanso-en-tu-jardin-instalando-una-pergola/:rest*",
+    "destination": "/pergolas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/trabajos-de-clientes-satisfechos",
+    "destination": "/trabajos",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/trabajos-de-clientes-satisfechos/:rest*",
+    "destination": "/trabajos",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/galeria-de-cerramientos",
+    "destination": "/trabajos",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/galeria-de-cerramientos/:rest*",
+    "destination": "/trabajos",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/aluminio-y-sus-especificaciones-tecnicas",
+    "destination": "/ventanas-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/aluminio-y-sus-especificaciones-tecnicas/:rest*",
+    "destination": "/ventanas-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/si-es-aluminio",
+    "destination": "/ventanas-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/si-es-aluminio/:rest*",
+    "destination": "/ventanas-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/10-razones-por-las-que-instalar-ventanas-de-aluminio",
+    "destination": "/ventanas-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/10-razones-por-las-que-instalar-ventanas-de-aluminio/:rest*",
+    "destination": "/ventanas-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/las-ventajas-del-aluminio",
+    "destination": "/ventanas-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/las-ventajas-del-aluminio/:rest*",
+    "destination": "/ventanas-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/principales-usos-y-ventajas-de-la-carpinteria-de-aluminio",
+    "destination": "/ventanas-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/principales-usos-y-ventajas-de-la-carpinteria-de-aluminio/:rest*",
+    "destination": "/ventanas-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/ventanas-de-aluminio-alcala-de-henares",
+    "destination": "/ventanas-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/ventanas-de-aluminio-alcala-de-henares/:rest*",
+    "destination": "/ventanas-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/nueva-bajada-del-precio-del-aluminio",
+    "destination": "/ventanas-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/nueva-bajada-del-precio-del-aluminio/:rest*",
+    "destination": "/ventanas-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/el-mantenimiento-y-limpieza-de-muebles-de-aluminio",
+    "destination": "/blog/mantenimiento-limpieza-ventanas",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/el-mantenimiento-y-limpieza-de-muebles-de-aluminio/:rest*",
+    "destination": "/blog/mantenimiento-limpieza-ventanas",
+    "permanent": true
+  },
+  {
+    "source": "/kommerling",
+    "destination": "/ventanas-pvc",
+    "permanent": true
+  },
+  {
+    "source": "/instalador-oficial-kommerling",
+    "destination": "/ventanas-pvc",
+    "permanent": true
+  },
+  {
+    "source": "/instalador-de-ventanas-pvc-en-alcala-de-henares",
+    "destination": "/ventanas-pvc",
+    "permanent": true
+  },
+  {
+    "source": "/ventanas-de-pvc/:rest*",
+    "destination": "/ventanas-pvc",
+    "permanent": true
+  },
+  {
+    "source": "/pvc/:rest*",
+    "destination": "/ventanas-pvc",
+    "permanent": true
+  },
+  {
+    "source": "/pvc",
+    "destination": "/ventanas-pvc",
+    "permanent": true
+  },
+  {
+    "source": "/producto/kommerling/:rest*",
+    "destination": "/blog/kommerling-76-ad-md-xtrem",
+    "permanent": true
+  },
+  {
+    "source": "/categoria-producto/kommerling/:rest*",
+    "destination": "/ventanas-pvc",
+    "permanent": true
+  },
+  {
+    "source": "/producto/productos-ams/carpinteria-pvc/:rest*",
+    "destination": "/ventanas-pvc",
+    "permanent": true
+  },
+  {
+    "source": "/categoria-producto/productos-ams/carpinteria-pvc/:rest*",
+    "destination": "/ventanas-pvc",
+    "permanent": true
+  },
+  {
+    "source": "/ventanas/ventanas-oscilobatientes/:rest*",
+    "destination": "/blog/ventanas-oscilobatientes",
+    "permanent": true
+  },
+  {
+    "source": "/ventanas/:rest*",
+    "destination": "/ventanas-pvc",
+    "permanent": true
+  },
+  {
+    "source": "/ventanas",
+    "destination": "/ventanas-pvc",
+    "permanent": true
+  },
+  {
+    "source": "/producto/productos-ams/persianas/:rest*",
+    "destination": "/persianas-cristales",
+    "permanent": true
+  },
+  {
+    "source": "/persianas/:rest*",
+    "destination": "/persianas-cristales",
+    "permanent": true
+  },
+  {
+    "source": "/categoria-producto/productos-ams/persianas/:rest*",
+    "destination": "/persianas-cristales",
+    "permanent": true
+  },
+  {
+    "source": "/producto/productos-ams/carpinteria-alumino/cerramientos-aluminio/cerramientos-de-cristales/:rest*",
+    "destination": "/persianas-cristales",
+    "permanent": true
+  },
+  {
+    "source": "/cristal-inteligente-reduccion-hasta-60-por-ciento-consumo-energetico",
+    "destination": "/persianas-cristales",
+    "permanent": true
+  },
+  {
+    "source": "/producto/productos-ams/carpinteria-alumino/cerramientos-aluminio/techos/:rest*",
+    "destination": "/techos",
+    "permanent": true
+  },
+  {
+    "source": "/categoria-producto/productos-ams/carpinteria-alumino/cerramientos-aluminio/techos/:rest*",
+    "destination": "/techos",
+    "permanent": true
+  },
+  {
+    "source": "/categoria-producto/productos-ams/carpinteria-alumino/techos-de-aluminio/:rest*",
+    "destination": "/techos",
+    "permanent": true
+  },
+  {
+    "source": "/cerramientos/techos/:rest*",
+    "destination": "/techos",
+    "permanent": true
+  },
+  {
+    "source": "/producto/productos-ams/cancelas-aluminio/:rest*",
+    "destination": "/cancelas-de-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/categoria-producto/productos-ams/cancelas-aluminio/:rest*",
+    "destination": "/cancelas-de-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/puertas-de-aluminio/cancela-de-aluminio-soldado/:rest*",
+    "destination": "/cancelas-de-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/cancelas-de-aluminio-soldado-en-alcala-de-henares-madrid/:rest*",
+    "destination": "/cancelas-de-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/cancelas-de-aluminio/:rest+",
+    "destination": "/cancelas-de-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/galeria-cerramiestos/cancelas-de-alumino/:rest*",
+    "destination": "/cancelas-de-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/producto/productos-ams/rejas/:rest*",
+    "destination": "/cancelas-puertas",
+    "permanent": true
+  },
+  {
+    "source": "/categoria-producto/productos-ams/rejas/:rest*",
+    "destination": "/cancelas-puertas",
+    "permanent": true
+  },
+  {
+    "source": "/producto/productos-ams/puertas/:rest*",
+    "destination": "/cancelas-puertas",
+    "permanent": true
+  },
+  {
+    "source": "/categoria-producto/productos-ams/puertas/:rest*",
+    "destination": "/cancelas-puertas",
+    "permanent": true
+  },
+  {
+    "source": "/puertas-de-aluminio/:rest*",
+    "destination": "/cancelas-puertas",
+    "permanent": true
+  },
+  {
+    "source": "/etiqueta-producto/panel-sandwich",
+    "destination": "/cancelas-puertas",
+    "permanent": true
+  },
+  {
+    "source": "/producto/productos-ams/automatismos/:rest*",
+    "destination": "/automatismos",
+    "permanent": true
+  },
+  {
+    "source": "/categoria-producto/productos-ams/automatismos/:rest*",
+    "destination": "/automatismos",
+    "permanent": true
+  },
+  {
+    "source": "/producto/productos-ams/toldos-y-pergolas/:rest*",
+    "destination": "/toldos",
+    "permanent": true
+  },
+  {
+    "source": "/categoria-producto/productos-ams/toldos-y-pergolas/:rest*",
+    "destination": "/toldos",
+    "permanent": true
+  },
+  {
+    "source": "/producto/productos-ams/carpinteria-alumino/:rest*",
+    "destination": "/ventanas-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/categoria-producto/productos-ams/carpinteria-alumino/:rest*",
+    "destination": "/ventanas-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/ventanas-de-aluminio-a-medida/:rest*",
+    "destination": "/ventanas-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/ventanas-aluminio/:rest+",
+    "destination": "/ventanas-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/instalacion-de-ventanas-de-aluminio",
+    "destination": "/ventanas-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/especialistas-en-fabricacion-de-ventanas-de-aluminio-en-alcala-de-henares/:rest*",
+    "destination": "/ventanas-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/productos-de-aluminio",
+    "destination": "/ventanas-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/aislamiento/:rest*",
+    "destination": "/ventanas-aluminio",
+    "permanent": true
+  },
+  {
+    "source": "/cerramientos/cuanto-cuesta-cerrar-una-terraza-en-madrid/:rest*",
+    "destination": "/blog/precio-cerrar-terraza",
+    "permanent": true
+  },
+  {
+    "source": "/cerramientos/:rest*",
+    "destination": "/cerramientos-terrazas",
+    "permanent": true
+  },
+  {
+    "source": "/cerramientos",
+    "destination": "/cerramientos-terrazas",
+    "permanent": true
+  },
+  {
+    "source": "/cerramientos-de-aluminio-en-alcala-de-henares",
+    "destination": "/cerramientos-terrazas",
+    "permanent": true
+  },
+  {
+    "source": "/el-cte-y-el-aislamiento-acustico",
+    "destination": "/blog/ventanas-ahorro-energia-calor-frio",
+    "permanent": true
+  },
+  {
+    "source": "/fondos-next-generation-en-la-comunidad-de-madrid",
+    "destination": "/blog/ayudas-cambiar-ventanas-madrid",
+    "permanent": true
+  },
+  {
+    "source": "/galeria-de-trabajos",
+    "destination": "/trabajos",
+    "permanent": true
+  },
+  {
+    "source": "/galeria",
+    "destination": "/trabajos",
+    "permanent": true
+  },
+  {
+    "source": "/galeria-cerramiestos/:rest*",
+    "destination": "/trabajos",
+    "permanent": true
+  },
+  {
+    "source": "/galeria-cerramiestos",
+    "destination": "/trabajos",
+    "permanent": true
+  },
+  {
+    "source": "/acabados-y-calidades/:rest*",
+    "destination": "/acabados",
+    "permanent": true
+  },
+  {
+    "source": "/acabados-y-calidades",
+    "destination": "/acabados",
+    "permanent": true
+  },
+  {
+    "source": "/contacto-ams-cerramientos-aluminio",
+    "destination": "/contacto",
+    "permanent": true
+  },
+  {
+    "source": "/ams-cerrajeria-y-cerramientos-de-aluminio",
+    "destination": "/empresa",
+    "permanent": true
+  },
+  {
+    "source": "/productos-ams-cerramientos-de-aluminio-y-pvc/:rest*",
+    "destination": "/productos",
+    "permanent": true
+  },
+  {
+    "source": "/productos-ams-cerramientos-de-aluminio-y-pvc",
+    "destination": "/productos",
+    "permanent": true
+  },
+  {
+    "source": "/mamparas-protectoras",
+    "destination": "/",
+    "permanent": true
+  },
+  {
+    "source": "/producto/mamparas/:rest*",
+    "destination": "/",
+    "permanent": true
+  },
+  {
+    "source": "/categoria-producto/mamparas/:rest*",
+    "destination": "/",
+    "permanent": true
+  },
+  {
+    "source": "/categoria-producto/mamparas",
+    "destination": "/",
+    "permanent": true
+  },
+  {
+    "source": "/seguridad/:rest*",
+    "destination": "/",
+    "permanent": true
+  },
+  {
+    "source": "/sitemap_index.xml",
+    "destination": "/sitemap.xml",
+    "permanent": true
+  },
+  {
+    "source": "/noticias/:rest*",
+    "destination": "/blog",
+    "permanent": true
+  },
+  {
+    "source": "/producto/:rest*",
+    "destination": "/productos",
+    "permanent": true
+  },
+  {
+    "source": "/categoria-producto/:rest*",
+    "destination": "/productos",
+    "permanent": true
+  },
+  {
+    "source": "/etiqueta-producto/:rest*",
+    "destination": "/productos",
+    "permanent": true
+  },
+  {
+    "source": "/page/:n",
+    "destination": "/",
+    "permanent": true
+  },
+  {
+    "source": "/decoracion",
+    "destination": "/blog",
+    "permanent": true
+  },
+  {
+    "source": "/sin-categoria/:rest*",
+    "destination": "/blog",
+    "permanent": true
+  },
+  {
+    "source": "/:p*/attachment/:a*",
+    "destination": "/",
+    "permanent": true
   }
 ]
