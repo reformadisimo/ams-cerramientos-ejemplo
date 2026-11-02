@@ -26,7 +26,7 @@ function encajeCp(cp) {
   if (CP_SI.test(cp)) return 'Interesa, tu zona';
   return 'A valorar, zona por confirmar';
 }
-const CANALES = { calculadora: 'Calculadora', configurador: 'Configurador', 'sin-visita': 'Precio con fotos', formulario: 'Formulario', web: 'Web' };
+const CANALES = { 'revisa-presupuesto': 'Comparar presupuesto', calculadora: 'Calculadora', configurador: 'Configurador', 'sin-visita': 'Precio con fotos', formulario: 'Formulario', web: 'Web' };
 
 async function rpc(fn, args) {
   const r = await fetch(SB_URL + '/rest/v1/rpc/' + fn, { method: 'POST', headers: { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY, 'Content-Type': 'application/json' }, body: JSON.stringify(args) });

@@ -3,6 +3,8 @@
 const { deDonde } = require('../../lib/deDonde.js');
 const DESTINO = process.env.PRESUPUESTO_DESTINO || 'delarubiaignacio@gmail.com';
 const DE = process.env.RESPUESTAS_DE || 'Guia AMS <guia@send.miestela.app>';
+const SB_URL = process.env.CRM_SUPABASE_URL || 'https://jrfqllllhweswhvwylog.supabase.co';
+const SB_KEY = process.env.CRM_SUPABASE_KEY || 'sb_publishable_6w-UFyFVPWAvq7OOr9F-BQ_8e7HMvuP';
 const TIPOS = { 'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp', 'application/pdf': 'pdf' };
 const MAX_B64 = 4300000; // unos 3,2 MB reales; el limite de Vercel para el cuerpo es 4,5 MB
 const visitas = {};
@@ -30,19 +32,23 @@ module.exports = async (req, res) => {
   const tipo = limpia(b.tipo, 40);
   const datos = String(b.datos || '').replace(/^data:[^,]*,/, '').replace(/\s+/g, '');
   if (!TIPOS[tipo] || !datos || datos.length > MAX_B64 || !/^[A-Za-z0-9+/=]+$/.test(datos) || !firmaOk(datos, tipo)) return res.status(400).json({ ok: false, motivo: 'archivo' });
-  const nombre = limpia(b.nombre, 80), tel = limpia(b.telefono, 30), mail = limpia(b.correo, 120), msg = limpia(b.mensaje, 600);
+  const nombre = limpia(b.nombre, 80), tel = limpia(b.telefono, 30), mail = limpia(b.correo, 120), msg = limpia(b.mensaje, 600), empresa = limpia(b.empresa, 120);
   const mailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail);
   if (!tel && !mailOk) return res.status(400).json({ ok: false, motivo: 'contacto' });
   if (b.consentimiento !== true) return res.status(400).json({ ok: false, motivo: 'consentimiento' });
   visitas[ip].push(ahora);
-  const texto = ['Presupuesto subido desde la web para que lo revisemos.', '', 'Nombre: ' + (nombre || '(sin nombre)'), 'Teléfono: ' + (tel || '(no indicado)'), 'Correo: ' + (mailOk ? mail : '(no indicado)'), 'Mensaje: ' + (msg || '(sin mensaje)'), 'De dónde viene: ' + deDonde(b.origen), '', 'El visitante ha aceptado que revisemos el archivo para contestarle.'].join('\n');
+  const texto = ['Presupuesto de OTRA EMPRESA subido desde la web para que se lo comparemos.', '', 'Qué hay que contestarle (por teléfono o WhatsApp, con sinceridad):', '1. Si el precio es razonable para lo que lleva (precio por metro cuadrado).', '2. Qué falta o no está claro: serie y marca del perfil, vidrio, cajón de persiana, remates, retirada de lo viejo, garantía, plazo y forma de pago.', '3. Cómo queda al lado del nuestro con lo mismo (hacer nuestro precio en la calculadora con sus medidas).', '4. Qué opinan de esa empresa en Google: nota, número de reseñas y quejas que se repitan.', '5. Si el suyo es mejor, decírselo. Y si le encaja el nuestro, proponerle la visita.', '', 'Empresa que se lo ha dado: ' + (empresa || '(no lo dice)'), 'Nombre: ' + (nombre || '(sin nombre)'), 'Teléfono: ' + (tel || '(no indicado)'), 'Correo: ' + (mailOk ? mail : '(no indicado)'), 'Mensaje: ' + (msg || '(sin mensaje)'), 'De dónde viene: ' + deDonde(b.origen), '', 'El visitante ha aceptado que revisemos el archivo para contestarle.'].join('\n');
   try {
     const r = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: 'Bearer ' + clave, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from: DE, to: [DESTINO], reply_to: mailOk ? mail : undefined, subject: 'Presupuesto para revisar (web AMS)', text: texto, attachments: [{ filename: 'presupuesto.' + TIPOS[tipo], content: datos }] })
+      body: JSON.stringify({ from: DE, to: [DESTINO], reply_to: mailOk ? mail : undefined, subject: '[Comparar] Presupuesto de otra empresa' + (empresa ? ': ' + empresa : '') + ' · ' + (nombre || tel || mail || 'sin nombre'), text: texto, attachments: [{ filename: 'presupuesto.' + TIPOS[tipo], content: datos }] })
     });
     if (!r.ok) return res.status(502).json({ ok: false });
+    // Libreta de clientes: se apunta como contacto (canal revisa-presupuesto). Si falla, el correo ya ha salido.
+    try {
+      await fetch(SB_URL + '/rest/v1/rpc/web_contacto', { method: 'POST', headers: { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY, 'Content-Type': 'application/json' }, body: JSON.stringify({ d: Object.assign({}, (b.origen && typeof b.origen === 'object') ? b.origen : {}, { nombre: nombre || '(sin nombre)', telefono: tel, correo: mailOk ? mail : '', trabajo: 'ventanas', pide: 'Sube el presupuesto de otra empresa' + (empresa ? ' (' + empresa + ')' : '') + ' para que se lo comparemos' + (msg ? '. ' + msg : ''), canal: 'revisa-presupuesto', tipo: 'contacto' }) }) });
+    } catch (e) {}
     return res.json({ ok: true });
   } catch (e) { return res.status(502).json({ ok: false }); }
 };
