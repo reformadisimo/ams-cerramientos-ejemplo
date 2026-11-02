@@ -3,7 +3,7 @@
 // la página /aprobar-respuesta deja cambiar el texto y lo manda aquí. Una vez por token (Idempotency-Key de Resend).
 const crypto = require('crypto');
 const { verifica } = require('../../lib/analisisPresupuesto.js');
-const DE = process.env.CRM_AVISOS_DE || process.env.RESPUESTAS_DE || 'AMS Cerramientos <guia@send.miestela.app>';
+const DE = require('../../lib/remitente').DE;
 const RESPONDER = process.env.RESPONDER_A || 'info@amscerramientos.es';
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 

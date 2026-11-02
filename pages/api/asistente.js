@@ -9,7 +9,7 @@ const { promptAsistente, conocimientoWeb } = require('../../lib/asistente-prompt
 const { deDonde } = require('../../lib/deDonde.js');
 const AV = require('../../lib/avisos.js');
 const DESTINO = AV.PARA_TXT;
-const DE = process.env.ASISTENTE_DE || process.env.RESPUESTAS_DE || 'Asistente AMS <guia@send.miestela.app>';
+const DE = require('../../lib/remitente').DE;
 const MODELOS = [process.env.ASISTENTE_MODELO || 'claude-sonnet-5-5', 'claude-sonnet-4-5'];
 const usos = {}, avisos = {};
 const limpia = (v, n) => String(v || '').replace(/[\r\t]+/g, ' ').trim().slice(0, n);

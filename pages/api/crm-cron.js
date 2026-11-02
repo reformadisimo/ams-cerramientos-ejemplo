@@ -6,7 +6,7 @@ const SB_KEY = process.env.CRM_SUPABASE_KEY || 'sb_publishable_6w-UFyFVPWAvq7OOr
 const AV = require('../../lib/avisos.js');
 const PARA = AV.PARA;
 const RESUMEN_PARA = AV.COPIA; // el resumen de la semana es para nosotros (Ig)
-const DE = process.env.CRM_AVISOS_DE || process.env.RESPUESTAS_DE || 'Contactos AMS <guia@send.miestela.app>';
+const DE = require('../../lib/remitente').DE;
 const CRM_URL = process.env.CRM_URL || 'https://www.amscerramientos.es/mis-contactos/';
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 

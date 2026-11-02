@@ -5,7 +5,7 @@ const SB_URL = process.env.CRM_SUPABASE_URL || 'https://jrfqllllhweswhvwylog.sup
 const SB_KEY = process.env.CRM_SUPABASE_KEY || 'sb_publishable_6w-UFyFVPWAvq7OOr9F-BQ_8e7HMvuP';
 const AV = require('../../lib/avisos.js');
 const AVISO_PARA = AV.PARA_TXT;
-const DE = process.env.CRM_AVISOS_DE || process.env.RESPUESTAS_DE || 'Contactos AMS <guia@send.miestela.app>';
+const DE = require('../../lib/remitente').DE;
 const CRM_URL = process.env.CRM_URL || 'https://www.amscerramientos.es/mis-contactos/';
 const visitas = {};
 

@@ -1,7 +1,7 @@
 // Recibe las respuestas del cuestionario de Javi y las manda por correo a Ignacio con Resend.
 // Necesita la variable RESEND_API_KEY (clave solo de envio). Sin ella responde 503 y la web usa el boton de correo.
 const PARA = 'delarubiaignacio@gmail.com';
-const DE = process.env.RESPUESTAS_DE || 'Guia AMS <guia@send.miestela.app>';
+const DE = require('../../lib/remitente').DE;
 const visitas = {};
 module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
