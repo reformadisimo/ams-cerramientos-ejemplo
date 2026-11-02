@@ -1,54 +1,58 @@
 {
- "version": "2026-10-29T16:00",
- "fecha": "29 de octubre de 2026",
- "aviso": "Tienes tu anuncio en vídeo y la página a la que llevaría la gente. Dale al play y dinos qué te parece.",
+ "version": "2026-11-02T07:55",
+ "fecha": "2 de noviembre de 2026",
+ "aviso": "Gracias por todas las respuestas del fin de semana: hemos puesto la guía al día. Lo único que te pedimos ahora es probar el Precio con fotos y mandarnos las fotos de ventanas.",
  "ultimo": [
   {
-   "f": "29 oct",
-   "t": "Anotado: los importes que nos diste (cancelas y ventanas) son precio de venta, no beneficio, y nos pasarás la información que puedas, sin prisa, durante el fin de semana. Si tienes nombres y teléfonos de clientes, aunque sea solo eso, nos valen para empezar."
+   "f": "1 nov",
+   "t": "Anotado lo de la zona norte: te parece bien el 25 % más y que abramos las zonas del norte de Madrid. También que de cada 10 presupuestos cierras unos 3, que contestas por WhatsApp en una hora y que puedes ir a medir en 1 o 2 días (o el mismo día si estás cerca). Cambiamos el «lo antes posible» de la herramienta por eso."
   },
   {
-   "f": "29 oct",
-   "t": "Tu anuncio en vídeo para Instagram, Facebook y YouTube (30 segundos). Aún no está publicado: lo lanzamos con la web nueva.",
-   "u": "/guia-javi/video"
+   "f": "1 nov",
+   "t": "Anotado tu margen real: unos 300 € por ventana (montaje 250 € más 100 a 150 € sobre el precio del proveedor, menos materiales), no 500 €. Con 3 o 4 ventanas al día y unos 17 días útiles al mes, la cuenta sale mucho más ajustada, y la tendremos en cuenta en las campañas. Y vale tu aviso del proveedor europeo de Kömmerling, un 20 % más barato: cuando haya volumen lo vemos."
   },
   {
-   "f": "29 oct",
-   "t": "Y la página a la que llegaría quien vea el anuncio: con el vídeo, tus garantías, tus zonas y el botón de presupuesto gratis. Es de ejemplo, aún no está publicada.",
-   "u": "/presupuesto-gratis"
+   "f": "1 nov",
+   "t": "Tus zonas, anotadas: hasta unos 35 km, con el Corredor del Henares, Alcobendas, San Sebastián de los Reyes, La Moraleja, Algete, Cobeña y San Agustín de Guadalix. Guadalajara, solo si hay mercado. No trabajas en Madrid capital ni en Getafe, Alcorcón, Pinto, Parla, Fuenlabrada, Tres Cantos, Colmenar, Las Rozas, Pozuelo ni Majadahonda. La persiana con motor, unos 120 a 140 € más, con el pulsador incluido y sin instalación eléctrica."
   },
   {
-   "f": "29 oct",
-   "t": "Sobre los costes: nuestra intención es que tengas mucho trabajo lo antes posible. Ya hablaremos, en su caso, de un fee, pero por ahora ni nos lo planteamos: de verdad que no hacemos esto para conseguir un fee. Si algún día cambiara, solo sería con un acuerdo nuevo, por escrito y aceptado antes por ti."
+   "f": "1 nov",
+   "t": "Anuncios: en noviembre no puedes atenderlos porque estás en obras, así que empezamos a final de mes o primeros de diciembre, con 500 a 800 € al mes. Y te parece interesante apostar algo más en enero y febrero, que son meses flojos. Lo hablamos con los números delante."
   },
   {
-   "f": "29 oct",
-   "t": "Dominio: ya tienes tu cuenta de DonDominio y has entrado tú mismo. Está todo preparado en tu cuenta, y tu web vieja y tu correo siguen funcionando igual. Antes de apuntar el dominio a la web nueva te diremos la fecha y la decides tú."
+   "f": "1 nov",
+   "t": "Facebook e Instagram: has mandado el mensaje a Raúl por WhatsApp y estamos esperando su respuesta. Cuando conteste, avísanos. También has contestado a las reseñas de Google que quedaban y has mirado la web, la calculadora y el vídeo."
   },
   {
-   "f": "28 oct",
-   "t": "Anotado que el correo de la empresa está alojado en el servidor de tu proveedor actual. Lo tendremos en cuenta: lo moveremos a un sitio que sea tuyo, con calma y sin cortarte nada."
+   "f": "1 nov",
+   "t": "Quedan anotados: la garantía es la de la ley (3 años), sin documento aparte; el plazo normal, de 30 a 60 días; y las tablas de precios son solo una estimación, cada trabajo se presupuesta con tus medidas. Imprimes el acuerdo y nos lo mandas firmado, y la libreta de clientes la miras con calma: si no te sale lo de la pantalla de inicio, dínoslo y te lo explicamos."
   }
  ],
  "cuentas": {
-  "ads": "Hoy la cuenta de anuncios es de tu agencia y tú no tienes acceso. Lo más limpio es abrir una cuenta nueva de Google Ads a tu nombre, con el correo de la empresa y tu tarjeta; te guiamos paso a paso y nos das acceso. Después abrimos también la de Facebook e Instagram.",
+  "ads": "La cuenta de anuncios que tenía tu agencia no se podía traspasar, así que se ha abierto una cuenta de Google Ads a tu nombre y nos has dado acceso. Pendiente: aceptar la invitación de «Casiopea 360» (si no te ha llegado, mira también la carpeta de spam y avísanos). La tarjeta la dejamos para diciembre, cuando empiecen los anuncios. Después abrimos también la de Facebook e Instagram.",
   "analytics": "Ya tienes tu propia cuenta de Google Analytics, creada por ti con tu correo de Gmail de empresa, y nos has dado acceso de administrador. Nos has pasado el código de medición para conectarla con la web nueva.",
   "dominio": "Tu dominio está en tu propia cuenta de DonDominio y has entrado tú mismo. La configuración ya está preparada en tu cuenta, y tu web vieja y tu correo siguen funcionando igual. Antes de apuntarlo a la web nueva te avisamos de la fecha y la decides tú. El correo de la empresa sigue alojado en el servidor de tu proveedor actual; lo moveremos después, con calma y sin cortarte nada.",
-  "ficha": "Hoy el propietario principal de la ficha es la cuenta de tu agencia actual y tú figuras como gestor, por eso Google no te deja añadir ni quitar a nadie. El 28 de octubre le has pedido por WhatsApp que te pase la titularidad y estamos esperando su respuesta. El otro gestor que aparece viene de un anuncio de Sedinfo: lo dejamos como está y, cuando la ficha sea tuya, decides si se queda. Cuando seas propietario principal, nos añades como gestores. Si no contesta en un par de días, hay un plan B desde Google."
+  "search": "Search Console: ya tenemos acceso y está resuelto.",
+  "ficha": "Ya nos has dado acceso a tu ficha de Google. Hemos puesto descripción nueva centrada en ventanas, logo y portada con un trabajo tuyo, y la portada nueva puede tardar uno o dos días en salir porque Google la revisa antes. Las reseñas ya están contestadas."
  },
  "resueltas": [
   1,
   2,
   3,
   4,
+  5,
   6,
-  8
+  7,
+  8,
+  12
  ],
  "nuevas": [
-  "Las fotos de la ventana oscilobatiente (con vistas a una ciudad) y de la terraza cerrada con cristal y perfil oscuro parecen hechas por ordenador, no trabajos vuestros. ¿Son obras reales de AMS? Si no lo son, no las presentamos como tales; si tienes fotos propias de esos trabajos, las ponemos en su lugar.",
-  "La imagen del cristal de ahorro energético dice «ventanas con hasta un 60 % de ahorro energético». ¿Tenéis algún documento del fabricante que lo respalde? Si no, quitamos esa cifra para que no os dé problemas.",
-  "Para el acuerdo de colaboración nos falta tu cargo en la empresa y la fecha de la firma.",
-  "Cuando tengas la titularidad de la ficha de Google, avísanos con un WhatsApp para que te digamos el siguiente paso."
+  "Las fotos de la ventana oscilobatiente (con vistas a una ciudad) y de la terraza cerrada con cristal y perfil oscuro parecen hechas por ordenador, no trabajos vuestros. ¿Son obras reales de AMS? Si no lo son, no las presentamos como tales; cuando nos mandes las fotos de tus ventanas, las ponemos en su lugar.",
+  "Las fotos de ventanas que tienes: mándanoslas todas por WeTransfer o WhatsApp, aunque salgan con poca luz. Nos sirven de antes y después.",
+  "El «hasta un 60 % de ahorro energético»: dices que solo lo pone Kömmerling en su publicidad. ¿Nos pasas el folleto o el enlace de Kömmerling donde lo dice? Si no, quitamos esa cifra.",
+  "Cuando puedas, mándanos el acuerdo firmado y la fecha de la firma.",
+  "Prueba el Precio con fotos con una ventana de tu casa y cuéntanos si la medida se parece a la real, si el precio te cuadra y si algo no se entiende.",
+  "Casiopea 360: ¿te ha llegado la invitación a Google Ads? Mira la bandeja de entrada y el spam del Gmail de empresa, y si no aparece, dínoslo y la reenviamos."
  ],
  "popup": {
   "etiqueta": "Hola de nuevo, Javi",
