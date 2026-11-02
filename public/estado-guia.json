@@ -1,8 +1,23 @@
 {
- "version": "2026-11-02T11:58",
+ "version": "2026-11-02T12:15",
  "fecha": "2 de noviembre de 2026",
- "aviso": "Hemos puesto la guía al día con todo lo de hoy. Arriba del todo tienes, en una lista, lo que te toca a ti.",
+ "aviso": "Más novedades de hoy: tu LinkedIn y unas preguntas sobre tu cliente. Las tienes arriba, en lo que te toca a ti.",
  "ultimo": [
+  {
+   "f": "2 nov",
+   "t": "Todos los avisos de la web (contactos, visitas, precio con fotos, comparar presupuesto) te llegan ya a info@amscerramientos.es.",
+   "u": "#tareas"
+  },
+  {
+   "f": "2 nov",
+   "t": "Tu LinkedIn, ya preparado para que lo veas: perfil y tres publicaciones de ejemplo con tus obras.",
+   "u": "/linkedin-javi"
+  },
+  {
+   "f": "2 nov",
+   "t": "Unas preguntas sobre cómo es tu cliente, para hacer los anuncios a su medida.",
+   "u": "/conoce-tu-cliente"
+  },
   {
    "f": "2 nov",
    "t": "Si un cliente te sube el presupuesto de otra empresa, te llega a info@ un informe con su precio, lo que falta, el nuestro con las mismas medidas, lo que opinan de esa empresa en Google y la respuesta ya escrita. La lees, la cambias si quieres y pulsas «Enviar». Sin tu visto bueno no le llega nada.",
@@ -17,24 +32,6 @@
    "f": "2 nov",
    "t": "Después de ver el precio, el cliente te pide la visita con día y hora, y le preguntamos en qué punto está, para que solo vayas a medir a quien ya lo tiene decidido.",
    "u": "/calculadora"
-  },
-  {
-   "f": "2 nov",
-   "t": "Los correos que recibe el cliente, rehechos con tus fotos, tu vídeo y tus reseñas, y adaptados a cada cliente.",
-   "u": "/correos-ejemplo"
-  },
-  {
-   "f": "2 nov",
-   "t": "Tu cancela de panel sándwich, como modelo nuevo y el primero de la página de cancelas.",
-   "u": "/cancelas-de-aluminio"
-  },
-  {
-   "f": "2 nov",
-   "t": "Hecho lo que nos pediste: vuelve «fabricante», tus zonas, la persiana con motor (120 a 140 € más), «vamos a medir en 1 o 2 días» y mucha menos Villalbilla de cara al cliente."
-  },
-  {
-   "f": "2 nov",
-   "t": "Tus reseñas de Google las contestamos nosotros cada semana. Las malas, siempre contigo antes."
   }
  ],
  "cuentas": {
@@ -58,28 +55,28 @@
  "nuevas": [],
  "popup": {
   "etiqueta": "Hola de nuevo, Javi",
-  "titulo": "Lo nuevo de hoy, 2 de noviembre",
-  "intro": "Hemos puesto la guía al día con todo lo que te contamos en el correo de hoy. Pulsa en cada punto para ir directo:",
+  "titulo": "Más cosas de hoy, 2 de noviembre",
+  "intro": "No te queremos abrumar, pero vamos a tope contigo. Pulsa en cada punto para ir directo:",
   "items": [
    {
-    "t": "Lo que te toca a ti, en una lista y por orden.",
+    "t": "Cómo es tu cliente: 4 minutos tocando opciones.",
+    "h": "/conoce-tu-cliente"
+   },
+   {
+    "t": "Así quedaría tu LinkedIn.",
+    "h": "/linkedin-javi"
+   },
+   {
+    "t": "Comparar presupuesto: te llega un informe y la respuesta escrita; tú la apruebas.",
+    "h": "/revisa-tu-presupuesto"
+   },
+   {
+    "t": "Todos los avisos de la web, ya a info@amscerramientos.es.",
     "h": "#tareas"
    },
    {
-    "t": "Tus fotos de antes y después, ya en la web.",
-    "h": "/ventanas-pvc#antes-despues"
-   },
-   {
-    "t": "Los correos que acompañan al cliente hasta que te dice que sí.",
-    "h": "/correos-ejemplo"
-   },
-   {
-    "t": "La visita con día y hora, solo para quien ya lo tiene decidido.",
-    "h": "/calculadora"
-   },
-   {
-    "t": "Tu cancela de panel sándwich.",
-    "h": "/cancelas-de-aluminio"
+    "t": "Lo que te toca a ti, en una lista.",
+    "h": "#tareas"
    }
   ]
  },
@@ -123,7 +120,9 @@
    "t": "Mándanos el acuerdo firmado, en foto o escaneado."
   },
   {
-   "t": "Sin prisa: tu trayectoria para LinkedIn, como un currículum en cuatro líneas."
+   "t": "Mira cómo quedaría tu LinkedIn. Lo que va en amarillo no lo sabemos: cuéntanoslo (desde qué año, trabajos anteriores, cómo empezaste) y mándanos una foto tuya trabajando o en el taller.",
+   "u": "/linkedin-javi",
+   "b": "Ver tu LinkedIn"
   },
   {
    "t": "Desde ya, en cada obra: una foto antes y otra después desde el mismo sitio, y al terminar el WhatsApp para pedir la reseña.",
