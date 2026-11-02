@@ -1,13 +1,8 @@
 {
- "version": "2026-11-02T14:00",
+ "version": "2026-11-02T12:15",
  "fecha": "2 de noviembre de 2026",
- "aviso": "Sorpresa: tu web nueva ya está en amscerramientos.es. No tienes que hacer nada.",
+ "aviso": "Más novedades de hoy: tu LinkedIn y unas preguntas sobre tu cliente. Las tienes arriba, en lo que te toca a ti.",
  "ultimo": [
-  {
-   "f": "2 nov",
-   "t": "Sorpresa: tu web nueva ya está en amscerramientos.es, conectada a Analytics, Search Console y Clarity.",
-   "u": "https://www.amscerramientos.es/"
-  },
   {
    "f": "2 nov",
    "t": "Todos los avisos de la web (contactos, visitas, precio con fotos, comparar presupuesto) te llegan ya a info@amscerramientos.es.",
@@ -42,8 +37,8 @@
  "cuentas": {
   "ads": "Falta un paso tuyo: mándanos por WhatsApp el número de 10 cifras de tu cuenta de Google Ads (sale arriba a la derecha en ads.google.com). Ese mismo día te mandamos la invitación de Casiopea 360 y solo tienes que darle a «Aceptar». La tarjeta, en diciembre. Facebook e Instagram, cuando Raúl te los pase.",
   "analytics": "Ya tienes tu propia cuenta de Google Analytics, creada por ti con tu correo de Gmail de empresa, y nos has dado acceso de administrador. Nos has pasado el código de medición para conectarla con la web nueva.",
-  "dominio": "Hecho: tu web nueva está en amscerramientos.es desde el 2 de noviembre. Tu correo y tu teléfono siguen igual. Las direcciones de la web vieja llevan a su página nueva, para no perder lo que tenías en Google.",
-  "search": "Search Console: le hemos avisado a Google de la web nueva (mapa de la web enviado). Y Microsoft Clarity nos enseña, de forma anónima, cómo se mueve la gente por la web.",
+  "dominio": "Nos has dado el «adelante»: la web nueva se sube el martes 3 de noviembre. No tienes que hacer nada; tu correo y tu teléfono siguen igual.",
+  "search": "Search Console: ya tenemos acceso y está resuelto.",
   "ficha": "Ya tenemos acceso a tu ficha de Google: descripción nueva, logo y portada con un trabajo tuyo. Las reseñas las contestamos nosotros cada semana; las malas, siempre contigo antes."
  },
  "resueltas": [
@@ -60,20 +55,24 @@
  "nuevas": [],
  "popup": {
   "etiqueta": "Hola de nuevo, Javi",
-  "titulo": "Sorpresa: tu web nueva ya está online",
-  "intro": "Desde hoy, quien te busque ya ve la web nueva. No tienes que hacer nada:",
+  "titulo": "Más cosas de hoy, 2 de noviembre",
+  "intro": "No te queremos abrumar, pero vamos a tope contigo. Pulsa en cada punto para ir directo:",
   "items": [
    {
-    "t": "Ver tu web nueva en amscerramientos.es.",
-    "h": "https://www.amscerramientos.es/"
+    "t": "Cómo es tu cliente y hasta dónde quieres llegar: 10 minutos tocando opciones.",
+    "h": "/conoce-tu-cliente"
    },
    {
-    "t": "El mensaje para pedir reseñas por WhatsApp.",
-    "h": "#foto-resena"
+    "t": "Así quedaría la página de AMS en LinkedIn.",
+    "h": "/linkedin-ams"
    },
    {
-    "t": "Los correos que recibe el cliente.",
-    "h": "/correos-ejemplo"
+    "t": "Comparar presupuesto: te llega un informe y la respuesta escrita; tú la apruebas.",
+    "h": "/revisa-tu-presupuesto"
+   },
+   {
+    "t": "Todos los avisos de la web, ya a info@amscerramientos.es.",
+    "h": "#tareas"
    },
    {
     "t": "Lo que te toca a ti, en una lista.",
@@ -108,8 +107,7 @@
    "b": "Ir a Google Ads"
   },
   {
-   "t": "Pon tu libreta de clientes en el iPhone: abre el enlace del correo del 2 de noviembre con Safari, pulsa compartir (el cuadrado con la flecha) y «Añadir a pantalla de inicio».",
-   "hecho": true
+   "t": "Pon tu libreta de clientes en el iPhone: abre el enlace del correo del 2 de noviembre con Safari, pulsa compartir (el cuadrado con la flecha) y «Añadir a pantalla de inicio»."
   },
   {
    "t": "Echa un vistazo a los correos que recibirá el cliente y dinos qué cambiarías.",
@@ -132,10 +130,6 @@
    "t": "Desde ya, en cada obra: una foto antes y otra después desde el mismo sitio, y al terminar el WhatsApp para pedir la reseña.",
    "u": "#foto-resena",
    "b": "Ver el mensaje"
-  },
-  {
-   "t": "Cuando puedas (en diciembre está bien): tu tarifa ampliada. Ventana y puerta de una hoja, correderas, colores y madera, mosquitera plisada y dos o tres cristales con las mismas medidas.",
-   "prio": "En diciembre"
   }
  ]
 }
