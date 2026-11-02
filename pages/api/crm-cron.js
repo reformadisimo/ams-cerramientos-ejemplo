@@ -7,7 +7,7 @@ const AV = require('../../lib/avisos.js');
 const PARA = AV.PARA;
 const RESUMEN_PARA = AV.COPIA; // el resumen de la semana es para nosotros (Ig)
 const DE = process.env.CRM_AVISOS_DE || process.env.RESPUESTAS_DE || 'Contactos AMS <guia@send.miestela.app>';
-const CRM_URL = process.env.CRM_URL || 'https://ams-cerramientos-ejemplo.vercel.app/mis-contactos/';
+const CRM_URL = process.env.CRM_URL || 'https://www.amscerramientos.es/mis-contactos/';
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
 async function rpc(fn, args) {

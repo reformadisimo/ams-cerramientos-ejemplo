@@ -6,7 +6,7 @@ const SB_KEY = process.env.CRM_SUPABASE_KEY || 'sb_publishable_6w-UFyFVPWAvq7OOr
 const AV = require('../../lib/avisos.js');
 const AVISO_PARA = AV.PARA_TXT;
 const DE = process.env.CRM_AVISOS_DE || process.env.RESPUESTAS_DE || 'Contactos AMS <guia@send.miestela.app>';
-const CRM_URL = process.env.CRM_URL || 'https://ams-cerramientos-ejemplo.vercel.app/mis-contactos/';
+const CRM_URL = process.env.CRM_URL || 'https://www.amscerramientos.es/mis-contactos/';
 const visitas = {};
 
 async function rpc(fn, args) {

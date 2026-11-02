@@ -35,7 +35,8 @@ module.exports = {
   async headers() {
     const larga = [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }];
     return [
-      { source: "/((?!opinion|img/resena-og).*)", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] },
+      // 2-nov-2026: la web ya está en amscerramientos.es. Solo la copia de *.vercel.app queda sin indexar (para no duplicar).
+      { source: "/:path*", has: [{ type: "host", value: "(?<h>.*)\\.vercel\\.app" }], headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] },
       { source: "/fonts/:path*", headers: larga },
       { source: "/img/:path*", headers: larga },
       { source: "/:path*.js", headers: [{ key: "Cache-Control", value: "public, max-age=86400" }] },

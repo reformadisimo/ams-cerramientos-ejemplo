@@ -9,7 +9,7 @@ const AV = require('../../lib/avisos.js');
 const PARA = AV.PARA_TXT;
 const DE = process.env.CRM_AVISOS_DE || process.env.RESPUESTAS_DE || 'AMS Cerramientos <guia@send.miestela.app>';
 const RESPONDER_A = process.env.RESPONDER_A || 'info@amscerramientos.es';
-const CRM_URL = process.env.CRM_URL || 'https://ams-cerramientos-ejemplo.vercel.app/mis-contactos/';
+const CRM_URL = process.env.CRM_URL || 'https://www.amscerramientos.es/mis-contactos/';
 const visitas = {};
 const limpia = (v, n) => String(v == null ? '' : v).replace(/[\r\n\t]+/g, ' ').trim().slice(0, n);
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
