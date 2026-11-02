@@ -316,7 +316,7 @@ var MOL=[{id:'frio',n:'Frío en invierno'},{id:'calor',n:'Calor en verano'},{id:
 
 var MAT={aluminio:'Aluminio con rotura de puente térmico',pvc:'PVC Kömmerling'};
 var APE={corredera:'Corredera',practicable:'Abatible',oscilobatiente:'Oscilobatiente'};
-var VID={doble:'Doble vidrio',termico:'Doble vidrio térmico (bajo emisivo)',acustico:'Vidrio acústico',seguridad:'Vidrio de seguridad'};
+var VID={termico:'Doble, bajo emisivo y control solar (de serie)',argon:'Con gas argón (más aislamiento)',acustico:'Acústico (más silencio)',seguridad:'De seguridad (laminado)',triple:'Triple cristal (máximo aislamiento)'};
 var COL={blanco:'Blanco',color:'Color (gris, negro, marrón...)',madera:'Imitación madera'};
 var PER={no:'Dejo las que tengo',manual:'Nuevas, manuales',motor:'Nuevas, con motor'};
 
@@ -383,9 +383,9 @@ function recoFrom(){
 function packs(){
  var r=recoFrom();
  return {
-  basica:{n:'Básica',d:'Buena y económica',mat:'aluminio',ape:'corredera',vid:'doble'},
+  basica:{n:'Básica',d:'Buena y económica',mat:'aluminio',ape:'corredera',vid:'termico'},
   reco:{n:'Recomendada para ti',d:'La que mejor resuelve lo que te molesta',mat:r.mat,ape:r.ape,vid:r.vid},
-  max:{n:'Máximo aislamiento',d:'Lo mejor en frío, calor y ruido',mat:'pvc',ape:'oscilobatiente',vid:'acustico'}};
+  max:{n:'Máximo aislamiento',d:'Lo mejor en frío, calor y ruido',mat:'pvc',ape:'oscilobatiente',vid:'triple'}};
 }
 function setPack(k){var p=packs()[k];S.pack=k;S.mat=p.mat;S.ape=p.ape;S.vid=p.vid;}
 

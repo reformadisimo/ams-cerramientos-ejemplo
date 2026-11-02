@@ -26,7 +26,7 @@ var GAMA={pvc:{eco:['Económica',['Perfil de 70 mm','5 cámaras']],confort:['Con
  alu:{eco:['Sin rotura de puente térmico',['Para trasteros, garajes o cerramientos sin calefacción']],confort:['Con rotura de puente térmico',['Alugom','La más vendida']],premium:['Rotura de alta gama',['Hoja oculta y perfil más fino','Máximo aislamiento en aluminio']]}};
 var COL=[['blanco','Blanco','#FFFFFF'],['color','Gris antracita u otro color liso','#3F454B'],['bicolor','Blanco dentro, color fuera','linear-gradient(90deg,#fff 50%,#3F454B 50%)'],['madera','Imitación madera','#8A5A35'],['negro','Negro mate','#1B1C1E']];
 var COLHEX={blanco:'#FFFFFF',color:'#3F454B',bicolor:'#3F454B',madera:'#8A5A35',negro:'#1B1C1E'};
-var VID=[['solar','Control solar (Guardian Sun)','Estándar, incluido en el precio'],['doble','Doble vidrio','Se presupuesta aparte'],['bajoe','Térmico bajo emisivo','Se presupuesta aparte'],['mate','Translúcido','Para baños. Se presupuesta aparte'],['acustico','Acústico','Calles con ruido. Se presupuesta aparte'],['seguridad','Seguridad laminado','Se presupuesta aparte'],['triple','Triple vidrio','Se presupuesta aparte']];
+var VID=[['solar','Bajo emisivo y control solar (Guardian Sun 4/16/4)','De serie, incluido en el precio'],['argon','Con gas argón','Más aislamiento. Se presupuesta aparte'],['mate','Translúcido','Para baños. Se presupuesta aparte'],['acustico','Acústico','Calles con ruido. Se presupuesta aparte'],['seguridad','De seguridad (laminado)','Se presupuesta aparte'],['triple','Triple cristal','Máximo aislamiento. Se presupuesta aparte']];
 var VID_RAPIDO=['solar','acustico','seguridad'];
 var PERS=[['no','Sin persiana'],['manual','Manual, con cinta'],['motor','Con motor e interruptor'],['radio','Con motor y mando'],['solar','Motor solar, sin cables']];
 var MOSQ=[['no','Sin mosquitera'],['enrollable','Enrollable'],['plisada','Plisada, para puertas']];
@@ -145,7 +145,7 @@ function bars(it){
  }
  var c=Math.min,b={};
  var th={pvc:{eco:3,confort:4,premium:5},alu:{eco:1,confort:3,premium:4}}[it.mat][it.gama];
- th+={doble:0,bajoe:1,solar:1,mate:0,acustico:.5,seguridad:0,triple:2}[it.vid];
+ th+=({solar:1,argon:1.5,mate:1,acustico:1.5,seguridad:1,triple:2}[it.vid]||1);
  if(it.tipo==='corredera')th-=.5;
  var ru=(it.mat==='pvc'?3:2)+(it.gama==='premium'?1:0)+({acustico:2,triple:1,seguridad:1}[it.vid]||0)-(it.tipo==='corredera'?1:0);
  var se=2+(it.mat==='alu'?.5:0)+(it.vid==='seguridad'?2:0)+(it.pers!=='no'?1:0)+(it.gama==='premium'?.5:0);
@@ -277,7 +277,7 @@ function renderOpts(){
   if(!R) h+=sec('Gama','','<div class="cf-cards">'+['eco','confort','premium'].map(function(g){var G=GAMA[it.mat][g];return opt('gama',g,'<b>'+G[0]+'</b>','<ul><li>'+G[1].join('</li><li>')+'</li></ul>',it.gama===g);}).join('')+'</div>');
   h+=sec('Color','','<div class="cf-sw">'+COL.map(function(c){return '<button type="button" class="cf-o'+(it.col===c[0]?' on':'')+'" data-k="col" data-v="'+c[0]+'"><span class="c" style="background:'+c[2]+'"></span><span>'+c[1]+'<span class="d" data-dk="col" data-dv="'+c[0]+'" style="display:block"></span></span></button>';}).join('')+'</div>');
   var vids=R?VID.filter(function(v){return VID_RAPIDO.indexOf(v[0])>=0;}):VID;
-  h+=sec('Cristal','Todos son doble cristal con cámara. Cambia lo que protegen.','<div class="cf-opts">'+vids.map(function(v){return opt('vid',v[0],v[1],v[2],it.vid===v[0]);}).join('')+'</div>');
+  h+=sec('Cristal','Todas llevan doble cristal con bajo emisivo y control solar de serie. Si quieres más, elige una mejora.','<div class="cf-opts">'+vids.map(function(v){return opt('vid',v[0],v[1],v[2],it.vid===v[0]);}).join('')+'</div>');
   if(it.tipo!=='fijo'){
    var pers=R?PERS.filter(function(p){return ['no','manual','motor'].indexOf(p[0])>=0;}):PERS;
    h+=sec('Persiana','Con cajón aislado nuevo, para que no entre frío por arriba.','<div class="cf-opts">'+pers.map(function(p){return opt('pers',p[0],p[1],'',it.pers===p[0]);}).join('')+'</div>');
@@ -486,7 +486,7 @@ $('cfPdf').addEventListener('click',function(){
 
 /* ---------- Arranque ---------- */
 function fetchFrom(){
- var its=TYPES.map(function(t){var it=defItem(t.id);if(t.pre){var p=t.pre[0];it.w=p.w;it.h=p.h;it.hojas=p.hojas;fixAper(it);}if(t.id==='techo')it.talla='55x78';if(t.id==='claraboya')it.talla='60';it.vid='doble';it.gama=it.mat==='alu'?'confort':'eco';return it;});
+ var its=TYPES.map(function(t){var it=defItem(t.id);if(t.pre){var p=t.pre[0];it.w=p.w;it.h=p.h;it.hojas=p.hojas;fixAper(it);}if(t.id==='techo')it.talla='55x78';if(t.id==='claraboya')it.talla='60';it.vid='solar';it.gama=it.mat==='alu'?'confort':'eco';return it;});
  fetch('/api/configurador',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items:its})}).then(function(r){return r.json();}).then(function(j){
   TYPES.forEach(function(t,i){var el=$('cfFrom_'+t.id);if(el&&j.lineas&&j.lineas[i])el.textContent='Instalada desde '+eur(j.lineas[i].unidad);});FROM=j;}).catch(function(){});
 }

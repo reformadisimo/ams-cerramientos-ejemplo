@@ -1,5 +1,6 @@
 // Calcula la horquilla de precio en el servidor, para que el preciario no se vea en la página.
 const base = require('../../lib/preciario.js');
+const { esNorte, RECARGO_NORTE } = require('../../lib/norte.js');
 
 function mezcla(a, b) {
   if (!b || typeof b !== 'object' || Array.isArray(b)) return b === undefined ? a : b;
@@ -21,7 +22,7 @@ function ventanas(d, P) {
   const v = P.ventana, lineas = [];
   const mat = elige(v.material, d.material, 'aluminio');
   const ap = elige(v.apertura, d.apertura, 'corredera');
-  const vid = elige(v.vidrio, d.vidrio, 'doble');
+  const vid = elige(v.vidrio, d.vidrio, 'termico');
   const col = elige(v.color, d.color, 'blanco');
   const per = elige(v.persiana, d.persiana, 'no');
   const f = v.material[mat] * v.apertura[ap] * v.vidrio[vid] * v.color[col];
@@ -91,6 +92,13 @@ module.exports = (req, res) => {
   if (typeof d === 'string') { try { d = JSON.parse(d); } catch (e) { d = {}; } }
   const out = calcula(d || {});
   if (!out) { res.statusCode = 400; return res.end(JSON.stringify({ error: 'Servicio no válido' })); }
+  // Zona norte (urbanizaciones de chalets): 25 % más en ventanas, terrazas y cancelas (Javi, 2-nov-2026).
+  const c = (d && d.contacto) || {};
+  if (esNorte((d && d.cp) || c.cp, c.loc || c.localidad || '')) {
+    out.lineas.forEach(l => { l.low = r10(l.low * RECARGO_NORTE); l.high = r10(l.high * RECARGO_NORTE); });
+    out.low = out.lineas.reduce((s, l) => s + l.low, 0); out.high = out.lineas.reduce((s, l) => s + l.high, 0);
+    out.zona = 'norte';
+  }
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
   res.end(JSON.stringify(out));
 };

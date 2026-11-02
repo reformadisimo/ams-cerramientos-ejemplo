@@ -13,8 +13,7 @@ const DE = process.env.CRM_AVISOS_DE || process.env.RESPUESTAS_DE || 'AMS Cerram
 const RESPONDER_A = process.env.RESPONDER_A || 'info@amscerramientos.es';
 const MAX_TOTAL = 4200000; // base64; el límite de Vercel para el cuerpo es 4,5 MB
 const MAX_FOTOS = 15;
-const NORTE_CP = { '28109': 'La Moraleja y El Soto (Alcobendas)', '28050': 'El Encinar de los Reyes', '28043': 'Conde Orgaz y Piovera', '28042': 'Alameda de Osuna', '28860': 'Paracuellos de Jarama', '28120': 'Santo Domingo (Algete)', '28707': 'Ciudalcampo y Fuente del Fresno' };
-const RECARGO_NORTE = Number(process.env.RECARGO_NORTE || 1.25);
+const { NORTE_CP, RECARGO_NORTE } = require('../../lib/norte.js');
 const MIN_NORTE = 6;
 const visitas = {};
 const limpia = (v, n) => String(v == null ? '' : v).replace(/[\r\n\t]+/g, ' ').trim().slice(0, n);
