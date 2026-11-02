@@ -14,6 +14,18 @@ const limpia = (v, n) => String(v == null ? '' : v).replace(/[\r\n\t]+/g, ' ').t
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const HORAS = ['9:00', '10:00', '11:00', '12:00', '13:00', '16:00', '17:00', '18:00'];
 const CUANDO = ['Lo antes posible', 'En un mes', 'De 1 a 3 meses', 'Más adelante'];
+// Encaje por código postal (mismas zonas que /api/fotos)
+const NORTE_CP = /^(28109|28050|28043|28042|28860|28120|28707)$/;
+const CP_NO = /^(2890\d|2892[0-5]|28320|2898[0-4]|2894[0-6]|28760|28770|2823[0-2]|28290|2822[0-4])$/;
+const CP_SI = /^(288\d\d|2810[08]|2870\d|28750|28110|192\d\d|1917\d)$/;
+function encajeCp(cp) {
+  if (NORTE_CP.test(cp)) return 'Interesa, zona norte (+25 %, 6 ventanas o más)';
+  if (/^280[0-5]\d$/.test(cp)) return 'No encaja, Madrid capital';
+  if (CP_NO.test(cp) || !/^(28|19)/.test(cp)) return 'No encaja, zona donde no trabajas';
+  if (CP_SI.test(cp)) return 'Interesa, tu zona';
+  return 'A valorar, zona por confirmar';
+}
+const CANALES = { calculadora: 'Calculadora', configurador: 'Configurador', 'sin-visita': 'Precio con fotos', formulario: 'Formulario', web: 'Web' };
 
 async function rpc(fn, args) {
   const r = await fetch(SB_URL + '/rest/v1/rpc/' + fn, { method: 'POST', headers: { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY, 'Content-Type': 'application/json' }, body: JSON.stringify(args) });
@@ -61,10 +73,14 @@ module.exports = async (req, res) => {
   const clave = process.env.RESEND_API_KEY;
   if (!clave) return res.json({ ok: true, correo: false });
   const telD = tel.replace(/\D/g, '');
-  const filas = [['Día', diaTxt + ' a las ' + hora], ['Nombre', nombre], ['Teléfono', tel], ['Correo', mail || '-'], ['Código postal', cp], ['Calle', calle || '-'], ['Quiere hacerlo', cuando || '-'], ['Lo que ha visto', limpia(b.resumen, 400) || '-'], ['De dónde viene', deDonde(o)]];
+  const filas = [['Encaje', encajeCp(cp)], ['Día preferido', diaTxt], ['Hora', hora + (Number(hora.split(':')[0]) < 14 ? ' (mañana)' : ' (tarde)')], ['Nombre', nombre], ['Teléfono', tel], ['Correo', mail || '-'], ['Código postal', cp], ['Calle', calle || '-'], ['Quiere hacerlo', cuando || '-'], ['Lo que ha visto', limpia(b.resumen, 400) || '-'], ['De dónde viene', deDonde(o)]];
+  const enc = encajeCp(cp), herr = CANALES[canal] || 'Web';
+  const prisa = cuando === 'Lo antes posible' || !cuando;
   const htmlAms = '<div style="font-family:Arial,sans-serif;font-size:15px;color:#1F2A36;max-width:600px">' +
-    '<p style="font-size:19px;font-weight:700;margin:0 0 4px;color:#C2410C">Pide visita para medir</p>' +
-    '<p style="margin:0 0 12px">Llámale o escríbele para <b>confirmarle la hora</b>. Si no te cuadra, proponle otra.</p>' +
+    '<div style="border-left:5px solid #1B6B3A;background:#E8F5EC;border-radius:8px;padding:12px 14px;margin:0 0 14px">' +
+    '<b style="color:#14532D">Llamar ya</b> · Pide la visita: llama en menos de 5 minutos si se puede, y confírmale la hora (si no te cuadra, proponle otra).<br>' +
+    '<span style="color:#14532D;font-size:14px">' + esc(enc) + ' · quiere hacerlo: ' + esc((cuando || 'no lo dice').toLowerCase()) + ' · deja teléfono</span></div>' +
+    '<p style="font-size:18px;font-weight:700;margin:0 0 10px">PIDE VISITA · ' + esc(herr) + '</p>' +
     '<table cellpadding="6" style="border-collapse:collapse">' + filas.map(f => '<tr><td style="color:#5B6B79;vertical-align:top">' + esc(f[0]) + '</td><td><b>' + esc(f[1]) + '</b></td></tr>').join('') + '</table>' +
     (telD ? '<p style="margin:18px 0 6px"><a href="tel:' + telD + '" style="background:#1B3247;color:#fff;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:700">Llamar</a> &nbsp; <a href="https://wa.me/34' + telD.slice(-9) + '" style="background:#1FA855;color:#fff;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:700">WhatsApp</a></p>' : '') +
     '<p style="color:#5B6B79;font-size:13px;margin-top:18px">Ya está apuntado en <a href="' + CRM_URL + '">tus contactos</a>.</p></div>';
@@ -75,7 +91,7 @@ module.exports = async (req, res) => {
     '<p>En la visita medimos con láser, te enseñamos los modelos y te damos el presupuesto definitivo por escrito, gratis y sin compromiso.</p>' +
     '<p>Un saludo,<br>AMS Cerramientos<br>639 78 82 20</p></div>';
   const manda = body => fetch('https://api.resend.com/emails', { method: 'POST', headers: { Authorization: 'Bearer ' + clave, 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).then(x => x.ok).catch(() => false);
-  const envios = [manda({ from: DE, to: PARA.split(',').map(s => s.trim()).filter(Boolean), reply_to: mailOk ? mail : undefined, subject: 'Pide visita: ' + diaTxt + ' a las ' + hora + ' · ' + nombre + ' · ' + cp, html: htmlAms })];
+  const envios = [manda({ from: DE, to: PARA.split(',').map(s => s.trim()).filter(Boolean), reply_to: mailOk ? mail : undefined, subject: (prisa ? '[Llamar ya] ' : '') + 'PIDE VISITA · ' + (CANALES[canal] || 'Web') + ': ' + nombre + ' · ' + diaTxt + ' a las ' + hora + ' · ' + cp, html: htmlAms })];
   if (mailOk) envios.push(manda({ from: DE, to: [mail], reply_to: RESPONDER_A, subject: 'Tu visita con AMS Cerramientos: ' + diaTxt + ' a las ' + hora + ' (te la confirmamos)', html: htmlCli }));
   const [okAms] = await Promise.all(envios);
   return res.json({ ok: true, avisado: okAms, libreta: !!(r && r.ok) });

@@ -196,7 +196,7 @@
       var doc = new window.jspdf.jsPDF({ unit: 'mm', format: 'a4' }), y = 20, W = 210, M = 18;
       var txt = function (t, size, bold, color) { doc.setFont('helvetica', bold ? 'bold' : 'normal'); doc.setFontSize(size); doc.setTextColor.apply(doc, color || [18, 32, 43]); var l = doc.splitTextToSize(t, W - 2 * M); if (y + l.length * size * 0.42 > 280) { doc.addPage(); y = 20; } doc.text(l, M, y); y += l.length * size * 0.42 + 2; };
       doc.setFillColor(31, 111, 178); doc.rect(0, 0, W, 12, 'F');
-      txt('AMS Cerramientos', 20, true); txt('Ventanas de PVC · Villalbilla (Madrid) · 639 78 82 20 · amscerramientos.es', 9, false, [74, 90, 104]);
+      txt('AMS Cerramientos', 20, true); txt('Ventanas de PVC · 639 78 82 20 · amscerramientos.es', 9, false, [74, 90, 104]);
       y += 4; txt('Precio orientativo de tus ventanas', 15, true);
       txt('Fecha: ' + new Date().toLocaleDateString('es-ES') + '   ·   Para: ' + (u.nombre || '-') + '   ·   Código postal: ' + u.cp + (u.pueblo ? ' (' + u.pueblo + ')' : ''), 10, false, [74, 90, 104]);
       y += 3; txt(eur(u.precio.low) + ' a ' + eur(u.precio.high), 24, true, [27, 107, 58]);
