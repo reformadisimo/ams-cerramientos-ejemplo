@@ -1,39 +1,43 @@
 {
- "version": "2026-11-02T07:55",
+ "version": "2026-11-02T11:20",
  "fecha": "2 de noviembre de 2026",
- "aviso": "Gracias por todas las respuestas del fin de semana: hemos puesto la guía al día. Lo único que te pedimos ahora es probar el Precio con fotos y mandarnos las fotos de ventanas.",
+ "aviso": "Hemos puesto la guía al día con todo lo de hoy. Arriba del todo tienes, en una lista, lo que te toca a ti.",
  "ultimo": [
   {
-   "f": "1 nov",
-   "t": "Anotado lo de la zona norte: te parece bien el 25 % más y que abramos las zonas del norte de Madrid. También que de cada 10 presupuestos cierras unos 3, que contestas por WhatsApp en una hora y que puedes ir a medir en 1 o 2 días (o el mismo día si estás cerca). Cambiamos el «lo antes posible» de la herramienta por eso."
+   "f": "2 nov",
+   "t": "Tus fotos ya están en la web: 11 de ventanas y 12 obras de antes y después, con una raya que se mueve con el dedo.",
+   "u": "/ventanas-pvc#antes-despues"
   },
   {
-   "f": "1 nov",
-   "t": "Anotado tu margen real: unos 300 € por ventana (montaje 250 € más 100 a 150 € sobre el precio del proveedor, menos materiales), no 500 €. Con 3 o 4 ventanas al día y unos 17 días útiles al mes, la cuenta sale mucho más ajustada, y la tendremos en cuenta en las campañas. Y vale tu aviso del proveedor europeo de Kömmerling, un 20 % más barato: cuando haya volumen lo vemos."
+   "f": "2 nov",
+   "t": "Después de ver el precio, el cliente te pide la visita con día y hora, y le preguntamos en qué punto está, para que solo vayas a medir a quien ya lo tiene decidido.",
+   "u": "/calculadora"
   },
   {
-   "f": "1 nov",
-   "t": "Tus zonas, anotadas: hasta unos 35 km, con el Corredor del Henares, Alcobendas, San Sebastián de los Reyes, La Moraleja, Algete, Cobeña y San Agustín de Guadalix. Guadalajara, solo si hay mercado. No trabajas en Madrid capital ni en Getafe, Alcorcón, Pinto, Parla, Fuenlabrada, Tres Cantos, Colmenar, Las Rozas, Pozuelo ni Majadahonda. La persiana con motor, unos 120 a 140 € más, con el pulsador incluido y sin instalación eléctrica."
+   "f": "2 nov",
+   "t": "Los correos que recibe el cliente, rehechos con tus fotos, tu vídeo y tus reseñas, y adaptados a cada cliente.",
+   "u": "/correos-ejemplo"
   },
   {
-   "f": "1 nov",
-   "t": "Anuncios: en noviembre no puedes atenderlos porque estás en obras, así que empezamos a final de mes o primeros de diciembre, con 500 a 800 € al mes. Y te parece interesante apostar algo más en enero y febrero, que son meses flojos. Lo hablamos con los números delante."
+   "f": "2 nov",
+   "t": "Tu cancela de panel sándwich, como modelo nuevo y el primero de la página de cancelas.",
+   "u": "/cancelas-de-aluminio"
   },
   {
-   "f": "1 nov",
-   "t": "Facebook e Instagram: has mandado el mensaje a Raúl por WhatsApp y estamos esperando su respuesta. Cuando conteste, avísanos. También has contestado a las reseñas de Google que quedaban y has mirado la web, la calculadora y el vídeo."
+   "f": "2 nov",
+   "t": "Hecho lo que nos pediste: vuelve «fabricante», tus zonas, la persiana con motor (120 a 140 € más), «vamos a medir en 1 o 2 días» y mucha menos Villalbilla de cara al cliente."
   },
   {
-   "f": "1 nov",
-   "t": "Quedan anotados: la garantía es la de la ley (3 años), sin documento aparte; el plazo normal, de 30 a 60 días; y las tablas de precios son solo una estimación, cada trabajo se presupuesta con tus medidas. Imprimes el acuerdo y nos lo mandas firmado, y la libreta de clientes la miras con calma: si no te sale lo de la pantalla de inicio, dínoslo y te lo explicamos."
+   "f": "2 nov",
+   "t": "Tus reseñas de Google las contestamos nosotros cada semana. Las malas, siempre contigo antes."
   }
  ],
  "cuentas": {
-  "ads": "La cuenta de anuncios que tenía tu agencia no se podía traspasar, así que se ha abierto una cuenta de Google Ads a tu nombre y nos has dado acceso. Pendiente: aceptar la invitación de «Casiopea 360» (si no te ha llegado, mira también la carpeta de spam y avísanos). La tarjeta la dejamos para diciembre, cuando empiecen los anuncios. Después abrimos también la de Facebook e Instagram.",
+  "ads": "Falta un paso tuyo: mándanos por WhatsApp el número de 10 cifras de tu cuenta de Google Ads (sale arriba a la derecha en ads.google.com). Ese mismo día te mandamos la invitación de Casiopea 360 y solo tienes que darle a «Aceptar». La tarjeta, en diciembre. Facebook e Instagram, cuando Raúl te los pase.",
   "analytics": "Ya tienes tu propia cuenta de Google Analytics, creada por ti con tu correo de Gmail de empresa, y nos has dado acceso de administrador. Nos has pasado el código de medición para conectarla con la web nueva.",
-  "dominio": "Tu dominio está en tu propia cuenta de DonDominio y has entrado tú mismo. La configuración ya está preparada en tu cuenta, y tu web vieja y tu correo siguen funcionando igual. Antes de apuntarlo a la web nueva te avisamos de la fecha y la decides tú. El correo de la empresa sigue alojado en el servidor de tu proveedor actual; lo moveremos después, con calma y sin cortarte nada.",
+  "dominio": "Tu dominio está en tu cuenta de DonDominio y la configuración está preparada. La web nueva pasa a amscerramientos.es en cuanto nos digas «adelante» (te proponemos el martes 3). Tu correo y tu teléfono siguen igual.",
   "search": "Search Console: ya tenemos acceso y está resuelto.",
-  "ficha": "Ya nos has dado acceso a tu ficha de Google. Hemos puesto descripción nueva centrada en ventanas, logo y portada con un trabajo tuyo, y la portada nueva puede tardar uno o dos días en salir porque Google la revisa antes. Las reseñas ya están contestadas."
+  "ficha": "Ya tenemos acceso a tu ficha de Google: descripción nueva, logo y portada con un trabajo tuyo. Las reseñas las contestamos nosotros cada semana; las malas, siempre contigo antes."
  },
  "resueltas": [
   1,
@@ -46,44 +50,74 @@
   8,
   12
  ],
- "nuevas": [
-  "Las fotos de la ventana oscilobatiente (con vistas a una ciudad) y de la terraza cerrada con cristal y perfil oscuro parecen hechas por ordenador, no trabajos vuestros. ¿Son obras reales de AMS? Si no lo son, no las presentamos como tales; cuando nos mandes las fotos de tus ventanas, las ponemos en su lugar.",
-  "Las fotos de ventanas que tienes: mándanoslas todas por WeTransfer o WhatsApp, aunque salgan con poca luz. Nos sirven de antes y después.",
-  "El «hasta un 60 % de ahorro energético»: dices que solo lo pone Kömmerling en su publicidad. ¿Nos pasas el folleto o el enlace de Kömmerling donde lo dice? Si no, quitamos esa cifra.",
-  "Cuando puedas, mándanos el acuerdo firmado y la fecha de la firma.",
-  "Prueba el Precio con fotos con una ventana de tu casa y cuéntanos si la medida se parece a la real, si el precio te cuadra y si algo no se entiende.",
-  "Casiopea 360: ¿te ha llegado la invitación a Google Ads? Mira la bandeja de entrada y el spam del Gmail de empresa, y si no aparece, dínoslo y la reenviamos."
- ],
+ "nuevas": [],
  "popup": {
   "etiqueta": "Hola de nuevo, Javi",
-  "titulo": "La guía ha seguido creciendo",
-  "intro": "Te dijimos que esta guía estaba viva, y es verdad: cada vez que entres encontrarás cosas nuevas, porque seguimos mirando tu caso y mejorando la web. Esto es lo último que hemos añadido (pulsa en cada punto para ir directo):",
+  "titulo": "Lo nuevo de hoy, 2 de noviembre",
+  "intro": "Hemos puesto la guía al día con todo lo que te contamos en el correo de hoy. Pulsa en cada punto para ir directo:",
   "items": [
    {
-    "t": "Nuestra forma de trabajar: conseguirte el mayor número de trabajos dándote la menor guerra posible. Sin reuniones ni llamadas, por correo y WhatsApp, y cada vez robándote menos tiempo.",
-    "h": "#forma-de-trabajar"
+    "t": "Lo que te toca a ti, en una lista y por orden.",
+    "h": "#tareas"
    },
    {
-    "t": "No te pedimos tu facturación: te pedimos dos números, cuántos contactos acaban siendo clientes y lo que deja cada uno.",
-    "h": "#sin-facturacion"
+    "t": "Tus fotos de antes y después, ya en la web.",
+    "h": "/ventanas-pvc#antes-despues"
    },
    {
-    "t": "Tu lista de clientes y tus zonas de trabajo: dos cosas que hacen que las campañas funcionen mejor desde el primer día.",
-    "h": "#clientes-zonas"
+    "t": "Los correos que acompañan al cliente hasta que te dice que sí.",
+    "h": "/correos-ejemplo"
    },
    {
-    "t": "Reseñas con foto: por qué pedimos también una foto del trabajo, y el WhatsApp de ejemplo para tus clientes.",
-    "h": "#foto-resena"
+    "t": "La visita con día y hora, solo para quien ya lo tiene decidido.",
+    "h": "/calculadora"
    },
    {
-    "t": "La web es tuya desde que tu dominio apunta a ella, con una copia completa para ti.",
-    "h": "#control"
-   },
-   {
-    "t": "Tus cancelas, con las fotos reales de tus trabajos y una galería con todas.",
+    "t": "Tu cancela de panel sándwich.",
     "h": "/cancelas-de-aluminio"
    }
   ]
  },
- "enlace": "/guia-javi/video"
+ "enlace": "#tareas",
+ "tareas": [
+  {
+   "t": "Confírmanos por WhatsApp si subimos la web nueva mañana martes, o qué día prefieres. Con un «adelante» nos vale.",
+   "prio": "Hoy"
+  },
+  {
+   "t": "Revisa los precios: haz 3 o 4 precios de ventanas de obras que conozcas y dinos si te encajan. Es lo más importante, porque el cliente llega sabiendo el precio.",
+   "u": "/calculadora",
+   "b": "Abrir la calculadora",
+   "u2": "/presupuesto-sin-visita",
+   "b2": "Precio con fotos",
+   "prio": "Muy importante"
+  },
+  {
+   "t": "Google Ads: entra en ads.google.com con el Gmail de la empresa, haz un pantallazo del número de 10 cifras que sale arriba a la derecha y mándanoslo por WhatsApp. Ese mismo día te llega la invitación de Casiopea 360 y le das a «Aceptar».",
+   "u": "https://ads.google.com",
+   "b": "Ir a Google Ads"
+  },
+  {
+   "t": "Pon tu libreta de clientes en el iPhone: abre el enlace del correo del 2 de noviembre con Safari, pulsa compartir (el cuadrado con la flecha) y «Añadir a pantalla de inicio»."
+  },
+  {
+   "t": "Echa un vistazo a los correos que recibirá el cliente y dinos qué cambiarías.",
+   "u": "/correos-ejemplo",
+   "b": "Ver los correos"
+  },
+  {
+   "t": "Dinos si en enero y febrero subimos los anuncios a 800 o 1.000 € al mes."
+  },
+  {
+   "t": "Mándanos el acuerdo firmado, en foto o escaneado."
+  },
+  {
+   "t": "Sin prisa: tu trayectoria para LinkedIn, como un currículum en cuatro líneas."
+  },
+  {
+   "t": "Desde ya, en cada obra: una foto antes y otra después desde el mismo sitio, y al terminar el WhatsApp para pedir la reseña.",
+   "u": "#foto-resena",
+   "b": "Ver el mensaje"
+  }
+ ]
 }
