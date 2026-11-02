@@ -26,6 +26,8 @@ module.exports = {
   async redirects() {
     const viejas = require("./lib/redirecciones.json");
     return [
+      // 2-nov-2026: la copia de prueba lleva a la web de verdad (misma página). /api se deja para no romper nada en marcha.
+      { source: "/:ruta((?!api/).*)", has: [{ type: "host", value: "ams-cerramientos-ejemplo.vercel.app" }], destination: "https://www.amscerramientos.es/:ruta", permanent: true },
       ...viejas,
       { source: "/index.html", destination: "/", permanent: true },
       { source: "/:dir*/index.html", destination: "/:dir*", permanent: true },
