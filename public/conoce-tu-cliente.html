@@ -31,9 +31,33 @@ textarea:focus{outline:none;border-color:var(--azul)}
 .msg{font-weight:700;text-align:center;min-height:1.4em;margin:10px 0 0}
 .ok{color:var(--verde)}.mal{color:#B42318}
 .nota{font-size:14px;color:var(--suave);margin:8px 0 0}
+
+header{background:linear-gradient(135deg,#12202B 0%,#1f4f7a 100%)}
+header .w{position:relative}
+.ilu{position:absolute;right:0;top:0;width:110px;height:74px}
+@media(max-width:480px){.ilu{width:84px;height:56px;top:2px}}
+.prog{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--linea);padding:8px 16px}
+.prog .w{display:flex;align-items:center;gap:10px}
+.pb{flex:1;height:10px;background:#E6EEF5;border-radius:99px;overflow:hidden}
+.pb i{display:block;height:100%;width:0;background:linear-gradient(90deg,#3DDC97,#0A8F4E);border-radius:99px;transition:width .3s}
+#pbt{font-size:14px;font-weight:700;color:#0A8F4E;white-space:nowrap}
+.parte{display:flex;align-items:center;gap:12px;margin:22px 0 12px}
+.parte span{width:46px;height:46px;border-radius:14px;background:#FF8C42;color:#fff;font:700 24px Arial;display:flex;align-items:center;justify-content:center;flex:none}
+.parte b{display:block;font-size:21px}.parte small{display:block;color:var(--suave);font-size:14px}
+.anima{margin:-4px 0 14px;color:var(--suave);font-size:15px}
+.q{transition:border-color .2s,box-shadow .2s}
+.q.hecha{border-color:#3DDC97;box-shadow:0 0 0 2px rgba(61,220,151,.25)}
+.q .ico{float:right;width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 0 6px 10px}
+.q .ico svg{width:24px;height:24px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.q .n{background:#FF8C42}
+.q.hecha .n{background:#0A8F4E}
+.ops label:has(input:checked){border-color:#0A8F4E;background:#EAFBF3}
+.ops input{accent-color:#0A8F4E}
+.btn{background:linear-gradient(90deg,#0A8F4E,#12A85E)}
 </style></head>
 <body>
-<header><div class="w"><img src="/img/logo-ams-blanco.svg" alt="AMS Cerramientos"><h1>¿Cómo es tu cliente?</h1><p>Unos 10 minutos, casi todo tocando opciones. Lo de dinero es opcional. Si no lo sabes seguro, pon lo que te parezca: nos vale.</p></div></header>
+<header><div class="w"><img src="/img/logo-ams-blanco.svg" alt="AMS Cerramientos"><svg class="ilu" viewBox="0 0 120 80" aria-hidden="true"><rect x="8" y="30" width="58" height="44" rx="3" fill="#FFD166"/><path d="M4 33 37 8l33 25" fill="none" stroke="#FF8C42" stroke-width="5" stroke-linejoin="round"/><rect x="18" y="40" width="16" height="16" rx="2" fill="#7FD3FF" stroke="#fff" stroke-width="2"/><rect x="40" y="40" width="16" height="16" rx="2" fill="#7FD3FF" stroke="#fff" stroke-width="2"/><rect x="31" y="60" width="12" height="14" rx="2" fill="#1f6fb2"/><circle cx="92" cy="34" r="20" fill="#3DDC97"/><path d="M83 34l6 6 12-13" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg><h1>¿Cómo es tu cliente?</h1><p>Unos 10 minutos, casi todo tocando opciones. Lo de dinero es opcional. Si no lo sabes seguro, pon lo que te parezca: nos vale.</p></div></header>
+<div class="prog" aria-live="polite"><div class="w"><div class="pb"><i id="pbi"></i></div><span id="pbt">Empieza cuando quieras</span></div></div>
 <main><div class="w">
 <div class="caja porque"><h2>Por qué te lo preguntamos</h2>
 Queremos conocer a tu cliente tan bien como tú. Con esto:
@@ -47,6 +71,7 @@ Queremos conocer a tu cliente tan bien como tú. Con esto:
 <p class="nota">Lo que nos cuentes se queda entre nosotros. No sale en la web.</p></div>
 
 <form id="f">
+<div class="parte"><span>1</span><div><b>Tu cliente</b><small>13 preguntas rápidas</small></div></div>
 <div class="caja q"><h2><span class="n">1</span>¿Quién te llama o te escribe primero?</h2><p class="ay">Mueve la barra. De cada 10 personas que te contactan, ¿cuántas son mujeres?</p>
 <div class="reparto"><input type="range" name="llama_mujeres" min="0" max="10" value="5" step="1" aria-label="Mujeres de cada 10"><output></output></div></div>
 
@@ -127,6 +152,7 @@ Queremos conocer a tu cliente tan bien como tú. Con esto:
 <div class="caja q"><h2><span class="n">13</span>Tu cliente ideal</h2><p class="ay">El que te deja más contento: qué casa tiene, dónde vive, a qué se dedica, qué te pide. Si te viene a la cabeza uno concreto, descríbelo (sin el nombre).</p>
 <textarea name="ideal" placeholder="Por ejemplo: chalet en Alcobendas, matrimonio de unos 50, él directivo, quieren 10 ventanas con persiana con motor y lo deciden rápido"></textarea></div>
 
+<div class="parte"><span>2</span><div><b>Más trabajo en cada visita</b><small>3 preguntas. Lo de dinero, opcional</small></div></div>
 <div class="caja q"><h2><span class="n">14</span>¿Cuánto suele ser una obra tuya?</h2><p class="ay">Más o menos, con IVA. Si prefieres no decirlo, déjalo sin marcar: no pasa nada.</p><div class="ops">
 <label><input type="radio" name="obra" value="Menos de 3.000 €">Menos de 3.000 €</label>
 <label><input type="radio" name="obra" value="3.000 a 6.000 €">3.000 a 6.000 €</label>
@@ -139,7 +165,8 @@ Queremos conocer a tu cliente tan bien como tú. Con esto:
 <div class="caja q"><h2><span class="n">16</span>¿Qué te gustaría vender más?</h2><p class="ay">Lo que más te deja o más te gusta hacer. Lo empujaremos en la web, en los correos al cliente y en los anuncios.</p><div class="ops"><label><input type="checkbox" name="vender_mas" value="Persiana con motor">Persiana con motor</label><label><input type="checkbox" name="vender_mas" value="Mosquitera">Mosquitera</label><label><input type="checkbox" name="vender_mas" value="Cajón de persiana aislado">Cajón aislado</label><label><input type="checkbox" name="vender_mas" value="Cerramiento de terraza">Cerramiento de terraza</label><label><input type="checkbox" name="vender_mas" value="Cancela o puerta de garaje">Cancela</label><label><input type="checkbox" name="vender_mas" value="Motor para la cancela">Motor de cancela</label><label><input type="checkbox" name="vender_mas" value="Toldo o pérgola">Toldo o pérgola</label><label><input type="checkbox" name="vender_mas" value="Rejas">Rejas</label><label><input type="checkbox" name="vender_mas" value="Puerta de entrada">Puerta de entrada</label><label><input type="checkbox" name="vender_mas" value="Ventanas del resto de la casa">Más ventanas de la casa</label></div>
 <textarea name="vender_nota" placeholder="Si quieres, explica por qué o añade otros trabajos que hagas"></textarea></div>
 
-<div class="caja porque"><h2>Segunda parte: tu empresa y hasta dónde quieres llegar</h2>Queremos traerte más trabajo y mejor. Para no pasarnos ni quedarnos cortos, necesitamos saber cuánto puedes hacer hoy y cuánto te gustaría crecer.</div>
+<div class="parte"><span>3</span><div><b>Tu empresa y hasta dónde quieres llegar</b><small>La parte más bonita: soñar un poco</small></div></div>
+<p class="anima">Queremos traerte más trabajo y mejor. Para no pasarnos ni quedarnos cortos, necesitamos saber cuánto puedes hacer hoy y cuánto te gustaría crecer.</p>
 
 <div class="caja q"><h2><span class="n">17</span>¿Cuántos montadores tienes hoy?</h2><div class="ops"><label><input type="radio" name="montadores" value="1">1</label><label><input type="radio" name="montadores" value="2">2</label><label><input type="radio" name="montadores" value="3 o 4">3 o 4</label><label><input type="radio" name="montadores" value="5 o más">5 o más</label></div></div>
 
@@ -155,21 +182,23 @@ Queremos conocer a tu cliente tan bien como tú. Con esto:
 
 <div class="caja q"><h2><span class="n">23</span>¿Cuánto factura AMS al año, más o menos?</h2><p class="ay">Opcional. Para saber cuánto conviene invertir en publicidad: en este sector se suele invertir en torno a un 3 % de lo que se factura. Así ni te quedas corto ni gastas de más.</p><div class="ops"><label><input type="radio" name="facturacion" value="Menos de 150.000 €">Menos de 150.000 €</label><label><input type="radio" name="facturacion" value="150.000 a 300.000 €">150.000 a 300.000 €</label><label><input type="radio" name="facturacion" value="300.000 a 500.000 €">300.000 a 500.000 €</label><label><input type="radio" name="facturacion" value="Más de 500.000 €">Más de 500.000 €</label></div></div>
 
-<div class="caja q"><h2><span class="n">24</span>¿Qué te frena hoy para crecer?</h2><p class="ay">Marca lo que más.</p><div class="ops"><label><input type="checkbox" name="frena" value="Montadores">Montadores</label><label><input type="checkbox" name="frena" value="Tiempo para visitas y presupuestos">Tiempo para visitas y presupuestos</label><label><input type="checkbox" name="frena" value="Llamadas y papeles">Llamadas y papeles</label><label><input type="checkbox" name="frena" value="Espacio en el taller">Espacio en el taller</label><label><input type="checkbox" name="frena" value="Plazos de los proveedores">Plazos de los proveedores</label><label><input type="checkbox" name="frena" value="Dinero para adelantar material">Dinero para adelantar material</label><label><input type="checkbox" name="frena" value="Nada, solo me faltan clientes">Nada, solo me faltan clientes</label></div></div>
+<div class="caja q"><h2><span class="n">24</span>¿Con cuánto al año cubres todos los gastos?</h2><p class="ay">Opcional. Es tu punto de equilibrio: lo que tiene que facturar AMS para pagar el taller, las furgonetas, los sueldos, los seguros... A partir de ahí, lo que te deja cada obra ya es beneficio. Saberlo nos dice cuántas obras más necesitas para ganar de verdad, y hacia ahí apuntamos las campañas.</p><div class="ops"><label><input type="radio" name="equilibrio" value="Menos de 100.000 €">Menos de 100.000 €</label><label><input type="radio" name="equilibrio" value="100.000 a 200.000 €">100.000 a 200.000 €</label><label><input type="radio" name="equilibrio" value="200.000 a 300.000 €">200.000 a 300.000 €</label><label><input type="radio" name="equilibrio" value="Más de 300.000 €">Más de 300.000 €</label><label><input type="radio" name="equilibrio" value="No lo sé seguro">No lo sé seguro</label></div><textarea name="equilibrio_nota" placeholder="Si lo sabes, pon la cifra o tus gastos al mes"></textarea></div>
 
-<div class="caja q"><h2><span class="n">25</span>¿Quién hace hoy las visitas y los presupuestos?</h2><div class="ops"><label><input type="radio" name="visitas_quien" value="Yo solo">Yo solo</label><label><input type="radio" name="visitas_quien" value="Yo y otra persona">Yo y otra persona</label><label><input type="radio" name="visitas_quien" value="Alguien del equipo">Alguien del equipo</label></div></div>
+<div class="caja q"><h2><span class="n">25</span>¿Qué te frena hoy para crecer?</h2><p class="ay">Marca lo que más.</p><div class="ops"><label><input type="checkbox" name="frena" value="Montadores">Montadores</label><label><input type="checkbox" name="frena" value="Tiempo para visitas y presupuestos">Tiempo para visitas y presupuestos</label><label><input type="checkbox" name="frena" value="Llamadas y papeles">Llamadas y papeles</label><label><input type="checkbox" name="frena" value="Espacio en el taller">Espacio en el taller</label><label><input type="checkbox" name="frena" value="Plazos de los proveedores">Plazos de los proveedores</label><label><input type="checkbox" name="frena" value="Dinero para adelantar material">Dinero para adelantar material</label><label><input type="checkbox" name="frena" value="Nada, solo me faltan clientes">Nada, solo me faltan clientes</label></div></div>
 
-<div class="caja q"><h2><span class="n">26</span>¿Te vendría bien que alguien te llevara las llamadas y la agenda de visitas?</h2><p class="ay">Por ejemplo, alguien que atienda, filtre y te deje las visitas cuadradas.</p><div class="ops"><label><input type="radio" name="agenda" value="Sí, cuanto antes">Sí, cuanto antes</label><label><input type="radio" name="agenda" value="Más adelante">Más adelante</label><label><input type="radio" name="agenda" value="No, lo llevo yo">No, lo llevo yo</label></div></div>
+<div class="caja q"><h2><span class="n">26</span>¿Quién hace hoy las visitas y los presupuestos?</h2><div class="ops"><label><input type="radio" name="visitas_quien" value="Yo solo">Yo solo</label><label><input type="radio" name="visitas_quien" value="Yo y otra persona">Yo y otra persona</label><label><input type="radio" name="visitas_quien" value="Alguien del equipo">Alguien del equipo</label></div></div>
 
-<div class="caja q"><h2><span class="n">27</span>¿Qué meses vas más flojo de trabajo?</h2><p class="ay">Queremos que tengas trabajo estable todo el año: esos meses subimos los anuncios para llenar la agenda.</p><div class="ops"><label><input type="checkbox" name="flojo" value="Enero">Enero</label><label><input type="checkbox" name="flojo" value="Febrero">Febrero</label><label><input type="checkbox" name="flojo" value="Marzo">Marzo</label><label><input type="checkbox" name="flojo" value="Abril">Abril</label><label><input type="checkbox" name="flojo" value="Mayo">Mayo</label><label><input type="checkbox" name="flojo" value="Junio">Junio</label><label><input type="checkbox" name="flojo" value="Julio">Julio</label><label><input type="checkbox" name="flojo" value="Agosto">Agosto</label><label><input type="checkbox" name="flojo" value="Septiembre">Septiembre</label><label><input type="checkbox" name="flojo" value="Octubre">Octubre</label><label><input type="checkbox" name="flojo" value="Noviembre">Noviembre</label><label><input type="checkbox" name="flojo" value="Diciembre">Diciembre</label></div></div>
+<div class="caja q"><h2><span class="n">27</span>¿Te vendría bien que alguien te llevara las llamadas y la agenda de visitas?</h2><p class="ay">Por ejemplo, alguien que atienda, filtre y te deje las visitas cuadradas.</p><div class="ops"><label><input type="radio" name="agenda" value="Sí, cuanto antes">Sí, cuanto antes</label><label><input type="radio" name="agenda" value="Más adelante">Más adelante</label><label><input type="radio" name="agenda" value="No, lo llevo yo">No, lo llevo yo</label></div></div>
 
-<div class="caja q"><h2><span class="n">28</span>¿Hay meses en los que no trabajas?</h2><p class="ay">Por ejemplo, agosto por vacaciones. Esos meses paramos los anuncios y en la web avisamos de que estáis cerrados, pero que ya se pueden ir encargando las ventanas para la vuelta.</p><div class="ops"><label><input type="checkbox" name="cerrado" value="Enero">Enero</label><label><input type="checkbox" name="cerrado" value="Febrero">Febrero</label><label><input type="checkbox" name="cerrado" value="Marzo">Marzo</label><label><input type="checkbox" name="cerrado" value="Abril">Abril</label><label><input type="checkbox" name="cerrado" value="Mayo">Mayo</label><label><input type="checkbox" name="cerrado" value="Junio">Junio</label><label><input type="checkbox" name="cerrado" value="Julio">Julio</label><label><input type="checkbox" name="cerrado" value="Agosto">Agosto</label><label><input type="checkbox" name="cerrado" value="Septiembre">Septiembre</label><label><input type="checkbox" name="cerrado" value="Octubre">Octubre</label><label><input type="checkbox" name="cerrado" value="Noviembre">Noviembre</label><label><input type="checkbox" name="cerrado" value="Diciembre">Diciembre</label><label><input type="checkbox" name="cerrado" value="Trabajo todo el año">Trabajo todo el año</label></div><textarea name="cerrado_nota" placeholder="Si quieres, dinos qué días exactos (por ejemplo: del 1 al 25 de agosto)"></textarea></div>
+<div class="caja q"><h2><span class="n">28</span>¿Qué meses vas más flojo de trabajo?</h2><p class="ay">Queremos que tengas trabajo estable todo el año: esos meses subimos los anuncios para llenar la agenda.</p><div class="ops"><label><input type="checkbox" name="flojo" value="Enero">Enero</label><label><input type="checkbox" name="flojo" value="Febrero">Febrero</label><label><input type="checkbox" name="flojo" value="Marzo">Marzo</label><label><input type="checkbox" name="flojo" value="Abril">Abril</label><label><input type="checkbox" name="flojo" value="Mayo">Mayo</label><label><input type="checkbox" name="flojo" value="Junio">Junio</label><label><input type="checkbox" name="flojo" value="Julio">Julio</label><label><input type="checkbox" name="flojo" value="Agosto">Agosto</label><label><input type="checkbox" name="flojo" value="Septiembre">Septiembre</label><label><input type="checkbox" name="flojo" value="Octubre">Octubre</label><label><input type="checkbox" name="flojo" value="Noviembre">Noviembre</label><label><input type="checkbox" name="flojo" value="Diciembre">Diciembre</label></div></div>
 
-<div class="caja q"><h2><span class="n">29</span>La obra que te encantaría hacer</h2><p class="ay">La que aún no te ha salido y te haría ilusión: un chalet entero, una urbanización, una cancela especial...</p><textarea name="obra_sueno" placeholder="Cuéntanosla"></textarea></div>
+<div class="caja q"><h2><span class="n">29</span>¿Hay meses en los que no trabajas?</h2><p class="ay">Por ejemplo, agosto por vacaciones. Esos meses paramos los anuncios y en la web avisamos de que estáis cerrados, pero que ya se pueden ir encargando las ventanas para la vuelta.</p><div class="ops"><label><input type="checkbox" name="cerrado" value="Enero">Enero</label><label><input type="checkbox" name="cerrado" value="Febrero">Febrero</label><label><input type="checkbox" name="cerrado" value="Marzo">Marzo</label><label><input type="checkbox" name="cerrado" value="Abril">Abril</label><label><input type="checkbox" name="cerrado" value="Mayo">Mayo</label><label><input type="checkbox" name="cerrado" value="Junio">Junio</label><label><input type="checkbox" name="cerrado" value="Julio">Julio</label><label><input type="checkbox" name="cerrado" value="Agosto">Agosto</label><label><input type="checkbox" name="cerrado" value="Septiembre">Septiembre</label><label><input type="checkbox" name="cerrado" value="Octubre">Octubre</label><label><input type="checkbox" name="cerrado" value="Noviembre">Noviembre</label><label><input type="checkbox" name="cerrado" value="Diciembre">Diciembre</label><label><input type="checkbox" name="cerrado" value="Trabajo todo el año">Trabajo todo el año</label></div><textarea name="cerrado_nota" placeholder="Si quieres, dinos qué días exactos (por ejemplo: del 1 al 25 de agosto)"></textarea></div>
 
-<div class="caja q"><h2><span class="n">30</span>Dentro de 3 años, ¿cómo te imaginas AMS?</h2><p class="ay">Equipo, taller, zonas, tipo de obras. Sueña un poco: nos ayuda a saber hacia dónde empujar.</p><textarea name="tres_anos" placeholder="Por ejemplo: 4 equipos de montaje, más chalets en el norte, una exposición..."></textarea></div>
+<div class="caja q"><h2><span class="n">30</span>La obra que te encantaría hacer</h2><p class="ay">La que aún no te ha salido y te haría ilusión: un chalet entero, una urbanización, una cancela especial...</p><textarea name="obra_sueno" placeholder="Cuéntanosla"></textarea></div>
 
-<div class="caja q"><h2><span class="n">31</span>¿Algo más que debamos saber?</h2>
+<div class="caja q"><h2><span class="n">31</span>Dentro de 3 años, ¿cómo te imaginas AMS?</h2><p class="ay">Equipo, taller, zonas, tipo de obras. Sueña un poco: nos ayuda a saber hacia dónde empujar.</p><textarea name="tres_anos" placeholder="Por ejemplo: 4 equipos de montaje, más chalets en el norte, una exposición..."></textarea></div>
+
+<div class="caja q"><h2><span class="n">32</span>¿Algo más que debamos saber?</h2>
 <textarea name="mas" placeholder="Lo que quieras: épocas del año con más trabajo, el cliente que no te interesa, lo que más te piden..."></textarea></div>
 
 <button class="btn" id="enviar" type="submit">Enviar mis respuestas</button>
@@ -193,6 +222,33 @@ Queremos conocer a tu cliente tan bien como tú. Con esto:
       else throw 0;
     }).catch(function(){b.disabled=false;msg.className='msg mal';msg.textContent='No se ha podido enviar. Prueba otra vez en un momento.'});
   });
+})();
+</script>
+
+<script>
+(function(){
+  var I={tel:'<path d="M5 4h4l2 5-3 2a11 11 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/>',
+    gente:'<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M14 20c0-2.5 1.5-4.5 3-5 2 0 4 2 4 5"/>',
+    casa:'<path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><rect x="10" y="14" width="4" height="6"/>',
+    ventana:'<rect x="4" y="3" width="16" height="18" rx="1"/><path d="M12 3v18M4 12h16"/>',
+    lupa:'<circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5"/>',
+    reloj:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    estrella:'<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',
+    euro:'<path d="M17 6a7 7 0 1 0 0 12M4 10h9M4 14h9"/>',
+    llave:'<path d="M14 7a4 4 0 1 1-3.5 6L4 19.5V21h3v-2h2v-2h2l1.5-1.5A4 4 0 0 1 14 7z"/>',
+    sube:'<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>',
+    cal:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+    cohete:'<path d="M12 2c4 3 5 8 3 13H9C7 10 8 5 12 2z"/><path d="M9 15l-3 3 1 3 3-2M15 15l3 3-1 3-3-2"/><circle cx="12" cy="9" r="1.5"/>',
+    charla:'<path d="M4 5h16v11H9l-5 4z"/>'};
+  var C=['#1f6fb2','#FF8C42','#0A8F4E','#8B5CF6','#E0457B','#0EA5B7'];
+  var mapa=['tel','gente','gente','gente','casa','lupa','ventana','lupa','charla','lupa','reloj','tel','estrella','euro','ventana','estrella','llave','llave','euro','cal','gente','sube','euro','euro','lupa','llave','cal','cal','cal','estrella','cohete','charla'];
+  var qs=[].slice.call(document.querySelectorAll('#f .caja.q')),pbi=document.getElementById('pbi'),pbt=document.getElementById('pbt');
+  qs.forEach(function(q,i){var d=document.createElement('span');d.className='ico';d.style.background=C[i%C.length];d.innerHTML='<svg viewBox="0 0 24 24">'+(I[mapa[i]]||I.estrella)+'</svg>';q.insertBefore(d,q.firstChild)});
+  var frases=['Empieza cuando quieras','Buen comienzo','Vas genial','Ya llevas la mitad','Muy bien, sigue así','Ya casi está','Hecho. Solo falta enviar'];
+  function cuenta(){var n=0;qs.forEach(function(q){var ok=false;q.querySelectorAll('input,textarea').forEach(function(el){if(el.type==='range'){if(el.dataset.movida)ok=true;return}if(el.type==='radio'||el.type==='checkbox'){if(el.checked)ok=true}else if(el.value.trim())ok=true});q.classList.toggle('hecha',ok);if(ok)n++});
+    var pc=Math.round(n/qs.length*100);pbi.style.width=pc+'%';var k=n===0?0:pc>=100?6:pc>=80?5:pc>=60?4:pc>=45?3:pc>=20?2:1;pbt.textContent=(n?n+' de '+qs.length+' · ':'')+frases[k]}
+  var r=document.querySelector('#f input[type=range]');if(r)r.addEventListener('input',function(){r.dataset.movida='1'});
+  document.getElementById('f').addEventListener('input',cuenta);document.getElementById('f').addEventListener('change',cuenta);cuenta();
 })();
 </script>
 </body></html>
