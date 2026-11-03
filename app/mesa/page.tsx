@@ -3,7 +3,7 @@ import Mesa from "@/components/mesa/Mesa";
 import { hayBaseDeDatos } from "@/lib/db";
 import { datosReales, llaveMesa } from "@/lib/mesaReal";
 
-/* MESA DE AMS (real, 31-oct-2026). Con clave (middleware.ts, MESA_CLAVE), fuera de Google.
+/* MESA DE AMS (real, 31-oct-2026). Con clave (middleware.ts, MESA_CLAVE) o por la dirección secreta /mesa-<MESA_RUTA>, fuera de Google.
    La misma pantalla que la de Reformadísimo y Casiopea. Lee el contador propio sin cookies (Neon)
    y los contactos del CRM (Supabase). Analytics, Google Ads y Meta se añadirán cuando estén conectados. */
 

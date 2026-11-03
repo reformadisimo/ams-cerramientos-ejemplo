@@ -35,7 +35,7 @@ export function canalCrm(o: string | null | undefined): string {
 
 /** Llave para que la mesa pida sus datos a /api/mesa sin volver a pedir la contraseña. Sale de MESA_CLAVE y no la revela. */
 export function llaveMesa(): string {
-  const c = (process.env.MESA_CLAVE ?? "").trim();
+  const c = (process.env.MESA_CLAVE || process.env.MESA_RUTA || process.env.CRM_ADMIN_SECRET || process.env.RESEND_API_KEY || "").trim();
   return c ? createHash("sha256").update(`ams-mesa:${c}`).digest("hex").slice(0, 40) : "";
 }
 

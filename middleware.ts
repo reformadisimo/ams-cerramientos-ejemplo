@@ -14,6 +14,19 @@ async function huella(clave: string): Promise<string> {
 }
 
 export async function middleware(req: NextRequest) {
+  /* Dirección secreta, como la de Reformadísimo: /mesa-<MESA_RUTA> abre la mesa sin pedir nada.
+     MESA_RUTA vive solo en Vercel (el repositorio es público: nunca escribirla en el código). */
+  const ruta = (process.env.MESA_RUTA ?? "").trim();
+  if (ruta.length >= 8 && req.nextUrl.pathname === `/mesa-${ruta}`) {
+    const u = req.nextUrl.clone();
+    u.pathname = "/mesa";
+    const r = NextResponse.rewrite(u);
+    r.headers.set("X-Robots-Tag", "noindex, nofollow");
+    r.headers.set("Referrer-Policy", "no-referrer");
+    return r;
+  }
+  if (!req.nextUrl.pathname.startsWith("/mesa")) return NextResponse.next();
+  if (req.nextUrl.pathname.startsWith("/mesa-")) return new NextResponse("No encontrada.", { status: 404 });
   const clave = (process.env.MESA_CLAVE ?? "").trim();
   if (!clave) return new NextResponse("La mesa está cerrada: falta poner la clave MESA_CLAVE en Vercel.", { status: 503, headers: { "content-type": "text/plain; charset=utf-8" } });
   const h = await huella(clave);
@@ -41,4 +54,4 @@ export async function middleware(req: NextRequest) {
   return new NextResponse("Clave necesaria.", { status: 401, headers: { "WWW-Authenticate": 'Basic realm="Mesa de AMS Cerramientos", charset="UTF-8"', "content-type": "text/plain; charset=utf-8" } });
 }
 
-export const config = { matcher: ["/mesa", "/mesa/:path*"] };
+export const config = { matcher: ["/mesa", "/mesa/:path*", "/mesa-:ruta"] };
