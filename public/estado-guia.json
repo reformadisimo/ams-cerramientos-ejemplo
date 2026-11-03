@@ -1,8 +1,22 @@
 {
- "version": "2026-11-02T18:50",
- "fecha": "2 de noviembre de 2026",
- "aviso": "Google Ads: gracias por el número. Ya te hemos mandado la invitación: solo falta que pulses «Aceptar».",
+ "version": "2026-11-03T07:20",
+ "fecha": "3 de noviembre de 2026",
+ "aviso": "Te hemos mandado un correo: cómo te subimos en Google, tu primer artículo en prensa y tres cosas que te pedimos. Las tienes arriba, en «Lo que te toca a ti».",
  "ultimo": [
+  {
+   "f": "3 nov",
+   "t": "Tu primer artículo en prensa, preparado: «¿Cuánto cuesta cambiar las ventanas de un piso en Alcalá?», con tus precios y tus fotos, para Dream Alcalá. Solo falta tu «sí».",
+   "u": "https://www.amscerramientos.es/informes/prensa-a4m9/articulo"
+  },
+  {
+   "f": "3 nov",
+   "t": "Hecho: tu ficha ya está en Bing (el buscador de Windows y de Copilot), publicada, verificada y conectada con tu ficha de Google. Y Bing ya tiene el mapa de tu web nueva.",
+   "u": "https://www.bing.com/search?q=AMS+Cerramientos+y+Servicios+Villalbilla"
+  },
+  {
+   "f": "3 nov",
+   "t": "Facebook e Instagram: si Raúl no nos pasa el acceso antes del miércoles 4, pasamos al plan B y abrimos unas cuentas nuevas a tu nombre. Te diremos los pasos, son pocos."
+  },
   {
    "f": "2 nov",
    "t": "Google Ads: recibido tu número (171-167-8619) y enviada la invitación de Casiopea 360. Solo falta que la aceptes.",
@@ -17,29 +31,14 @@
    "f": "2 nov",
    "t": "Todos los avisos de la web (contactos, visitas, precio con fotos, comparar presupuesto) te llegan ya a info@amscerramientos.es.",
    "u": "#tareas"
-  },
-  {
-   "f": "2 nov",
-   "t": "La página de AMS en LinkedIn, como empresa: así quedaría, con tres publicaciones de ejemplo de tus obras.",
-   "u": "/linkedin-ams"
-  },
-  {
-   "f": "2 nov",
-   "t": "Unas preguntas sobre cómo es tu cliente, para hacer los anuncios a su medida.",
-   "u": "/conoce-tu-cliente"
-  },
-  {
-   "f": "2 nov",
-   "t": "Si un cliente te sube el presupuesto de otra empresa, te llega a info@ un informe con su precio, lo que falta, el nuestro con las mismas medidas, lo que opinan de esa empresa en Google y la respuesta ya escrita. La lees, la cambias si quieres y pulsas «Enviar». Sin tu visto bueno no le llega nada.",
-   "u": "/revisa-tu-presupuesto"
   }
  ],
  "cuentas": {
-  "ads": "Invitación enviada a tu cuenta 171-167-8619 (2 de noviembre). Solo falta que la aceptes: en el correo de Google Ads a amscerramientos@gmail.com, o en ads.google.com, «Administración», «Acceso y seguridad», «Administradores», «Aceptar» en Casiopea 360. Los anuncios empiezan el 1 de diciembre (en noviembre, nada); la tarjeta, entonces. Facebook e Instagram, cuando Raúl te los pase.",
+  "ads": "Invitación enviada a tu cuenta 171-167-8619 (2 de noviembre). Solo falta que la aceptes: en el correo de Google Ads a amscerramientos@gmail.com, o en ads.google.com, «Administración», «Acceso y seguridad», «Administradores», «Aceptar» en Casiopea 360. Los anuncios empiezan el 1 de diciembre (en noviembre, nada); la tarjeta, entonces. Facebook e Instagram: si Raúl no nos pasa el acceso antes del miércoles 4 de noviembre, abrimos unas cuentas nuevas a tu nombre (plan B) y te diremos los pasos.",
   "analytics": "Ya tienes tu propia cuenta de Google Analytics, creada por ti con tu correo de Gmail de empresa, y nos has dado acceso de administrador. Nos has pasado el código de medición para conectarla con la web nueva.",
   "dominio": "Hecho: tu web nueva está en amscerramientos.es desde el 2 de noviembre. Tu correo y tu teléfono siguen igual. Las direcciones de la web vieja llevan a su página nueva, para no perder lo que tenías en Google.",
-  "search": "Search Console: le hemos enviado a Google el mapa de tu web nueva (70 páginas) y lo ha leído bien. Y Microsoft Clarity nos enseña, de forma anónima, cómo se mueve la gente por la web.",
-  "ficha": "Ya tenemos acceso a tu ficha de Google: descripción nueva, logo y portada con un trabajo tuyo. Las reseñas las contestamos nosotros cada semana; las malas, siempre contigo antes."
+  "search": "Search Console: le hemos enviado a Google el mapa de tu web nueva (70 páginas) y lo ha leído bien. Y Microsoft Clarity nos enseña, de forma anónima, cómo se mueve la gente por la web. Bing (el buscador de Microsoft) también tiene ya el mapa de tu web.",
+  "ficha": "Ya tenemos acceso a tu ficha de Google: descripción nueva, logo y portada con un trabajo tuyo. Las reseñas las contestamos nosotros cada semana; las malas, siempre contigo antes. Tu ficha ya está también en Bing, conectada con la de Google: lo que cambiemos en Google se copia solo."
  },
  "resueltas": [
   1,
@@ -78,6 +77,20 @@
  },
  "enlace": "#tareas",
  "tareas": [
+  {
+   "t": "Dinos si empezamos con el artículo en Dream Alcalá, el periódico de Alcalá con más lectores: 280 €, con 4 enlaces a tu web. Te lo facturaríamos a través de AYR Galic antes de publicarlo. Con un «sí» nos vale.",
+   "prio": "Importante",
+   "u": "https://www.amscerramientos.es/informes/prensa-a4m9/articulo",
+   "b": "Ver el artículo"
+  },
+  {
+   "t": "Léete el artículo y dinos si te cuadran dos cosas: la frase entre comillas sobre la persiana y que un piso de 6 ventanas se monta en uno o dos días. Si lo dirías de otra forma, cuéntanoslo como te salga.",
+   "u": "https://www.amscerramientos.es/informes/prensa-a4m9/articulo",
+   "b": "Leer el artículo"
+  },
+  {
+   "t": "Tu ficha de Kömmerling solo sale en Villalbilla. Reenvía a tu comercial de Kömmerling el mensaje que va ya escrito en el correo del 3 de noviembre, para que salgas también en Alcalá, Torrejón, Coslada, San Fernando, Alcobendas y San Sebastián de los Reyes, con el enlace a tu web nueva."
+  },
   {
    "t": "Revisa los precios: haz 3 o 4 precios de ventanas de obras que conozcas y dinos si te encajan. Es lo más importante, porque el cliente llega sabiendo el precio.",
    "u": "/calculadora",
