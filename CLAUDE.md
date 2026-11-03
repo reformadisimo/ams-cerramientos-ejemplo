@@ -90,3 +90,4 @@
 - 2026-11-03 (ams·v86): `/todo-es-tuyo`, paso 1 de la lista de cambio de proveedor: añadido que al avisar se le hace un informe de todo (SEO, enlaces, campañas, inversión, evolución) para el nuevo proveedor.
 - 2026-11-03 (ams·v87): guía de Javi, novedad «Todo es tuyo»: añadido que si cambia de proveedor se le hace un informe de todo lo hecho (SEO, campañas, inversión).
 - 2026-11-03 (ams·v88): sin permanencia para Javi, dicho en `/todo-es-tuyo` (compromisos) y en la novedad «Todo es tuyo» de la guía: en proyectos cobrados solemos pedir 3 a 6 meses; a él, sin coste, ninguna.
+- 2026-11-03 (ams·v89): `/todo-es-tuyo` y guía: «todo lo hecho es tuyo (web, asistente, creatividades, campañas, artículos) y tienes el control de todo». Única cosa en cuenta nuestra: la clave de IA del asistente (ANTHROPIC_API_KEY); dicho a Javi en genérico, «cuenta de inteligencia artificial», sin nombres: si se va, el nuevo proveedor abre la suya.
