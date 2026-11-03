@@ -88,3 +88,4 @@
 - 2026-11-03 (ams·v84): `/todo-es-tuyo`, «Tu web»: matizado que cualquier proveedor puede hacerse cargo con lo que Javi ya tiene y sus accesos; la guía a medida solo lo facilita al máximo y refleja lo hecho durante la ayuda.
 - 2026-11-03 (ams·v85): `/todo-es-tuyo`: fuera la promesa de «guía a medida» (Ig: no dar pistas ni crear expectativa; la guía real es solo lo de Vercel, que ya está explicado). Queda: con lo que ya tiene y sus accesos, cualquier proveedor puede hacerse cargo.
 - 2026-11-03 (ams·v86): `/todo-es-tuyo`, paso 1 de la lista de cambio de proveedor: añadido que al avisar se le hace un informe de todo (SEO, enlaces, campañas, inversión, evolución) para el nuevo proveedor.
+- 2026-11-03 (ams·v87): guía de Javi, novedad «Todo es tuyo»: añadido que si cambia de proveedor se le hace un informe de todo lo hecho (SEO, campañas, inversión).
