@@ -1,5 +1,5 @@
 {
- "version": "2026-11-03T17:08",
+ "version": "2026-11-03T17:41",
  "fecha": "3 de noviembre de 2026",
  "aviso": "Todo es tuyo y tú tienes el control: tu dominio, tu correo, tu web, tus anuncios y tus contactos, a tu nombre. Te lo hemos mandado por correo, con tu guía de control en PDF.",
  "ultimo": [
@@ -105,6 +105,12 @@
  },
  "enlace": "#tareas",
  "tareas": [
+  {
+   "t": "Tres preguntas rápidas, con un sí o un no (las puedes contestar en la caja del final de la guía, «¿Qué echas de menos?»): 1) ¿Ya te llegan los correos nuevos en Outlook? 2) ¿Has guardado la copia de tu Outlook (el archivo .pst en el escritorio)? Hasta que nos digas que sí a las dos, no le digas nada a Raúl del hosting. 3) ¿Prefieres que a partir de ahora te escribamos a info@amscerramientos.es o a info@amscerrajeria.es? Los dos te llegan igual.",
+   "u": "#sugerencias",
+   "b": "Contestar aquí",
+   "prio": "Muy importante"
+  },
   {
    "t": "Google Ads: acepta la invitación de Casiopea 360 (caduca el 2 de diciembre y sin ella no podemos preparar tus anuncios). Ojo: la invitación no siempre llega por correo, a veces aparece dentro de Google Ads. Tienes dos cuentas: la buena es AMS CERRAMIENTOS (171-167-8619); la de «Pájaro» no la uses. 1) Entra en ads.google.com. 2) Arriba a la derecha mira con qué correo has entrado y, si quieres, mándanos un pantallazo. 3) Elige AMS CERRAMIENTOS, pulsa el engranaje «Administración», «Acceso y seguridad», pestaña «Administradores» y «Aceptar». Si no te sale nada para aceptar, no pasa nada: dínoslo y te la mandamos otra vez con el correo que uses. Si no te sale «Administración», pulsa «Cambiar a modo experto» y «Crear una cuenta sin campaña» (sin tarjeta ni anuncios) y vuelve a probar.",
    "u": "https://ads.google.com",
