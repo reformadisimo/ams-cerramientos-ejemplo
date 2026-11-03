@@ -118,13 +118,13 @@ export async function detalleReal(desde: string, hasta: string, soloCrm = false)
     q`SELECT count(*) FILTER (WHERE nuevo)::int AS u FROM vistas WHERE (creado AT TIME ZONE 'Europe/Madrid')::date BETWEEN ${desde}::date AND ${hasta}::date`,
     q`SELECT fuente, sum(segundos)::int AS s, count(*) FILTER (WHERE rebote)::int AS r FROM tiempos
       WHERE (creado AT TIME ZONE 'Europe/Madrid')::date BETWEEN ${desde}::date AND ${hasta}::date GROUP BY fuente`,
-    q`SELECT fuente, count(*)::int AS n FROM pasos_visita WHERE tipo IN ('contacto_wa', 'contacto_tel')
+    q`SELECT fuente, count(*) FILTER (WHERE tipo = 'contacto_wa')::int AS cw, count(*) FILTER (WHERE tipo = 'contacto_tel')::int AS ct FROM pasos_visita WHERE tipo IN ('contacto_wa', 'contacto_tel')
       AND (creado AT TIME ZONE 'Europe/Madrid')::date BETWEEN ${desde}::date AND ${hasta}::date GROUP BY fuente`,
   ]);
   // WhatsApp y llamadas: se cuentan desde el 31-oct-2026; antes, sin dato ("-")
   const conToques = desde >= INICIO_TOQUES;
-  const toq: Record<string, number> = {};
-  for (const r of pv) { const k = canalMesa(r.fuente); toq[k] = (toq[k] ?? 0) + Number(r.n ?? 0); }
+  const toqWa: Record<string, number> = {}, toqTel: Record<string, number> = {};
+  for (const r of pv) { const k = canalMesa(r.fuente); toqWa[k] = (toqWa[k] ?? 0) + Number(r.cw ?? 0); toqTel[k] = (toqTel[k] ?? 0) + Number(r.ct ?? 0); }
   const seg: Record<string, number> = {}, reb: Record<string, number> = {};
   for (const r of tf) { const k = canalMesa(r.fuente); seg[k] = (seg[k] ?? 0) + Number(r.s ?? 0); reb[k] = (reb[k] ?? 0) + Number(r.r ?? 0); }
   const o: Record<string, { n: number; movil: number; visitas: number; personas: number }> = {};
@@ -141,7 +141,7 @@ export async function detalleReal(desde: string, hasta: string, soloCrm = false)
     gsc: null,
     entradas: [],
     personas: Number(pers[0]?.u ?? 0),
-    origenes: Object.entries(o).map(([origen, x]) => ({ origen, ...x, segundos: seg[origen] ?? 0, rebotes: reb[origen] ?? 0, ...(conToques ? { toques: toq[origen] ?? 0 } : {}) })).sort((a, b) => b.n - a.n),
+    origenes: Object.entries(o).map(([origen, x]) => ({ origen, ...x, segundos: seg[origen] ?? 0, rebotes: reb[origen] ?? 0, ...(conToques ? { contactos: toqWa[origen] ?? 0, llamadas: toqTel[origen] ?? 0 } : {}) })).sort((a, b) => b.n - a.n),
     crm,
   };
 }
