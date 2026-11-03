@@ -85,3 +85,4 @@
 - 2026-11-03 (ams·v81): guía de Javi, dos novedades más del 3-nov (Instagram ya abierto en su móvil y Facebook con Raúl mañana; Outlook con la contraseña de siempre y aviso de cuándo dar de baja el hosting).
 - 2026-11-03 (ams·v82): guía: Clarity aceptado por Javi (3-nov 17:06); la tarea de invitaciones solo pide Bing, para que quede a su nombre.
 - 2026-11-03 (ams·v83): `/todo-es-tuyo`, «Tu web»: añadido que el día que Javi quiera trabajar por su cuenta o con otro proveedor se le da una guía detallada (la web está en nuestro Vercel; con su cuenta propia se mueve y no pierde control). Bing a su nombre sigue pendiente en la guía.
+- 2026-11-03 (ams·v84): `/todo-es-tuyo`, «Tu web»: matizado que cualquier proveedor puede hacerse cargo con lo que Javi ya tiene y sus accesos; la guía a medida solo lo facilita al máximo y refleja lo hecho durante la ayuda.
