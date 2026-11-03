@@ -75,7 +75,7 @@
   "ads": "Invitación enviada a tu cuenta 171-167-8619 (2 de noviembre). Solo falta que la aceptes. No siempre llega por correo: entra en ads.google.com, «Administración», «Acceso y seguridad», «Administradores», «Aceptar» en Casiopea 360. Si no te sale, dínoslo y te la mandamos otra vez con el correo que uses. Los anuncios empiezan el 1 de diciembre (en noviembre, nada); la tarjeta, entonces. Facebook e Instagram: si Raúl no nos pasa el acceso antes del miércoles 4 de noviembre, abrimos unas cuentas nuevas a tu nombre (plan B) y te diremos los pasos.",
   "analytics": "Ya tienes tu propia cuenta de Google Analytics, creada por ti con tu correo de Gmail de empresa, y nos has dado acceso de administrador. Nos has pasado el código de medición para conectarla con la web nueva.",
   "dominio": "Tuyo, en DonDominio, a tu nombre, y se renueva solo. Tu web nueva está en amscerramientos.es desde el 2 de noviembre. Tu correo info@amscerramientos.es también está ya en DonDominio (desde el 3 de noviembre), a tu nombre: solo te falta cambiar los datos en tu Outlook.",
-  "search": "Search Console: ya eres propietario con amscerramientos@gmail.com. Le hemos enviado a Google el mapa de tu web nueva (70 páginas). Clarity (cómo se mueve la gente por la web): te hemos invitado como administrador. Bing: entra una vez en bing.com/webmasters con tu Gmail y pulsa «Importar».",
+  "search": "Search Console: ya eres propietario con amscerramientos@gmail.com. Le hemos enviado a Google el mapa de tu web nueva (70 páginas). Clarity (cómo se mueve la gente por la web): ya estás dentro como administrador. Bing: entra una vez en bing.com/webmasters con tu Gmail y pulsa «Importar».",
   "ficha": "Ya tenemos acceso a tu ficha de Google: descripción nueva, logo y portada con un trabajo tuyo. Las reseñas las contestamos nosotros cada semana; las malas, siempre contigo antes. Tu ficha ya está también en Bing, conectada con la de Google: lo que cambiemos en Google se copia solo."
  },
  "resueltas": [
@@ -136,7 +136,7 @@
    "prio": "Importante"
   },
   {
-   "t": "Acepta las invitaciones, sin poner ningún dato: solo pulsa el botón del correo. Microsoft Clarity: ya llegó, pulsa el botón y listo (no hace falta crear ningún proyecto). Search Console: ya eres el dueño, no tienes que hacer nada. Bing: entra una vez en bing.com/webmasters con tu Gmail y pulsa «Importar». Así todo queda a tu nombre.",
+   "t": "Una sola cosa: Clarity ya lo has aceptado y Search Console ya es tuyo, gracias. Falta Bing, solo para que quede también a tu nombre (lo nuestro ya está hecho y funcionando): entra una vez en bing.com/webmasters con tu Gmail y pulsa «Importar». Así todo queda a tu nombre.",
    "u": "https://www.bing.com/webmasters",
    "b": "Entrar en Bing"
   },
