@@ -1,5 +1,5 @@
 {
- "version": "2026-11-03T07:20",
+ "version": "2026-11-03T07:30",
  "fecha": "3 de noviembre de 2026",
  "aviso": "Te hemos mandado un correo: cómo te subimos en Google, tu primer artículo en prensa y tres cosas que te pedimos. Las tienes arriba, en «Lo que te toca a ti».",
  "ultimo": [
@@ -78,15 +78,16 @@
  "enlace": "#tareas",
  "tareas": [
   {
-   "t": "Dinos si empezamos con el artículo en Dream Alcalá, el periódico de Alcalá con más lectores: 280 €, con 4 enlaces a tu web. Te lo facturaríamos a través de AYR Galic antes de publicarlo. Con un «sí» nos vale.",
+   "t": "Lee el artículo que te hemos preparado para Dream Alcalá, el periódico de Alcalá con más lectores, y dinos dos cosas: si empezamos con él (280 €, con 4 enlaces a tu web; te lo facturaríamos a través de AYR Galic antes de publicarlo) y si te cuadran la frase entre comillas sobre la persiana y que un piso de 6 ventanas se monta en uno o dos días. Con un «sí» y lo que cambiarías, nos vale.",
    "prio": "Importante",
    "u": "https://www.amscerramientos.es/informes/prensa-a4m9/articulo",
-   "b": "Ver el artículo"
+   "b": "Leer el artículo"
   },
   {
-   "t": "Léete el artículo y dinos si te cuadran dos cosas: la frase entre comillas sobre la persiana y que un piso de 6 ventanas se monta en uno o dos días. Si lo dirías de otra forma, cuéntanoslo como te salga.",
-   "u": "https://www.amscerramientos.es/informes/prensa-a4m9/articulo",
-   "b": "Leer el artículo"
+   "t": "Google Ads: acepta la invitación de Casiopea 360 (caduca el 2 de diciembre y sin ella no podemos preparar tus anuncios). Ojo, tienes dos cuentas: la buena es AMS CERRAMIENTOS (171-167-8619); la de «Pájaro» no la uses. Entra en ads.google.com, elige AMS CERRAMIENTOS, engranaje «Administración», «Acceso y seguridad», pestaña «Administradores» y «Aceptar». Si no te sale «Administración», pulsa «Cambiar a modo experto» y «Crear una cuenta sin campaña» (sin tarjeta ni anuncios) y vuelve a probar.",
+   "u": "https://ads.google.com",
+   "b": "Ir a Google Ads",
+   "prio": "Muy importante"
   },
   {
    "t": "Tu ficha de Kömmerling solo sale en Villalbilla. Reenvía a tu comercial de Kömmerling el mensaje que va ya escrito en el correo del 3 de noviembre, para que salgas también en Alcalá, Torrejón, Coslada, San Fernando, Alcobendas y San Sebastián de los Reyes, con el enlace a tu web nueva."
@@ -104,12 +105,6 @@
    "prio": "Muy importante",
    "u": "/conoce-tu-cliente",
    "b": "Contestar (10 minutos)"
-  },
-  {
-   "t": "Google Ads: acepta la invitación de Casiopea 360. Ojo, tienes dos cuentas: la buena es AMS CERRAMIENTOS (171-167-8619); la de «Pájaro» no la uses. Entra en ads.google.com, elige AMS CERRAMIENTOS, engranaje «Administración», «Acceso y seguridad», pestaña «Administradores» y «Aceptar». Si no te sale «Administración», pulsa «Cambiar a modo experto» y «Crear una cuenta sin campaña» (sin tarjeta ni anuncios) y vuelve a probar.",
-   "u": "https://ads.google.com",
-   "b": "Ir a Google Ads",
-   "prio": "Importante"
   },
   {
    "t": "Repasa tu web nueva con calma: navega, toca todo y dinos lo que no se vea bien, no te guste o quieras cambiar. Lo hacemos enseguida.",
