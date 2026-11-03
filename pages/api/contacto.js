@@ -26,6 +26,7 @@ const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&am
 const ZONA_SI = /alcal[aá]|villalbilla|torrej[oó]n|meco|azuqueca|camarma|daganzo|santos de la humosa|anchuelo|corpa|santorcaz|pezuela|nuevo bazt[aá]n|loeches|torres de la alameda|valverde|ajalvir|cabanillas|alovera|chiloeches|marchamalo|villanueva de la torre|quer|yunquera|fontanar|el casar|valdeavero|fresno de torote|serracines|ribatejada|campo real|pozuelo del rey|olmeda|coslada|san fernando|mejorada|velilla|alcobendas|san sebasti[aá]n de los reyes|algete|cobe[ñn]a|san agust[ií]n|guadalix/; // zonas de Javi (1-nov-2026)
 const ZONA_DUDA = /guadalajara|arganda|rivas|fuente el saz/;
 const ZONA_NO = /getafe|alcorc[oó]n|\bpinto\b|\bparla\b|fuenlabrada|tres cantos|colmenar|las rozas|pozuelo de alarc|^pozuelo$|majadahonda|canillejas/; // donde Javi no trabaja
+const ZONA_LEJOS = /alicante|alacant|tarragona|barcelona|valencia|castell[oó]n|murcia|m[aá]laga|sevilla|c[oó]rdoba|granada|almer[ií]a|c[aá]diz|huelva|ja[eé]n|badajoz|c[aá]ceres|coru[ñn]a|lugo|ourense|pontevedra|asturias|oviedo|gij[oó]n|cantabria|santander|bilbao|vizcaya|guip[uú]zcoa|san sebasti[aá]n$|vitoria|[aá]lava|navarra|pamplona|zaragoza|huesca|teruel|lleida|l[eé]rida|girona|gerona|baleares|mallorca|ibiza|canarias|tenerife|las palmas|albacete|ciudad real|cuenca|toledo|[aá]vila|segovia|salamanca|zamora|valladolid|le[oó]n|burgos|palencia|soria|la rioja|logro[ñn]o|ceuta|melilla/; // fuera de zona (3-nov-2026)
 const ZONA_NORTE = /moraleja|encinar|conde orgaz|piovera|alameda de osuna|paracuellos|santo domingo|ciudalcampo|fuente del fresno|\b(28109|28050|28043|28042|28860|28120|28707)\b/;
 const quitaAcentos = t => String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 function encaje(d) {
@@ -37,6 +38,7 @@ function encaje(d) {
     if (n > 0) return ['No encaja', 'zona norte, solo ' + n + ' ventana' + (n === 1 ? '' : 's')];
     return ['A valorar', 'zona norte: preguntar cuántas ventanas'];
   }
+  if (ZONA_LEJOS.test(z) && !ZONA_SI.test(z)) return ['No encaja', 'muy lejos de nuestra zona'];
   if (ZONA_NO.test(z)) return ['No encaja', 'zona donde no trabajamos'];
   if (/\batico\b/.test(t) && /cerramiento|terraza|cerrar/.test(t)) return ['No encaja', 'cerramiento de ático'];
   if (/^madrid( capital)?$|madrid capital|\b280[0-5]\d\b/.test(z) && !ZONA_SI.test(z)) return ['No encaja', 'Madrid capital'];
@@ -96,7 +98,7 @@ module.exports = async (req, res) => {
       d.encaje = nivel + ' (' + motivo + ')';
       d.pide = '[' + nivel + '] ' + String(d.pide || '');
       const r = await rpc('web_contacto', { d });
-      await aviso(d, r);
+      if (nivel !== 'No encaja') await aviso(d, r); // lo que no encaja queda en la libreta, sin correo a Javi
       return res.json({ ok: !!(r && r.ok) });
     }
     return res.status(400).json({ ok: false });
