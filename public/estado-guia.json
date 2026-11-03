@@ -1,226 +1,226 @@
 {
- "version": "2026-11-03T17:44",
- "fecha": "3 de noviembre de 2026",
- "aviso": "Todo es tuyo y tú tienes el control: tu dominio, tu correo, tu web, tus anuncios y tus contactos, a tu nombre. Te lo hemos mandado por correo, con tu guía de control en PDF.",
- "ultimo": [
-  {
-   "f": "3 nov",
-   "t": "¿Cuándo se ven los resultados?\n- Entre 3 y 6 meses, por nuestra experiencia\n- Google tarda semanas en leer tu web nueva\n- Los anuncios empiezan el 1 de diciembre\n> Antes no esperes grandes cifras. Es lo normal."
+  "version": "2026-11-03T20:50",
+  "fecha": "3 de noviembre de 2026",
+  "aviso": "Todo es tuyo y tú tienes el control: tu dominio, tu correo, tu web, tus anuncios y tus contactos, a tu nombre. Te lo hemos mandado por correo, con tu guía de control en PDF.",
+  "ultimo": [
+    {
+      "f": "3 nov",
+      "t": "¿Cuándo se ven los resultados?\n- Entre 3 y 6 meses, por nuestra experiencia\n- Google tarda semanas en leer tu web nueva\n- Los anuncios empiezan el 1 de diciembre\n> Antes no esperes grandes cifras. Es lo normal."
+    },
+    {
+      "f": "3 nov",
+      "t": "Anuncios y SEO: por qué hacemos los dos\n- **Anuncios:** traen contactos pronto, pero se acaban cuando dejas de pagar\n- **SEO:** se queda en tu web para siempre (enlaces, notas de prensa, artículos)"
+    },
+    {
+      "f": "3 nov",
+      "t": "Te sobran cosas: perfecto, es fácil quitarlas\n- La lupa de la guía es solo un ejemplo, para que veas por curiosidad cómo se ve\n- Los datos de verdad de tu web los analizamos nosotros cada cierto tiempo\n- Quitamos lo que no sirva\n> Paciencia, y empezar con fuerza: para frenar siempre hay tiempo.",
+      "u": "/guia-javi/lupa"
+    },
+    {
+      "f": "3 nov",
+      "t": "Instagram y Facebook\n- Instagram: ya has cambiado la contraseña y la cuenta es solo tuya\n- Falta poner el correo de AMS y pasarla a empresa\n- Facebook: mañana hablas con Raúl; si no te lo pasa, te abrimos uno nuevo a tu nombre",
+      "u": "#tareas"
+    },
+    {
+      "f": "3 nov",
+      "t": "Outlook: ya recibes los correos y tienes la copia, gracias\n- Falta solo pedirle a Raúl que dé de baja el hosting antiguo (mañana, cuando hables con él)\n- Lo demás lo hacemos nosotros",
+      "u": "#tareas"
+    },
+    {
+      "f": "3 nov",
+      "t": "Libreta: motivos nuevos en «No ha salido»\n- «Está lejos, fuera de mi zona»\n- «No hago ese producto»\n> Si no los ves, cierra la libreta y vuelve a abrirla.",
+      "u": "#tareas"
+    },
+    {
+      "f": "3 nov",
+      "t": "Contactos que no te encajan\n- Los de Alicante, Tarragona y otras zonas lejanas ya no te mandan correo\n- Quedan guardados en tu libreta\n> No tienes que hacer nada.",
+      "u": "#tareas"
+    },
+    {
+      "f": "3 nov",
+      "t": "Todo es tuyo y tú tienes el control\n- Tu guía de control: qué tienes, dónde está y cómo entras\n- Todo lo hecho es tuyo: web, asistente, creatividades, campañas y artículos\n- Contigo no hay permanencia ni la habrá (solemos pedir 3 a 6 meses en proyectos que cobramos; a ti te ayudamos sin coste)\n- Si un día cambias de proveedor, te hacemos un informe de todo: SEO, campañas e inversión\n> Te la mandamos también en PDF: guárdala.",
+      "u": "https://www.amscerramientos.es/todo-es-tuyo"
+    },
+    {
+      "f": "3 nov",
+      "t": "Hecho: tu correo info@amscerramientos.es ya está en DonDominio, a tu nombre (unos 10 € al año). Ya no depende de Raúl. Solo te falta un paso en tu Outlook (en «Lo que te toca a ti»).",
+      "u": "#tareas"
+    },
+    {
+      "f": "3 nov",
+      "t": "Tus contactos son tuyos: en tu libreta, «Ajustes», «Descargar todos mis contactos». Te los bajas en Excel cuando quieras, sin pedírnoslo."
+    },
+    {
+      "f": "3 nov",
+      "t": "Ya eres propietario de Search Console (cómo te ve Google) y administrador de Clarity. Acepta la invitación que te llega a tu Gmail."
+    },
+    {
+      "f": "3 nov",
+      "t": "Tu primer artículo en prensa, preparado: «¿Cuánto cuesta cambiar las ventanas de un piso en Alcalá?», con tus precios y tus fotos, para Dream Alcalá. Solo falta tu «sí».",
+      "u": "https://www.amscerramientos.es/informes/prensa-a4m9/articulo"
+    },
+    {
+      "f": "3 nov",
+      "t": "Hecho: tu ficha ya está en Bing (el buscador de Windows y de Copilot), publicada, verificada y conectada con tu ficha de Google. Y Bing ya tiene el mapa de tu web nueva.",
+      "u": "https://www.bing.com/search?q=AMS+Cerramientos+y+Servicios+Villalbilla"
+    },
+    {
+      "f": "3 nov",
+      "t": "Facebook e Instagram: si Raúl no nos pasa el acceso antes del miércoles 4, pasamos al plan B y abrimos unas cuentas nuevas a tu nombre. Te diremos los pasos, son pocos."
+    },
+    {
+      "f": "2 nov",
+      "t": "Google Ads: recibido tu número (171-167-8619) y enviada la invitación de Casiopea 360. Solo falta que la aceptes.",
+      "u": "#tareas"
+    },
+    {
+      "f": "2 nov",
+      "t": "Sorpresa: tu web nueva ya está en amscerramientos.es, conectada a Analytics, Search Console y Clarity.",
+      "u": "https://www.amscerramientos.es/"
+    },
+    {
+      "f": "2 nov",
+      "t": "Todos los avisos de la web (contactos, visitas, precio con fotos, comparar presupuesto) te llegan ya a info@amscerramientos.es.",
+      "u": "#tareas"
+    }
+  ],
+  "cuentas": {
+    "ads": "Invitación enviada a tu cuenta 171-167-8619 (2 de noviembre). Solo falta que la aceptes. No siempre llega por correo: entra en ads.google.com, «Administración», «Acceso y seguridad», «Administradores», «Aceptar» en Casiopea 360. Si no te sale, dínoslo y te la mandamos otra vez con el correo que uses. Los anuncios empiezan el 1 de diciembre (en noviembre, nada); la tarjeta, entonces. Facebook e Instagram: si Raúl no nos pasa el acceso antes del miércoles 4 de noviembre, abrimos unas cuentas nuevas a tu nombre (plan B) y te diremos los pasos.",
+    "analytics": "Ya tienes tu propia cuenta de Google Analytics, creada por ti con tu correo de Gmail de empresa, y nos has dado acceso de administrador. Nos has pasado el código de medición para conectarla con la web nueva.",
+    "dominio": "Tuyo, en DonDominio, a tu nombre, y se renueva solo. Tu web nueva está en amscerramientos.es desde el 2 de noviembre. Tu correo info@amscerramientos.es también está ya en DonDominio (desde el 3 de noviembre), a tu nombre: solo te falta cambiar los datos en tu Outlook.",
+    "search": "Search Console: ya eres propietario con amscerramientos@gmail.com. Le hemos enviado a Google el mapa de tu web nueva (70 páginas). Clarity (cómo se mueve la gente por la web): ya estás dentro como administrador. Bing: entra una vez en bing.com/webmasters con tu Gmail y pulsa «Importar».",
+    "ficha": "Ya tenemos acceso a tu ficha de Google: descripción nueva, logo y portada con un trabajo tuyo. Las reseñas las contestamos nosotros cada semana; las malas, siempre contigo antes. Tu ficha ya está también en Bing, conectada con la de Google: lo que cambiemos en Google se copia solo."
   },
-  {
-   "f": "3 nov",
-   "t": "Anuncios y SEO: por qué hacemos los dos\n- **Anuncios:** traen contactos pronto, pero se acaban cuando dejas de pagar\n- **SEO:** se queda en tu web para siempre (enlaces, notas de prensa, artículos)"
+  "resueltas": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    12
+  ],
+  "nuevas": [],
+  "popup": {
+    "etiqueta": "Hola de nuevo, Javi",
+    "titulo": "Todo es tuyo. Tú tienes el control.",
+    "intro": "Todo lo de AMS está a tu nombre y lo pagas tú directamente. Nosotros solo entramos porque tú nos invitas, y nos puedes quitar cuando quieras:",
+    "items": [
+      {
+        "t": "Tu guía de control: todo lo tuyo, en una página (guárdala en PDF).",
+        "h": "https://www.amscerramientos.es/todo-es-tuyo"
+      },
+      {
+        "t": "Tu correo ya está en DonDominio, a tu nombre. Ya no dependes de Raúl.",
+        "h": "#tareas"
+      },
+      {
+        "t": "Tus contactos, en Excel cuando quieras, desde tu libreta.",
+        "h": "#tareas"
+      },
+      {
+        "t": "Lo que te toca a ti, en una lista.",
+        "h": "#tareas"
+      }
+    ]
   },
-  {
-   "f": "3 nov",
-   "t": "Te sobran cosas: perfecto, es fácil quitarlas\n- La lupa de la guía es solo un ejemplo, para que veas por curiosidad cómo se ve\n- Los datos de verdad de tu web los analizamos nosotros cada cierto tiempo\n- Quitamos lo que no sirva\n> Paciencia, y empezar con fuerza: para frenar siempre hay tiempo.",
-   "u": "/guia-javi/lupa"
-  },
-  {
-   "f": "3 nov",
-   "t": "Instagram y Facebook\n- Instagram: ya lo tienes abierto en el móvil\n- Falta comprobar correo y teléfono, cambiar la contraseña y pasarla a empresa\n- Facebook: mañana hablas con Raúl; si no te lo pasa, te abrimos uno nuevo a tu nombre",
-   "u": "#tareas"
-  },
-  {
-   "f": "3 nov",
-   "t": "Outlook: ya recibes los correos y tienes la copia, gracias\n- Falta solo pedirle a Raúl que dé de baja el hosting antiguo (mañana, cuando hables con él)\n- Lo demás lo hacemos nosotros",
-   "u": "#tareas"
-  },
-  {
-   "f": "3 nov",
-   "t": "Libreta: motivos nuevos en «No ha salido»\n- «Está lejos, fuera de mi zona»\n- «No hago ese producto»\n> Si no los ves, cierra la libreta y vuelve a abrirla.",
-   "u": "#tareas"
-  },
-  {
-   "f": "3 nov",
-   "t": "Contactos que no te encajan\n- Los de Alicante, Tarragona y otras zonas lejanas ya no te mandan correo\n- Quedan guardados en tu libreta\n> No tienes que hacer nada.",
-   "u": "#tareas"
-  },
-  {
-   "f": "3 nov",
-   "t": "Todo es tuyo y tú tienes el control\n- Tu guía de control: qué tienes, dónde está y cómo entras\n- Todo lo hecho es tuyo: web, asistente, creatividades, campañas y artículos\n- Contigo no hay permanencia ni la habrá (solemos pedir 3 a 6 meses en proyectos que cobramos; a ti te ayudamos sin coste)\n- Si un día cambias de proveedor, te hacemos un informe de todo: SEO, campañas e inversión\n> Te la mandamos también en PDF: guárdala.",
-   "u": "https://www.amscerramientos.es/todo-es-tuyo"
-  },
-  {
-   "f": "3 nov",
-   "t": "Hecho: tu correo info@amscerramientos.es ya está en DonDominio, a tu nombre (unos 10 € al año). Ya no depende de Raúl. Solo te falta un paso en tu Outlook (en «Lo que te toca a ti»).",
-   "u": "#tareas"
-  },
-  {
-   "f": "3 nov",
-   "t": "Tus contactos son tuyos: en tu libreta, «Ajustes», «Descargar todos mis contactos». Te los bajas en Excel cuando quieras, sin pedírnoslo."
-  },
-  {
-   "f": "3 nov",
-   "t": "Ya eres propietario de Search Console (cómo te ve Google) y administrador de Clarity. Acepta la invitación que te llega a tu Gmail."
-  },
-  {
-   "f": "3 nov",
-   "t": "Tu primer artículo en prensa, preparado: «¿Cuánto cuesta cambiar las ventanas de un piso en Alcalá?», con tus precios y tus fotos, para Dream Alcalá. Solo falta tu «sí».",
-   "u": "https://www.amscerramientos.es/informes/prensa-a4m9/articulo"
-  },
-  {
-   "f": "3 nov",
-   "t": "Hecho: tu ficha ya está en Bing (el buscador de Windows y de Copilot), publicada, verificada y conectada con tu ficha de Google. Y Bing ya tiene el mapa de tu web nueva.",
-   "u": "https://www.bing.com/search?q=AMS+Cerramientos+y+Servicios+Villalbilla"
-  },
-  {
-   "f": "3 nov",
-   "t": "Facebook e Instagram: si Raúl no nos pasa el acceso antes del miércoles 4, pasamos al plan B y abrimos unas cuentas nuevas a tu nombre. Te diremos los pasos, son pocos."
-  },
-  {
-   "f": "2 nov",
-   "t": "Google Ads: recibido tu número (171-167-8619) y enviada la invitación de Casiopea 360. Solo falta que la aceptes.",
-   "u": "#tareas"
-  },
-  {
-   "f": "2 nov",
-   "t": "Sorpresa: tu web nueva ya está en amscerramientos.es, conectada a Analytics, Search Console y Clarity.",
-   "u": "https://www.amscerramientos.es/"
-  },
-  {
-   "f": "2 nov",
-   "t": "Todos los avisos de la web (contactos, visitas, precio con fotos, comparar presupuesto) te llegan ya a info@amscerramientos.es.",
-   "u": "#tareas"
-  }
- ],
- "cuentas": {
-  "ads": "Invitación enviada a tu cuenta 171-167-8619 (2 de noviembre). Solo falta que la aceptes. No siempre llega por correo: entra en ads.google.com, «Administración», «Acceso y seguridad», «Administradores», «Aceptar» en Casiopea 360. Si no te sale, dínoslo y te la mandamos otra vez con el correo que uses. Los anuncios empiezan el 1 de diciembre (en noviembre, nada); la tarjeta, entonces. Facebook e Instagram: si Raúl no nos pasa el acceso antes del miércoles 4 de noviembre, abrimos unas cuentas nuevas a tu nombre (plan B) y te diremos los pasos.",
-  "analytics": "Ya tienes tu propia cuenta de Google Analytics, creada por ti con tu correo de Gmail de empresa, y nos has dado acceso de administrador. Nos has pasado el código de medición para conectarla con la web nueva.",
-  "dominio": "Tuyo, en DonDominio, a tu nombre, y se renueva solo. Tu web nueva está en amscerramientos.es desde el 2 de noviembre. Tu correo info@amscerramientos.es también está ya en DonDominio (desde el 3 de noviembre), a tu nombre: solo te falta cambiar los datos en tu Outlook.",
-  "search": "Search Console: ya eres propietario con amscerramientos@gmail.com. Le hemos enviado a Google el mapa de tu web nueva (70 páginas). Clarity (cómo se mueve la gente por la web): ya estás dentro como administrador. Bing: entra una vez en bing.com/webmasters con tu Gmail y pulsa «Importar».",
-  "ficha": "Ya tenemos acceso a tu ficha de Google: descripción nueva, logo y portada con un trabajo tuyo. Las reseñas las contestamos nosotros cada semana; las malas, siempre contigo antes. Tu ficha ya está también en Bing, conectada con la de Google: lo que cambiemos en Google se copia solo."
- },
- "resueltas": [
-  1,
-  2,
-  3,
-  4,
-  5,
-  6,
-  7,
-  8,
-  12
- ],
- "nuevas": [],
- "popup": {
-  "etiqueta": "Hola de nuevo, Javi",
-  "titulo": "Todo es tuyo. Tú tienes el control.",
-  "intro": "Todo lo de AMS está a tu nombre y lo pagas tú directamente. Nosotros solo entramos porque tú nos invitas, y nos puedes quitar cuando quieras:",
-  "items": [
-   {
-    "t": "Tu guía de control: todo lo tuyo, en una página (guárdala en PDF).",
-    "h": "https://www.amscerramientos.es/todo-es-tuyo"
-   },
-   {
-    "t": "Tu correo ya está en DonDominio, a tu nombre. Ya no dependes de Raúl.",
-    "h": "#tareas"
-   },
-   {
-    "t": "Tus contactos, en Excel cuando quieras, desde tu libreta.",
-    "h": "#tareas"
-   },
-   {
-    "t": "Lo que te toca a ti, en una lista.",
-    "h": "#tareas"
-   }
+  "enlace": "#tareas",
+  "tareas": [
+    {
+      "t": "Google Ads: acepta la invitación (caduca el 2 de diciembre)\n- Sin ella no podemos preparar tus anuncios\n- Tienes dos cuentas: usa **AMS CERRAMIENTOS (171-167-8619)**; la de «Pájaro» no\nPasos\n1. Entra en ads.google.com\n2. Elige AMS CERRAMIENTOS\n3. Engranaje «Administración», «Acceso y seguridad», pestaña «Administradores» y «Aceptar»\n> No siempre llega por correo: a veces aparece dentro de Ads. Si no te sale nada para aceptar, dínoslo (con un pantallazo del correo con el que entras) y te la mandamos otra vez.\n> Si no te sale «Administración»: «Cambiar a modo experto» y «Crear una cuenta sin campaña» (sin tarjeta ni anuncios) y vuelve a probar.",
+      "u": "https://ads.google.com",
+      "b": "Ir a Google Ads",
+      "prio": "Muy importante"
+    },
+    {
+      "t": "Instagram y Facebook\nInstagram: ya has cambiado la contraseña, muy bien\n1. Pon el correo de AMS en la cuenta: tres rayas, «Centro de cuentas», «Información personal», «Información de contacto». Añade info@amscerramientos.es y ponlo como principal (ahora sale el de la cerrajería)\n2. Pásala a cuenta de empresa: Ajustes, «Tipo de cuenta», «Cambiar a cuenta profesional», «Empresa»\nFacebook\n- Está a nombre de Raúl: pídele que te haga administrador con tu correo\n- Si no puede, te abrimos una nueva a tu nombre\n> Sin prisa, mañana con calma. Si algo no lo ves, mándanos un pantallazo.",
+      "prio": "Importante"
+    },
+    {
+      "t": "Contestar las preguntas de «cómo te ves»\n- Unos 10 minutos, casi todo tocando opciones\n- Puedes dejarlo a medias y seguir otro día\n- Lo de dinero es opcional\nQué te preguntamos\n- Cómo es tu cliente\n- Qué más le puedes vender en la misma visita\n- Qué meses vas flojo o cierras\n- Hasta dónde quieres llevar AMS\n> Con esto hacemos los anuncios a tu medida y te buscamos trabajo estable todo el año.",
+      "prio": "Muy importante",
+      "u": "/conoce-tu-cliente",
+      "b": "Contestar (10 minutos)"
+    },
+    {
+      "t": "Bing: un último paso, para que quede a tu nombre\n- Clarity y Search Console: hechos, gracias\n- Entra una vez en bing.com/webmasters con tu Gmail y pulsa «Importar»\n> Lo nuestro ya está hecho y funcionando; esto es solo para que todo quede a tu nombre.",
+      "u": "https://www.bing.com/webmasters",
+      "b": "Entrar en Bing"
+    },
+    {
+      "t": "Tu ficha de Kömmerling solo sale en Villalbilla\n- Reenvía a tu comercial el mensaje que va ya escrito en el correo del 3 de noviembre\n- Con el enlace a tu web nueva\nAsí saldrás también en\n- Alcalá, Torrejón y Coslada\n- San Fernando y Alcobendas\n- San Sebastián de los Reyes"
+    },
+    {
+      "t": "Revisa los precios\n- Haz 3 o 4 precios de ventanas de obras que conozcas\n- Dinos si te encajan\n> Es lo más importante: el cliente llega sabiendo el precio.",
+      "u": "/calculadora",
+      "b": "Abrir la calculadora",
+      "u2": "/presupuesto-sin-visita",
+      "b2": "Precio con fotos",
+      "prio": "Muy importante"
+    },
+    {
+      "t": "Repasa tu web nueva con calma\n- Navega y toca todo\n- Dinos lo que no se vea bien, no te guste o quieras cambiar\n> Lo cambiamos enseguida.",
+      "u": "/",
+      "b": "Ver mi web"
+    },
+    {
+      "t": "Mira los correos que recibirá el cliente\n- Dinos qué cambiarías",
+      "u": "/correos-ejemplo",
+      "b": "Ver los correos"
+    },
+    {
+      "t": "Pegatina nueva con QR\n- Mándanos por WhatsApp una foto de la pegatina que pones ahora y su medida\n- Dinos si te gusta la nueva (va en el correo del 2 de noviembre)\n> Cuando te acuerdes, sin prisa."
+    },
+    {
+      "t": "Abre la página de AMS en LinkedIn (como empresa, no tu perfil)\n- Son 10 minutos y te lo explicamos paso a paso\n- Después nos añades como administradores\n- La llevamos nosotros",
+      "u": "/linkedin-ams#abrir",
+      "b": "Ver cómo abrirla"
+    },
+    {
+      "t": "En cada obra: una foto antes y otra después\n- Desde el mismo sitio\n- Al terminar, el WhatsApp para pedir la reseña\n> Ya tenemos 12 parejas tuyas en la web y quedan genial: cuantas más, mejor.",
+      "u": "#foto-resena",
+      "b": "Ver el mensaje"
+    },
+    {
+      "t": "Tu tarifa ampliada (en diciembre está bien)\n- Ventana y puerta de una hoja\n- Correderas\n- Colores y madera\n- Mosquitera plisada\n- Dos o tres cristales con las mismas medidas",
+      "prio": "En diciembre"
+    },
+    {
+      "t": "Lee el artículo para Dream Alcalá\n- Es el periódico de Alcalá con más lectores\nDinos si empezamos con él\n- 280 €, con 4 enlaces a tu web\n- Te lo facturamos a través de AYR Galic antes de publicarlo\nDinos si te cuadran\n- La frase entre comillas sobre la persiana\n- Que un piso de 6 ventanas se monta en uno o dos días\n> Con un «sí» y lo que cambiarías, nos vale.",
+      "prio": "Sin prisa",
+      "u": "https://www.amscerramientos.es/informes/prensa-a4m9/articulo",
+      "b": "Leer el artículo"
+    },
+    {
+      "t": "Confírmanos por WhatsApp si subimos la web nueva mañana martes, o qué día prefieres. Con un «adelante» nos vale.",
+      "prio": "Hoy",
+      "hecho": true
+    },
+    {
+      "t": "Pon tu libreta de clientes en el iPhone: abre el enlace del correo del 2 de noviembre con Safari, pulsa compartir (el cuadrado con la flecha) y «Añadir a pantalla de inicio».",
+      "hecho": true
+    },
+    {
+      "t": "Mándanos el acuerdo firmado, en foto o escaneado.",
+      "hecho": true
+    },
+    {
+      "t": "Mándanos el número de tu cuenta de Google Ads.",
+      "hecho": true
+    },
+    {
+      "t": "Tres preguntas rápidas, con un sí o un no (las puedes contestar en la caja del final de la guía, «¿Qué echas de menos?»): 1) ¿Ya te llegan los correos nuevos en Outlook? 2) ¿Has guardado la copia de tu Outlook (el archivo .pst en el escritorio)? Hasta que nos digas que sí a las dos, no le digas nada a Raúl del hosting. 3) ¿Prefieres que a partir de ahora te escribamos a info@amscerramientos.es o a info@amscerrajeria.es? Los dos te llegan igual.",
+      "u": "#sugerencias",
+      "b": "Contestar aquí",
+      "prio": "Muy importante",
+      "hecho": true
+    },
+    {
+      "t": "Pasa tu Outlook al correo nuevo (10 minutos). Ya está arreglado de nuestro lado: la contraseña es la de siempre, no hay que aprender otra. 1) Haz una copia de tu Outlook, por seguridad (Archivo, Abrir y exportar, Importar o exportar, Exportar a un archivo .pst). 2) Archivo, Configuración de la cuenta, info@amscerramientos.es, Cambiar, y pon: entrada imap.dondominio.com, puerto 993, SSL/TLS; salida smtp.dondominio.com, puerto 465, SSL/TLS. Si da error, mándanos un pantallazo. Después ya puedes dar de baja el hosting de Raúl (antes no).",
+      "prio": "Importante",
+      "hecho": true
+    }
   ]
- },
- "enlace": "#tareas",
- "tareas": [
-  {
-   "t": "Google Ads: acepta la invitación (caduca el 2 de diciembre)\n- Sin ella no podemos preparar tus anuncios\n- Tienes dos cuentas: usa **AMS CERRAMIENTOS (171-167-8619)**; la de «Pájaro» no\nPasos\n1. Entra en ads.google.com\n2. Elige AMS CERRAMIENTOS\n3. Engranaje «Administración», «Acceso y seguridad», pestaña «Administradores» y «Aceptar»\n> No siempre llega por correo: a veces aparece dentro de Ads. Si no te sale nada para aceptar, dínoslo (con un pantallazo del correo con el que entras) y te la mandamos otra vez.\n> Si no te sale «Administración»: «Cambiar a modo experto» y «Crear una cuenta sin campaña» (sin tarjeta ni anuncios) y vuelve a probar.",
-   "u": "https://ads.google.com",
-   "b": "Ir a Google Ads",
-   "prio": "Muy importante"
-  },
-  {
-   "t": "Instagram y Facebook\nInstagram «ams cerramientos»: ya lo tienes abierto en el móvil\n1. Comprueba que el correo y el teléfono son los tuyos (tres rayas, «Centro de cuentas», «Información personal», «Información de contacto»)\n2. Cambia la contraseña por una que solo sepas tú (no nos la mandes)\n3. Pásala a cuenta de empresa (Ajustes, «Tipo de cuenta», «Cambiar a cuenta profesional», «Empresa»)\nFacebook\n- Está a nombre de Raúl: pídele que te haga administrador con tu correo\n- Si no puede, te abrimos una nueva a tu nombre\n> Si algo no lo ves, mándanos un pantallazo.",
-   "prio": "Importante"
-  },
-  {
-   "t": "Contestar las preguntas de «cómo te ves»\n- Unos 10 minutos, casi todo tocando opciones\n- Puedes dejarlo a medias y seguir otro día\n- Lo de dinero es opcional\nQué te preguntamos\n- Cómo es tu cliente\n- Qué más le puedes vender en la misma visita\n- Qué meses vas flojo o cierras\n- Hasta dónde quieres llevar AMS\n> Con esto hacemos los anuncios a tu medida y te buscamos trabajo estable todo el año.",
-   "prio": "Muy importante",
-   "u": "/conoce-tu-cliente",
-   "b": "Contestar (10 minutos)"
-  },
-  {
-   "t": "Bing: un último paso, para que quede a tu nombre\n- Clarity y Search Console: hechos, gracias\n- Entra una vez en bing.com/webmasters con tu Gmail y pulsa «Importar»\n> Lo nuestro ya está hecho y funcionando; esto es solo para que todo quede a tu nombre.",
-   "u": "https://www.bing.com/webmasters",
-   "b": "Entrar en Bing"
-  },
-  {
-   "t": "Tu ficha de Kömmerling solo sale en Villalbilla\n- Reenvía a tu comercial el mensaje que va ya escrito en el correo del 3 de noviembre\n- Con el enlace a tu web nueva\nAsí saldrás también en\n- Alcalá, Torrejón y Coslada\n- San Fernando y Alcobendas\n- San Sebastián de los Reyes"
-  },
-  {
-   "t": "Revisa los precios\n- Haz 3 o 4 precios de ventanas de obras que conozcas\n- Dinos si te encajan\n> Es lo más importante: el cliente llega sabiendo el precio.",
-   "u": "/calculadora",
-   "b": "Abrir la calculadora",
-   "u2": "/presupuesto-sin-visita",
-   "b2": "Precio con fotos",
-   "prio": "Muy importante"
-  },
-  {
-   "t": "Repasa tu web nueva con calma\n- Navega y toca todo\n- Dinos lo que no se vea bien, no te guste o quieras cambiar\n> Lo cambiamos enseguida.",
-   "u": "/",
-   "b": "Ver mi web"
-  },
-  {
-   "t": "Mira los correos que recibirá el cliente\n- Dinos qué cambiarías",
-   "u": "/correos-ejemplo",
-   "b": "Ver los correos"
-  },
-  {
-   "t": "Pegatina nueva con QR\n- Mándanos por WhatsApp una foto de la pegatina que pones ahora y su medida\n- Dinos si te gusta la nueva (va en el correo del 2 de noviembre)\n> Cuando te acuerdes, sin prisa."
-  },
-  {
-   "t": "Abre la página de AMS en LinkedIn (como empresa, no tu perfil)\n- Son 10 minutos y te lo explicamos paso a paso\n- Después nos añades como administradores\n- La llevamos nosotros",
-   "u": "/linkedin-ams#abrir",
-   "b": "Ver cómo abrirla"
-  },
-  {
-   "t": "En cada obra: una foto antes y otra después\n- Desde el mismo sitio\n- Al terminar, el WhatsApp para pedir la reseña\n> Ya tenemos 12 parejas tuyas en la web y quedan genial: cuantas más, mejor.",
-   "u": "#foto-resena",
-   "b": "Ver el mensaje"
-  },
-  {
-   "t": "Tu tarifa ampliada (en diciembre está bien)\n- Ventana y puerta de una hoja\n- Correderas\n- Colores y madera\n- Mosquitera plisada\n- Dos o tres cristales con las mismas medidas",
-   "prio": "En diciembre"
-  },
-  {
-   "t": "Lee el artículo para Dream Alcalá\n- Es el periódico de Alcalá con más lectores\nDinos si empezamos con él\n- 280 €, con 4 enlaces a tu web\n- Te lo facturamos a través de AYR Galic antes de publicarlo\nDinos si te cuadran\n- La frase entre comillas sobre la persiana\n- Que un piso de 6 ventanas se monta en uno o dos días\n> Con un «sí» y lo que cambiarías, nos vale.",
-   "prio": "Sin prisa",
-   "u": "https://www.amscerramientos.es/informes/prensa-a4m9/articulo",
-   "b": "Leer el artículo"
-  },
-  {
-   "t": "Confírmanos por WhatsApp si subimos la web nueva mañana martes, o qué día prefieres. Con un «adelante» nos vale.",
-   "prio": "Hoy",
-   "hecho": true
-  },
-  {
-   "t": "Pon tu libreta de clientes en el iPhone: abre el enlace del correo del 2 de noviembre con Safari, pulsa compartir (el cuadrado con la flecha) y «Añadir a pantalla de inicio».",
-   "hecho": true
-  },
-  {
-   "t": "Mándanos el acuerdo firmado, en foto o escaneado.",
-   "hecho": true
-  },
-  {
-   "t": "Mándanos el número de tu cuenta de Google Ads.",
-   "hecho": true
-  },
-  {
-   "t": "Tres preguntas rápidas, con un sí o un no (las puedes contestar en la caja del final de la guía, «¿Qué echas de menos?»): 1) ¿Ya te llegan los correos nuevos en Outlook? 2) ¿Has guardado la copia de tu Outlook (el archivo .pst en el escritorio)? Hasta que nos digas que sí a las dos, no le digas nada a Raúl del hosting. 3) ¿Prefieres que a partir de ahora te escribamos a info@amscerramientos.es o a info@amscerrajeria.es? Los dos te llegan igual.",
-   "u": "#sugerencias",
-   "b": "Contestar aquí",
-   "prio": "Muy importante",
-   "hecho": true
-  },
-  {
-   "t": "Pasa tu Outlook al correo nuevo (10 minutos). Ya está arreglado de nuestro lado: la contraseña es la de siempre, no hay que aprender otra. 1) Haz una copia de tu Outlook, por seguridad (Archivo, Abrir y exportar, Importar o exportar, Exportar a un archivo .pst). 2) Archivo, Configuración de la cuenta, info@amscerramientos.es, Cambiar, y pon: entrada imap.dondominio.com, puerto 993, SSL/TLS; salida smtp.dondominio.com, puerto 465, SSL/TLS. Si da error, mándanos un pantallazo. Después ya puedes dar de baja el hosting de Raúl (antes no).",
-   "prio": "Importante",
-   "hecho": true
-  }
- ]
 }
