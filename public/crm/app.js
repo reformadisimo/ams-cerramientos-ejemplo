@@ -62,7 +62,7 @@ const PASOS=[
  {k:'presupuesto',n:'Presupuesto dado',i:'doc',d:'Le has pasado el precio'}
 ];
 const ETN={nuevo:'Sin llamar',hablado:'Ya hemos hablado',visita:'Visita hecha',presupuesto:'Presupuesto dado',si:'Contratado',no:'No ha salido'};
-const MOT=['Por el precio','Lo deja para más adelante','No contesta','Se ha ido con otro','No era lo nuestro','Otra cosa'];
+const MOT=['Está lejos, fuera de mi zona','No hago ese producto','Por el precio','Lo deja para más adelante','No contesta','Se ha ido con otro','Otra cosa'];
 const OR=k=>ORIG.find(o=>o.k===k)||ORIG[ORIG.length-1];
 const TR=k=>TRAB.find(t=>t.k===k)||{k:'',n:'Sin concretar',i:'puntos'};
 
