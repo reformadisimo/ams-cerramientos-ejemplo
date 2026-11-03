@@ -1,8 +1,26 @@
 {
- "version": "2026-11-03T07:30",
+ "version": "2026-11-03T14:30",
  "fecha": "3 de noviembre de 2026",
- "aviso": "Te hemos mandado un correo: cómo te subimos en Google, tu primer artículo en prensa y tres cosas que te pedimos. Las tienes arriba, en «Lo que te toca a ti».",
+ "aviso": "Todo es tuyo y tú tienes el control: tu dominio, tu correo, tu web, tus anuncios y tus contactos, a tu nombre. Te lo hemos mandado por correo, con tu guía de control en PDF.",
  "ultimo": [
+  {
+   "f": "3 nov",
+   "t": "Todo es tuyo y tú tienes el control. Tu guía de control: qué tienes, dónde está, cómo entras y qué hacer si un día quieres trabajar con otros. Te la mandamos también en PDF: guárdala.",
+   "u": "https://www.amscerramientos.es/todo-es-tuyo"
+  },
+  {
+   "f": "3 nov",
+   "t": "Hecho: tu correo info@amscerramientos.es ya está en DonDominio, a tu nombre (unos 10 € al año). Ya no depende de Raúl. Solo te falta un paso en tu Outlook (en «Lo que te toca a ti»).",
+   "u": "#tareas"
+  },
+  {
+   "f": "3 nov",
+   "t": "Tus contactos son tuyos: en tu libreta, «Ajustes», «Descargar todos mis contactos». Te los bajas en Excel cuando quieras, sin pedírnoslo."
+  },
+  {
+   "f": "3 nov",
+   "t": "Ya eres propietario de Search Console (cómo te ve Google) y administrador de Clarity. Acepta la invitación que te llega a tu Gmail."
+  },
   {
    "f": "3 nov",
    "t": "Tu primer artículo en prensa, preparado: «¿Cuánto cuesta cambiar las ventanas de un piso en Alcalá?», con tus precios y tus fotos, para Dream Alcalá. Solo falta tu «sí».",
@@ -36,8 +54,8 @@
  "cuentas": {
   "ads": "Invitación enviada a tu cuenta 171-167-8619 (2 de noviembre). Solo falta que la aceptes: en el correo de Google Ads a amscerramientos@gmail.com, o en ads.google.com, «Administración», «Acceso y seguridad», «Administradores», «Aceptar» en Casiopea 360. Los anuncios empiezan el 1 de diciembre (en noviembre, nada); la tarjeta, entonces. Facebook e Instagram: si Raúl no nos pasa el acceso antes del miércoles 4 de noviembre, abrimos unas cuentas nuevas a tu nombre (plan B) y te diremos los pasos.",
   "analytics": "Ya tienes tu propia cuenta de Google Analytics, creada por ti con tu correo de Gmail de empresa, y nos has dado acceso de administrador. Nos has pasado el código de medición para conectarla con la web nueva.",
-  "dominio": "Hecho: tu web nueva está en amscerramientos.es desde el 2 de noviembre. Tu correo y tu teléfono siguen igual. Las direcciones de la web vieja llevan a su página nueva, para no perder lo que tenías en Google.",
-  "search": "Search Console: le hemos enviado a Google el mapa de tu web nueva (70 páginas) y lo ha leído bien. Y Microsoft Clarity nos enseña, de forma anónima, cómo se mueve la gente por la web. Bing (el buscador de Microsoft) también tiene ya el mapa de tu web.",
+  "dominio": "Tuyo, en DonDominio, a tu nombre, y se renueva solo. Tu web nueva está en amscerramientos.es desde el 2 de noviembre. Tu correo info@amscerramientos.es también está ya en DonDominio (desde el 3 de noviembre), a tu nombre: solo te falta cambiar los datos en tu Outlook.",
+  "search": "Search Console: ya eres propietario con amscerramientos@gmail.com. Le hemos enviado a Google el mapa de tu web nueva (70 páginas). Clarity (cómo se mueve la gente por la web): te hemos invitado como administrador. Bing: entra una vez en bing.com/webmasters con tu Gmail y pulsa «Importar».",
   "ficha": "Ya tenemos acceso a tu ficha de Google: descripción nueva, logo y portada con un trabajo tuyo. Las reseñas las contestamos nosotros cada semana; las malas, siempre contigo antes. Tu ficha ya está también en Bing, conectada con la de Google: lo que cambiemos en Google se copia solo."
  },
  "resueltas": [
@@ -54,20 +72,20 @@
  "nuevas": [],
  "popup": {
   "etiqueta": "Hola de nuevo, Javi",
-  "titulo": "Sorpresa: tu web nueva ya está online",
-  "intro": "Desde hoy, quien te busque ya ve la web nueva. No tienes que hacer nada:",
+  "titulo": "Todo es tuyo. Tú tienes el control.",
+  "intro": "Todo lo de AMS está a tu nombre y lo pagas tú directamente. Nosotros solo entramos porque tú nos invitas, y nos puedes quitar cuando quieras:",
   "items": [
    {
-    "t": "Ver tu web nueva en amscerramientos.es.",
-    "h": "https://www.amscerramientos.es/"
+    "t": "Tu guía de control: todo lo tuyo, en una página (guárdala en PDF).",
+    "h": "https://www.amscerramientos.es/todo-es-tuyo"
    },
    {
-    "t": "El mensaje para pedir reseñas por WhatsApp.",
-    "h": "#foto-resena"
+    "t": "Tu correo ya está en DonDominio, a tu nombre. Ya no dependes de Raúl.",
+    "h": "#tareas"
    },
    {
-    "t": "Los correos que recibe el cliente.",
-    "h": "/correos-ejemplo"
+    "t": "Tus contactos, en Excel cuando quieras, desde tu libreta.",
+    "h": "#tareas"
    },
    {
     "t": "Lo que te toca a ti, en una lista.",
@@ -90,7 +108,16 @@
    "prio": "Muy importante"
   },
   {
+   "t": "Pasa tu Outlook al correo nuevo (10 minutos): 1) haz una copia de tu Outlook (Archivo, Abrir y exportar, Importar o exportar, Exportar a un archivo .pst) y 2) cambia los servidores: entrada imap.dondominio.com, puerto 993, SSL/TLS; salida smtp.dondominio.com, puerto 465, SSL/TLS; la contraseña nueva te la mandamos por WhatsApp. Después ya puedes dar de baja el hosting de Raúl (antes no).",
+   "prio": "Importante"
+  },
+  {
    "t": "Tu ficha de Kömmerling solo sale en Villalbilla. Reenvía a tu comercial de Kömmerling el mensaje que va ya escrito en el correo del 3 de noviembre, para que salgas también en Alcalá, Torrejón, Coslada, San Fernando, Alcobendas y San Sebastián de los Reyes, con el enlace a tu web nueva."
+  },
+  {
+   "t": "Acepta las invitaciones que te llegan a amscerramientos@gmail.com: Microsoft Clarity (pulsa el botón del correo) y Bing (entra una vez en bing.com/webmasters con tu Gmail y pulsa «Importar»). Así todo queda a tu nombre.",
+   "u": "https://www.bing.com/webmasters",
+   "b": "Entrar en Bing"
   },
   {
    "t": "Revisa los precios: haz 3 o 4 precios de ventanas de obras que conozcas y dinos si te encajan. Es lo más importante, porque el cliente llega sabiendo el precio.",
