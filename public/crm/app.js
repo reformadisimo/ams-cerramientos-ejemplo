@@ -269,6 +269,7 @@ function vista(){
   h+='<div class="caja" style="margin-top:22px"><b>'+ic('ojo')+' Tu facturación es solo tuya.</b><br>Pones una vez lo que facturas de media por trabajo. Después, cuando cierras un trabajo, pones lo que factura. Las cifras se quedan en este móvil: nosotros solo vemos si cada trabajo está por encima o por debajo de tu media, en porcentaje.</div>'+
    '<label class="l">Tu facturación media por trabajo (€)</label><div class="linea"><input class="t" id="med" inputmode="numeric" value="'+(D.media||'')+'"><button class="peq" id="medok">Guardar</button></div><p class="pista">Más o menos. Por ejemplo, 6.000 €. Se puede cambiar cuando quieras.</p>'+
    '<h2>Ponlo como una app en tu móvil</h2><div class="caja"><b>'+ic('movil')+' iPhone:</b> abre esta página en Safari, pulsa el botón de compartir (el cuadrado con la flecha hacia arriba) y elige «Añadir a pantalla de inicio».<br><br><b>'+ic('movil')+' Android:</b> abre esta página en Chrome, pulsa los tres puntos de arriba a la derecha y elige «Añadir a pantalla de inicio».<br><br>Te queda un icono de AMS como cualquier otra app.</div>'+
+   '<h2>Tus contactos son tuyos</h2><div class="caja">'+ic('ojo')+' Descárgalos cuando quieras en un Excel, con todo lo que sabemos de cada uno. Los puedes guardar o llevar a donde quieras.</div><button class="peq" id="xls" style="width:100%;margin-top:10px">Descargar todos mis contactos (Excel)</button>'+
    '<h2>Ayuda</h2><button class="peq" id="guia" style="width:100%">Ver otra vez la explicación</button>'+
    (REAL?'':'<h2>Demostración</h2><button class="peq" id="rst" style="width:100%">Volver a los datos de ejemplo</button>');
  }
@@ -292,7 +293,20 @@ function enlaza(){
  if($('npok'))$('npok').onclick=()=>{const v=$('np').value.trim();if(v&&!D.equipo.includes(v)){D.equipo.push(v);guarda();aviso(v+' ya está en el equipo','check');vista()}};
  if($('medok'))$('medok').onclick=()=>{D.media=+$('med').value.replace(/\D/g,'')||0;guarda();aviso('Guardado en este móvil. Solo lo ves tú.','check')};
  if($('guia'))$('guia').onclick=()=>{tour(0)};
+ if($('xls'))$('xls').onclick=descargaExcel;
  if($('rst'))$('rst').onclick=()=>{const t=D.tour;D=demo();D.tour=t;guarda();aviso('Datos de ejemplo recuperados','check');vista()};
+}
+
+// Descarga de todos los contactos en un CSV que abre Excel (punto y coma y BOM para los acentos).
+function descargaExcel(){
+ const cel=v=>{v=v==null?'':String(v).replace(/\s+/g,' ').trim();return /[;"\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v};
+ const fe=t=>t?new Date(t).toLocaleString('es-ES'):'';
+ const cab=['Fecha','Nombre','Teléfono','Correo','Dirección','Pueblo','Qué pide','De dónde viene','Cómo va','Motivo si no salió','Quién lo lleva','Historial'];
+ const filas=D.L.map(x=>[fe(x.f),x.nombre,x.tel,x.correo,x.dir,x.zona,x.pide,x.origen,ETN[x.est]||x.est,x.motivo,x.quien,(x.h||[]).map(e=>fe(e.f)+' '+(e.q||'')+': '+(e.x||'')).join(' | ')]);
+ const csv='\ufeff'+[cab].concat(filas).map(r=>r.map(cel).join(';')).join('\r\n');
+ const u=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));
+ const a=document.createElement('a');a.href=u;a.download='contactos-ams-'+new Date().toISOString().slice(0,10)+'.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),2000);
+ aviso('Descargados '+D.L.length+' contactos','check');
 }
 
 // ---------- hoja ----------
