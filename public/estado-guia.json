@@ -35,7 +35,7 @@
   }
  ],
  "cuentas": {
-  "ads": "Invitación enviada a tu cuenta 171-167-8619 (2 de noviembre). Solo falta que la aceptes: en el correo de Google Ads a amscerramientos@gmail.com, o en ads.google.com, «Administración», «Acceso y seguridad», «Administradores», «Aceptar» en Casiopea 360. La tarjeta, en diciembre. Facebook e Instagram, cuando Raúl te los pase.",
+  "ads": "Invitación enviada a tu cuenta 171-167-8619 (2 de noviembre). Solo falta que la aceptes: en el correo de Google Ads a amscerramientos@gmail.com, o en ads.google.com, «Administración», «Acceso y seguridad», «Administradores», «Aceptar» en Casiopea 360. Los anuncios empiezan el 1 de diciembre (en noviembre, nada); la tarjeta, entonces. Facebook e Instagram, cuando Raúl te los pase.",
   "analytics": "Ya tienes tu propia cuenta de Google Analytics, creada por ti con tu correo de Gmail de empresa, y nos has dado acceso de administrador. Nos has pasado el código de medición para conectarla con la web nueva.",
   "dominio": "Hecho: tu web nueva está en amscerramientos.es desde el 2 de noviembre. Tu correo y tu teléfono siguen igual. Las direcciones de la web vieja llevan a su página nueva, para no perder lo que tenías en Google.",
   "search": "Search Console: le hemos enviado a Google el mapa de tu web nueva (70 páginas) y lo ha leído bien. Y Microsoft Clarity nos enseña, de forma anónima, cómo se mueve la gente por la web.",
@@ -79,11 +79,6 @@
  "enlace": "#tareas",
  "tareas": [
   {
-   "t": "Confírmanos por WhatsApp si subimos la web nueva mañana martes, o qué día prefieres. Con un «adelante» nos vale.",
-   "prio": "Hoy",
-   "hecho": true
-  },
-  {
    "t": "Revisa los precios: haz 3 o 4 precios de ventanas de obras que conozcas y dinos si te encajan. Es lo más importante, porque el cliente llega sabiendo el precio.",
    "u": "/calculadora",
    "b": "Abrir la calculadora",
@@ -98,13 +93,15 @@
    "b": "Contestar (10 minutos)"
   },
   {
-   "t": "Google Ads: acepta la invitación. Ya tenemos tu número y te la hemos mandado. Te llega un correo de Google Ads a amscerramientos@gmail.com (mira en spam): pulsa el botón y «Aceptar». Si no lo ves: ads.google.com, «Administración», «Acceso y seguridad», pestaña «Administradores», «Aceptar» en Casiopea 360.",
+   "t": "Google Ads: acepta la invitación de Casiopea 360. Ojo, tienes dos cuentas: la buena es AMS CERRAMIENTOS (171-167-8619); la de «Pájaro» no la uses. Entra en ads.google.com, elige AMS CERRAMIENTOS, engranaje «Administración», «Acceso y seguridad», pestaña «Administradores» y «Aceptar». Si no te sale «Administración», pulsa «Cambiar a modo experto» y «Crear una cuenta sin campaña» (sin tarjeta ni anuncios) y vuelve a probar.",
    "u": "https://ads.google.com",
-   "b": "Ir a Google Ads"
+   "b": "Ir a Google Ads",
+   "prio": "Importante"
   },
   {
-   "t": "Pon tu libreta de clientes en el iPhone: abre el enlace del correo del 2 de noviembre con Safari, pulsa compartir (el cuadrado con la flecha) y «Añadir a pantalla de inicio».",
-   "hecho": true
+   "t": "Repasa tu web nueva con calma: navega, toca todo y dinos lo que no se vea bien, no te guste o quieras cambiar. Lo hacemos enseguida.",
+   "u": "/",
+   "b": "Ver mi web"
   },
   {
    "t": "Echa un vistazo a los correos que recibirá el cliente y dinos qué cambiarías.",
@@ -112,11 +109,7 @@
    "b": "Ver los correos"
   },
   {
-   "t": "Dinos si en enero y febrero subimos los anuncios a 800 o 1.000 € al mes."
-  },
-  {
-   "t": "Mándanos el acuerdo firmado, en foto o escaneado.",
-   "hecho": true
+   "t": "Pegatina nueva con QR: cuando te acuerdes, mándanos por WhatsApp una foto de la pegatina que pones ahora y su medida, y dinos si te gusta la nueva (va en el correo del 2 de noviembre)."
   },
   {
    "t": "Abre la página de AMS en LinkedIn, como empresa (no tu perfil). Son 10 minutos y te lo explicamos paso a paso. Después nos añades como administradores y la llevamos nosotros.",
@@ -124,13 +117,30 @@
    "b": "Ver cómo abrirla"
   },
   {
-   "t": "Desde ya, en cada obra: una foto antes y otra después desde el mismo sitio, y al terminar el WhatsApp para pedir la reseña.",
+   "t": "Desde ya, en cada obra: una foto antes y otra después desde el mismo sitio (ya tenemos 12 parejas tuyas en la web y quedan genial: cuantas más, mejor), y al terminar el WhatsApp para pedir la reseña.",
    "u": "#foto-resena",
    "b": "Ver el mensaje"
   },
   {
    "t": "Cuando puedas (en diciembre está bien): tu tarifa ampliada. Ventana y puerta de una hoja, correderas, colores y madera, mosquitera plisada y dos o tres cristales con las mismas medidas.",
    "prio": "En diciembre"
+  },
+  {
+   "t": "Confírmanos por WhatsApp si subimos la web nueva mañana martes, o qué día prefieres. Con un «adelante» nos vale.",
+   "prio": "Hoy",
+   "hecho": true
+  },
+  {
+   "t": "Pon tu libreta de clientes en el iPhone: abre el enlace del correo del 2 de noviembre con Safari, pulsa compartir (el cuadrado con la flecha) y «Añadir a pantalla de inicio».",
+   "hecho": true
+  },
+  {
+   "t": "Mándanos el acuerdo firmado, en foto o escaneado.",
+   "hecho": true
+  },
+  {
+   "t": "Mándanos el número de tu cuenta de Google Ads.",
+   "hecho": true
   }
  ]
 }
