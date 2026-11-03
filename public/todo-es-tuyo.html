@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="es"><head><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/img/icono-192.png" type="image/png" sizes="192x192"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Todo es tuyo | AMS Cerramientos</title>
+<style>
+:root{--tinta:#1d2226;--azul:#1f6fb2;--gris:#5e6b76;--linea:#e0e4e8;--fondo:#f4f6f8;--verde:#0A8F4E;--amar:#FFF6DD}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;font:17px/1.55 Arial,Helvetica,sans-serif;color:var(--tinta);background:var(--fondo)}
+.w{max-width:760px;margin:0 auto;padding:0 16px}
+.cab{background:#12202B;color:#fff;padding:30px 0 26px}
+.cab .lg{height:38px;margin-bottom:14px}
+.cab h1{margin:0 0 8px;font-size:30px;line-height:1.2}
+.cab p{margin:0;color:#C9D3DB;font-size:18px}
+h2{color:var(--azul);font-size:23px;line-height:1.25;margin:34px 0 10px}
+.caja{background:#fff;border-left:5px solid var(--azul);border-radius:10px;padding:16px 18px;margin:14px 0}
+.caja.v{border-left-color:var(--verde)}
+.caja p{margin:0 0 10px}.caja p:last-child{margin:0}
+.ojo{background:var(--amar);border:1px solid #E8C04A;border-radius:10px;padding:13px 16px;margin:14px 0;font-size:16px}
+.item{background:#fff;border:1px solid var(--linea);border-radius:12px;padding:16px 18px;margin:12px 0}
+.item h3{margin:0 0 4px;font-size:19px;display:flex;gap:10px;align-items:flex-start}
+.item h3 .n{flex:none;width:28px;height:28px;border-radius:50%;background:var(--azul);color:#fff;font-size:15px;display:flex;align-items:center;justify-content:center;margin-top:-1px}
+.item .tag{display:inline-block;font-size:13px;font-weight:700;border-radius:999px;padding:2px 10px;margin:2px 0 8px}
+.tag.tuyo{background:#E3F4EA;color:var(--verde)}
+.tag.prep{background:var(--amar);color:#8a6400}
+.dl{display:grid;grid-template-columns:150px 1fr;gap:4px 14px;font-size:16px;margin:6px 0 0}
+.dl b{color:var(--gris);font-weight:700}
+.dl a{color:var(--azul);word-break:break-word}
+ol.check{list-style:none;padding:0;margin:10px 0;counter-reset:c}
+ol.check li{counter-increment:c;background:#fff;border:1px solid var(--linea);border-radius:12px;padding:14px 16px 14px 56px;margin:10px 0;position:relative}
+ol.check li::before{content:counter(c);position:absolute;left:16px;top:14px;width:28px;height:28px;border-radius:6px;border:2px solid var(--verde);color:var(--verde);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:15px}
+ol.check li b{display:block;font-size:18px;margin-bottom:2px}
+ul{padding-left:20px}li{margin:0 0 6px}
+.pie{color:var(--gris);font-size:14px;margin:36px 0 40px;border-top:1px solid var(--linea);padding-top:14px}
+.imp{display:inline-block;background:var(--azul);color:#fff;border:0;border-radius:10px;padding:11px 18px;font:700 16px Arial,sans-serif;cursor:pointer;margin-top:14px}
+@media (max-width:560px){.cab h1{font-size:25px}.dl{grid-template-columns:1fr;gap:0 0}.dl b{margin-top:8px}}
+@media print{body{background:#fff;font-size:13px}.cab{background:#fff;color:#000;padding:0 0 10px;border-bottom:2px solid #000}.cab p{color:#333}.cab .lg{display:none}.imp{display:none}.item,ol.check li,.caja{break-inside:avoid;border-color:#bbb}}
+</style></head>
+<body>
+<header class="cab"><div class="w">
+<img class="lg" src="/img/logo-ams-blanco.svg" alt="" onerror="this.remove()">
+<h1>Todo es tuyo. Tú tienes el control.</h1>
+<p>Lo que tienes, dónde está, cómo entras y qué hacer si un día quieres trabajar con otro. Guárdalo.</p>
+<button class="imp" onclick="window.print()">Guardar en PDF o imprimir</button>
+</div></header>
+
+<main class="w">
+
+<div class="caja v" style="margin-top:24px">
+<p><b>Nuestra forma de trabajar, en una frase: todo está a tu nombre y lo pagas tú directamente.</b> Nosotros solo entramos porque tú nos invitas, y nos puedes quitar cuando quieras con un clic.</p>
+<p>Si mañana no quieres seguir con nosotros, <b>no pasa nada</b>. Le das esta hoja a otro proveedor y al día siguiente puede seguir trabajando con todo lo tuyo. Sin permisos, sin esperas y sin coste.</p>
+<p>Conocemos el sector: muchas veces las cuentas se dan de alta a nombre de la agencia y, el día que el cliente se quiere ir, no puede entrar ni en lo suyo. <b>Con nosotros eso no va a pasar nunca.</b></p>
+</div>
+
+<h2>1. Lo que tienes y dónde está</h2>
+<p>Las contraseñas no van en esta hoja: te las mandamos aparte, por correo y por WhatsApp. Las de tus cuentas de Google y de DonDominio solo las sabes tú.</p>
+
+<div class="item"><h3><span class="n">1</span>Tu dominio: amscerramientos.es</h3>
+<span class="tag tuyo">Tuyo, a tu nombre</span>
+<div class="dl">
+<b>Dónde está</b><span>DonDominio</span>
+<b>Cómo entras</b><span><a href="https://www.dondominio.com/admin/">dondominio.com/admin</a>, con tu usuario y tu contraseña de DonDominio</span>
+<b>Renovación</b><span>Automática, con el saldo de tu cuenta. Caduca el 9 de febrero de 2027 y se renueva sola.</span>
+<b>Por qué importa</b><span>Es lo más importante de todo: quien tiene el dominio tiene la web y el correo. Es tuyo.</span>
+</div></div>
+
+<div class="item"><h3><span class="n">2</span>Tu correo: info@amscerramientos.es</h3>
+<span class="tag tuyo">Tuyo, a tu nombre</span>
+<div class="dl">
+<b>Dónde está</b><span>DonDominio, plan de correo (unos 10 € al año, en tu misma cuenta)</span>
+<b>Cómo entras</b><span><a href="https://webmail.dondominio.com/">webmail.dondominio.com</a>, con info@amscerramientos.es y su contraseña</span>
+<b>En el móvil</b><span>Servidor de entrada imap.dondominio.com y de salida smtp.dondominio.com, los dos con SSL</span>
+<b>Copia</b><span>Todo lo que llega se te reenvía también a info@amscerrajeria.es</span>
+</div></div>
+
+<div class="item"><h3><span class="n">3</span>Tu web</h3>
+<span class="tag tuyo">Tuya: copia completa cada mes</span>
+<div class="dl">
+<b>Dónde está</b><span>Hoy la tenemos alojada nosotros, sin coste para ti</span>
+<b>Tu copia</b><span>Te mandamos una copia completa (páginas, fotos, vídeos y herramientas) y te la actualizamos todos los meses con los cambios</span>
+<b>Si te vas</b><span>Se crea una cuenta gratis en Vercel con esa copia y se apunta tu dominio allí. Lo explicamos paso a paso más abajo.</span>
+</div></div>
+
+<div class="item"><h3><span class="n">4</span>Google Ads (tus anuncios)</h3>
+<span class="tag tuyo">Tuyo, con tu tarjeta</span>
+<div class="dl">
+<b>Cuenta</b><span>171-167-8619, «AMS CERRAMIENTOS»</span>
+<b>Cómo entras</b><span><a href="https://ads.google.com/">ads.google.com</a>, con amscerramientos@gmail.com</span>
+<b>Quién paga</b><span>Tú, directamente a Google, con tu tarjeta. A nosotros no nos pagas los anuncios.</span>
+<b>Nosotros</b><span>Solo administradores, como Casiopea 360, porque tú aceptas la invitación</span>
+</div></div>
+
+<div class="item"><h3><span class="n">5</span>Google Analytics (quién entra en tu web)</h3>
+<span class="tag tuyo">Tuyo</span>
+<div class="dl">
+<b>Cómo entras</b><span><a href="https://analytics.google.com/">analytics.google.com</a>, con amscerramientos@gmail.com</span>
+<b>Nosotros</b><span>Administradores, porque tú nos añadiste</span>
+</div></div>
+
+<div class="item"><h3><span class="n">6</span>Tu ficha de Google (la del mapa y las reseñas)</h3>
+<span class="tag tuyo">Tuya</span>
+<div class="dl">
+<b>Cómo entras</b><span>Busca «AMS Cerramientos» en Google con amscerramientos@gmail.com, o entra en <a href="https://business.google.com/">business.google.com</a></span>
+<b>Nosotros</b><span>Tenemos acceso para contestar reseñas y poner novedades</span>
+<b>Bing</b><span>Tu ficha también está en Bing, copiada de la de Google</span>
+</div></div>
+
+<div class="item"><h3><span class="n">7</span>YouTube</h3>
+<span class="tag tuyo">Tuyo</span>
+<div class="dl">
+<b>Cómo entras</b><span><a href="https://studio.youtube.com/">studio.youtube.com</a>, con amscerramientos@gmail.com</span>
+<b>Tu vídeo</b><span><a href="https://youtube.com/shorts/NKfSj460cWo">youtube.com/shorts/NKfSj460cWo</a></span>
+</div></div>
+
+<div class="item"><h3><span class="n">8</span>Search Console y Bing Webmaster (cómo te ve Google)</h3>
+<span class="tag prep">Te hacemos propietario</span>
+<div class="dl">
+<b>Qué es</b><span>Donde Google y Bing nos dicen qué buscan para encontrarte y si la web tiene algún fallo</span>
+<b>Hoy</b><span>Las dimos de alta nosotros para subir la web nueva. Te añadimos como propietario con amscerramientos@gmail.com: te llega un correo de Google y otro de Microsoft.</span>
+</div></div>
+
+<div class="item"><h3><span class="n">9</span>Microsoft Clarity (cómo se mueve la gente por tu web)</h3>
+<span class="tag prep">Te hacemos propietario</span>
+<div class="dl">
+<b>Qué es</b><span>Grabaciones anónimas de cómo navega la gente, para mejorar la web</span>
+<b>Hoy</b><span>La dimos de alta nosotros. Te añadimos como administrador con amscerramientos@gmail.com.</span>
+</div></div>
+
+<div class="item"><h3><span class="n">10</span>Facebook e Instagram</h3>
+<span class="tag prep">En camino</span>
+<div class="dl">
+<b>Hoy</b><span>Las lleva Raúl. Si nos pasa el acceso, quedan a tu nombre; si no, abrimos unas nuevas a tu nombre.</span>
+<b>Nosotros</b><span>Solo administradores, como en Google</span>
+</div></div>
+
+<div class="item"><h3><span class="n">11</span>Tu libreta de clientes</h3>
+<span class="tag tuyo">Tuya: te la damos en Excel cuando quieras</span>
+<div class="dl">
+<b>Cómo entras</b><span>Con el enlace que tienes en el iPhone (te lo mandamos otra vez por correo)</span>
+<b>Lo que guarda</b><span>Cada contacto de la web, con su teléfono, lo que pidió, de dónde vino y cómo va</span>
+<b>Si te vas</b><span>Te mandamos todos tus contactos en Excel, para que los lleves donde quieras</span>
+<b>Tu facturación</b><span>Se queda en tu móvil. Nosotros no vemos ninguna cifra.</span>
+</div></div>
+
+<div class="item"><h3><span class="n">12</span>Tu panel, las conversaciones del asistente y los avisos</h3>
+<span class="tag tuyo">Tuyos</span>
+<div class="dl">
+<b>Panel</b><span>Todas las cifras de tu web en una pantalla (te mandamos el enlace por correo)</span>
+<b>Conversaciones</b><span>Lo que la gente le pregunta al asistente de tu web (enlace por correo)</span>
+<b>Avisos</b><span>Los correos de «Nuevo contacto» y «Pide visita» salen de avisos@avisos.amscerramientos.es, una dirección de tu propio dominio</span>
+<b>Tu guía</b><span><a href="https://www.amscerramientos.es/guia-javi">amscerramientos.es/guia-javi</a>, con todo lo que hemos hecho</span>
+</div></div>
+
+<h2>2. Si un día quieres trabajar con otro: la lista</h2>
+<p>Dale esta hoja a tu nuevo proveedor. Con esto puede empezar al día siguiente. Tu web y tu correo no se paran en ningún momento.</p>
+
+<ol class="check">
+<li><b>Avísanos</b>Un WhatsApp basta. No te vamos a preguntar por qué ni a poner pegas. En 48 horas te mandamos la última copia de tu web y tus contactos en Excel.</li>
+<li><b>Tu dominio y tu correo: no hay que hacer nada</b>Ya están en tu cuenta de DonDominio. Siguen funcionando igual.</li>
+<li><b>Tu web: una cuenta gratis en Vercel</b>Tu nuevo proveedor (o tú) crea una cuenta gratuita en <a href="https://vercel.com/signup">vercel.com</a> y sube la copia de tu web. Mientras, la tuya sigue funcionando donde está.</li>
+<li><b>Apunta tu dominio a la web nueva</b>En DonDominio, en «Zona DNS», se cambian dos líneas (la «A» y la «www») por las que le dé Vercel. Son cinco minutos y la web no se cae.</li>
+<li><b>Las herramientas que usan servicios de fuera</b>El asistente, los avisos por correo, la libreta y el panel necesitan sus propias claves (de inteligencia artificial, de envío de correos y de base de datos). La copia lleva una lista de cuáles son. Tu nuevo proveedor pone las suyas y funcionan igual.</li>
+<li><b>Quítanos de tus cuentas</b>Google Ads: «Administración», «Acceso y seguridad», «Administradores», y quita Casiopea 360. En Analytics, la ficha de Google, YouTube, Search Console, Clarity, Facebook e Instagram, lo mismo, en «Usuarios» o «Administradores». Lo puedes hacer tú o te lo hacemos nosotros.</li>
+<li><b>Listo</b>Tu nuevo proveedor tiene todo lo tuyo. Nosotros nos despedimos encantados y deseándote lo mejor.</li>
+</ol>
+
+<h2>3. Lo que nosotros nos comprometemos a hacer</h2>
+<div class="caja">
+<ul style="margin:0">
+<li><b>Nunca abrimos una cuenta tuya a nuestro nombre.</b> Si algo hay que crearlo, se crea con tu correo.</li>
+<li><b>Nunca te pedimos que nos pagues a nosotros lo que es de otros:</b> los anuncios, el dominio y el correo los pagas tú directamente.</li>
+<li><b>Te mandamos la copia de tu web cada mes</b>, con todo lo que hayamos cambiado.</li>
+<li><b>Tus contactos son tuyos:</b> en Excel, cuando los pidas.</li>
+<li><b>Si te vas, te ayudamos a irte.</b> Preferimos que sigas con nosotros porque quieres, no porque no puedas irte.</li>
+</ul>
+</div>
+
+<div class="ojo"><b>Guárdala bien:</b> pulsa «Guardar en PDF o imprimir» arriba y guárdala en tu ordenador o en el móvil. Esta hoja la iremos poniendo al día cuando cambie algo.</div>
+
+<p class="pie">AMS Cerramientos y Servicios S.L. · Hoja de control de tus cuentas · Noviembre de 2026</p>
+</main>
+</body></html>
