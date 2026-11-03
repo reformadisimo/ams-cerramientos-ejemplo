@@ -2104,5 +2104,31 @@ fetch('/api/respuestas',{method:'POST',headers:{'Content-Type':'application/json
 </footer>
 
 <script src="/web.js?v=2"></script>
-<script src="/asistente.js" defer></script><script src="/vida.js?v=4" defer></script></body>
+<script src="/asistente.js" defer></script><script src="/vida.js?v=4" defer></script><style>
+.gnav{align-items:center;position:fixed;left:16px;bottom:16px;z-index:60;display:flex;gap:10px;opacity:0;transform:translateY(14px);pointer-events:none;transition:opacity .25s,transform .25s}
+.gnav.on{opacity:1;transform:none;pointer-events:auto}
+.gnav a{margin:0!important;white-space:nowrap;display:inline-flex;align-items:center;gap:9px;font:700 16px/1.1 Arial,Helvetica,sans-serif;text-decoration:none;padding:13px 18px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.gnav .gni{background:#fff;color:#12202B!important;border:2px solid #12202B}
+.gnav .gnt{background:#0A8F4E;color:#fff!important;border:2px solid #0A8F4E}
+.gnav .gnt b{background:#fff;color:#0A8F4E;border-radius:99px;min-width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;font-size:14px;padding:0 6px}
+.gnav svg{width:20px;height:20px;flex:none}
+.gnav .gnt.pulso{animation:gpul 1.6s ease-in-out 3}
+@keyframes gpul{0%,100%{box-shadow:0 6px 18px rgba(0,0,0,.25)}50%{box-shadow:0 0 0 8px rgba(10,143,78,.25),0 6px 18px rgba(0,0,0,.25)}}
+.fl,.fq{display:none!important}
+.gnav a{text-transform:none;letter-spacing:0}
+@media (min-width:1180px){.gnav{left:340px}}
+@media (max-width:700px){.gnav{left:0;right:0;bottom:0;gap:8px;padding:10px 10px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);box-shadow:0 -4px 16px rgba(18,32,43,.12)}.gnav a{flex:1;justify-content:center;font-size:15px;padding:12px 8px;gap:7px;white-space:nowrap;box-shadow:none}.gnav svg{width:18px;height:18px}
+body.gnav-on #asb{bottom:84px!important}}
+@media print{.gnav{display:none!important}}
+</style>
+<nav class="gnav" id="gnav" aria-label="Atajos de la guía">
+<a class="gni" href="#" id="gnav-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>Volver al inicio</a>
+<a class="gnt" href="#tareas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg>Lo que te toca<b id="gnav-n" hidden></b></a>
+</nav>
+<script>(function(){var n=document.getElementById('gnav');if(!n)return;
+document.getElementById('gnav-i').addEventListener('click',function(e){e.preventDefault();window.scrollTo({top:0,behavior:'smooth'})});
+function v(){var o=window.scrollY>500;n.classList.toggle('on',o);document.body.classList.toggle('gnav-on',o)}window.addEventListener('scroll',v,{passive:true});v();
+fetch('/estado-guia.json',{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){var k=(d.tareas||[]).filter(function(t){return !t.hecho}).length;var b=document.getElementById('gnav-n');if(k){document.querySelector('.gnav .gnt').classList.add('pulso')}}).catch(function(){});
+})();</script>
+</body>
 </html>
