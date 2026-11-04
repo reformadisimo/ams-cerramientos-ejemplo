@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Script from "next/script";
 import { VERSION } from "@/lib/version";
 
 /* Mismas letras que la mesa de control original (Roboto y Lora, servidas desde casa). */
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <main id="contenido">{children}</main>
         <span data-versionante aria-hidden="true" className="pointer-events-none fixed bottom-2 left-2 z-[60] rounded-full bg-white/85 px-2 py-0.5 text-[10.5px] font-semibold text-ink/45 ring-1 ring-black/5">{VERSION}</span>
+        <Script src="/volver-guia.js?v=1" strategy="afterInteractive" />
       </body>
     </html>
   );

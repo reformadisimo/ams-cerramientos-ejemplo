@@ -2130,5 +2130,5 @@ document.getElementById('gnav-i').addEventListener('click',function(e){e.prevent
 function v(){var o=window.scrollY>500;n.classList.toggle('on',o);document.body.classList.toggle('gnav-on',o)}window.addEventListener('scroll',v,{passive:true});v();
 fetch('/estado-guia.json',{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){var k=(d.tareas||[]).filter(function(t){return !t.hecho}).length;var b=document.getElementById('gnav-n');if(k){document.querySelector('.gnav .gnt').classList.add('pulso')}}).catch(function(){});
 })();</script>
-</body>
+<script src="/volver-guia.js?v=1" defer></script></body>
 </html>
