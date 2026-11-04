@@ -1,8 +1,13 @@
 {
-  "version": "2026-11-03T20:50",
+  "version": "2026-11-04T04:05",
   "fecha": "3 de noviembre de 2026",
   "aviso": "Todo es tuyo y tú tienes el control: tu dominio, tu correo, tu web, tus anuncios y tus contactos, a tu nombre. Te lo hemos mandado por correo, con tu guía de control en PDF.",
   "ultimo": [
+    {
+      "f": "4 nov",
+      "t": "Botones nuevos cuando navegas por tu web\n- Abajo a la izquierda verás un botón azul: «Volver a la guía»\n- Si te quedan tareas, también uno verde y grande: «Tareas pendientes», para repasarlas en la guía\n- Cuando no queden tareas, el verde desaparece solo\n> Solo los ves tú, en tu navegador. Quien visita tu web no los ve.",
+      "u": "#tareas"
+    },
     {
       "f": "3 nov",
       "t": "¿Cuándo se ven los resultados?\n- Entre 3 y 6 meses, por nuestra experiencia\n- Google tarda semanas en leer tu web nueva\n- Los anuncios empiezan el 1 de diciembre\n> Antes no esperes grandes cifras. Es lo normal."
