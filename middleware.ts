@@ -13,7 +13,56 @@ async function huella(clave: string): Promise<string> {
   return Array.from(new Uint8Array(d)).map((b) => b.toString(16).padStart(2, "0")).join("").slice(0, 48);
 }
 
+
+/* Páginas privadas de Javi (todo-es-tuyo, conoce-tu-cliente...): con PRIV_RUTA puesta en Vercel solo se abren en
+   /<nombre>-<PRIV_RUTA> (dirección larga, difícil de adivinar); /<nombre> a secas da 404. Los enlaces de la guía van a
+   /ir/<nombre>, que solo reenvía si ese navegador ya pasó por la guía (cookie ams_g). Sin PRIV_RUTA todo sigue como
+   antes (no se rompe nada). PRIV_RUTA vive SOLO en Vercel: el repositorio es público. Más adelante, pasarlas a clave. */
+const PRIV = ["todo-es-tuyo", "conoce-tu-cliente", "correos-ejemplo", "linkedin-ams", "fotos-web-antigua", "conversaciones", "mapa-de-obras"];
+const COOKIE_G = "ams_g";
+
+async function privadas(req: NextRequest): Promise<NextResponse | null> {
+  const ruta = (process.env.PRIV_RUTA ?? "").trim();
+  const p = req.nextUrl.pathname.replace(/\/+$/, "");
+  if (ruta.length < 12) {
+    /* Sin PRIV_RUTA: /ir/<nombre> lleva a la dirección de siempre, para que los enlaces de la guía no se rompan. */
+    if (p.startsWith("/ir/") && PRIV.includes(p.slice(4))) { const u = req.nextUrl.clone(); u.pathname = p.slice(3); return NextResponse.redirect(u, 307); }
+    return null;
+  }
+  const h = await huella(`priv:${ruta}`);
+  if (p === "/guia-javi" || p === "/guia-javi.html" || p.startsWith("/guia-javi/")) {
+    const r = NextResponse.next();
+    r.cookies.set(COOKIE_G, h, { httpOnly: true, secure: true, sameSite: "lax", path: "/", maxAge: 60 * 60 * 24 * 365 });
+    return r;
+  }
+  if (p.startsWith("/ir/")) {
+    const n = p.slice(4);
+    if (PRIV.includes(n) && req.cookies.get(COOKIE_G)?.value === h) {
+      const u = req.nextUrl.clone();
+      u.pathname = `/${n}-${ruta}`;
+      const r = NextResponse.redirect(u, 307);
+      r.headers.set("Referrer-Policy", "no-referrer");
+      return r;
+    }
+    return new NextResponse("Entra por la guía.", { status: 404, headers: { "content-type": "text/plain; charset=utf-8" } });
+  }
+  for (const n of PRIV) {
+    if (p === `/${n}-${ruta}`) {
+      const u = req.nextUrl.clone();
+      u.pathname = `/${n}.html`;
+      const r = NextResponse.rewrite(u);
+      r.headers.set("X-Robots-Tag", "noindex, nofollow");
+      r.headers.set("Referrer-Policy", "no-referrer");
+      return r;
+    }
+    if (p === `/${n}` || p === `/${n}.html` || p.startsWith(`/${n}/`)) return new NextResponse("No encontrada.", { status: 404 });
+  }
+  return null;
+}
+
 export async function middleware(req: NextRequest) {
+  const pv = await privadas(req);
+  if (pv) return pv;
   /* Dirección secreta, como la de Reformadísimo: /mesa-<MESA_RUTA> abre la mesa sin pedir nada.
      MESA_RUTA vive solo en Vercel (el repositorio es público: nunca escribirla en el código). */
   const ruta = (process.env.MESA_RUTA ?? "").trim();
@@ -54,4 +103,4 @@ export async function middleware(req: NextRequest) {
   return new NextResponse("Clave necesaria.", { status: 401, headers: { "WWW-Authenticate": 'Basic realm="Mesa de AMS Cerramientos", charset="UTF-8"', "content-type": "text/plain; charset=utf-8" } });
 }
 
-export const config = { matcher: ["/mesa", "/mesa/:path*", "/mesa-:ruta"] };
+export const config = { matcher: ["/mesa", "/mesa/:path*", "/mesa-:ruta", "/ir/:n", "/guia-javi", "/guia-javi.html", "/guia-javi/:path*", "/(todo-es-tuyo|conoce-tu-cliente|correos-ejemplo|linkedin-ams|fotos-web-antigua|conversaciones|mapa-de-obras)(.*)"] };

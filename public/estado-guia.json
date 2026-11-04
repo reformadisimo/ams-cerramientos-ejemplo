@@ -5,6 +5,10 @@
   "ultimo": [
     {
       "f": "4 nov",
+      "t": "Tus páginas privadas ahora tienen dirección secreta\n- Son enlaces largos y difíciles de adivinar: es casi imposible que alguien llegue sin que tú se lo des\n- Entra siempre desde esta guía y no compartas esos enlaces\n- Más adelante, cuando acabemos esta fase y entres menos, las pasaremos a clave\n> Ahora te lo hacemos fácil; después, más seguro."
+    },
+    {
+      "f": "4 nov",
       "t": "Botones nuevos cuando navegas por tu web\n- Abajo a la izquierda verás un botón azul: «Volver a la guía»\n- Si te quedan tareas, también uno verde y grande: «Tareas pendientes», para repasarlas en la guía\n- Cuando no queden tareas, el verde desaparece solo\n> Solo los ves tú, en tu navegador. Quien visita tu web no los ve.",
       "u": "#tareas"
     },
@@ -44,7 +48,7 @@
     {
       "f": "3 nov",
       "t": "Todo es tuyo y tú tienes el control\n- Tu guía de control: qué tienes, dónde está y cómo entras\n- Todo lo hecho es tuyo: web, asistente, creatividades, campañas y artículos\n- Contigo no hay permanencia ni la habrá (solemos pedir 3 a 6 meses en proyectos que cobramos; a ti te ayudamos sin coste)\n- Si un día cambias de proveedor, te hacemos un informe de todo: SEO, campañas e inversión\n> Te la mandamos también en PDF: guárdala.",
-      "u": "https://www.amscerramientos.es/todo-es-tuyo"
+      "u": "/ir/todo-es-tuyo"
     },
     {
       "f": "3 nov",
@@ -146,7 +150,7 @@
     {
       "t": "Contestar las preguntas de «cómo te ves»\n- Unos 10 minutos, casi todo tocando opciones\n- Puedes dejarlo a medias y seguir otro día\n- Lo de dinero es opcional\nQué te preguntamos\n- Cómo es tu cliente\n- Qué más le puedes vender en la misma visita\n- Qué meses vas flojo o cierras\n- Hasta dónde quieres llevar AMS\n> Con esto hacemos los anuncios a tu medida y te buscamos trabajo estable todo el año.",
       "prio": "Muy importante",
-      "u": "/conoce-tu-cliente",
+      "u": "/ir/conoce-tu-cliente",
       "b": "Contestar (10 minutos)"
     },
     {
@@ -172,7 +176,7 @@
     },
     {
       "t": "Mira los correos que recibirá el cliente\n- Dinos qué cambiarías",
-      "u": "/correos-ejemplo",
+      "u": "/ir/correos-ejemplo",
       "b": "Ver los correos"
     },
     {
@@ -180,7 +184,7 @@
     },
     {
       "t": "Abre la página de AMS en LinkedIn (como empresa, no tu perfil)\n- Son 10 minutos y te lo explicamos paso a paso\n- Después nos añades como administradores\n- La llevamos nosotros",
-      "u": "/linkedin-ams#abrir",
+      "u": "/ir/linkedin-ams#abrir",
       "b": "Ver cómo abrirla"
     },
     {
