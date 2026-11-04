@@ -134,7 +134,7 @@
   "enlace": "#tareas",
   "tareas": [
     {
-      "t": "Google Ads: acepta la invitación (caduca el 2 de diciembre)\n- Sin ella no podemos preparar tus anuncios\n- Tienes dos cuentas: usa **AMS CERRAMIENTOS (171-167-8619)**; la de «Pájaro» no\nPasos\n1. Entra en ads.google.com\n2. Elige AMS CERRAMIENTOS\n3. Engranaje «Administración», «Acceso y seguridad», pestaña «Administradores» y «Aceptar»\n> No siempre llega por correo: a veces aparece dentro de Ads. Si no te sale nada para aceptar, dínoslo (con un pantallazo del correo con el que entras) y te la mandamos otra vez.\n> Si no te sale «Administración»: «Cambiar a modo experto» y «Crear una cuenta sin campaña» (sin tarjeta ni anuncios) y vuelve a probar.",
+      "t": "Google Ads: acepta la invitación (caduca el 2 de diciembre)\n- Sin ella no podemos preparar tus anuncios\n- Tienes dos cuentas: usa **AMS CERRAMIENTOS (171-167-8619)**; la de «Pájaro» no\nPasos\n1. Entra en ads.google.com\n2. Mira arriba a la derecha: debe poner AMS CERRAMIENTOS y 171-167-8619; si no, pulsa el nombre y elige esa cuenta\n3. Engranaje «Administración», «Acceso y seguridad», pestaña «Administradores» y «Aceptar»\n> Si te sale «Nueva campaña», sal sin crear nada: no hace falta.\n> No siempre llega por correo: a veces aparece dentro de Ads. Si no te sale nada para aceptar, dínoslo (con un pantallazo del correo con el que entras) y te la mandamos otra vez.\n> Si no te sale «Administración»: «Cambiar a modo experto» y «Crear una cuenta sin campaña» (sin tarjeta ni anuncios) y vuelve a probar.",
       "u": "https://ads.google.com",
       "b": "Ir a Google Ads",
       "prio": "Muy importante"
