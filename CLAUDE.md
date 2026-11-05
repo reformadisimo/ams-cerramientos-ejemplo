@@ -115,3 +115,4 @@
 - 2026-11-05 (ams·v111): guía de Javi, novedad nueva primera de «Lo último»: «Tú decides siempre» (Ig): lo que proponemos (inversión, campañas, SEO, enlaces) es opinión sincera y no obligación; la última palabra es de Javi y nos adaptamos a lo que decida. Sin correo aparte.
 - 2026-11-05 (ams·v112): novedad «Tú decides» de la guía ampliada (Ig): él marca el ritmo, solo aconsejamos con visión de conjunto, trabajamos con quien quiere trabajar con nosotros y se le facilita la salida.
 - 2026-11-05 (ams·v113): novedad «Tú decides» de la guía: la salida pasa a viñeta propia («Si un día quieres llevártelo todo, ya tienes el control: no tienes que pedirnos nada, pero te facilitamos la salida»).
+- 2026-11-05 (ams·v114): novedad «Tú decides» de la guía: nueva viñeta «Nuestra prioridad es que no dependas de nosotros de ninguna manera». OJO: no escribir «dependencia cero» a secas; la única pieza en cuenta nuestra es la IA del asistente (v89/v90) y ya se le dijo.
