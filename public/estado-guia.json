@@ -1,8 +1,12 @@
 {
-  "version": "2026-11-04T04:05",
-  "fecha": "3 de noviembre de 2026",
+  "version": "2026-11-05T06:40",
+  "fecha": "5 de noviembre de 2026",
   "aviso": "Todo es tuyo y tú tienes el control: tu dominio, tu correo, tu web, tus anuncios y tus contactos, a tu nombre. Te lo hemos mandado por correo, con tu guía de control en PDF.",
   "ultimo": [
+    {
+      "f": "5 nov",
+      "t": "Google Ads: solo falta un «Aceptar»\n- Te hemos creado la cuenta de Google Ads de AMS a tu nombre, con tu Gmail como administrador\n- Te llega un correo de Google a amscerramientos@gmail.com: pulsa «Aceptar» (mira también en Spam)\n- Con eso podemos preparar tus campañas y dejártelas listas para que las veas\n> Los anuncios empiezan el 1 de diciembre. Tú tienes el mando de todo."
+    },
     {
       "f": "4 nov",
       "t": "Tus páginas privadas ahora tienen dirección secreta\n- Son enlaces largos y difíciles de adivinar: es casi imposible que alguien llegue sin que tú se lo des\n- Entra siempre desde esta guía y no compartas esos enlaces\n- Más adelante, cuando acabemos esta fase y entres menos, las pasaremos a clave\n> Ahora te lo hacemos fácil; después, más seguro."
@@ -86,11 +90,6 @@
       "f": "2 nov",
       "t": "Sorpresa: tu web nueva ya está en amscerramientos.es, conectada a Analytics, Search Console y Clarity.",
       "u": "https://www.amscerramientos.es/"
-    },
-    {
-      "f": "2 nov",
-      "t": "Todos los avisos de la web (contactos, visitas, precio con fotos, comparar presupuesto) te llegan ya a info@amscerramientos.es.",
-      "u": "#tareas"
     }
   ],
   "cuentas": {
@@ -138,13 +137,13 @@
   "enlace": "#tareas",
   "tareas": [
     {
-      "t": "Google Ads: acepta la invitación (caduca el 2 de diciembre)\n- Sin ella no podemos preparar tus anuncios\n- Tienes dos cuentas: usa **AMS CERRAMIENTOS (171-167-8619)**; la de «Pájaro» no\nPasos\n1. Entra en ads.google.com\n2. Mira arriba a la derecha: debe poner AMS CERRAMIENTOS y 171-167-8619; si no, pulsa el nombre y elige esa cuenta\n3. Engranaje «Administración», «Acceso y seguridad», pestaña «Administradores» y «Aceptar»\n> Si te sale «Nueva campaña», sal sin crear nada: no hace falta.\n> No siempre llega por correo: a veces aparece dentro de Ads. Si no te sale nada para aceptar, dínoslo (con un pantallazo del correo con el que entras) y te la mandamos otra vez.\n> Si no te sale «Administración»: «Cambiar a modo experto» y «Crear una cuenta sin campaña» (sin tarjeta ni anuncios) y vuelve a probar.",
-      "u": "https://ads.google.com",
-      "b": "Ir a Google Ads",
+      "t": "Google Ads: pulsa «Aceptar» en el correo que te manda Google (caduca el 2 de diciembre)\n- Te hemos preparado una cuenta nueva a tu nombre, **AMS CERRAMIENTOS**, y tú eres el administrador\n- Olvida lo de antes: ya no hace falta que busques nada dentro de Google Ads\nQué tienes que hacer\n1. Abre el correo **amscerramientos@gmail.com** (mira también en Spam y en Promociones)\n2. Busca un correo de Google Ads con una invitación y pulsa **Aceptar**\n> Sin tarjeta y sin crear ninguna campaña: la tarjeta, en diciembre, y te lo explicamos paso a paso.\n> Si no te llega nada, dínoslo y lo arreglamos nosotros. No hay prisa.",
+      "u": "https://mail.google.com",
+      "b": "Abrir mi Gmail",
       "prio": "Muy importante"
     },
     {
-      "t": "Instagram y Facebook\nInstagram: ya has cambiado la contraseña, muy bien\n1. Pon el correo de AMS en la cuenta: tres rayas, «Centro de cuentas», «Información personal», «Información de contacto». Añade info@amscerramientos.es y ponlo como principal (ahora sale el de la cerrajería)\n2. Pásala a cuenta de empresa: Ajustes, «Tipo de cuenta», «Cambiar a cuenta profesional», «Empresa»\nFacebook\n- Está a nombre de Raúl: pídele que te haga administrador con tu correo\n- Si no puede, te abrimos una nueva a tu nombre\n> Sin prisa, mañana con calma. Si algo no lo ves, mándanos un pantallazo.",
+      "t": "Instagram y Facebook\nInstagram: ya has cambiado la contraseña, muy bien\n1. Pon el correo de AMS en la cuenta: tres rayas, «Centro de cuentas», «Información personal», «Información de contacto». Añade info@amscerramientos.es y ponlo como principal (ahora sale el de la cerrajería)\n2. Pásala a cuenta de empresa: Ajustes, «Tipo de cuenta», «Cambiar a cuenta profesional», «Empresa»\nFacebook\n- Está a nombre de Raúl: pídele que te haga administrador con tu correo\n- **Dinos qué te ha dicho Raúl**, aunque sea «no me contesta»\n- Si no puede, te abrimos una nueva a tu nombre\n> Sin prisa, mañana con calma. Si algo no lo ves, mándanos un pantallazo.",
       "prio": "Importante"
     },
     {
