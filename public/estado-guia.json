@@ -5,6 +5,10 @@
   "ultimo": [
     {
       "f": "5 nov",
+      "t": "Facebook: la página nueva la creas tú\n- Raúl ya no hace falta: creamos una nueva a tu nombre\n- La creas tú para que el control sea tuyo, y nosotros te guiamos paso a paso\n- Es complicado una sola vez y luego es tuyo para siempre; si lo hiciera otra persona, tendría ella el control\n> Tienes los pasos en tu correo y en «Tus tareas pendientes»."
+    },
+    {
+      "f": "5 nov",
       "t": "Tú decides y tú marcas el ritmo. Lo nuestro son consejos, no obligaciones\n- Inversión, campañas, SEO, enlaces: te lo planteamos porque creemos de verdad que te conviene\n- Te diremos siempre lo que pensamos, con sinceridad y con nuestra visión de conjunto\n- Si no lo ves o no es el momento, no pasa nada: la última palabra es tuya y nos adaptamos\n- Nuestra prioridad es que no dependas de nosotros de ninguna manera: ni tú ni nadie para quien trabajamos\n- Si un día quieres llevártelo todo, ya tienes el control: no tienes que pedirnos nada, pero te facilitamos la salida\n> Es tu negocio, mandas tú y tienes el control de todo, cuando quieras."
     },
     {
@@ -84,14 +88,10 @@
       "f": "3 nov",
       "t": "Hecho: tu ficha ya está en Bing (el buscador de Windows y de Copilot), publicada, verificada y conectada con tu ficha de Google. Y Bing ya tiene el mapa de tu web nueva.",
       "u": "https://www.bing.com/search?q=AMS+Cerramientos+y+Servicios+Villalbilla"
-    },
-    {
-      "f": "3 nov",
-      "t": "Facebook e Instagram: si Raúl no nos pasa el acceso antes del miércoles 4, pasamos al plan B y abrimos unas cuentas nuevas a tu nombre. Te diremos los pasos, son pocos."
     }
   ],
   "cuentas": {
-    "ads": "Cuenta de Google Ads 359-117-7001 (la que ya tenías con tu Gmail amscerramientos@gmail.com): solicitud aceptada el 5 de noviembre, vinculada con Casiopea 360. Los anuncios empiezan el 1 de diciembre (en noviembre, nada); la tarjeta, entonces, la pones tú. Facebook e Instagram: si Raúl no nos pasa el acceso, abrimos unas cuentas nuevas a tu nombre (plan B) y te diremos los pasos.",
+    "ads": "Cuenta de Google Ads 359-117-7001 (la que ya tenías con tu Gmail amscerramientos@gmail.com): solicitud aceptada el 5 de noviembre, vinculada con Casiopea 360. Los anuncios empiezan el 1 de diciembre (en noviembre, nada); la tarjeta, entonces, la pones tú. Facebook e Instagram: la página de Facebook nueva la creas tú (la de Raúl se elimina) y luego nos das acceso como socio.",
     "analytics": "Ya tienes tu propia cuenta de Google Analytics, creada por ti con tu correo de Gmail de empresa, y nos has dado acceso de administrador. Nos has pasado el código de medición para conectarla con la web nueva.",
     "dominio": "Tuyo, en DonDominio, a tu nombre, y se renueva solo. Tu web nueva está en amscerramientos.es desde el 2 de noviembre. Tu correo info@amscerramientos.es también está ya en DonDominio (desde el 3 de noviembre), a tu nombre: solo te falta cambiar los datos en tu Outlook.",
     "search": "Search Console: ya eres propietario con amscerramientos@gmail.com. Le hemos enviado a Google el mapa de tu web nueva (70 páginas). Clarity (cómo se mueve la gente por la web): ya estás dentro como administrador. Bing: entra una vez en bing.com/webmasters con tu Gmail y pulsa «Importar».",
@@ -142,7 +142,7 @@
       "hecho": true
     },
     {
-      "t": "Instagram y Facebook\nInstagram: ya has cambiado la contraseña, muy bien\n1. Pon el correo de AMS en la cuenta: tres rayas, «Centro de cuentas», «Información personal», «Información de contacto». Añade info@amscerramientos.es y ponlo como principal (ahora sale el de la cerrajería)\n2. Pásala a cuenta de empresa: Ajustes, «Tipo de cuenta», «Cambiar a cuenta profesional», «Empresa»\nFacebook\n- Es lo único que nos falta: con Facebook hacemos las campañas de Facebook y de Instagram\n- Está a nombre de Raúl: pídele que te haga administrador con tu correo\n- **Dinos qué te ha dicho Raúl**, aunque sea «no me contesta»\n- Si no te contesta o no puede, lo arreglamos por otro lado (te abrimos una nueva a tu nombre)\n> Sin prisa, mañana con calma. Si algo no lo ves, mándanos un pantallazo.",
+      "t": "Instagram y Facebook\nFacebook: crea tu página nueva, tú mismo\n1. Abre la aplicación de Facebook, toca las tres rayitas y «Páginas»\n2. Toca «Crear» y pon el nombre **AMS Cerramientos**\n3. Elige la categoría («Empresa de construcción» o «Servicios de ventanas») y toca «Crear página»\n- Te lo hemos mandado por correo, paso a paso\n- Dile a Raúl que ya puede eliminar la página vieja: no tiene nada dentro\nInstagram\n1. Pon el correo de AMS en la cuenta: tres rayas, «Centro de cuentas», «Información personal», «Información de contacto». Añade info@amscerramientos.es y ponlo como principal (ahora sale el de la cerrajería)\n2. Pásala a cuenta de empresa: Ajustes, «Tipo de cuenta», «Cambiar a cuenta profesional», «Empresa»\n> Esta vez la creas tú para que el control sea tuyo. Es complicado una sola vez y luego es tuyo para siempre. Si algo no lo ves, mándanos un pantallazo.",
       "prio": "Importante"
     },
     {
