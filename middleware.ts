@@ -20,12 +20,22 @@ async function huella(clave: string): Promise<string> {
    antes (no se rompe nada). PRIV_RUTA vive SOLO en Vercel: el repositorio es público. Más adelante, pasarlas a clave. */
 const PRIV = ["todo-es-tuyo", "conoce-tu-cliente", "correos-ejemplo", "linkedin-ams", "fotos-web-antigua", "conversaciones", "mapa-de-obras"];
 const COOKIE_G = "ams_g";
+/* Descarga de la web (ZIP de la última versión + LEEME con las instrucciones para otro proveedor). Mismo trato que
+   las privadas: /ir/descargar-web desde la guía -> /descargar-web-<PRIV_RUTA> -> ZIP. Nunca indexada. */
+const ZIP_WEB = "https://github.com/reformadisimo/ams-cerramientos-ejemplo/archive/refs/heads/main.zip";
+function zipWeb() {
+  const r = NextResponse.redirect(ZIP_WEB, 302);
+  r.headers.set("X-Robots-Tag", "noindex, nofollow");
+  r.headers.set("Referrer-Policy", "no-referrer");
+  return r;
+}
 
 async function privadas(req: NextRequest): Promise<NextResponse | null> {
   const ruta = (process.env.PRIV_RUTA ?? "").trim();
   const p = req.nextUrl.pathname.replace(/\/+$/, "");
   if (ruta.length < 12) {
     /* Sin PRIV_RUTA: /ir/<nombre> lleva a la dirección de siempre, para que los enlaces de la guía no se rompan. */
+    if (p === "/ir/descargar-web") return zipWeb();
     if (p.startsWith("/ir/") && PRIV.includes(p.slice(4))) { const u = req.nextUrl.clone(); u.pathname = p.slice(3); return NextResponse.redirect(u, 307); }
     return null;
   }
@@ -34,6 +44,12 @@ async function privadas(req: NextRequest): Promise<NextResponse | null> {
     const r = NextResponse.next();
     r.cookies.set(COOKIE_G, h, { httpOnly: true, secure: true, sameSite: "lax", path: "/", maxAge: 60 * 60 * 24 * 365 });
     return r;
+  }
+  if (p === `/descargar-web-${ruta}`) return zipWeb();
+  if (p === "/descargar-web" || p.startsWith("/descargar-web/")) return new NextResponse("No encontrada.", { status: 404 });
+  if (p === "/ir/descargar-web") {
+    if (req.cookies.get(COOKIE_G)?.value === h) { const u = req.nextUrl.clone(); u.pathname = `/descargar-web-${ruta}`; return NextResponse.redirect(u, 307); }
+    return new NextResponse("Entra por la guía.", { status: 404, headers: { "content-type": "text/plain; charset=utf-8" } });
   }
   if (p.startsWith("/ir/")) {
     const n = p.slice(4);
@@ -103,4 +119,4 @@ export async function middleware(req: NextRequest) {
   return new NextResponse("Clave necesaria.", { status: 401, headers: { "WWW-Authenticate": 'Basic realm="Mesa de AMS Cerramientos", charset="UTF-8"', "content-type": "text/plain; charset=utf-8" } });
 }
 
-export const config = { matcher: ["/mesa", "/mesa/:path*", "/mesa-:ruta", "/ir/:n", "/guia-javi", "/guia-javi.html", "/guia-javi/:path*", "/(todo-es-tuyo|conoce-tu-cliente|correos-ejemplo|linkedin-ams|fotos-web-antigua|conversaciones|mapa-de-obras)(.*)"] };
+export const config = { matcher: ["/mesa", "/mesa/:path*", "/mesa-:ruta", "/ir/:n", "/guia-javi", "/guia-javi.html", "/guia-javi/:path*", "/(todo-es-tuyo|conoce-tu-cliente|correos-ejemplo|linkedin-ams|fotos-web-antigua|conversaciones|mapa-de-obras|descargar-web)(.*)"] };
