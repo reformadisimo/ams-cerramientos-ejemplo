@@ -116,3 +116,4 @@
 - 2026-11-05 (ams·v112): novedad «Tú decides» de la guía ampliada (Ig): él marca el ritmo, solo aconsejamos con visión de conjunto, trabajamos con quien quiere trabajar con nosotros y se le facilita la salida.
 - 2026-11-05 (ams·v113): novedad «Tú decides» de la guía: la salida pasa a viñeta propia («Si un día quieres llevártelo todo, ya tienes el control: no tienes que pedirnos nada, pero te facilitamos la salida»).
 - 2026-11-05 (ams·v114): novedad «Tú decides» de la guía: nueva viñeta «Nuestra prioridad es que no dependas de nosotros de ninguna manera». OJO: no escribir «dependencia cero» a secas; la única pieza en cuenta nuestra es la IA del asistente (v89/v90) y ya se le dijo.
+- 2026-11-05 (ams·v115): novedad «Tú decides» de la guía: fuera la viñeta «Trabajamos solo con quien quiere trabajar con nosotros» (Ig).
