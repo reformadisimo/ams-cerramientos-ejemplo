@@ -1,8 +1,13 @@
 {
-  "version": "2026-11-05T07:30",
-  "fecha": "5 de noviembre de 2026",
+  "version": "2026-11-06T09:30",
+  "fecha": "6 de noviembre de 2026",
   "aviso": "Todo es tuyo y tú tienes el control: tu dominio, tu correo, tu web, tus anuncios y tus contactos, a tu nombre. Te lo hemos mandado por correo, con tu guía de control en PDF.",
   "ultimo": [
+    {
+      "f": "6 nov",
+      "t": "Facebook e Instagram: lo haces este fin de semana, perfecto\n- Gracias por avisar, Javi\n- Son 10 minutos y los pasos están en tu correo y en «Lo que te toca a ti»\n- Cuando termines, pulsa «Ya lo hice»\n> Si algo no lo ves igual, mándanos un pantallazo.",
+      "u": "#tareas"
+    },
     {
       "f": "6 nov",
       "t": "Instagram y Facebook: ya es lo último\n- Raúl no nos contesta, así que seguimos sin él: la página de Facebook la creas tú, en 5 minutos\n- Con eso y tu Instagram ya tenemos todo para preparar las campañas de diciembre, que llevan tiempo\n- Sin esto no funciona el ecosistema 360\n> Los pasos, uno a uno, están en «Lo que te toca a ti», la primera tarea."
@@ -82,10 +87,6 @@
       "f": "3 nov",
       "t": "Hecho: tu correo info@amscerramientos.es ya está en DonDominio, a tu nombre (unos 10 € al año). Ya no depende de Raúl. Solo te falta un paso en tu Outlook (en «Lo que te toca a ti»).",
       "u": "#tareas"
-    },
-    {
-      "f": "3 nov",
-      "t": "Tus contactos son tuyos: en tu libreta, «Ajustes», «Descargar todos mis contactos». Te los bajas en Excel cuando quieras, sin pedírnoslo."
     }
   ],
   "cuentas": {
@@ -133,7 +134,7 @@
   "enlace": "#tareas",
   "tareas": [
     {
-      "t": "Instagram y Facebook: lo último que nos falta\n- Con esto ya lo tenemos todo y podemos preparar las campañas de diciembre\n- Sin esto no funciona el ecosistema 360: Facebook e Instagram van juntos\n- Raúl no nos ha contestado, así que lo hacemos tú y nosotros, sin esperarle\nPaso 1: crea tu página de Facebook (5 minutos)\n1. Abre la aplicación de Facebook en el móvil, toca las tres rayitas y «Páginas»\n2. Toca «Crear» y escribe el nombre: **AMS Cerramientos y Servicios**\n3. Categoría: busca «Carpintería metálica» y tócala\n4. Toca «Crear página»\n5. Si te pide correo y teléfono, pon **info@amscerramientos.es** y tu teléfono de siempre\nPaso 2: conecta tu Instagram con esa página (2 minutos)\n1. Abre Instagram, ve a tu perfil, toca las tres rayas y «Ajustes»\n2. Toca «Tipo de cuenta y herramientas» y «Cambiar a cuenta profesional». Elige «Empresa»\n3. Cuando te lo pregunte, toca «Conectar con una página de Facebook» y elige la que acabas de crear\nPaso 3: pon el correo de AMS en Instagram\n1. Tres rayas, «Centro de cuentas», «Información personal», «Información de contacto»\n2. Añade **info@amscerramientos.es** y ponlo como principal (ahora sale el de la cerrajería)\n> Cuando termines, pulsa «Ya lo hice». Nosotros te mandamos después una invitación para ayudarte con los vídeos y anuncios, sin que tengas que darnos ninguna contraseña. Si algo no lo ves, mándanos un pantallazo y te decimos dónde tocar.",
+      "t": "Instagram y Facebook: lo último que nos falta\n- Con esto ya lo tenemos todo y podemos preparar las campañas de diciembre\n- Sin esto no funciona el ecosistema 360: Facebook e Instagram van juntos\n- Ya nos has dicho que lo haces este fin de semana, gracias\n- Raúl no nos ha contestado, así que lo hacemos tú y nosotros, sin esperarle\nPaso 1: crea tu página de Facebook (5 minutos)\n1. Abre la aplicación de Facebook en el móvil, toca las tres rayitas y «Páginas»\n2. Toca «Crear» y escribe el nombre: **AMS Cerramientos y Servicios**\n3. Categoría: busca «Carpintería metálica» y tócala\n4. Toca «Crear página»\n5. Si te pide correo y teléfono, pon **info@amscerramientos.es** y tu teléfono de siempre\nPaso 2: conecta tu Instagram con esa página (2 minutos)\n1. Abre Instagram, ve a tu perfil, toca las tres rayas y «Ajustes»\n2. Toca «Tipo de cuenta y herramientas» y «Cambiar a cuenta profesional». Elige «Empresa»\n3. Cuando te lo pregunte, toca «Conectar con una página de Facebook» y elige la que acabas de crear\nPaso 3: pon el correo de AMS en Instagram\n1. Tres rayas, «Centro de cuentas», «Información personal», «Información de contacto»\n2. Añade **info@amscerramientos.es** y ponlo como principal (ahora sale el de la cerrajería)\n> Cuando termines, pulsa «Ya lo hice». Nosotros te mandamos después una invitación para ayudarte con los vídeos y anuncios, sin que tengas que darnos ninguna contraseña. Si algo no lo ves, mándanos un pantallazo y te decimos dónde tocar.",
       "prio": "Muy importante"
     },
     {
