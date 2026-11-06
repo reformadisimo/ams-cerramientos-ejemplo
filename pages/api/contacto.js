@@ -26,11 +26,19 @@ const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&am
 const ZONA_SI = /alcal[aá]|villalbilla|torrej[oó]n|meco|azuqueca|camarma|daganzo|santos de la humosa|anchuelo|corpa|santorcaz|pezuela|nuevo bazt[aá]n|loeches|torres de la alameda|valverde|ajalvir|cabanillas|alovera|chiloeches|marchamalo|villanueva de la torre|quer|yunquera|fontanar|el casar|valdeavero|fresno de torote|serracines|ribatejada|campo real|pozuelo del rey|olmeda|coslada|san fernando|mejorada|velilla|alcobendas|san sebasti[aá]n de los reyes|algete|cobe[ñn]a|san agust[ií]n|guadalix/; // zonas de Javi (1-nov-2026)
 const ZONA_DUDA = /guadalajara|arganda|rivas|fuente el saz/;
 const ZONA_NO = /getafe|alcorc[oó]n|\bpinto\b|\bparla\b|fuenlabrada|tres cantos|colmenar|las rozas|pozuelo de alarc|^pozuelo$|majadahonda|canillejas/; // donde Javi no trabaja
-const ZONA_LEJOS = /alicante|alacant|tarragona|barcelona|valencia|castell[oó]n|murcia|m[aá]laga|sevilla|c[oó]rdoba|granada|almer[ií]a|c[aá]diz|huelva|ja[eé]n|badajoz|c[aá]ceres|coru[ñn]a|lugo|ourense|pontevedra|asturias|oviedo|gij[oó]n|cantabria|santander|bilbao|vizcaya|guip[uú]zcoa|san sebasti[aá]n$|vitoria|[aá]lava|navarra|pamplona|zaragoza|huesca|teruel|lleida|l[eé]rida|girona|gerona|baleares|mallorca|ibiza|canarias|tenerife|las palmas|albacete|ciudad real|cuenca|toledo|[aá]vila|segovia|salamanca|zamora|valladolid|le[oó]n|burgos|palencia|soria|la rioja|logro[ñn]o|ceuta|melilla/; // fuera de zona (3-nov-2026)
+const ZONA_LEJOS = /alicante|alacant|tarragona|barcelona|valencia|castell[oó]n|murcia|m[aá]laga|sevilla|c[oó]rdoba|granada|almer[ií]a|c[aá]diz|huelva|ja[eé]n|badajoz|c[aá]ceres|coru[ñn]a|lugo|ourense|pontevedra|asturias|oviedo|gij[oó]n|cantabria|santander|bilbao|vizcaya|guip[uú]zcoa|san sebasti[aá]n$|vitoria|[aá]lava|navarra|pamplona|zaragoza|huesca|teruel|lleida|l[eé]rida|girona|gerona|baleares|mallorca|ibiza|canarias|tenerife|las palmas|albacete|ciudad real|cuenca|toledo|[aá]vila|segovia|salamanca|zamora|valladolid|le[oó]n|burgos|palencia|soria|la rioja|logro[ñn]o|ceuta|melilla|molina de arag|siguenza|cifuentes|sacedon|pastrana|brihuega|mondejar|atienza|cogolludo|jadraque|maranchon|corduente/; // fuera de zona (3-nov-2026; Guadalajara lejana 6-nov)
+const CP_NO = /^(2890\d|2892[0-5]|28320|2898[0-4]|2894[0-6]|28760|28770|2823[0-2]|28290|2822[0-4])$/; // igual que en fotos.js
 const ZONA_NORTE = /moraleja|encinar|conde orgaz|piovera|alameda de osuna|paracuellos|santo domingo|ciudalcampo|fuente del fresno|\b(28109|28050|28043|28042|28860|28120|28707)\b/;
 const quitaAcentos = t => String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 function encaje(d) {
   const z = quitaAcentos(d.zona), t = quitaAcentos(d.trabajo + ' ' + d.pide);
+  // Código postal (6-nov-2026): solo Madrid (28) y la parte de Guadalajara cercana; lo demás no encaja
+  const cpm = z.match(/\b(\d{5})\b/), cp = cpm ? cpm[1] : '';
+  if (cp && !ZONA_NORTE.test(z)) {
+    if (!/^(28|19)/.test(cp)) return ['No encaja', 'fuera de Madrid y Guadalajara (CP ' + cp + ')'];
+    if (/^19/.test(cp) && !/^(1900\d|1916\d|1917\d|1918\d|192[01]\d)$/.test(cp)) return ['No encaja', 'Guadalajara lejos de nuestra zona (CP ' + cp + ')'];
+    if (CP_NO.test(cp)) return ['No encaja', 'zona donde no trabajamos (CP ' + cp + ')'];
+  }
   // Urbanizaciones de chalets del norte de Madrid (1-nov-2026): solo obras de 6 ventanas o más
   if (ZONA_NORTE.test(z)) {
     const n = Number((t.match(/(\d+)\s*ventanas?/) || [])[1] || 0);
