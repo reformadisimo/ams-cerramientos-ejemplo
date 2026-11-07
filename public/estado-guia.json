@@ -1,8 +1,13 @@
 {
- "version": "2026-11-07T15:40",
+ "version": "2026-11-07T20:20",
  "fecha": "7 de noviembre de 2026",
  "aviso": "Todo es tuyo y tú tienes el control: tu dominio, tu correo, tu web, tus anuncios y tus contactos, a tu nombre. Te lo hemos mandado por correo, con tu guía de control en PDF.",
  "ultimo": [
+  {
+   "f": "7 nov",
+   "t": "Ya puedes escribirnos en cada tarea\n- Pulsa «Escribir una respuesta» debajo de la tarea\n- Cuéntanos lo que quieras o pregúntanos lo que no entiendas\n- Nos llega por correo y te contestamos\n> Gracias por avisar, Javi: tenías razón, faltaba esa caja.",
+   "u": "#tareas"
+  },
   {
    "f": "7 nov",
    "t": "Tu cliente: hombre o mujer, y quién decide\n- Con esta respuesta elegimos a quién enseñar tus anuncios\n- Facebook, Instagram y Google dejan elegir sexo y edad\n- Cuanto mejor conozcamos a tu cliente, menos dinero se pierde\n> Está en «Lo que te toca a ti», son 10 minutos.",
@@ -82,11 +87,6 @@
    "f": "3 nov",
    "t": "Contactos que no te encajan\n- Los de Alicante, Tarragona y otras zonas lejanas ya no te mandan correo\n- Quedan guardados en tu libreta\n> No tienes que hacer nada.",
    "u": "#tareas"
-  },
-  {
-   "f": "3 nov",
-   "t": "Todo es tuyo y tú tienes el control\n- Tu guía de control: qué tienes, dónde está y cómo entras\n- Todo lo hecho es tuyo: web, asistente, creatividades, campañas y artículos\n- Contigo no hay permanencia ni la habrá (solemos pedir 3 a 6 meses en proyectos que cobramos; a ti te ayudamos sin coste)\n- Si un día cambias de proveedor, te hacemos un informe de todo: SEO, campañas e inversión\n> Te la mandamos también en PDF: guárdala.",
-   "u": "/ir/todo-es-tuyo"
   }
  ],
  "cuentas": {
