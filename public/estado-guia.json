@@ -5,6 +5,10 @@
   "ultimo": [
     {
       "f": "8 nov",
+      "t": "Gracias, Javi: Instagram y Meta Business Suite ya están\n- Tu Instagram está conectado a tu página de Facebook y tu cuenta de Meta Business Suite ya existe\n- Te hemos contestado lo de LinkedIn (no borres el tuyo, la página de empresa es aparte) y lo de Bing (solo «Importar»)\n- Solo falta el correo de AMS en Instagram, LinkedIn, Bing y tus tres datos de Facebook\n> Queda poquísimo. Ánimo."
+    },
+    {
+      "f": "8 nov",
       "t": "Queda poquito: tu Facebook ya luce\n- Tu página ya tiene 65 fotos reales, presentación, botón «Llamar» y una publicación para que te pidan precio\n- Faltan cuatro cosas: Instagram y Meta Business Suite, LinkedIn, Bing, y dos datos tuyos (horario y año)\n> Con esto dejamos todo listo para los anuncios de diciembre. Ánimo, ya casi está."
     },
     {
@@ -81,11 +85,6 @@
     {
       "f": "3 nov",
       "t": "Anuncios y SEO: por qué hacemos los dos\n- **Anuncios:** traen contactos pronto, pero se acaban cuando dejas de pagar\n- **SEO:** se queda en tu web para siempre (enlaces, notas de prensa, artículos)"
-    },
-    {
-      "f": "3 nov",
-      "t": "Te sobran cosas: perfecto, es fácil quitarlas\n- La lupa de la guía es solo un ejemplo, para que veas por curiosidad cómo se ve\n- Los datos de verdad de tu web los analizamos nosotros cada cierto tiempo\n- Quitamos lo que no sirva\n> Paciencia, y empezar con fuerza: para frenar siempre hay tiempo.",
-      "u": "/guia-javi/lupa"
     }
   ],
   "cuentas": {
@@ -133,10 +132,8 @@
   "enlace": "#tareas",
   "tareas": [
     {
-      "t": "Instagram a cuenta de empresa y Meta Business Suite: lo último que nos falta\n- Tu página de Facebook ya está hecha y nos has dado acceso: gracias, ha quedado muy bien\n- Falta conectar Instagram y abrir tu cuenta en Meta Business Suite\n- Con esto ya podemos preparar las campañas de diciembre\nPaso 1: pasa Instagram a cuenta de empresa y conéctala (3 minutos)\n1. Abre Instagram, ve a tu perfil, toca las tres rayas y «Ajustes»\n2. Toca «Tipo de cuenta y herramientas» y «Cambiar a cuenta profesional». Elige «Empresa»\n3. Cuando te lo pregunte, toca «Conectar con una página de Facebook» y elige **Ams cerramientos y servicios**\nPaso 2: pon el correo de AMS en Instagram\n1. Tres rayas, «Centro de cuentas», «Información personal», «Información de contacto»\n2. Añade **info@amscerramientos.es** y ponlo como principal (ahora sale el de la cerrajería)\nPaso 3: entra en Meta Business Suite (5 minutos)\n1. Abre https://business.facebook.com desde el ordenador, con tu Facebook de siempre (es el panel gratis de Facebook para llevar tu página e Instagram juntos)\n2. Si te pide crear una cuenta de empresa, acepta y ponle el nombre **AMS Cerramientos**\n3. Comprueba que ves tu página de Facebook y tu Instagram dentro\n> Cuando termines, pulsa «Ya lo hice». Después te pedimos acceso como socio, sin contraseñas, para publicar y lanzar los anuncios. Si algo no lo ves, mándanos un pantallazo y te decimos dónde tocar.\n> Queda poquito: con esto dejamos todo listo para diciembre.",
+      "t": "Instagram: solo falta poner el correo de AMS\n- Instagram ya está conectado a tu página de Facebook y tu cuenta de Meta Business Suite ya existe: ¡muy bien!\n1. Abre Instagram, tres rayas, «Centro de cuentas», «Información personal», «Información de contacto»\n2. Añade **info@amscerramientos.es** y ponlo como principal (ahora sale el de la cerrajería)\n> Cuando termines, pulsa «Ya lo hice». Si algo no lo ves, mándanos un pantallazo y te decimos dónde tocar.",
       "prio": "Muy importante",
-      "u": "https://business.facebook.com/",
-      "b": "Abrir Meta Business Suite",
       "u2": "https://www.facebook.com/profile.php?id=61596565850785",
       "b2": "Ver mi página de Facebook"
     },
@@ -192,7 +189,7 @@
       "hecho": true
     },
     {
-      "t": "Abre la página de AMS en LinkedIn (como empresa, no tu perfil)\n- Ahí se pueden hacer anuncios muy buenos para que te encuentren quienes encargan obras grandes\n- Es el último esfuercito, son 10 minutos y te lo explicamos paso a paso\n1. LinkedIn pide una cuenta personal solo para crear la página\n2. La página queda a nombre de AMS\n3. Después nos añades como administradores\n> La llevamos nosotros. Lo tuyo es solo abrirla.",
+      "t": "Abre la página de AMS en LinkedIn (como empresa)\n- Deja tu perfil de LinkedIn como está: **no lo borres**. La página de empresa es otra cosa y se crea desde el tuyo\n- Ahí se pueden hacer anuncios muy buenos para que te encuentren quienes encargan obras grandes\n1. Abre el enlace de abajo con tu LinkedIn de siempre\n2. Elige «Empresa» y pon el nombre **AMS Cerramientos y Servicios**\n3. Pon la web amscerramientos.es y pulsa «Crear página»\n> Después nos añades como administradores. La llevamos nosotros. Lo tuyo es solo abrirla.",
       "u": "https://www.linkedin.com/company/setup/new/",
       "b": "Crear la página en LinkedIn",
       "prio": "Importante",
@@ -200,7 +197,7 @@
       "b2": "Ver cómo hacerlo"
     },
     {
-      "t": "Bing: para rizar el rizo (sin prisa)\n- Es el último detalle: Bing tiene poco volumen, un 2 o 3 % de las búsquedas\n- Aun así, así todo queda también a tu nombre\n1. Entra en bing.com/webmasters con tu Gmail\n2. Pulsa «Importar» (trae todo desde Search Console)\n> Lo nuestro ya está hecho y funcionando; esto es solo para que quede a tu nombre.",
+      "t": "Bing: para rizar el rizo (sin prisa)\n- Es el último detalle: Bing tiene poco volumen, un 2 o 3 % de las búsquedas\n- Ya has entrado con tu correo: vas bien\n1. En la pantalla que nos has mandado, pulsa **«Importar»** (la de Google Search Console)\n2. **No escribas ninguna dirección** en la otra casilla: es solo para añadir webs a mano\n> Lo nuestro ya está hecho y funcionando; esto es solo para que quede a tu nombre.",
       "u": "https://www.bing.com/webmasters",
       "b": "Entrar en Bing Webmaster",
       "prio": "Sin prisa"
