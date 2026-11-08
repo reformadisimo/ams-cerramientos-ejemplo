@@ -132,9 +132,9 @@
   "enlace": "#tareas",
   "tareas": [
     {
-      "t": "Dame el control total de tu página (1 minuto)\n- Con esto nos das acceso a la página y al Instagram de una vez, sin contraseñas\n- Facebook ha pasado nuestro acceso a tu cuenta de Meta Business Suite y ahora es limitado: así no podemos publicar ni preparar los anuncios\n1. Entra en https://business.facebook.com con tu Facebook, abajo a la izquierda «Configuración»\n2. Arriba a la izquierda elige el portfolio **ams cerramientos**\n3. Toca «Personas», luego **Ignacio Dlr** y «Asignar activos»\n4. Marca tu página y tu Instagram y activa **«Control total»** (el interruptor grande)\n5. Pulsa «Guardar cambios»\n> Sigues siendo tú el dueño: puedes quitarnos cuando quieras. Si algo no lo ves, mándanos un pantallazo y te decimos dónde tocar.",
+      "t": "Dame el control total de tu página (1 minuto)\n- Con esto nos das la página y el Instagram de una vez, sin contraseñas\n- Facebook ha pasado nuestro acceso a tu cuenta de Meta Business Suite y ahora es limitado: así no podemos publicar ni preparar los anuncios\n1. Toca el botón verde de abajo («Abrir Personas en Meta»). Entras directo, con tu Facebook de siempre\n2. Toca el nombre **Ignacio Dlr** (a la izquierda, en la lista)\n3. Toca **«Asignar activos»** (arriba a la derecha)\n4. Marca **tu página** (Ams cerramientos y servicios) y tu Instagram\n5. Activa **«Control total»** (el interruptor grande)\n6. Pulsa **«Guardar cambios»**\n> Sigues siendo el dueño: puedes quitarnos cuando quieras. Si algo no lo ves, mándanos un pantallazo y te decimos dónde tocar.",
       "prio": "Muy importante",
-      "u": "https://business.facebook.com/latest/settings/people",
+      "u": "https://business.facebook.com/latest/settings/people?business_id=2024992614868199",
       "b": "Abrir Personas en Meta"
     },
     {
