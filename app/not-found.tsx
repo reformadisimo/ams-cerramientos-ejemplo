@@ -20,7 +20,7 @@ export default function NoEncontrada() {
     <div style={{ fontFamily: "Arial, Helvetica, sans-serif", color: "#12202B", background: "#ffffff", minHeight: "100vh", padding: "40px 16px" }}>
       <div style={{ maxWidth: 640, margin: "0 auto" }}>
         <a href="/" style={{ display: "inline-block", marginBottom: 24 }}>
-          <img src="/img/logo-cuadrado.png" alt="AMS Cerramientos" width={72} height={72} />
+          <img src="/img/icono-512.png" alt="AMS Cerramientos" width={72} height={72} />
         </a>
         <h1 style={{ fontSize: 28, lineHeight: 1.2, margin: "0 0 10px", color: AZUL }}>Esta página ya no está aquí</h1>
         <p style={{ fontSize: 17, lineHeight: 1.55, margin: "0 0 20px" }}>

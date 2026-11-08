@@ -4,6 +4,11 @@
   "aviso": "Todo es tuyo y tú tienes el control: tu dominio, tu correo, tu web, tus anuncios y tus contactos, a tu nombre. Te lo hemos mandado por correo, con tu guía de control en PDF.",
   "ultimo": [
     {
+      "f": "8 nov",
+      "t": "Así se verán tus anuncios\n- Una muestra de cada anuncio: Google, Facebook, Instagram y vídeo\n- Con la inversión de cada uno\n- Los textos y fotos son de ejemplo; los definitivos los afinamos contigo\n> Mírala cuando quieras. Sin tus accesos de Facebook no podemos empezar, pero lo demás está listo.",
+      "u": "/guia-javi/anuncios"
+    },
+    {
       "f": "7 nov",
       "t": "Ya puedes escribirnos en cada tarea\n- Pulsa «Escribir una respuesta» debajo de la tarea\n- Cuéntanos lo que quieras o pregúntanos lo que no entiendas\n- Nos llega por correo y te contestamos\n> Gracias por avisar, Javi: tenías razón, faltaba esa caja.",
       "u": "#tareas"
@@ -81,11 +86,6 @@
     {
       "f": "3 nov",
       "t": "Libreta: motivos nuevos en «No ha salido»\n- «Está lejos, fuera de mi zona»\n- «No hago ese producto»\n> Si no los ves, cierra la libreta y vuelve a abrirla.",
-      "u": "#tareas"
-    },
-    {
-      "f": "3 nov",
-      "t": "Contactos que no te encajan\n- Los de Alicante, Tarragona y otras zonas lejanas ya no te mandan correo\n- Quedan guardados en tu libreta\n> No tienes que hacer nada.",
       "u": "#tareas"
     }
   ],
@@ -186,9 +186,10 @@
       "t": "Pegatina nueva con QR\n- Mándanos por WhatsApp una foto de la pegatina que pones ahora y su medida\n- Dinos si te gusta la nueva (va en el correo del 2 de noviembre)\n> Cuando te acuerdes, sin prisa."
     },
     {
-      "t": "Abre la página de AMS en LinkedIn (como empresa, no tu perfil)\n- Son 10 minutos y te lo explicamos paso a paso\n- Después nos añades como administradores\n- La llevamos nosotros",
+      "t": "Abre la página de AMS en LinkedIn (como empresa, no tu perfil)\n- Ahí se pueden hacer anuncios muy buenos para que te encuentren quienes encargan obras grandes\n- Son 10 minutos y te lo explicamos paso a paso\n1. LinkedIn pide una cuenta personal solo para crear la página\n2. La página queda a nombre de AMS\n3. Después nos añades como administradores\n> La llevamos nosotros. Lo tuyo es solo abrirla.",
       "u": "/ir/linkedin-ams#abrir",
-      "b": "Ver cómo abrirla"
+      "b": "Ver cómo abrirla",
+      "prio": "Importante"
     },
     {
       "t": "En cada obra: una foto antes y otra después\n- Desde el mismo sitio\n- Al terminar, el WhatsApp para pedir la reseña\n> Ya tenemos 12 parejas tuyas en la web y quedan genial: cuantas más, mejor.",
