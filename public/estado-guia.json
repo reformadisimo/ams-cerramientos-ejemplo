@@ -5,6 +5,12 @@
   "ultimo": [
     {
       "f": "8 nov",
+      "t": "Tu página de Facebook ya está en marcha\n- Ya tiene logo, portada, categoría, la web y dos vídeos publicados\n- Es pública: la ve cualquiera, no solo nosotros. Lo de «Publicado por Ignacio» solo lo ven los administradores\n- Seguiremos actualizándola, y tu web ya tiene artículos programados para mejorar el posicionamiento\n> Un último esfuerzo: Instagram, Meta Business Suite y LinkedIn.",
+      "u": "https://www.facebook.com/profile.php?id=61596565850785",
+      "b": "Ver tu página"
+    },
+    {
+      "f": "8 nov",
       "t": "Así se verán tus anuncios\n- Una muestra de cada anuncio: Google, Facebook, Instagram y vídeo\n- Con la inversión de cada uno\n- Los textos y fotos son de ejemplo; los definitivos los afinamos contigo\n> Mírala cuando quieras. Sin tus accesos de Facebook no podemos empezar, pero lo demás está listo.",
       "u": "/guia-javi/anuncios"
     },
@@ -82,11 +88,6 @@
       "f": "3 nov",
       "t": "Outlook: ya recibes los correos y tienes la copia, gracias\n- Falta solo pedirle a Raúl que dé de baja el hosting antiguo (mañana, cuando hables con él)\n- Lo demás lo hacemos nosotros",
       "u": "#tareas"
-    },
-    {
-      "f": "3 nov",
-      "t": "Libreta: motivos nuevos en «No ha salido»\n- «Está lejos, fuera de mi zona»\n- «No hago ese producto»\n> Si no los ves, cierra la libreta y vuelve a abrirla.",
-      "u": "#tareas"
     }
   ],
   "cuentas": {
@@ -134,7 +135,7 @@
   "enlace": "#tareas",
   "tareas": [
     {
-      "t": "Instagram y Facebook: lo último que nos falta\n- Con esto ya lo tenemos todo y podemos preparar las campañas de diciembre\n- Sin esto no funciona el ecosistema 360: Facebook e Instagram van juntos\n- Ya nos has dicho que lo haces este fin de semana, gracias\n- Raúl no nos ha contestado, así que lo hacemos tú y nosotros, sin esperarle\nPaso 1: crea tu página de Facebook (5 minutos)\n1. Abre la aplicación de Facebook en el móvil, toca las tres rayitas y «Páginas»\n2. Toca «Crear» y escribe el nombre: **AMS Cerramientos y Servicios**\n3. Categoría: busca «Carpintería metálica» y tócala\n4. Toca «Crear página»\n5. Si te pide correo y teléfono, pon **info@amscerramientos.es** y tu teléfono de siempre\nPaso 2: conecta tu Instagram con esa página (2 minutos)\n1. Abre Instagram, ve a tu perfil, toca las tres rayas y «Ajustes»\n2. Toca «Tipo de cuenta y herramientas» y «Cambiar a cuenta profesional». Elige «Empresa»\n3. Cuando te lo pregunte, toca «Conectar con una página de Facebook» y elige la que acabas de crear\nPaso 3: pon el correo de AMS en Instagram\n1. Tres rayas, «Centro de cuentas», «Información personal», «Información de contacto»\n2. Añade **info@amscerramientos.es** y ponlo como principal (ahora sale el de la cerrajería)\n> Cuando termines, pulsa «Ya lo hice». Nosotros te mandamos después una invitación para ayudarte con los vídeos y anuncios, sin que tengas que darnos ninguna contraseña. Si algo no lo ves, mándanos un pantallazo y te decimos dónde tocar.",
+      "t": "Instagram a cuenta de empresa y Meta Business Suite: lo último que nos falta\n- Tu página de Facebook ya está hecha y nos has dado acceso: gracias, ha quedado muy bien\n- Falta conectar Instagram y abrir tu cuenta en Meta Business Suite\n- Con esto ya podemos preparar las campañas de diciembre\nPaso 1: pasa Instagram a cuenta de empresa y conéctala (3 minutos)\n1. Abre Instagram, ve a tu perfil, toca las tres rayas y «Ajustes»\n2. Toca «Tipo de cuenta y herramientas» y «Cambiar a cuenta profesional». Elige «Empresa»\n3. Cuando te lo pregunte, toca «Conectar con una página de Facebook» y elige **Ams cerramientos y servicios**\nPaso 2: pon el correo de AMS en Instagram\n1. Tres rayas, «Centro de cuentas», «Información personal», «Información de contacto»\n2. Añade **info@amscerramientos.es** y ponlo como principal (ahora sale el de la cerrajería)\nPaso 3: entra en Meta Business Suite (5 minutos)\n1. Abre business.facebook.com desde el ordenador, con tu Facebook de siempre\n2. Si te pide crear una cuenta de empresa, acepta y ponle el nombre **AMS Cerramientos**\n3. Comprueba que ves tu página de Facebook y tu Instagram dentro\n> Cuando termines, pulsa «Ya lo hice». Después te pedimos acceso como socio, sin contraseñas, para publicar y lanzar los anuncios. Si algo no lo ves, mándanos un pantallazo y te decimos dónde tocar.",
       "prio": "Muy importante"
     },
     {
@@ -186,7 +187,7 @@
       "t": "Pegatina nueva con QR\n- Mándanos por WhatsApp una foto de la pegatina que pones ahora y su medida\n- Dinos si te gusta la nueva (va en el correo del 2 de noviembre)\n> Cuando te acuerdes, sin prisa."
     },
     {
-      "t": "Abre la página de AMS en LinkedIn (como empresa, no tu perfil)\n- Ahí se pueden hacer anuncios muy buenos para que te encuentren quienes encargan obras grandes\n- Son 10 minutos y te lo explicamos paso a paso\n1. LinkedIn pide una cuenta personal solo para crear la página\n2. La página queda a nombre de AMS\n3. Después nos añades como administradores\n> La llevamos nosotros. Lo tuyo es solo abrirla.",
+      "t": "Abre la página de AMS en LinkedIn (como empresa, no tu perfil)\n- Ahí se pueden hacer anuncios muy buenos para que te encuentren quienes encargan obras grandes\n- Es el último esfuercito, son 10 minutos y te lo explicamos paso a paso\n1. LinkedIn pide una cuenta personal solo para crear la página\n2. La página queda a nombre de AMS\n3. Después nos añades como administradores\n> La llevamos nosotros. Lo tuyo es solo abrirla.",
       "u": "/ir/linkedin-ams#abrir",
       "b": "Ver cómo abrirla",
       "prio": "Importante"
