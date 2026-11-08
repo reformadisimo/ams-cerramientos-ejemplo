@@ -172,7 +172,7 @@
       "hecho": true
     },
     {
-      "t": "Revisa los precios\n- Haz 3 o 4 precios de ventanas de obras que conozcas\n- Dinos si te encajan\n> Es lo más importante: el cliente llega sabiendo el precio.",
+      "t": "Revisa los precios: una pregunta y tres precios\n- Con tu obra de julio la calculadora ya sale cerca (entre 4.480 y 6.140 € sin IVA, y tu obra fue 5.036 €)\n- Con tus respuestas la dejamos clavada\n1. Una pregunta: los **250 a 300 € de más del aluminio**, ¿son **por ventana** o **por toda la obra**?\n2. Haz **3 o 4 precios** de ventanas de obras que conozcas en la calculadora\n3. Dinos si te encajan\n> Es lo más importante: el cliente llega sabiendo el precio. Contéstalo con «Escribir una respuesta».",
       "u": "/calculadora",
       "b": "Abrir la calculadora",
       "u2": "/presupuesto-sin-visita",
