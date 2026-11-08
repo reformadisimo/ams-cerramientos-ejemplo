@@ -5,6 +5,10 @@
   "ultimo": [
     {
       "f": "8 nov",
+      "t": "Queda poquito: tu Facebook ya luce\n- Tu página ya tiene 65 fotos reales, presentación, botón «Llamar» y una publicación para que te pidan precio\n- Faltan cuatro cosas: Instagram y Meta Business Suite, LinkedIn, Bing, y dos datos tuyos (horario y año)\n> Con esto dejamos todo listo para los anuncios de diciembre. Ánimo, ya casi está."
+    },
+    {
+      "f": "8 nov",
       "t": "Gracias por tus precios y tus correcciones\n- Con tu presupuesto de julio rehacemos el artículo: 6 ventanas, unos 5.000 € más IVA (entre 4.000 y 6.000)\n- Tienes razón: conviene cambiar siempre el cajón de persiana, y así lo diremos\n- Los vídeos de ventanas irán sin soldadura y con una sola hoja oscilobatiente\n> No se publica nada sin tu visto bueno."
     },
     {
@@ -82,11 +86,6 @@
       "f": "3 nov",
       "t": "Te sobran cosas: perfecto, es fácil quitarlas\n- La lupa de la guía es solo un ejemplo, para que veas por curiosidad cómo se ve\n- Los datos de verdad de tu web los analizamos nosotros cada cierto tiempo\n- Quitamos lo que no sirva\n> Paciencia, y empezar con fuerza: para frenar siempre hay tiempo.",
       "u": "/guia-javi/lupa"
-    },
-    {
-      "f": "3 nov",
-      "t": "Instagram y Facebook\n- Instagram: ya has cambiado la contraseña y la cuenta es solo tuya\n- Falta poner el correo de AMS y pasarla a empresa\n- Facebook: mañana hablas con Raúl; si no te lo pasa, te abrimos uno nuevo a tu nombre",
-      "u": "#tareas"
     }
   ],
   "cuentas": {
@@ -134,12 +133,16 @@
   "enlace": "#tareas",
   "tareas": [
     {
-      "t": "Instagram a cuenta de empresa y Meta Business Suite: lo último que nos falta\n- Tu página de Facebook ya está hecha y nos has dado acceso: gracias, ha quedado muy bien\n- Falta conectar Instagram y abrir tu cuenta en Meta Business Suite\n- Con esto ya podemos preparar las campañas de diciembre\nPaso 1: pasa Instagram a cuenta de empresa y conéctala (3 minutos)\n1. Abre Instagram, ve a tu perfil, toca las tres rayas y «Ajustes»\n2. Toca «Tipo de cuenta y herramientas» y «Cambiar a cuenta profesional». Elige «Empresa»\n3. Cuando te lo pregunte, toca «Conectar con una página de Facebook» y elige **Ams cerramientos y servicios**\nPaso 2: pon el correo de AMS en Instagram\n1. Tres rayas, «Centro de cuentas», «Información personal», «Información de contacto»\n2. Añade **info@amscerramientos.es** y ponlo como principal (ahora sale el de la cerrajería)\nPaso 3: entra en Meta Business Suite (5 minutos)\n1. Abre https://business.facebook.com desde el ordenador, con tu Facebook de siempre (es el panel gratis de Facebook para llevar tu página e Instagram juntos)\n2. Si te pide crear una cuenta de empresa, acepta y ponle el nombre **AMS Cerramientos**\n3. Comprueba que ves tu página de Facebook y tu Instagram dentro\n> Cuando termines, pulsa «Ya lo hice». Después te pedimos acceso como socio, sin contraseñas, para publicar y lanzar los anuncios. Si algo no lo ves, mándanos un pantallazo y te decimos dónde tocar.",
+      "t": "Instagram a cuenta de empresa y Meta Business Suite: lo último que nos falta\n- Tu página de Facebook ya está hecha y nos has dado acceso: gracias, ha quedado muy bien\n- Falta conectar Instagram y abrir tu cuenta en Meta Business Suite\n- Con esto ya podemos preparar las campañas de diciembre\nPaso 1: pasa Instagram a cuenta de empresa y conéctala (3 minutos)\n1. Abre Instagram, ve a tu perfil, toca las tres rayas y «Ajustes»\n2. Toca «Tipo de cuenta y herramientas» y «Cambiar a cuenta profesional». Elige «Empresa»\n3. Cuando te lo pregunte, toca «Conectar con una página de Facebook» y elige **Ams cerramientos y servicios**\nPaso 2: pon el correo de AMS en Instagram\n1. Tres rayas, «Centro de cuentas», «Información personal», «Información de contacto»\n2. Añade **info@amscerramientos.es** y ponlo como principal (ahora sale el de la cerrajería)\nPaso 3: entra en Meta Business Suite (5 minutos)\n1. Abre https://business.facebook.com desde el ordenador, con tu Facebook de siempre (es el panel gratis de Facebook para llevar tu página e Instagram juntos)\n2. Si te pide crear una cuenta de empresa, acepta y ponle el nombre **AMS Cerramientos**\n3. Comprueba que ves tu página de Facebook y tu Instagram dentro\n> Cuando termines, pulsa «Ya lo hice». Después te pedimos acceso como socio, sin contraseñas, para publicar y lanzar los anuncios. Si algo no lo ves, mándanos un pantallazo y te decimos dónde tocar.\n> Queda poquito: con esto dejamos todo listo para diciembre.",
       "prio": "Muy importante",
       "u": "https://business.facebook.com/",
       "b": "Abrir Meta Business Suite",
       "u2": "https://www.facebook.com/profile.php?id=61596565850785",
       "b2": "Ver mi página de Facebook"
+    },
+    {
+      "t": "Dos datos para tu página de Facebook: tu horario y el año en que empezó AMS\n- Con esto la dejamos completa para que quien entre vea cuándo atiendes\n1. Dinos tu horario: qué días y de qué hora a qué hora atiendes\n2. Dinos el año en que empezó AMS (o cuántos años llevas)\n> Escríbelo con el botón «Escribir una respuesta». Te lleva un minuto.",
+      "prio": "Importante"
     },
     {
       "t": "Google Ads: pulsa «Aceptar» en el correo que te manda Google (caduca el 2 de diciembre)\n- Te hemos preparado una cuenta nueva a tu nombre, **AMS CERRAMIENTOS**, y tú eres el administrador\n- Olvida lo de antes: ya no hace falta que busques nada dentro de Google Ads\nQué tienes que hacer\n1. Abre el correo **amscerramientos@gmail.com** (mira también en Spam y en Promociones)\n2. Busca un correo de Google Ads con una invitación y pulsa **Aceptar**\n> Sin tarjeta y sin crear ninguna campaña: la tarjeta, en diciembre, y te lo explicamos paso a paso.\n> Si no te llega nada, dínoslo y lo arreglamos nosotros. No hay prisa.",
