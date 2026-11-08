@@ -132,7 +132,7 @@
   "enlace": "#tareas",
   "tareas": [
     {
-      "t": "Dame el control total de tu página (1 minuto)\n- Facebook ha pasado nuestro acceso a tu cuenta de Meta Business Suite y ahora es limitado: así no podemos publicar ni preparar los anuncios\n1. Entra en https://business.facebook.com con tu Facebook, abajo a la izquierda «Configuración»\n2. Arriba a la izquierda elige el portfolio **ams cerramientos**\n3. Toca «Personas», luego **Ignacio Dlr** y «Asignar activos»\n4. Marca tu página y tu Instagram y activa **«Control total»** (el interruptor grande)\n5. Pulsa «Guardar cambios»\n> Sigues siendo tú el dueño: puedes quitarnos cuando quieras. Si algo no lo ves, mándanos un pantallazo y te decimos dónde tocar.",
+      "t": "Dame el control total de tu página (1 minuto)\n- Con esto nos das acceso a la página y al Instagram de una vez, sin contraseñas\n- Facebook ha pasado nuestro acceso a tu cuenta de Meta Business Suite y ahora es limitado: así no podemos publicar ni preparar los anuncios\n1. Entra en https://business.facebook.com con tu Facebook, abajo a la izquierda «Configuración»\n2. Arriba a la izquierda elige el portfolio **ams cerramientos**\n3. Toca «Personas», luego **Ignacio Dlr** y «Asignar activos»\n4. Marca tu página y tu Instagram y activa **«Control total»** (el interruptor grande)\n5. Pulsa «Guardar cambios»\n> Sigues siendo tú el dueño: puedes quitarnos cuando quieras. Si algo no lo ves, mándanos un pantallazo y te decimos dónde tocar.",
       "prio": "Muy importante",
       "u": "https://business.facebook.com/latest/settings/people",
       "b": "Abrir Personas en Meta"
@@ -195,7 +195,7 @@
       "hecho": true
     },
     {
-      "t": "Abre la página de AMS en LinkedIn (como empresa)\n- Deja tu perfil de LinkedIn como está: **no lo borres**. La página de empresa es otra cosa y se crea desde el tuyo\n- Ahí se pueden hacer anuncios muy buenos para que te encuentren quienes encargan obras grandes\n1. Abre el enlace de abajo con tu LinkedIn de siempre\n2. Elige «Empresa» y pon el nombre **AMS Cerramientos y Servicios**\n3. Pon la web amscerramientos.es y pulsa «Crear página»\n> Después nos añades como administradores. La llevamos nosotros. Lo tuyo es solo abrirla.",
+      "t": "LinkedIn: abre la página de AMS y dános acceso (nosotros hacemos el resto)\n- Deja tu perfil de LinkedIn como está: **no lo borres**\n- LinkedIn solo deja crear la página desde una cuenta personal, así que ese primer paso es tuyo (2 minutos)\n1. Abre el enlace de abajo con tu LinkedIn de siempre\n2. Elige «Empresa» y pon el nombre **AMS Cerramientos y Servicios** y la web amscerramientos.es. Pulsa «Crear página»\n3. Ya dentro, toca «Herramientas de administrador», «Administradores de la página» y añade a **Ignacio de la Rubia** (delarubiaignacio@gmail.com) como **Super administrador**\n> No tienes que escribir nada más: textos, fotos y anuncios los ponemos nosotros. Tú sigues siendo el dueño y puedes quitarnos cuando quieras.",
       "u": "https://www.linkedin.com/company/setup/new/",
       "b": "Crear la página en LinkedIn",
       "prio": "Importante",
@@ -203,7 +203,7 @@
       "b2": "Ver cómo hacerlo"
     },
     {
-      "t": "Bing: para rizar el rizo (sin prisa)\n- Es el último detalle: Bing tiene poco volumen, un 2 o 3 % de las búsquedas\n- Ya has entrado con tu correo: vas bien\n1. En la pantalla que nos has mandado, pulsa **«Importar»** (la de Google Search Console)\n2. **No escribas ninguna dirección** en la otra casilla: es solo para añadir webs a mano\n> Lo nuestro ya está hecho y funcionando; esto es solo para que quede a tu nombre.",
+      "t": "Bing: para rizar el rizo (sin prisa)\n- Es el último detalle: Bing tiene poco volumen, un 2 o 3 % de las búsquedas\n1. En la pantalla que nos has mandado, pulsa **«Importar»** (la de Google Search Console)\n2. **No escribas ninguna dirección** en la otra casilla: es solo para añadir webs a mano\n3. Cuando termine, arriba a la derecha toca la rueda de ajustes, «Usuarios», «Añadir» y pon delarubiaignacio@gmail.com como **Administrador**\n> Lo nuestro ya está hecho y funcionando; esto es solo para que quede a tu nombre y podamos ayudarte.",
       "u": "https://www.bing.com/webmasters",
       "b": "Entrar en Bing Webmaster",
       "prio": "Sin prisa"
