@@ -162,11 +162,6 @@
       "hecho": true
     },
     {
-      "t": "Bing: un último paso, para que quede a tu nombre\n- Clarity y Search Console: hechos, gracias\n- Entra una vez en bing.com/webmasters con tu Gmail y pulsa «Importar»\n> Lo nuestro ya está hecho y funcionando; esto es solo para que todo quede a tu nombre.",
-      "u": "https://www.bing.com/webmasters",
-      "b": "Entrar en Bing"
-    },
-    {
       "t": "Tu ficha de Kömmerling solo sale en Villalbilla\n- Reenvía a tu comercial el mensaje que va ya escrito en el correo del 3 de noviembre\n- Con el enlace a tu web nueva\nAsí saldrás también en\n- Alcalá, Torrejón y Coslada\n- San Fernando y Alcobendas\n- San Sebastián de los Reyes",
       "hecho": true
     },
@@ -200,6 +195,12 @@
       "prio": "Importante",
       "u2": "/ir/linkedin-ams#abrir",
       "b2": "Ver cómo hacerlo"
+    },
+    {
+      "t": "Bing: para rizar el rizo (sin prisa)\n- Es el último detalle: Bing tiene poco volumen, un 2 o 3 % de las búsquedas\n- Aun así, así todo queda también a tu nombre\n1. Entra en bing.com/webmasters con tu Gmail\n2. Pulsa «Importar» (trae todo desde Search Console)\n> Lo nuestro ya está hecho y funcionando; esto es solo para que quede a tu nombre.",
+      "u": "https://www.bing.com/webmasters",
+      "b": "Entrar en Bing Webmaster",
+      "prio": "Sin prisa"
     },
     {
       "t": "En cada obra: una foto antes y otra después\n- Desde el mismo sitio\n- Al terminar, el WhatsApp para pedir la reseña\n> Ya tenemos 12 parejas tuyas en la web y quedan genial: cuantas más, mejor.",
