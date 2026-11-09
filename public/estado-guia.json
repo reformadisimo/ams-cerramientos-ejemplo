@@ -1,8 +1,12 @@
 {
-  "version": "2026-11-09T05:57",
+  "version": "2026-11-09T10:23",
   "fecha": "9 de noviembre de 2026",
   "aviso": "Todo es tuyo y tú tienes el control: tu dominio, tu correo, tu web, tus anuncios y tus contactos, a tu nombre. Te lo hemos mandado por correo, con tu guía de control en PDF.",
   "ultimo": [
+    {
+      "f": "9 nov",
+      "t": "Instagram hecho, y solo falta un toque en LinkedIn\n- Tu Instagram ya tiene el correo de AMS y la biografía: ¡perfecto!\n- Facebook: la página que se borra es la del **logo antiguo con la palabra AMS**; la nueva, con el icono del edificio, se queda\n- LinkedIn ya tiene tu perfil; solo falta que **sigas la página** para hacerte administrador\n> Queda poquísimo. Gracias, Javi."
+    },
     {
       "f": "8 nov",
       "t": "Gracias, Javi: Instagram y Meta Business Suite ya están\n- Tu Instagram está conectado a tu página de Facebook y tu cuenta de Meta Business Suite ya existe\n- Te hemos contestado lo de LinkedIn (no borres el tuyo, la página de empresa es aparte) y lo de Bing (solo «Importar»)\n- Solo falta el correo de AMS en Instagram, LinkedIn, Bing y tus tres datos de Facebook\n> Queda poquísimo. Ánimo."
@@ -81,10 +85,6 @@
     {
       "f": "3 nov",
       "t": "¿Cuándo se ven los resultados?\n- Entre 3 y 6 meses, por nuestra experiencia\n- Google tarda semanas en leer tu web nueva\n- Los anuncios empiezan el 1 de diciembre\n> Antes no esperes grandes cifras. Es lo normal."
-    },
-    {
-      "f": "3 nov",
-      "t": "Anuncios y SEO: por qué hacemos los dos\n- **Anuncios:** traen contactos pronto, pero se acaban cuando dejas de pagar\n- **SEO:** se queda en tu web para siempre (enlaces, notas de prensa, artículos)"
     }
   ],
   "cuentas": {
@@ -142,7 +142,8 @@
       "t": "Instagram: solo falta poner el correo de AMS\n- Instagram ya está conectado a tu página de Facebook y tu cuenta de Meta Business Suite ya existe: ¡muy bien!\n1. Abre Instagram, tres rayas, «Centro de cuentas», «Información personal», «Información de contacto»\n2. Añade **info@amscerramientos.es** y ponlo como principal (ahora sale el de la cerrajería)\n> Cuando termines, pulsa «Ya lo hice». Si algo no lo ves, mándanos un pantallazo y te decimos dónde tocar.",
       "prio": "Muy importante",
       "u2": "https://www.facebook.com/profile.php?id=61596565850785",
-      "b2": "Ver mi página de Facebook"
+      "b2": "Ver mi página de Facebook",
+      "hecho": true
     },
     {
       "t": "Tres datos para tu página de Facebook: horario, año y tu WhatsApp\n- Con esto la dejamos completa: quien entre verá cuándo atiendes y podrá escribirte por WhatsApp\n1. Dinos tu horario: qué días y de qué hora a qué hora atiendes\n2. Dinos el año en que empezó AMS (o cuántos años llevas)\n3. Confirma si el WhatsApp de clientes es el 639 78 82 20 (el de tu web)\n> Al conectarlo, WhatsApp te mandará un código de 6 cifras al móvil: cuando te llegue, dínoslo. Es solo para enlazarlo a tu página y no cambia tu WhatsApp.\n> Escríbelo con el botón «Escribir una respuesta». Te lleva un minuto.",
@@ -201,8 +202,10 @@
       "hecho": true
     },
     {
-      "t": "LinkedIn: solo mándanos el enlace de tu perfil\n- Ya hemos creado la página de empresa **AMS Cerramientos y Servicios**\n- Solo falta hacerte **administrador a ti**, y para eso necesitamos el enlace de tu perfil\n- Deja tu perfil como está: **no lo borres**\n1. Abre tu perfil en LinkedIn\n2. Toca los tres puntitos y **«Copiar enlace al perfil»** (o mándanos un pantallazo de tu perfil)\n3. Mándanoslo por WhatsApp o con el botón «Escribir una respuesta»\n> Tú sigues siendo el dueño de la página y puedes quitarnos cuando quieras.",
-      "prio": "Importante"
+      "t": "LinkedIn: solo falta que sigas la página (10 segundos)\n- Ya tenemos el enlace de tu perfil: ¡gracias!\n- Para hacerte **administrador**, LinkedIn pide que antes **sigas la página de AMS**\n1. Pulsa el botón de abajo\n2. Toca **«Seguir»**\n3. Avísanos con «Ya lo hice» y te hacemos administrador al momento\n> Tú sigues siendo el dueño de la página y puedes quitarnos cuando quieras.",
+      "prio": "Importante",
+      "u": "https://www.linkedin.com/company/ams-cerramientos-y-servicios/",
+      "b": "Abrir la página y pulsar «Seguir»"
     },
     {
       "t": "Bing: para rizar el rizo (sin prisa)\n- Es el último detalle: Bing tiene poco volumen, un 2 o 3 % de las búsquedas\n1. En la pantalla que nos has mandado, pulsa **«Importar»** (la de Google Search Console)\n2. **No escribas ninguna dirección** en la otra casilla: es solo para añadir webs a mano\n3. Cuando termine, arriba a la derecha toca la rueda de ajustes, «Usuarios», «Añadir» y pon delarubiaignacio@gmail.com como **Administrador**\n> Lo nuestro ya está hecho y funcionando; esto es solo para que quede a tu nombre y podamos ayudarte.",
