@@ -77,6 +77,13 @@ async function privadas(req: NextRequest): Promise<NextResponse | null> {
 }
 
 export async function middleware(req: NextRequest) {
+  /* 9-nov-2026: adjuntos de la web vieja (WordPress), /?attachment_id=NNN. Antes cargaban la portada (duplicada); ahora 301 limpio a /trabajos. */
+  if (req.nextUrl.pathname === "/" && req.nextUrl.searchParams.has("attachment_id")) {
+    const u = req.nextUrl.clone();
+    u.pathname = "/trabajos";
+    u.search = "";
+    return NextResponse.redirect(u, 301);
+  }
   const pv = await privadas(req);
   if (pv) return pv;
   /* Dirección secreta, como la de Reformadísimo: /mesa-<MESA_RUTA> abre la mesa sin pedir nada.
@@ -119,4 +126,4 @@ export async function middleware(req: NextRequest) {
   return new NextResponse("Clave necesaria.", { status: 401, headers: { "WWW-Authenticate": 'Basic realm="Mesa de AMS Cerramientos", charset="UTF-8"', "content-type": "text/plain; charset=utf-8" } });
 }
 
-export const config = { matcher: ["/mesa", "/mesa/:path*", "/mesa-:ruta", "/ir/:n", "/guia-javi", "/guia-javi.html", "/guia-javi/:path*", "/(todo-es-tuyo|conoce-tu-cliente|correos-ejemplo|linkedin-ams|fotos-web-antigua|conversaciones|mapa-de-obras|descargar-web)(.*)"] };
+export const config = { matcher: ["/", "/mesa", "/mesa/:path*", "/mesa-:ruta", "/ir/:n", "/guia-javi", "/guia-javi.html", "/guia-javi/:path*", "/(todo-es-tuyo|conoce-tu-cliente|correos-ejemplo|linkedin-ams|fotos-web-antigua|conversaciones|mapa-de-obras|descargar-web)(.*)"] };
