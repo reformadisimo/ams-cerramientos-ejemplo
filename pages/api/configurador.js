@@ -367,6 +367,16 @@ module.exports = (req, res) => {
   const items = (Array.isArray(d.items) ? d.items.slice(0, 60) : []).map((it) => limpia(it || {}, C));
   const lineas = items.map((o) => (aPresupuestar(o) ? { unidad: 0, total: 0, presupuestar: true } : { unidad: r5(precioUnidad(o, C)), total: total(o, C), vidrio_aparte: vidrioAparte(o, C) }));
   const base_ = lineas.reduce((s, l) => s + l.total, 0);
+  // Orientativo PARA AMS (no para el cliente): lo que no tiene tarifa (aluminio, mas de 2 m) se estima con la formula
+  // provisional +-15 %, para que Javi vea de un vistazo si le interesa la obra. Sin IVA.
+  let oriLow = 0, oriHigh = 0, hayEstimado = false;
+  items.forEach((o, i) => {
+    if (lineas[i].presupuestar) {
+      const u = precioUnidad(o, C) * o.n;
+      lineas[i].ref = { low: r5(u * 0.85), high: r5(u * 1.15) };
+      oriLow += lineas[i].ref.low; oriHigh += lineas[i].ref.high; hayEstimado = true;
+    } else { oriLow += lineas[i].total; oriHigh += lineas[i].total; }
+  });
   // La misma casa en el otro material, para comparar lado a lado.
   const alt = { pvc: 0, alu: 0 };
   let hayCarpinteria = false;
@@ -375,7 +385,7 @@ module.exports = (req, res) => {
     hayCarpinteria = true;
     for (const m of ['pvc', 'alu']) alt[m] += total(Object.assign({}, o, { mat: m }), C);
   }
-  const out = { lineas, base: base_, iva_pct: C.iva, iva: Math.round(base_ * C.iva) / 100, total: Math.round(base_ * (100 + C.iva)) / 100, comparar: null, hay_presupuestar: lineas.some((l) => l.presupuestar) };
+  const out = { lineas, base: base_, iva_pct: C.iva, iva: Math.round(base_ * C.iva) / 100, total: Math.round(base_ * (100 + C.iva)) / 100, comparar: null, hay_presupuestar: lineas.some((l) => l.presupuestar), orientativo: { low: oriLow, high: oriHigh, estimado: hayEstimado } };
   const pi = Number(d.probe);
   if (Number.isInteger(pi) && items[pi]) out.variantes = variantes(items[pi], C);
   res.end(JSON.stringify(out));

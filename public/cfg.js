@@ -450,7 +450,7 @@ $('cfShare').addEventListener('click',function(){
 /* ---------- Datos, PDF y WhatsApp ---------- */
 var C={};
 $('cfLead').addEventListener('click',function(){if(!S.items.length&&S.cur){$('cfAdd').click();}$('cfDlg').showModal();});
-var _cfgLeadOk=0;function amsLeadCfg(){if(_cfgLeadOk)return;_cfgLeadOk=1;try{if(window.amsLead)window.amsLead({nombre:C.nombre,telefono:C.tel,correo:C.email,zona:C.loc,trabajo:'ventanas',pide:resumen().slice(0,580)},'configurador')}catch(e){}try{if(window.amsPideVisita)window.amsPideVisita($('cfAgenda'),{nombre:C.nombre,telefono:C.tel,correo:C.email,zona:C.loc,resumen:S.res?'Configurador: '+eur(S.res.total)+' con IVA':'Configurador',canal:'configurador',clave:'cf'})}catch(e){}}
+var _cfgLeadOk=0;function amsLeadCfg(){if(_cfgLeadOk)return;_cfgLeadOk=1;try{if(window.amsLead)window.amsLead({nombre:C.nombre,telefono:C.tel,correo:C.email,zona:C.loc,trabajo:'ventanas',pide:resumenLead()},'configurador')}catch(e){}try{if(window.amsPideVisita)window.amsPideVisita($('cfAgenda'),{nombre:C.nombre,telefono:C.tel,correo:C.email,zona:C.loc,resumen:S.res?'Configurador: '+(S.res.hay_presupuestar&&S.res.orientativo&&S.res.orientativo.high>0?'orientativo '+eur(S.res.orientativo.low)+' a '+eur(S.res.orientativo.high)+' sin IVA (a ojo, falta presupuestar parte)':eur(S.res.total)+' con IVA'):'Configurador',canal:'configurador',clave:'cf'})}catch(e){}}
 function valid(){
  C={nombre:$('cfNombre').value.trim(),tel:$('cfTel').value.trim(),email:$('cfEmail').value.trim(),loc:$('cfLoc').value.trim()};var e=[];
  if(!C.nombre)e.push('tu nombre');if(C.tel.replace(/\D/g,'').length<9)e.push('un teléfono de 9 cifras');
@@ -461,6 +461,12 @@ function valid(){
 function resumen(){
  var r=S.res,L=S.items.map(function(it,i){return '- '+(it.n>1?it.n+' × ':'')+(it.hab?it.hab+': ':'')+nombre(it)+', '+detalle(it)+(r&&r.lineas[i]?(r.lineas[i].presupuestar?' (a presupuestar)':' ('+eur(r.lineas[i].total)+' + IVA'+(r.lineas[i].vidrio_aparte?', vidrio especial aparte':'')+')'):'');});
  if(r)L.push('','Total: '+eur(r.total)+' con IVA'+(r.hay_presupuestar?' (sin contar lo que va a presupuestar)':''));return L.join('\n');
+}
+/* Para AMS (aviso a Javi): lo orientativo va delante para que vea de un vistazo si le interesa; el cliente no lo ve. */
+function resumenLead(){
+ var r=S.res,o=r&&r.orientativo,h='';
+ if(o&&o.high>0)h='ORIENTATIVO sin IVA'+(o.estimado?' (a ojo, parte sin tarifa)':'')+': '+(o.low===o.high?eur(o.low):eur(o.low)+' a '+eur(o.high))+'\n';
+ return (h+resumen().split('\n\nTotal:')[0]).slice(0,580);
 }
 $('cfWa').addEventListener('click',function(){
  if(!valid())return;amsLeadCfg();
