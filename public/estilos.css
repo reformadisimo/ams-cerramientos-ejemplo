@@ -65,6 +65,8 @@ a{color:var(--navy)}a:hover{color:#B8430A}
 .site-footer{background:var(--navy2);color:#B9C4CE}
 .foot{max-width:1200px;margin:0 auto;padding:48px 16px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px;font-size:14px;line-height:1.6}
 .foot div{display:flex;flex-direction:column;gap:6px}
+.foot .foot-zonas{grid-column:1/-1;flex-direction:row;flex-wrap:wrap;align-items:center;gap:6px 20px;border-top:1px solid var(--line);padding-top:20px}
+.foot .foot-zonas strong{margin-right:4px}
 .foot strong{color:#fff;font-size:15px}
 .foot a{color:#B9C4CE;text-decoration:none}.foot a:hover{color:#fff}
 .foot-bottom{max-width:1200px;margin:0 auto;padding:16px 16px 90px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:13px}
