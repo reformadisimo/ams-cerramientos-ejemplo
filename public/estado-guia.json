@@ -149,7 +149,7 @@
       "prio": "Muy importante"
     },
     {
-      "t": "Las medidas que te manda el cliente: ¿cuánto se desvían?\n- Cuando el cliente te manda foto y medidas por WhatsApp, queremos saber **cuánto se equivoca de media** frente a tu láser\n- Con ese dato ajustamos el margen del precio con fotos para que no se pase ni se quede corto\n1. De las **últimas 5 ventanas**, ¿cuántos centímetros de diferencia hubo entre la medida del cliente y la tuya?\n2. ¿Las tomó con un folio A4 pegado al cristal, con metro o a ojo?\n> Un **más o menos** nos vale (por ejemplo «5 cm de media»). Respóndelo con «Escribir una respuesta». Lo que no sepas, déjalo en blanco.",
+      "t": "Las medidas que te manda el cliente: afinamos la calculadora con 5 casos reales\n- Queremos que **lo que ve el cliente, lo que le calculamos y lo que tú le dices al medir** casi no se diferencien\n- Con 5 obras tuyas recientes ajustamos la calculadora y el precio con fotos\n1. Para **cada obra**, una línea con tres datos: la **medida que dio el cliente** (ancho x alto, en cm), **tu medida con el láser** y el **precio final** que presupuestaste (sin IVA)\n2. Si lo sabes, dinos si el cliente midió con **folio A4** pegado al cristal, con metro o a ojo\n3. Si no recuerdas alguna medida, déjala en blanco\n> Un **más o menos** nos vale. No hace falta que uses la calculadora: la comparación la hacemos nosotros. Respóndelo con «Escribir una respuesta» o mándanos un pantallazo de los presupuestos.",
       "prio": "Importante"
     },
     {
