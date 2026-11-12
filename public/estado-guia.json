@@ -1,8 +1,12 @@
 {
-  "version": "2026-11-12T17:10",
+  "version": "2026-11-12T17:25",
   "fecha": "12 de noviembre de 2026",
   "aviso": "Todo es tuyo y tú tienes el control: tu dominio, tu correo, tu web, tus anuncios y tus contactos, a tu nombre. Te lo hemos mandado por correo, con tu guía de control en PDF.",
   "ultimo": [
+    {
+      "f": "12 nov",
+      "t": "Bing y LinkedIn, al día\n- Bing: Raúl ya no está, solo quedáis tú, nosotros y el correo de la web\n- LinkedIn: ya sigues la página, solo falta que verifiques tu cuenta"
+    },
     {
       "f": "12 nov",
       "t": "Ya puedes mandarnos pantallazos desde la guía\n- En cada tarea, pulsa «Escribir una respuesta» y luego «Añadir pantallazo o foto»\n- Puedes añadir hasta 4 (fotos o PDF pequeños)\n- Bing: hecho, gracias. Outlook: déjalo como está, que ya te funciona"
@@ -180,10 +184,10 @@
       "hecho": true
     },
     {
-      "t": "LinkedIn: solo falta que sigas la página (10 segundos)\n- Ya tenemos el enlace de tu perfil: ¡gracias!\n- Para hacerte **administrador**, LinkedIn pide que antes **sigas la página de AMS**\n1. Pulsa el botón de abajo\n2. Toca **«Seguir»**\n3. Avísanos con «Ya lo hice» y te hacemos administrador al momento\n> Tú sigues siendo el dueño de la página y puedes quitarnos cuando quieras.",
+      "t": "LinkedIn: solo falta verificar tu cuenta (2 minutos)\n- Gracias por seguir la página, ya casi está\n- Al hacerte **administrador**, LinkedIn nos dice que tu cuenta **aún no está verificada**\n1. Entra en LinkedIn con tu cuenta (el móvil vale)\n2. Si te pide **confirmar el correo o el teléfono**, hazlo (te llega un código)\n3. Avísanos con «Ya lo hice» y te hacemos administrador al momento\n> Si no te sale ningún aviso, dínoslo con «Escribir una respuesta» y un pantallazo de lo que ves.",
       "prio": "Importante",
-      "u": "https://www.linkedin.com/company/ams-cerramientos-y-servicios/",
-      "b": "Abrir la página y pulsar «Seguir»"
+      "u": "https://www.linkedin.com/feed/",
+      "b": "Abrir LinkedIn"
     },
     {
       "t": "Bing: para rizar el rizo (sin prisa)\n- Es el último detalle: Bing tiene poco volumen, un 2 o 3 % de las búsquedas\n1. En la pantalla que nos has mandado, pulsa **«Importar»** (la de Google Search Console)\n2. **No escribas ninguna dirección** en la otra casilla: es solo para añadir webs a mano\n3. Cuando termine, arriba a la derecha toca la rueda de ajustes, «Usuarios», «Añadir» y pon delarubiaignacio@gmail.com como **Administrador**\n> Lo nuestro ya está hecho y funcionando; esto es solo para que quede a tu nombre y podamos ayudarte.",
