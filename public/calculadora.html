@@ -581,11 +581,18 @@ function payload(){
 function calcular(){
  S.res=null;
  var body=payload();body.contacto=S.c;
- try{if(window.amsLead)window.amsLead({nombre:S.c.nombre,telefono:S.c.tel,correo:S.c.email,zona:S.c.loc,trabajo:S.svc==='terraza'?'cerramiento':S.svc==='ventanas'?'ventanas':'cancela',pide:resumenTxt()},'calculadora')}catch(e){}
  fetch('/api/precio',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
   .then(function(r){if(!r.ok)throw 0;return r.json();})
-  .then(function(j){S.res=j;render(false);})
-  .catch(function(){S.res={error:true};render(false);});
+  .then(function(j){S.res=j;render(false);avisaLead();})
+  .catch(function(){S.res={error:true};render(false);avisaLead();});
+}
+/* El aviso a Javi sale DESPUES de calcular, para que lleve el precio que ha visto el cliente (antes salia sin cifras). El precio va primero: el aviso corta a 600 letras. */
+function avisaLead(){
+ try{if(!window.amsLead)return;
+  var sel=[];document.querySelectorAll('#cxSumList li span').forEach(function(x){sel.push('- '+x.textContent);});
+  var pr=(S.res&&!S.res.error)?'PRECIO QUE HA VISTO: '+eur(S.res.low)+' a '+eur(S.res.high)+(S.res.iva_incluido?' (IVA incluido)':' + IVA')+'\n':'(No llegó a ver precio)\n';
+  window.amsLead({nombre:S.c.nombre,telefono:S.c.tel,correo:S.c.email,zona:S.c.loc,trabajo:S.svc==='terraza'?'cerramiento':S.svc==='ventanas'?'ventanas':'cancela',pide:pr+sel.join('\n')},'calculadora');
+ }catch(e){}
 }
 
 function next(){
