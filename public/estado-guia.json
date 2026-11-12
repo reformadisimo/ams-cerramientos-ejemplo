@@ -1,8 +1,12 @@
 {
-  "version": "2026-11-12T16:20",
+  "version": "2026-11-12T17:10",
   "fecha": "12 de noviembre de 2026",
   "aviso": "Todo es tuyo y tú tienes el control: tu dominio, tu correo, tu web, tus anuncios y tus contactos, a tu nombre. Te lo hemos mandado por correo, con tu guía de control en PDF.",
   "ultimo": [
+    {
+      "f": "12 nov",
+      "t": "Ya puedes mandarnos pantallazos desde la guía\n- En cada tarea, pulsa «Escribir una respuesta» y luego «Añadir pantallazo o foto»\n- Puedes añadir hasta 4 (fotos o PDF pequeños)\n- Bing: hecho, gracias. Outlook: déjalo como está, que ya te funciona"
+    },
     {
       "f": "12 nov",
       "t": "Plazos: gracias Javi, ya lo hemos cambiado en la web\n- Ya no prometemos fechas ni «llegas antes de Navidad»\n- Si un cliente pregunta, decimos que son unos 30 a 60 días y que se lo confirmas tú al medir\n- Del montaje solo decimos que va a un día por cada 3 ventanas, más o menos\n> Lo único que seguimos diciendo es que contestamos el mismo día y vamos a medir en 1 o 2 días."
@@ -185,7 +189,8 @@
       "t": "Bing: para rizar el rizo (sin prisa)\n- Es el último detalle: Bing tiene poco volumen, un 2 o 3 % de las búsquedas\n1. En la pantalla que nos has mandado, pulsa **«Importar»** (la de Google Search Console)\n2. **No escribas ninguna dirección** en la otra casilla: es solo para añadir webs a mano\n3. Cuando termine, arriba a la derecha toca la rueda de ajustes, «Usuarios», «Añadir» y pon delarubiaignacio@gmail.com como **Administrador**\n> Lo nuestro ya está hecho y funcionando; esto es solo para que quede a tu nombre y podamos ayudarte.",
       "u": "https://www.bing.com/webmasters",
       "b": "Entrar en Bing Webmaster",
-      "prio": "Sin prisa"
+      "prio": "Sin prisa",
+      "hecho": true
     },
     {
       "t": "En cada obra: una foto antes y otra después\n- Desde el mismo sitio\n- Al terminar, el WhatsApp para pedir la reseña\n> Ya tenemos 12 parejas tuyas en la web y quedan genial: cuantas más, mejor.",

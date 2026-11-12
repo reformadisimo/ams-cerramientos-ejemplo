@@ -17,11 +17,14 @@ module.exports = async (req, res) => {
   if (typeof body === 'string') { try { body = JSON.parse(body); } catch (e) { body = {}; } }
   const texto = String((body && body.texto) || '').slice(0, 20000);
   if (texto.trim().length < 5) return res.status(400).json({ ok: false });
+  const adj = (Array.isArray(body && body.adjuntos) ? body.adjuntos : []).slice(0, 4)
+    .map(a => ({ filename: String((a && a.nombre) || 'archivo').replace(/[^\w.\- ]/g, '_').slice(0, 80), content: String((a && a.contenido) || '').replace(/[^A-Za-z0-9+/=]/g, '') }))
+    .filter(a => a.content.length > 100);
   try {
     const r = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: 'Bearer ' + clave, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from: DE, to: [PARA], subject: 'Respuestas de Javi - AMS Cerramientos', text: texto })
+      body: JSON.stringify({ from: DE, to: [PARA], subject: 'Respuestas de Javi - AMS Cerramientos', text: texto, ...(adj.length ? { attachments: adj } : {}) })
     });
     if (!r.ok) return res.status(502).json({ ok: false });
     return res.json({ ok: true });
@@ -30,3 +33,4 @@ module.exports = async (req, res) => {
 
 /* Next.js (pages/api) pide la función como exportación "default" */
 module.exports.default = module.exports;
+module.exports.config = { api: { bodyParser: { sizeLimit: '4mb' } } };
