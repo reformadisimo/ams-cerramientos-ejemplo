@@ -1,8 +1,12 @@
 {
-  "version": "2026-11-11T18:40",
-  "fecha": "11 de noviembre de 2026",
+  "version": "2026-11-12T09:50",
+  "fecha": "12 de noviembre de 2026",
   "aviso": "Todo es tuyo y tú tienes el control: tu dominio, tu correo, tu web, tus anuncios y tus contactos, a tu nombre. Te lo hemos mandado por correo, con tu guía de control en PDF.",
   "ultimo": [
+    {
+      "f": "12 nov",
+      "t": "Outlook arreglado, gracias Javi\n- Ya recibes bien los correos de info@amscerramientos.es en tu Outlook del ordenador\n- No se ha perdido ningún correo\n> Ya no hace falta que nos mandes el pantallazo."
+    },
     {
       "f": "11 nov",
       "t": "Tus correos están a salvo\n- En el servidor siguen todos tus correos, también los del 18 de octubre en adelante\n- Lo que falla es tu Outlook del ordenador, no el correo; en el iPhone los ves bien\n- Ya no te llegarán duplicados: quitamos la copia a la cerrajería\n> Solo necesitamos un pantallazo de tu Outlook. Está en «Lo que te toca a ti». No borres nada hasta entonces."
@@ -22,16 +26,12 @@
     {
       "f": "9 nov",
       "t": "Instagram hecho, y solo falta un toque en LinkedIn\n- Tu Instagram ya tiene el correo de AMS y la biografía: ¡perfecto!\n- Facebook: la página que se borra es la del **logo antiguo con la palabra AMS**; la nueva, con el icono del edificio, se queda\n- LinkedIn ya tiene tu perfil; solo falta que **sigas la página** para hacerte administrador\n> Queda poquísimo. Gracias, Javi."
-    },
-    {
-      "f": "8 nov",
-      "t": "Gracias, Javi: Instagram y Meta Business Suite ya están\n- Tu Instagram está conectado a tu página de Facebook y tu cuenta de Meta Business Suite ya existe\n- Te hemos contestado lo de LinkedIn (no borres el tuyo, la página de empresa es aparte) y lo de Bing (solo «Importar»)\n- Solo falta el correo de AMS en Instagram, LinkedIn, Bing y tus tres datos de Facebook\n> Queda poquísimo. Ánimo."
     }
   ],
   "cuentas": {
     "ads": "Cuenta de Google Ads 359-117-7001 (la que ya tenías con tu Gmail amscerramientos@gmail.com): solicitud aceptada el 5 de noviembre, vinculada con Casiopea 360. Los anuncios empiezan el 1 de diciembre (en noviembre, nada); la tarjeta, entonces, la pones tú. Facebook e Instagram: la página de Facebook nueva la creas tú (la de Raúl se elimina) y luego nos das acceso como socio.",
     "analytics": "Ya tienes tu propia cuenta de Google Analytics, creada por ti con tu correo de Gmail de empresa, y nos has dado acceso de administrador. Nos has pasado el código de medición para conectarla con la web nueva.",
-    "dominio": "Tuyo, en DonDominio, a tu nombre, y se renueva solo. Tu web nueva está en amscerramientos.es desde el 2 de noviembre. Tu correo info@amscerramientos.es también está ya en DonDominio (desde el 3 de noviembre), a tu nombre: solo te falta cambiar los datos en tu Outlook.",
+    "dominio": "Tuyo, en DonDominio, a tu nombre, y se renueva solo. Tu web nueva está en amscerramientos.es desde el 2 de noviembre. Tu correo info@amscerramientos.es también está ya en DonDominio (desde el 3 de noviembre), a tu nombre, y desde el 11 de noviembre lo recibes bien en tu Outlook.",
     "search": "Search Console: ya eres propietario con amscerramientos@gmail.com. Le hemos enviado a Google el mapa de tu web nueva (70 páginas). Clarity (cómo se mueve la gente por la web): ya estás dentro como administrador. Bing: entra una vez en bing.com/webmasters con tu Gmail y pulsa «Importar».",
     "ficha": "Ya tenemos acceso a tu ficha de Google: descripción nueva, logo y portada con un trabajo tuyo. Las reseñas las contestamos nosotros cada semana; las malas, siempre contigo antes. Tu ficha ya está también en Bing, conectada con la de Google: lo que cambiemos en Google se copia solo."
   },
@@ -74,7 +74,8 @@
   "tareas": [
     {
       "t": "Outlook: un pantallazo y una respuesta, y lo dejamos bien\n- Tus correos están a salvo en el servidor. Lo que falla es el Outlook del ordenador\n- Hasta que lo arreglemos, **no borres nada** ni cambies cuentas\n1. Dinos si los correos te faltan en el **Outlook del ordenador** o en el del **iPhone** (en el iPhone dices que los ves)\n2. Dinos en qué cuenta te faltan: **info@amscerramientos.es** o **info@amscerrajeria.es**\n3. Mándanos un **pantallazo** de la lista de cuentas y carpetas de tu Outlook\n> Con «Escribir una respuesta» o respondiendo al correo. Ya no te llegarán los correos dos veces.",
-      "prio": "Muy importante"
+      "prio": "Muy importante",
+      "hecho": true
     },
     {
       "t": "Dame el control total de tu página (1 minuto)\n- Con esto nos das la página y el Instagram de una vez, sin contraseñas\n- Ya casi lo tienes: en tu último pantallazo estabas en otro portfolio, el que se llama **Javier Panchón** (solo tiene tu Instagram personal). Tiene que ser el de **ams cerramientos**\n1. Toca el botón verde de abajo («Abrir Personas en Meta»). Entras directo en el portfolio bueno\n2. Si te pregunta o ves arriba otro nombre, elige **ams cerramientos**\n3. En la lista, toca el nombre **Ignacio Dlr** (no el tuyo)\n4. Toca **«Asignar activos»** (arriba a la derecha)\n5. Marca **tu página** (Ams cerramientos y servicios) y el **Instagram de AMS**\n6. Activa **«Control total»** y pulsa **«Guardar cambios»**\n> Sigues siendo el dueño: puedes quitarnos cuando quieras. Si algo no lo ves, mándanos un pantallazo y te decimos dónde tocar.",
