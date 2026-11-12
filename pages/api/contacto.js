@@ -61,7 +61,7 @@ function deDonde(origen, d) {
   if (d && d.pagina_entrada) t += ' · entró por ' + String(d.pagina_entrada).slice(0, 120);
   return t;
 }
-async function aviso(d, res) {
+async function aviso(d, res, detalle) {
   const clave = require('../../lib/remitente').CLAVE;
   if (!clave || !res || !res.ok || res.repetido) return;
   const tel = String(d.telefono || '').replace(/\D/g, '');
@@ -73,6 +73,7 @@ async function aviso(d, res) {
   const html = '<div style="font-family:Arial,sans-serif;font-size:15px;color:#1F2A36;max-width:560px">' +
     '<p style="font-size:18px;font-weight:700;margin:0 0 12px">Nuevo contacto desde la web</p>' +
     '<table cellpadding="6" style="border-collapse:collapse">' + filas.map(f => '<tr><td style="color:#5B6B79;vertical-align:top">' + esc(f[0]) + '</td><td><b>' + esc(f[1]) + '</b></td></tr>').join('') + '</table>' +
+    (detalle ? '<p style="margin:14px 0 4px;font-weight:700">Todo lo que ha pedido y el precio que ha visto</p><div style="white-space:pre-line;background:#F4F7FA;border-radius:10px;padding:12px 14px;font-size:14px;line-height:1.5">' + esc(detalle) + '</div>' : '') +
     (tel ? '<p style="margin:18px 0 6px"><a href="tel:' + tel + '" style="background:#1B3247;color:#fff;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:700">Llamar</a> &nbsp; ' +
       '<a href="https://wa.me/34' + tel.slice(-9) + '" style="background:#1FA855;color:#fff;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:700">WhatsApp</a></p>' : '') +
     '<p style="color:#5B6B79;font-size:13px;margin-top:18px">Ya está apuntado en <a href="' + CRM_URL + '">tus contactos</a>.</p></div>';
@@ -105,8 +106,9 @@ module.exports = async (req, res) => {
       const [nivel, motivo] = encaje(d);
       d.encaje = nivel + ' (' + motivo + ')';
       d.pide = '[' + nivel + '] ' + String(d.pide || '');
+      const detalle = String(d.detalle || '').slice(0, 4000); delete d.detalle; // texto largo solo para el correo a Javi
       const r = await rpc('web_contacto', { d });
-      if (nivel !== 'No encaja') await aviso(d, r); // lo que no encaja queda en la libreta, sin correo a Javi
+      if (nivel !== 'No encaja') await aviso(d, r, detalle); // lo que no encaja queda en la libreta, sin correo a Javi
       return res.json({ ok: !!(r && r.ok) });
     }
     return res.status(400).json({ ok: false });
