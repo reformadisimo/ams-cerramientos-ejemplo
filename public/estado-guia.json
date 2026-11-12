@@ -1,8 +1,12 @@
 {
-  "version": "2026-11-12T19:00",
+  "version": "2026-11-12T18:40",
   "fecha": "12 de noviembre de 2026",
   "aviso": "Javi, para LinkedIn entra con tu cuenta personal. Tienes los pasos en «Lo que te toca a ti».",
   "ultimo": [
+    {
+      "f": "12 nov",
+      "t": "Tu duda de los avisos: ya está hecho\n- Tenías razón: el aviso no traía el presupuesto\n- Desde hoy, cada aviso de la calculadora y del configurador te llega con **todo lo que ha pedido el cliente y el precio que ha visto**\n- Si ves cualquier otra cosa así, dínosla: lo vamos adaptando a tu medida\n> Los avisos con presupuesto completo ya funcionan para los contactos nuevos."
+    },
     {
       "f": "12 nov",
       "t": "LinkedIn: entra con tu cuenta personal\n- Las páginas de empresa se administran desde tu perfil personal; no hay una cuenta aparte de AMS\n- Tu idea de ver el presupuesto de cada cliente (materiales e importes): la hemos recibido y la estudiamos"
