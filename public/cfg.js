@@ -384,9 +384,7 @@ function renderSummary(){
 }
 function addLab(d,n){d=new Date(d);while(n>0){d.setDate(d.getDate()+1);var w=d.getDay();if(w&&w<6)n--;}return d;}
 function fechaTxt(){
- var hoy=new Date(),a=addLab(hoy,14),b=addLab(hoy,20),m=function(d){return d.getDate()+' de '+d.toLocaleDateString('es-ES',{month:'long'});};
- var nav=hoy.getMonth()>=9&&b<=new Date(hoy.getFullYear(),11,20);
- return '<b>Montadas entre el '+m(a)+' y el '+m(b)+'</b> si nos lo encargas esta semana.'+(nav?' Llegas antes de Navidad.':'');
+ return '<b>Todo incluido:</b> instalación, retirada de lo viejo y remates. El plazo te lo confirma el equipo al medir.';
 }
 
 /* ---------- Acciones ---------- */

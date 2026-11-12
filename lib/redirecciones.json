@@ -5,6 +5,11 @@
   "permanent": false
  },
  {
+  "source": "/blog/cerrar-terraza-antes-de-navidad",
+  "destination": "/cerramientos-terrazas",
+  "permanent": true
+ },
+ {
   "source": "/Terrazas",
   "destination": "/cerramientos-terrazas",
   "permanent": false

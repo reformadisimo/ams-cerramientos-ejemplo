@@ -233,7 +233,6 @@ window.addEventListener("load",function(){if(S.z>0){done=-1;scaleText()}if(S.c)c
 .cx-kpi{padding:16px;border-radius:12px;background:var(--bg)}
 .cx-kpi>b{display:block;font:800 22px Archivo,Inter,sans-serif;color:var(--ink)}
 .cx-kpi span{font-size:14px;line-height:1.45;color:var(--soft)}
-.cx-kpi.xmas{background:#E9F5EE}
 .cx-acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
 .cx-legal{display:flex;gap:10px;align-items:flex-start;margin-top:14px;font-size:14px;line-height:1.5;color:var(--soft)}
 .cx-legal input{width:22px;height:22px;flex:none;margin-top:1px;accent-color:var(--acc)}
@@ -506,14 +505,14 @@ R.datos=function(){
 R.resultado=function(){
  if(!S.res)return '<h2>Calculando tu precio...</h2><p class="cx-lead">Un segundo.</p>';
  if(S.res.error)return '<h2>No hemos podido calcularlo ahora</h2><p class="cx-lead">Pásanos lo que has elegido por WhatsApp y te damos el precio hoy mismo.</p><div class="cx-acts"><a class="cx-btn cx-wa" target="_blank" rel="noopener" href="'+waLink()+'">Enviar por WhatsApp</a><a class="cx-btn sec" href="tel:'+TEL+'">Llamar al 639 78 82 20</a></div>';
- var r=S.res,mid=(r.low+r.high)/2,f=fechas();
+ var r=S.res,mid=(r.low+r.high)/2;
  var media=S.svc==='terraza'?'<video autoplay muted loop playsinline preload="metadata" poster="/img/salon-ventanal.jpg"><source src="/img/salon-ventanal.webm" type="video/webm"><source src="/img/salon-ventanal.mp4" type="video/mp4"></video>':
   S.svc==='ventanas'?'<video autoplay muted loop playsinline preload="metadata" poster="/img/sonrisa-luces.jpg"><source src="/img/sonrisa-luces.webm" type="video/webm"><source src="/img/sonrisa-luces.mp4" type="video/mp4"></video>':'<img src="/img/cancela.webp" alt="">';
  var h='<div class="cx-res-top"><div><div style="font-size:15px;font-weight:700;color:#4A5A68">'+esc(S.c.nombre?S.c.nombre.split(' ')[0]+', tu precio orientativo':'Tu precio orientativo')+'</div>'+
  '<div class="cx-price">'+eur(r.low)+' <small>a</small> '+eur(r.high)+'</div><div style="font-size:14px;color:#4A5A68">'+(r.iva_incluido?'IVA incluido':'IVA no incluido')+'. Instalado y con la retirada de lo viejo.</div></div>'+
  '<div class="cx-res-media">'+media+'</div></div>';
  h+='<ul class="cx-lines">'+r.lineas.map(function(l){return '<li><span>'+esc(l.t)+'</span><span>'+eur(l.low)+' – '+eur(l.high)+'</span></li>';}).join('')+'</ul>';
- h+='<div class="cx-kpis"><div class="cx-kpi'+(f.navidad?' xmas':'')+'"><b>'+f.txt+'</b><span>'+(f.navidad?'Si nos escribes esta semana, <strong style="color:#14532D">llegas antes de Navidad</strong>.':'Fecha aproximada de montaje si nos escribes hoy.')+(S.svc==='terraza'?' Más el permiso del ayuntamiento, si hace falta.':'')+'</span></div>'+
+ h+='<div class="cx-kpis"><div class="cx-kpi"><b>Todo incluido</b><span>Instalación, retirada de lo viejo y remates.'+(S.svc==='terraza'?' El permiso del ayuntamiento, si hace falta, va aparte.':'')+'</span></div>'+
  '<div class="cx-kpi"><b>'+eur(mid/12)+' al mes</b><span>A 12 meses, sin contar intereses (la financiación tiene intereses y está sujeta a aprobación).</span></div>'+
  '<div class="cx-kpi"><b>Medición gratis</b><span>Vamos, medimos con láser y te damos el precio cerrado por escrito.</span></div></div>';
  h+='<div class="cx-acts"><a class="cx-btn cx-wa" target="_blank" rel="noopener" href="'+waLink()+'"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg>Pedir la visita por WhatsApp</a><a class="cx-btn sec" href="tel:'+TEL+'">Llamar al 639 78 82 20</a><button type="button" class="cx-btn sec" id="cxShare">Enviárselo a alguien</button></div>';
@@ -522,14 +521,6 @@ R.resultado=function(){
  return h;
 };
 
-function addLab(d,n){d=new Date(d);while(n>0){d.setDate(d.getDate()+1);var w=d.getDay();if(w&&w<6)n--;}return d;}
-function fechas(){
- var hoy=new Date(),a=addLab(hoy,14),b=addLab(hoy,20);
- var m=function(d){return d.getDate()+' de '+d.toLocaleDateString('es-ES',{month:'long'});};
- var txt=a.getMonth()==b.getMonth()?'Del '+a.getDate()+' al '+m(b):'Del '+m(a)+' al '+m(b);
- var nav=new Date(hoy.getFullYear(),11,20);
- return {txt:txt,navidad:hoy.getMonth()>=9&&b<=nav};
-}
 function resumenTxt(){
  var L=[];document.querySelectorAll('#cxSumList li span').forEach(function(s){L.push('- '+s.textContent);});
  if(S.res&&!S.res.error){L.push('');S.res.lineas.forEach(function(l){L.push('- '+l.t+': '+eur(l.low)+' a '+eur(l.high));});L.push('Precio orientativo: '+eur(S.res.low)+' a '+eur(S.res.high)+(S.res.iva_incluido?' (IVA incluido)':' + IVA'));}

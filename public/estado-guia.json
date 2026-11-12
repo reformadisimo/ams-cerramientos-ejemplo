@@ -1,8 +1,12 @@
 {
-  "version": "2026-11-12T09:50",
+  "version": "2026-11-12T16:20",
   "fecha": "12 de noviembre de 2026",
   "aviso": "Todo es tuyo y tú tienes el control: tu dominio, tu correo, tu web, tus anuncios y tus contactos, a tu nombre. Te lo hemos mandado por correo, con tu guía de control en PDF.",
   "ultimo": [
+    {
+      "f": "12 nov",
+      "t": "Plazos: gracias Javi, ya lo hemos cambiado en la web\n- Ya no prometemos fechas ni «llegas antes de Navidad»\n- Si un cliente pregunta, decimos que son unos 30 a 60 días y que se lo confirmas tú al medir\n- Del montaje solo decimos que va a un día por cada 3 ventanas, más o menos\n> Lo único que seguimos diciendo es que contestamos el mismo día y vamos a medir en 1 o 2 días."
+    },
     {
       "f": "12 nov",
       "t": "Outlook arreglado, gracias Javi\n- Ya recibes bien los correos de info@amscerramientos.es en tu Outlook del ordenador\n- No se ha perdido ningún correo\n> Ya no hace falta que nos mandes el pantallazo."
@@ -93,7 +97,8 @@
     },
     {
       "t": "Plazos: cuánto tarda cada obra, de la medida a la ventana puesta\n- Es lo que más preguntan los clientes y lo que menos se dice en la competencia\n- Con tus plazos reales la web puede prometer algo **cierto**, y mejoramos los correos y la agenda\n1. **Fabricación.** ¿Cuántos días o semanas tarda desde que el cliente confirma la medida hasta que tienes las ventanas?\n2. **Montaje: ¿cuántos días de obra?** Una cifra para cada caso: **3 ventanas**, **6 ventanas** y **9 ventanas** (un piso normal, con persiana)\n3. **Alicatado y remates:** si hay que alicatar o rematar el hueco, ¿cuántos días suma?\n> Sin prisa por afinar: un **más o menos** nos vale (por ejemplo «6 ventanas, 2 días»). Escríbelo con el botón «Escribir una respuesta» o mándanos un pantallazo. Lo que no sepas, déjalo en blanco.",
-      "prio": "Muy importante"
+      "prio": "Muy importante",
+      "hecho": true
     },
     {
       "t": "Medimos 5 ventanas: con tu láser y con un folio A4\n- **Para qué sirve:** en la web el cliente hace una foto de su ventana con un folio y ve un precio\n- Queremos que ese precio se parezca lo máximo posible al que **tú le des cuando midas de verdad**\n- Así el cliente **no se lleva una decepción** cuando llegas con el láser\n- Para ajustarlo, necesitamos ver cuánto se equivoca la foto frente a tu láser. Con 5 ventanas basta\nQué tienes que hacer\n1. Elige **5 ventanas** (da igual de quién sean)\n2. **Mide cada una con tu láser** y apunta el ancho y el alto en centímetros (por ejemplo, 120 x 100)\n3. **Pega un folio A4 en el cristal**, recto, con cinta\n4. **Haz una foto de frente**, sin inclinar el móvil, y que se vea el folio entero y la ventana entera\n5. **Respóndenos al correo** con las 5 fotos y las 5 medidas\n> Nada más. Nosotros pasamos tus fotos por la herramienta, comparamos con tu láser y la ajustamos.\nUna pregunta más, de sí o no\n- **¿Solo vas a medir cuando el cliente ya ha aceptado el presupuesto?** Confírmanoslo con «Escribir una respuesta».",
