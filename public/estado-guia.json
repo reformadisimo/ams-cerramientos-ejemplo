@@ -1,5 +1,5 @@
 {
-  "version": "2026-11-12T18:40",
+  "version": "2026-11-13T05:10",
   "fecha": "12 de noviembre de 2026",
   "aviso": "Javi, para LinkedIn entra con tu cuenta personal. Tienes los pasos en «Lo que te toca a ti».",
   "ultimo": [
@@ -188,7 +188,7 @@
       "hecho": true
     },
     {
-      "t": "LinkedIn: solo falta verificar tu cuenta (2 minutos)\n- Gracias por seguir la página, ya casi está\n- Al hacerte **administrador**, LinkedIn nos dice que tu cuenta **aún no está verificada**\n1. Entra en LinkedIn con **tu cuenta personal** (la tuya de siempre; AMS no tiene una cuenta aparte, la página se administra desde tu perfil). El móvil vale\n2. Si te pide **confirmar el correo o el teléfono**, hazlo (te llega un código)\n3. Avísanos con «Ya lo hice» y te hacemos administrador al momento\n> Si no te sale ningún aviso, dínoslo con «Escribir una respuesta» y un pantallazo de lo que ves.",
+      "t": "LinkedIn: tu cuenta aún no está verificada (2 minutos)\n- Gracias por tu pantallazo: **entras bien y sigues la página**\n- Lo hemos vuelto a intentar hoy y LinkedIn **sigue diciendo que tu cuenta no está verificada**, aunque no te pida código\n- Esto no es el correo: es la **verificación de tu perfil** de LinkedIn\n1. Abre tu perfil (pulsa en **Yo** y luego en **Ver perfil**)\n2. Busca un botón o aviso que diga **Verificar** y pulsa\n3. Sigue los pasos y avísanos con «Ya lo hice»\n> Si no te sale ningún botón de «Verificar», dínoslo con «Escribir una respuesta» y un pantallazo de tu perfil: lo resolvemos por otro camino. No corre prisa.",
       "prio": "Importante",
       "u": "https://www.linkedin.com/feed/",
       "b": "Abrir LinkedIn"
