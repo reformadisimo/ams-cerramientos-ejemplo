@@ -42,12 +42,13 @@ module.exports = async (req, res) => {
     const filasS = (SG.visitas || []).map(c => lin(c, 'Fuiste a verle hace 3 días. ¿Le has pasado ya el presupuesto?')).concat((SG.presupuestos || []).map(c => lin(c, 'Le pasaste el presupuesto hace ' + Math.round((Date.now() - c.fp) / 864e5) + ' días. ¿Qué te ha dicho?')));
     if (filasS.length) out.seguimiento = await correo(PARA, filasS.length === 1 ? 'Un cliente pendiente de respuesta' : filasS.length + ' clientes pendientes de respuesta',
       caja('<p style="font-size:18px;font-weight:700">Toca preguntar</p><p>Una llamada a tiempo cierra muchos trabajos que se quedan en el aire.</p><table style="border-collapse:collapse">' + filasS.join('') + '</table><p style="margin-top:18px"><a href="' + CRM_URL + '" style="background:#C2410C;color:#fff;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:700">Apuntar cómo ha ido</a></p>'));
-    // 1c. Serie de correos de seguimiento al cliente (camino B). APAGADA salvo SERIE_CORREOS=1 en Vercel.
+    // 1c. Serie de correos de seguimiento al cliente (camino B). ENCENDIDA desde el 14-nov-2026 (OK de Ig). Para apagarla: SERIE_CORREOS=0 en Vercel.
     // Solo a quien dio su correo y marcó «Acepta recibir correos». Con ?serie=mirar dice a quién le tocaría hoy, sin enviar.
-    if (process.env.SERIE_CORREOS === '1' || req.query.serie === 'mirar') {
+    const serieOn = process.env.SERIE_CORREOS !== '0';
+    if (serieOn || req.query.serie === 'mirar') {
       const S = require('../../lib/serieCorreos.js'), R = require('../../lib/remitente');
       const pend = await rpc('adm_serie_pendientes', { p_secret: sec });
-      if (req.query.serie === 'mirar' || process.env.SERIE_CORREOS !== '1') out.serie = { tocaria: pend.map(c => c.codigo) };
+      if (req.query.serie === 'mirar' || !serieOn) out.serie = { tocaria: pend.map(c => c.codigo) };
       else {
         const hechos = [], fallos = [];
         for (const c of pend.slice(0, 25)) {
