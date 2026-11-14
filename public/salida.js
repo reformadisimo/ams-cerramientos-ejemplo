@@ -48,7 +48,7 @@
       tit = '¿Quieres que te lo <mark>afinemos</mark>?'; txt = 'Este precio es orientativo. El equipo de AMS te prepara el presupuesto cerrado, por escrito.';
       it = ['Visita y medición gratis', 'Precio cerrado, sin sorpresas', 'Sin compromiso']; ico = 'calc';
       b1 = '<a class="p" href="/contacto">Pedir presupuesto gratis ' + FL + '</a>';
-    } else if (/^\/(cerramientos-terrazas|techos|pergolas|toldos|persianas-cristales)/.test(p) || /precio-cerrar-terraza|cerrar-terraza/.test(p)) {
+    } else if (/^\/(cerramientos-terrazas|techos|pergolas|cortinas-de-cristal|persianas-cristales)/.test(p) || /precio-cerrar-terraza|cerrar-terraza/.test(p)) {
       tit = '¿Cuánto costaría <mark>cerrar tu terraza</mark>?'; txt = 'Calcula un precio orientativo en un minuto. Si te encaja, pides presupuesto sin compromiso.';
       it = ['Precio orientativo en un minuto', 'Sin dejar tus datos', 'Visita y medición gratis']; ico = 'home';
       b1 = '<a class="p" href="/calculadora">Calcular el precio de mi terraza ' + FL + '</a>';

@@ -5,6 +5,11 @@
   "permanent": false
  },
  {
+  "source": "/toldos",
+  "destination": "/pergolas",
+  "permanent": true
+ },
+ {
   "source": "/blog/cerrar-terraza-antes-de-navidad",
   "destination": "/cerramientos-terrazas",
   "permanent": true
@@ -656,22 +661,22 @@
  },
  {
   "source": "/noticias/tejidos-para-toldos",
-  "destination": "/toldos",
+  "destination": "/pergolas",
   "permanent": true
  },
  {
   "source": "/noticias/tejidos-para-toldos/:rest*",
-  "destination": "/toldos",
+  "destination": "/pergolas",
   "permanent": true
  },
  {
   "source": "/noticias/como-mantener-un-toldo-en-invierno-y-conservarlo-en-optimas-condiciones",
-  "destination": "/toldos",
+  "destination": "/pergolas",
   "permanent": true
  },
  {
   "source": "/noticias/como-mantener-un-toldo-en-invierno-y-conservarlo-en-optimas-condiciones/:rest*",
-  "destination": "/toldos",
+  "destination": "/pergolas",
   "permanent": true
  },
  {
@@ -966,12 +971,12 @@
  },
  {
   "source": "/producto/productos-ams/toldos-y-pergolas/:rest*",
-  "destination": "/toldos",
+  "destination": "/pergolas",
   "permanent": true
  },
  {
   "source": "/categoria-producto/productos-ams/toldos-y-pergolas/:rest*",
-  "destination": "/toldos",
+  "destination": "/pergolas",
   "permanent": true
  },
  {
