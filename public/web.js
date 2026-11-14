@@ -27,4 +27,9 @@ ok.innerHTML='<strong>Gracias, '+n+'. Se abre WhatsApp con tu petición: solo ti
 else{window.location.href=mailUrl;
 ok.innerHTML='<strong>Gracias, '+n+'. Se abre tu programa de correo con la petición preparada: solo tienes que pulsar enviar.</strong><br>Si no se ha abierto, puedes <a href="'+mailUrl+'">escribirnos a info@amscerramientos.es</a>, <a href="'+waUrl+'" target="_blank" rel="noopener">enviarla por WhatsApp</a> o llamarnos al <a href="tel:+34639788220">639 78 82 20</a>.';}
 f.replaceWith(ok);});});
+/* Desplegables con ratón: se quedan abiertos un momento al salir (el trayecto en diagonal hacia el submenú pasa por fuera del botón) y al entrar en otro se cierra el anterior. */
+(function(){if(!window.matchMedia||!matchMedia('(hover:hover) and (pointer:fine)').matches)return;var all=document.querySelectorAll('.nav .drop'),T=new WeakMap(),S=new WeakMap();
+function show(d){clearTimeout(T.get(d));all.forEach(function(o){if(o!==d){clearTimeout(T.get(o));o.classList.remove('hov','open');var bt=o.querySelector(':scope>button');bt&&bt.setAttribute('aria-expanded','false');}});var ae=document.activeElement;if(ae&&ae.closest&&ae.closest('.nav .drop')&&!d.contains(ae))ae.blur();d.classList.add('hov');}
+all.forEach(function(d){d.addEventListener('mouseenter',function(){clearTimeout(T.get(d));var otro=false;all.forEach(function(o){if(o!==d&&o.classList.contains('hov'))otro=true;});if(otro){clearTimeout(S.get(d));S.set(d,setTimeout(function(){show(d);},180));}else show(d);});
+d.addEventListener('mouseleave',function(){clearTimeout(S.get(d));clearTimeout(T.get(d));T.set(d,setTimeout(function(){d.classList.remove('hov');},380));});});})();
 })();
