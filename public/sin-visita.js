@@ -68,7 +68,7 @@
     el.innerHTML =
       '<div class="sv-cab"><h3>Ventana <span class="sv-num"></span></h3><button type="button" class="sv-quitar">Quitar</button></div>' +
       (cuenta === 1 ? '<div class="sv-guia"><img src="/img/sv-ejemplo-foto.jpg" alt="Ejemplo: ventana entera, de frente, con un folio pegado en el cristal" loading="lazy"><p><b>Ejemplo de cómo tiene que quedar la foto:</b> la ventana entera, de frente, con un folio pegado en el cristal.</p></div>' : '<div class="sv-guia" style="display:block"><p style="margin:0">Haz una foto nueva de esta otra ventana, también con el folio pegado en el cristal.</p></div>') +
-      '<label class="sv-foto"><input type="file" accept="image/*" capture="environment"><span>' + (cuenta === 1 ? 'Hacer la foto' : 'Hacer la foto de esta ventana') + '</span></label>' +
+      '<label class="sv-foto"><input type="file" accept="image/*"><span>' + (cuenta === 1 ? 'Hacer o elegir la foto' : 'Hacer o elegir la foto de esta ventana') + '</span></label>' +
       '<div class="sv-lienzo"><p class="sv-paso"></p><canvas></canvas><div class="sv-botones"><button type="button" class="sv-deshacer">Deshacer el último toque</button><button type="button" class="sv-reiniciar">Volver a marcar</button></div></div>' +
       '<p class="sv-ok" hidden></p>' +
       '<p class="sv-mano">¿Sabes la medida o no tienes folio? Escríbela aquí:</p>' +
@@ -130,14 +130,14 @@
       im.onerror = function () {
         URL.revokeObjectURL(u);
         if (!blob.__convertida && /heic|heif/i.test((blob.type || '') + ' ' + (blob.name || ''))) return convertirHeic(blob);
-        etiqueta.textContent = 'Hacer la foto';
+        etiqueta.textContent = 'Hacer o elegir la foto';
         aviso('No hemos podido abrir esa foto. Prueba con otra, o hazla directamente con el móvil desde esta página.', true);
       };
       im.src = u;
     }
     function convertirHeic(blob) {
       etiqueta.textContent = 'Abriendo la foto del iPhone...';
-      var falla = function () { etiqueta.textContent = 'Hacer la foto'; aviso('Esa foto es del iPhone (formato HEIC) y no la podemos abrir aquí. Hazla directamente con el móvil desde esta página.', true); };
+      var falla = function () { etiqueta.textContent = 'Hacer o elegir la foto'; aviso('Esa foto es del iPhone (formato HEIC) y no la podemos abrir aquí. Hazla directamente con el móvil desde esta página.', true); };
       var go = function () {
         window.heic2any({ blob: blob, toType: 'image/jpeg', quality: 0.85 }).then(function (r) { r = Array.isArray(r) ? r[0] : r; r.__convertida = true; mostrar(r); }).catch(falla);
       };
