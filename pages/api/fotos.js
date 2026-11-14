@@ -119,8 +119,8 @@ module.exports = async (req, res) => {
         '<p style="font-size:26px;font-weight:bold;color:#12202B;margin:8px 0">' + eur(precio.low) + ' a ' + eur(precio.high) + '</p>' +
         '<p style="color:#555;margin:0 0 10px">' + (precio.iva ? 'IVA incluido. ' : 'Más IVA. ') + 'PVC de calidad, montaje y remates incluidos.</p>' +
         '<ul style="padding-left:20px">' + lineasTxt.map(t => '<li>' + esc(t) + '</li>').join('') + '</ul>' +
-        '<p><b>¿Y ahora?</b> Te contestamos el mismo día y vamos a medir con láser en 1 o 2 días, para darte el presupuesto definitivo por escrito, sin compromiso.</p>'
-      : '<p>Gracias por usar el precio con fotos de AMS Cerramientos.</p><p>' + esc(aviso || 'Te contestamos el mismo día para darte el precio.') + '</p>') +
+        '<p><b>¿Y ahora?</b> Te contestamos lo antes posible y vamos a medir con láser en 1 o 2 días, para darte el presupuesto definitivo por escrito, sin compromiso.</p>'
+      : '<p>Gracias por usar el precio con fotos de AMS Cerramientos.</p><p>' + esc(aviso || 'Te contestamos lo antes posible para darte el precio.') + '</p>') +
     '<p>Si lo prefieres, llámanos o escríbenos por WhatsApp al <b>639 78 82 20</b>.</p><p>Un saludo,<br>AMS Cerramientos<br>Corredor del Henares y norte de Madrid</p></div>';
 
   const manda = (body) => fetch('https://api.resend.com/emails', { method: 'POST', headers: { Authorization: 'Bearer ' + clave, 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).then(r => r.ok).catch(() => false);
