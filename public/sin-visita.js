@@ -67,7 +67,7 @@
     el.className = 'card sv-v';
     el.innerHTML =
       '<div class="sv-cab"><h3>Ventana <span class="sv-num"></span></h3><button type="button" class="sv-quitar">Quitar</button></div>' +
-      (cuenta === 1 ? '<div class="sv-guia"><img src="/img/sv-ejemplo-foto.jpg" alt="Ejemplo: ventana entera, de frente, con un folio pegado en el cristal" loading="lazy"><p><b>Ejemplo de cómo tiene que quedar la foto:</b> la ventana entera, de frente, con un folio pegado en el cristal.</p></div>' : '<div class="sv-guia" style="display:block"><p style="margin:0">Haz una foto nueva de esta otra ventana, también con el folio pegado en el cristal.</p></div>') +
+      (cuenta === 1 ? '<div class="sv-guia"><img src="/img/sv-ejemplo-foto.jpg" alt="Ejemplo: ventana entera, de frente, con un folio pegado en el cristal" loading="lazy"><p><b>Ejemplo de cómo tiene que quedar la foto:</b> la ventana entera, de frente (sin ponerte de lado), con el folio en el centro del cristal y la ventana llenando la foto.</p></div>' : '<div class="sv-guia" style="display:block"><p style="margin:0">Haz una foto nueva de esta otra ventana, también con el folio pegado en el cristal.</p></div>') +
       '<label class="sv-foto"><input type="file" accept="image/*"><span>' + (cuenta === 1 ? 'Hacer o elegir la foto' : 'Hacer o elegir la foto de esta ventana') + '</span></label>' +
       '<div class="sv-lienzo"><p class="sv-paso"></p><canvas></canvas><div class="sv-botones"><button type="button" class="sv-deshacer">Deshacer el último toque</button><button type="button" class="sv-reiniciar">Volver a marcar</button></div></div>' +
       '<p class="sv-ok" hidden></p>' +
@@ -104,7 +104,7 @@
         var m = medir(v.folio, v.marco);
         if (m && m.ancho >= 20 && m.ancho <= 600 && m.alto >= 20 && m.alto <= 400) {
           an.value = m.ancho; al.value = m.alto; v.como = 'foto';
-          aviso('Tu ventana mide unos ' + m.ancho + ' × ' + m.alto + ' cm.');
+          aviso('Tu ventana mide unos ' + m.ancho + ' × ' + m.alto + ' cm.' + (Math.max(m.ancho, m.alto) > 180 ? ' Como es un hueco grande, esta medida es solo orientativa: la confirmamos con láser al medir.' : ''));
         } else aviso('La medida no sale bien. Pulsa «Volver a marcar» y toca bien las esquinas, o escribe la medida a mano.', true);
       }
     }
