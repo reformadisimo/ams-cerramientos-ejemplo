@@ -82,7 +82,8 @@
     var pc = f.querySelector('[name=privacidad]'); if (pc && !pc.checked) return;
     var serv = v('servicio'), msg = v('mensaje'), t = '', s = serv.toLowerCase();
     TRAB.forEach(function (x) { if (!t && s.indexOf(x[0]) !== -1) t = x[1]; });
-    window.amsLead({ nombre: nombre, telefono: tel, correo: correo, zona: zonaf, trabajo: t, pide: [serv, callef ? 'Calle: ' + callef : '', msg].filter(Boolean).join('. ') }, 'formulario');
+    var pub = f.querySelector('[name=publicidad]'), pubOk = !!(pub && pub.checked && correo);
+    window.amsLead({ nombre: nombre, telefono: tel, correo: correo, zona: zonaf, trabajo: t, pide: [pubOk ? 'Acepta recibir correos' : '', serv, callef ? 'Calle: ' + callef : '', msg].filter(Boolean).join('. ') }, 'formulario');
     try {
       if (!f.__ag) { f.__ag = document.createElement('div'); f.parentNode.insertBefore(f.__ag, f.nextSibling); }
       window.amsPideVisita(f.__ag, { nombre: nombre, telefono: tel, correo: correo, cp: cpf, zona: v('localidad'), resumen: [serv, msg].filter(Boolean).join('. '), canal: 'formulario', clave: 'form' });
