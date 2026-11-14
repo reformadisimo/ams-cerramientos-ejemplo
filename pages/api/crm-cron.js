@@ -42,6 +42,26 @@ module.exports = async (req, res) => {
     const filasS = (SG.visitas || []).map(c => lin(c, 'Fuiste a verle hace 3 días. ¿Le has pasado ya el presupuesto?')).concat((SG.presupuestos || []).map(c => lin(c, 'Le pasaste el presupuesto hace ' + Math.round((Date.now() - c.fp) / 864e5) + ' días. ¿Qué te ha dicho?')));
     if (filasS.length) out.seguimiento = await correo(PARA, filasS.length === 1 ? 'Un cliente pendiente de respuesta' : filasS.length + ' clientes pendientes de respuesta',
       caja('<p style="font-size:18px;font-weight:700">Toca preguntar</p><p>Una llamada a tiempo cierra muchos trabajos que se quedan en el aire.</p><table style="border-collapse:collapse">' + filasS.join('') + '</table><p style="margin-top:18px"><a href="' + CRM_URL + '" style="background:#C2410C;color:#fff;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:700">Apuntar cómo ha ido</a></p>'));
+    // 1c. Serie de correos de seguimiento al cliente (camino B). APAGADA salvo SERIE_CORREOS=1 en Vercel.
+    // Solo a quien dio su correo y marcó «Acepta recibir correos». Con ?serie=mirar dice a quién le tocaría hoy, sin enviar.
+    if (process.env.SERIE_CORREOS === '1' || req.query.serie === 'mirar') {
+      const S = require('../../lib/serieCorreos.js'), R = require('../../lib/remitente');
+      const pend = await rpc('adm_serie_pendientes', { p_secret: sec });
+      if (req.query.serie === 'mirar' || process.env.SERIE_CORREOS !== '1') out.serie = { tocaria: pend.map(c => c.codigo) };
+      else {
+        const hechos = [], fallos = [];
+        for (const c of pend.slice(0, 25)) {
+          const m = S.correoDe(c.codigo, c); if (!m) continue;
+          const baja = S.enlaceBaja(c.id);
+          const de = m.de ? R.DE.replace(/^[^<]*</, m.de + ' <') : R.DE;
+          const r = await fetch('https://api.resend.com/emails', { method: 'POST', headers: { Authorization: 'Bearer ' + R.CLAVE, 'Content-Type': 'application/json', 'Idempotency-Key': 'serie-' + c.id + '-' + c.codigo },
+            body: JSON.stringify({ from: de, to: [c.correo], reply_to: 'info@amscerramientos.es', subject: m.asunto, html: m.html, headers: { 'List-Unsubscribe': '<' + baja + '>', 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click' } }) });
+          if (r.ok) { await rpc('adm_serie_marcar', { p_secret: sec, p_id: c.id, p_codigo: c.codigo }); hechos.push(c.codigo); } else fallos.push(c.codigo);
+        }
+        out.serie = { enviados: hechos, fallos };
+        if (hechos.length || fallos.length) await correo(RESUMEN_PARA, 'AMS: correos de seguimiento de hoy (' + hechos.length + ' enviados' + (fallos.length ? ', ' + fallos.length + ' con fallo' : '') + ')', caja('<p>Enviados: ' + (hechos.join(', ') || 'ninguno') + '</p>' + (fallos.length ? '<p>Con fallo: ' + fallos.join(', ') + '</p>' : '')));
+      }
+    }
     // 2. Lunes: resumen semanal para nosotros
     const lunes = new Date().toLocaleDateString('es-ES', { weekday: 'long', timeZone: 'Europe/Madrid' }) === 'lunes';
     if (lunes || req.query.resumen === '1') {
