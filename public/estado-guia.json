@@ -1,8 +1,12 @@
 {
-  "version": "2026-11-13T05:10",
-  "fecha": "12 de noviembre de 2026",
+  "version": "2026-11-14T08:00",
+  "fecha": "14 de noviembre de 2026",
   "aviso": "Javi, para LinkedIn entra con tu cuenta personal. Tienes los pasos en «Lo que te toca a ti».",
   "ultimo": [
+    {
+      "f": "14 nov",
+      "t": "Cortinas de cristal ya están en la web\n- Tenías razón: es un producto tuyo y faltaba\n- Ya tiene su página, con las dos fotos que nos mandaste. Cuando tengas fotos de obras tuyas, las cambiamos\n- Los toldos y tejidos ya no salen en la web\n> Lo que más nos ayuda ahora: las **5 ventanas con folio A4 y láser** (en tus tareas)."
+    },
     {
       "f": "12 nov",
       "t": "Tu duda de los avisos: ya está hecho\n- Tenías razón: el aviso no traía el presupuesto\n- Desde hoy, cada aviso de la calculadora y del configurador te llega con **todo lo que ha pedido el cliente y el precio que ha visto**\n- Si ves cualquier otra cosa así, dínosla: lo vamos adaptando a tu medida\n> Los avisos con presupuesto completo ya funcionan para los contactos nuevos."
@@ -113,7 +117,7 @@
       "hecho": true
     },
     {
-      "t": "Medimos 5 ventanas: con tu láser y con un folio A4\n- **Para qué sirve:** en la web el cliente hace una foto de su ventana con un folio y ve un precio\n- Queremos que ese precio se parezca lo máximo posible al que **tú le des cuando midas de verdad**\n- Así el cliente **no se lleva una decepción** cuando llegas con el láser\n- Para ajustarlo, necesitamos ver cuánto se equivoca la foto frente a tu láser. Con 5 ventanas basta\nQué tienes que hacer\n1. Elige **5 ventanas** (da igual de quién sean)\n2. **Mide cada una con tu láser** y apunta el ancho y el alto en centímetros (por ejemplo, 120 x 100)\n3. **Pega un folio A4 en el cristal**, recto, con cinta\n4. **Haz una foto de frente**, sin inclinar el móvil, y que se vea el folio entero y la ventana entera\n5. **Respóndenos al correo** con las 5 fotos y las 5 medidas\n> Nada más. Nosotros pasamos tus fotos por la herramienta, comparamos con tu láser y la ajustamos.\nUna pregunta más, de sí o no\n- **¿Solo vas a medir cuando el cliente ya ha aceptado el presupuesto?** Confírmanoslo con «Escribir una respuesta».",
+      "t": "Medimos 5 ventanas: con tu láser y con un folio A4\n> **Lo más útil que puedes hacernos ahora:** fotos de 5 ventanas con el folio A4 pegado, y su medida con el láser. Con eso afinamos la calculadora.\n- **Para qué sirve:** en la web el cliente hace una foto de su ventana con un folio y ve un precio\n- Queremos que ese precio se parezca lo máximo posible al que **tú le des cuando midas de verdad**\n- Así el cliente **no se lleva una decepción** cuando llegas con el láser\n- Para ajustarlo, necesitamos ver cuánto se equivoca la foto frente a tu láser. Con 5 ventanas basta\nQué tienes que hacer\n1. Elige **5 ventanas** (da igual de quién sean)\n2. **Mide cada una con tu láser** y apunta el ancho y el alto en centímetros (por ejemplo, 120 x 100)\n3. **Pega un folio A4 en el cristal**, recto, con cinta\n4. **Haz una foto de frente**, sin inclinar el móvil, y que se vea el folio entero y la ventana entera\n5. **Mándanos las 5 fotos con el folio y las 5 medidas del láser**: con «Escribir una respuesta» (puedes adjuntar las fotos) o respondiendo al correo\n> Nada más. Nosotros pasamos tus fotos por la herramienta, comparamos con tu láser y la ajustamos.\nUna pregunta más, de sí o no\n- **¿Solo vas a medir cuando el cliente ya ha aceptado el presupuesto?** Confírmanoslo con «Escribir una respuesta».",
       "prio": "Importante"
     },
     {
