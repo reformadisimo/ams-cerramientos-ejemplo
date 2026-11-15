@@ -97,7 +97,12 @@
  "enlace": "#tareas",
  "tareas": [
   {
-   "t": "Si Google Ads se te atasca, no te preocupes\n- Es normal: el asistente de Google es un laberinto y nos pasa a todos\n1. Si te atascas, mándanos una **captura** de dónde te has quedado, respondiendo al correo\n2. Si aun así no sale, **lo hacemos nosotros**: nos conectamos a tu ordenador con **AnyDesk**, solo con tu permiso\n- Entra en **anydesk.com**, pulsa «Descarga gratis» y ábrelo (no hace falta instalarlo)\n- Mándanos por correo el **número de 9 cifras** que te sale\n- Cuando pidamos conectar, pulsa **Aceptar**. Al acabar, cierras el programa\n> Tú decides cuándo, sin prisa.",
+   "t": "Si algo se te atasca, nos conectamos y lo hacemos nosotros\n- Es normal: Google Ads y el resto de asistentes son un laberinto y nos pasa a todos\n- A partir de ahora, **cualquier cosa que se te atasque la hacemos nosotros**, para que no pierdas tiempo\n1. Mándanos una **captura** de dónde te has quedado, respondiendo al correo\n2. Si hace falta, nos conectamos a tu ordenador con **AnyDesk**, solo con tu permiso\n- Entra en **anydesk.com**, pulsa «Descarga gratis» y ábrelo (no hace falta instalarlo)\n- Mándanos por correo el **número de 9 cifras** que te sale\n- Cuando pidamos conectar, pulsa **Aceptar**. Al acabar, cierras el programa\n- Vale para Google Ads, LinkedIn, Facebook o lo que sea. Solo lo que pide tu documento o tu cara (como verificar tu perfil de LinkedIn) lo haces tú\n> Tú decides cuándo, sin prisa.",
+   "prio": "Importante",
+   "hecho": false
+  },
+  {
+   "t": "Dos datos de tu lista de precios\n- Gracias por la lista de ventanas con cajón. Con ella afinamos la calculadora para que el precio que ve el cliente se parezca al tuyo\n1. Los importes de la lista, ¿son tu **coste** o tu **precio de venta**?\n2. ¿Cuánto sueles sumar encima? Un **porcentaje o una cantidad por ventana** vale, aproximado\n3. ¿Tienes una lista parecida de **aluminio** y de **correderas**? Si la tienes a mano, mándala\n> Respondes con «Escribir una respuesta». Sin prisa y sin cuentas exactas.",
    "prio": "Importante",
    "hecho": false
   },
