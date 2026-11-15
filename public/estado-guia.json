@@ -1,8 +1,12 @@
 {
  "version": "2026-11-14T08:00",
- "fecha": "14 de noviembre de 2026",
+ "fecha": "15 de noviembre de 2026",
  "aviso": "Javi, para LinkedIn entra con tu cuenta personal. Tienes los pasos en «Lo que te toca a ti».",
  "ultimo": [
+  {
+   "f": "15 nov",
+   "t": "Ahora puedes contestarnos hablando\n- Nuevo botón **«Hablar y que se escriba»**: hablas y se escribe solo\n- Nuevo botón **«Grabar un audio»**: nos mandas un mensaje de voz\n- Los encuentras dentro de **«Escribir una respuesta»**, en cada tarea\n> Gracias a lo que nos dijiste de que escribir se te hacía pesado. Seguimos mejorando con lo que nos vas contando."
+  },
   {
    "f": "14 nov",
    "t": "Ya puedes subir fotos que ya tengas hechas\n- Tenías razón: el botón te obligaba a hacer la foto en ese momento\n- Ya lo hemos cambiado: ahora dice **«Hacer o elegir la foto»** y te deja escoger una de la galería\n- Pruébalo cuando quieras y dinos si te funciona"
