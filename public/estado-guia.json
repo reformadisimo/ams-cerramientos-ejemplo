@@ -1,8 +1,12 @@
 {
- "version": "2026-11-16T17:50",
- "fecha": "16 de noviembre de 2026",
- "aviso": "Javi, Google Ads: párate en la pantalla de pago y dinos una hora para terminarlo juntos. Mira «Lo que te toca a ti».",
+ "version": "2026-11-19T12:30",
+ "fecha": "19 de noviembre de 2026",
+ "aviso": "Javi, dos cosas en «Lo que te toca a ti»: el último botón de Google Ads y decidir si activamos los anuncios en diciembre.",
  "ultimo": [
+  {
+   "f": "19 nov",
+   "t": "Tu artículo ya está publicado\n- Ya sale en **Dream Alcalá**, con 4 enlaces a tu web\n- La factura va en el correo, y este fin de semana está perfecto\n- Gracias por contarnos que te están entrando bastantes contactos: es buena noticia\n> Te hemos explicado qué falta en Google Ads y te dejamos decidir si empezamos en diciembre."
+  },
   {
    "f": "16 nov",
    "t": "Google Ads, lista de precios y fotos con folio\n- Gracias por los pantallazos y el vídeo: se ve perfecto dónde te quedaste en Google Ads\n- Esa campaña de prueba **no se envía**: la dejamos como queremos, con el presupuesto y las zonas bien puestos\n- Lista de precios: entendido, los de tu programa más 60 u 80 € por ventana\n- Las ventanas de las fotos con folio eran **correderas de aluminio**: apuntado\n> Tú marcas los ritmos, Javi."
@@ -22,14 +26,10 @@
   {
    "f": "14 nov",
    "t": "Cortinas de cristal ya están en la web\n- Tenías razón: es un producto tuyo y faltaba\n- Ya tiene su página, con las dos fotos que nos mandaste. Cuando tengas fotos de obras tuyas, las cambiamos\n- Los toldos y tejidos ya no salen en la web\n> Lo que más nos ayuda ahora: las **5 ventanas con folio A4 y láser** (en tus tareas)."
-  },
-  {
-   "f": "12 nov",
-   "t": "Tu duda de los avisos: ya está hecho\n- Tenías razón: el aviso no traía el presupuesto\n- Desde hoy, cada aviso de la calculadora y del configurador te llega con **todo lo que ha pedido el cliente y el precio que ha visto**\n- Si ves cualquier otra cosa así, dínosla: lo vamos adaptando a tu medida\n> Los avisos con presupuesto completo ya funcionan para los contactos nuevos."
   }
  ],
  "cuentas": {
-  "ads": "Tu cuenta de Google Ads (con tu Gmail amscerramientos@gmail.com) está a medias: has llegado hasta la pantalla de pago y has parado antes de aceptar la tarjeta, que es lo correcto. Esa campaña de prueba no se envía; la terminamos juntos por Chrome. Los anuncios empiezan el 1 de diciembre (antes, nada); la tarjeta la pones tú. Facebook e Instagram: la página de Facebook nueva la creas tú (la de Raúl se elimina) y luego nos das acceso como socio.",
+  "ads": "Tu cuenta de Google Ads (con tu Gmail amscerramientos@gmail.com) está a medias: falta que pulses «Enviar» y aceptes el correo de Casiopea 360. Con eso queda lista y no gastas nada hasta que tú des la orden. Los anuncios empezaban el 1 de diciembre; si tienes diciembre muy cargado, decides tú si empezamos entonces, más tarde o con un trabajo más grande o una zona más concreta. Facebook e Instagram: la página de Facebook nueva la creas tú (la de Raúl se elimina) y luego nos das acceso como socio.",
   "analytics": "Ya tienes tu propia cuenta de Google Analytics, creada por ti con tu correo de Gmail de empresa, y nos has dado acceso de administrador. Nos has pasado el código de medición para conectarla con la web nueva.",
   "dominio": "Tuyo, en DonDominio, a tu nombre, y se renueva solo. Tu web nueva está en amscerramientos.es desde el 2 de noviembre. Tu correo info@amscerramientos.es también está ya en DonDominio (desde el 3 de noviembre), a tu nombre, y desde el 11 de noviembre lo recibes bien en tu Outlook.",
   "search": "Search Console: ya eres propietario con amscerramientos@gmail.com. Le hemos enviado a Google el mapa de tu web nueva (70 páginas). Clarity (cómo se mueve la gente por la web): ya estás dentro como administrador. Bing: entra una vez en bing.com/webmasters con tu Gmail y pulsa «Importar».",
@@ -73,8 +73,18 @@
  "enlace": "#tareas",
  "tareas": [
   {
-   "t": "Google Ads: un último botón y queda abierta tu cuenta\n- Esta mañana lo hiciste todo bien. Ya lo hemos revisado y **sí puedes pulsar «Enviar»**\n1. Entra en **ads.google.com** con tu correo de siempre\n2. Baja hasta el final, marca «Acepto las condiciones» y **«No»** en las dos preguntas\n3. Pulsa el botón azul **«Enviar»**\n4. Cuando te llegue el correo de Google de **Casiopea 360**, pulsa **«Aceptar»**\n> Tu tarjeta y tu CIF ya están puestos. Los anuncios empiezan el 1 de diciembre y no gastas nada antes. Si te sale algo distinto, mándanos una foto de la pantalla.",
+   "t": "Decide tú: ¿activamos los anuncios el 1 de diciembre?\n- Cuando empiecen, lo normal es que entren más contactos y haya más trabajo; no sabemos cuánto, pero será más que ahora\n- Si diciembre lo tienes muy cargado, puedes esperar a estar más desahogado\n- Punto medio: activarlos apuntando a un **trabajo más grande** o a una **zona más concreta**, para que lleguen menos contactos y de más valor\n> Dinos qué prefieres cuando lo tengas claro, con «Escribir una respuesta». Sin prisa; lo que decidas nos parece bien.",
+   "prio": "Importante",
+   "hecho": false
+  },
+  {
+   "t": "Google Ads: un último botón y queda abierta tu cuenta\n- Esta mañana lo hiciste todo bien. Ya lo hemos revisado y **sí puedes pulsar «Enviar»**\n1. Entra en **ads.google.com** con tu correo de siempre\n2. Baja hasta el final, marca «Acepto las condiciones» y **«No»** en las dos preguntas\n3. Pulsa el botón azul **«Enviar»**\n4. Cuando te llegue el correo de Google de **Casiopea 360**, pulsa **«Aceptar»**\n> Tu tarjeta y tu CIF ya están puestos. Los anuncios empiezan el 1 de diciembre y no gastas nada antes. Si te sale algo distinto, mándanos una foto de la pantalla.\n- Si no te llega el correo de Casiopea 360, a veces aparece dentro de Ads; si no lo ves, mándanos una captura",
    "prio": "Muy importante",
+   "hecho": false
+  },
+  {
+   "t": "Factura del artículo en prensa: el ingreso, este fin de semana\n- Son 339,01 € (280,17 de base y 58,84 de IVA); los datos para pagar están en la propia factura\n- Ya nos dijiste que lo haces este fin de semana: perfecto",
+   "prio": "Este fin de semana",
    "hecho": false
   },
   {
