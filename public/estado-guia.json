@@ -1,5 +1,5 @@
 {
- "version": "2026-11-20T19:00",
+ "version": "2026-11-20T20:30",
  "fecha": "20 de noviembre de 2026",
  "aviso": "Javi, gracias por tus prioridades. Tus campañas de Google Ads ya están preparadas, en pausa, y las repasamos juntos antes del 1 de diciembre.",
  "ultimo": [
@@ -94,12 +94,12 @@
   {
    "t": "Factura del artículo en prensa: el ingreso, este fin de semana\n- Son 339,01 € (280,17 de base y 58,84 de IVA); los datos para pagar están en la propia factura\n- Ya nos dijiste que lo haces este fin de semana: perfecto",
    "prio": "Este fin de semana",
-   "hecho": false
+   "hecho": true
   },
   {
    "t": "Si algo se te atasca, lo hacemos nosotros\n- Es normal: Google Ads y el resto de asistentes son un laberinto y nos pasa a todos\n- A partir de ahora, **cualquier cosa que se te atasque la hacemos nosotros**, para que no pierdas tiempo\n1. Mándanos una **captura** de dónde te has quedado, respondiendo al correo\n2. Te escribimos las **indicaciones paso a paso**\n3. Si aun así no sale, **nos conectamos a tu ordenador, con tu permiso, y solo para terminar ese paso**\n- Abre **Chrome** y entra en **remotedesktop.google.com/support**\n- En la tarjeta **«Compartir esta pantalla»**, pulsa el **botón azul de descarga**. La primera vez hay que instalar un pequeño componente de Google: acéptalo\n- Si te sale un aviso en la esquina de abajo, «¿Quieres instalar Escritorio Remoto de Chrome?», puedes decir **«No, gracias»**\n- Cuando termine, te saldrá un **código**. Mándanoslo por correo. Es de un solo uso y caduca a los pocos minutos; si caduca, genera otro\n- Al conectarnos, verás en pantalla el correo **hola@casiopea360.es**. Es el nuestro: no hay ninguna otra cuenta\n- Si no usas Chrome, ábrelo solo para esto\n- Lo que pide tu documento, tu cara o tu contraseña (como verificar tu perfil de LinkedIn) lo haces tú\n> Tú decides cuándo, sin prisa.",
    "prio": "Importante",
-   "hecho": false,
+   "hecho": true,
    "u": "/img/asistencia-chrome.jpg",
    "b": "Ver cómo se ve esa pantalla"
   },
