@@ -1,8 +1,12 @@
 {
- "version": "2026-11-20T17:00",
+ "version": "2026-11-20T19:00",
  "fecha": "20 de noviembre de 2026",
- "aviso": "Javi, gracias por conseguir lo de Google Ads. En «Lo que te toca a ti» hay dos preguntas cortas: zonas y qué quieres vender más.",
+ "aviso": "Javi, gracias por tus prioridades. Tus campañas de Google Ads ya están preparadas, en pausa, y las repasamos juntos antes del 1 de diciembre.",
  "ultimo": [
+  {
+   "f": "20 nov",
+   "t": "Tus campañas ya están preparadas\n- Con tu orden de pueblos y tus prioridades, hemos cargado todo en Google Ads\n- Todas están en **pausa**: no se gasta nada hasta que tú des el visto bueno\n- Primero **ventanas de PVC**, después **cancelas de aluminio soldado**, y tu marca\n- Prueba pequeña de cancelas en La Moraleja, Sanse y Alcobendas, como propusiste: el precio más alto lo decides tú al presupuestar\n- Las **cortinas de cristal** las dejamos para enero, pero es decisión tuya: si las quieres ya, las preparamos\n> Antes del 1 de diciembre lo repasamos juntos."
+  },
   {
    "f": "20 nov",
    "t": "Google Ads ya está conectado\n- Lo has conseguido: ya podemos trabajar en tu cuenta\n- La campaña de prueba que creó Google la hemos **pausado**: no se gasta nada\n- Los anuncios los empezamos en diciembre, como dijiste, y lo repasamos juntos antes de activar nada\n- Los precios en la web los dejamos: quien llega ya sabe lo que cuesta, y si ves que no funciona, lo cambiamos\n> Ahora solo te pedimos dos respuestas: zonas y qué quieres vender más."
@@ -29,7 +33,7 @@
   }
  ],
  "cuentas": {
-  "ads": "Tu cuenta de Google Ads (con tu Gmail amscerramientos@gmail.com) ya está conectada con Casiopea 360 y la sigues controlando tú. La campaña de prueba que creó Google está pausada: no se gasta nada. Los anuncios empiezan en diciembre, como decidiste, y nada se activa sin tu visto bueno. Facebook e Instagram: la página de Facebook nueva la creas tú (la de Raúl se elimina) y luego nos das acceso como socio.",
+  "ads": "Tu cuenta de Google Ads (con tu Gmail amscerramientos@gmail.com) está conectada con Casiopea 360 y la sigues controlando tú. La campaña de prueba que creó Google está pausada, y las nuestras (ventanas, cancelas y tu marca) están preparadas en pausa: nada se activa sin tu visto bueno, a partir del 1 de diciembre. Facebook e Instagram: la página de Facebook nueva la creas tú (la de Raúl se elimina) y luego nos das acceso como socio.",
   "analytics": "Ya tienes tu propia cuenta de Google Analytics, creada por ti con tu correo de Gmail de empresa, y nos has dado acceso de administrador. Nos has pasado el código de medición para conectarla con la web nueva.",
   "dominio": "Tuyo, en DonDominio, a tu nombre, y se renueva solo. Tu web nueva está en amscerramientos.es desde el 2 de noviembre. Tu correo info@amscerramientos.es también está ya en DonDominio (desde el 3 de noviembre), a tu nombre, y desde el 11 de noviembre lo recibes bien en tu Outlook.",
   "search": "Search Console: ya eres propietario con amscerramientos@gmail.com. Le hemos enviado a Google el mapa de tu web nueva (70 páginas). Clarity (cómo se mueve la gente por la web): ya estás dentro como administrador. Bing: entra una vez en bing.com/webmasters con tu Gmail y pulsa «Importar».",
@@ -75,7 +79,7 @@
   {
    "t": "Dos preguntas para preparar tus anuncios: zonas y qué quieres vender más\n- Tu cuenta de Google Ads ya está conectada y la campaña de prueba que creó Google está **pausada**: no se gasta nada\n1. **Zonas:** Alcalá de Henares va la primera. Después de Alcalá, ¿qué pueblos o zonas de alrededor te interesan más, por orden?\n2. **Qué quieres vender más:** ventanas, cancelas de aluminio u otra cosa. ¿Cuál es tu prioridad número uno?\n> Respóndelas con «Escribir una respuesta» o por correo, con tus palabras y sin prisa. Con eso cargamos las campañas, quedan en pausa hasta el 1 de diciembre y lo repasamos juntos antes de activar nada.",
    "prio": "Importante",
-   "hecho": false
+   "hecho": true
   },
   {
    "t": "Decide tú: ¿activamos los anuncios el 1 de diciembre?\n- Cuando empiecen, lo normal es que entren más contactos y haya más trabajo; no sabemos cuánto, pero será más que ahora\n- Si diciembre lo tienes muy cargado, puedes esperar a estar más desahogado\n- Punto medio: activarlos apuntando a un **trabajo más grande** o a una **zona más concreta**, para que lleguen menos contactos y de más valor\n> Dinos qué prefieres cuando lo tengas claro, con «Escribir una respuesta». Sin prisa; lo que decidas nos parece bien.",
