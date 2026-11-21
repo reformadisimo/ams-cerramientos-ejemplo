@@ -9,6 +9,8 @@
 
 ## Avisos
 
+- 2026-11-21 (ams·v216): guía de Javi: tarea nueva la primera de «Lo que te toca a ti», «Enséñanos las cuentas y los vídeos que te gustaron» (Javi dijo que había visto cuentas de Instagram y vídeos muy buenos de empresas grandes; pedimos pantallazos, enlaces y qué le gustó para adaptar mensajes y vídeos). Responde en la caja `#sugerencias`. Correo para Javi con lo mismo, en borrador dummy en el Gmail de Ig, SIN ENVIAR hasta que lo vea Ig. Aún no sabemos qué cuentas son.
+
 - 2026-11-21 (ams·v215): el botón de arriba del menú (`.btn-call`, 78 páginas) pasa de «639 78 82 20» (llamar) a «WhatsApp» en verde, con enlace `wa.me/34639788220` y texto «Hola, AMS Cerramientos. Quiero pedir presupuesto gratis.» (Ig: mejor que escriban a que llamen). Los teléfonos 91 883 35 12 y 639 78 82 20 siguen en el pie, el aviso legal y los datos de Google. El contador sigue midiendo `contacto_wa` (wa.me); `contacto_tel` bajará. `estilos.css?v=c186`.
 
 - 2026-11-21 (ams·v214): el botón verde del WhatsApp de abajo en ordenador lleva el texto «WhatsApp» (píldora verde junto a «Pedir presupuesto gratis»; `public/barra.js`, clase `.pbt`). En móvil sigue solo el icono.
