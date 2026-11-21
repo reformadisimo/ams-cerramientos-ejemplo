@@ -56,7 +56,7 @@ a{color:var(--navy)}a:hover{color:#B8430A}
 @media (max-width:1180px){
  .nav{display:none}.burger{display:inline-flex}
  .bar{justify-content:space-between;gap:8px}.actions{margin-left:0}
- .btn-call span{display:none}.btn-call::after{content:"Llamar"}.btn-call{padding:0 14px}
+ .btn-call span{display:none}.btn-call::after{content:"WhatsApp"}.btn-call{padding:0 14px}
  .logo img{height:42px}
 }
 @media (min-width:1181px){.mobile{display:none !important}}
@@ -123,3 +123,5 @@ body:has(#ck) .mobile-in{padding-bottom:360px}
 .btn-soc{display:none;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:1px solid #5B6B78;color:#fff;text-decoration:none}
 .btn-soc:hover{border-color:#fff;color:#fff}
 @media(min-width:1181px){.btn-soc{display:inline-flex}}
+
+.btn-call{background:#1F8F4E}.btn-call:hover{background:#17703C}
