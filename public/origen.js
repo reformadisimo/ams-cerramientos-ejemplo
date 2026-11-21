@@ -63,8 +63,23 @@
   };
   window.amsOrigen = function () { return base(); };
   // Después del precio: cuándo quiere hacerlo y pedir la visita (public/agenda.js, se carga solo cuando hace falta)
+  // 21-nov-2026 (Ig): fuera de las zonas de Javi no se ofrece visita; se dice claro que no trabajamos allí
+  var ZSI = /alcal[aá]|villalbilla|torrej[oó]n|meco|azuqueca|camarma|daganzo|santos de la humosa|anchuelo|corpa|santorcaz|pezuela|nuevo bazt[aá]n|loeches|torres de la alameda|valverde|ajalvir|cabanillas|alovera|chiloeches|marchamalo|villanueva de la torre|quer|yunquera|fontanar|el casar|valdeavero|fresno de torote|serracines|ribatejada|campo real|pozuelo del rey|olmeda|coslada|san fernando|mejorada|velilla|alcobendas|san sebasti[aá]n de los reyes|algete|cobe[ñn]a|san agust[ií]n|guadalix|^guadalajara$|guadalajara capital|pioz|el pozo/, ZDUDA = /guadalajara|arganda|rivas|fuente el saz/, ZNORTE = /moraleja|encinar|conde orgaz|piovera|alameda de osuna|paracuellos|santo domingo|ciudalcampo|fuente del fresno/;
+  var CPSI = /^(288\d\d|2810[08]|2870\d|28750|28110|192\d\d|1917\d|28109|28050|28043|28042|28860|28120|28707)$/, CPNO = /^(2890\d|2891\d|2892[0-5]|28320|2898[0-4]|2894[0-6]|28760|28770|2823[0-2]|28290|2822[0-4])$/;
+  function fueraZona(cp, zona) {
+    var z = String(zona || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''), c = String(cp || '').replace(/\D/g, '');
+    var m = z.match(/\b(\d{5})\b/); if (!c && m) c = m[1];
+    if (c.length === 5) { if (CPNO.test(c) || /^280[0-5]\d$/.test(c) || !/^(28|19)/.test(c)) return !(ZSI.test(z) && !CPNO.test(c) && /^(28|19)/.test(c) && !/^280[0-5]\d$/.test(c)); return !(CPSI.test(c) || ZSI.test(z) || ZDUDA.test(z) || ZNORTE.test(z)); }
+    if (!z.trim()) return false;
+    return !(ZSI.test(z) || ZDUDA.test(z) || ZNORTE.test(z));
+  }
+  window.amsFueraZona = fueraZona;
   window.amsPideVisita = function (el, datos) {
     if (!el) return;
+    if (fueraZona(datos && datos.cp, datos && datos.zona)) {
+      el.innerHTML = '<div style="margin:16px 0;padding:14px 16px;border-radius:12px;background:#eef3f8;color:#1F2A36;font-size:16px;line-height:1.5"><b>Tu zona nos queda lejos.</b> Trabajamos en el Corredor del Henares, en el norte de Madrid (Alcobendas, San Sebastián de los Reyes, La Moraleja, Algete...) y en Guadalajara. En tu localidad no podríamos darte el servicio que queremos, así que no te ofrecemos visita. El precio que has visto te sirve como referencia.</div>';
+      return;
+    }
     var go = function () { window.amsAgenda(el, datos); };
     if (window.amsAgenda) return go();
     var sc = document.createElement('script'); sc.src = '/agenda.js?v=2'; sc.onload = go; document.head.appendChild(sc);

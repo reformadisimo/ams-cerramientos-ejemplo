@@ -26,7 +26,7 @@ const PERSIANAS = { motor: 1, manual: 1, no: 1 };
 
 // Zonas de Javi (1-nov-2026): unos 35 km alrededor de Villalbilla, norte (Alcobendas, San Sebastián de los Reyes,
 // La Moraleja, Algete, San Agustín) y Guadalajara si hay mercado. No trabaja en Madrid capital ni en el sur y el oeste.
-const CP_NO = /^(2890\d|2892[0-5]|28320|2898[0-4]|2894[0-6]|28760|28770|2823[0-2]|28290|2822[0-4])$/;
+const CP_NO = /^(2890\d|2891\d|2892[0-5]|28320|2898[0-4]|2894[0-6]|28760|28770|2823[0-2]|28290|2822[0-4])$/;
 const CP_SI = /^(288\d\d|2810[08]|2870\d|28750|28110|192\d\d|1917\d)$/;
 function zonaDe(cp) {
   if (NORTE_CP[cp]) return { tipo: 'norte', nombre: NORTE_CP[cp] };

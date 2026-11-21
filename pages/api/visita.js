@@ -18,7 +18,7 @@ const CUANDO = ['Lo antes posible', 'En un mes', 'De 1 a 3 meses', 'Más adelant
 const FASES = { decidido: 'Decidido, quiere confirmar medidas', comparando: 'Comparando presupuestos', precio: 'Solo quería saber el precio' };
 // Encaje por código postal (mismas zonas que /api/fotos)
 const NORTE_CP = /^(28109|28050|28043|28042|28860|28120|28707)$/;
-const CP_NO = /^(2890\d|2892[0-5]|28320|2898[0-4]|2894[0-6]|28760|28770|2823[0-2]|28290|2822[0-4])$/;
+const CP_NO = /^(2890\d|2891\d|2892[0-5]|28320|2898[0-4]|2894[0-6]|28760|28770|2823[0-2]|28290|2822[0-4])$/;
 const CP_SI = /^(288\d\d|2810[08]|2870\d|28750|28110|192\d\d|1917\d)$/;
 function encajeCp(cp) {
   if (NORTE_CP.test(cp)) return 'Interesa, zona norte (+25 %, 6 ventanas o más)';

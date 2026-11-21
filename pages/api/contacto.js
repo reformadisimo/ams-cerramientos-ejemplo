@@ -27,7 +27,8 @@ const ZONA_SI = /alcal[aá]|villalbilla|torrej[oó]n|meco|azuqueca|camarma|dagan
 const ZONA_DUDA = /guadalajara|arganda|rivas|fuente el saz/;
 const ZONA_NO = /getafe|alcorc[oó]n|\bpinto\b|\bparla\b|fuenlabrada|tres cantos|colmenar|las rozas|pozuelo de alarc|^pozuelo$|majadahonda|canillejas/; // donde Javi no trabaja
 const ZONA_LEJOS = /alicante|alacant|tarragona|barcelona|valencia|castell[oó]n|murcia|m[aá]laga|sevilla|c[oó]rdoba|granada|almer[ií]a|c[aá]diz|huelva|ja[eé]n|badajoz|c[aá]ceres|coru[ñn]a|lugo|ourense|pontevedra|asturias|oviedo|gij[oó]n|cantabria|santander|bilbao|vizcaya|guip[uú]zcoa|san sebasti[aá]n$|vitoria|[aá]lava|navarra|pamplona|zaragoza|huesca|teruel|lleida|l[eé]rida|girona|gerona|baleares|mallorca|ibiza|canarias|tenerife|las palmas|albacete|ciudad real|cuenca|toledo|[aá]vila|segovia|salamanca|zamora|valladolid|le[oó]n|burgos|palencia|soria|la rioja|logro[ñn]o|ceuta|melilla|molina de arag|siguenza|cifuentes|sacedon|pastrana|brihuega|mondejar|atienza|cogolludo|jadraque|maranchon|corduente/; // fuera de zona (3-nov-2026; Guadalajara lejana 6-nov)
-const CP_NO = /^(2890\d|2892[0-5]|28320|2898[0-4]|2894[0-6]|28760|28770|2823[0-2]|28290|2822[0-4])$/; // igual que en fotos.js
+const CP_NO = /^(2890\d|2891\d|2892[0-5]|28320|2898[0-4]|2894[0-6]|28760|28770|2823[0-2]|28290|2822[0-4])$/; // igual que en fotos.js (21-nov: suma Leganés, 2891x)
+const CP_SI = /^(288\d\d|2810[08]|2870\d|28750|28110|192\d\d|1917\d)$/; // igual que en fotos.js
 const ZONA_NORTE = /moraleja|encinar|conde orgaz|piovera|alameda de osuna|paracuellos|santo domingo|ciudalcampo|fuente del fresno|\b(28109|28050|28043|28042|28860|28120|28707)\b/;
 const quitaAcentos = t => String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 function encaje(d) {
@@ -50,9 +51,11 @@ function encaje(d) {
   if (ZONA_NO.test(z)) return ['No encaja', 'zona donde no trabajamos'];
   if (/\batico\b/.test(t) && /cerramiento|terraza|cerrar/.test(t)) return ['No encaja', 'cerramiento de ático'];
   if (/^madrid( capital)?$|madrid capital|\b280[0-5]\d\b/.test(z) && !ZONA_SI.test(z)) return ['No encaja', 'Madrid capital'];
-  if (ZONA_SI.test(z)) return /ventana|pvc|cancela|puerta|cerramiento|terraza|persiana|mosquitera/.test(t) || !t.trim() ? ['Interesa', 'su zona'] : ['A valorar', 'trabajo poco habitual'];
+  if (ZONA_SI.test(z) || (cp && CP_SI.test(cp))) return /ventana|pvc|cancela|puerta|cerramiento|terraza|persiana|mosquitera/.test(t) || !t.trim() ? ['Interesa', 'su zona'] : ['A valorar', 'trabajo poco habitual'];
   if (ZONA_DUDA.test(z)) return ['A valorar', 'zona algo lejos'];
-  return ['A valorar', z ? 'zona por confirmar' : 'sin pueblo'];
+  // 21-nov-2026 (Ig): lo que no esté en las zonas de Javi se descarta solo (llega como «No encaja», sin correo a Javi)
+  if (z) return ['No encaja', 'fuera de las zonas de Javi (' + String(d.zona).trim().slice(0, 40) + ')'];
+  return ['A valorar', 'sin pueblo'];
 }
 
 function deDonde(origen, d) {

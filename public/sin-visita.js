@@ -8,7 +8,7 @@
   var lista = document.getElementById('sv-lista');
   if (!lista) return;
   var ventanas = [], cuenta = 0;
-  var CP_NO = /^(2890\d|2892[0-5]|28320|2898[0-4]|2894[0-6]|28760|28770|2823[0-2]|28290|2822[0-4])$/;
+  var CP_NO = /^(2890\d|2891\d|2892[0-5]|28320|2898[0-4]|2894[0-6]|28760|28770|2823[0-2]|28290|2822[0-4])$/;
   var ZONAS = 'Trabajamos en el Corredor del Henares, en el norte de Madrid (Alcobendas, San Sebastián de los Reyes, La Moraleja, Algete...) y en Guadalajara.';
   var NORTE_CP = { '28109': 1, '28050': 1, '28043': 1, '28042': 1, '28860': 1, '28120': 1, '28707': 1 };
   var TIPOS = [['Oscilobatiente (se abre y se inclina)', 'oscilobatiente'], ['Abatible (solo se abre)', 'practicable'], ['Corredera', 'corredera'], ['Balconera (puerta a la terraza)', 'practicable'], ['Fija (no se abre)', 'corredera'], ['No lo sé', 'oscilobatiente']];
