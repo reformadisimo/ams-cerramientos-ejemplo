@@ -9,6 +9,8 @@
 
 ## Avisos
 
+- 2026-11-21 (ams·v214): el botón verde del WhatsApp de abajo en ordenador lleva el texto «WhatsApp» (píldora verde junto a «Pedir presupuesto gratis»; `public/barra.js`, clase `.pbt`). En móvil sigue solo el icono.
+
 - 2026-11-21 (ams·v213): ORDEN ABAJO EN ORDENADOR (Ig: «es un poco caos»). `public/barra.js`: «Pedir presupuesto gratis» y el WhatsApp (círculo verde de 52 px) van juntos y centrados en una fila abajo; fuera el WhatsApp flotante suelto de la derecha (`a.wa` oculto en ordenador); el chat «Pregunta a AMS» (`#asb`) baja a la misma línea (bottom 18 px) a la derecha; `body` con 84 px de margen abajo para no tapar el pie. En móvil no cambia (barra a todo el ancho con WhatsApp y el chat encima). Los botones «Tareas pendientes» y «Volver a la guía» de abajo a la izquierda son de la guía de Javi, no del cliente.
 
 - 2026-11-21 (ams·v212): botón flotante «Pedir presupuesto gratis» CENTRADO abajo en ordenador (`public/barra.js`; en móvil sigue la barra a todo el ancho con WhatsApp). Iconos de Facebook e Instagram arriba a la derecha del menú, junto a «Aa» y el teléfono (`.btn-soc` en `estilos.css`, solo desde 1181 px; 78 páginas; `estilos.css?v=c185`). Ig no veía los cambios de v211 por caché; el pie ya los llevaba publicados.
