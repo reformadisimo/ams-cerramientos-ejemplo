@@ -1,4 +1,4 @@
-/* Botón fijo "Pedir presupuesto gratis" en toda la web. Móvil: barra abajo con WhatsApp. Ordenador: botón flotante abajo a la izquierda.
+/* Botón fijo "Pedir presupuesto gratis" en toda la web. Móvil: barra abajo con WhatsApp. Ordenador: botón flotante abajo, centrado.
    Si la página tiene formulario de presupuesto, lleva a él; si no, a /contacto. */
 (function(){try{
  if(document.getElementById('pbar'))return;
@@ -10,7 +10,7 @@
  '#pbar .pb1{flex:1;background:#C2410C;color:#fff;font-size:17px;box-shadow:0 6px 16px rgba(194,65,12,.4)}'+
  '#pbar .pb2{width:58px;flex:none;background:#1F8F4E}'+
  'body{padding-bottom:72px}a.wa{display:none!important}#asb{bottom:80px!important}'+
- '@media(min-width:860px){#pbar{left:18px;right:auto;bottom:18px;padding:0;background:none;box-shadow:none}#pbar .pb2{display:none}#pbar .pb1{padding:0 24px;border-radius:999px;box-shadow:0 10px 26px rgba(194,65,12,.45)}body{padding-bottom:0}a.wa{display:flex!important}#asb{bottom:88px!important}}'+
+ '@media(min-width:860px){#pbar{left:50%;right:auto;transform:translateX(-50%);bottom:18px;padding:0;background:none;box-shadow:none}#pbar .pb2{display:none}#pbar .pb1{padding:0 24px;border-radius:999px;box-shadow:0 10px 26px rgba(194,65,12,.45)}body{padding-bottom:0}a.wa{display:flex!important}#asb{bottom:88px!important}}'+
  '@media print{#pbar{display:none}}';
  document.head.appendChild(st);
  var b=document.createElement('div');b.id='pbar';

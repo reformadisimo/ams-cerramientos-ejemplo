@@ -119,3 +119,7 @@ a{color:var(--navy)}a:hover{color:#B8430A}
 @media (max-width:640px){.hero-cta a[href*="wa.me"]{display:inline-block;min-height:44px;padding:12px 8px;box-sizing:border-box}}@media (max-width:640px){main a[style*="B8430A"]{display:inline-block;min-height:44px;padding:11px 0;box-sizing:border-box}}
 .drop.hov .drop-menu{display:block}.drop.hov .drop-menu.two{display:grid;grid-template-columns:1fr 1fr;gap:2px 8px}
 body:has(#ck) .mobile-in{padding-bottom:360px}
+
+.btn-soc{display:none;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:1px solid #5B6B78;color:#fff;text-decoration:none}
+.btn-soc:hover{border-color:#fff;color:#fff}
+@media(min-width:1181px){.btn-soc{display:inline-flex}}
