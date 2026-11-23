@@ -1,8 +1,16 @@
 {
- "version": "2026-11-21T09:45",
- "fecha": "21 de noviembre de 2026",
- "aviso": "Javi, gracias por tus prioridades. Tus campañas de Google Ads ya están preparadas, en pausa, y las repasamos juntos antes del 1 de diciembre.",
+ "version": "2026-11-23T08:00",
+ "fecha": "23 de noviembre de 2026",
+ "aviso": "Javi, LinkedIn ya está listo y no tienes que hacer nada más con él. Gracias por contestarnos.",
  "ultimo": [
+  {
+   "f": "22 nov",
+   "t": "LinkedIn, todo claro\n- La página buena es la nueva que creamos nosotros, y ya la sigues\n- **No tienes que hacer nada más con LinkedIn**: ni verificar tu DNI ni la página\n- Ya está enlazada desde tu web, junto a Facebook e Instagram"
+  },
+  {
+   "f": "21 nov",
+   "t": "Vamos bien así, lo entendemos\n- Nos cuentas que no tienes fábrica ni máquinas que enseñar y que estás más cómodo sin mostrar mucho\n- Perfecto: no te pedimos pantallazos ni vídeos de otras empresas\n- En diciembre vemos qué entra y decidimos juntos el camino"
+  },
   {
    "f": "20 nov",
    "t": "Tus campañas ya están preparadas\n- Con tu orden de pueblos y tus prioridades, hemos cargado todo en Google Ads\n- Todas están en **pausa**: no se gasta nada hasta que tú des el visto bueno\n- Primero **ventanas de PVC**, después **cancelas de aluminio soldado**, y tu marca\n- Prueba pequeña de cancelas en La Moraleja, Sanse y Alcobendas, como propusiste: el precio más alto lo decides tú al presupuestar\n- Las **cortinas de cristal** las dejamos para enero, pero es decisión tuya: si las quieres ya, las preparamos\n> Antes del 1 de diciembre lo repasamos juntos."
@@ -18,18 +26,6 @@
   {
    "f": "16 nov",
    "t": "Google Ads, lista de precios y fotos con folio\n- Gracias por los pantallazos y el vídeo: se ve perfecto dónde te quedaste en Google Ads\n- Esa campaña de prueba **no se envía**: la dejamos como queremos, con el presupuesto y las zonas bien puestos\n- Lista de precios: entendido, los de tu programa más 60 u 80 € por ventana\n- Las ventanas de las fotos con folio eran **correderas de aluminio**: apuntado\n> Tú marcas los ritmos, Javi."
-  },
-  {
-   "f": "15 nov",
-   "t": "Una forma más sencilla de ayudarte\n- Si algo se te atasca, **nos conectamos a tu ordenador**, con tu permiso y solo para terminar ese paso\n- Se hace desde **Chrome**, con un código de un solo uso. Lo explicamos en la primera tarea de tu lista\n- Esto **sustituye** a lo que te dijimos esta mañana: olvida el otro programa, este es más fácil\n> Sin prisa y sin llamadas: primero una captura, y solo si no sale, nos conectamos."
-  },
-  {
-   "f": "15 nov",
-   "t": "Ahora puedes contestarnos hablando\n- Nuevo botón **«Hablar y que se escriba»**: hablas y se escribe solo\n- Nuevo botón **«Grabar un audio»**: nos mandas un mensaje de voz\n- Los encuentras dentro de **«Escribir una respuesta»**, en cada tarea\n> Gracias a lo que nos dijiste de que escribir se te hacía pesado. Seguimos mejorando con lo que nos vas contando."
-  },
-  {
-   "f": "14 nov",
-   "t": "Ya puedes subir fotos que ya tengas hechas\n- Tenías razón: el botón te obligaba a hacer la foto en ese momento\n- Ya lo hemos cambiado: ahora dice **«Hacer o elegir la foto»** y te deja escoger una de la galería\n- Pruébalo cuando quieras y dinos si te funciona"
   }
  ],
  "cuentas": {
@@ -80,7 +76,8 @@
    "t": "Enséñanos las cuentas y los vídeos que te gustaron\n- El otro día nos contaste que habías visto cuentas de Instagram y vídeos muy buenos, de empresas grandes\n- Queremos verlos para saber por qué línea quieres ir: podemos adaptar los mensajes y crear vídeos parecidos\n1. Mándanos **pantallazos, enlaces o lo que sea** de los vídeos, los anuncios y las cuentas de Instagram que te llamaron la atención\n2. Si puedes, dinos en una frase **qué te gustó**: cómo hablan, cómo se ven, qué enseñan\n> Sin prisa. Respóndenos en la caja del final de la guía o por correo, con lo que tengas.",
    "u": "#sugerencias",
    "b": "Contestar aquí",
-   "prio": "Importante"
+   "prio": "Importante",
+   "hecho": true
   },
   {
    "t": "Dos preguntas para preparar tus anuncios: zonas y qué quieres vender más\n- Tu cuenta de Google Ads ya está conectada y la campaña de prueba que creó Google está **pausada**: no se gasta nada\n1. **Zonas:** Alcalá de Henares va la primera. Después de Alcalá, ¿qué pueblos o zonas de alrededor te interesan más, por orden?\n2. **Qué quieres vender más:** ventanas, cancelas de aluminio u otra cosa. ¿Cuál es tu prioridad número uno?\n> Respóndelas con «Escribir una respuesta» o por correo, con tus palabras y sin prisa. Con eso cargamos las campañas, quedan en pausa hasta el 1 de diciembre y lo repasamos juntos antes de activar nada.",
@@ -218,7 +215,8 @@
    "t": "LinkedIn: tu cuenta aún no está verificada (2 minutos)\n- Gracias por tu pantallazo: **entras bien y sigues la página**\n- Lo hemos vuelto a intentar hoy y LinkedIn **sigue diciendo que tu cuenta no está verificada**, aunque no te pida código\n- Esto no es el correo: es la **verificación de tu perfil** de LinkedIn\n1. Abre tu perfil (pulsa en **Yo** y luego en **Ver perfil**)\n2. Busca un botón o aviso que diga **Verificar** y pulsa\n3. Sigue los pasos y avísanos con «Ya lo hice»\n> Si no te sale ningún botón de «Verificar», dínoslo con «Escribir una respuesta» y un pantallazo de tu perfil: lo resolvemos por otro camino. No corre prisa.",
    "prio": "Importante",
    "u": "https://www.linkedin.com/feed/",
-   "b": "Abrir LinkedIn"
+   "b": "Abrir LinkedIn",
+   "hecho": true
   },
   {
    "t": "Bing: para rizar el rizo (sin prisa)\n- Es el último detalle: Bing tiene poco volumen, un 2 o 3 % de las búsquedas\n1. En la pantalla que nos has mandado, pulsa **«Importar»** (la de Google Search Console)\n2. **No escribas ninguna dirección** en la otra casilla: es solo para añadir webs a mano\n3. Cuando termine, arriba a la derecha toca la rueda de ajustes, «Usuarios», «Añadir» y pon delarubiaignacio@gmail.com como **Administrador**\n> Lo nuestro ya está hecho y funcionando; esto es solo para que quede a tu nombre y podamos ayudarte.",
