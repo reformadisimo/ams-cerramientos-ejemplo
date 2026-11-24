@@ -59,6 +59,7 @@
     ['nombre', 'telefono', 'correo', 'zona', 'trabajo', 'pide'].forEach(function (c) { if (datos[c]) d[c] = String(datos[c]).slice(0, 600); });
     if (datos.detalle) d.detalle = String(datos.detalle).slice(0, 4000);
     d.canal = canal || 'formulario'; d.tipo = 'contacto';
+    try { window.dispatchEvent(new Event('ams-contacto')); } catch (e) {}
     enviar(d);
   };
   window.amsOrigen = function () { return base(); };

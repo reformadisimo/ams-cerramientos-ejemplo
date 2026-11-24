@@ -38,7 +38,31 @@
     } catch (e) {}
     try { sessionStorage.setItem('ams-pags', String(Number(sessionStorage.getItem('ams-pags') || 0) + 1)); } catch (e) {}
     manda('/api/vista', { pagina: ruta, fuente: fuente, disp: disp, entrada: entrada, nuevo: nuevo });
+    if (entrada) clicAnuncio();
   }, 1200);
+
+  // Clic de anuncio (24-nov-2026): SOLO si la visita llega por un anuncio de pago, una vez por visita y en su primera
+  // página, se manda la IP (la lee el servidor) a /api/clic-anuncio para detectar quien pincha sin pedir nada. Se borra a los 30 días.
+  function clicAnuncio() {
+    try {
+      var q = new URLSearchParams(location.search), pl = '';
+      if (q.get('gclid') || q.get('gbraid') || q.get('wbraid')) pl = 'google';
+      else if (q.get('fbclid')) pl = 'meta';
+      else if (q.get('ttclid')) pl = 'tiktok';
+      else if (q.get('msclkid')) pl = 'microsoft';
+      else if (q.get('li_fat_id')) pl = 'linkedin';
+      else if (/^(cpc|ppc|paid|paid_social|paidsocial|display|cpm)$/i.test(q.get('utm_medium') || '')) pl = 'otra';
+      if (!pl) return;
+      sessionStorage.setItem('ams-clic', '1');
+      manda('/api/clic-anuncio', { tipo: 'clic', plataforma: pl, campana: (q.get('utm_campaign') || '').slice(0, 80), landing: ruta, disp: disp });
+    } catch (e) {}
+  }
+  // Si esa visita acaba pidiendo algo (WhatsApp, llamada o formulario), se marca para no tratarla como sospechosa.
+  function marcaContacto() {
+    try { if (!sessionStorage.getItem('ams-clic') || sessionStorage.getItem('ams-clic-c')) return; sessionStorage.setItem('ams-clic-c', '1'); } catch (e) { return; }
+    manda('/api/clic-anuncio', { tipo: 'contacto' });
+  }
+  window.addEventListener('ams-contacto', marcaContacto);
 
   // Tiempo con la página a la vista: se acumula mientras la pestaña está visible y se manda en trozos.
   var desde = document.visibilityState === 'visible' ? Date.now() : 0, acumulado = 0, total = 0, navega = false;
@@ -71,6 +95,7 @@
     if (h.indexOf('tel:') === 0) { tipo = 'contacto_tel'; marca = 'ams-ctel'; }
     else if (/wa\.me|api\.whatsapp|whatsapp:/.test(h)) { tipo = 'contacto_wa'; marca = 'ams-cwa'; }
     if (!tipo) return;
+    marcaContacto();
     try { if (sessionStorage.getItem(marca)) return; sessionStorage.setItem(marca, '1'); } catch (er) {}
     manda('/api/evento', { tipo: tipo, pagina: ruta, fuente: fuente, disp: disp });
   }, true);
