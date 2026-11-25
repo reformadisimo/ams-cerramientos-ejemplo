@@ -29,19 +29,24 @@ module.exports = async (req, res) => {
   if (!sec || !require('../../lib/remitente').CLAVE) return res.status(503).json({ ok: false, motivo: 'faltan claves' });
   const out = {};
   try {
+    // Avisos de pendientes: se pueden apagar con el enlace «No recibir este aviso» del pie (25-nov-2026, ams·v220).
+    // Cada persona sale como mucho dos mañanas seguidas (a las 20 h y al día siguiente); después no se repite.
+    const AVISOS_OFF = await rpc('adm_aviso_estado', { p_secret: sec });
+    const pie = '<p style="margin-top:22px;font-size:12px;color:#5B6B79">Si ya no quieres estos avisos de contactos pendientes: <a href="' + require('../../lib/serieCorreos.js').enlaceBajaAviso() + '" style="color:#5B6B79">No recibir este aviso</a>.</p>';
     // 1. Sin llamar
-    const L = await rpc('adm_sin_llamar', { p_secret: sec });
+    const L = AVISOS_OFF ? [] : (await rpc('adm_sin_llamar', { p_secret: sec })).filter(c => Date.now() - new Date(c.f).getTime() < 2.2 * 864e5);
+    out.avisos_off = !!AVISOS_OFF;
     if (L.length) {
       const filas = L.map(c => '<tr><td style="padding:8px 6px"><b>' + esc(c.nombre) + '</b><br><span style="color:#5B6B79;font-size:13px">' + esc(c.origen || '') + ' · entró el ' + new Date(c.f).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' }) + '</span></td><td style="padding:8px 6px">' + (c.tel ? '<a href="tel:' + esc(String(c.tel).replace(/\D/g, '')) + '">' + esc(c.tel) + '</a>' : '') + '</td></tr>').join('');
       out.sin_llamar = await correo(PARA, (L.length === 1 ? '1 persona espera' : L.length + ' personas esperan') + ' tu llamada',
-        caja('<p style="font-size:18px;font-weight:700">' + (L.length === 1 ? 'Una persona lleva casi un día esperando' : L.length + ' personas llevan casi un día esperando') + '</p><p>Cuanto antes se llama, más trabajos se cierran.</p><table style="border-collapse:collapse">' + filas + '</table><p style="margin-top:18px"><a href="' + CRM_URL + '" style="background:#C2410C;color:#fff;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:700">Abrir tus contactos</a></p>'));
+        caja('<p style="font-size:18px;font-weight:700">' + (L.length === 1 ? 'Una persona lleva casi un día esperando' : L.length + ' personas llevan casi un día esperando') + '</p><p>Cuanto antes se llama, más trabajos se cierran.</p><table style="border-collapse:collapse">' + filas + '</table><p style="margin-top:18px"><a href="' + CRM_URL + '" style="background:#C2410C;color:#fff;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:700">Abrir tus contactos</a></p>' + pie));
     }
     // 1b. Seguimiento: visitas sin presupuesto (3 días) y presupuestos sin respuesta (7 y 14 días)
-    const SG = await rpc('adm_seguimiento', { p_secret: sec });
+    const SG = AVISOS_OFF ? { visitas: [], presupuestos: [] } : await rpc('adm_seguimiento', { p_secret: sec });
     const lin = (c, txt) => '<tr><td style="padding:8px 6px"><b>' + esc(c.nombre) + '</b><br><span style="color:#5B6B79;font-size:13px">' + txt + '</span></td><td style="padding:8px 6px">' + (c.tel ? '<a href="tel:' + esc(String(c.tel).replace(/\D/g, '')) + '">' + esc(c.tel) + '</a>' : '') + '</td></tr>';
     const filasS = (SG.visitas || []).map(c => lin(c, 'Fuiste a verle hace 3 días. ¿Le has pasado ya el presupuesto?')).concat((SG.presupuestos || []).map(c => lin(c, 'Le pasaste el presupuesto hace ' + Math.round((Date.now() - c.fp) / 864e5) + ' días. ¿Qué te ha dicho?')));
     if (filasS.length) out.seguimiento = await correo(PARA, filasS.length === 1 ? 'Un cliente pendiente de respuesta' : filasS.length + ' clientes pendientes de respuesta',
-      caja('<p style="font-size:18px;font-weight:700">Toca preguntar</p><p>Una llamada a tiempo cierra muchos trabajos que se quedan en el aire.</p><table style="border-collapse:collapse">' + filasS.join('') + '</table><p style="margin-top:18px"><a href="' + CRM_URL + '" style="background:#C2410C;color:#fff;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:700">Apuntar cómo ha ido</a></p>'));
+      caja('<p style="font-size:18px;font-weight:700">Toca preguntar</p><p>Una llamada a tiempo cierra muchos trabajos que se quedan en el aire.</p><table style="border-collapse:collapse">' + filasS.join('') + '</table><p style="margin-top:18px"><a href="' + CRM_URL + '" style="background:#C2410C;color:#fff;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:700">Apuntar cómo ha ido</a></p>' + pie));
     // 1c. Serie de correos de seguimiento al cliente (camino B). ENCENDIDA desde el 14-nov-2026 (OK de Ig). Para apagarla: SERIE_CORREOS=0 en Vercel.
     // Solo a quien dio su correo y marcó «Acepta recibir correos». Con ?serie=mirar dice a quién le tocaría hoy, sin enviar.
     const serieOn = process.env.SERIE_CORREOS !== '0';
